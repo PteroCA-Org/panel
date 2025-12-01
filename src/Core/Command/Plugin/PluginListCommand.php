@@ -11,8 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:list',
+    name: 'pteroca:plugin:list',
     description: 'List all registered plugins',
+    aliases: ['plugin:list']
 )]
 class PluginListCommand extends Command
 {
@@ -37,6 +38,7 @@ class PluginListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $stateFilter = $input->getOption('state');
 
         $io->title('Plugin List');

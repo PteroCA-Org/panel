@@ -10,8 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:scan',
+    name: 'pteroca:plugin:scan',
     description: 'Scan plugins directory and display discovered plugins',
+    aliases: ['plugin:scan']
 )]
 class PluginScanCommand extends Command
 {

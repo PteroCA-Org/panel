@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Plugin;
 
 use App\Core\Service\Plugin\PluginManager;
 use App\Core\Service\Plugin\PluginAssetManager;
@@ -13,8 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:assets:publish',
+    name: 'pteroca:plugin:assets:publish',
     description: 'Publish assets for enabled plugins',
+    aliases: ['plugin:assets:publish']
 )]
 class PluginAssetsPublishCommand extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Cron;
 
 use App\Core\Enum\CronIntervalEnum;
 use App\Core\Enum\SettingEnum;
@@ -15,20 +15,21 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:cron-job-schedule',
+    name: 'pteroca:cron:schedule',
     description: 'Cron job schedule command',
+    aliases: ['app:cron-job-schedule']
 )]
-class CronJobScheduleCommand extends Command
+class CronScheduleCommand extends Command
 {
     private const SCHEDULED_COMMANDS = [
-        'app:suspend-unpaid-servers',
-        'plugin:cron:run',
+        'pteroca:server:suspend-unpaid',
+        'pteroca:plugin:cron:run',
 
-        'app:cleanup-purchase-tokens' => [
+        'pteroca:system:cleanup-tokens' => [
             'interval' => CronIntervalEnum::HOURLY,
         ],
 
-        'app:delete-inactive-servers' => [
+        'pteroca:server:delete-inactive' => [
             'interval' => CronIntervalEnum::DAILY,
             'conditions' => [
                 [
@@ -38,7 +39,7 @@ class CronJobScheduleCommand extends Command
             ]
         ],
 
-        'app:delete-old-logs' => [
+        'pteroca:system:cleanup-logs' => [
             'conditions' => [
                 [
                     'settingName' => SettingEnum::LOG_CLEANUP_ENABLED,
@@ -61,6 +62,7 @@ class CronJobScheduleCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $application = $this->getApplication();
         $timestamp = (new \DateTime())->format('Y-m-d H:i:s');
 

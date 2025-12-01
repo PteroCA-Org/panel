@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\System;
 
-use App\Core\Handler\Installer\SystemSettingConfiguratorHandler;
+use App\Core\Handler\Installer\DatabaseConfiguratorHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,13 +10,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:configure-system',
-    description: 'Configure system settings',
+    name: 'pteroca:system:configure-database',
+    description: 'Configure database',
+    aliases: ['app:configure-database']
 )]
-class ConfigureSystemCommand extends Command
+class SystemConfigureDatabaseCommand extends Command
 {
     public function __construct(
-        private readonly SystemSettingConfiguratorHandler $systemSettingConfiguratorHandler,
+        private readonly DatabaseConfiguratorHandler $databaseConfiguratorHandler,
     )
     {
         parent::__construct();
@@ -26,9 +27,9 @@ class ConfigureSystemCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $this->systemSettingConfiguratorHandler->configureSystemSettings($io);
+        $this->databaseConfiguratorHandler->configureDatabase($io);
 
-        $io->success('System configured!');
+        $io->success('Database configured!');
         return Command::SUCCESS;
     }
 }

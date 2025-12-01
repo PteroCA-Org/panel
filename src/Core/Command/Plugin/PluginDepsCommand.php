@@ -15,8 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
-    name: 'plugin:deps',
-    description: 'Show plugin dependencies and dependency tree'
+    name: 'pteroca:plugin:deps',
+    description: 'Show plugin dependencies and dependency tree',
+    aliases: ['plugin:deps']
 )]
 class PluginDepsCommand extends Command
 {
@@ -53,6 +54,7 @@ class PluginDepsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $pluginName = $input->getArgument('plugin');
         $showTree = $input->getOption('tree');
         $showDependents = $input->getOption('dependents');

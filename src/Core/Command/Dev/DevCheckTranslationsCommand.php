@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Dev;
 
 use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -12,10 +12,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Yaml\Yaml;
 
 #[AsCommand(
-    name: 'app:show-missing-translations',
-    description: 'Show missing translations in the files.'
+    name: 'pteroca:dev:check-translations',
+    description: 'Show missing translations in the files',
+    aliases: ['app:show-missing-translations']
 )]
-class ShowMissingTranslationsCommand extends Command
+class DevCheckTranslationsCommand extends Command
 {
     public function __construct()
     {

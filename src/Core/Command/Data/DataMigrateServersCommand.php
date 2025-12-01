@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Data;
 
 use App\Core\Handler\MigrateServersHandler;
 use Exception;
@@ -12,10 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'pterodactyl:migrate-servers',
+    name: 'pteroca:data:migrate-servers',
     description: 'Migrate servers from Pterodactyl to existing user accounts in PteroCA',
+    aliases: ['pterodactyl:migrate-servers']
 )]
-class PterodactylMigrateServersCommand extends Command
+class DataMigrateServersCommand extends Command
 {
     public function __construct(
         private readonly MigrateServersHandler $migrateServersHandler,
@@ -46,12 +47,13 @@ class PterodactylMigrateServersCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $dryRun = $input->getOption('dry-run');
-        
+
         if ($dryRun) {
             $io->note('Running in dry-run mode - no changes will be made');
         }
-        
+
         $this->migrateServersHandler
             ->setLimit($input->getOption('limit') ?: 100)
             ->setIo($io)

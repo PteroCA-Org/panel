@@ -17,8 +17,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
-    name: 'plugin:disable',
+    name: 'pteroca:plugin:disable',
     description: 'Disable a plugin',
+    aliases: ['plugin:disable']
 )]
 class PluginDisableCommand extends Command
 {
@@ -49,6 +50,7 @@ class PluginDisableCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $pluginName = $input->getArgument('plugin');
         $cascade = $input->getOption('cascade');
 

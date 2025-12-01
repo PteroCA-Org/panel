@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\System;
 
 use App\Core\Handler\UpdateSystemHandler;
 use App\Core\Service\Update\BackupService;
@@ -18,10 +18,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 
 #[AsCommand(
-    name: 'app:update-system',
+    name: 'pteroca:system:update',
     description: 'Update PteroCA system with enhanced safety features',
+    aliases: ['app:update-system']
 )]
-class UpdateSystemCommand extends Command
+class SystemUpdateCommand extends Command
 {
     public function __construct(
         private readonly Connection $connection,

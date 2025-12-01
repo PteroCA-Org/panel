@@ -19,8 +19,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * --no-dev, --no-plugins, --no-scripts for security.
  */
 #[AsCommand(
-    name: 'plugin:install-deps',
+    name: 'pteroca:plugin:install-deps',
     description: 'Install Composer dependencies for a plugin',
+    aliases: ['plugin:install-deps']
 )]
 class PluginInstallDepsCommand extends Command
 {
@@ -84,6 +85,7 @@ HELP
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $pluginName = $input->getArgument('plugin');
         $all = $input->getOption('all');
         $clean = $input->getOption('clean');

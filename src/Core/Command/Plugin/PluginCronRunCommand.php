@@ -15,8 +15,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:cron:run',
-    description: 'Run plugin cron tasks (all due tasks or a specific task)'
+    name: 'pteroca:plugin:cron:run',
+    description: 'Run plugin cron tasks (all due tasks or a specific task)',
+    aliases: ['plugin:cron:run']
 )]
 class PluginCronRunCommand extends Command
 {
@@ -37,6 +38,7 @@ class PluginCronRunCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $taskName = $input->getArgument('task');
         $force = $input->getOption('force');
         $dryRun = $input->getOption('dry-run');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Dev;
 
 use App\Core\Handler\MakeThemeHandler;
 use App\Core\Service\Template\TemplateManager;
@@ -11,10 +11,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'make:theme',
+    name: 'pteroca:dev:make-theme',
     description: 'Make a new theme for PteroCA panel',
+    aliases: ['make:theme']
 )]
-class MakeThemeCommand extends Command
+class DevMakeThemeCommand extends Command
 {
     public function __construct(
         private readonly TemplateManager $templateManager,

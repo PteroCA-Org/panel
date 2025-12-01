@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\System;
 
 use App\Core\Service\PurchaseTokenService;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -10,10 +10,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:cleanup-purchase-tokens',
+    name: 'pteroca:system:cleanup-tokens',
     description: 'Clean up expired purchase tokens from the database',
+    aliases: ['app:cleanup-purchase-tokens']
 )]
-class CleanupExpiredPurchaseTokensCommand extends Command
+class SystemCleanupTokensCommand extends Command
 {
     public function __construct(
         private readonly PurchaseTokenService $purchaseTokenService,

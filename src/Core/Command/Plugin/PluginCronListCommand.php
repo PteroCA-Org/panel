@@ -14,8 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:cron:list',
-    description: 'List all registered plugin cron tasks'
+    name: 'pteroca:plugin:cron:list',
+    description: 'List all registered plugin cron tasks',
+    aliases: ['plugin:cron:list']
 )]
 class PluginCronListCommand extends Command
 {
@@ -36,6 +37,7 @@ class PluginCronListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $io->title('Plugin Cron Tasks');
 
         $pluginFilter = $input->getOption('plugin');

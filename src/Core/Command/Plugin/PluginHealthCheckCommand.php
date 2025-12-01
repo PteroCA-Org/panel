@@ -14,8 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:health:check',
-    description: 'Check plugin health status'
+    name: 'pteroca:plugin:health:check',
+    description: 'Check plugin health status',
+    aliases: ['plugin:health:check']
 )]
 class PluginHealthCheckCommand extends Command
 {
@@ -38,6 +39,7 @@ class PluginHealthCheckCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $io->title('Plugin Health Check');
 
         $pluginName = $input->getArgument('plugin-name');

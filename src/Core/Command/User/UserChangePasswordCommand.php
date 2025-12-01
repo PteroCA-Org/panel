@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\User;
 
 use App\Core\Handler\ChangeUserPasswordHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -11,10 +11,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:change-user-password',
+    name: 'pteroca:user:change-password',
     description: 'Change user password',
+    aliases: ['app:change-user-password']
 )]
-class ChangeUserPasswordCommand extends Command
+class UserChangePasswordCommand extends Command
 {
     public function __construct(
         private readonly ChangeUserPasswordHandler $changeUserPasswordHandler,

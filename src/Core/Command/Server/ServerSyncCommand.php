@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Server;
 
 use App\Core\Handler\SyncServersHandler;
 use Exception;
@@ -12,10 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'pteroca:sync-servers',
+    name: 'pteroca:server:sync',
     description: 'Synchronize servers between Pterodactyl and PteroCA (cleanup orphaned servers)',
+    aliases: ['pteroca:sync-servers']
 )]
-class PterocaSyncServersCommand extends Command
+class ServerSyncCommand extends Command
 {
     public function __construct(
         private readonly SyncServersHandler $syncServersHandler,
@@ -52,17 +53,18 @@ class PterocaSyncServersCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $dryRun = $input->getOption('dry-run');
         $auto = $input->getOption('auto');
-        
+
         if ($dryRun) {
             $io->note('Running in dry-run mode - no changes will be made');
         }
-        
+
         if ($auto) {
             $io->note('Running in automatic mode - orphaned servers will be deleted automatically');
         }
-        
+
         $this->syncServersHandler
             ->setLimit($input->getOption('limit') ?: 1000)
             ->setIo($io)

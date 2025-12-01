@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\User;
 
 use App\Core\Enum\UserRoleEnum;
 use App\Core\Exception\CouldNotCreatePterodactylClientApiKeyException;
@@ -14,10 +14,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:create-new-user',
-    description: 'Create new user',
+    name: 'pteroca:user:create',
+    description: 'Create a new user',
+    aliases: ['app:create-new-user']
 )]
-class CreateNewUserCommand extends Command
+class UserCreateCommand extends Command
 {
     public function __construct(
         private readonly CreateNewUserHandler $createNewUserHandler,

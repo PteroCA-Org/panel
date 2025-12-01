@@ -17,8 +17,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
-    name: 'plugin:enable',
+    name: 'pteroca:plugin:enable',
     description: 'Enable a plugin',
+    aliases: ['plugin:enable']
 )]
 class PluginEnableCommand extends Command
 {
@@ -55,6 +56,7 @@ class PluginEnableCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $pluginName = $input->getArgument('plugin');
         $withDependencies = $input->getOption('with-dependencies');
         $force = $input->getOption('force');

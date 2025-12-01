@@ -14,8 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'plugin:security:scan',
-    description: 'Scan plugins for security issues'
+    name: 'pteroca:plugin:security:scan',
+    description: 'Scan plugins for security issues',
+    aliases: ['plugin:security:scan']
 )]
 class PluginSecurityScanCommand extends Command
 {
@@ -39,6 +40,7 @@ class PluginSecurityScanCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $io->title('Plugin Security Scanner');
 
         $pluginName = $input->getArgument('plugin-name');

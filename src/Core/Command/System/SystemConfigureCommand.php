@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\System;
 
-use App\Core\Handler\SuspendUnpaidServersHandler;
-use Exception;
+use App\Core\Handler\Installer\SystemSettingConfiguratorHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,27 +10,26 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:suspend-unpaid-servers',
-    description: 'Suspend unpaid servers',
+    name: 'pteroca:system:configure',
+    description: 'Configure system settings',
+    aliases: ['app:configure-system']
 )]
-class SuspendUnpaidServersCommand extends Command
+class SystemConfigureCommand extends Command
 {
     public function __construct(
-        private readonly SuspendUnpaidServersHandler $suspendUnpaidServersHandler
+        private readonly SystemSettingConfiguratorHandler $systemSettingConfiguratorHandler,
     )
     {
         parent::__construct();
     }
 
-    /**
-     * @throws Exception
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $this->suspendUnpaidServersHandler->handle();
-        $io->success('Suspend unpaid servers command executed successfully');
 
+        $this->systemSettingConfiguratorHandler->configureSystemSettings($io);
+
+        $io->success('System configured!');
         return Command::SUCCESS;
     }
 }

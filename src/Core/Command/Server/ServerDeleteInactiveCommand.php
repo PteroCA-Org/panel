@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\Server;
 
-use App\Core\Handler\SynchronizeDataHandler;
-use Exception;
+use App\Core\Handler\DeleteInactiveServersHandler;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,28 +10,29 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:synchronize-data',
-    description: 'Synchronize database data with pterodactyl data',
+    name: 'pteroca:server:delete-inactive',
+    description: 'Delete inactive servers',
+    aliases: ['app:delete-inactive-servers']
 )]
-class SynchronizeDataCommand extends Command
+class ServerDeleteInactiveCommand extends Command
 {
     public function __construct(
-        private readonly SynchronizeDataHandler $synchronizeDataHandler,
+        private readonly DeleteInactiveServersHandler $deleteInactiveServersHandler
     )
     {
         parent::__construct();
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-        $this->synchronizeDataHandler->handle();
+        $this->deleteInactiveServersHandler->handle();
+        $io->success('Delete inactive servers command executed successfully');
 
-        $io->success('Data synchronized successfully.');
         return Command::SUCCESS;
     }
 }

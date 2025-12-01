@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Command;
+namespace App\Core\Command\System;
 
 use App\Core\Enum\SettingEnum;
 use App\Core\Event\Cli\DeleteOldLogs\LogDeletionProcessCompletedEvent;
@@ -22,10 +22,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 #[AsCommand(
-    name: 'app:delete-old-logs',
+    name: 'pteroca:system:cleanup-logs',
     description: 'Delete old logs based on system settings',
+    aliases: ['app:delete-old-logs']
 )]
-class DeleteOldLogsCommand extends Command
+class SystemCleanupLogsCommand extends Command
 {
     public function __construct(
         private readonly SettingRepository $settingRepository,
@@ -44,6 +45,7 @@ class DeleteOldLogsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
         $startTime = new DateTimeImmutable();
 
         try {
@@ -56,7 +58,7 @@ class DeleteOldLogsCommand extends Command
                         'Invalid log cleanup days setting',
                         null,
                         new DateTimeImmutable(),
-                        $this->eventContextService->buildCliContext('app:delete-old-logs')
+                        $this->eventContextService->buildCliContext('pteroca:system:cleanup-logs')
                     )
                 );
 
@@ -68,7 +70,7 @@ class DeleteOldLogsCommand extends Command
             $cutoffDate->modify("-$daysAfterInt days");
             $cutoffDateImmutable = DateTimeImmutable::createFromMutable($cutoffDate);
 
-            $context = $this->eventContextService->buildCliContext('app:delete-old-logs', [
+            $context = $this->eventContextService->buildCliContext('pteroca:system:cleanup-logs', [
                 'daysAfter' => $daysAfterInt,
                 'cutoffDate' => $cutoffDateImmutable->format('Y-m-d H:i:s'),
             ]);
@@ -127,7 +129,7 @@ class DeleteOldLogsCommand extends Command
                     $e->getMessage(),
                     $daysAfterInt ?? null,
                     new DateTimeImmutable(),
-                    $this->eventContextService->buildCliContext('app:delete-old-logs')
+                    $this->eventContextService->buildCliContext('pteroca:system:cleanup-logs')
                 )
             );
 
