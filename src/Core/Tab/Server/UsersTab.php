@@ -4,6 +4,7 @@ namespace App\Core\Tab\Server;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\ServerPermissionEnum;
 
 class UsersTab implements ServerTabInterface
 {
@@ -24,7 +25,7 @@ class UsersTab implements ServerTabInterface
 
     public function isVisible(ServerTabContext $context): bool
     {
-        return $context->hasPermission('user.read');
+        return $context->hasPermission(ServerPermissionEnum::USER_READ->value);
     }
 
     public function isDefault(): bool

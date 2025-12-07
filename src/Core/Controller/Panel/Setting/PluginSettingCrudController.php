@@ -45,14 +45,16 @@ class PluginSettingCrudController extends AbstractSettingCrudController
         $this->localRequestStack = $requestStack;
     }
 
+    protected function getSettingContext(): SettingContextEnum
+    {
+        return SettingContextEnum::PLUGIN;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         // Get plugin name from request
         $request = $this->localRequestStack->getCurrentRequest();
         $this->pluginName = $request->query->get('pluginName');
-
-        // Set context to PLUGIN (we'll override the query builder to filter plugin settings)
-        $this->context = SettingContextEnum::PLUGIN;
 
         if ($this->pluginName) {
             // Specific plugin settings

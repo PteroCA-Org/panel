@@ -2734,3 +2734,114 @@ hr {
     font-size: 3rem;
     color: var(--stripe-blue-600);
 }
+
+
+.permission-roles-list .role-card {
+    background-color: #f8f9fa;
+    transition: box-shadow 0.2s;
+}
+
+.permission-roles-list .role-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.role-permissions-display {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.permission-section-card {
+    border: 1px solid #e3e8ee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s;
+}
+
+.permission-section-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.permission-section-card .section-header {
+    background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+    border-bottom: 1px solid #e3e8ee;
+    padding: 12px 16px;
+}
+
+.permission-section-card .section-header h6 {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.permission-section-card .section-content {
+    padding: 0;
+}
+
+.permissions-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.permission-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.15s;
+}
+
+.permission-item:last-child {
+    border-bottom: none;
+}
+
+.permission-item:hover {
+    background-color: #f7fafc;
+}
+
+.permission-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.permission-name {
+    font-size: 0.9rem;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+}
+
+.permission-name strong {
+    font-weight: 500;
+}
+
+.permission-meta {
+    font-size: 0.8rem;
+    color: #718096;
+    display: flex;
+    align-items: center;
+}
+
+.permission-meta code {
+    background: #edf2f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+}
+
+.permissions-summary {
+    border-left: 4px solid #4299e1;
+}
+
+.permissions-summary .bg-light {
+    background-color: #f7fafc !important;
+    border: 1px solid #e3e8ee;
+}
+
+#main-menu .menu .submenu a {
+    padding: 3px 0 3px 15px;
+}
+
+#main-menu .menu .submenu .menu-item.active a {
+    padding: 3px 0 3px 12px;
+}

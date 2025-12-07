@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller\API\Admin;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Service\System\SystemVersionService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ class VersionController extends AbstractAdminAPIController
         SystemVersionService $systemVersionService,
     ): JsonResponse
     {
-        $this->grantAccess();
+        $this->requirePermission(PermissionEnum::ACCESS_ADMIN_OVERVIEW);
 
         return new JsonResponse($systemVersionService->getVersionInformation());
     }

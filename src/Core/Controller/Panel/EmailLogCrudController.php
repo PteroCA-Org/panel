@@ -3,7 +3,6 @@
 namespace App\Core\Controller\Panel;
 
 use App\Core\Entity\EmailLog;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Enum\EmailTypeEnum;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Service\Crud\PanelCrudService;
@@ -59,9 +58,11 @@ class EmailLogCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->disable(Action::EDIT, Action::DELETE, Action::NEW)
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -71,7 +72,6 @@ class EmailLogCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.email_log.email_log'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.email_log.email_logs'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ->setDefaultSort(['sentAt' => 'DESC'])
             ->showEntityActionsInlined();
 

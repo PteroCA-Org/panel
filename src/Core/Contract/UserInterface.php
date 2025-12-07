@@ -2,6 +2,7 @@
 
 namespace App\Core\Contract;
 
+use App\Core\Enum\PermissionEnum;
 use DateTime;
 use DateTimeInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
@@ -63,7 +64,7 @@ interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserI
     public function softDelete(): self;
     public function restore(): self;
 
-    public function isAdmin(): bool;
+    public function hasPermission(string|PermissionEnum $permissionCode): bool;
 
     public function __toString(): string;
 }

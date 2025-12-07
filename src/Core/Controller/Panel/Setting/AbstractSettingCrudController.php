@@ -5,9 +5,9 @@ namespace App\Core\Controller\Panel\Setting;
 use App\Core\Controller\Panel\AbstractPanelController;
 use App\Core\Entity\Setting;
 use App\Core\Enum\CrudTemplateContextEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingContextEnum;
 use App\Core\Enum\SettingTypeEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Repository\SettingRepository;
 use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
@@ -38,9 +38,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractSettingCrudController extends AbstractPanelController
 {
-    protected SettingContextEnum $context;
+    protected bool $useConventionBasedPermissions = false;
 
     protected ?Setting $currentEntity = null;
+
+    abstract protected function getSettingContext(): SettingContextEnum;
 
     public function __construct(
         PanelCrudService $panelCrudService,
@@ -109,6 +111,9 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
                 ->setChoices($this->getSelectOptions($this->currentEntity?->getName())),
             default => TextareaField::new('value', $valueLabel)
                 ->formatValue(function ($value, $entity) {
+                    if (!$entity) {
+                        return $value;
+                    }
                     return match ($entity->getType()) {
                         SettingTypeEnum::SECRET->value => '********',
                         SettingTypeEnum::BOOLEAN->value => $value
@@ -153,7 +158,7 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->update(Crud::PAGE_INDEX, Action::NEW, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.setting.add')))
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.setting.add')))
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.setting.save')))
@@ -161,20 +166,65 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_INDEX, Action::NEW);
+
+        $actions = parent::configureActions($actions);
+
+        // Settings use custom permission mapping
+        $actions = $this->applyConventionBasedPermissions($actions);
+        $actions = $this->applyPermissionBasedVisibility($actions);
+
+        return $actions;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        $context = $this->getSettingContext();
+
+        $accessPermission = match($context) {
+            SettingContextEnum::GENERAL => PermissionEnum::ACCESS_SETTINGS_GENERAL->value,
+            SettingContextEnum::PTERODACTYL => PermissionEnum::ACCESS_SETTINGS_PTERODACTYL->value,
+            SettingContextEnum::SECURITY => PermissionEnum::ACCESS_SETTINGS_SECURITY->value,
+            SettingContextEnum::PAYMENT => PermissionEnum::ACCESS_SETTINGS_PAYMENT->value,
+            SettingContextEnum::EMAIL => PermissionEnum::ACCESS_SETTINGS_EMAIL->value,
+            SettingContextEnum::THEME => PermissionEnum::ACCESS_SETTINGS_THEME->value,
+            SettingContextEnum::PLUGIN => PermissionEnum::ACCESS_SETTINGS_PLUGIN->value,
+        };
+
+        $editPermission = match($context) {
+            SettingContextEnum::GENERAL => PermissionEnum::EDIT_SETTINGS_GENERAL->value,
+            SettingContextEnum::PTERODACTYL => PermissionEnum::EDIT_SETTINGS_PTERODACTYL->value,
+            SettingContextEnum::SECURITY => PermissionEnum::EDIT_SETTINGS_SECURITY->value,
+            SettingContextEnum::PAYMENT => PermissionEnum::EDIT_SETTINGS_PAYMENT->value,
+            SettingContextEnum::EMAIL => PermissionEnum::EDIT_SETTINGS_EMAIL->value,
+            SettingContextEnum::THEME => PermissionEnum::EDIT_SETTINGS_THEME->value,
+            SettingContextEnum::PLUGIN => PermissionEnum::EDIT_SETTINGS_PLUGIN->value,
+        };
+
+        return [
+            Action::INDEX  => $accessPermission,  // Viewing list - requires access
+            Action::DETAIL => $accessPermission,  // Viewing details (not used in UI)
+            Action::NEW    => $editPermission,    // Creating (removed from UI, but map correctly)
+            Action::EDIT   => $editPermission,    // Editing settings - requires edit permission
+            Action::DELETE => $editPermission,    // Deleting (removed from UI, but map correctly)
+        ];
     }
 
     public function configureCrud(Crud $crud): Crud
     {
-        $context = ucfirst(strtolower($this->context->name));
+        $context = $this->getSettingContext();
+        $contextLabel = ucfirst(strtolower($context->name));
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
         if (!empty($this->currentEntity)) {
             $this->appendCrudTemplateContext($this->currentEntity->getName());
         }
 
+        $contextName = strtolower($context->name);
+        $entityPermission = 'access_settings_' . $contextName;
+
         $crud
-            ->setEntityLabelInSingular(sprintf('%s %s', $context, $this->translator->trans('pteroca.crud.setting.setting')))
-            ->setEntityLabelInPlural(sprintf('%s %s', $context, $this->translator->trans('pteroca.crud.setting.settings')))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name);
+            ->setEntityLabelInSingular(sprintf('%s %s', $contextLabel, $this->translator->trans('pteroca.crud.setting.setting')))
+            ->setEntityLabelInPlural(sprintf('%s %s', $contextLabel, $this->translator->trans('pteroca.crud.setting.settings')))
+            ->setEntityPermission($entityPermission);
 
         return parent::configureCrud($crud);
     }
@@ -215,9 +265,10 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+        $context = $this->getSettingContext();
         $qb->andWhere('entity.context = :context')
             ->orderBy('entity.hierarchy', 'ASC')
-            ->setParameter('context', $this->context->value);
+            ->setParameter('context', $context->value);
 
         return $qb;
     }
@@ -231,8 +282,6 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
         $request = $this->requestStack->getCurrentRequest();
         $formData = $request->request->all();
 
-        // Check if setAsEmpty checkbox is checked in the submitted form data
-        // The form data structure is: ['Setting' => ['setAsEmpty' => true/false, ...]]
         $setAsEmpty = $formData['Setting']['setAsEmpty'] ?? false;
 
         if ($setAsEmpty) {

@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\SSO\SSORedirectRequestedEvent;
 use App\Core\Event\SSO\SSORedirectInitiatedEvent;
@@ -23,6 +24,8 @@ class SSOLoginRedirectController extends AbstractController
         SSOLoginRedirectService $ssoLoginRedirectService,
         Request $request,
     ): Response {
+        $this->denyAccessUnlessGranted(PermissionEnum::ACCESS_PTERODACTYL_SSO->value);
+
         $user = $this->getUser();
         $redirectPath = $this->getRedirectPath($request);
 

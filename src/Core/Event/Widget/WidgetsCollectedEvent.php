@@ -26,7 +26,7 @@ use App\Core\Service\Widget\WidgetRegistry;
  * {
  *     if ($event->getWidgetContext() === WidgetContext::ADMIN_OVERVIEW) {
  *         $user = $event->getContextData()['user'] ?? null;
- *         if ($user && $user->hasRole('ROLE_ADMIN')) {
+ *         if ($user && $user->hasPermission('access_admin_overview')) {
  *             $event->getRegistry()->registerWidget(new MyAdminWidget());
  *         }
  *     }

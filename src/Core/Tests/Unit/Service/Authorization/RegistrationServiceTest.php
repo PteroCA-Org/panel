@@ -4,7 +4,6 @@ namespace App\Core\Tests\Unit\Service\Authorization;
 
 use App\Core\Entity\User;
 use App\Core\Enum\LogActionEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Message\SendEmailMessage;
 use App\Core\Repository\UserRepository;
 use App\Core\Service\Authorization\RegistrationService;

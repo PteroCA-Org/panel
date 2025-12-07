@@ -3,6 +3,7 @@
 namespace App\Core\Controller\Panel;
 
 use App\Core\Enum\LogActionEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Crud\CrudActionsConfiguredEvent;
 use App\Core\Event\Crud\CrudConfiguredEvent;
@@ -22,6 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
@@ -31,6 +33,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\String\Inflector\EnglishInflector;
 
 abstract class AbstractPanelController extends AbstractCrudController
 {
@@ -38,6 +41,7 @@ abstract class AbstractPanelController extends AbstractCrudController
     use EventContextTrait;
 
     private array $crudTemplateContext = [];
+    protected bool $useConventionBasedPermissions = true;
 
     public function __construct(
         private readonly PanelCrudService $panelCrudService,
@@ -52,6 +56,13 @@ abstract class AbstractPanelController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
+        // Auto-set entity permission if convention-based permissions are enabled
+        if ($this->shouldUseConventionBasedPermissions()) {
+            $entityPluralSlug = $this->getEntityPluralSlug();
+            $entityPermission = 'access_' . $entityPluralSlug;
+            $crud->setEntityPermission($entityPermission);
+        }
+
         $crud->overrideTemplates($this->panelCrudService->getTemplatesToOverride($this->crudTemplateContext));
 
         $request = $this->requestStack->getCurrentRequest();
@@ -72,6 +83,14 @@ abstract class AbstractPanelController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
+        $actions = parent::configureActions($actions);
+
+        // Apply convention-based permissions if enabled
+        if ($this->shouldUseConventionBasedPermissions()) {
+            $actions = $this->applyConventionBasedPermissions($actions);
+            $actions = $this->applyPermissionBasedVisibility($actions);
+        }
+
         $request = $this->requestStack->getCurrentRequest();
         $context = $request ? $this->buildMinimalEventContext($request) : [];
 
@@ -85,7 +104,7 @@ abstract class AbstractPanelController extends AbstractCrudController
         $event = $this->dispatchEvent($event);
         $actions = $event->getActions();
 
-        return parent::configureActions($actions);
+        return $actions;
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -248,6 +267,129 @@ abstract class AbstractPanelController extends AbstractCrudController
     {
         $this->panelCrudService
             ->logEntityAction($action, $entityInstance, $this->getUser(), $this->getEntityFqcn());
+    }
+
+    protected function shouldUseConventionBasedPermissions(): bool
+    {
+        // Opt-out check
+        if (!$this->useConventionBasedPermissions) {
+            return false;
+        }
+
+        // Exclude plugins (namespace detection)
+        $reflection = new \ReflectionClass($this);
+        $namespace = $reflection->getNamespaceName();
+        if (str_contains($namespace, '\\Plugin\\')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function applyConventionBasedPermissions(Actions $actions): Actions
+    {
+        $permissionMapping = $this->getPermissionMapping();
+
+        foreach ($permissionMapping as $actionName => $permissionCode) {
+            // Skip actions with null permission (e.g., link actions that don't need permissions)
+            if ($permissionCode === null) {
+                continue;
+            }
+
+            // Convert enum to string for EasyAdmin
+            $codeString = $permissionCode instanceof PermissionEnum
+                ? $permissionCode->value
+                : $permissionCode;
+
+            // Apply permission for each action
+            // If child controllers set permissions manually, they will override these
+            try {
+                $actions->setPermission($actionName, $codeString);
+            } catch (\Exception $e) {
+                // Action doesn't exist (e.g., removed action) - skip silently
+                continue;
+            }
+        }
+
+        return $actions;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        $entitySlug = $this->getEntitySlug();
+        $entityPluralSlug = $this->getEntityPluralSlug();
+
+        return [
+            Action::INDEX  => 'access_' . $entityPluralSlug,
+            Action::DETAIL => 'view_' . $entitySlug,
+            Action::NEW    => 'create_' . $entitySlug,
+            Action::EDIT   => 'edit_' . $entitySlug,
+            Action::DELETE => 'delete_' . $entitySlug,
+        ];
+    }
+
+    protected function getEntitySlug(): string
+    {
+        $fqcn = static::getEntityFqcn();
+        $shortName = (new \ReflectionClass($fqcn))->getShortName();
+
+        // Convert PascalCase to snake_case
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $shortName));
+    }
+
+    protected function getEntityPluralSlug(): string
+    {
+        $singular = $this->getEntitySlug();
+
+        // Use Symfony's English inflector for intelligent pluralization
+        $inflector = new EnglishInflector();
+        $plurals = $inflector->pluralize($singular);
+
+        // Return first plural form (most common)
+        return $plurals[0] ?? $singular . 's';
+    }
+
+    protected function isStandardCrudAction(string $actionName): bool
+    {
+        return in_array($actionName, [
+            Action::INDEX,
+            Action::NEW,
+            Action::EDIT,
+            Action::DELETE,
+            Action::DETAIL,
+        ], true);
+    }
+
+    protected function applyPermissionBasedVisibility(Actions $actions): Actions
+    {
+        if (!$this->shouldUseConventionBasedPermissions()) {
+            return $actions;
+        }
+
+        $permissionMapping = $this->getPermissionMapping();
+
+        foreach ($permissionMapping as $actionName => $permissionCode) {
+            if ($permissionCode === null || !$this->isStandardCrudAction($actionName)) {
+                continue;
+            }
+
+            foreach ([Crud::PAGE_INDEX, Crud::PAGE_DETAIL] as $page) {
+                try {
+                    $actions->update(
+                        $page,
+                        $actionName,
+                        fn (Action $action) => $action->displayIf(
+                            fn ($entity) => $this->getUser()?->hasPermission($permissionCode) ?? false
+                        )
+                    );
+                } catch (\Exception $e) {
+                    // Action doesn't exist on this page - skip
+                    continue;
+                }
+            }
+        }
+
+        return $actions;
     }
 
     protected function renderWithEvent(

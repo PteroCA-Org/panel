@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Balance\BalanceRechargePageAccessedEvent;
@@ -34,7 +35,7 @@ class BalanceController extends AbstractController
     public function rechargeBalance(
         Request $request,
     ): Response {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_WALLET);
 
         $this->dispatchDataEvent(
             BalanceRechargePageAccessedEvent::class,
@@ -88,7 +89,7 @@ class BalanceController extends AbstractController
     #[Route('/wallet/recharge/success', name: 'stripe_success')]
     public function success(Request $request): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_WALLET);
 
         $sessionId = $request->query->get('session_id');
 
@@ -117,7 +118,7 @@ class BalanceController extends AbstractController
     #[Route('/wallet/recharge/cancel', name: 'stripe_cancel')]
     public function cancel(Request $request): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_WALLET);
 
         $this->dispatchDataEvent(
             BalancePaymentCallbackAccessedEvent::class,

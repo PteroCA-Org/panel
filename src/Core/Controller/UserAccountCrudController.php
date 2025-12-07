@@ -5,7 +5,7 @@ namespace App\Core\Controller;
 use App\Core\Controller\Panel\AbstractPanelController;
 use App\Core\Entity\Panel\UserAccount;
 use App\Core\Enum\CrudTemplateContextEnum;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Event\User\Account\PterodactylAccountSyncedEvent;
 use App\Core\Event\User\Account\UserAccountUpdateRequestedEvent;
 use App\Core\Event\User\Account\UserAccountUpdatedEvent;
@@ -40,6 +40,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserAccountCrudController extends AbstractPanelController
 {
+    protected bool $useConventionBasedPermissions = false;
+
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly TranslatorInterface $translator,
@@ -53,6 +55,14 @@ class UserAccountCrudController extends AbstractPanelController
     public static function getEntityFqcn(): string
     {
         return UserAccount::class;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        return [
+            Action::INDEX => PermissionEnum::EDIT_USER_ACCOUNT->value,
+            Action::EDIT  => PermissionEnum::EDIT_USER_ACCOUNT->value,
+        ];
     }
 
     public function configureActions(Actions $actions): Actions
@@ -116,9 +126,9 @@ class UserAccountCrudController extends AbstractPanelController
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::USER_ACCOUNT->value);
 
         $crud
+            ->setEntityPermission(PermissionEnum::EDIT_USER_ACCOUNT->value)
             ->setEntityLabelInSingular($this->translator->trans('pteroca.dashboard.account_settings'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.dashboard.account_settings'))
-            ->setEntityPermission(UserRoleEnum::ROLE_USER->name)
             ->setHelp('edit', $this->translator->trans('pteroca.crud.user_account.description'))
             ->setSearchFields(null);
 

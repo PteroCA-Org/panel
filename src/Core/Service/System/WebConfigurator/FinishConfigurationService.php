@@ -5,8 +5,9 @@ namespace App\Core\Service\System\WebConfigurator;
 use App\Core\DTO\Action\Result\ConfiguratorVerificationResult;
 use App\Core\Entity\User;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Repository\UserRepository;
 use App\Core\Service\Authorization\RegistrationService;
+use App\Core\Service\Security\RoleManager;
 use App\Core\Service\SettingService;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -38,6 +39,8 @@ class FinishConfigurationService
         private readonly PterodactylConnectionVerificationService $pterodactylConnectionVerificationService,
         private readonly RegistrationService $registrationService,
         private readonly TranslatorInterface $translator,
+        private readonly RoleManager $roleManager,
+        private readonly UserRepository $userRepository,
     ) {}
 
     public function getRequiredSettingsMap(): array
@@ -112,14 +115,26 @@ class FinishConfigurationService
         $user->setSurname('Admin');
         $user->setEmail($data['admin_email']);
 
+        // Register user without roles (empty array) - we'll assign via RoleManager below
         $registerResult = $this->registrationService->registerUser(
             $user,
             $data['admin_password'],
-            [UserRoleEnum::ROLE_ADMIN->name],
+            [],
             true,
         );
 
-        return $registerResult->success;
+        if (!$registerResult->success) {
+            return false;
+        }
+
+        // Assign admin role using RoleManager
+        $adminRole = $this->roleManager->getRoleByName('admin');
+        if ($adminRole && $registerResult->user) {
+            $registerResult->user->addUserRole($adminRole);
+            $this->userRepository->save($registerResult->user);
+        }
+
+        return true;
     }
 
     /**

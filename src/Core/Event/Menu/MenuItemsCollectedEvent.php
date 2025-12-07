@@ -24,10 +24,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     );
  * }
  *
- * @example Adding a menu item to the admin section (with role check)
+ * @example Adding a menu item to the admin section (with permission check)
  * public function onMenuItemsCollected(MenuItemsCollectedEvent $event): void
  * {
- *     if ($event->getUser()->hasRole('ROLE_ADMIN')) {
+ *     if ($event->getUser()->hasPermission('access_admin_panel')) {
  *         $event->addMenuItem('admin',
  *             MenuItem::linkToCrud(
  *                 'Plugin Settings',

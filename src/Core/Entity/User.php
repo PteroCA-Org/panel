@@ -3,10 +3,13 @@
 namespace App\Core\Entity;
 
 use App\Core\Contract\UserInterface;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\PermissionEnum;
+use App\Core\Enum\SystemRoleEnum;
 use App\Core\Repository\UserRepository;
 use DateTime;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -69,6 +72,10 @@ class User implements UserInterface
     #[ORM\OneToMany(targetEntity: Log::class, mappedBy: 'user', cascade: ['remove'])]
     private PersistentCollection $logs;
 
+    #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'users')]
+    #[ORM\JoinTable(name: 'user_role')]
+    private Collection $userRoles;
+
     private ?string $plainPassword = null;
 
     /**
@@ -76,6 +83,11 @@ class User implements UserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    public function __construct()
+    {
+        $this->userRoles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -133,10 +145,11 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = UserRoleEnum::ROLE_USER->name;
-
+        $roles = [];
+        foreach ($this->userRoles as $role) {
+            $roles[] = 'ROLE_' . strtoupper($role->getName());
+        }
+        $roles[] = SystemRoleEnum::ROLE_USER->value;
         return array_unique($roles);
     }
 
@@ -325,9 +338,50 @@ class User implements UserInterface
         return $this;
     }
 
-    public function isAdmin(): bool
+    /**
+     * @return Collection<int, Role>
+     */
+    public function getUserRoles(): Collection
     {
-        return in_array(UserRoleEnum::ROLE_ADMIN->name, $this->getRoles());
+        return $this->userRoles;
+    }
+
+    public function addUserRole(Role $role): static
+    {
+        if (!$this->userRoles->contains($role)) {
+            $this->userRoles->add($role);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRole(Role $role): static
+    {
+        $this->userRoles->removeElement($role);
+
+        return $this;
+    }
+
+    public function hasUserRole(Role $role): bool
+    {
+        return $this->userRoles->contains($role);
+    }
+
+    /**
+     * Check if user has a specific permission through their roles
+     */
+    public function hasPermission(string|PermissionEnum $permissionCode): bool
+    {
+        $code = $permissionCode instanceof PermissionEnum ? $permissionCode->value : $permissionCode;
+
+        foreach ($this->userRoles as $role) {
+            foreach ($role->getPermissions() as $permission) {
+                if ($permission->getCode() === $code) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public function __toString(): string

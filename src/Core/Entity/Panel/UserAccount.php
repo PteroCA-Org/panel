@@ -2,7 +2,7 @@
 
 namespace App\Core\Entity\Panel;
 
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\SystemRoleEnum;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -93,7 +93,7 @@ class UserAccount implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = UserRoleEnum::ROLE_USER->name;
+        $roles[] = SystemRoleEnum::ROLE_USER->value;
 
         return array_unique($roles);
     }

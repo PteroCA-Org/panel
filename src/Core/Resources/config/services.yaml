@@ -220,3 +220,13 @@ services:
       $projectDir: '%kernel.project_dir%'
     tags:
       - { name: kernel.event_subscriber }
+
+  # Security Voters
+  # PermissionVoter has higher priority to ensure database-based permissions take precedence
+  App\Core\Security\PermissionVoter:
+    tags:
+      - { name: security.voter, priority: 100 }
+
+  App\Core\Security\PluginPermissionVoter:
+    tags:
+      - { name: security.voter, priority: 50 }

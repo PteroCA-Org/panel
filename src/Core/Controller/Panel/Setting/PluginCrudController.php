@@ -7,7 +7,6 @@ use App\Core\Entity\Plugin;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Enum\LogActionEnum;
 use App\Core\Enum\PluginStateEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Plugin\PluginDetailsDataLoadedEvent;
 use App\Core\Event\Plugin\PluginDetailsPageAccessedEvent;
@@ -42,6 +41,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Composer\Semver\Semver;
+use App\Core\Enum\PermissionEnum;
 
 /**
  * Plugin CRUD Controller
@@ -66,6 +66,18 @@ class PluginCrudController extends AbstractPanelController
     public static function getEntityFqcn(): string
     {
         return Plugin::class;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        return [
+            Action::INDEX  => PermissionEnum::ACCESS_PLUGINS->value,
+            Action::DETAIL => PermissionEnum::VIEW_PLUGIN->value,
+            'settingsAction' => null, // Link action - no permission needed
+            'enableAction' => PermissionEnum::ENABLE_PLUGIN->value,
+            'disableAction' => PermissionEnum::DISABLE_PLUGIN->value,
+            'uploadPlugin' => PermissionEnum::UPLOAD_PLUGIN->value,
+        ];
     }
 
     public function configureFields(string $pageName): iterable
@@ -125,28 +137,31 @@ class PluginCrudController extends AbstractPanelController
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl();
             })
-            ->displayIf(static function (Plugin $plugin) {
+            ->displayIf(function (Plugin $plugin) {
                 // Show settings for plugins that have been enabled at least once (have DB entry)
-                return $plugin->getId() !== null;
+                return $plugin->getId() !== null &&
+                    $this->getUser()?->hasPermission(PermissionEnum::ACCESS_PLUGINS);
             })
             ->setCssClass('btn btn-secondary');
 
         $enableAction = Action::new('enable', $this->translator->trans('pteroca.crud.plugin.enable'), 'fa fa-check')
             ->linkToCrudAction('enablePlugin')
-            ->displayIf(static function (Plugin $plugin) {
+            ->displayIf(function (Plugin $plugin) {
                 $state = $plugin->getState();
-                return in_array($state, [PluginStateEnum::DISCOVERED, PluginStateEnum::DISABLED], true);
+                return in_array($state, [PluginStateEnum::DISCOVERED, PluginStateEnum::DISABLED], true) &&
+                    $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
             })
             ->setCssClass('btn btn-success');
 
         $disableAction = Action::new('disable', $this->translator->trans('pteroca.crud.plugin.disable'), 'fa fa-times')
             ->linkToCrudAction('disablePlugin')
-            ->displayIf(static function (Plugin $plugin) {
-                return $plugin->getState() === PluginStateEnum::ENABLED;
+            ->displayIf(function (Plugin $plugin) {
+                return $plugin->getState() === PluginStateEnum::ENABLED &&
+                    $this->getUser()?->hasPermission(PermissionEnum::DISABLE_PLUGIN);
             })
             ->setCssClass('btn btn-warning');
 
-        return $actions
+        $actions = $actions
             ->add(Crud::PAGE_INDEX, $settingsAction)
             ->add(Crud::PAGE_INDEX, $enableAction)
             ->add(Crud::PAGE_INDEX, $disableAction)
@@ -157,6 +172,8 @@ class PluginCrudController extends AbstractPanelController
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::EDIT);
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -167,7 +184,6 @@ class PluginCrudController extends AbstractPanelController
         return $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.plugin.plugin'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.plugin.plugins'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ->setDefaultSort(['name' => 'ASC'])
             ->setPageTitle(Crud::PAGE_INDEX, $this->translator->trans('pteroca.crud.plugin.plugin_management'))
             ->setPageTitle(Crud::PAGE_DETAIL, fn (Plugin $plugin) => sprintf('%s: %s', $this->translator->trans('pteroca.crud.plugin.plugin'), $plugin->getDisplayName()))

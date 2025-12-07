@@ -1,0 +1,74 @@
+{# Template for displaying users in role detail view #}
+{% set users = field.value %}
+
+{# Filter out deleted and blocked users #}
+{% set activeUsers = [] %}
+{% for user in users %}
+    {% if user.deletedAt is null and not user.isBlocked %}
+        {% set activeUsers = activeUsers|merge([user]) %}
+    {% endif %}
+{% endfor %}
+
+<div class="role-users-list">
+    {% if activeUsers is empty %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <em>{{ 'pteroca.crud.role.field.no_active_users'|trans }}</em>
+            {% if users|length > 0 %}
+                <br><small class="text-muted">({{ users|length }} {{ 'pteroca.crud.role.field.deleted_blocked_hidden'|trans }})</small>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ 'pteroca.crud.role.field.id'|trans }}</th>
+                        <th>{{ 'pteroca.crud.role.field.email'|trans }}</th>
+                        <th>{{ 'pteroca.crud.role.field.name'|trans }}</th>
+                        <th>{{ 'pteroca.crud.role.field.status'|trans }}</th>
+                        <th>{{ 'pteroca.crud.role.field.created'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in activeUsers %}
+                        <tr>
+                            <td><small class="text-muted">#{{ user.id }}</small></td>
+                            <td>
+                                <i class="fas fa-user me-1"></i>
+                                {{ user.email }}
+                            </td>
+                            <td>{{ user.name }} {{ user.surname }}</td>
+                            <td>
+                                {% if user.isVerified %}
+                                    <span class="badge bg-success" title="{{ 'pteroca.crud.role.field.verified'|trans }}">
+                                        <i class="fas fa-check-circle"></i> {{ 'pteroca.crud.role.field.verified'|trans }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-warning" title="{{ 'pteroca.crud.role.field.not_verified'|trans }}">
+                                        <i class="fas fa-exclamation-triangle"></i> {{ 'pteroca.crud.role.field.not_verified'|trans }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small class="text-muted">
+                                    {{ user.createdAt|date('Y-m-d H:i') }}
+                                </small>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-3">
+            <p class="text-muted small">
+                <i class="fas fa-info-circle me-1"></i>
+                {{ 'pteroca.crud.role.field.active_users'|trans }} <strong>{{ activeUsers|length }}</strong>
+                {% if users|length > activeUsers|length %}
+                    <span class="text-muted">({{ users|length - activeUsers|length }} {{ 'pteroca.crud.role.field.deleted_blocked_hidden'|trans }})</span>
+                {% endif %}
+            </p>
+        </div>
+    {% endif %}
+</div>

@@ -22,16 +22,22 @@ readonly class PanelCrudService
 
     public function logEntityAction(LogActionEnum $action, $entityInstance, UserInterface $user, string $entityName): void
     {
+        // Create a clone for logging to avoid mutating the original entity
+        $entityForLogging = $entityInstance;
+
         if (is_a($entityInstance, Setting::class)
             && $entityInstance->getType() === SettingTypeEnum::SECRET->value) {
-            $entityInstance->setValue('********');
+            // Clone the entity to avoid mutating the original that will be persisted
+            $entityForLogging = clone $entityInstance;
+            $entityForLogging->setValue('********');
         }
+
         $this->logService->logAction(
             $user,
             $action,
             [
                 'entityName' => $entityName,
-                'entity' => $this->serializer->normalize($entityInstance, null, ['groups' => 'log'])
+                'entity' => $this->serializer->normalize($entityForLogging, null, ['groups' => 'log'])
             ],
         );
     }
