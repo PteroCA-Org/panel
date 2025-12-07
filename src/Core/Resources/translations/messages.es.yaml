@@ -950,6 +950,7 @@ pteroca:
         renewal_notification_enabled: 'Habilitar notificaciones de renovación'
         renewal_notification_min_period_hours: 'Frecuencia mínima de notificación (en horas)'
         renewal_notification_on_demand_min_hours: 'Horas mínimas antes de enviar la notificación bajo demanda'
+        telemetry_consent: 'Permitir el envío de datos de uso anónimos para ayudar a mejorar PteroCA. Solo se rastrean eventos de instalación y errores. No se recopilan datos personales, claves API o URLs.'
       template:
         name: 'Nombre de la plantilla'
         description: 'Descripción de la plantilla'
@@ -1390,6 +1391,8 @@ pteroca:
       pterodactyl_already_configured: 'Configuración de Pterodactyl existente detectada. Puede omitir este paso o anular la configuración existente.'
       override_settings: 'Anular configuración'
       user_already_exists_in_local_database: 'Un usuario con esta dirección de correo electrónico ya existe en la base de datos local.'
+    telemetry_consent: 'Ayuda a mejorar PteroCA enviando datos de uso anónimos'
+    telemetry_consent_help: 'Recopilamos telemetría anónima para mejorar PteroCA. Solo se rastrean eventos de instalación y errores. No se recopilan datos personales, claves API o URLs.'
 
   error:
     invalid_csrf_token: 'Token CSRF inválido. Por favor, actualice la página e inténtelo de nuevo.'

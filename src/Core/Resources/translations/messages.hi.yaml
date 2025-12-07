@@ -950,6 +950,7 @@ pteroca:
         renewal_notification_enabled: 'नवीकरण सूचनाएं सक्षम करें'
         renewal_notification_min_period_hours: 'अधिसूचना न्यूनतम आवृत्ति (घंटों में)'
         renewal_notification_on_demand_min_hours: 'अधिसूचना भेजने से पहले मांग पर न्यूनतम घंटे'
+        telemetry_consent: 'PteroCA को बेहतर बनाने में मदद करने के लिए अनाम उपयोग डेटा भेजने की अनुमति दें। केवल इंस्टॉलेशन घटनाएँ और त्रुटियाँ ट्रैक की जाती हैं। कोई व्यक्तिगत डेटा, API कुंजियाँ, या URL एकत्र नहीं किए जाते।'
       template:
         name: 'टेम्पलेट का नाम'
         description: 'टेम्पलेट विवरण'
@@ -1390,6 +1391,8 @@ pteroca:
       pterodactyl_already_configured: 'मौजूदा Pterodactyl कॉन्फ़िगरेशन का पता चला। आप इस चरण को छोड़ सकते हैं या मौजूदा सेटिंग्स को ओवरराइड कर सकते हैं।'
       override_settings: 'सेटिंग्स ओवरराइड करें'
       user_already_exists_in_local_database: 'इस ईमेल पते वाला उपयोगकर्ता पहले से ही स्थानीय डेटाबेस में मौजूद है।'
+    telemetry_consent: 'अनाम उपयोग डेटा भेजकर PteroCA को बेहतर बनाने में मदद करें'
+    telemetry_consent_help: 'हम PteroCA को बेहतर बनाने के लिए अनाम टेलीमेट्री एकत्र करते हैं। केवल इंस्टॉलेशन घटनाएँ और त्रुटियाँ ट्रैक की जाती हैं। कोई व्यक्तिगत डेटा, API कुंजियाँ, या URL एकत्र नहीं किए जाते।'
 
   error:
     invalid_csrf_token: 'अमान्य CSRF टोकन। कृपया पृष्ठ को ताज़ा करें और पुनः प्रयास करें।'

@@ -940,6 +940,7 @@ pteroca:
         renewal_notification_enabled: 'Enable renewal notifications'
         renewal_notification_min_period_hours: 'Notification minimum frequency (in hours)'
         renewal_notification_on_demand_min_hours: 'On-demand minimum hours before sending notification'
+        telemetry_consent: 'Allow sending anonymous usage data to help improve PteroCA. Only installation events and errors are tracked. No personal data, API keys, or URLs are collected.'
       template:
         name: 'Template name'
         description: 'Template description'
@@ -1376,6 +1377,8 @@ pteroca:
       user_validation_success: 'User validation successful.'
       user_checking_account_creation: 'Checking if account can be created...'
       validation_error: 'An error occurred while validating the step. Please try again.'
+    telemetry_consent: 'Help improve PteroCA by sending anonymous usage data'
+    telemetry_consent_help: 'We collect anonymous telemetry to improve PteroCA. Only installation events and errors are tracked. No personal data, API keys, or URLs are collected.'
 
   error:
     invalid_csrf_token: 'Invalid CSRF token. Please refresh the page and try again.'

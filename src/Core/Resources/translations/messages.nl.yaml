@@ -938,6 +938,7 @@ pteroca:
         renewal_notification_enabled: 'Hernieuwingsmeldingen inschakelen'
         renewal_notification_min_period_hours: 'Minimale meldingsfrequentie (in uren)'
         renewal_notification_on_demand_min_hours: 'Minimum aantal uren voor het verzenden van melding op aanvraag'
+        telemetry_consent: 'Sta het verzenden van anonieme gebruiksgegevens toe om PteroCA te helpen verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
       template:
         name: 'Sjabloonnaam'
         description: 'Sjabloonbeschrijving'
@@ -1374,6 +1375,8 @@ pteroca:
       pterodactyl_already_configured: 'Bestaande Pterodactyl-configuratie gedetecteerd. U kunt deze stap overslaan of de bestaande instellingen overschrijven.'
       override_settings: 'Instellingen overschrijven'
       user_already_exists_in_local_database: 'Een gebruiker met dit e-mailadres bestaat al in de lokale database.'
+    telemetry_consent: 'Help PteroCA te verbeteren door anonieme gebruiksgegevens te verzenden'
+    telemetry_consent_help: 'We verzamelen anonieme telemetrie om PteroCA te verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
 
   error:
     invalid_csrf_token: 'Ongeldig CSRF-token. Vernieuw de pagina en probeer het opnieuw.'

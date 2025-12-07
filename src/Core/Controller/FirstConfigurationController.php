@@ -3,6 +3,7 @@
 namespace App\Core\Controller;
 
 use App\Core\Service\System\WebConfigurator\WebConfiguratorService;
+use App\Core\Service\Telemetry\TelemetryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ class FirstConfigurationController extends AbstractController
 {
     public function __construct(
         private readonly WebConfiguratorService $webConfiguratorService,
+        private readonly TelemetryService $telemetryService,
     ) {}
 
     #[Route('/first-configuration', name: 'first_configuration')]
@@ -55,6 +57,10 @@ class FirstConfigurationController extends AbstractController
 
         $isSuccessfulFinished = $this->webConfiguratorService->finishConfiguration($request->request->all());
         $responseStatus = $isSuccessfulFinished->isVerificationSuccessful ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST;
+
+        if ($isSuccessfulFinished->isVerificationSuccessful) {
+            $this->telemetryService->sendInstallCompleteEvent();
+        }
 
         return new JsonResponse(
             data: $isSuccessfulFinished->message,
