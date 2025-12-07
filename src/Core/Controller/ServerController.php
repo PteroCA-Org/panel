@@ -3,7 +3,7 @@
 namespace App\Core\Controller;
 
 use App\Core\Entity\Server;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Server\ServerManagementDataLoadedEvent;
 use App\Core\Event\Server\ServerManagementPageAccessedEvent;
@@ -28,14 +28,14 @@ class ServerController extends AbstractController
         ServerService $serverService,
     ): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_MY_SERVERS);
 
         $this->dispatchSimpleEvent(ServersListAccessedEvent::class, $request);
 
         $imagePath = $this->getParameter('products_base_path') . '/';
         $servers = array_map(function (Server $server) use ($imagePath) {
             if (!empty($server->getServerProduct()->getOriginalProduct()?->getImagePath())) {
-                $server->imagePath = $imagePath . $server->getServerProduct()->getOriginalProduct()?->getImagePath();
+                $server->setImagePath($imagePath . $server->getServerProduct()->getOriginalProduct()?->getImagePath());
             }
             return $server;
         }, $serverService->getServersWithAccess($this->getUser()));
@@ -83,12 +83,12 @@ class ServerController extends AbstractController
                 $server->getPterodactylServerIdentifier(),
                 $server->getServerProduct()->getName(),
                 $server->getUser() === $this->getUser(), // isOwner
-                $this->isGranted(UserRoleEnum::ROLE_ADMIN->name), // isAdminView
+                $this->isGranted(PermissionEnum::ACCESS_SERVERS->value), // isAdminView
             ]
         );
 
         $serverData = $serverDataService->getServerData($server, $this->getUser(), $currentPage);
-        $isAdminView = $this->isGranted(UserRoleEnum::ROLE_ADMIN->name);
+        $isAdminView = $this->isGranted(PermissionEnum::ACCESS_SERVERS->value);
         $isOwner = $server->getUser() === $this->getUser();
 
         $loadedDataSections = [];

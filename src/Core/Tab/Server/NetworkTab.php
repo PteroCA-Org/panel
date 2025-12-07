@@ -4,6 +4,7 @@ namespace App\Core\Tab\Server;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\ServerPermissionEnum;
 
 class NetworkTab implements ServerTabInterface
 {
@@ -24,7 +25,7 @@ class NetworkTab implements ServerTabInterface
 
     public function isVisible(ServerTabContext $context): bool
     {
-        return $context->hasPermission('allocation.read');
+        return $context->hasPermission(ServerPermissionEnum::ALLOCATION_READ->value);
     }
 
     public function isDefault(): bool

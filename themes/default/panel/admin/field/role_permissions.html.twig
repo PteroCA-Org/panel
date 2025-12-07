@@ -1,0 +1,70 @@
+{# Template for displaying permissions in role detail view #}
+{% set permissions = field.value %}
+
+<div class="role-permissions-display">
+    {% if permissions is empty %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <em>{{ 'pteroca.crud.role.field.no_permissions'|trans }}</em>
+        </div>
+    {% else %}
+        {# Group permissions by section #}
+        {% set permissionsBySection = {} %}
+        {% for permission in permissions %}
+            {% set section = permission.section %}
+            {% if permissionsBySection[section] is not defined %}
+                {% set permissionsBySection = permissionsBySection|merge({(section): []}) %}
+            {% endif %}
+            {% set permissionsBySection = permissionsBySection|merge({
+                (section): permissionsBySection[section]|merge([permission])
+            }) %}
+        {% endfor %}
+
+        {# Summary header #}
+        <div class="permissions-summary mb-4">
+            <div class="d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                <div>
+                    <h6 class="mb-0">
+                        <i class="fas fa-shield-alt text-primary me-2"></i>
+                        <strong>{{ permissions|length }}</strong> {{ 'pteroca.crud.role.field.permissions_across'|trans }} <strong>{{ permissionsBySection|length }}</strong> {{ 'pteroca.crud.role.field.sections'|trans }}
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        {# Permissions by section #}
+        <div class="permissions-sections">
+            {% for section, sectionPermissions in permissionsBySection %}
+                <div class="permission-section-card mb-3">
+                    <div class="section-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-folder me-2 text-primary"></i>
+                            {{ ('pteroca.permission.section.' ~ section)|trans }}
+                            <span class="badge bg-primary ms-2">{{ sectionPermissions|length }}</span>
+                        </h6>
+                    </div>
+                    <div class="section-content">
+                        <div class="permissions-list">
+                            {% for permission in sectionPermissions %}
+                                <div class="permission-item">
+                                    <div class="permission-info">
+                                        <div class="permission-name">
+                                            <i class="fas fa-check-circle text-success me-2"></i>
+                                            <strong>{{ permission.name }}</strong>
+                                        </div>
+                                        <div class="permission-meta">
+                                            <code class="text-muted small">{{ permission.code }}</code>
+                                            {% if permission.description %}
+                                                <span class="text-muted small ms-2">• {{ permission.description }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

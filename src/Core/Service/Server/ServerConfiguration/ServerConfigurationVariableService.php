@@ -4,7 +4,7 @@ namespace App\Core\Service\Server\ServerConfiguration;
 
 use App\Core\Contract\UserInterface;
 use App\Core\Entity\Server;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Event\Server\Configuration\ServerStartupVariableUpdateRequestedEvent;
 use App\Core\Event\Server\Configuration\ServerStartupVariableUpdatedEvent;
 use App\Core\Service\Event\EventContextService;
@@ -64,7 +64,7 @@ class ServerConfigurationVariableService extends AbstractServerConfiguration
 
         $isReadOnlyVariable = $serverVariable['user_editable'] === false;
 
-        if ($isReadOnlyVariable && in_array(UserRoleEnum::ROLE_ADMIN->value, $user->getRoles())) {
+        if ($isReadOnlyVariable && $user->hasPermission(PermissionEnum::EDIT_SERVER)) {
             // Use Application API for read-only variables (admin only)
             $fullServerDetails = $this->getServerDetails($server, ['egg']);
             $payload = $this->serverConfigurationStartupService->getEnvironmentVariablePayload(
@@ -112,7 +112,7 @@ class ServerConfigurationVariableService extends AbstractServerConfiguration
 
     private function isVariableEditableForUser(Server $server, array $serverDetails, array $serverVariable, UserInterface $user): bool
     {
-        if (in_array(UserRoleEnum::ROLE_ADMIN->value, $user->getRoles())) {
+        if ($user->hasPermission(PermissionEnum::EDIT_SERVER)) {
             return true;
         }
 

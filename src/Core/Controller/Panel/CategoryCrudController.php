@@ -4,7 +4,6 @@ namespace App\Core\Controller\Panel;
 
 use App\Core\Entity\Category;
 use App\Core\Enum\CrudTemplateContextEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Service\Crud\PanelCrudService;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -60,12 +59,14 @@ class CategoryCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->update(Crud::PAGE_INDEX, Action::NEW, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.category.add')))
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.category.add')))
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.category.save')))
             ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE);
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -75,7 +76,6 @@ class CategoryCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.category.category'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.category.categories'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ;
 
         return parent::configureCrud($crud);

@@ -2,10 +2,11 @@
 
 namespace App\Core\Service\Server;
 
-use App\Core\Entity\Server;
-use App\Core\Enum\SettingEnum;
-use App\Core\Entity\ServerSubuser;
 use App\Core\Contract\UserInterface;
+use App\Core\Entity\Server;
+use App\Core\Entity\ServerSubuser;
+use App\Core\Enum\PermissionEnum;
+use App\Core\Enum\SettingEnum;
 use App\Core\Service\SettingService;
 use App\Core\Enum\ServerLogActionEnum;
 use App\Core\Repository\UserRepository;
@@ -338,8 +339,8 @@ readonly class ServerUserService
     private function validateSubuserModification(Server $server, UserInterface $user, string $targetEmail, string $action): void
     {
         $isServerOwner = $server->getUser()->getId() === $user->getId();
-        $isAdmin = in_array('ROLE_ADMIN', $user->getRoles());
-        
+        $isAdmin = $user->hasPermission(PermissionEnum::EDIT_SERVER);
+
         if (!$isServerOwner && !$isAdmin && $user->getEmail() === $targetEmail) {
             throw new Exception($this->translator->trans('pteroca.api.server_user.cannot_modify_yourself', ['action' => $action]));
         }

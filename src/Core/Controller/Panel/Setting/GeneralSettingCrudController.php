@@ -7,10 +7,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class GeneralSettingCrudController extends AbstractSettingCrudController
 {
-    public function configureCrud(Crud $crud): Crud
+    protected function getSettingContext(): SettingContextEnum
     {
-        $this->context = SettingContextEnum::GENERAL;
-
-        return parent::configureCrud($crud);
+        return SettingContextEnum::GENERAL;
     }
 }

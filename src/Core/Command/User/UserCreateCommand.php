@@ -2,7 +2,6 @@
 
 namespace App\Core\Command\User;
 
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Exception\CouldNotCreatePterodactylClientApiKeyException;
 use App\Core\Handler\CreateNewUserHandler;
 use Exception;
@@ -32,7 +31,7 @@ class UserCreateCommand extends Command
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'User email')
             ->addArgument('password', InputArgument::REQUIRED, 'User password')
-            ->addArgument('role', InputArgument::OPTIONAL, 'User role', UserRoleEnum::ROLE_USER->name)
+            ->addArgument('role', InputArgument::OPTIONAL, 'Role name (admin, user)', 'user')
         ;
     }
 
@@ -46,10 +45,10 @@ class UserCreateCommand extends Command
 
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
-        $role = UserRoleEnum::tryFrom($input->getArgument('role')) ?? UserRoleEnum::ROLE_USER;
+        $roleName = $input->getArgument('role');
 
         try {
-            $this->createNewUserHandler->setUserCredentials($email, $password, $role);
+            $this->createNewUserHandler->setUserCredentials($email, $password, $roleName);
             $this->createNewUserHandler->handle();
         } catch (CouldNotCreatePterodactylClientApiKeyException $exception) {
             $io->warning($exception->getMessage());

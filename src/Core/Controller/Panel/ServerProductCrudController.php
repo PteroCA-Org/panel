@@ -5,7 +5,6 @@ namespace App\Core\Controller\Panel;
 use App\Core\Entity\ServerProduct;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Form\ServerProductPriceDynamicFormType;
 use App\Core\Form\ServerProductPriceFixedFormType;
 use App\Core\Form\ServerProductPriceSlotFormType;
@@ -192,7 +191,7 @@ class ServerProductCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->disable(Crud::PAGE_INDEX)
             ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
@@ -215,8 +214,9 @@ class ServerProductCrudController extends AbstractPanelController
             ->add(Crud::PAGE_EDIT, $this->getServerAction(Crud::PAGE_EDIT))
             ->add(Crud::PAGE_EDIT, $this->getManageServerAction())
             ->add(Crud::PAGE_DETAIL, $this->getManageServerAction())
-            ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction())
-            ;
+            ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction());
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -226,7 +226,6 @@ class ServerProductCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.product.server_build'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.product.server_builds'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ->setSearchFields(null)
         ;
 

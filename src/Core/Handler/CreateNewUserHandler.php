@@ -3,7 +3,6 @@
 namespace App\Core\Handler;
 
 use App\Core\Entity\User;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessCompletedEvent;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessFailedEvent;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessStartedEvent;
@@ -13,6 +12,7 @@ use App\Core\Repository\UserRepository;
 use App\Core\Service\Event\EventContextService;
 use App\Core\Service\Pterodactyl\PterodactylAccountService;
 use App\Core\Service\Pterodactyl\PterodactylClientApiKeyService;
+use App\Core\Service\Security\RoleManager;
 use DateTimeImmutable;
 use Exception;
 use RuntimeException;
@@ -25,7 +25,7 @@ class CreateNewUserHandler implements HandlerInterface
 
     private string $userPassword;
 
-    private UserRoleEnum $userRole;
+    private string $userRoleName;
 
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
@@ -34,6 +34,7 @@ class CreateNewUserHandler implements HandlerInterface
         private readonly PterodactylClientApiKeyService $pterodactylClientApiKeyService,
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly EventContextService $eventContextService,
+        private readonly RoleManager $roleManager,
     ) {}
 
     /**
@@ -47,14 +48,14 @@ class CreateNewUserHandler implements HandlerInterface
         // Validate credentials first
         if (empty($this->userEmail) || empty($this->userPassword)) {
             $context = $this->eventContextService->buildCliContext('app:create-new-user', [
-                'role' => $this->userRole->name ?? 'UNKNOWN',
+                'role' => $this->userRoleName ?? 'UNKNOWN',
             ]);
 
             $this->eventDispatcher->dispatch(
                 new UserCreationProcessFailedEvent(
                     'User credentials not set',
                     $this->userEmail ?? 'UNKNOWN',
-                    $this->userRole->name ?? 'UNKNOWN',
+                    $this->userRoleName ?? 'UNKNOWN',
                     new DateTimeImmutable(),
                     $context
                 )
@@ -65,7 +66,7 @@ class CreateNewUserHandler implements HandlerInterface
 
         $context = $this->eventContextService->buildCliContext('app:create-new-user', [
             'email' => $this->userEmail,
-            'role' => $this->userRole->name,
+            'role' => $this->userRoleName,
         ]);
 
         // Emit process started event
@@ -73,7 +74,7 @@ class CreateNewUserHandler implements HandlerInterface
             new UserCreationProcessStartedEvent(
                 $startTime,
                 $this->userEmail,
-                $this->userRole->name,
+                $this->userRoleName,
                 $context
             )
         );
@@ -82,10 +83,21 @@ class CreateNewUserHandler implements HandlerInterface
             $user = (new User())
                 ->setEmail($this->userEmail)
                 ->setPassword('')
-                ->setRoles([$this->userRole->name])
                 ->setBalance(0)
                 ->setName('Admin')
                 ->setSurname('Admin');
+
+            // Assign role using RoleManager
+            $role = $this->roleManager->getRoleByName($this->userRoleName);
+            if ($role) {
+                $user->addUserRole($role);
+            } else {
+                // Fallback to user role if specified role doesn't exist
+                $defaultRole = $this->roleManager->getRoleByName('user');
+                if ($defaultRole) {
+                    $user->addUserRole($defaultRole);
+                }
+            }
 
             $hashedPassword = $this->passwordHasher->hashPassword($user, $this->userPassword);
             $user->setPassword($hashedPassword);
@@ -103,7 +115,7 @@ class CreateNewUserHandler implements HandlerInterface
                     new UserCreationProcessFailedEvent(
                         $message,
                         $this->userEmail,
-                        $this->userRole->name,
+                        $this->userRoleName,
                         new DateTimeImmutable(),
                         $context
                     )
@@ -136,7 +148,7 @@ class CreateNewUserHandler implements HandlerInterface
                                 new UserCreationProcessFailedEvent(
                                     $failureMessage,
                                     $this->userEmail,
-                                    $this->userRole->name,
+                                    $this->userRoleName,
                                     new DateTimeImmutable(),
                                     $context
                                 )
@@ -149,7 +161,7 @@ class CreateNewUserHandler implements HandlerInterface
                             new UserCreationProcessFailedEvent(
                                 $exception->getMessage(),
                                 $this->userEmail,
-                                $this->userRole->name,
+                                $this->userRoleName,
                                 new DateTimeImmutable(),
                                 $context
                             )
@@ -173,7 +185,7 @@ class CreateNewUserHandler implements HandlerInterface
                 new UserCreationProcessCompletedEvent(
                     $user->getId() ?? 0,
                     $this->userEmail,
-                    $this->userRole->name,
+                    $this->userRoleName,
                     $hasPterodactylAccount,
                     $hasApiKey,
                     $createdWithoutApiKey,
@@ -191,7 +203,7 @@ class CreateNewUserHandler implements HandlerInterface
                 new UserCreationProcessFailedEvent(
                     $e->getMessage(),
                     $this->userEmail,
-                    $this->userRole->name,
+                    $this->userRoleName,
                     new DateTimeImmutable(),
                     $context
                 )
@@ -201,10 +213,10 @@ class CreateNewUserHandler implements HandlerInterface
         }
     }
 
-    public function setUserCredentials(string $email, string $password, UserRoleEnum $userRole): void
+    public function setUserCredentials(string $email, string $password, string $userRoleName): void
     {
         $this->userEmail = $email;
         $this->userPassword = $password;
-        $this->userRole = $userRole;
+        $this->userRoleName = $userRoleName;
     }
 }

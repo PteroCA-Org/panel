@@ -3,6 +3,7 @@
 namespace App\Core\Service\User;
 
 use App\Core\Contract\UserInterface;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Exception\CouldNotCreatePterodactylClientApiKeyException;
 use App\Core\Exception\PterodactylUserNotFoundException;
 use App\Core\Repository\UserRepository;
@@ -53,7 +54,7 @@ readonly class UserService
                     'first_name' => $user->getName(),
                     'last_name' => $user->getSurname(),
                     'password' => $plainPassword,
-                    'root_admin' => $user->isAdmin(),
+                    'root_admin' => $user->hasPermission(PermissionEnum::PTERODACTYL_ROOT_ADMIN),
             ]);
             $user->setPterodactylUserId($createdUser->get('id'));
         } catch (Exception $exception) {
@@ -157,7 +158,7 @@ readonly class UserService
                     'email' => $user->getEmail(),
                     'first_name' => $user->getName(),
                     'last_name' => $user->getSurname(),
-                    'root_admin' => $user->isAdmin(),
+                    'root_admin' => $user->hasPermission(PermissionEnum::PTERODACTYL_ROOT_ADMIN),
                 ];
 
                 if ($plainPassword) {

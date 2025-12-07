@@ -3,7 +3,6 @@
 namespace App\Core\Handler\Installer;
 
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Repository\SettingRepository;
 use App\Core\Service\SettingService;
 use App\Core\Service\System\EnvironmentConfigurationService;
@@ -74,8 +73,8 @@ class SystemSettingConfiguratorHandler
             
             $isAdmin = $io->ask('Is user admin? (yes/no)', 'yes') === 'yes';
 
-            $userRole = $isAdmin ? UserRoleEnum::ROLE_ADMIN : UserRoleEnum::ROLE_USER;
-            exec(sprintf('php bin/console app:create-new-user %s %s %s', $email, $password, $userRole->name));
+            $roleName = $isAdmin ? 'admin' : 'user';
+            exec(sprintf('php bin/console app:create-new-user %s %s %s', $email, $password, $roleName));
         }
     }
 

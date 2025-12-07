@@ -7,8 +7,8 @@ use App\Core\Entity\Payment;
 use App\Core\Entity\Voucher;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Enum\PaymentStatusEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Event\Payment\PaymentContinueFailedEvent;
 use App\Core\Event\Payment\PaymentContinuedEvent;
 use App\Core\Event\Payment\PaymentContinueRequestedEvent;
@@ -49,6 +49,15 @@ class UserPaymentCrudController extends AbstractPanelController
     public static function getEntityFqcn(): string
     {
         return UserPayment::class;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        return [
+            Action::INDEX  => PermissionEnum::ACCESS_USER_PAYMENTS->value,
+            Action::DETAIL => PermissionEnum::VIEW_USER_PAYMENT->value,
+            'continuePayment' => PermissionEnum::CONTINUE_PAYMENT->value,
+        ];
     }
 
     /**
@@ -163,12 +172,13 @@ class UserPaymentCrudController extends AbstractPanelController
                 return $payment->getStatus() === PaymentStatusEnum::PAID->value;
             });
 
-        return $actions
+        $actions = $actions
             ->disable(Action::NEW, Action::EDIT, Action::DELETE)
             ->add(Crud::PAGE_INDEX, $continuePayment)
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
-            ->update(Crud::PAGE_INDEX, Action::DETAIL, fn(Action $action) => $showOnlyPaid)
-            ;
+            ->update(Crud::PAGE_INDEX, Action::DETAIL, fn(Action $action) => $showOnlyPaid);
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -178,7 +188,6 @@ class UserPaymentCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.payment.payment'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.payment.payments'))
-            ->setEntityPermission(UserRoleEnum::ROLE_USER->name)
             ->setDefaultSort(['createdAt' => 'DESC'])
             ->setHelp('index', $this->translator->trans('pteroca.crud.payment.description'))
             ->setHelp('detail', $this->translator->trans('pteroca.crud.payment.description'))

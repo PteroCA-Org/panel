@@ -4,7 +4,6 @@ namespace App\Core\Tests\Integration\Controller\Panel;
 
 use App\Core\Controller\Panel\UserCrudController;
 use App\Core\Entity\User;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Service\Pterodactyl\PterodactylService;
 use App\Core\Service\Pterodactyl\PterodactylUsernameService;
 use App\Core\Tests\Integration\BaseTestCase;

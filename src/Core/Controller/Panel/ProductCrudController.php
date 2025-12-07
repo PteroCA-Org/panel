@@ -4,8 +4,8 @@ namespace App\Core\Controller\Panel;
 
 use App\Core\Entity\Product;
 use App\Core\Enum\CrudTemplateContextEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Form\ProductPriceDynamicFormType;
 use App\Core\Form\ProductPriceFixedFormType;
 use App\Core\Form\ProductPriceSlotFormType;
@@ -57,6 +57,18 @@ class ProductCrudController extends AbstractPanelController
     public static function getEntityFqcn(): string
     {
         return Product::class;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        return [
+            Action::INDEX  => PermissionEnum::ACCESS_PRODUCTS->value,
+            Action::DETAIL => PermissionEnum::VIEW_PRODUCT->value,
+            Action::NEW    => PermissionEnum::CREATE_PRODUCT->value,
+            Action::EDIT   => PermissionEnum::EDIT_PRODUCT->value,
+            Action::DELETE => PermissionEnum::DELETE_PRODUCT->value,
+            'copyProduct' => PermissionEnum::COPY_PRODUCT->value,
+        ];
     }
 
     public function configureFields(string $pageName): iterable
@@ -221,19 +233,32 @@ class ProductCrudController extends AbstractPanelController
         $copyAction = Action::new('copyProduct', $this->translator->trans('pteroca.crud.product.copy'))
             ->linkToCrudAction('copyProduct')
             ->setCssClass('action-copy-product')
-            ->displayIf(fn (Product $entity) => empty($entity->getDeletedAt()));
+            ->displayIf(fn (Product $entity) =>
+                $this->getUser()?->hasPermission(PermissionEnum::COPY_PRODUCT) &&
+                empty($entity->getDeletedAt())
+            );
 
-        return $actions
+        $actions = $actions
             ->update(Crud::PAGE_INDEX, Action::NEW, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.product.add')))
             ->update(Crud::PAGE_NEW, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.product.add')))
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, fn (Action $action) => $action->setLabel($this->translator->trans('pteroca.crud.product.save')))
-            ->update(Crud::PAGE_INDEX, Action::EDIT, fn (Action $action) => $action->displayIf(fn (Product $entity) => empty($entity->getDeletedAt())))
-            ->update(Crud::PAGE_INDEX, Action::DELETE, fn (Action $action) => $action->displayIf(fn (Product $entity) => empty($entity->getDeletedAt())))
+            ->update(Crud::PAGE_INDEX, Action::EDIT, fn (Action $action) => $action->displayIf(
+                fn (Product $entity) =>
+                    $this->getUser()?->hasPermission(PermissionEnum::EDIT_PRODUCT) &&
+                    empty($entity->getDeletedAt())
+            ))
+            ->update(Crud::PAGE_INDEX, Action::DELETE, fn (Action $action) => $action->displayIf(
+                fn (Product $entity) =>
+                    $this->getUser()?->hasPermission(PermissionEnum::DELETE_PRODUCT) &&
+                    empty($entity->getDeletedAt())
+            ))
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->add(Crud::PAGE_INDEX, $copyAction)
             ->reorder(Crud::PAGE_INDEX, [Action::EDIT, Action::DETAIL, 'copyProduct', Action::DELETE])
             ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE);
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -244,7 +269,6 @@ class ProductCrudController extends AbstractPanelController
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.product.product'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.product.products'))
             ->setDefaultSort(['createdAt' => 'DESC'])
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
         ;
 
         return parent::configureCrud($crud);

@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Store\StoreAccessedEvent;
 use App\Core\Event\Store\StoreDataLoadedEvent;
@@ -25,7 +26,7 @@ class StoreController extends AbstractController
     #[Route('/store', name: 'store')]
     public function store(Request $request): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_SHOP);
 
         $this->dispatchSimpleEvent(StoreAccessedEvent::class, $request);
 
@@ -49,7 +50,7 @@ class StoreController extends AbstractController
     #[Route('/store/category', name: 'store_category')]
     public function category(Request $request): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_SHOP);
         $categoryId = $request->query->getInt('id');
 
         $category = $this->storeService->getCategory($categoryId);
@@ -82,7 +83,7 @@ class StoreController extends AbstractController
     #[Route('/store/product', name: 'store_product')]
     public function product(Request $request): Response
     {
-        $this->checkPermission();
+        $this->checkPermission(PermissionEnum::ACCESS_SHOP);
 
         $productId = $request->query->getInt('id');
         $product = $this->storeService->getActiveProduct($productId);

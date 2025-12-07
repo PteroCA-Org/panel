@@ -4,6 +4,7 @@ namespace App\Core\Tab\Server;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\ServerPermissionEnum;
 
 class DatabasesTab implements ServerTabInterface
 {
@@ -25,7 +26,7 @@ class DatabasesTab implements ServerTabInterface
     public function isVisible(ServerTabContext $context): bool
     {
         return $context->getProductFeature('dbCount') > 0
-            && $context->hasPermission('database.read');
+            && $context->hasPermission(ServerPermissionEnum::DATABASE_READ->value);
     }
 
     public function isDefault(): bool

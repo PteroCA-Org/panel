@@ -4,7 +4,6 @@ namespace App\Core\Controller\Panel;
 
 use App\Core\Entity\Server;
 use App\Core\Enum\CrudTemplateContextEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Server\DeleteServerService;
 use App\Core\Service\Server\UpdateServerService;
@@ -25,6 +24,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use App\Core\Enum\PermissionEnum;
 
 class ServerCrudController extends AbstractPanelController
 {
@@ -103,13 +103,15 @@ class ServerCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->update(
                 Crud::PAGE_INDEX,
                 Action::DELETE,
                 fn (Action $action) => $action->displayIf(
-                    fn (Server $entity) => empty($entity->getDeletedAt())
+                    fn (Server $entity) =>
+                        $this->getUser()?->hasPermission(PermissionEnum::DELETE_SERVER) &&
+                        empty($entity->getDeletedAt())
                 )
             )->update(
                 Crud::PAGE_EDIT,
@@ -127,8 +129,9 @@ class ServerCrudController extends AbstractPanelController
             ->add(Crud::PAGE_INDEX, $this->getShowServerLogsAction())
             ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction())
             ->add(Crud::PAGE_DETAIL, $this->getManageServerAction())
-            ->add(Crud::PAGE_EDIT, $this->getManageServerAction())
-            ;
+            ->add(Crud::PAGE_EDIT, $this->getManageServerAction());
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -138,7 +141,6 @@ class ServerCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.server.server'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.server.servers'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ->setDefaultSort(['createdAt' => 'DESC']);
 
         return parent::configureCrud($crud);
@@ -197,6 +199,18 @@ class ServerCrudController extends AbstractPanelController
                 ]
             )
         )->displayIf(function (Server $entity) use ($action) {
+            // Check permission based on action type
+            $permissionMap = [
+                Action::DETAIL => PermissionEnum::VIEW_SERVER_PRODUCT,
+                Action::EDIT => PermissionEnum::EDIT_SERVER_PRODUCT,
+            ];
+            $permission = $permissionMap[$action] ?? null;
+
+            if ($permission && !$this->getUser()?->hasPermission($permission)) {
+                return false;
+            }
+
+            // Check entity state
             if ($action !== Action::DETAIL) {
                 return empty($entity->getDeletedAt());
             }

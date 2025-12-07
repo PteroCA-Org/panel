@@ -2,9 +2,9 @@
 
 namespace App\Core\Controller\API;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ServerLogActionEnum;
 use App\Core\Enum\ServerPermissionEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Repository\ServerRepository;
 use App\Core\Service\Logs\ServerLogService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
@@ -204,7 +204,7 @@ class ServerConfigurationController extends APIAbstractController
     ): JsonResponse
     {
         $server = $this->serverRepository->find($id);
-        if (empty($server) || ($server->getUser() !== $this->getUser() && !$this->isGranted(UserRoleEnum::ROLE_ADMIN->name))) {
+        if (empty($server) || ($server->getUser() !== $this->getUser() && !$this->isGranted(PermissionEnum::EDIT_SERVER))) {
             throw $this->createAccessDeniedException();
         }
         

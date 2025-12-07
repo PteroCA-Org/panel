@@ -5,8 +5,8 @@ namespace App\Core\Controller;
 use App\Core\Attribute\RequiresVerifiedEmail;
 use App\Core\Entity\Product;
 use App\Core\Entity\Server;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Event\Cart\CartTopUpPageAccessedEvent;
 use App\Core\Event\Cart\CartTopUpDataLoadedEvent;
@@ -61,6 +61,8 @@ class CartController extends AbstractController
         PaymentGatewayManager $gatewayManager,
     ): Response
     {
+        $this->denyAccessUnlessGranted(PermissionEnum::ACCESS_WALLET->value);
+
         $currency = $settingService->getSetting(SettingEnum::CURRENCY_NAME->value);
 
         // Dispatch event to allow plugins to register payment gateways
@@ -150,6 +152,8 @@ class CartController extends AbstractController
     #[Route('/cart/configure', name: 'cart_configure')]
     public function configure(Request $request): Response
     {
+        $this->denyAccessUnlessGranted(PermissionEnum::ACCESS_SHOP->value);
+
         $product = $this->getProductByRequest($request);
 
         $this->dispatchDataEvent(
@@ -223,6 +227,8 @@ class CartController extends AbstractController
         CreateServerService $createServerService,
     ): Response
     {
+        $this->denyAccessUnlessGranted(PermissionEnum::PURCHASE_SERVER->value);
+
         try {
             $purchaseToken = $request->request->getString('purchase_token');
             $this->purchaseTokenService->validateAndConsumeToken($purchaseToken, $this->getUser(), 'buy');
@@ -332,6 +338,8 @@ class CartController extends AbstractController
         Request $request,
     ): Response
     {
+        $this->denyAccessUnlessGranted(PermissionEnum::RENEW_SERVER->value);
+
         $server = $this->getServerByRequest($request);
 
         $this->dispatchDataEvent(
@@ -385,6 +393,8 @@ class CartController extends AbstractController
         RenewServerService $renewServerService,
     ): Response
     {
+        $this->denyAccessUnlessGranted(PermissionEnum::RENEW_SERVER->value);
+
         try {
             $purchaseToken = $request->request->getString('purchase_token');
             $this->purchaseTokenService->validateAndConsumeToken($purchaseToken, $this->getUser(), 'renew');
@@ -494,7 +504,7 @@ class CartController extends AbstractController
             throw $this->createNotFoundException($this->translator->trans('pteroca.store.product_not_found'));
         }
 
-        $isOwner = $server->getUser() === $this->getUser() || $this->isGranted(UserRoleEnum::ROLE_ADMIN->value);
+        $isOwner = $server->getUser() === $this->getUser() || $this->isGranted(PermissionEnum::ACCESS_SERVERS->value);
         if ($isOwner) {
             return $server;
         }

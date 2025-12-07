@@ -1,0 +1,61 @@
+{# Template for displaying roles in permission detail view #}
+{% set roles = field.value %}
+
+<div class="permission-roles-list">
+    {% if roles is empty %}
+        <p class="text-muted"><em>{{ 'pteroca.crud.permission.field.no_roles'|trans }}</em></p>
+    {% else %}
+        <div class="roles-grid">
+            {% for role in roles %}
+                <div class="role-card mb-3 p-3 border rounded">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">
+                                <i class="fas fa-user-tag me-2 text-primary"></i>
+                                {{ role.displayName }}
+                                {% if role.isSystem %}
+                                    <span class="badge bg-info ms-2" title="System role - protected">
+                                        <i class="fas fa-shield-alt"></i> System
+                                    </span>
+                                {% endif %}
+                            </h6>
+                            <p class="text-muted small mb-2">
+                                <strong>{{ 'pteroca.crud.permission.field.role_name'|trans }}</strong> {{ role.name }}
+                            </p>
+                            {% if role.description %}
+                                <p class="text-muted small mb-0">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    {{ role.description }}
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="ms-3 text-end">
+                            <small class="text-muted">
+                                <i class="fas fa-users me-1"></i>
+                                {% set activeUsersCount = 0 %}
+                                {% for user in role.users %}
+                                    {% if user.deletedAt is null and not user.isBlocked %}
+                                        {% set activeUsersCount = activeUsersCount + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                {{ activeUsersCount }} {{ 'pteroca.crud.permission.field.users_count'|trans }}
+                            </small>
+                            <br>
+                            <small class="text-muted">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                {{ role.permissions|length }} {{ 'pteroca.crud.permission.field.permissions_count'|trans }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-3">
+            <p class="text-muted small">
+                <i class="fas fa-info-circle me-1"></i>
+                {{ 'pteroca.crud.permission.field.total_roles'|trans }} <strong>{{ roles|length }}</strong>
+            </p>
+        </div>
+    {% endif %}
+</div>

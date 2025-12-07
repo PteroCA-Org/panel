@@ -4,7 +4,6 @@ namespace App\Core\Controller\Panel;
 
 use App\Core\Entity\Voucher;
 use App\Core\Enum\CrudTemplateContextEnum;
-use App\Core\Enum\UserRoleEnum;
 use App\Core\Enum\VoucherTypeEnum;
 use App\Core\Event\Voucher\VoucherCreationRequestedEvent;
 use App\Core\Event\Voucher\VoucherCreatedEvent;
@@ -29,6 +28,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use RuntimeException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use App\Core\Enum\PermissionEnum;
 
 
 class VoucherCrudController extends AbstractPanelController
@@ -44,6 +44,18 @@ class VoucherCrudController extends AbstractPanelController
     public static function getEntityFqcn(): string
     {
         return Voucher::class;
+    }
+
+    protected function getPermissionMapping(): array
+    {
+        return [
+            Action::INDEX  => PermissionEnum::ACCESS_VOUCHERS->value,
+            Action::DETAIL => PermissionEnum::VIEW_VOUCHER->value,
+            Action::NEW    => PermissionEnum::CREATE_VOUCHER->value,
+            Action::EDIT   => PermissionEnum::EDIT_VOUCHER->value,
+            Action::DELETE => PermissionEnum::DELETE_VOUCHER->value,
+            'showVoucherUsages' => PermissionEnum::SHOW_VOUCHER_USAGES->value,
+        ];
     }
 
     public function configureFields(string $pageName): iterable
@@ -95,11 +107,12 @@ class VoucherCrudController extends AbstractPanelController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions
+        $actions = $actions
             ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
             ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
-            ->add(Crud::PAGE_INDEX, $this->getShowRedeemedVouchersAction())
-            ;
+            ->add(Crud::PAGE_INDEX, $this->getShowRedeemedVouchersAction());
+
+        return parent::configureActions($actions);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -109,7 +122,6 @@ class VoucherCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.voucher.voucher'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.voucher.vouchers'))
-            ->setEntityPermission(UserRoleEnum::ROLE_ADMIN->name)
             ;
 
         return parent::configureCrud($crud);
@@ -240,6 +252,6 @@ class VoucherCrudController extends AbstractPanelController
                     ]
                 ]
             )
-        );
+        )->displayIf(fn (Voucher $entity) => $this->getUser()?->hasPermission(PermissionEnum::SHOW_VOUCHER_USAGES));
     }
 }

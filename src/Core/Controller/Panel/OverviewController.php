@@ -2,7 +2,7 @@
 
 namespace App\Core\Controller\Panel;
 
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\ViewNameEnum;
 use App\Core\Enum\WidgetContext;
 use App\Core\Controller\AbstractController;
@@ -42,7 +42,7 @@ class OverviewController extends AbstractController
         AdminStatisticsService $adminStatisticsService,
     ): Response
     {
-        $this->checkPermission(UserRoleEnum::ROLE_ADMIN->name);
+        $this->denyAccessUnlessGranted(PermissionEnum::ACCESS_ADMIN_OVERVIEW->value);
 
         $user = $this->getUser();
         $request = $this->requestStack->getCurrentRequest();

@@ -16,14 +16,14 @@ use App\Core\Service\Security\PermissionRegistry;
  * {
  *     $registry = $event->getRegistry();
  *
- *     // Register a simple role-based permission
+ *     // Register a permission for admins and moderators
  *     $registry->registerPermission(
- *         'PLUGIN_MY_PLUGIN_ADMIN',
- *         'Administrator access to MyPlugin',
- *         ['ROLE_ADMIN']
+ *         'PLUGIN_MY_PLUGIN_MANAGE',
+ *         'Manage MyPlugin content',
+ *         ['ROLE_ADMIN', 'ROLE_MODERATOR']
  *     );
  *
- *     // Register a permission for all users
+ *     // Register a permission for all authenticated users
  *     $registry->registerPermission(
  *         'PLUGIN_MY_PLUGIN_VIEW',
  *         'View MyPlugin content',

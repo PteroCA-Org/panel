@@ -4,6 +4,7 @@ namespace App\Core\Tab\Server;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\ServerPermissionEnum;
 
 class SchedulesTab implements ServerTabInterface
 {
@@ -25,7 +26,7 @@ class SchedulesTab implements ServerTabInterface
     public function isVisible(ServerTabContext $context): bool
     {
         return $context->getProductFeature('schedules') > 0
-            && $context->hasPermission('schedule.read');
+            && $context->hasPermission(ServerPermissionEnum::SCHEDULE_READ->value);
     }
 
     public function isDefault(): bool

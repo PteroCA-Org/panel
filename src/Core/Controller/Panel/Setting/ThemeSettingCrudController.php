@@ -56,11 +56,9 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
             || $settingService->getSetting(SettingEnum::THEME_DISABLE_DARK_MODE->value);
     }
 
-    public function configureCrud(Crud $crud): Crud
+    protected function getSettingContext(): SettingContextEnum
     {
-        $this->context = SettingContextEnum::THEME;
-
-        return parent::configureCrud($crud);
+        return SettingContextEnum::THEME;
     }
 
     public function configureFields(string $pageName): iterable

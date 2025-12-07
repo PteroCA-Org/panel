@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller\Panel\Setting;
 
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingContextEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Repository\SettingRepository;
@@ -35,11 +36,9 @@ class EmailSettingCrudController extends AbstractSettingCrudController
         parent::__construct($panelCrudService, $requestStack, $translator, $settingRepository, $settingOptionRepository, $settingService, $localeService);
     }
 
-    public function configureCrud(Crud $crud): Crud
+    protected function getSettingContext(): SettingContextEnum
     {
-        $this->context = SettingContextEnum::EMAIL;
-
-        return parent::configureCrud($crud);
+        return SettingContextEnum::EMAIL;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -48,6 +47,7 @@ class EmailSettingCrudController extends AbstractSettingCrudController
             ->linkToRoute('admin_email_test_smtp')
             ->setIcon('fa fa-envelope-circle-check')
             ->setCssClass('btn btn-info')
+            ->displayIf(fn () => $this->getUser()?->hasPermission(PermissionEnum::EDIT_SETTINGS_EMAIL))
             ->createAsGlobalAction();
 
         $actions = parent::configureActions($actions);

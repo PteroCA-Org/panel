@@ -6,7 +6,7 @@ use DateTimeInterface;
 use Exception;
 use Lcobucci\JWT\Token\Plain;
 use App\Core\Enum\SettingEnum;
-use App\Core\Enum\UserRoleEnum;
+use App\Core\Enum\SystemRoleEnum;
 use Lcobucci\JWT\Configuration;
 use App\Core\Enum\LogActionEnum;
 use App\Core\Contract\UserInterface;
@@ -53,7 +53,7 @@ class RegistrationService
     public function registerUser(
         UserInterface $user,
         string $plainPassword,
-        array $roles = [UserRoleEnum::ROLE_USER->name],
+        array $roles = [SystemRoleEnum::ROLE_USER->value],
         bool $isVerified = false
     ): RegisterUserActionResult
     {

@@ -4,6 +4,7 @@ namespace App\Core\Tab\Server;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\ServerPermissionEnum;
 
 class StartupTab implements ServerTabInterface
 {
@@ -25,7 +26,7 @@ class StartupTab implements ServerTabInterface
     public function isVisible(ServerTabContext $context): bool
     {
         return $context->hasConfigurableStartup()
-            && $context->hasPermission('startup.read');
+            && $context->hasPermission(ServerPermissionEnum::STARTUP_READ->value);
     }
 
     public function isDefault(): bool

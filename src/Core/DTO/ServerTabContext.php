@@ -4,6 +4,7 @@ namespace App\Core\DTO;
 
 use App\Core\Contract\UserInterface;
 use App\Core\Entity\Server;
+use App\Core\Enum\ServerPermissionEnum;
 
 readonly class ServerTabContext
 {
@@ -15,8 +16,12 @@ readonly class ServerTabContext
         public bool          $isOwner,
     ) {}
 
-    public function hasPermission(string $permission): bool
+    public function hasPermission(string|ServerPermissionEnum $permission): bool
     {
+        if ($permission instanceof ServerPermissionEnum) {
+            $permission = $permission->value;
+        }
+
         if ($this->isAdminView) {
             return true; // Admins have all permissions
         }
