@@ -800,6 +800,7 @@ pteroca:
       settings: 'Ustawienia'
       enable: 'Włącz'
       disable: 'Wyłącz'
+      reset: 'Resetuj'
       details: 'Szczegóły'
       plugin: 'Wtyczka'
       plugin_management: 'Zarządzanie wtyczkami'
@@ -853,6 +854,9 @@ pteroca:
       failed_to_enable_plugin: 'Nie udało się włączyć pluginu: %s'
       failed_to_disable_plugin: 'Nie udało się wyłączyć pluginu: %s'
       plugin_not_found: 'Plugin "%s" nie znaleziony.'
+      plugin_reset_successfully: 'Plugin "%s" został pomyślnie zresetowany. Możesz teraz spróbować włączyć go ponownie.'
+      failed_to_reset_plugin: 'Nie udało się zresetować pluginu: %s'
+      plugin_not_faulted: 'Plugin "%s" nie jest w stanie błędu. Reset nie jest potrzebny.'
     server:
       pterodactyl_server_id: 'ID serwera Pterodactyl'
       pterodactyl_server_identifier: 'Identyfikator Pterodactyl'

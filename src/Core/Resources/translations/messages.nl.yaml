@@ -788,6 +788,7 @@ pteroca:
       settings: 'Instellingen'
       enable: 'Inschakelen'
       disable: 'Uitschakelen'
+      reset: 'Resetten'
       details: 'Details'
       plugin: 'Plugin'
       plugin_management: 'Pluginbeheer'
@@ -841,6 +842,9 @@ pteroca:
       failed_to_enable_plugin: 'Mislukt om plugin in te schakelen: %s'
       failed_to_disable_plugin: 'Mislukt om plugin uit te schakelen: %s'
       plugin_not_found: 'Plugin "%s" niet gevonden.'
+      plugin_reset_successfully: 'Plugin "%s" is succesvol gereset. U kunt het nu opnieuw proberen in te schakelen.'
+      failed_to_reset_plugin: 'Mislukt om plugin te resetten: %s'
+      plugin_not_faulted: 'Plugin "%s" is niet in foutstatus. Geen reset nodig.'
     server:
       pterodactyl_server_id: 'Pterodactyl Server-ID'
       pterodactyl_server_identifier: 'Pterodactyl identificatie'

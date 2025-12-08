@@ -800,6 +800,7 @@ pteroca:
       settings: '设置'
       enable: '启用'
       disable: '禁用'
+      reset: '重置'
       details: '详情'
       plugin: '插件'
       plugin_management: '插件管理'
@@ -853,6 +854,9 @@ pteroca:
       failed_to_enable_plugin: '启用插件失败：%s'
       failed_to_disable_plugin: '禁用插件失败：%s'
       plugin_not_found: '未找到插件 "%s"。'
+      plugin_reset_successfully: '插件 "%s" 已成功重置。您现在可以尝试再次启用它。'
+      failed_to_reset_plugin: '重置插件失败：%s'
+      plugin_not_faulted: '插件 "%s" 不在故障状态。不需要重置。'
     server:
       pterodactyl_server_id: 'Pterodactyl 服务器 ID'
       pterodactyl_server_identifier: 'Pterodactyl 标识符'

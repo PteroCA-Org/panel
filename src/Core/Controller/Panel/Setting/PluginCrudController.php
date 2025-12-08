@@ -76,6 +76,7 @@ class PluginCrudController extends AbstractPanelController
             'settingsAction' => null, // Link action - no permission needed
             'enableAction' => PermissionEnum::ENABLE_PLUGIN->value,
             'disableAction' => PermissionEnum::DISABLE_PLUGIN->value,
+            'resetAction' => PermissionEnum::ENABLE_PLUGIN->value,
             'uploadPlugin' => PermissionEnum::UPLOAD_PLUGIN->value,
         ];
     }
@@ -161,13 +162,23 @@ class PluginCrudController extends AbstractPanelController
             })
             ->setCssClass('btn btn-warning');
 
+        $resetAction = Action::new('reset', $this->translator->trans('pteroca.crud.plugin.reset'), 'fa fa-redo')
+            ->linkToCrudAction('resetPlugin')
+            ->displayIf(function (Plugin $plugin) {
+                return $plugin->getState() === PluginStateEnum::FAULTED &&
+                    $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
+            })
+            ->setCssClass('btn btn-info');
+
         $actions = $actions
             ->add(Crud::PAGE_INDEX, $settingsAction)
             ->add(Crud::PAGE_INDEX, $enableAction)
             ->add(Crud::PAGE_INDEX, $disableAction)
+            ->add(Crud::PAGE_INDEX, $resetAction)
             ->add(Crud::PAGE_DETAIL, $settingsAction)
             ->add(Crud::PAGE_DETAIL, $enableAction)
             ->add(Crud::PAGE_DETAIL, $disableAction)
+            ->add(Crud::PAGE_DETAIL, $resetAction)
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
@@ -218,9 +229,16 @@ class PluginCrudController extends AbstractPanelController
             [$plugins, count($plugins)]
         );
 
+        // Prepare actions for each plugin
+        $pluginActions = [];
+        foreach ($plugins as $plugin) {
+            $pluginActions[$plugin->getName()] = $this->getPluginActions($plugin);
+        }
+
         $viewData = [
             'plugins' => $plugins,
             'pageName' => Crud::PAGE_INDEX,
+            'plugin_actions' => $pluginActions,
         ];
 
         return $this->renderWithEvent(
@@ -311,6 +329,9 @@ class PluginCrudController extends AbstractPanelController
             // Silently fail if security scan fails
         }
 
+        // Prepare actions for this plugin
+        $pluginActions = $this->getPluginActions($plugin);
+
         $viewData = [
             'plugin' => $plugin,
             'pageName' => Crud::PAGE_DETAIL,
@@ -320,6 +341,7 @@ class PluginCrudController extends AbstractPanelController
             'circularDependencyPath' => $circularPath,
             'healthCheckResult' => $healthCheckResult,
             'securityCheckResult' => $securityCheckResult,
+            'plugin_actions' => $pluginActions,
         ];
 
         return $this->renderWithEvent(
@@ -453,6 +475,58 @@ class PluginCrudController extends AbstractPanelController
         return new RedirectResponse($url);
     }
 
+    public function resetPlugin(AdminContext $context): RedirectResponse
+    {
+        $request = $context->getRequest();
+        $pluginName = $request->query->get('pluginName');
+
+        try {
+            $pluginEntity = $this->pluginManager->getPluginByName($pluginName);
+
+            if ($pluginEntity === null) {
+                throw new RuntimeException('Plugin not found in database');
+            }
+
+            // Check if plugin is faulted
+            if (!$pluginEntity->getState()->isFaulted()) {
+                $this->addFlash('warning', sprintf(
+                    $this->translator->trans('pteroca.crud.plugin.plugin_not_faulted'),
+                    $pluginEntity->getDisplayName()
+                ));
+            } else {
+                $oldFaultReason = $pluginEntity->getFaultReason();
+
+                $this->pluginManager->resetPlugin($pluginEntity);
+
+                $this->logService->logAction(
+                    $this->getUser(),
+                    LogActionEnum::PLUGIN_RESET,
+                    [
+                        'plugin' => $pluginName,
+                        'previous_fault_reason' => $oldFaultReason,
+                    ]
+                );
+
+                $this->addFlash('success', sprintf(
+                    $this->translator->trans('pteroca.crud.plugin.plugin_reset_successfully'),
+                    $pluginEntity->getDisplayName()
+                ));
+            }
+        } catch (Exception $e) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.plugin.failed_to_reset_plugin'),
+                $e->getMessage()
+            ));
+        }
+
+        $url = $this->adminUrlGenerator
+            ->setController(self::class)
+            ->setAction(Action::INDEX)
+            ->generateUrl();
+
+        return new RedirectResponse($url);
+    }
+
     public function uploadPlugin(): Response
     {
         $form = $this->createForm(PluginUploadFormType::class);
@@ -549,5 +623,77 @@ class PluginCrudController extends AbstractPanelController
             ->generateUrl();
 
         return new RedirectResponse($url);
+    }
+
+    /**
+     * Get visible actions for a plugin based on configured actions
+     * This method is exposed to Twig templates for dynamic action rendering
+     */
+    public function getPluginActions(Plugin $plugin): array
+    {
+        $actions = [];
+
+        // Settings action
+        if ($plugin->getId() !== null && $this->getUser()?->hasPermission(PermissionEnum::ACCESS_PLUGINS)) {
+            $actions[] = [
+                'name' => 'settings',
+                'label' => $this->translator->trans('pteroca.crud.plugin.settings'),
+                'icon' => 'fa fa-cog',
+                'url' => $this->adminUrlGenerator
+                    ->setController(PluginSettingCrudController::class)
+                    ->setAction(Action::INDEX)
+                    ->set('pluginName', $plugin->getName())
+                    ->generateUrl(),
+                'class' => 'btn-secondary',
+            ];
+        }
+
+        // Enable action
+        $state = $plugin->getState();
+        if ($state->canBeEnabled() && $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN)) {
+            $actions[] = [
+                'name' => 'enable',
+                'label' => $this->translator->trans('pteroca.crud.plugin.enable'),
+                'icon' => 'fa fa-check',
+                'url' => $this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('enablePlugin')
+                    ->set('pluginName', $plugin->getName())
+                    ->generateUrl(),
+                'class' => 'btn-success',
+            ];
+        }
+
+        // Disable action
+        if ($state->canBeDisabled() && $this->getUser()?->hasPermission(PermissionEnum::DISABLE_PLUGIN)) {
+            $actions[] = [
+                'name' => 'disable',
+                'label' => $this->translator->trans('pteroca.crud.plugin.disable'),
+                'icon' => 'fa fa-times',
+                'url' => $this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('disablePlugin')
+                    ->set('pluginName', $plugin->getName())
+                    ->generateUrl(),
+                'class' => 'btn-warning',
+            ];
+        }
+
+        // Reset action
+        if ($state === PluginStateEnum::FAULTED && $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN)) {
+            $actions[] = [
+                'name' => 'reset',
+                'label' => $this->translator->trans('pteroca.crud.plugin.reset'),
+                'icon' => 'fa fa-redo',
+                'url' => $this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('resetPlugin')
+                    ->set('pluginName', $plugin->getName())
+                    ->generateUrl(),
+                'class' => 'btn-info',
+            ];
+        }
+
+        return $actions;
     }
 }

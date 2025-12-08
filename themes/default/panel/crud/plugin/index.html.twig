@@ -52,38 +52,22 @@
                             </span>
                         </td>
                         <td class="text-center actions">
-                            {# Detail button - using custom action #}
+                            {# Detail button - always visible #}
                             <a href="{{ ea_url({ crudAction: 'viewDetails', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\PluginCrudController', pluginName: plugin.name }) }}"
                                class="btn btn-sm btn-info"
                                title="{{ 'pteroca.crud.plugin.details'|trans }}">
                                 <i class="fa fa-eye"></i>
                             </a>
 
-                            {# Show Settings button - for plugins that have been enabled at least once (have DB entry) #}
-                            {% if plugin.id is not null %}
-                                <a href="{{ ea_url({ crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\PluginSettingCrudController', crudAction: 'index', pluginName: plugin.name }) }}"
-                                   class="btn btn-sm btn-secondary"
-                                   title="{{ 'pteroca.crud.plugin.settings'|trans }}">
-                                    <i class="fa fa-cog"></i>
-                                </a>
-                            {% endif %}
-
-                            {# Enable button #}
-                            {% if plugin.state.value == 'discovered' or plugin.state.value == 'disabled' %}
-                                <a href="{{ ea_url({ crudAction: 'enablePlugin', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\PluginCrudController', pluginName: plugin.name }) }}"
-                                   class="btn btn-sm btn-success"
-                                   title="{{ 'pteroca.crud.plugin.enable'|trans }}">
-                                    <i class="fa fa-check"></i>
-                                </a>
-                            {% endif %}
-
-                            {# Disable button #}
-                            {% if plugin.state.value == 'enabled' %}
-                                <a href="{{ ea_url({ crudAction: 'disablePlugin', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\PluginCrudController', pluginName: plugin.name }) }}"
-                                   class="btn btn-sm btn-warning"
-                                   title="{{ 'pteroca.crud.plugin.disable'|trans }}">
-                                    <i class="fa fa-times"></i>
-                                </a>
+                            {# Dynamic actions from controller #}
+                            {% if plugin_actions[plugin.name] is defined %}
+                                {% for action in plugin_actions[plugin.name] %}
+                                    <a href="{{ action.url }}"
+                                       class="btn btn-sm {{ action.class }}"
+                                       title="{{ action.label }}">
+                                        <i class="{{ action.icon }}"></i>
+                                    </a>
+                                {% endfor %}
                             {% endif %}
                         </td>
                     </tr>

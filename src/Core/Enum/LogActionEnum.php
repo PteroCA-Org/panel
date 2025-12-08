@@ -19,6 +19,7 @@ enum LogActionEnum
    case VOUCHER_REDEEMED;
    case PLUGIN_ENABLED;
    case PLUGIN_DISABLED;
+   case PLUGIN_RESET;
    case PLUGIN_DISCOVERED;
    case PLUGIN_REGISTERED;
    case PLUGIN_UPLOADED;

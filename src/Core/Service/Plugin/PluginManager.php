@@ -383,6 +383,35 @@ readonly class PluginManager
         $this->clearCache();
     }
 
+    /**
+     * Reset a faulted plugin back to REGISTERED state.
+     *
+     * This allows retrying enablement after fixing the issue that caused the fault.
+     *
+     * @param Plugin $plugin The plugin to reset
+     * @throws InvalidStateTransitionException If plugin is not in FAULTED state
+     */
+    public function resetPlugin(Plugin $plugin): void
+    {
+        // Validate state transition (FAULTED → REGISTERED)
+        $this->stateMachine->validateTransition($plugin, PluginStateEnum::REGISTERED);
+
+        $oldFaultReason = $plugin->getFaultReason();
+
+        // Transition to REGISTERED state
+        $this->stateMachine->transitionToRegistered($plugin);
+
+        // Clear fault reason
+        $plugin->setFaultReason(null);
+
+        // Persist changes
+        $this->pluginRepository->save($plugin);
+
+        $this->logger->info("Plugin reset from FAULTED to REGISTERED: {$plugin->getName()}", [
+            'previous_fault_reason' => $oldFaultReason,
+        ]);
+    }
+
     private function handlePluginUpdate(Plugin $plugin, PluginManifestDTO $newManifest): void
     {
         $oldVersion = $plugin->getVersion();
