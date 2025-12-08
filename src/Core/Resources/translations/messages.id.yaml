@@ -973,6 +973,7 @@ pteroca:
         renewal_notification_enabled: 'Aktifkan notifikasi perpanjangan'
         renewal_notification_min_period_hours: 'Frekuensi notifikasi minimum (dalam jam)'
         renewal_notification_on_demand_min_hours: 'Jam minimum sesuai permintaan sebelum mengirim notifikasi'
+        telemetry_consent: 'Izinkan pengiriman data penggunaan anonim untuk membantu meningkatkan PteroCA. Hanya peristiwa instalasi dan kesalahan yang dilacak. Tidak ada data pribadi, kunci API, atau URL yang dikumpulkan.'
       template:
         name: 'Nama template'
         description: 'Deskripsi template'
@@ -1375,6 +1376,8 @@ pteroca:
       user_validation_success: 'Validasi pengguna berhasil.'
       user_checking_account_creation: 'Memeriksa apakah akun dapat dibuat...'
       validation_error: 'Terjadi kesalahan saat memvalidasi langkah. Silakan coba lagi.'
+    telemetry_consent: 'Bantu tingkatkan PteroCA dengan mengirim data penggunaan anonim'
+    telemetry_consent_help: 'Kami mengumpulkan telemetri anonim untuk meningkatkan PteroCA. Hanya peristiwa instalasi dan kesalahan yang dilacak. Tidak ada data pribadi, kunci API, atau URL yang dikumpulkan.'
 
   error:
     invalid_csrf_token: 'Token CSRF tidak valid. Silakan refresh halaman dan coba lagi.'

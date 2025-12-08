@@ -948,6 +948,7 @@ pteroca:
         renewal_notification_enabled: 'Увімкнути сповіщення про поновлення'
         renewal_notification_min_period_hours: 'Мінімальна частота сповіщень (у годинах)'
         renewal_notification_on_demand_min_hours: 'Мінімальна кількість годин перед надсиланням сповіщення на запит'
+        telemetry_consent: 'Дозволити надсилання анонімних даних про використання для покращення PteroCA. Відстежуються лише події встановлення та помилки. Особисті дані, ключі API або URL не збираються.'
         show_pterodactyl_logs_in_server_activity: 'Показувати логи Pterodactyl в активності сервера'
       template:
         name: 'Назва шаблону'
@@ -1389,6 +1390,8 @@ pteroca:
       pterodactyl_already_configured: 'Виявлено існуючу конфігурацію Pterodactyl. Ви можете пропустити цей крок або перевизначити існуючі налаштування.'
       override_settings: 'Перевизначити налаштування'
       user_already_exists_in_local_database: 'Користувач із такою адресою електронної пошти вже існує в локальній базі даних.'
+    telemetry_consent: 'Допоможіть покращити PteroCA, надіславши анонімні дані про використання'
+    telemetry_consent_help: 'Ми збираємо анонімну телеметрію для покращення PteroCA. Відстежуються лише події встановлення та помилки. Особисті дані, ключі API або URL не збираються.'
 
   error:
     invalid_csrf_token: 'Недійсний токен CSRF. Будь ласка, оновіть сторінку та спробуйте ще раз.'

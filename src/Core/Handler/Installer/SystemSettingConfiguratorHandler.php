@@ -38,6 +38,7 @@ class SystemSettingConfiguratorHandler
         if ($io->ask('Do you want to configure system settings? (yes/no)', 'yes') === 'yes') {
             $this->generateAppSecretKeyIfNeeded($io);
             $this->askForSiteSettings($io);
+            $this->askForTelemetryConsent($io);
             $this->askForPterodactylPanelCredentialsSettings($io);
             $this->askForEmailSettings($io);
             $this->askForPaymentSettings($io);
@@ -229,6 +230,29 @@ class SystemSettingConfiguratorHandler
 
             $this->saveSettings($settings);
         }
+    }
+
+    private function askForTelemetryConsent(SymfonyStyle $io): void
+    {
+        $io->section('Telemetry settings');
+        $io->text('Help improve PteroCA by sending anonymous usage data.');
+        $io->text('We collect anonymous telemetry to improve PteroCA. Only installation events and errors are tracked.');
+        $io->text('No personal data, API keys, or URLs are collected.');
+
+        $telemetryConsent = $io->ask(
+            'Allow sending anonymous telemetry? (yes/no)',
+            'yes'
+        );
+
+        $consentValue = ($telemetryConsent === 'yes') ? '1' : '0';
+
+        $settings = [
+            SettingEnum::TELEMETRY_CONSENT->value => [
+                'value' => $consentValue,
+            ],
+        ];
+
+        $this->saveSettings($settings);
     }
 
     /**

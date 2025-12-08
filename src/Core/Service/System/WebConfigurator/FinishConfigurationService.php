@@ -9,6 +9,7 @@ use App\Core\Repository\UserRepository;
 use App\Core\Service\Authorization\RegistrationService;
 use App\Core\Service\Security\RoleManager;
 use App\Core\Service\SettingService;
+use App\Core\Service\Telemetry\TelemetryService;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -31,6 +32,7 @@ class FinishConfigurationService
         SettingEnum::EMAIL_SMTP_PASSWORD->value => 'email_smtp_password',
         SettingEnum::EMAIL_SMTP_FROM->value => 'email_smtp_from',
         SettingEnum::STRIPE_SECRET_KEY->value => 'stripe_secret_key',
+        SettingEnum::TELEMETRY_CONSENT->value => 'telemetry_consent',
     ];
 
     public function __construct(
@@ -41,6 +43,7 @@ class FinishConfigurationService
         private readonly TranslatorInterface $translator,
         private readonly RoleManager $roleManager,
         private readonly UserRepository $userRepository,
+        private readonly TelemetryService $telemetryService,
     ) {}
 
     public function getRequiredSettingsMap(): array
@@ -53,41 +56,48 @@ class FinishConfigurationService
      */
     public function finishConfiguration(array $data): ConfiguratorVerificationResult
     {
-        $isEmailConnectionValidated = $this->emailConnectionVerificationService->validateConnection(
-            $data['email_smtp_username'],
-            $data['email_smtp_password'],
-            $data['email_smtp_server'],
-            $data['email_smtp_port'],
-        );
-        if (!$isEmailConnectionValidated->isVerificationSuccessful) {
-            $data = $this->clearEmailSettings($data);
-        }
-
-        if (!empty($data['useExistingPterodactylSettings']) && $data['useExistingPterodactylSettings'] === 'true') {
-            $data['pterodactyl_panel_url'] = $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_URL->value);
-            $data['pterodactyl_panel_api_key'] = $this->settingService->getSetting(SettingEnum::PTERODACTYL_API_KEY->value);
-        }
-
-        $isPterodactylConnectionValid = $this->validatePterodactylConnection($data['pterodactyl_panel_url'], $data['pterodactyl_panel_api_key']);
-        if (!$isPterodactylConnectionValid) {
-            return new ConfiguratorVerificationResult(
-                false,
-                $this->translator->trans('pteroca.first_configuration.messages.pterodactyl_api_error'),
+        try {
+            $isEmailConnectionValidated = $this->emailConnectionVerificationService->validateConnection(
+                $data['email_smtp_username'],
+                $data['email_smtp_password'],
+                $data['email_smtp_server'],
+                $data['email_smtp_port'],
             );
+            if (!$isEmailConnectionValidated->isVerificationSuccessful) {
+                $data = $this->clearEmailSettings($data);
+            }
+
+            if (!empty($data['useExistingPterodactylSettings']) && $data['useExistingPterodactylSettings'] === 'true') {
+                $data['pterodactyl_panel_url'] = $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_URL->value);
+                $data['pterodactyl_panel_api_key'] = $this->settingService->getSetting(SettingEnum::PTERODACTYL_API_KEY->value);
+            }
+
+            $isPterodactylConnectionValid = $this->validatePterodactylConnection($data['pterodactyl_panel_url'], $data['pterodactyl_panel_api_key']);
+            if (!$isPterodactylConnectionValid) {
+                $this->telemetryService->sendInstallErrorEvent('pterodactyl_connection_failed');
+                return new ConfiguratorVerificationResult(
+                    false,
+                    $this->translator->trans('pteroca.first_configuration.messages.pterodactyl_api_error'),
+                );
+            }
+
+            $this->saveConfigurationSettings($data);
+
+            if (!$this->createAdminAccount($data)) {
+                $this->telemetryService->sendInstallErrorEvent('admin_account_creation_failed');
+                return new ConfiguratorVerificationResult(
+                    false,
+                    $this->translator->trans('pteroca.first_configuration.messages.validation_error'),
+                );
+            }
+
+            $this->disableConfigurator();
+
+            return new ConfiguratorVerificationResult(true);
+        } catch (\Throwable $e) {
+            $this->telemetryService->sendInstallErrorEvent('configuration_exception');
+            throw $e;
         }
-
-        $this->saveConfigurationSettings($data);
-
-        if (!$this->createAdminAccount($data)) {
-            return new ConfiguratorVerificationResult(
-                false,
-                $this->translator->trans('pteroca.first_configuration.messages.validation_error'),
-            );
-        }
-
-        $this->disableConfigurator();
-
-        return new ConfiguratorVerificationResult(true);
     }
 
     /**
