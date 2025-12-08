@@ -802,6 +802,7 @@ pteroca:
       settings: 'Configurações'
       enable: 'Ativar'
       disable: 'Desativar'
+      reset: 'Redefinir'
       details: 'Detalhes'
       plugin: 'Plugin'
       plugin_management: 'Gestão de plugins'
@@ -855,6 +856,9 @@ pteroca:
       failed_to_enable_plugin: 'Falha ao habilitar o plugin: %s'
       failed_to_disable_plugin: 'Falha ao desabilitar o plugin: %s'
       plugin_not_found: 'Plugin "%s" não encontrado.'
+      plugin_reset_successfully: 'O plugin "%s" foi redefinido com sucesso. Agora você pode tentar habilitá-lo novamente.'
+      failed_to_reset_plugin: 'Falha ao redefinir o plugin: %s'
+      plugin_not_faulted: 'O plugin "%s" não está em estado de falha. Nenhuma redefinição necessária.'
     server:
       pterodactyl_server_id: 'ID do servidor Pterodactyl'
       pterodactyl_server_identifier: 'Identificador Pterodactyl'

@@ -800,6 +800,7 @@ pteroca:
       settings: 'सेटिंग्स'
       enable: 'सक्षम करें'
       disable: 'अक्षम करें'
+      reset: 'रीसेट करें'
       details: 'विवरण'
       plugin: 'प्लगइन'
       plugin_management: 'प्लगइन प्रबंधन'
@@ -853,6 +854,9 @@ pteroca:
       failed_to_enable_plugin: 'प्लगइन सक्षम करने में विफल: %s'
       failed_to_disable_plugin: 'प्लगइन अक्षम करने में विफल: %s'
       plugin_not_found: 'प्लगइन "%s" नहीं मिला।'
+      plugin_reset_successfully: 'प्लगइन "%s" सफलतापूर्वक रीसेट किया गया है। अब आप इसे फिर से सक्षम करने का प्रयास कर सकते हैं।'
+      failed_to_reset_plugin: 'प्लगइन रीसेट करने में विफल: %s'
+      plugin_not_faulted: 'प्लगइन "%s" दोष स्थिति में नहीं है। रीसेट की आवश्यकता नहीं।'
     server:
       pterodactyl_server_id: 'Pterodactyl सर्वर आईडी'
       pterodactyl_server_identifier: 'Pterodactyl पहचानकर्ता'

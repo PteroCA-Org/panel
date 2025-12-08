@@ -794,6 +794,7 @@ pteroca:
       settings: 'Настройки'
       enable: 'Включить'
       disable: 'Отключить'
+      reset: 'Сбросить'
       details: 'Подробности'
       plugin: 'Плагин'
       plugin_management: 'Управление плагинами'
@@ -847,6 +848,9 @@ pteroca:
       failed_to_enable_plugin: 'Не удалось включить плагин: %s'
       failed_to_disable_plugin: 'Не удалось отключить плагин: %s'
       plugin_not_found: 'Плагин "%s" не найден.'
+      plugin_reset_successfully: 'Плагин "%s" успешно сброшен. Теперь вы можете попробовать включить его снова.'
+      failed_to_reset_plugin: 'Не удалось сбросить плагин: %s'
+      plugin_not_faulted: 'Плагин "%s" не в состоянии неисправности. Сброс не требуется.'
     server:
       pterodactyl_server_id: 'ID сервера Pterodactyl'
       pterodactyl_server_identifier: 'Идентификатор Pterodactyl'

@@ -800,6 +800,7 @@ pteroca:
       settings: 'Pengaturan'
       enable: 'Aktifkan'
       disable: 'Nonaktifkan'
+      reset: 'Atur Ulang'
       details: 'Detail'
       plugin: 'Plugin'
       plugin_management: 'Manajemen Plugin'
@@ -853,6 +854,9 @@ pteroca:
       failed_to_enable_plugin: 'Gagal mengaktifkan plugin: %s'
       failed_to_disable_plugin: 'Gagal menonaktifkan plugin: %s'
       plugin_not_found: 'Plugin "%s" tidak ditemukan.'
+      plugin_reset_successfully: 'Plugin "%s" telah berhasil diatur ulang. Sekarang Anda dapat mencoba mengaktifkannya lagi.'
+      failed_to_reset_plugin: 'Gagal mengatur ulang plugin: %s'
+      plugin_not_faulted: 'Plugin "%s" tidak dalam keadaan kesalahan. Tidak perlu mengatur ulang.'
     menu:
       menu: 'Menu'
       dashboard: 'Dasbor'
