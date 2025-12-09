@@ -11,6 +11,7 @@ use App\Core\Form\ProductPriceFixedFormType;
 use App\Core\Form\ProductPriceSlotFormType;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Crud\ProductCopyService;
+use App\Core\Service\Product\ProductHealthCheckService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use App\Core\Service\SettingService;
 use App\Core\Trait\ExperimentalFeatureMessageTrait;
@@ -50,6 +51,7 @@ class ProductCrudController extends AbstractPanelController
         private readonly TranslatorInterface $translator,
         private readonly ProductCopyService $productCopyService,
         private readonly AdminUrlGenerator $adminUrlGenerator,
+        private readonly ProductHealthCheckService $productHealthCheckService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -305,6 +307,8 @@ class ProductCrudController extends AbstractPanelController
             $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
             $entityInstance->setCreatedAtValue();
             $entityInstance->setUpdatedAtValue();
+
+            $this->validateProductEggs($entityInstance);
         }
 
         parent::persistEntity($entityManager, $entityInstance);
@@ -315,6 +319,8 @@ class ProductCrudController extends AbstractPanelController
         if ($entityInstance instanceof Product) {
             $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
             $entityInstance->setUpdatedAtValue();
+
+            $this->validateProductEggs($entityInstance);
         }
 
         parent::updateEntity($entityManager, $entityInstance);
@@ -353,5 +359,15 @@ class ProductCrudController extends AbstractPanelController
             ->generateUrl();
 
         return new RedirectResponse($url);
+    }
+
+    private function validateProductEggs(Product $product): void
+    {
+        $this->productHealthCheckService->validateProductEggs(
+            $product,
+            $this->translator->trans('pteroca.crud.product.no_eggs_selected'),
+            $this->translator->trans('pteroca.crud.product.invalid_eggs_selected'),
+            $this->translator->trans('pteroca.crud.product.egg_validation_error')
+        );
     }
 }

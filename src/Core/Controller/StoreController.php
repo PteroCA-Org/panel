@@ -100,6 +100,14 @@ class StoreController extends AbstractController
         );
 
         $preparedEggs = $this->storeService->getProductEggs($product);
+
+        if (empty($preparedEggs) && !empty($product->getEggs())) {
+            $this->addFlash(
+                'warning',
+                $this->translator->trans('pteroca.store.product_eggs_unavailable')
+            );
+        }
+
         $this->dispatchDataEvent(
             StoreProductDataLoadedEvent::class,
             $request,

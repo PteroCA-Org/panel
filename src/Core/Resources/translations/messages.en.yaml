@@ -232,6 +232,10 @@ pteroca:
     slot_based_pricing: 'Slot-based pricing'
     invalid_slots_number: 'Invalid number of slots'
     slots_exceed_maximum: 'Number of slots exceeds maximum allowed value (%max%)'
+    product_eggs_unavailable: 'This product is currently unavailable because server software options are no longer available. Please contact support or choose a different product.'
+    product_configuration_unavailable: 'This product cannot be purchased because required resources are unavailable. Please contact support for assistance.'
+    no_eggs_available: 'No server software options available'
+    product_unavailable_title: 'Product Temporarily Unavailable'
   cart_configuration:
     title: 'Configure your server'
     configuration: 'Configuration'
@@ -781,6 +785,9 @@ pteroca:
         details: 'A new product will be created with the same configuration. You can edit it afterwards.'
         cancel: 'Cancel'
         confirm: 'Copy Product'
+      no_eggs_selected: 'You must select at least one egg for this product.'
+      invalid_eggs_selected: 'Selected egg (ID: %id%) does not exist in Pterodactyl. Please select valid eggs only.'
+      egg_validation_error: 'Unable to validate eggs with Pterodactyl. Please check your API connection.'
     plugin:
       plugins: 'Plugins'
       name: 'Name'
