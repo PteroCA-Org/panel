@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[UniqueEntity(fields: ['email'], message: 'pteroca.register.email_already_exists')]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
-class User implements UserInterface
+class User extends AbstractEntity implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

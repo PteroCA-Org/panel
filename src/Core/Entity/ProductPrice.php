@@ -7,7 +7,7 @@ use App\Core\Trait\ProductPriceEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: "App\Core\Repository\ProductPriceRepository")]
-class ProductPrice implements ProductPriceInterface
+class ProductPrice extends AbstractEntity implements ProductPriceInterface
 {
     use ProductPriceEntityTrait;
 

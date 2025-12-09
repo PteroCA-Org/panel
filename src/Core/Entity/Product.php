@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 #[ORM\Entity(repositoryClass: "App\Core\Repository\ProductRepository")]
 #[ORM\HasLifecycleCallbacks]
 #[Vich\Uploadable]
-class Product implements ProductInterface
+class Product extends AbstractEntity implements ProductInterface
 {
     use ProductEntityTrait;
 

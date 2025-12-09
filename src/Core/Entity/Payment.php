@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: "App\Core\Repository\PaymentRepository")]
 #[ORM\HasLifecycleCallbacks]
-class Payment
+class Payment extends AbstractEntity
 {
     use PaymentEntityTrait;
 }

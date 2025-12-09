@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PermissionRepository::class)]
 #[ORM\Table(name: 'permission')]
 #[ORM\HasLifecycleCallbacks]
-class Permission
+class Permission extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
