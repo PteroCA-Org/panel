@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SettingOptionRepository::class)]
 #[ORM\Table(name: 'setting_option')]
-class SettingOption
+class SettingOption extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -2,42 +2,43 @@
 
 namespace App\Core\Controller;
 
-use App\Core\Attribute\RequiresVerifiedEmail;
-use App\Core\Entity\Product;
+use Exception;
 use App\Core\Entity\Server;
-use App\Core\Enum\PermissionEnum;
+use App\Core\Entity\Product;
 use App\Core\Enum\SettingEnum;
 use App\Core\Enum\ViewNameEnum;
-use App\Core\Event\Cart\CartTopUpPageAccessedEvent;
-use App\Core\Event\Cart\CartTopUpDataLoadedEvent;
-use App\Core\Event\Cart\CartPaymentRedirectEvent;
-use App\Core\Event\Cart\CartConfigurePageAccessedEvent;
-use App\Core\Event\Cart\CartConfigureDataLoadedEvent;
-use App\Core\Event\Cart\CartBuyRequestedEvent;
-use App\Core\Event\Cart\CartRenewPageAccessedEvent;
-use App\Core\Event\Cart\CartRenewDataLoadedEvent;
-use App\Core\Event\Cart\CartRenewBuyRequestedEvent;
-use App\Core\Event\Payment\PaymentGatewaysCollectedEvent;
-use App\Core\Form\Cart\TopUpBalanceType;
+use App\Core\Enum\PermissionEnum;
+use App\Core\Service\StoreService;
+use App\Core\Service\SettingService;
 use App\Core\Form\Cart\ServerOrderType;
 use App\Core\Form\Cart\ServerRenewType;
-use App\Core\Repository\ServerRepository;
-use App\Core\Repository\ServerSubuserRepository;
 use App\Core\Repository\UserRepository;
-use App\Core\Service\Payment\PaymentService;
-use App\Core\Service\Payment\PaymentGatewayManager;
-use App\Core\Service\PurchaseTokenService;
-use App\Core\Service\Server\CreateServerService;
-use App\Core\Service\Server\RenewServerService;
-use App\Core\Service\Server\ServerSlotPricingService;
-use App\Core\Service\SettingService;
-use App\Core\Service\StoreService;
+use App\Core\Form\Cart\TopUpBalanceType;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
+use App\Core\Repository\ServerRepository;
+use App\Core\Service\PurchaseTokenService;
+use App\Core\Service\Payment\PaymentService;
+use App\Core\Attribute\RequiresVerifiedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use App\Core\Event\Cart\CartBuyRequestedEvent;
 use Symfony\Component\HttpFoundation\Response;
+use App\Core\Service\Server\RenewServerService;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Core\Repository\ServerSubuserRepository;
+use App\Core\Service\Server\CreateServerService;
+use App\Core\Event\Cart\CartPaymentRedirectEvent;
+use App\Core\Event\Cart\CartRenewDataLoadedEvent;
+use App\Core\Event\Cart\CartTopUpDataLoadedEvent;
+use App\Core\Event\Cart\CartRenewBuyRequestedEvent;
+use App\Core\Event\Cart\CartRenewPageAccessedEvent;
+use App\Core\Event\Cart\CartTopUpPageAccessedEvent;
+use App\Core\Service\Payment\PaymentGatewayManager;
+use App\Core\Event\Cart\CartConfigureDataLoadedEvent;
+use App\Core\Service\Server\ServerSlotPricingService;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Core\Event\Cart\CartConfigurePageAccessedEvent;
+use App\Core\Event\Payment\PaymentGatewaysCollectedEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartController extends AbstractController
 {
@@ -65,21 +66,17 @@ class CartController extends AbstractController
 
         $currency = $settingService->getSetting(SettingEnum::CURRENCY_NAME->value);
 
-        // Dispatch event to allow plugins to register payment gateways
         $context = $this->buildMinimalEventContext($request);
         $gatewaysEvent = new PaymentGatewaysCollectedEvent($gatewayManager, $context);
         $this->dispatchEvent($gatewaysEvent);
 
-        // Get available payment gateways for the currency
         $availableGateways = $gatewayManager->getProvidersForCurrency($currency);
 
-        // Prepare choices for gateway field
         $gatewayChoices = [];
         foreach ($availableGateways as $gateway) {
             $gatewayChoices[$gateway->displayName] = $gateway->identifier;
         }
 
-        // Prepare initial data from query params if present (for GET requests from recharge_balance)
         $initialData = [];
         if ($request->query->has('amount')) {
             $initialData['amount'] = (float) $request->query->get('amount');
@@ -88,7 +85,6 @@ class CartController extends AbstractController
             $initialData['currency'] = $request->query->get('currency');
         }
 
-        // Create form
         $form = $this->createForm(TopUpBalanceType::class, $initialData, [
             'currency' => $currency,
             'payment_gateways' => $gatewayChoices,
@@ -96,7 +92,6 @@ class CartController extends AbstractController
 
         $form->handleRequest($request);
 
-        // Get amount for events (from form data or query params)
         $amount = $form->has('amount') && $form->get('amount')->getData()
             ? (float) $form->get('amount')->getData()
             : (float) $request->query->get('amount', 0);
@@ -165,21 +160,31 @@ class CartController extends AbstractController
         $hasSlotPrices = $this->serverSlotPricingService->hasSlotPrices($product);
         $purchaseToken = $this->purchaseTokenService->generateToken($this->getUser(), 'buy');
         $preparedEggs = $this->storeService->getProductEggs($product);
+
+        if (empty($preparedEggs)) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans('pteroca.store.product_configuration_unavailable')
+            );
+
+            return $this->redirectToRoute('panel', [
+                'routeName' => 'store_product',
+                'id' => $product->getId()
+            ]);
+        }
+
         $requestData = $request->query->all();
 
-        // Prepare egg choices for form
         $eggChoices = [];
         foreach ($preparedEggs as $egg) {
             $eggChoices[$egg['name']] = $egg['id'];
         }
 
-        // Prepare price choices for form
         $priceChoices = [];
         foreach ($product->getPrices() as $price) {
             $priceChoices[$price->getId()] = $price->getId();
         }
 
-        // Prepare initial data from query params
         $initialData = [];
         if (isset($requestData['egg'])) {
             $initialData['egg'] = (int) $requestData['egg'];
@@ -191,7 +196,6 @@ class CartController extends AbstractController
             $initialData['slots'] = (int) $requestData['slots'];
         }
 
-        // Create form
         $form = $this->createForm(ServerOrderType::class, $initialData, [
             'product_id' => $product->getId(),
             'eggs' => $eggChoices,
@@ -237,19 +241,22 @@ class CartController extends AbstractController
             $hasSlotPrices = $this->serverSlotPricingService->hasSlotPrices($product);
             $preparedEggs = $this->storeService->getProductEggs($product);
 
-            // Prepare egg choices for form
+            if (empty($preparedEggs)) {
+                throw new NotFoundHttpException(
+                    $this->translator->trans('pteroca.store.product_configuration_unavailable')
+                );
+            }
+
             $eggChoices = [];
             foreach ($preparedEggs as $egg) {
                 $eggChoices[$egg['name']] = $egg['id'];
             }
 
-            // Prepare price choices for form
             $priceChoices = [];
             foreach ($product->getPrices() as $price) {
                 $priceChoices[$price->getId()] = $price->getId();
             }
 
-            // Create and handle form
             $form = $this->createForm(ServerOrderType::class, null, [
                 'product_id' => $product->getId(),
                 'eggs' => $eggChoices,
@@ -308,7 +315,6 @@ class CartController extends AbstractController
                 );
             });
 
-            // Check if email was sent successfully
             if ($result && $result['emailError']) {
                 $this->addFlash('warning', $this->translator->trans($result['emailError']));
             }
@@ -356,10 +362,8 @@ class CartController extends AbstractController
             $serverSlots = $this->serverSlotPricingService->getServerSlots($server);
         }
 
-        // Generate one-time purchase token to prevent double-submit
         $purchaseToken = $this->purchaseTokenService->generateToken($this->getUser(), 'renew');
 
-        // Create form
         $form = $this->createForm(ServerRenewType::class, null, [
             'server_id' => $server->getId(),
             'current_auto_renewal' => $server->isAutoRenewal(),

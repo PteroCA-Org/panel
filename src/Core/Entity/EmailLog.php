@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EmailLogRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class EmailLog
+class EmailLog extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

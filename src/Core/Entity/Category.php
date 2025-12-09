@@ -9,7 +9,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: "App\Core\Repository\CategoryRepository")]
 #[Vich\Uploadable]
-class Category
+class Category extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

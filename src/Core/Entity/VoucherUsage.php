@@ -9,7 +9,7 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VoucherUsageRepository::class)]
-class VoucherUsage
+class VoucherUsage extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

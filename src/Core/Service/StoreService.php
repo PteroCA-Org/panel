@@ -16,6 +16,7 @@ use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use App\Core\Service\Server\ServerSlotConfigurationService;
 use Exception;
 use JsonException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -28,6 +29,7 @@ readonly class StoreService
         private TranslatorInterface            $translator,
         private ProductPriceCalculatorService  $productPriceCalculatorService,
         private ServerSlotConfigurationService $serverSlotConfigurationService,
+        private LoggerInterface                $logger,
         private string                         $categoriesBasePath,
         private string                         $productsBasePath,
     ) {}
@@ -97,6 +99,22 @@ readonly class StoreService
             ->all($product->getNest())
             ->toArray();
 
+        $apiEggIds = array_column($eggs, 'id');
+        $storedEggIds = $product->getEggs();
+
+        $missingEggIds = array_diff($storedEggIds, $apiEggIds);
+
+        if (!empty($missingEggIds)) {
+            $this->logger->warning('Product has eggs that are no longer available in Pterodactyl', [
+                'product_id' => $product->getId(),
+                'product_name' => $product->getName(),
+                'missing_egg_ids' => $missingEggIds,
+                'missing_count' => count($missingEggIds),
+                'total_stored_eggs' => count($storedEggIds),
+                'available_eggs' => count($apiEggIds),
+            ]);
+        }
+
         return array_filter($eggs, fn($egg) => in_array($egg['id'], $product->getEggs()));
     }
 
@@ -149,6 +167,17 @@ readonly class StoreService
     {
         if (empty($server) && (empty($eggId) || !in_array($eggId, $product->getEggs()))) {
             throw new NotFoundHttpException($this->translator->trans('pteroca.store.egg_not_found'));
+        }
+
+        if (!empty($eggId) && empty($server)) {
+            $validEggs = $this->getProductEggs($product);
+            $validEggIds = array_column($validEggs, 'id');
+
+            if (!in_array($eggId, $validEggIds)) {
+                throw new NotFoundHttpException(
+                    $this->translator->trans('pteroca.store.egg_not_found')
+                );
+            }
         }
 
         $productPrices = $product->getPrices()->toArray();

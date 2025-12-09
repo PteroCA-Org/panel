@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PluginRepository::class)]
 #[ORM\Table(name: 'plugin')]
 #[ORM\HasLifecycleCallbacks]
-class Plugin
+class Plugin extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

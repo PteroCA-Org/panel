@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: "App\Core\Repository\ServerProductRepository")]
-class ServerProduct implements ProductInterface
+class ServerProduct extends AbstractEntity implements ProductInterface
 {
     use ProductEntityTrait;
 

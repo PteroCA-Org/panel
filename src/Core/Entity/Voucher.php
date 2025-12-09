@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VoucherRepository::class)]
-class Voucher
+class Voucher extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

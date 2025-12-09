@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: "App\Repository\PasswordResetRequestRepository")]
-class PasswordResetRequest
+class PasswordResetRequest extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

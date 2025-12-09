@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ServerSubuserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class ServerSubuser
+class ServerSubuser extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(columns: ['token'], name: 'idx_token')]
 #[ORM\Index(columns: ['created_at'], name: 'idx_created_at')]
 #[ORM\HasLifecycleCallbacks]
-class PurchaseToken
+class PurchaseToken extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,7 +28,7 @@ class PurchaseToken
     private string $type;
 
     #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $createdAt;
+    private \DateTime $createdAt;
 
     public function getId(): ?int
     {
@@ -68,7 +68,7 @@ class PurchaseToken
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }

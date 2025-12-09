@@ -83,7 +83,7 @@ class PluginCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $fields = [
             TextField::new('name', $this->translator->trans('pteroca.crud.plugin.name'))
                 ->hideOnForm(),
             TextField::new('displayName', $this->translator->trans('pteroca.crud.plugin.display_name'))
@@ -126,6 +126,10 @@ class PluginCrudController extends AbstractPanelController
                 ->hideOnForm()
                 ->hideOnIndex(),
         ];
+
+        $fields = array_merge($fields, parent::configureFields($pageName));
+
+        return $fields;
     }
 
     public function configureActions(Actions $actions): Actions

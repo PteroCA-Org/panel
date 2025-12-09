@@ -6,7 +6,7 @@ use App\Core\Repository\SettingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
-class Setting
+class Setting extends AbstractEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

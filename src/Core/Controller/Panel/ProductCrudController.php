@@ -11,6 +11,8 @@ use App\Core\Form\ProductPriceFixedFormType;
 use App\Core\Form\ProductPriceSlotFormType;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Crud\ProductCopyService;
+use App\Core\Service\Product\NestEggsCacheService;
+use App\Core\Service\Product\ProductHealthStatusFormatter;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use App\Core\Service\SettingService;
 use App\Core\Trait\ExperimentalFeatureMessageTrait;
@@ -26,6 +28,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -50,6 +53,8 @@ class ProductCrudController extends AbstractPanelController
         private readonly TranslatorInterface $translator,
         private readonly ProductCopyService $productCopyService,
         private readonly AdminUrlGenerator $adminUrlGenerator,
+        private readonly NestEggsCacheService $nestEggsCacheService,
+        private readonly ProductHealthStatusFormatter $productHealthStatusFormatter,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -73,6 +78,8 @@ class ProductCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
+        Product::registerVirtualField('healthStatus');
+        
         $nests = $this->getNestsChoices();
         $uploadDirectory = str_replace(
             '/',
@@ -213,7 +220,13 @@ class ProductCrudController extends AbstractPanelController
                 ->setRequired(true)
                 ->setFormTypeOption('attr', ['class' => 'egg-selector'])
                 ->setColumns(12),
-
+            Field::new('healthStatus', $this->translator->trans('pteroca.crud.product.health_status'))
+                ->onlyOnIndex()
+                ->setColumns(2)
+                ->setSortable(false)
+                ->formatValue(fn($value, Product $entity) =>
+                    $this->productHealthStatusFormatter->getHealthBadgeHtml($entity, $this->translator)
+                ),
             DateTimeField::new('createdAt', $this->translator->trans('pteroca.crud.product.created_at'))->onlyOnDetail(),
             DateTimeField::new('updatedAt', $this->translator->trans('pteroca.crud.product.updated_at'))->onlyOnDetail(),
             DateTimeField::new('deletedAt', $this->translator->trans('pteroca.crud.product.deleted_at'))->onlyOnDetail(),
@@ -305,6 +318,8 @@ class ProductCrudController extends AbstractPanelController
             $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
             $entityInstance->setCreatedAtValue();
             $entityInstance->setUpdatedAtValue();
+
+            $this->validateProductEggs($entityInstance);
         }
 
         parent::persistEntity($entityManager, $entityInstance);
@@ -315,6 +330,8 @@ class ProductCrudController extends AbstractPanelController
         if ($entityInstance instanceof Product) {
             $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
             $entityInstance->setUpdatedAtValue();
+
+            $this->validateProductEggs($entityInstance);
         }
 
         parent::updateEntity($entityManager, $entityInstance);
@@ -353,5 +370,15 @@ class ProductCrudController extends AbstractPanelController
             ->generateUrl();
 
         return new RedirectResponse($url);
+    }
+
+    private function validateProductEggs(Product $product): void
+    {
+        $this->nestEggsCacheService->validateProductEggs(
+            $product,
+            $this->translator->trans('pteroca.crud.product.no_eggs_selected'),
+            $this->translator->trans('pteroca.crud.product.invalid_eggs_selected'),
+            $this->translator->trans('pteroca.crud.product.egg_validation_error')
+        );
     }
 }
