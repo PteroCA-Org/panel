@@ -4,6 +4,7 @@ namespace App\Core\Handler;
 
 use App\Core\Contract\UserInterface;
 use App\Core\DTO\Pterodactyl\Application\PterodactylUser;
+use App\Core\DTO\Pterodactyl\Collection;
 use App\Core\Entity\Server;
 use App\Core\Entity\ServerProduct;
 use App\Core\Entity\ServerProductPrice;
@@ -101,8 +102,8 @@ class MigrateServersHandler implements HandlerInterface
             $pterocaServers = $this->getPterocaServers();
             $pterocaUsers = $this->getPterocaUsers();
 
-            $stats['pterodactylServersFound'] = count($pterodactylServers);
-            $stats['pterodactylUsersFound'] = count($pterodactylUsers);
+            $stats['pterodactylServersFound'] = $pterodactylServers->count();
+            $stats['pterodactylUsersFound'] = $pterodactylUsers->count();
 
             foreach ($pterodactylServers as $pterodactylServer) {
                 $serverArray = $pterodactylServer->toArray();
@@ -133,7 +134,7 @@ class MigrateServersHandler implements HandlerInterface
 
                 // Find owner
                 $pterodactylServerOwner = current(array_filter(
-                    $pterodactylUsers,
+                    $pterodactylUsers->all(),
                     fn(PterodactylUser $user) => $user->get('id') === $serverArray['user']
                 ));
 
@@ -478,7 +479,7 @@ class MigrateServersHandler implements HandlerInterface
         );
     }
 
-    private function getPterodactylServers(): array
+    private function getPterodactylServers(): Collection
     {
         $this->io->section('Fetching servers from Pterodactyl...');
         $servers = $this->pterodactylApplicationService
@@ -487,12 +488,12 @@ class MigrateServersHandler implements HandlerInterface
             ->all([
                 'per_page' => $this->limit,
             ]);
-        $this->io->info(sprintf('Fetched %d servers from Pterodactyl', count($servers->toArray())));
+        $this->io->info(sprintf('Fetched %d servers from Pterodactyl', $servers->count()));
 
-        return $servers->toArray();
+        return $servers;
     }
 
-    private function getPterodactylUsers(): array
+    private function getPterodactylUsers(): Collection
     {
         $this->io->section('Fetching users from Pterodactyl...');
         $users = $this->pterodactylApplicationService
@@ -501,9 +502,9 @@ class MigrateServersHandler implements HandlerInterface
             ->getAllUsers([
                 'per_page' => $this->limit,
             ]);
-        $this->io->info(sprintf('Fetched %d users from Pterodactyl', count($users->toArray())));
+        $this->io->info(sprintf('Fetched %d users from Pterodactyl', $users->count()));
 
-        return $users->toArray();
+        return $users;
     }
 
     private function getPterocaServers(): array

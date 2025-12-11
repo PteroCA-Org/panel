@@ -4,8 +4,11 @@ namespace App\Core\DTO\Pterodactyl;
 
 use App\Core\Contract\Pterodactyl\MetaAccessInterface;
 use ArrayAccess;
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
 
-class Collection implements ArrayAccess, MetaAccessInterface
+class Collection implements ArrayAccess, MetaAccessInterface, IteratorAggregate
 {
     public function __construct(
         protected array $data = [],
@@ -79,6 +82,11 @@ class Collection implements ArrayAccess, MetaAccessInterface
     public function last()
     {
         return end($this->data) ?: null;
+    }
+
+    public function getIterator(): Traversable
+    {
+        return new ArrayIterator($this->data);
     }
 
     // ArrayAccess implementation
