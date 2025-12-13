@@ -31,7 +31,7 @@ class UserCreateCommand extends Command
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'User email')
             ->addArgument('password', InputArgument::REQUIRED, 'User password')
-            ->addArgument('role', InputArgument::OPTIONAL, 'Role name (admin, user)', 'user')
+            ->addArgument('role', InputArgument::OPTIONAL, 'Role name (ROLE_ADMIN, ROLE_USER)', 'ROLE_USER')
         ;
     }
 

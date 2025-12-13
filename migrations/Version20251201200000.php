@@ -75,8 +75,8 @@ final class Version20251201200000 extends AbstractMigration
         // Seed system roles
         $now = date('Y-m-d H:i:s');
         $this->addSql("INSERT INTO role (name, display_name, description, is_system, created_at, updated_at) VALUES
-            ('admin', 'Administrator', 'Full system access with all permissions', 1, '{$now}', '{$now}'),
-            ('user', 'User', 'Standard user with basic permissions', 1, '{$now}', '{$now}')
+            ('ROLE_ADMIN', 'Administrator', 'Full system access with all permissions', 1, '{$now}', '{$now}'),
+            ('ROLE_USER', 'User', 'Standard user with basic permissions', 1, '{$now}', '{$now}')
         ");
 
         // Seed core permissions - Dashboard
@@ -221,7 +221,7 @@ final class Version20251201200000 extends AbstractMigration
             SELECT r.id, p.id
             FROM role r
             CROSS JOIN permission p
-            WHERE r.name = 'admin'
+            WHERE r.name = 'ROLE_ADMIN'
         ");
 
         // Assign user permissions to user role
@@ -230,7 +230,7 @@ final class Version20251201200000 extends AbstractMigration
             SELECT r.id, p.id
             FROM role r
             CROSS JOIN permission p
-            WHERE r.name = 'user'
+            WHERE r.name = 'ROLE_USER'
             AND p.code IN (
                 'access_dashboard',
                 'access_shop',
@@ -254,7 +254,7 @@ final class Version20251201200000 extends AbstractMigration
             SELECT u.id, r.id
             FROM user u
             CROSS JOIN role r
-            WHERE r.name = 'admin'
+            WHERE r.name = 'ROLE_ADMIN'
             AND JSON_CONTAINS(u.roles, '\"ROLE_ADMIN\"', '$')
         ");
 
@@ -264,7 +264,7 @@ final class Version20251201200000 extends AbstractMigration
             SELECT u.id, r.id
             FROM user u
             CROSS JOIN role r
-            WHERE r.name = 'user'
+            WHERE r.name = 'ROLE_USER'
             AND NOT JSON_CONTAINS(u.roles, '\"ROLE_ADMIN\"', '$')
         ");
     }

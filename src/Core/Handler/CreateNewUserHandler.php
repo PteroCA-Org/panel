@@ -3,6 +3,7 @@
 namespace App\Core\Handler;
 
 use App\Core\Entity\User;
+use App\Core\Enum\SystemRoleEnum;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessCompletedEvent;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessFailedEvent;
 use App\Core\Event\Cli\CreateUser\UserCreationProcessStartedEvent;
@@ -93,7 +94,7 @@ class CreateNewUserHandler implements HandlerInterface
                 $user->addUserRole($role);
             } else {
                 // Fallback to user role if specified role doesn't exist
-                $defaultRole = $this->roleManager->getRoleByName('user');
+                $defaultRole = $this->roleManager->getRoleByName(SystemRoleEnum::ROLE_USER->value);
                 if ($defaultRole) {
                     $user->addUserRole($defaultRole);
                 }

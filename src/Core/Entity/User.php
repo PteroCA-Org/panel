@@ -140,22 +140,38 @@ class User extends AbstractEntity implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
-        $roles = [];
+        $roles = $this->roles;
+
         foreach ($this->userRoles as $role) {
-            $roles[] = 'ROLE_' . strtoupper($role->getName());
+            $roles[] = $role->getName();
         }
+
         $roles[] = SystemRoleEnum::ROLE_USER->value;
+
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): static
     {
-        $this->roles = $roles;
+        $this->roles = [];
+
+        $currentRoles = [];
+        foreach ($this->userRoles as $role) {
+            $currentRoles[] = $role;
+        }
+        foreach ($currentRoles as $role) {
+            $this->removeUserRole($role);
+        }
+
+        foreach ($roles as $role) {
+            if ($role instanceof Role) {
+                $this->addUserRole($role);
+            } elseif (is_string($role)) {
+                $this->roles[] = $role;
+            }
+        }
 
         return $this;
     }

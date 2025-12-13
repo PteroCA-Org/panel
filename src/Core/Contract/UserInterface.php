@@ -2,12 +2,14 @@
 
 namespace App\Core\Contract;
 
-use App\Core\Enum\PermissionEnum;
 use DateTime;
 use DateTimeInterface;
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Core\Entity\Role;
+use App\Core\Enum\PermissionEnum;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserInterface
 {
@@ -65,6 +67,10 @@ interface UserInterface extends SymfonyUserInterface, PasswordAuthenticatedUserI
     public function restore(): self;
 
     public function hasPermission(string|PermissionEnum $permissionCode): bool;
+    public function getUserRoles(): Collection;
+    public function addUserRole(Role $role): self;
+    public function removeUserRole(Role $role): self;
+    public function hasUserRole(Role $role): bool;
 
     public function __toString(): string;
 }

@@ -19,27 +19,26 @@ readonly class ServerEggService
         $pterodactylServer = $this->pterodactylApplicationService
             ->getApplicationApi()
             ->servers()
-            ->getServer($pterodactylServerId, ['include' => 'variables'])
-            ->toArray();
+            ->getServer($pterodactylServerId, ['include' => 'variables']);
 
-        $pterodactylServerVariables = $pterodactylServer['relationships']['variables']->toArray();
+        $pterodactylServerVariables = $pterodactylServer->get('relationships')['variables'];
         $preparedVariables = [];
         foreach ($pterodactylServerVariables as $variable) {
-            $preparedVariables[$variable['attributes']['id']] = [
-                'value' => $variable['attributes']['default_value'],
-                'user_viewable' => $variable['attributes']['user_viewable'],
-                'user_editable' => $variable['attributes']['user_editable'],
+            $preparedVariables[$variable->get('id')] = [
+                'value' => $variable->get('default_value'),
+                'user_viewable' => $variable->get('user_viewable'),
+                'user_editable' => $variable->get('user_editable'),
             ];
         }
 
         $serverEggsConfiguration = [
-            $pterodactylServer['egg'] => [
+            $pterodactylServer->get('egg') => [
                 'options' => [
                     'startup' => [
-                        'value' => $pterodactylServer['container']['startup_command'],
+                        'value' => $pterodactylServer->get('container')['startup_command'],
                     ],
                     'docker_image' => [
-                        'value' => $pterodactylServer['container']['image'],
+                        'value' => $pterodactylServer->get('container')['image'],
                     ],
                 ],
                 'variables' => $preparedVariables,
@@ -54,8 +53,7 @@ readonly class ServerEggService
         $eggs = $this->pterodactylApplicationService
             ->getApplicationApi()
             ->nestEggs()
-            ->all($nestId, ['include' => 'variables'])
-            ->toArray();
+            ->all($nestId, ['include' => 'variables']);
 
 
         $translations = $this->getEggsTranslations();
@@ -63,8 +61,11 @@ readonly class ServerEggService
         $loadedEggs = [];
 
         foreach ($eggs as $egg) {
-            $choices[$egg['name']] = $egg['id'];
-            $loadedEggs[$egg['id']] = $egg;
+            $eggId = $egg->get('id');
+            $eggName = $egg->get('name');
+
+            $choices[$eggName] = $eggId;
+            $loadedEggs[$eggId] = $egg->toArray();
         }
 
         return [
