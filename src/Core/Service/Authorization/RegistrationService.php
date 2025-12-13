@@ -16,6 +16,7 @@ use App\Core\Service\Logs\LogService;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use App\Core\Service\User\UserService;
 use App\Core\Repository\UserRepository;
+use App\Core\Repository\RoleRepository;
 use App\Core\Event\User\Registration\UserRegisteredEvent;
 use App\Core\Enum\EmailVerificationValueEnum;
 use App\Core\Event\User\Registration\UserEmailVerifiedEvent;
@@ -37,6 +38,7 @@ class RegistrationService
 
     public function __construct(
         private readonly UserRepository $userRepository,
+        private readonly RoleRepository $roleRepository,
         private readonly TranslatorInterface $translator,
         private readonly LogService $logService,
         private readonly SettingService $settingService,
@@ -96,9 +98,16 @@ class RegistrationService
             );
         }
 
-        // Plugins may have modified roles
         $user->setIsVerified($isVerified);
-        $user->setRoles($validatedEvent->getRoles());
+
+        $rolesToSet = $validatedEvent->getRoles();
+        $userRole = $this->roleRepository->findByName(SystemRoleEnum::ROLE_USER->value);
+
+        if ($userRole) {
+            $rolesToSet[] = $userRole;
+        }
+        
+        $user->setRoles($rolesToSet);
 
         try {
             $this->userService->createUserWithPterodactylAccount($user, $plainPassword);
@@ -117,10 +126,8 @@ class RegistrationService
             );
         }
 
-        // UserAboutToBeCreatedEvent, UserCreatedEvent and UserRegisteredEvent
-        // are emitted automatically by UserEventSubscriber
-        // Email sending is handled by UserRegistrationSubscriber
         $this->userRepository->save($user);
+
         $this->logService->logAction($user, LogActionEnum::USER_REGISTERED);
 
         return new RegisterUserActionResult(
@@ -139,16 +146,32 @@ class RegistrationService
         try {
             $deletedUser->restore();
             $deletedUser->setIsVerified($isVerified);
-            $deletedUser->setRoles($roles);
-            
-            if (!empty($plainPassword)) {
-                $deletedUser->setPlainPassword($plainPassword);
-                $this->userService->createOrRestoreUser($deletedUser, $plainPassword);
+
+            $rolesToSet = $roles;
+            $userRole = $this->roleRepository->findByName(SystemRoleEnum::ROLE_USER->value);
+
+            if ($userRole) {
+                $rolesToSet[] = $userRole;
             }
+
+            $deletedUser->setRoles($rolesToSet);
 
             // NOTE: For reactivation, UserEventSubscriber does NOT emit events automatically,
             // because this is an UPDATE, not INSERT (prePersist/postPersist are not triggered)
+            // IMPORTANT: Save user BEFORE calling Pterodactyl services to persist role changes
             $this->userRepository->save($deletedUser);
+
+            if (!empty($plainPassword)) {
+                $deletedUser->setPlainPassword($plainPassword);
+
+                if ($deletedUser->getPterodactylUserId()) {
+                    $this->userService->updateUserInPterodactyl($deletedUser, $plainPassword);
+                } else {
+                    $this->userService->createUserWithPterodactylAccount($deletedUser, $plainPassword);
+                }
+
+                $this->userRepository->save($deletedUser);
+            }
             $this->logService->logAction($deletedUser, LogActionEnum::USER_REGISTERED);
 
             // Manually emit UserRegisteredEvent for reactivated user

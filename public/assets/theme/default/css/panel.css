@@ -1755,6 +1755,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Override for elements that shouldn't transition */
 *:not(.btn):not(.card):not(.list-group-item):not(.badge) {
     transition: none;
+    min-width: 20px;
 }
 
 /* Container spacing */
@@ -2430,11 +2431,9 @@ hr {
     color: #9AA5B1;
 }
 
-/* Table improvements */
 .ea-dark-scheme .table {
     color: #E6EDF3;
     border-radius: 0.5rem;
-    overflow: hidden;
 }
 
 .ea-dark-scheme .table thead th {
@@ -2456,7 +2455,6 @@ hr {
     background-color: rgba(36, 59, 83, 0.5);
 }
 
-/* Badge styling */
 .ea-dark-scheme .badge {
     border: 1px solid var(--bs-border-color, #2D3F52);
 }
@@ -2466,12 +2464,10 @@ hr {
     color: #ffffff !important;
 }
 
-/* Override EasyAdmin badge margin for flex-wrap containers (e.g. plugin capabilities) */
 .d-flex.flex-wrap .badge + .badge {
     margin-inline-start: 0 !important;
 }
 
-/* Dropdown menus */
 .ea-dark-scheme .dropdown-menu {
     background-color: var(--bs-body-bg) !important;
     border-color: var(--bs-border-color) !important;
@@ -2487,7 +2483,6 @@ hr {
     color: #F8FAFC !important;
 }
 
-/* Alert styling */
 .ea-dark-scheme .alert {
     border-color: var(--bs-border-color, #2D3F52);
 }
@@ -2516,7 +2511,6 @@ hr {
     color: #ef4444;
 }
 
-/* Pagination */
 .ea-dark-scheme .pagination .page-link {
     background-color: #1A2B3D;
     border-color: var(--bs-border-color, #2D3F52);
@@ -2534,7 +2528,6 @@ hr {
     border-color: #6BA5F2;
 }
 
-/* Fix MOTD (Message of the Day) colors in dark mode */
 .ea-dark-scheme .motd-icon-box {
     background-color: rgba(107, 165, 242, 0.1) !important;
 }
@@ -2547,13 +2540,11 @@ hr {
     color: #E6EDF3 !important;
 }
 
-/* Fix product-summary-box in dark mode */
 .ea-dark-scheme .product-summary-box {
     background-color: rgba(34, 197, 94, 0.1) !important;
     border-color: rgba(34, 197, 94, 0.3) !important;
 }
 
-/* Flash messages / Alerts styling */
 .alert {
     border-radius: 0.75rem !important;
     background-clip: padding-box !important;
@@ -2562,7 +2553,6 @@ hr {
     font-weight: 500 !important;
 }
 
-/* Light mode alerts - Stripe inspired */
 .alert-success {
     background-color: #f0fdf4 !important;
     border-color: #86efac !important;
@@ -2587,7 +2577,6 @@ hr {
     color: #1e40af !important;
 }
 
-/* Close button styling */
 .btn-close {
     opacity: 0.6;
 }
@@ -2600,7 +2589,6 @@ hr {
     padding-left: 0 !important;
 }
 
-/* Close button visibility in dark mode */
 .ea-dark-scheme .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
     opacity: 0.8;
@@ -2610,13 +2598,11 @@ hr {
     opacity: 1;
 }
 
-/* Remove bg-opacity-10 backgrounds in dark mode (same as light mode) */
 .ea-dark-scheme .bg-opacity-10 {
     background-color: transparent !important;
     opacity: 1 !important;
 }
 
-/* Ensure icons are visible in dark mode without background */
 .ea-dark-scheme i.text-primary {
     color: #6BA5F2 !important;
 }
@@ -2657,12 +2643,10 @@ hr {
     margin-bottom: 0 !important;
 }
 
-/* Content Top Header - white background like footer */
 .content-top {
     background: var(--body-bg) !important;
 }
 
-/* Global Footer */
 .global-footer {
     padding: 1rem 0;
     margin-top: 0.5rem;
@@ -2692,7 +2676,6 @@ hr {
     text-decoration: none;
 }
 
-/* Verification Page Styling */
 .verification-icon-container {
     width: 80px;
     height: 80px;
@@ -2707,7 +2690,6 @@ hr {
     color: #ff9800;
 }
 
-/* Store Product Placeholder */
 .store-product-placeholder {
     height: 200px;
     background: linear-gradient(135deg, var(--stripe-gray-100) 0%, var(--stripe-gray-50) 100%);
@@ -2721,7 +2703,6 @@ hr {
     color: var(--stripe-gray-400);
 }
 
-/* Store Category Placeholder */
 .store-category-placeholder {
     height: 200px;
     background: linear-gradient(135deg, var(--stripe-blue-100) 0%, var(--stripe-blue-50) 100%);
@@ -2734,7 +2715,6 @@ hr {
     font-size: 3rem;
     color: var(--stripe-blue-600);
 }
-
 
 .permission-roles-list .role-card {
     background-color: #f8f9fa;
