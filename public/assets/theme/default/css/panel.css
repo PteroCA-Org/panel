@@ -2825,3 +2825,61 @@ hr {
 #main-menu .menu .submenu .menu-item.active a {
     padding: 3px 0 3px 12px;
 }
+
+.ea-dark-scheme .permissions-summary .bg-light {
+    background-color: var(--bs-body-bg) !important;
+    border: 1px solid var(--bs-border-color) !important;
+}
+
+.ea-dark-scheme .permissions-summary h6 {
+    color: var(--bs-heading-color) !important;
+}
+
+.ea-dark-scheme .permission-section-card {
+    background: var(--bs-card-bg);
+    border-color: var(--bs-border-color) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ea-dark-scheme .permission-section-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.ea-dark-scheme .permission-section-card .section-header {
+    background: linear-gradient(to bottom, var(--bs-card-cap-bg), var(--bs-body-bg));
+    border-bottom: 1px solid var(--bs-border-color);
+}
+
+.ea-dark-scheme .permission-section-card .section-header h6 {
+    color: var(--bs-heading-color);
+}
+
+.ea-dark-scheme .permission-item {
+    border-bottom-color: var(--bs-border-color);
+}
+
+.ea-dark-scheme .permission-item:hover {
+    background-color: rgba(36, 59, 83, 0.3);
+}
+
+.ea-dark-scheme .permission-name {
+    color: var(--bs-body-color);
+}
+
+.ea-dark-scheme .permission-name strong {
+    color: var(--bs-heading-color);
+}
+
+.ea-dark-scheme .permission-meta {
+    color: #9AA5B1;
+}
+
+.ea-dark-scheme .permission-meta code {
+    background: var(--bs-body-bg);
+    color: #9AA5B1;
+    border: 1px solid var(--bs-border-color);
+}
+
+.ea-dark-scheme .permission-meta .text-muted {
+    color: #9AA5B1 !important;
+}
