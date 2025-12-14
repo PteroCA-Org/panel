@@ -4,6 +4,9 @@ namespace App\Core\Service\Tab;
 
 use App\Core\Contract\Tab\ServerTabInterface;
 use App\Core\DTO\ServerTabContext;
+use App\Core\Enum\PluginStateEnum;
+use App\Core\Repository\PluginRepository;
+use Exception;
 use InvalidArgumentException;
 
 class ServerTabRegistry
@@ -13,9 +16,12 @@ class ServerTabRegistry
 
     /**
      * @param iterable<ServerTabInterface> $tabs Tagged server tabs
+     * @param PluginRepository|null $pluginRepository Optional repository for filtering plugin tabs
      */
-    public function __construct(iterable $tabs = [])
-    {
+    public function __construct(
+        iterable $tabs = [],
+        private ?PluginRepository $pluginRepository = null,
+    ) {
         foreach ($tabs as $tab) {
             $this->registerTab($tab);
         }
@@ -41,8 +47,10 @@ class ServerTabRegistry
 
     public function getVisibleTabs(ServerTabContext $context): array
     {
+        $enabledTabs = $this->filterEnabledPluginTabs($this->tabs);
+
         $visibleTabs = array_filter(
-            $this->tabs,
+            $enabledTabs,
             fn(ServerTabInterface $tab) => $tab->isVisible($context)
         );
 
@@ -111,5 +119,42 @@ class ServerTabRegistry
     public function count(): int
     {
         return count($this->tabs);
+    }
+
+    /**
+     * Filter tabs to only include those from enabled plugins.
+     * Core tabs (not in Plugins namespace) are always included.
+     *
+     * @param array<ServerTabInterface> $tabs
+     * @return array<ServerTabInterface>
+     */
+    private function filterEnabledPluginTabs(array $tabs): array
+    {
+        if ($this->pluginRepository === null) {
+            return $tabs;
+        }
+
+        return array_filter($tabs, function (ServerTabInterface $tab) {
+            $tabClass = get_class($tab);
+
+            if (!str_starts_with($tabClass, 'Plugins\\')) {
+                return true;
+            }
+
+            $parts = explode('\\', $tabClass);
+            if (count($parts) < 2) {
+                return false;
+            }
+
+            $pluginClassName = $parts[1];
+            $pluginName = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $pluginClassName));
+
+            try {
+                $plugin = $this->pluginRepository->findByName($pluginName);
+                return $plugin && $plugin->getState() === PluginStateEnum::ENABLED;
+            } catch (Exception) {
+                return false;
+            }
+        });
     }
 }
