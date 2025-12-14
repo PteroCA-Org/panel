@@ -77,11 +77,11 @@ class PluginSettingCrudController extends AbstractSettingCrudController
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
 
         if ($this->pluginName) {
-            $pluginContext = 'plugin_' . $this->pluginName;
+            $pluginContext = 'plugin:' . $this->pluginName;
             $qb->setParameter('context', $pluginContext);
         } else {
             $qb->andWhere('entity.context LIKE :pluginPrefix')
-               ->setParameter('pluginPrefix', 'plugin_%');
+               ->setParameter('pluginPrefix', 'plugin:%');
         }
 
         return $qb;

@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Automatically registers all tagged widgets into the WidgetRegistry.
  *
  * This compiler pass finds all services tagged with:
+ * - 'widget' (generic widget tag for plugins and new widgets)
  * - 'core.widget' (core system widgets)
  * - 'dashboard.widget' (legacy dashboard widgets)
  * - 'admin.widget' (legacy admin widgets)
@@ -30,6 +31,7 @@ class WidgetRegistryCompilerPass implements CompilerPassInterface
 
         // Tags to scan for widgets
         $widgetTags = [
+            'widget',
             'core.widget',
             'dashboard.widget',
             'admin.widget',

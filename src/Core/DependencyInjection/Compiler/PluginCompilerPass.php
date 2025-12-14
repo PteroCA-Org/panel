@@ -97,20 +97,40 @@ class PluginCompilerPass implements CompilerPassInterface
      */
     private function registerPluginServices(ContainerBuilder $container, array $services, string $pluginName): void
     {
+        // Extract _defaults if present
+        $defaults = $services['_defaults'] ?? [];
+
         foreach ($services as $serviceId => $serviceConfig) {
             // Skip special keys like _defaults
             if (str_starts_with($serviceId, '_')) {
                 continue;
             }
 
-            // Prefix service ID with plugin name for isolation
-            $prefixedServiceId = "plugin.$pluginName.$serviceId";
-
-            // Get service class
             $class = $serviceConfig['class'] ?? $serviceId;
+            $isDoctrineRepository = isset($serviceConfig['tags']) &&
+                in_array('doctrine.repository_service', $serviceConfig['tags'], true);
+            $isController = isset($serviceConfig['tags']) &&
+                in_array('controller.service_arguments', $serviceConfig['tags'], true);
 
-            // Register service definition
-            $definition = $container->register($prefixedServiceId, $class);
+            if ($isDoctrineRepository || $isController) {
+                $definition = $container->register($class, $class);
+
+                if ($isDoctrineRepository) {
+                    $definition->setAutowired(true);
+                }
+
+                if ($isController) {
+                    $definition->addTag('container.service_subscriber');
+                    $definition->setAutowired(true);
+                }
+            } else {
+                $prefixedServiceId = "plugin.$pluginName.$serviceId";
+                $definition = $container->register($prefixedServiceId, $class);
+
+                if (class_exists($class) && $serviceId === $class) {
+                    $container->setAlias($class, $prefixedServiceId)->setPublic(true);
+                }
+            }
 
             // Apply configuration
             if (isset($serviceConfig['arguments'])) {
@@ -125,14 +145,20 @@ class PluginCompilerPass implements CompilerPassInterface
 
             if (isset($serviceConfig['public'])) {
                 $definition->setPublic($serviceConfig['public']);
+            } elseif (isset($defaults['public'])) {
+                $definition->setPublic($defaults['public']);
             }
 
             if (isset($serviceConfig['autowire'])) {
                 $definition->setAutowired($serviceConfig['autowire']);
+            } elseif (isset($defaults['autowire'])) {
+                $definition->setAutowired($defaults['autowire']);
             }
 
             if (isset($serviceConfig['autoconfigure'])) {
                 $definition->setAutoconfigured($serviceConfig['autoconfigure']);
+            } elseif (isset($defaults['autoconfigure'])) {
+                $definition->setAutoconfigured($defaults['autoconfigure']);
             }
         }
     }

@@ -6,6 +6,7 @@ namespace App\Core\EventSubscriber\Plugin;
 
 use App\Core\Repository\PluginRepository;
 use App\Core\Service\Plugin\PluginAutoloader;
+use App\Core\Service\Plugin\PluginEventSubscriberRegistry;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,6 +20,7 @@ use Twig\Loader\FilesystemLoader;
  * Performs runtime registration of plugin components:
  * - PSR-4 autoloaders for plugin classes
  * - Twig namespaces for plugin templates
+ * - Event subscribers for plugin event handlers
  *
  * This runs once per request with high priority (before routing) to ensure
  * plugin resources are available when needed.
@@ -30,6 +32,7 @@ class PluginBootSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly PluginRepository $pluginRepository,
         private readonly PluginAutoloader $pluginAutoloader,
+        private readonly PluginEventSubscriberRegistry $eventSubscriberRegistry,
         private readonly FilesystemLoader $twigLoader,
         private readonly LoggerInterface $logger,
         private readonly string $projectDir,
@@ -70,6 +73,9 @@ class PluginBootSubscriber implements EventSubscriberInterface
 
             // Register Twig namespaces for enabled plugins
             $this->registerTwigNamespaces($enabledPlugins);
+
+            // Register event subscribers for enabled plugins
+            $this->registerEventSubscribers($enabledPlugins);
 
             self::$booted = true;
 
@@ -118,6 +124,30 @@ class PluginBootSubscriber implements EventSubscriberInterface
                 ]);
             } catch (Exception $e) {
                 $this->logger->error("Failed to register Twig namespace", [
+                    'plugin' => $plugin->getName(),
+                    'error' => $e->getMessage(),
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Register event subscribers for enabled plugins with 'eda' capability.
+     *
+     * @param array $plugins Array of Plugin entities
+     */
+    private function registerEventSubscribers(array $plugins): void
+    {
+        foreach ($plugins as $plugin) {
+            // Only register for plugins with 'eda' capability
+            if (!$plugin->hasCapability('eda')) {
+                continue;
+            }
+
+            try {
+                $this->eventSubscriberRegistry->registerSubscribers($plugin);
+            } catch (Exception $e) {
+                $this->logger->error("Failed to register event subscribers for plugin", [
                     'plugin' => $plugin->getName(),
                     'error' => $e->getMessage(),
                 ]);

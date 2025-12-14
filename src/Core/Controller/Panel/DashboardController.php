@@ -65,6 +65,7 @@ class DashboardController extends AbstractDashboardController
         private readonly ActivityWidget $activityWidget,
         private readonly QuickActionsWidget $quickActionsWidget,
         private readonly MenuBuilder $menuBuilder,
+        private readonly WidgetRegistry $widgetRegistry,
     ) {}
 
     #[Route('/panel', name: 'panel')]
@@ -82,15 +83,13 @@ class DashboardController extends AbstractDashboardController
         );
 
         // === Widget Registry System ===
-        $widgetRegistry = new WidgetRegistry();
-
-        // Register builtin widgets
-        $this->registerBuiltinWidgets($widgetRegistry);
+        // Register builtin widgets (injected as dependencies)
+        $this->registerBuiltinWidgets($this->widgetRegistry);
 
         // Dispatch event for plugins to register custom widgets
         $contextData = ['user' => $user];
         $widgetEvent = new WidgetsCollectedEvent(
-            $widgetRegistry,
+            $this->widgetRegistry,
             WidgetContext::DASHBOARD,
             $contextData
         );
@@ -111,7 +110,7 @@ class DashboardController extends AbstractDashboardController
         );
 
         $viewData = [
-            'widgetRegistry' => $widgetRegistry,
+            'widgetRegistry' => $this->widgetRegistry,
             'widgetContext' => WidgetContext::DASHBOARD,
             'contextData' => $contextData,
             'servers' => $servers,

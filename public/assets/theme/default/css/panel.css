@@ -2883,3 +2883,46 @@ hr {
 .ea-dark-scheme .permission-meta .text-muted {
     color: #9AA5B1 !important;
 }
+
+.content-top {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.navbar-custom-menu {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.content-search {
+    flex: 1;
+}
+
+.user-balance {
+    display: inline-block;
+    align-items: center;
+}
+
+.user-balance a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.user-balance a:hover {
+    color: var(--bs-primary);
+}
+
+.ea-dark-scheme .user-balance a {
+    color: #9AA5B1;
+}
+
+.ea-dark-scheme .user-balance a:hover {
+    color: #FFFFFF;
+}

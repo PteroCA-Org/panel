@@ -3,8 +3,11 @@
 namespace App\Core\Service\Widget;
 
 use App\Core\Contract\Widget\WidgetInterface;
+use App\Core\Enum\PluginStateEnum;
 use App\Core\Enum\WidgetContext;
 use App\Core\Enum\WidgetPosition;
+use App\Core\Repository\PluginRepository;
+use Exception;
 
 /**
  * Universal registry for widgets across different contexts.
@@ -19,6 +22,10 @@ class WidgetRegistry
 {
     /** @var array<string, WidgetInterface> */
     private array $widgets = [];
+
+    public function __construct(
+        private ?PluginRepository $pluginRepository = null,
+    ) {}
 
     /**
      * Register a widget in the registry.
@@ -73,6 +80,8 @@ class WidgetRegistry
             fn(WidgetInterface $widget) => $widget->getPosition() === $position
         );
 
+        $widgets = $this->filterEnabledPluginWidgets($widgets);
+
         // Sort by priority DESC (higher priority first)
         usort($widgets, fn($a, $b) => $b->getPriority() <=> $a->getPriority());
 
@@ -93,6 +102,8 @@ class WidgetRegistry
             $this->widgets,
             fn(WidgetInterface $widget) => $widget->getPosition() === $position
         );
+
+        $widgets = $this->filterEnabledPluginWidgets($widgets);
 
         // Sort by priority DESC (higher priority first)
         usort($widgets, fn($a, $b) => $b->getPriority() <=> $a->getPriority());
@@ -146,5 +157,42 @@ class WidgetRegistry
         }
 
         return count($this->getWidgetsForContext($context));
+    }
+
+    /**
+     * Filter widgets to only include those from enabled plugins.
+     * Core widgets (not in Plugins namespace) are always included.
+     *
+     * @param array<WidgetInterface> $widgets
+     * @return array<WidgetInterface>
+     */
+    private function filterEnabledPluginWidgets(array $widgets): array
+    {
+        if ($this->pluginRepository === null) {
+            return $widgets;
+        }
+
+        return array_filter($widgets, function (WidgetInterface $widget) {
+            $widgetClass = get_class($widget);
+
+            if (!str_starts_with($widgetClass, 'Plugins\\')) {
+                return true;
+            }
+
+            $parts = explode('\\', $widgetClass);
+            if (count($parts) < 2) {
+                return false;
+            }
+
+            $pluginClassName = $parts[1];
+            $pluginName = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $pluginClassName));
+
+            try {
+                $plugin = $this->pluginRepository->findByName($pluginName);
+                return $plugin && $plugin->getState() === PluginStateEnum::ENABLED;
+            } catch (Exception) {
+                return false;
+            }
+        });
     }
 }
