@@ -252,6 +252,7 @@ pteroca:
     order: '订单'
     order_description: '充值资金'
     payment_method: '支付方式'
+    select_payment_method: '请选择支付方式'
     description: '充值您的账户余额'
   cart_renew:
     title: '续订你的服务器'

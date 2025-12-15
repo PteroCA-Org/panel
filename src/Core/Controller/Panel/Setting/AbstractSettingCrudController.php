@@ -13,6 +13,7 @@ use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
+use App\Core\Service\SettingTypeMapperService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -52,6 +53,7 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
         private readonly SettingOptionRepository $settingOptionRepository,
         private readonly SettingService $settingService,
         private readonly LocaleService $localeService,
+        private readonly SettingTypeMapperService $typeMapper,
     ) {
         parent::__construct($panelCrudService, $requestStack);
         $this->currentEntity = $this->getSettingEntity();
@@ -85,7 +87,9 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
         ];
 
         $valueLabel = $this->translator->trans('pteroca.crud.setting.value');
-        $valueField = match ($this->currentEntity?->getType()) {
+        $normalizedType = $this->typeMapper->toDisplayType($this->currentEntity?->getType() ?? 'text');
+
+        $valueField = match ($normalizedType) {
             SettingTypeEnum::COLOR->value => TextField::new('value', $valueLabel)
                 ->setFormType(ColorType::class),
             SettingTypeEnum::BOOLEAN->value => ChoiceField::new('value', $valueLabel)

@@ -83,26 +83,32 @@
                                         {% set gatewayIdentifier = radio.vars.value %}
                                         {% set gateway = null %}
                                         {% for gw in availableGateways %}
-                                            {% if gw.identifier == gatewayIdentifier %}
+                                            {% if gw.getIdentifier() == gatewayIdentifier %}
                                                 {% set gateway = gw %}
                                             {% endif %}
                                         {% endfor %}
 
                                         {% if gateway %}
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                                                {{ form_widget(radio) }}
-                                                <label for="{{ radio.vars.id }}" class="card border-2 shadow-sm rounded-3 card-input h-100">
+                                                <input type="radio"
+                                                       id="{{ radio.vars.id }}"
+                                                       name="{{ radio.vars.full_name }}"
+                                                       value="{{ radio.vars.value }}"
+                                                       class="payment-gateway-input"
+                                                       {% if radio.vars.checked %}checked="checked"{% endif %}>
+                                                <label for="{{ radio.vars.id }}" class="payment-gateway-card card border-2 shadow-sm rounded-3 h-100">
                                                     <div class="card-body text-center p-4">
-                                                        <i class="{{ gateway.icon }} mb-3" style="font-size: 2.5rem; {% if gateway.metadata.color is defined %}color: {{ gateway.metadata.color }};{% endif %}"></i>
-                                                        <h6 class="card-title mb-0 fw-semibold">{{ gateway.displayName }}</h6>
-                                                        {% if gateway.description %}
-                                                            <small class="text-muted d-block mt-1">{{ gateway.description }}</small>
+                                                        <i class="{{ gateway.getIcon() }} mb-3" style="font-size: 2.5rem; {% if gateway.getMetadata().color is defined %}color: {{ gateway.getMetadata().color }};{% endif %}"></i>
+                                                        <h6 class="card-title mb-0 fw-semibold">{{ gateway.getDisplayName() }}</h6>
+                                                        {% if gateway.getDescription() %}
+                                                            <small class="text-muted d-block mt-1">{{ gateway.getDescription() }}</small>
                                                         {% endif %}
                                                     </div>
                                                 </label>
                                             </div>
                                         {% endif %}
                                     {% endfor %}
+                                    {% do form.gateway.setRendered %}
                                 </div>
                             {% endif %}
                         </div>
@@ -141,7 +147,7 @@
                                         <small>{{ 'pteroca.cart_topup.payment_method'|trans }}:</small>
                                         <div id="selected-payment-method" class="fw-semibold">
                                             {% if availableGateways is not empty %}
-                                                {{ availableGateways|first.displayName }}
+                                                {{ availableGateways|first.getDisplayName() }}
                                             {% else %}
                                                 -
                                             {% endif %}
@@ -191,6 +197,7 @@
                     </div>
                 </div>
             </div>
+        {{ form_rest(form) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 
@@ -207,20 +214,39 @@
 
             // Add event listeners for payment method selection
             const paymentRadios = document.querySelectorAll('input[name="top_up_balance[gateway]"]');
+            const orderButton = document.getElementById('order-submit');
+            const topupForm = document.getElementById('topup-form');
+
             paymentRadios.forEach(radio => {
-                radio.addEventListener('change', updateSelectedPaymentMethod);
+                radio.addEventListener('change', function() {
+                    updateSelectedPaymentMethod();
+                    updateOrderButtonState();
+                });
             });
 
             // Disable order button if no payment gateways available
-            const orderButton = document.getElementById('order-submit');
             if (paymentRadios.length === 0 && orderButton) {
                 orderButton.disabled = true;
                 orderButton.classList.add('disabled');
             }
 
+            // Form submission validation
+            if (topupForm) {
+                topupForm.addEventListener('submit', function(e) {
+                    const selectedGateway = document.querySelector('input[name="top_up_balance[gateway]"]:checked');
+
+                    if (!selectedGateway) {
+                        e.preventDefault();
+                        alert('{{ 'pteroca.cart_topup.select_payment_method'|trans }}');
+                        return false;
+                    }
+                });
+            }
+
             calculatePrice();
             updateSelectedPaymentMethod();
-        })
+            updateOrderButtonState();
+        });
 
         function calculatePrice() {
             const appliedDiscountValue = document.querySelector('#applied-discount-value')
@@ -244,6 +270,21 @@
                 const label = document.querySelector(`label[for="${selectedRadio.id}"]`);
                 const methodName = label.querySelector('.card-title').textContent;
                 document.querySelector('#selected-payment-method').textContent = methodName;
+            }
+        }
+
+        function updateOrderButtonState() {
+            const selectedGateway = document.querySelector('input[name="top_up_balance[gateway]"]:checked');
+            const orderButton = document.getElementById('order-submit');
+
+            if (orderButton) {
+                if (selectedGateway) {
+                    orderButton.disabled = false;
+                    orderButton.classList.remove('disabled');
+                } else {
+                    orderButton.disabled = true;
+                    orderButton.classList.add('disabled');
+                }
             }
         }
     </script>

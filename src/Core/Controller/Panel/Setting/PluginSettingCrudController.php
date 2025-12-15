@@ -8,13 +8,19 @@ use App\Core\Repository\SettingRepository;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
+use App\Core\Service\SettingTypeMapperService;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PluginSettingCrudController extends AbstractSettingCrudController
@@ -22,6 +28,7 @@ class PluginSettingCrudController extends AbstractSettingCrudController
     private ?string $pluginName = null;
     private RequestStack $localRequestStack;
     private TranslatorInterface $translator;
+    private SettingRepository $settingRepository;
 
     public function __construct(
         PanelCrudService $panelCrudService,
@@ -31,6 +38,7 @@ class PluginSettingCrudController extends AbstractSettingCrudController
         SettingOptionRepository $settingOptionRepository,
         SettingService $settingService,
         LocaleService $localeService,
+        SettingTypeMapperService $typeMapper,
     ) {
         parent::__construct(
             $panelCrudService,
@@ -39,15 +47,36 @@ class PluginSettingCrudController extends AbstractSettingCrudController
             $settingRepository,
             $settingOptionRepository,
             $settingService,
-            $localeService
+            $localeService,
+            $typeMapper
         );
         $this->translator = $translator;
         $this->localRequestStack = $requestStack;
+        $this->settingRepository = $settingRepository;
     }
 
     protected function getSettingContext(): SettingContextEnum
     {
         return SettingContextEnum::PLUGIN;
+    }
+
+    public function index(AdminContext $context): KeyValueStore|Response
+    {
+        $request = $this->localRequestStack->getCurrentRequest();
+        if (!$request->query->has('pluginName') && $request->getSession()->has('plugin_settings_return_plugin')) {
+            $pluginName = $request->getSession()->get('plugin_settings_return_plugin');
+            $request->getSession()->remove('plugin_settings_return_plugin');
+
+            $url = $this->generateUrl('panel', [
+                'crudAction' => 'index',
+                'crudControllerFqcn' => self::class,
+                'pluginName' => $pluginName
+            ]);
+
+            return $this->redirect($url);
+        }
+
+        return parent::index($context);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -70,6 +99,36 @@ class PluginSettingCrudController extends AbstractSettingCrudController
         }
 
         return parent::configureCrud($crud);
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        $request = $this->localRequestStack->getCurrentRequest();
+        $entityId = $request->query->get('entityId');
+
+        if ($entityId && !$this->pluginName) {
+            $setting = $this->settingRepository->find($entityId);
+            if ($setting && str_starts_with($setting->getContext(), 'plugin:')) {
+                $extractedPluginName = substr($setting->getContext(), 7); // Remove 'plugin:' prefix
+
+                $request->getSession()->set('plugin_settings_return_plugin', $extractedPluginName);
+
+                $url = $this->generateUrl('panel', [
+                    'crudAction' => 'index',
+                    'crudControllerFqcn' => self::class,
+                    'pluginName' => $extractedPluginName
+                ]);
+
+                $indexAction = Action::new(Action::INDEX)
+                    ->linkToUrl($url);
+
+                $actions->add(Crud::PAGE_EDIT, $indexAction);
+            }
+        }
+
+        return $actions;
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

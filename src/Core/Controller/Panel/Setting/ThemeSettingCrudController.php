@@ -10,6 +10,7 @@ use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
+use App\Core\Service\SettingTypeMapperService;
 use App\Core\Service\Template\TemplateManager;
 use App\Core\Service\Template\TemplateService;
 use Doctrine\ORM\QueryBuilder;
@@ -36,6 +37,7 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
         SettingOptionRepository $settingOptionRepository,
         SettingService $settingService,
         LocaleService $localeService,
+        SettingTypeMapperService $typeMapper,
         private readonly TemplateService $templateService,
         private readonly TemplateManager $templateManager,
         private readonly TranslatorInterface $translator,
@@ -48,7 +50,8 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
             $settingRepository,
             $settingOptionRepository,
             $settingService,
-            $localeService
+            $localeService,
+            $typeMapper
         );
 
         $this->currentTemplateOptions = $this->templateManager->getCurrentTemplateOptions();

@@ -35,6 +35,7 @@ use App\Core\Event\Cart\CartTopUpPageAccessedEvent;
 use App\Core\Service\Payment\PaymentGatewayManager;
 use App\Core\Event\Cart\CartConfigureDataLoadedEvent;
 use App\Core\Service\Server\ServerSlotPricingService;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Core\Event\Cart\CartConfigurePageAccessedEvent;
 use App\Core\Event\Payment\PaymentGatewaysCollectedEvent;
@@ -74,7 +75,7 @@ class CartController extends AbstractController
 
         $gatewayChoices = [];
         foreach ($availableGateways as $gateway) {
-            $gatewayChoices[$gateway->displayName] = $gateway->identifier;
+            $gatewayChoices[$gateway->getDisplayName()] = $gateway->getIdentifier();
         }
 
         $initialData = [];
@@ -105,15 +106,36 @@ class CartController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $formData = $form->getData();
+                $gateway = $formData['gateway'];
+
+                $paymentProvider = $gatewayManager->getProvider($gateway);
+                if ($paymentProvider === null) {
+                    throw new Exception($this->translator->trans('pteroca.payment.gateway_not_found'));
+                }
+
+                $baseSuccessUrl = $this->generateUrl(
+                    $paymentProvider->getSuccessCallbackRoute(),
+                    ['provider' => $gateway],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+
+                $baseCancelUrl = $this->generateUrl(
+                    $paymentProvider->getCancelCallbackRoute(),
+                    ['provider' => $gateway],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+
+                $successUrl = $paymentProvider->buildSuccessUrl($baseSuccessUrl);
+                $cancelUrl = $paymentProvider->buildCancelUrl($baseCancelUrl);
 
                 $paymentUrl = $paymentService->createPayment(
                     $this->getUser(),
                     $formData['amount'],
                     $currency,
                     $formData['voucher'] ?? '',
-                    $this->generateUrl('stripe_success', [], 0) . '?session_id={CHECKOUT_SESSION_ID}',
-                    $this->generateUrl('stripe_cancel', [], 0),
-                    $formData['gateway']
+                    $successUrl,
+                    $cancelUrl,
+                    $gateway
                 );
 
                 $this->dispatchDataEvent(

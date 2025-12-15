@@ -86,6 +86,62 @@ class BalanceController extends AbstractController
         return $this->renderWithEvent(ViewNameEnum::BALANCE_RECHARGE, 'panel/wallet/recharge.html.twig', $viewData, $request);
     }
 
+    #[Route('/wallet/{provider}/success', name: 'payment_callback_success', requirements: ['provider' => '[a-z]+'])]
+    public function paymentSuccess(Request $request, string $provider): Response
+    {
+        $this->checkPermission(PermissionEnum::ACCESS_WALLET);
+
+        $paymentProvider = $this->gatewayManager->getProvider($provider);
+        if ($paymentProvider === null) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.payment.gateway_not_found'));
+            return $this->redirectToRechargeBalance();
+        }
+
+        $sessionId = $paymentProvider->extractSessionIdFromCallback($request);
+
+        $this->dispatchDataEvent(
+            BalancePaymentCallbackAccessedEvent::class,
+            $request,
+            [$sessionId, 'success']
+        );
+
+        if (empty($sessionId)) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.recharge.invalid_session_id'));
+            return $this->redirectToRechargeBalance();
+        }
+
+        $error = $this->paymentService->finalizePayment($this->getUser(), $sessionId);
+        if (!empty($error)) {
+            $this->addFlash('danger', $error);
+            return $this->redirectToRechargeBalance();
+        }
+
+        $this->addFlash('success', $this->translator->trans('pteroca.recharge.payment_success'));
+
+        return $this->redirectToRechargeBalance();
+    }
+
+    #[Route('/wallet/{provider}/cancel', name: 'payment_callback_cancel', requirements: ['provider' => '[a-z]+'])]
+    public function paymentCancel(Request $request, string $provider): Response
+    {
+        $this->checkPermission(PermissionEnum::ACCESS_WALLET);
+
+        $this->dispatchDataEvent(
+            BalancePaymentCallbackAccessedEvent::class,
+            $request,
+            [null, 'cancel']
+        );
+
+        $this->addFlash('danger', $this->translator->trans('pteroca.recharge.payment_canceled'));
+
+        return $this->redirectToRechargeBalance();
+    }
+
+    /**
+     * @deprecated Since v0.6, use paymentSuccess() with provider-specific routes
+     * This route is maintained for backward compatibility with payments in progress
+     * Will be removed in v0.7.0
+     */
     #[Route('/wallet/recharge/success', name: 'stripe_success')]
     public function success(Request $request): Response
     {
@@ -115,6 +171,11 @@ class BalanceController extends AbstractController
         return $this->redirectToRechargeBalance();
     }
 
+    /**
+     * @deprecated Since v0.6, use paymentCancel() with provider-specific routes
+     * This route is maintained for backward compatibility with payments in progress
+     * Will be removed in v0.7.0
+     */
     #[Route('/wallet/recharge/cancel', name: 'stripe_cancel')]
     public function cancel(Request $request): Response
     {

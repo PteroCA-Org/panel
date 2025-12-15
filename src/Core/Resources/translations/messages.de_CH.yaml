@@ -248,6 +248,7 @@ pteroca:
     order: 'Bestellung'
     order_description: 'Guthaben aufladen'
     payment_method: 'Zahlungsmethode'
+    select_payment_method: 'Bitte wählen Sie eine Zahlungsmethode'
     description: 'Laden Sie Ihr Kontoguthaben auf'
   cart_renew:
     title: 'Server verlängern'

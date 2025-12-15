@@ -16,6 +16,8 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-zip": "*",
         "composer/semver": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "dragonmantank/cron-expression": "^3.3",
@@ -42,9 +44,7 @@
         "symfony/serializer": "^7.0",
         "symfony/ux-twig-component": "^2.22",
         "symfony/yaml": "^7.0",
-        "vich/uploader-bundle": "^2.4",
-        "ext-zip": "*",
-        "ext-pdo": "*"
+        "vich/uploader-bundle": "^2.4"
     },
     "config": {
         "allow-plugins": {

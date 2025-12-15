@@ -10,6 +10,7 @@ use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
+use App\Core\Service\SettingTypeMapperService;
 use App\Core\Service\System\WebConfigurator\EmailConnectionVerificationService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -31,9 +32,10 @@ class EmailSettingCrudController extends AbstractSettingCrudController
         SettingOptionRepository $settingOptionRepository,
         SettingService $settingService,
         LocaleService $localeService,
+        SettingTypeMapperService $typeMapper,
         private readonly EmailConnectionVerificationService $emailConnectionVerificationService,
     ) {
-        parent::__construct($panelCrudService, $requestStack, $translator, $settingRepository, $settingOptionRepository, $settingService, $localeService);
+        parent::__construct($panelCrudService, $requestStack, $translator, $settingRepository, $settingOptionRepository, $settingService, $localeService, $typeMapper);
     }
 
     protected function getSettingContext(): SettingContextEnum
