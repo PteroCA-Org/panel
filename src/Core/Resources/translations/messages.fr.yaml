@@ -251,6 +251,7 @@ pteroca:
     order: 'Commander'
     order_description: 'Recharger des fonds'
     payment_method: 'Méthode de paiement'
+    select_payment_method: 'Veuillez sélectionner un mode de paiement'
     description: 'Rechargez le solde de votre compte'
   cart_renew:
     title: 'Renouveler votre serveur'

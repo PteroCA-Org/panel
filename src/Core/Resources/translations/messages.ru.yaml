@@ -247,6 +247,7 @@ pteroca:
     order: 'Заказать'
     order_description: 'Пополнить средства'
     payment_method: 'Способ оплаты'
+    select_payment_method: 'Пожалуйста, выберите способ оплаты'
     description: 'Пополните баланс вашего аккаунта'
   cart_renew:
     title: 'Продлить сервер'

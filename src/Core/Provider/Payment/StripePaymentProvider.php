@@ -7,6 +7,7 @@ use App\Core\DTO\PaymentSessionDTO;
 use App\Core\Enum\SettingEnum;
 use App\Core\Service\SettingService;
 use Exception;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StripePaymentProvider implements PaymentProviderInterface
@@ -144,5 +145,32 @@ class StripePaymentProvider implements PaymentProviderInterface
             'supports_recurring' => true,
             'payment_methods' => $this->getStripePaymentMethods(),
         ];
+    }
+
+    public function getSuccessCallbackRoute(): string
+    {
+        return 'payment_callback_success';
+    }
+
+    public function getCancelCallbackRoute(): string
+    {
+        return 'payment_callback_cancel';
+    }
+
+    public function extractSessionIdFromCallback(Request $request): ?string
+    {
+        return $request->query->get('session_id');
+    }
+
+    public function buildSuccessUrl(string $baseUrl): string
+    {
+        $separator = str_contains($baseUrl, '?') ? '&' : '?';
+        return $baseUrl . $separator . 'session_id={CHECKOUT_SESSION_ID}';
+    }
+
+    public function buildCancelUrl(string $baseUrl): string
+    {
+        // Stripe doesn't need special parameters for cancel URL
+        return $baseUrl;
     }
 }

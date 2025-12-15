@@ -5,6 +5,7 @@ namespace App\Core\Service\Plugin;
 use App\Core\Entity\Plugin;
 use App\Core\Entity\Setting;
 use App\Core\Repository\SettingRepository;
+use App\Core\Service\SettingTypeMapperService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -21,9 +22,10 @@ use RuntimeException;
 readonly class PluginSettingService
 {
     public function __construct(
-        private SettingRepository      $settingRepository,
-        private EntityManagerInterface $entityManager,
-        private LoggerInterface        $logger,
+        private SettingRepository        $settingRepository,
+        private EntityManagerInterface   $entityManager,
+        private LoggerInterface          $logger,
+        private SettingTypeMapperService $typeMapper,
     ) {}
 
     /**
@@ -58,7 +60,7 @@ readonly class PluginSettingService
      * @param string $pluginName Plugin name
      * @param string $key Setting key
      * @param mixed $value Setting value
-     * @param string|null $type Setting type (string, integer, boolean, json), auto-detected if null
+     * @param string|null $type Setting type (string, integer, boolean, etc.), auto-detected if null
      * @param int|null $hierarchy Hierarchy level for grouping settings
      * @throws RuntimeException If setting cannot be saved
      */
@@ -75,6 +77,9 @@ readonly class PluginSettingService
         if ($type === null) {
             $type = $this->detectType($value);
         }
+
+        // Map config_schema storage type to SettingTypeEnum display type
+        $type = $this->typeMapper->toDisplayType($type);
 
         // Convert value to string for storage
         $stringValue = $this->serializeValue($value, $type);
@@ -274,7 +279,8 @@ readonly class PluginSettingService
             }
 
             $defaultValue = $schema['default'] ?? null;
-            $type = $schema['type'] ?? 'string';
+            $storageType = $schema['type'] ?? 'string';
+            $type = $this->typeMapper->toDisplayType($storageType);
             $hierarchy = $schema['hierarchy'] ?? 100;
 
             // Validate hierarchy

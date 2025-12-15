@@ -252,6 +252,7 @@ pteroca:
     order: 'Ordenar'
     order_description: 'Recargar fondos'
     payment_method: 'Método de pago'
+    select_payment_method: 'Por favor seleccione un método de pago'
     description: 'Recarga el saldo de tu cuenta'
   cart_renew:
     title: 'Renueva tu servidor'

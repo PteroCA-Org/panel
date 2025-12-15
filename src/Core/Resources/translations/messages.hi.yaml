@@ -252,6 +252,7 @@ pteroca:
     order: 'ऑर्डर'
     order_description: 'फंड्स रिचार्ज करें'
     payment_method: 'भुगतान विधि'
+    select_payment_method: 'कृपया एक भुगतान विधि चुनें'
     description: 'अपने खाते की शेष राशि रिचार्ज करें'
   cart_renew:
     title: 'अपने सर्वर का नवीनीकरण करें'

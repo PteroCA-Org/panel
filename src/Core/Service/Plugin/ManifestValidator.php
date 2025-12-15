@@ -3,6 +3,7 @@
 namespace App\Core\Service\Plugin;
 
 use App\Core\DTO\PluginManifestDTO;
+use App\Core\Service\SettingTypeMapperService;
 use Composer\Semver\VersionParser;
 use Exception;
 
@@ -28,10 +29,15 @@ class ManifestValidator
 
     private string $pterocaVersion;
 
-    public function __construct(string $pterocaVersion = '0.5.9')
-    {
+    private SettingTypeMapperService $typeMapper;
+
+    public function __construct(
+        string $pterocaVersion = '0.6.0',
+        ?SettingTypeMapperService $typeMapper = null
+    ) {
         $this->versionParser = new VersionParser();
         $this->pterocaVersion = $pterocaVersion;
+        $this->typeMapper = $typeMapper ?? new SettingTypeMapperService();
     }
 
     public function validate(PluginManifestDTO $manifest): array
@@ -278,8 +284,9 @@ class ManifestValidator
             // Validate type
             if (!isset($schema['type'])) {
                 $errors[] = "Config schema for '$key' must have 'type' field";
-            } elseif (!in_array($schema['type'], ['string', 'integer', 'boolean', 'array'], true)) {
-                $errors[] = "Invalid type '{$schema['type']}' for config '$key'";
+            } elseif (!$this->typeMapper->isValidStorageType($schema['type'])) {
+                $validTypes = implode(', ', $this->typeMapper->getValidStorageTypes());
+                $errors[] = "Invalid type '{$schema['type']}' for config '$key'. Valid types: {$validTypes}";
             }
 
             // Validate hierarchy

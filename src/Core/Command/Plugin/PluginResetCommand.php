@@ -3,6 +3,7 @@
 namespace App\Core\Command\Plugin;
 
 use App\Core\Exception\Plugin\InvalidStateTransitionException;
+use App\Core\Service\Plugin\ManifestParser;
 use App\Core\Service\Plugin\PluginManager;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -10,11 +11,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
     name: 'pteroca:plugin:reset',
-    description: 'Reset a faulted plugin back to registered state',
+    description: 'Reset a faulted plugin or register a discovered plugin',
     aliases: ['plugin:reset']
 )]
 class PluginResetCommand extends Command
@@ -22,6 +24,9 @@ class PluginResetCommand extends Command
     public function __construct(
         private readonly PluginManager $pluginManager,
         private readonly TranslatorInterface $translator,
+        private readonly ManifestParser $manifestParser,
+        #[Autowire(param: 'kernel.project_dir')]
+        private readonly string $projectDir,
     ) {
         parent::__construct();
     }
@@ -35,16 +40,21 @@ class PluginResetCommand extends Command
                 'Plugin name to reset'
             )
             ->setHelp(<<<'HELP'
-The <info>%command.name%</info> command resets a faulted plugin back to registered state.
+The <info>%command.name%</info> command resets a faulted plugin or registers a discovered plugin.
 
-This is useful when a plugin failed to enable due to a temporary issue (e.g., migration error,
-dependency problem) that has since been resolved. After reset, you can try to enable the plugin again.
+Use cases:
+1. Reset a FAULTED plugin back to REGISTERED state
+2. Register a plugin found on filesystem but not in database (DISCOVERED state)
 
 Usage:
   <info>php %command.full_name% plugin-name</info>
 
-Example:
-  <info>php %command.full_name% acme-payments</info>
+Examples:
+  # Register a discovered plugin
+  <info>php %command.full_name% paypal-payment</info>
+
+  # Reset a faulted plugin
+  <info>php %command.full_name% broken-plugin</info>
 
 HELP
             );
@@ -57,15 +67,52 @@ HELP
 
         $io->title("Reset Plugin: $pluginName");
 
-        // Find plugin
         $plugin = $this->pluginManager->getPluginByName($pluginName);
 
         if ($plugin === null) {
-            $io->error("Plugin '$pluginName' not found. Run 'plugin:list' to see available plugins.");
-            return Command::FAILURE;
+            $io->note("Plugin not found in database. Checking filesystem...");
+
+            $pluginPath = $this->projectDir . '/plugins/' . $pluginName;
+
+            if (!is_dir($pluginPath)) {
+                $io->error("Plugin '$pluginName' not found in database or filesystem.");
+                return Command::FAILURE;
+            }
+
+            try {
+                $manifest = $this->manifestParser->parseFromDirectory($pluginPath);
+            } catch (\Exception $e) {
+                $io->error("Failed to parse plugin manifest: " . $e->getMessage());
+                return Command::FAILURE;
+            }
+
+            $io->section('Registering Plugin from Filesystem');
+            $io->text([
+                "Plugin found on filesystem but not in database.",
+                "This will register the plugin with REGISTERED state.",
+                "",
+                "Plugin: {$manifest->displayName}",
+                "Version: {$manifest->version}",
+                "Author: {$manifest->author}",
+            ]);
+
+            try {
+                $registeredPlugin = $this->pluginManager->registerPlugin($pluginPath, $manifest);
+
+                $io->success("Plugin '$pluginName' registered successfully!");
+                $io->text([
+                    "The plugin is now in REGISTERED state.",
+                    "You can enable it using:",
+                    "  php bin/console plugin:enable $pluginName",
+                ]);
+
+                return Command::SUCCESS;
+            } catch (\Exception $e) {
+                $io->error("Failed to register plugin: " . $e->getMessage());
+                return Command::FAILURE;
+            }
         }
 
-        // Check current state
         $currentState = $plugin->getState();
 
         if (!$currentState->isFaulted()) {
@@ -75,7 +122,6 @@ HELP
             return Command::SUCCESS;
         }
 
-        // Display plugin information
         $io->section('Plugin Information');
         $io->table(
             ['Property', 'Value'],
@@ -89,13 +135,11 @@ HELP
             ]
         );
 
-        // Display fault reason prominently
         if ($plugin->getFaultReason()) {
             $io->warning("Previous Fault Reason:");
             $io->text($plugin->getFaultReason());
         }
 
-        // Confirmation
         $io->section('Reset Action');
         $io->text([
             'This will:',
@@ -111,7 +155,6 @@ HELP
             return Command::SUCCESS;
         }
 
-        // Perform reset
         try {
             $this->pluginManager->resetPlugin($plugin);
 

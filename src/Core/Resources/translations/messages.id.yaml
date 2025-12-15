@@ -252,6 +252,7 @@ pteroca:
     order: 'Pesan'
     order_description: 'Isi ulang dana'
     payment_method: 'Metode pembayaran'
+    select_payment_method: 'Silakan pilih metode pembayaran'
     description: 'Isi ulang saldo akun Anda'
   cart_renew:
     title: 'Perpanjang server Anda'

@@ -2124,6 +2124,83 @@ hr {
     color: #dc2626 !important;
 }
 
+.payment-gateway-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.payment-gateway-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid var(--stripe-gray-300) !important;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.ea-dark-scheme .payment-gateway-card {
+    background-color: var(--bs-card-bg);
+    border-color: var(--bs-border-color) !important;
+}
+
+.payment-gateway-card:hover {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.ea-dark-scheme .payment-gateway-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.payment-gateway-input:checked + .payment-gateway-card {
+    border-color: var(--primary-color) !important;
+    background-color: rgba(84, 112, 211, 0.05);
+    box-shadow: 0 0 0 3px rgba(84, 112, 211, 0.1);
+    position: relative;
+}
+
+.ea-dark-scheme .payment-gateway-input:checked + .payment-gateway-card {
+    background-color: rgba(84, 112, 211, 0.15);
+}
+
+.payment-gateway-input:checked + .payment-gateway-card::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.payment-gateway-input:disabled + .payment-gateway-card {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.payment-gateway-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-gateway-card .card-title {
+    color: var(--stripe-gray-900);
+}
+
+.ea-dark-scheme .payment-gateway-card .card-title {
+    color: var(--bs-heading-color);
+}
+
+.card-input-element {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .card-input-element + label {
     cursor: pointer;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -2160,7 +2237,6 @@ hr {
     box-shadow: 0 4px 12px color-mix(in srgb, var(--primary-color) 40%, transparent) !important;
 }
 
-/* Cart and Product Pages - Icon containers */
 .list-group-item .bg-opacity-10 {
     background-color: transparent !important;
     opacity: 1 !important;
@@ -2176,7 +2252,6 @@ hr {
     opacity: 1 !important;
 }
 
-/* Fix summary card header - remove colored backgrounds */
 .card-header.bg-success {
     background-color: #fff !important;
     border-bottom: 1px solid var(--bs-border-color);

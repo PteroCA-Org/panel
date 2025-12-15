@@ -252,6 +252,7 @@ pteroca:
     order: 'Order'
     order_description: 'Top up funds'
     payment_method: 'Payment method'
+    select_payment_method: 'Please select a payment method'
     description: 'Recharge your account balance'
   cart_renew:
     title: 'Renew your server'

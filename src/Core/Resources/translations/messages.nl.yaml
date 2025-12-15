@@ -642,6 +642,7 @@ pteroca:
     order: 'Bestellen'
     order_description: 'Saldo opwaarderen'
     payment_method: 'Betalingsmethode'
+    select_payment_method: 'Selecteer een betalingsmethode'
     description: 'Laad het saldo van uw account op'
   cart_renew:
     title: 'Verleng je server'
