@@ -1,30 +1,75 @@
 # Changelog
 
-## [0.6.0] - Unreleased
+## [0.6.0] - 2025-12-16
 
 ### Added
-- **Introduced a comprehensive Plugin System** with full lifecycle management (scan, enable, disable, update, uninstall).
+- Introduced a comprehensive Plugin System with full lifecycle management (scan, enable, disable, update, reset, uninstall).
 - Added capability-based plugin access control for routes, entities, migrations, UI components, events, console commands, and cron tasks.
 - Added plugin security validator that scans for dangerous code patterns, SQL injection risks, and path traversal vulnerabilities.
 - Added plugin health check system with automated monitoring and audit logging.
 - Added plugin dependency management with semantic versioning support and circular dependency detection.
-- Added universal widget system supporting dashboard and navbar widgets with priority-based positioning.
-- Added 40+ new event classes for event-driven architecture across multiple domains (forms, views, menus, emails, permissions, CRUD operations).
-- Added 10+ new console commands for plugin management (scan, enable, disable, update, list, info, health, security-scan, dependencies, cron management, asset publishing).
+- Added plugin upload functionality with ZIP archive support, security pre-scanning, and automatic installation.
+- Added universal widget system supporting dashboard, admin, and navbar widgets with priority-based positioning.
+- Added EasyAdmin CRUD controller support for plugins - plugins can now create CRUD interfaces for their entities that integrate seamlessly with the panel's admin interface.
+- Added 40+ new event classes for event-driven architecture across multiple domains (forms, views, menus, emails, permissions, CRUD operations, widgets).
+- Added 10+ new console commands for plugin management (`plugin:scan`, `plugin:enable`, `plugin:disable`, `plugin:reset`, `plugin:list`, `plugin:info`, `plugin:health`, `plugin:security-scan`, `plugin:dependencies`, `plugin:rebuild-cache`).
 - Added navbar widget extension points for plugins to extend the navigation bar.
 - Added comprehensive plugin development documentation including API reference, security best practices, testing guide, and troubleshooting guide.
+- Added `pterodactyl_root_admin` permission to control root admin access in Pterodactyl Panel - provides flexible control independent of PteroCA admin role.
+- Added granular edit permissions for Settings CRUD (`edit_settings_general`, `edit_settings_email`, `edit_settings_payment`, `edit_settings_pterodactyl`, `edit_settings_security`, `edit_settings_theme`, `edit_settings_plugin`) - separated viewing from editing permissions for better access control.
+- Added plugin-specific permissions system - plugins can define custom permissions in their manifest that are automatically registered and available for role assignment.
+- Added telemetry system for anonymous usage statistics and crash reporting (opt-in, fully transparent, can be disabled).
+- Added Indonesian language support (thanks to the community contributors).
+- Added product validation rules and improved product configuration interface.
+- Added server migration command improvements with better error handling and progress reporting.
+- Added support for Inter and Poppins custom fonts in the default theme.
 
 ### Changed
-- **Completely redesigned and refreshed the entire frontend** with modern design.
-- **Rewrote Pterodactyl API communication implementation** with custom API layer for improved reliability and maintainability.
-- Migrated event subscriber, console command, and cron task registration from compile-time to runtime for better plugin support.
+- Completely redesigned and refreshed the entire frontend with modern design, improved color schemes, and enhanced user experience.
+- Upgraded to EasyAdminBundle v4.27.5 with full compatibility fixes for new API changes (Twig components, trans filter syntax, AdminContext methods).
+- Standardized button styling system - replaced Bootstrap's verbose button classes (`btn-success`, `btn-danger`, `btn-primary`) with simplified custom classes (`success`, `danger`, `primary`, `secondary`, `warning`, `info`) for better maintainability and consistency across templates.
+- Rewrote Pterodactyl API communication implementation with custom API layer for improved reliability and maintainability - completely new adapter architecture for both Application and Client APIs.
+- Refactored all CLI command names to use consistent `pteroca:` namespace with hierarchical organization (e.g., `pteroca:user:*`, `pteroca:server:*`, `pteroca:plugin:*`). Old command names remain available as deprecated aliases until v1.0.0.
+- Completed migration from legacy role system to new permission-based access control - replaced all hardcoded `ROLE_ADMIN` checks with granular permission checks (`access_admin_overview`, `access_servers`, `edit_server`, etc.). Updated 14 controllers, 3 services, and CLI commands to use the new `hasPermission()` method and RoleManager service.
+- Removed backward compatibility layer for legacy role system - removed `UserRoleEnum` enum and legacy JSON roles fallback. All users now use the database-driven role and permission system exclusively.
+- Refactored Pterodactyl admin status determination - replaced `isAdmin()` method with permission-based check using new `pterodactyl_root_admin` permission.
+- Payment providers now define their own callback routes and URL building logic via interface methods - refactored payment callback system to be provider-driven instead of hard-coded. Generic callback routes `/wallet/{provider}/success` and `/wallet/{provider}/cancel` work for any payment provider.
+- Plugin service loading now respects enabled/disabled state - implemented `EnabledPluginsCacheManager` to track enabled plugins in cache file. Only enabled plugins have their services registered in Symfony container during compilation, preventing disabled plugins from registering providers or services.
+- Migrated event subscriber, console command, and cron task registration from compile-time to runtime for better plugin support and dynamic loading.
 - Redesigned first-time configuration wizard with visual progress stepper, improved layout, and enhanced user experience.
-- Improved cache:clear command performance by removing database queries from compiler passes.
+- Improved cache:clear command performance by optimizing compiler passes.
 - Enhanced form system with generic events for plugin extensibility.
 - Updated email system with before/after send events for plugin hooks.
+- Plugin settings now use config_schema as single source of truth - settings are defined declaratively in plugin.json and automatically created when plugin is enabled.
+- Added automatic type mapping from config_schema types to UI field types - plugin config_schema types (string, integer, boolean, float, json, array) are automatically mapped to appropriate SettingTypeEnum display types.
+- Improved error page templates with better styling and user-friendly messages.
+- Updated flash message system to use new Twig component syntax and improved styling.
+- Enhanced server management page styling and user interface.
+- Updated cart configurator with improved product ordering calculator.
+- Improved egg manager interface and validation.
 
 ### Fixed
+- Fixed EasyAdminBundle v4.27.5 compatibility issues:
+  - Fixed `Call to undefined method MenuItemDto::getAsDto()` error in DashboardController.
+  - Fixed `hasContext` method not existing in AdminContext - updated to use `null != ea` check.
+  - Updated flash_messages.html.twig template to use new Twig component syntax.
+  - Fixed trans filter syntax from `domain =` to `domain:` throughout templates.
+- Fixed disabled plugins still registering services - disabled plugins no longer have their payment providers or other services available in the container.
+- Fixed button visibility issues - server control buttons (Start/Stop/Restart) and plugin action buttons now display with correct colors and styling.
+- Plugin settings with 'string', 'integer' types now render correctly in UI - fixed type validation errors during plugin scanning and empty Type column display in settings UI.
+- Fixed PayPal payment provider callback URL handling - each provider now defines its own callback URL format through interface methods.
+- Added missing `access_server_products` permission to migration and assigned to admin role - fixes "You don't have enough permissions" error when accessing ServerProductCrudController.
+- Refactored API permission checking to use granular permissions instead of deprecated `access_admin_api`.
+- Fixed suspended servers listing and display issues.
+- Fixed server migration command bugs and edge cases.
+- Fixed product validation and configuration issues.
 - Various performance optimizations and bug fixes across the system.
+
+### Deprecated
+- Routes `stripe_success` and `stripe_cancel` are deprecated and will be removed in v0.7.0. Use provider-specific callback routes (`payment_callback_success`, `payment_callback_cancel`) instead.
+
+### Removed
+- Removed `isAdmin()` method from User entity and UserInterface - use `hasPermission('pterodactyl_root_admin')` instead.
 
 ---
 
@@ -94,9 +139,9 @@
 ## [0.5.7] - 2025-09-04
 
 ### Added
-- Added new **per-slot pricing type** with egg configuration support.  
+- Added new per-slot pricing type with egg configuration support.  
 - Added server software tile on the server management page.  
-- Added automatic **Copy IP Address** button on the server management page.  
+- Added automatic Copy IP Address button on the server management page.  
 - Added SMTP connection test button on the email settings page.  
 - Added support for the `TRUSTED_HOSTS` variable for Symfony host validation.
 
