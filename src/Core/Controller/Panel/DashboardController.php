@@ -225,7 +225,7 @@ class DashboardController extends AbstractDashboardController
         $menuItems = $userMenu->getAsDto()->getItems();
 
         $logoutAction = end($menuItems);
-        $logoutAction->getAsDto()->setIcon('fa-sign-out-alt');
+        $logoutAction->setIcon('fa-sign-out-alt');
 
         $userMenu->addMenuItems([
             MenuItem::linkToCrud(

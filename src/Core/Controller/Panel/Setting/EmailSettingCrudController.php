@@ -48,7 +48,7 @@ class EmailSettingCrudController extends AbstractSettingCrudController
         $testSmtpAction = Action::new('testSmtpConnection', $this->translator->trans('pteroca.crud.setting.test_smtp_connection'))
             ->linkToRoute('admin_email_test_smtp')
             ->setIcon('fa fa-envelope-circle-check')
-            ->setCssClass('btn btn-info')
+            ->setCssClass('btn info')
             ->displayIf(fn () => $this->getUser()?->hasPermission(PermissionEnum::EDIT_SETTINGS_EMAIL))
             ->createAsGlobalAction();
 

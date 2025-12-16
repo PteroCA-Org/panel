@@ -197,6 +197,10 @@ services:
       $tempDirectory: '%plugin_upload.temp_directory%'
       $enablePreScan: '%plugin_upload.enable_pre_scan%'
 
+  App\Core\Service\Plugin\EnabledPluginsCacheManager:
+    arguments:
+      $projectDir: '%kernel.project_dir%'
+
   App\Core\Service\CronScheduler:
     autowire: true
     public: true

@@ -64,7 +64,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="mb-0 text-white">{{ 'pteroca.server.schedule_tasks'|trans }}</h6>
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addNewTask()">
+                        <button type="button" class="btn primary btn-sm p-3" onclick="addNewTask()">
                             <i class="fas fa-plus"></i>
                             {{ 'pteroca.server.new_task'|trans }}
                         </button>
@@ -81,15 +81,15 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="deleteCurrentSchedule()">
+                <button type="button" class="btn danger" onclick="deleteCurrentSchedule()">
                     <i class="fas fa-trash"></i>
                     {{ 'pteroca.server.delete'|trans }}
                 </button>
-                <button type="button" class="btn btn-secondary" onclick="editCurrentSchedule()">
+                <button type="button" class="btn secondary" onclick="editCurrentSchedule()">
                     <i class="fas fa-edit"></i>
                     {{ 'pteroca.server.edit'|trans }}
                 </button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn secondary" data-bs-dismiss="modal">
                     {{ 'pteroca.server.close'|trans }}
                 </button>
             </div>

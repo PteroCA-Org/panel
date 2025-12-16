@@ -5,7 +5,7 @@
                 <i class="fas fa-server me-2"></i>
                 <h5 class="mb-0 fw-semibold">{{ 'pteroca.dashboard.my_servers'|trans }}</h5>
             </div>
-            <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn btn-primary btn-sm">
+            <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn primary btn-sm p-3">
                 {{ 'pteroca.dashboard.view_all_servers'|trans }}
                 <i class="fas fa-arrow-right ms-1"></i>
             </a>
@@ -41,13 +41,13 @@
                             {% if not server.isSuspended %}
                                 <a href="{% if not use_pterodactyl_panel_as_client_panel() %}{{ path('panel', { routeName: 'server', id: server.pterodactylServerIdentifier }) }}{% else %}{{ get_pterodactyl_panel_url('/server/' ~ server.pterodactylServerIdentifier) }}{% endif %}"
                                    target="{% if use_pterodactyl_panel_as_client_panel() %}_blank{% else %}_self{% endif %}"
-                                   class="btn btn-primary btn-sm pt-1 pb-1 pe-3">
+                                   class="btn primary btn-sm p-3">
                                     <i class="fas fa-cog m-1"></i>
                                     <span class="d-none d-md-inline">{{ 'pteroca.servers.manage_server'|trans }}</span>
                                 </a>
                             {% else %}
                                 <a href="{{ path('panel', { routeName: 'cart_renew', id: server.id }) }}" 
-                                    class="btn btn-primary btn-sm pt-1 pb-1 pe-3"
+                                    class="btn primary btn-sm p-3"
                                     title="{{ 'pteroca.servers.extend'|trans }}">
                                     <i class="fas fa-sync fa-xs m-1"></i>
                                     <span>{{ 'pteroca.servers.extend'|trans }}</span>
@@ -65,7 +65,7 @@
                 </div>
                 <h6 class="fw-bold text-dark mb-2">{{ 'pteroca.dashboard.no_servers'|trans }}</h6>
                 <p class="text-muted mb-4">{{ 'pteroca.dashboard.no_servers_description'|trans }}</p>
-                <a href="{{ path('panel', { routeName: 'store' }) }}" class="btn btn-primary rounded-pill">
+                <a href="{{ path('panel', { routeName: 'store' }) }}" class="btn primary rounded-pill">
                     <i class="fas fa-plus me-2"></i>
                     {{ 'pteroca.dashboard.order_first_server'|trans }}
                 </a>

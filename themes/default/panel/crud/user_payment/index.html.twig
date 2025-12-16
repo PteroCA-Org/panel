@@ -1,7 +1,7 @@
 {% extends '@EasyAdmin/crud/index.html.twig' %}
 
 {% block header_custom_actions %}
-    <a href="{{ path('panel', { routeName: 'recharge_balance' }) }}" class="btn btn-primary">
+    <a href="{{ path('panel', { routeName: 'recharge_balance' }) }}" class="btn primary p-3">
         <i class="fa fa-plus me-2"></i>{{ 'pteroca.cart_topup.title'|trans }}
     </a>
 {% endblock %}

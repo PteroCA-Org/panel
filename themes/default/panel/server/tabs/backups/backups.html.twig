@@ -93,7 +93,7 @@
                 {% set currentBackups = serverData.serverBackups|length %}
                 {% set backupLimit = serverData.pterodactylServer.feature_limits.backups %}
                 {% set canCreateBackup = currentBackups < backupLimit %}
-                <button type="button" class="btn btn-primary float-end{% if not canCreateBackup %} disabled{% endif %}" 
+                <button type="button" class="btn primary float-end{% if not canCreateBackup %} disabled{% endif %}" 
                         data-bs-toggle="modal" data-bs-target="#createBackupModal" 
                         {% if not canCreateBackup %}disabled{% endif %}>
                     <i class="fas fa-plus"></i>

@@ -26,7 +26,7 @@
                                 </td>
                                 <td>{{ ('pteroca.server_actions.' ~ log.actionId)|trans }}</td>
                                 <td>
-                                    <button id="toggle-btn-{{ logIndex }}" class="btn btn-primary" onclick="toggleDetails('{{ logIndex }}')">
+                                    <button id="toggle-btn-{{ logIndex }}" class="btn primary p-3" onclick="toggleDetails('{{ logIndex }}')">
                                         {{ 'pteroca.server.show_details'|trans }}
                                     </button>
                                     <div id="log-details-{{ logIndex }}" class="mt-3" style="display:none;">

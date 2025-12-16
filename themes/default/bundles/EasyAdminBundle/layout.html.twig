@@ -364,7 +364,7 @@
 
                     {% set flash_messages_peek = app.session.flashbag.peekAll() %}
                     {% if flash_messages_peek|length > 0 %}
-                        <div class="content-wrapper alerts-wrapper d-block pb-0">
+                        <div class="content-wrapper alerts-wrapper d-block pb-0 pt-3">
                             {% block flash_messages %}
                                 {{ include(ea.templatePath('flash_messages')) }}
                             {% endblock %}

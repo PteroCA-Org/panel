@@ -29,14 +29,14 @@
         <div class="btn-group" role="group">
             {% if not server.isSuspended %}
                 <a href="{% if not use_pterodactyl_panel_as_client_panel() %}{{ path('panel', { routeName: 'server', id: server.pterodactylServerIdentifier }) }}{% else %}{{ get_pterodactyl_panel_url('/server/' ~ server.pterodactylServerIdentifier) }}{% endif %}"
-                   class="btn btn-primary btn-sm"
+                   class="btn primary btn-sm p-3"
                    target="{% if use_pterodactyl_panel_as_client_panel() %}_blank{% else %}_self{% endif %}"
                    title="{{ 'pteroca.servers.manage_server'|trans }}">
                     <i class="fas fa-cogs fa-xs"></i>
                 </a>
             {% endif %}
             <a href="{{ path('panel', { routeName: 'cart_renew', id: server.id }) }}" 
-               class="btn btn-primary btn-sm"
+               class="btn primary btn-sm p-3"
                title="{{ 'pteroca.servers.extend'|trans }}">
                 <i class="fas fa-sync fa-xs"></i>
             </a>

@@ -106,7 +106,7 @@
                 {% set currentAllocations = serverData.allocatedPorts|length %}
                 {% set allocationLimit = serverData.pterodactylServer.feature_limits.allocations %}
                 {% set canCreateAllocation = currentAllocations < allocationLimit %}
-                <button type="button" class="btn btn-primary float-end{% if not canCreateAllocation %} disabled{% endif %}" 
+                <button type="button" class="btn primary float-end{% if not canCreateAllocation %} disabled{% endif %}" 
                         data-bs-toggle="modal" data-bs-target="#createAllocationModal" 
                         {% if not canCreateAllocation %}disabled{% endif %}>
                     <i class="fas fa-plus"></i>

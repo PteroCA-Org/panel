@@ -29,14 +29,26 @@ class PluginCompilerPass implements CompilerPassInterface
         $projectDir = $container->getParameter('kernel.project_dir');
         $pluginsDir = $projectDir . '/plugins';
 
-        // Scan plugins directory for ALL plugins (no database query needed)
-        $plugins = $this->scanPluginDirectory($pluginsDir);
+        // Load list of enabled plugins from cache
+        $enabledPlugins = $this->getEnabledPluginsFromCache($projectDir);
 
-        if (empty($plugins)) {
+        if (empty($enabledPlugins)) {
+            return; // No enabled plugins to load
+        }
+
+        // Scan plugins directory for ALL plugins
+        $allPlugins = $this->scanPluginDirectory($pluginsDir);
+
+        // Filter to only enabled plugins
+        $pluginsToLoad = array_filter($allPlugins, function ($pluginData) use ($enabledPlugins) {
+            return in_array($pluginData['name'], $enabledPlugins, true);
+        });
+
+        if (empty($pluginsToLoad)) {
             return; // No plugins to load
         }
 
-        foreach ($plugins as $pluginData) {
+        foreach ($pluginsToLoad as $pluginData) {
             $this->registerPlugin($container, $pluginData, $projectDir);
         }
     }
@@ -286,5 +298,28 @@ class PluginCompilerPass implements CompilerPassInterface
                 require $file;
             }
         });
+    }
+
+    /**
+     * Get list of enabled plugins from cache file.
+     *
+     * @param string $projectDir
+     * @return array Array of enabled plugin names
+     */
+    private function getEnabledPluginsFromCache(string $projectDir): array
+    {
+        $cacheFile = $projectDir . '/var/cache/enabled_plugins.php';
+
+        if (!file_exists($cacheFile)) {
+            return [];
+        }
+
+        try {
+            $enabledPlugins = include $cacheFile;
+            return is_array($enabledPlugins) ? $enabledPlugins : [];
+        } catch (Exception $e) {
+            error_log("Failed to load enabled plugins cache: {$e->getMessage()}");
+            return [];
+        }
     }
 }

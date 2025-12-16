@@ -1,18 +1,19 @@
-{% trans_default_domain ea.hasContext ? ea.i18n.translationDomain : (translation_domain is defined ? translation_domain ?? 'messages') %}
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Provider\AdminContext #}
+{% set ea = ea() %}
+{% trans_default_domain null != ea ? ea.i18n.translationDomain : (translation_domain is defined ? translation_domain ?? 'messages') %}
 
 {% set flash_messages = app.flashes %}
 
 {% if flash_messages|length > 0 %}
-    <div class="flash-messages-container">
+    <div id="flash-messages">
         {% for label, messages in flash_messages %}
-            {% set displayed_messages = [] %}
             {% for message in messages %}
-                {% if message not in displayed_messages %}
-                    <twig:ea:Alert variant="{{ label }}" :withDismissButton="true" class="mb-4">
-                        {{ message|trans|raw }}
-                    </twig:ea:Alert>
-                    {% set displayed_messages = displayed_messages|merge([message]) %}
-                {% endif %}
+                {# the message must be translated outside of the Twig component because
+                   the trans_default_domain value is ignored inside the component #}
+                {% set translated_message = message|trans %}
+                <twig:ea:Alert variant="{{ label }}" withDismissButton>
+                    {{ translated_message|raw }}
+                </twig:ea:Alert>
             {% endfor %}
         {% endfor %}
     </div>

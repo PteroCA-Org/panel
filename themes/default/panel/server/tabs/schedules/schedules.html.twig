@@ -97,7 +97,7 @@
             {% if hasServerPermission(serverData.serverPermissions, 'schedule.create') %}
             <div class="col-12 mb-3">
                 {% set canCreateSchedule = serverData.serverSchedules|length < server.serverProduct.schedules %}
-                <button type="button" class="btn btn-primary float-end{% if not canCreateSchedule %} disabled{% endif %}" 
+                <button type="button" class="btn primary float-end{% if not canCreateSchedule %} disabled{% endif %}" 
                         onclick="{% if canCreateSchedule %}addNewSchedule(){% else %}showScheduleLimitMessage(){% endif %}"
                         {% if not canCreateSchedule %}disabled{% endif %}>
                     <i class="fas fa-plus"></i>

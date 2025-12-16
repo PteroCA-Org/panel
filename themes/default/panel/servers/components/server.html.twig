@@ -112,7 +112,7 @@
                 {% if not server.isSuspended %}
                     <div class="col-6">
                         <a href="{% if not use_pterodactyl_panel_as_client_panel() %}{{ path('panel', { routeName: 'server', id: server.pterodactylServerIdentifier }) }}{% else %}{{ get_pterodactyl_panel_url('/server/' ~ server.pterodactylServerIdentifier) }}{% endif %}"
-                           class="btn btn-primary w-100 d-flex align-items-center justify-content-center"
+                           class="btn primary w-100 d-flex align-items-center justify-content-center p-3"
                            target="{% if use_pterodactyl_panel_as_client_panel() %}_blank{% else %}_self{% endif %}">
                             <i class="fas fa-cogs me-2"></i>
                             <span>{{ 'pteroca.servers.manage_server'|trans }}</span>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-6">
                         <a href="{{ path('panel', { routeName: 'cart_renew', id: server.id }) }}" 
-                           class="btn btn-secondary w-100 d-flex align-items-center justify-content-center">
+                           class="btn secondary w-100 d-flex align-items-center justify-content-center">
                             <i class="fas fa-sync me-2"></i>
                             <span>{{ 'pteroca.servers.extend'|trans }}</span>
                         </a>
@@ -128,7 +128,7 @@
                 {% else %}
                     <div class="col-12">
                         <a href="{{ path('panel', { routeName: 'cart_renew', id: server.id }) }}" 
-                           class="btn btn-secondary w-100 d-flex align-items-center justify-content-center">
+                           class="btn secondary w-100 d-flex align-items-center justify-content-center">
                             <i class="fas fa-sync me-2"></i>
                             <span>{{ 'pteroca.servers.extend'|trans }}</span>
                         </a>

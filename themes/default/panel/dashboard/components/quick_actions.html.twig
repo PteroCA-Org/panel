@@ -2,25 +2,25 @@
     <div class="card-body p-3">
         <div class="row g-2">
             <div class="col-md-3 col-6">
-                <a href="{{ path('panel', { routeName: 'store' }) }}" class="btn btn-outline-primary w-100">
+                <a href="{{ path('panel', { routeName: 'store' }) }}" class="btn btn-outline-primary w-100 p-3">
                     <i class="fas fa-shopping-cart me-2"></i>
                     {{ 'pteroca.dashboard.quick_action_order_server'|trans }}
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ path('panel', { routeName: 'recharge_balance' }) }}" class="btn btn-outline-primary w-100">
+                <a href="{{ path('panel', { routeName: 'recharge_balance' }) }}" class="btn btn-outline-primary w-100 p-3">
                     <i class="fas fa-wallet me-2"></i>
                     {{ 'pteroca.dashboard.quick_action_add_funds'|trans }}
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn btn-outline-primary w-100">
+                <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn btn-outline-primary w-100 p-3">
                     <i class="fas fa-server me-2"></i>
                     {{ 'pteroca.dashboard.quick_action_my_servers'|trans }}
                 </a>
             </div>
             <div class="col-md-3 col-6">
-                <a href="{{ ea_url().setController('App\\Core\\Controller\\UserAccountCrudController').setAction('edit').setEntityId(app.user.id) }}" class="btn btn-outline-primary w-100">
+                <a href="{{ ea_url().setController('App\\Core\\Controller\\UserAccountCrudController').setAction('edit').setEntityId(app.user.id) }}" class="btn btn-outline-primary w-100 p-3">
                     <i class="fas fa-cog me-2"></i>
                     {{ 'pteroca.dashboard.quick_action_settings'|trans }}
                 </a>

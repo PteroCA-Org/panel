@@ -83,7 +83,7 @@
                 {% set currentDatabases = serverData.pterodactylServer.relationships.databases.toArray()|length %}
                 {% set databaseLimit = serverData.pterodactylServer.feature_limits.databases %}
                 {% set canCreateDatabase = currentDatabases < databaseLimit %}
-                <button type="button" class="btn btn-primary float-end{% if not canCreateDatabase %} disabled{% endif %}" 
+                <button type="button" class="btn primary float-end{% if not canCreateDatabase %} disabled{% endif %}" 
                         data-bs-toggle="modal" data-bs-target="#createDatabaseModal" 
                         {% if not canCreateDatabase %}disabled{% endif %}>
                     <i class="fas fa-plus"></i>

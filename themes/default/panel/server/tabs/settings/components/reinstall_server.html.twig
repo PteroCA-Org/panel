@@ -28,7 +28,7 @@
                         </div>
                     {% endif %}
                     <div class="col-4">
-                        <button type="button" class="btn btn-danger w-100" {% if not server.isSuspended %}onclick="reinstallServer()"{% else %}disabled{% endif %}>
+                        <button type="button" class="btn danger w-100 p-4" {% if not server.isSuspended %}onclick="reinstallServer()"{% else %}disabled{% endif %}>
                             {{ 'pteroca.server.reinstall_server'|trans }}
                         </button>
                     </div>

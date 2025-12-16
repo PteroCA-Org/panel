@@ -65,9 +65,9 @@
                     </div>
                     <div class="modal-footer">
                         {% if hasServerPermission(serverData.serverPermissions, 'database.update') %}
-                        <button type="submit" class="btn btn-primary" id="rotate-database-password"><i class="fa-solid fa-circle-notch fa-spin d-none"></i> {{ 'pteroca.server.rotate_password'|trans }}</button>
+                        <button type="submit" class="btn primary p-3" id="rotate-database-password"><i class="fa-solid fa-circle-notch fa-spin d-none"></i> {{ 'pteroca.server.rotate_password'|trans }}</button>
                         {% endif %}
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'pteroca.server.close'|trans }}</button>
+                        <button type="button" class="btn secondary" data-bs-dismiss="modal">{{ 'pteroca.server.close'|trans }}</button>
                     </div>
                 </form>
             </div>

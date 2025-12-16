@@ -146,8 +146,7 @@ class PluginCrudController extends AbstractPanelController
                 // Show settings for plugins that have been enabled at least once (have DB entry)
                 return $plugin->getId() !== null &&
                     $this->getUser()?->hasPermission(PermissionEnum::ACCESS_PLUGINS);
-            })
-            ->setCssClass('btn btn-secondary');
+            });
 
         $enableAction = Action::new('enable', $this->translator->trans('pteroca.crud.plugin.enable'), 'fa fa-check')
             ->linkToCrudAction('enablePlugin')
@@ -155,24 +154,21 @@ class PluginCrudController extends AbstractPanelController
                 $state = $plugin->getState();
                 return in_array($state, [PluginStateEnum::DISCOVERED, PluginStateEnum::DISABLED], true) &&
                     $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
-            })
-            ->setCssClass('btn btn-success');
+            });
 
         $disableAction = Action::new('disable', $this->translator->trans('pteroca.crud.plugin.disable'), 'fa fa-times')
             ->linkToCrudAction('disablePlugin')
             ->displayIf(function (Plugin $plugin) {
                 return $plugin->getState() === PluginStateEnum::ENABLED &&
                     $this->getUser()?->hasPermission(PermissionEnum::DISABLE_PLUGIN);
-            })
-            ->setCssClass('btn btn-warning');
+            });
 
         $resetAction = Action::new('reset', $this->translator->trans('pteroca.crud.plugin.reset'), 'fa fa-redo')
             ->linkToCrudAction('resetPlugin')
             ->displayIf(function (Plugin $plugin) {
                 return $plugin->getState() === PluginStateEnum::FAULTED &&
                     $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
-            })
-            ->setCssClass('btn btn-info');
+            });
 
         $actions = $actions
             ->add(Crud::PAGE_INDEX, $settingsAction)
@@ -648,7 +644,7 @@ class PluginCrudController extends AbstractPanelController
                     ->setAction(Action::INDEX)
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl(),
-                'class' => 'btn-secondary',
+                'class' => 'secondary',
             ];
         }
 
@@ -664,7 +660,7 @@ class PluginCrudController extends AbstractPanelController
                     ->setAction('enablePlugin')
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl(),
-                'class' => 'btn-success',
+                'class' => 'success',
             ];
         }
 
@@ -679,7 +675,7 @@ class PluginCrudController extends AbstractPanelController
                     ->setAction('disablePlugin')
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl(),
-                'class' => 'btn-warning',
+                'class' => 'warning',
             ];
         }
 
@@ -694,7 +690,7 @@ class PluginCrudController extends AbstractPanelController
                     ->setAction('resetPlugin')
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl(),
-                'class' => 'btn-info',
+                'class' => 'info',
             ];
         }
 

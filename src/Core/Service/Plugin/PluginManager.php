@@ -41,6 +41,7 @@ readonly class PluginManager
         private PluginSettingService     $settingService,
         private PluginSecurityValidator  $securityValidator,
         private ComposerDependencyManager $composerManager,
+        private EnabledPluginsCacheManager $cacheManager,
     ) {}
 
     /**
@@ -304,6 +305,9 @@ readonly class PluginManager
 
         // Clear cache to reload routes, entities, etc.
         $this->clearCache();
+
+        // Rebuild enabled plugins cache for container compilation
+        $this->cacheManager->rebuildCache();
     }
 
     /**
@@ -381,6 +385,9 @@ readonly class PluginManager
 
         // Clear cache to reload routes, entities, etc.
         $this->clearCache();
+
+        // Rebuild enabled plugins cache for container compilation
+        $this->cacheManager->rebuildCache();
     }
 
     /**
