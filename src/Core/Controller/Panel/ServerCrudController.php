@@ -5,6 +5,7 @@ namespace App\Core\Controller\Panel;
 use App\Core\Entity\Server;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Service\Crud\PanelCrudService;
+use App\Core\Service\Pterodactyl\PterodactylRedirectService;
 use App\Core\Service\Server\DeleteServerService;
 use App\Core\Service\Server\UpdateServerService;
 use App\Core\Service\SettingService;
@@ -38,6 +39,7 @@ class ServerCrudController extends AbstractPanelController
         private readonly DeleteServerService $deleteServerService,
         private readonly SettingService $settingService,
         private readonly TranslatorInterface $translator,
+        private readonly PterodactylRedirectService $pterodactylRedirectService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }

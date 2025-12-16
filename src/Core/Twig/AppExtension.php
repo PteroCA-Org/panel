@@ -16,6 +16,7 @@ use App\Core\Service\Template\TemplateManager;
 use Symfony\Component\Routing\RouterInterface;
 use App\Core\Service\System\SystemVersionService;
 use App\Core\Service\Plugin\PluginAssetManager;
+use App\Core\Service\Pterodactyl\PterodactylRedirectService;
 
 class AppExtension extends AbstractExtension
 {
@@ -27,6 +28,7 @@ class AppExtension extends AbstractExtension
         private readonly TemplateManager $templateManager,
         private readonly Packages $packages,
         private readonly RouterInterface $router,
+        private readonly PterodactylRedirectService $pterodactylRedirectService,
         private readonly PluginAssetManager $pluginAssetManager,
     ) {}
 
@@ -126,30 +128,17 @@ class AppExtension extends AbstractExtension
 
     public function usePterodactylPanelAsClientPanel(): bool
     {
-        return (bool)$this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_USE_AS_CLIENT_PANEL->value);
+        return $this->pterodactylRedirectService->shouldUsePterodactylPanel();
     }
 
     public function isPterodactylSSOEnabled(): bool
     {
-        return (bool)$this->settingService->getSetting(SettingEnum::PTERODACTYL_SSO_ENABLED->value);
+        return $this->pterodactylRedirectService->isSSOEnabled();
     }
 
     public function getPterodactylPanelUrl(string $path = ''): string
     {
-        $isPterodactylSSOEnabled = $this->settingService->getSetting(SettingEnum::PTERODACTYL_SSO_ENABLED->value);
-        $pterodactylPanelUrl = $isPterodactylSSOEnabled
-            ? $this->router->generate('sso_redirect')
-            : $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_URL->value);
-
-        if (!empty($path)) {
-            if (!$isPterodactylSSOEnabled) {
-                $pterodactylPanelUrl = rtrim($pterodactylPanelUrl, '/') . '/' . ltrim($path, '/');
-            } else {
-                $pterodactylPanelUrl .= '?redirect_path=' . $path;
-            }
-        }
-
-        return $pterodactylPanelUrl;
+        return $this->pterodactylRedirectService->getPterodactylUrl($path);
     }
 
     public function getCaptchaSiteKey(): ?string

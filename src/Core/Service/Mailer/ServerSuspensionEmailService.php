@@ -8,6 +8,7 @@ use App\Core\Enum\EmailTypeEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Message\SendEmailMessage;
 use App\Core\Service\Email\EmailNotificationService;
+use App\Core\Service\Pterodactyl\PterodactylRedirectService;
 use App\Core\Service\Server\ServerService;
 use App\Core\Service\SettingService;
 use DateTimeImmutable;
@@ -27,6 +28,7 @@ readonly class ServerSuspensionEmailService
         private LoggerInterface          $logger,
         private EmailNotificationService $emailNotificationService,
         private ServerService            $serverService,
+        private PterodactylRedirectService $pterodactylRedirectService,
     ) {}
 
     /**
@@ -128,8 +130,6 @@ readonly class ServerSuspensionEmailService
      */
     private function getClientPanelUrl(): string
     {
-        return $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_USE_AS_CLIENT_PANEL->value)
-            ? $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_URL->value)
-            : $this->settingService->getSetting(SettingEnum::SITE_URL->value);
+        return $this->pterodactylRedirectService->getBasePanelUrl();
     }
 }

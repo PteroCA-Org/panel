@@ -44,6 +44,7 @@ services:
     arguments:
       $twig: '@twig'
       $defaultLogoPath: '%default_logo_path%'
+      $projectDir: '%kernel.project_dir%'
 
   App\Core\Twig\AppExtension:
     tags: [ 'twig.extension' ]

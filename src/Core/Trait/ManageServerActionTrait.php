@@ -7,7 +7,6 @@ use App\Core\Controller\Panel\ServerLogCrudController;
 use App\Core\Controller\Panel\ServerProductCrudController;
 use App\Core\Entity\Server;
 use App\Core\Entity\ServerProduct;
-use App\Core\Enum\SettingEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 trait ManageServerActionTrait
@@ -70,25 +69,28 @@ trait ManageServerActionTrait
             return empty($entity->getServer()->getDeletedAt());
         });
 
-        $usePterodactyl = $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_USE_AS_CLIENT_PANEL->value);
-        if (empty($usePterodactyl)) {
+        if (!$this->pterodactylRedirectService->shouldUsePterodactylPanel()) {
             $manageServerAction->linkToRoute(
                 'server',
                 fn (Server|ServerProduct $entity) => ['id' => $this->getEntityPterodactylServerIdentifier($entity)],
             );
         } else {
-            if ($this->settingService->getSetting(SettingEnum::PTERODACTYL_SSO_ENABLED->value)) {
+            $routeInfo = $this->pterodactylRedirectService->getServerRouteInfo('');
+
+            if ($routeInfo['route']) {
                 $manageServerAction->linkToRoute(
-                    'sso_redirect',
+                    $routeInfo['route'],
                     fn (Server|ServerProduct $entity) => [
                         'redirect_path' => sprintf('/server/%s', $this->getEntityPterodactylServerIdentifier($entity)),
                     ]
                 );
             } else {
-                $pterodactylUrl = $this->settingService->getSetting(SettingEnum::PTERODACTYL_PANEL_URL->value);
-                $manageServerAction->linkToUrl($pterodactylUrl);
+                $manageServerAction->linkToUrl($routeInfo['url']);
             }
-            $manageServerAction->setHtmlAttributes(['target' => '_blank']);
+
+            if ($this->pterodactylRedirectService->shouldOpenInNewTab()) {
+                $manageServerAction->setHtmlAttributes(['target' => '_blank']);
+            }
         }
 
         return $manageServerAction;

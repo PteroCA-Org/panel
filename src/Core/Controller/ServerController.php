@@ -12,6 +12,7 @@ use App\Core\Event\Server\ServersListDataLoadedEvent;
 use App\Core\Event\Server\Tab\ServerTabsCollectedEvent;
 use App\Core\DTO\ServerTabContext;
 use App\Core\Repository\ServerRepository;
+use App\Core\Service\Pterodactyl\PterodactylRedirectService;
 use App\Core\Service\Tab\ServerTabRegistry;
 use App\Core\Service\Server\ServerDataService;
 use App\Core\Service\Server\ServerService;
@@ -21,7 +22,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ServerController extends AbstractController
 {
-
     #[Route('/servers', name: 'servers')]
     public function servers(
         Request $request,
@@ -59,15 +59,21 @@ class ServerController extends AbstractController
         ServerRepository $serverRepository,
         ServerDataService $serverDataService,
         ServerTabRegistry $serverTabRegistry,
+        PterodactylRedirectService $pterodactylRedirectService,
     ): Response
     {
         $this->checkPermission();
 
         $serverId = $request->get('id');
-        $currentPage = $request->get('page', 1);
         if (empty($serverId)) {
             throw $this->createNotFoundException();
         }
+
+        if ($pterodactylRedirectService->shouldUsePterodactylPanel()) {
+            return $pterodactylRedirectService->createServerRedirect($serverId);
+        }
+
+        $currentPage = $request->get('page', 1);
 
         /** @var ?Server $server */
         $server = current($serverRepository->findBy(['pterodactylServerIdentifier' => $serverId]));
