@@ -416,6 +416,7 @@ pteroca:
     cannot_modify_yourself: 'Вы не можете изменить себя.'
     extend_server_expires_on_demand: 'Ваш сервер <strong>{{ productName }}</strong> в настоящее время настроен на истечение срока <strong>по требованию</strong>.'
     on_demand_billing_cycle: 'Цикл выставления счетов ({{ productPrice }} {{ internalCurrency }} / минута) будет приостановлен, когда сервер выключен, и ресурсы будут бесплатны.'
+    usage: 'Использование'
     type: 'Тип'
     primary: 'Основной'
     secondary: 'Второстепенный'
