@@ -223,7 +223,7 @@ readonly class UpdateServerService
                     ->updateServerDetails(
                         $entityInstance->getPterodactylServerId(),
                         [
-                            'name' => $entityInstance->getName() ?: $pterodactylServer->get('name') ?: $entityInstance->getServerProduct()->getName() ?: 'Default name',
+                            'name' => $entityInstance->getName() ?: $pterodactylServer->get('name') ?: $entityInstance->getServerProduct()?->getName() ?: 'Default name',
                             'description' => $pterodactylServer->get('description'),
                             'user' => $entityInstance->getUser()->getPterodactylUserId(),
                         ],

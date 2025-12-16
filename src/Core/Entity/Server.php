@@ -26,7 +26,7 @@ class Server extends AbstractEntity
     private ?string $name = null;
 
     #[ORM\OneToOne(targetEntity: ServerProduct::class, mappedBy: 'server', cascade: ['persist', 'remove'])]
-    private ServerProduct $serverProduct;
+    private ?ServerProduct $serverProduct = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
@@ -97,12 +97,12 @@ class Server extends AbstractEntity
         return $this;
     }
 
-    public function getServerProduct(): ServerProduct
+    public function getServerProduct(): ?ServerProduct
     {
         return $this->serverProduct;
     }
 
-    public function setServerProduct(ServerProduct $serverProduct): self
+    public function setServerProduct(?ServerProduct $serverProduct): self
     {
         $this->serverProduct = $serverProduct;
         return $this;
@@ -127,6 +127,10 @@ class Server extends AbstractEntity
     public function setDeletedAtValue(): void
     {
         $this->deletedAt = new DateTime();
+
+        if (!$this->serverProduct) {
+            return;
+        }
 
         foreach ($this->serverProduct->getPrices() as $price) {
             $price->setDeletedAt($this->deletedAt);

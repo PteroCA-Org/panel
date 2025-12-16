@@ -60,6 +60,10 @@ readonly class ServerTabContext
     {
         $product = $this->server->getServerProduct();
 
+        if (!$product) {
+            return null;
+        }
+
         return match($feature) {
             'dbCount' => $product->getDbCount(),
             'backups' => $product->getBackups(),

@@ -63,7 +63,7 @@ class ServerCrudController extends AbstractPanelController
                 ->setColumns(4),
             TextField::new('name', $this->translator->trans('pteroca.crud.server.name'))
                 ->formatValue(function ($value, Server $entity) {
-                    return $value ?: $entity->getServerProduct()->getName();
+                    return $value ?: ($entity->getServerProduct()?->getName() ?? 'N/A');
                 }),
             AssociationField::new('serverProduct', $this->translator->trans('pteroca.crud.server.product_server_build'))
                 ->setDisabled()
@@ -79,21 +79,29 @@ class ServerCrudController extends AbstractPanelController
                 ->hideOnIndex()
                 ->setColumns(4),
             NumberField::new('serverProduct.diskSpace', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.disk_space')))
-                ->onlyOnDetail(),
+                ->onlyOnDetail()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.memory', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.memory')))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.io', $this->translator->trans('pteroca.crud.product.io'))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.cpu', sprintf('%s (%%)', $this->translator->trans('pteroca.crud.product.cpu')))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.dbCount', $this->translator->trans('pteroca.crud.product.db_count'))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.swap', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.swap')))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.backups', $this->translator->trans('pteroca.crud.product.backups'))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             NumberField::new('serverProduct.ports', $this->translator->trans('pteroca.crud.product.ports'))
-                ->onlyOnIndex(),
+                ->onlyOnIndex()
+                ->formatValue(fn($value) => $value ?? 'N/A'),
             BooleanField::new('isSuspended', $this->translator->trans('pteroca.crud.server.is_suspended'))
                 ->setColumns(4),
             DateTimeField::new('createdAt', $this->translator->trans('pteroca.crud.server.created_at'))
@@ -197,10 +205,14 @@ class ServerCrudController extends AbstractPanelController
                 [
                     'crudAction' => $action,
                     'crudControllerFqcn' => ServerProductCrudController::class,
-                    'entityId' => $entity->getServerProduct()->getId(),
+                    'entityId' => $entity->getServerProduct()?->getId(),
                 ]
             )
         )->displayIf(function (Server $entity) use ($action) {
+            if (!$entity->getServerProduct()) {
+                return false;
+            }
+
             // Check permission based on action type
             $permissionMap = [
                 Action::DETAIL => PermissionEnum::VIEW_SERVER_PRODUCT,

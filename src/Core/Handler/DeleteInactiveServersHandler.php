@@ -95,7 +95,7 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
                     $server->getUser()->getId() ?? 0,
                     $server->getId(),
                     $server->getPterodactylServerIdentifier(),
-                    $server->getServerProduct()->getName(),
+                    $server->getServerProduct()?->getName() ?? 'Unknown Product',
                     $expiredAtImmutable,
                     $daysAfter,
                     $context
@@ -121,7 +121,7 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
                         $server->getUser()->getId() ?? 0,
                         $server->getId(),
                         $server->getPterodactylServerIdentifier(),
-                        $server->getServerProduct()->getName(),
+                        $server->getServerProduct()?->getName() ?? 'Unknown Product',
                         $expiredAtImmutable,
                         new DateTimeImmutable(),
                         $daysAfter,
@@ -140,7 +140,7 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
                         $server->getUser()->getId() ?? 0,
                         $server->getId(),
                         $server->getPterodactylServerIdentifier(),
-                        $server->getServerProduct()->getName(),
+                        $server->getServerProduct()?->getName() ?? 'Unknown Product',
                         $expiredAtImmutable,
                         $e->getMessage(),
                         $context
