@@ -24,10 +24,22 @@ readonly class ServerEggService
         $pterodactylServerVariables = $pterodactylServer->get('relationships')['variables'];
         $preparedVariables = [];
         foreach ($pterodactylServerVariables as $variable) {
-            $preparedVariables[$variable->get('id')] = [
-                'value' => $variable->get('default_value'),
-                'user_viewable' => $variable->get('user_viewable'),
-                'user_editable' => $variable->get('user_editable'),
+            if (is_array($variable)) {
+                $id = $variable['attributes']['id'] ?? $variable['id'];
+                $defaultValue = $variable['attributes']['default_value'] ?? $variable['default_value'];
+                $userViewable = $variable['attributes']['user_viewable'] ?? $variable['user_viewable'];
+                $userEditable = $variable['attributes']['user_editable'] ?? $variable['user_editable'];
+            } else {
+                $id = $variable->get('id');
+                $defaultValue = $variable->get('default_value');
+                $userViewable = $variable->get('user_viewable');
+                $userEditable = $variable->get('user_editable');
+            }
+
+            $preparedVariables[$id] = [
+                'value' => $defaultValue,
+                'user_viewable' => $userViewable,
+                'user_editable' => $userEditable,
             ];
         }
 
@@ -61,11 +73,18 @@ readonly class ServerEggService
         $loadedEggs = [];
 
         foreach ($eggs as $egg) {
-            $eggId = $egg->get('id');
-            $eggName = $egg->get('name');
+            if (is_array($egg)) {
+                $eggId = $egg['attributes']['id'] ?? $egg['id'];
+                $eggName = $egg['attributes']['name'] ?? $egg['name'];
+                $eggArray = $egg;
+            } else {
+                $eggId = $egg->get('id');
+                $eggName = $egg->get('name');
+                $eggArray = $egg->toArray();
+            }
 
             $choices[$eggName] = $eggId;
-            $loadedEggs[$eggId] = $egg->toArray();
+            $loadedEggs[$eggId] = $eggArray;
         }
 
         return [

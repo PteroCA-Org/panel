@@ -106,7 +106,7 @@ class MigrateServersHandler implements HandlerInterface
             $stats['pterodactylUsersFound'] = $pterodactylUsers->count();
 
             foreach ($pterodactylServers as $pterodactylServer) {
-                $serverArray = $pterodactylServer->toArray();
+                $serverArray = is_array($pterodactylServer) ? $pterodactylServer : $pterodactylServer->toArray();
 
                 // Skip: already exists
                 if ($this->isServerAlreadyExists($serverArray, $pterocaServers)) {

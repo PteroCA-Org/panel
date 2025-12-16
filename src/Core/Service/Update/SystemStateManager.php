@@ -161,7 +161,7 @@ class SystemStateManager
     private function getCurrentSchemaVersion(): ?string
     {
         try {
-            $process = new Process(['php', 'bin/console', 'doctrine:migrations:status', '--show-versions']);
+            $process = new Process(['php', 'bin/console', 'doctrine:migrations:status']);
             $process->setTimeout(30);
             $process->run();
             

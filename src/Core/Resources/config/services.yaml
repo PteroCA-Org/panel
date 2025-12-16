@@ -145,7 +145,7 @@ services:
 
   App\Core\Service\Plugin\ManifestValidator:
     arguments:
-      $pterocaVersion: '0.5.9'
+      $pterocaVersion: '0.6.0'
 
   App\Core\Service\Plugin\PluginScanner:
     arguments:

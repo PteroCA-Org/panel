@@ -40,7 +40,7 @@ class DatabaseOperationService
 
     public function canRollbackMigrations(): bool
     {
-        exec('php bin/console doctrine:migrations:status --show-versions 2>/dev/null', $output, $returnCode);
+        exec('php bin/console doctrine:migrations:status 2>/dev/null', $output, $returnCode);
         
         if ($returnCode !== 0) {
             return false;
@@ -76,7 +76,7 @@ class DatabaseOperationService
     public function getCurrentSchemaVersion(): ?string
     {
         try {
-            exec('php bin/console doctrine:migrations:status --show-versions 2>/dev/null', $output, $returnCode);
+            exec('php bin/console doctrine:migrations:status 2>/dev/null', $output, $returnCode);
             
             if ($returnCode !== 0) {
                 return null;
