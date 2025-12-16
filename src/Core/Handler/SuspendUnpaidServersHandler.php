@@ -122,7 +122,7 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
                         $server->getUser()->getId() ?? 0,
                         $server->getId(),
                         $server->getPterodactylServerIdentifier(),
-                        $server->getName(),
+                        $server->getName() ?? 'Unknown Server',
                         new DateTimeImmutable(),
                         $context
                     )
@@ -136,7 +136,7 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
                         $server->getUser()->getId() ?? 0,
                         $server->getId(),
                         $server->getPterodactylServerIdentifier(),
-                        $server->getName(),
+                        $server->getName() ?? 'Unknown Server',
                         $e->getMessage(),
                         $context
                     )
