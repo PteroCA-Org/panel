@@ -78,8 +78,20 @@ class ProductCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
+        if ($pageName === Crud::PAGE_EDIT) {
+            $context = $this->getContext();
+            $product = $context?->getEntity()?->getInstance();
+
+            if ($product instanceof Product && $product->getSanitizedEggsCount() > 0) {
+                $this->addFlash('warning', $this->translator->trans(
+                    'pteroca.crud.product.eggs_auto_removed_warning',
+                    ['%count%' => $product->getSanitizedEggsCount()]
+                ));
+            }
+        }
+
         Product::registerVirtualField('healthStatus');
-        
+
         $nests = $this->getNestsChoices();
         $uploadDirectory = str_replace(
             '/',

@@ -777,6 +777,7 @@ pteroca:
       no_eggs_selected: 'U moet ten minste één ei selecteren voor dit product.'
       invalid_eggs_selected: 'Geselecteerd ei (ID: %id%) bestaat niet in Pterodactyl. Selecteer alleen geldige eieren.'
       egg_validation_error: 'Kan eieren niet valideren met Pterodactyl. Controleer uw API-verbinding.'
+      eggs_auto_removed_warning: '%count% ei(en) zijn automatisch verwijderd uit dit product omdat ze niet meer bestaan in Pterodactyl. De wijzigingen worden opgeslagen wanneer u het formulier indient.'
       health_status: 'Gezondheidsstatus'
       health_status.healthy: 'OK'
       health_status.some_eggs_invalid: 'Waarschuwing'

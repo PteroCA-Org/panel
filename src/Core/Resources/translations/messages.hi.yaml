@@ -789,6 +789,7 @@ pteroca:
       no_eggs_selected: 'आपको इस उत्पाद के लिए कम से कम एक अंडा चुनना होगा।'
       invalid_eggs_selected: 'चयनित अंडा (ID: %id%) Pterodactyl में मौजूद नहीं है। कृपया केवल मान्य अंडे चुनें।'
       egg_validation_error: 'Pterodactyl के साथ अंडों को मान्य करने में असमर्थ। कृपया अपनी API कनेक्शन जांचें।'
+      eggs_auto_removed_warning: '%count% अंडा(एं) इस उत्पाद से स्वचालित रूप से हटा दिए गए हैं क्योंकि वे Pterodactyl में अब मौजूद नहीं हैं। परिवर्तन तब सहेजे जाएंगे जब आप फॉर्म सबमिट करेंगे।'
       health_status: 'स्वास्थ्य स्थिति'
       health_status.healthy: 'ठीक'
       health_status.some_eggs_invalid: 'चेतावनी'

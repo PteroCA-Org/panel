@@ -788,6 +788,7 @@ pteroca:
       no_eggs_selected: 'Ви повинні обрати принаймні одне яйце для цього продукту.'
       invalid_eggs_selected: 'Обране яйце (ID: %id%) не існує в Pterodactyl. Будь ласка, обирайте лише дійсні яйця.'
       egg_validation_error: 'Неможливо перевірити яйця з Pterodactyl. Будь ласка, перевірте ваше API-з''єднання.'
+      eggs_auto_removed_warning: '%count% яйце(я) були автоматично видалені з цього продукту, оскільки вони більше не існують у Pterodactyl. Зміни будуть збережені при надсиланні форми.'
       health_status: 'Стан Здоров''я'
       health_status.healthy: 'OK'
       health_status.some_eggs_invalid: 'Попередження'

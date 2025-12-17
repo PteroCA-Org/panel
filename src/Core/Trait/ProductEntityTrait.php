@@ -61,6 +61,8 @@ trait ProductEntityTrait
     #[ORM\Column(type: "boolean")]
     private bool $allowChangeEgg = false;
 
+    private ?int $sanitizedEggsCount = null;
+
     public function getId(): int
     {
         return $this->id;
@@ -239,6 +241,17 @@ trait ProductEntityTrait
     public function setAllowChangeEgg(bool $allowChangeEgg): self
     {
         $this->allowChangeEgg = $allowChangeEgg;
+        return $this;
+    }
+
+    public function getSanitizedEggsCount(): ?int
+    {
+        return $this->sanitizedEggsCount;
+    }
+
+    public function setSanitizedEggsCount(?int $count): self
+    {
+        $this->sanitizedEggsCount = $count;
         return $this;
     }
 }

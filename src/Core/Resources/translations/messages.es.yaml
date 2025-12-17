@@ -789,6 +789,7 @@ pteroca:
       no_eggs_selected: 'Debe seleccionar al menos un egg para este producto.'
       invalid_eggs_selected: 'El egg seleccionado (ID: %id%) no existe en Pterodactyl. Por favor, seleccione solo eggs válidos.'
       egg_validation_error: 'No se pueden validar los eggs con Pterodactyl. Por favor, verifique su conexión API.'
+      eggs_auto_removed_warning: '%count% huevo(s) se eliminaron automáticamente de este producto porque ya no existen en Pterodactyl. Los cambios se guardarán cuando envíe el formulario.'
       health_status: 'Estado de Salud'
       health_status.healthy: 'OK'
       health_status.some_eggs_invalid: 'Advertencia'

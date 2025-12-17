@@ -789,6 +789,7 @@ pteroca:
       no_eggs_selected: '您必须为此产品选择至少一个 egg。'
       invalid_eggs_selected: '选定的 egg (ID: %id%) 在 Pterodactyl 中不存在。请仅选择有效的 egg。'
       egg_validation_error: '无法通过 Pterodactyl 验证 egg。请检查您的 API 连接。'
+      eggs_auto_removed_warning: '%count% 个蛋已自动从此产品中移除，因为它们在 Pterodactyl 中已不存在。更改将在提交表单时保存。'
       health_status: '健康状态'
       health_status.healthy: '正常'
       health_status.some_eggs_invalid: '警告'

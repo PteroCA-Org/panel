@@ -781,6 +781,7 @@ pteroca:
       no_eggs_selected: 'Anda harus memilih setidaknya satu telur untuk produk ini.'
       invalid_eggs_selected: 'Telur yang dipilih (ID: %id%) tidak ada di Pterodactyl. Silakan pilih telur yang valid saja.'
       egg_validation_error: 'Tidak dapat memvalidasi telur dengan Pterodactyl. Silakan periksa koneksi API Anda.'
+      eggs_auto_removed_warning: '%count% telur telah secara otomatis dihapus dari produk ini karena tidak lagi ada di Pterodactyl. Perubahan akan disimpan saat Anda mengirimkan formulir.'
       health_status: 'Status Kesehatan'
       health_status.healthy: 'OK'
       health_status.some_eggs_invalid: 'Peringatan'

@@ -10,6 +10,7 @@ use App\Core\Form\ServerProductPriceFixedFormType;
 use App\Core\Form\ServerProductPriceSlotFormType;
 use App\Core\Repository\ServerProductRepository;
 use App\Core\Service\Crud\PanelCrudService;
+use App\Core\Service\Product\NestEggsCacheService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use App\Core\Service\Pterodactyl\PterodactylClientService;
 use App\Core\Service\Pterodactyl\PterodactylRedirectService;
@@ -63,6 +64,7 @@ class ServerProductCrudController extends AbstractPanelController
         private readonly DeleteServerService $deleteServerService,
         private readonly TranslatorInterface $translator,
         private readonly PterodactylRedirectService $pterodactylRedirectService,
+        private readonly NestEggsCacheService $nestEggsCacheService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }

@@ -783,6 +783,7 @@ pteroca:
       no_eggs_selected: 'Вы должны выбрать хотя бы одно яйцо для этого продукта.'
       invalid_eggs_selected: 'Выбранное яйцо (ID: %id%) не существует в Pterodactyl. Пожалуйста, выбирайте только действительные яйца.'
       egg_validation_error: 'Невозможно проверить яйца с Pterodactyl. Пожалуйста, проверьте ваше API-соединение.'
+      eggs_auto_removed_warning: '%count% яйцо(а) были автоматически удалены из этого продукта, поскольку они больше не существуют в Pterodactyl. Изменения будут сохранены при отправке формы.'
       health_status: 'Состояние Здоровья'
       health_status.healthy: 'OK'
       health_status.some_eggs_invalid: 'Предупреждение'

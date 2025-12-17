@@ -63,11 +63,7 @@ trait ProductCrudControllerTrait
         try {
             $choices = [];
             foreach ($nests as $nestId) {
-                $eggs = $this->pterodactylApplicationService
-                    ->getApplicationApi()
-                    ->nestEggs()
-                    ->all($nestId)
-                    ->toArray();
+                $eggs = $this->nestEggsCacheService->getEggsForNest($nestId);
 
                 foreach ($eggs as $egg) {
                     $choices[$egg['name']] = $egg['id'];
