@@ -93,6 +93,7 @@ class ProductCrudController extends AbstractPanelController
         Product::registerVirtualField('healthStatus');
 
         $nests = $this->getNestsChoices();
+
         $uploadDirectory = str_replace(
             '/',
             DIRECTORY_SEPARATOR,
@@ -226,7 +227,7 @@ class ProductCrudController extends AbstractPanelController
                 ->hideOnIndex(),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
-                ->setChoices(fn() => $this->getEggsChoices($nests))
+                ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
                 ->allowMultipleChoices()
                 ->onlyOnForms()
                 ->setRequired(true)

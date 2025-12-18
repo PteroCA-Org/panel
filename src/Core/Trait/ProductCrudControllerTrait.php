@@ -62,11 +62,14 @@ trait ProductCrudControllerTrait
     {
         try {
             $choices = [];
+            $nestNames = $this->getNestsChoices();
+
             foreach ($nests as $nestId) {
                 $eggs = $this->nestEggsCacheService->getEggsForNest($nestId);
+                $nestName = array_search($nestId, $nestNames) ?: "Nest $nestId";
 
                 foreach ($eggs as $egg) {
-                    $choices[$egg['name']] = $egg['id'];
+                    $choices["[$nestName] {$egg['name']}"] = $egg['id'];
                 }
             }
 

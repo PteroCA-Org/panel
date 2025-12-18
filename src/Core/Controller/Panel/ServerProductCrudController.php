@@ -77,6 +77,7 @@ class ServerProductCrudController extends AbstractPanelController
     public function configureFields(string $pageName): iterable
     {
         $nests = $this->getNestsChoices();
+
         $internalCurrency = $this->settingService
             ->getSetting(SettingEnum::INTERNAL_CURRENCY_NAME->value);
 
@@ -186,7 +187,7 @@ class ServerProductCrudController extends AbstractPanelController
                 ->hideOnIndex(),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
-                ->setChoices(fn() => $this->getEggsChoices($nests))
+                ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
                 ->allowMultipleChoices()
                 ->onlyOnForms()
                 ->setRequired(true)
