@@ -178,13 +178,6 @@ class CreateServerService extends AbstractActionServerService
                 'error' => $e->getMessage(),
             ]);
         }
-        $this->boughtConfirmationEmailService->sendBoughtConfirmationEmail(
-            $user,
-            $createdEntityServer,
-            $product,
-            $priceId,
-            $this->getPterodactylAccountLogin($user),
-        );
 
         $this->logService->logAction(
             $user,
