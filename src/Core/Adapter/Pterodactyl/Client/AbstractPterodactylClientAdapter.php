@@ -36,16 +36,24 @@ abstract class AbstractPterodactylClientAdapter extends AbstractPterodactylAdapt
     {
         $url = sprintf('%s/api/client/%s', $this->credentials->getUrl(), $endpoint);
 
-        $options = array_merge([
-            'headers' => [
-                'Authorization' => 'Bearer ' . $this->credentials->getApiKey(),
-                'Content-Type' => 'application/json',
-                'Accept' => 'Application/vnd.pterodactyl.v1+json',
-            ],
-        ], $additionalOptions);
+        if (!empty($additionalOptions['query'])) {
+            $url .= '?' . http_build_query($additionalOptions['query']);
+        }
+
+        if (empty($additionalOptions['headers']['Authorization'])) {
+            $additionalOptions['headers']['Authorization'] = 'Bearer ' . $this->credentials->getApiKey();
+        }
+
+        if (empty($additionalOptions['headers']['Accept'])) {
+            $additionalOptions['headers']['Accept'] = 'Application/vnd.pterodactyl.v1+json';
+        }
+
+        if (empty($additionalOptions['headers']['Content-Type'])) {
+            $additionalOptions['headers']['Content-Type'] = 'application/json';
+        }
 
         try {
-            return $this->httpClient->request($method, $url, $options);
+            return $this->httpClient->request($method, $url, $additionalOptions);
         } catch (TransportExceptionInterface $e) {
             throw new PterodactylConnectionException(
                 sprintf('Failed to connect to Pterodactyl Client API: %s', $e->getMessage()),
@@ -140,7 +148,7 @@ abstract class AbstractPterodactylClientAdapter extends AbstractPterodactylAdapt
         $endpoint = $response->getInfo('url') ?? 'unknown';
         $method = $response->getInfo('http_method') ?? 'unknown';
 
-        $message = sprintf('Pterodactyl Client API error: %d %s', $statusCode, $responseBody);
+        $message = sprintf('Pterodactyl Client API error: %d %s %s', $statusCode, $endpoint, $responseBody);
 
         // Create appropriate exception based on status code
         $exception = match (true) {
