@@ -2,6 +2,7 @@
 
 namespace App\Core\Handler;
 
+use App\Core\Service\Composer\ComposerBinaryResolverService;
 use App\Core\Service\Update\BackupService;
 use App\Core\Service\Update\SystemStateManager;
 use App\Core\Service\Update\UpdateLockManager;
@@ -42,7 +43,7 @@ class UpdateSystemHandler implements HandlerInterface
 
         // Create operation services
         $gitService = new GitOperationService();
-        $composerService = new ComposerOperationService();
+        $composerService = new ComposerOperationService(new ComposerBinaryResolverService());
         $databaseService = new DatabaseOperationService();
         $systemService = new SystemOperationService();
 
