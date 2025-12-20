@@ -213,6 +213,11 @@ services:
     tags:
       - { name: routing.loader }
 
+  # Composer Binary Resolver
+  App\Core\Service\Composer\ComposerBinaryResolverService:
+    arguments:
+      $composerBinaryEnv: '%env(default::COMPOSER_BINARY)%'
+
   # Composer Dependency Manager
   App\Core\Service\Plugin\ComposerDependencyManager:
     arguments:

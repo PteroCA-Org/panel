@@ -180,12 +180,17 @@ readonly class PluginManager
         }
 
         // Composer dependencies validation - check before security validation
-        if ($this->composerManager->hasComposerJson($plugin)) {
-            // Require composer.lock for reproducible builds
+        if ($this->composerManager->requiresDependencies($plugin)) {
+            $this->logger->info("Plugin requires Composer dependencies", [
+                'plugin' => $plugin->getName(),
+            ]);
+
+            // Step 1: Validate composer.lock exists
             if (!$this->composerManager->hasComposerLock($plugin)) {
                 $errorMessage = sprintf(
                     "Cannot enable plugin '%s': composer.lock file is missing.\n" .
-                    "Run 'composer install' in plugin directory and commit the lock file.",
+                    "Plugin has package dependencies but no lock file.\n" .
+                    "Run 'composer install' in plugin directory and commit composer.lock.",
                     $plugin->getName()
                 );
 
@@ -200,30 +205,50 @@ readonly class PluginManager
                 throw new RuntimeException($errorMessage);
             }
 
-            // Require installed vendor directory
+            // Step 2: Auto-install if vendor/ directory is missing
             if (!$this->composerManager->hasVendorDirectory($plugin)) {
-                $errorMessage = sprintf(
-                    "Cannot enable plugin '%s': Composer dependencies not installed.\n" .
-                    "Run: php bin/console plugin:install-deps %s",
-                    $plugin->getName(),
-                    $plugin->getName()
-                );
-
-                $this->eventDispatcher->dispatch(
-                    new PluginEnablementFailedEvent(null, $plugin->getName(), $errorMessage, [])
-                );
-
-                $this->logger->error("Plugin enablement blocked: vendor/ directory missing", [
+                $this->logger->info("Auto-installing Composer dependencies", [
                     'plugin' => $plugin->getName(),
                 ]);
 
-                throw new RuntimeException($errorMessage);
-            }
+                try {
+                    // Attempt automatic installation (no clean flag)
+                    $this->composerManager->installDependencies($plugin, false);
 
-            $this->logger->info("Composer dependencies validated for plugin", [
+                    $this->logger->info("Composer dependencies auto-installed successfully", [
+                        'plugin' => $plugin->getName(),
+                    ]);
+                } catch (\Exception $e) {
+                    // Installation failed - block enablement with helpful error
+                    $errorMessage = sprintf(
+                        "Cannot enable plugin '%s': Failed to install Composer dependencies.\n\n" .
+                        "Error: %s\n\n" .
+                        "You can try manual installation:\n" .
+                        "php bin/console plugin:install-deps %s",
+                        $plugin->getName(),
+                        $e->getMessage(),
+                        $plugin->getName()
+                    );
+
+                    $this->eventDispatcher->dispatch(
+                        new PluginEnablementFailedEvent(null, $plugin->getName(), $errorMessage, [])
+                    );
+
+                    $this->logger->error("Auto-installation of Composer dependencies failed", [
+                        'plugin' => $plugin->getName(),
+                        'error' => $e->getMessage(),
+                    ]);
+
+                    throw new RuntimeException($errorMessage, 0, $e);
+                }
+            } else {
+                $this->logger->info("Composer dependencies already installed", [
+                    'plugin' => $plugin->getName(),
+                ]);
+            }
+        } else {
+            $this->logger->info("Plugin does not require Composer dependencies", [
                 'plugin' => $plugin->getName(),
-                'has_lock' => true,
-                'has_vendor' => true,
             ]);
         }
 

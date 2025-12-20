@@ -3,6 +3,7 @@
 namespace App\Core\Service\Plugin;
 
 use App\Core\Entity\Plugin;
+use App\Core\Service\Composer\ComposerBinaryResolverService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
@@ -14,10 +15,15 @@ use Symfony\Component\Process\Process;
  */
 readonly class ComposerDependencyManager
 {
+    private string $composerBinary;
+
     public function __construct(
         private string $projectDir,
-        private LoggerInterface $logger
-    ) {}
+        private LoggerInterface $logger,
+        ComposerBinaryResolverService $composerResolver
+    ) {
+        $this->composerBinary = $composerResolver->resolveComposerBinary();
+    }
 
     /**
      * Install Composer dependencies for a plugin.
@@ -57,7 +63,7 @@ readonly class ComposerDependencyManager
         // Execute composer install with production and security flags
         $process = new Process(
             [
-                'composer',
+                $this->composerBinary,
                 'install',
                 '--no-dev',              // Exclude development dependencies
                 '--no-interaction',      // No prompts
@@ -68,7 +74,7 @@ readonly class ComposerDependencyManager
                 '--classmap-authoritative', // Optimize autoloader
             ],
             $pluginPath,
-            null,
+            $this->buildProcessEnvironment(),  // Inherit environment variables (PATH, etc.)
             null,
             300  // 5 minute timeout
         );
@@ -127,6 +133,39 @@ readonly class ComposerDependencyManager
     }
 
     /**
+     * Check if plugin requires Composer package dependencies.
+     * Returns false if no composer.json or only PHP/extension requirements.
+     *
+     * @return bool True if plugin needs vendor/ installation
+     */
+    public function requiresDependencies(Plugin $plugin): bool
+    {
+        if (!$this->hasComposerJson($plugin)) {
+            return false;
+        }
+
+        $composerJsonPath = $this->getPluginPath($plugin) . '/composer.json';
+
+        if (!file_exists($composerJsonPath)) {
+            return false;
+        }
+
+        $composerData = json_decode(file_get_contents($composerJsonPath), true);
+
+        if (empty($composerData['require'])) {
+            return false;
+        }
+
+        // Filter out PHP and extensions (not actual packages)
+        $packages = array_filter(
+            array_keys($composerData['require']),
+            fn($name) => !str_starts_with($name, 'php') && !str_starts_with($name, 'ext-')
+        );
+
+        return !empty($packages);
+    }
+
+    /**
      * Validate Composer files (composer.json and composer.lock).
      *
      * Returns array of validation issues. Empty array means all checks passed.
@@ -155,8 +194,9 @@ readonly class ComposerDependencyManager
 
         // Validate composer.json structure
         $process = new Process(
-            ['composer', 'validate', '--no-check-publish', '--strict'],
-            $pluginPath
+            [$this->composerBinary, 'validate', '--no-check-publish', '--strict'],
+            $pluginPath,
+            $this->buildProcessEnvironment()  // Inherit environment variables (PATH, etc.)
         );
 
         $process->run();
@@ -212,6 +252,36 @@ readonly class ComposerDependencyManager
         }
 
         return $output;
+    }
+
+    /**
+     * Build environment array for Process.
+     * Filters $_SERVER to include only string values (Process requirement).
+     *
+     * @return array<string, string>
+     */
+    private function buildProcessEnvironment(): array
+    {
+        $env = [];
+
+        // Include essential environment variables for composer to work
+        $essentialVars = ['PATH', 'HOME', 'COMPOSER_HOME', 'COMPOSER_CACHE_DIR', 'COMPOSER_ALLOW_SUPERUSER'];
+
+        foreach ($essentialVars as $var) {
+            $value = getenv($var);
+            if ($value !== false) {
+                $env[$var] = $value;
+            }
+        }
+
+        // Also filter $_SERVER for other string values
+        foreach ($_SERVER as $key => $value) {
+            if (is_string($value) && !isset($env[$key])) {
+                $env[$key] = $value;
+            }
+        }
+
+        return $env;
     }
 
     /**

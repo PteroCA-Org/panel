@@ -80,7 +80,7 @@ class PluginUploadService
             // 5. (Optional) Pre-security scan
             $securityIssues = [];
             if ($this->enablePreScan) {
-                $securityIssues = $this->runSecurityScan($tempDir, $manifest->name);
+                $securityIssues = $this->runSecurityScan($tempDir, $manifest);
             }
 
             // 6. Move to plugins directory
@@ -268,7 +268,7 @@ class PluginUploadService
      * Run security scan on plugin before moving to final location.
      * @throws ReflectionException
      */
-    private function runSecurityScan(string $pluginPath, string $pluginName): array
+    private function runSecurityScan(string $pluginPath, PluginManifestDTO $manifest): array
     {
         // Find actual plugin root
         $pluginRoot = $this->findPluginRoot($pluginPath);
@@ -278,21 +278,17 @@ class PluginUploadService
 
         // Create temporary Plugin entity for scanning
         $tempPlugin = new Plugin();
-        $tempPlugin->setName($pluginName);
+        $tempPlugin->setName($manifest->name);
+        $tempPlugin->setManifest($manifest->toArray());
+        $tempPlugin->setPterocaMinVersion($manifest->pteroca['min']);
 
         try {
-            // Mock the path by temporarily setting it
-            // (PluginSecurityValidator scans files in plugin directory)
-            $reflection = new ReflectionClass($tempPlugin);
-            $property = $reflection->getProperty('name');
-            $property->setAccessible(true);
-            $property->setValue($tempPlugin, $pluginName);
-
             // Temporarily move to plugins directory for scan
             $tempScanPath = $this->pluginsDirectory . '/temp-scan-' . uniqid();
             $this->filesystem->rename($pluginRoot, $tempScanPath);
 
             $tempPlugin->setName(basename($tempScanPath));
+            $tempPlugin->setPath($tempScanPath);
             $securityCheckResult = $this->securityValidator->validate($tempPlugin);
 
             // Move back
@@ -312,7 +308,7 @@ class PluginUploadService
         } catch (Exception $e) {
             $this->logger->warning('Security scan failed during upload', [
                 'error' => $e->getMessage(),
-                'plugin' => $pluginName,
+                'plugin' => $manifest->name,
             ]);
 
             // If it's a critical security exception, re-throw

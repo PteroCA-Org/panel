@@ -2,13 +2,21 @@
 
 namespace App\Core\Service\Update\Operation;
 
+use App\Core\Service\Composer\ComposerBinaryResolverService;
 use RuntimeException;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ComposerOperationService
 {
+    private string $composerBinary;
     private SymfonyStyle $io;
     private array $options = [];
+
+    public function __construct(
+        ComposerBinaryResolverService $composerResolver
+    ) {
+        $this->composerBinary = $composerResolver->resolveComposerBinary();
+    }
 
     public function setIo(SymfonyStyle $io): self
     {
@@ -105,13 +113,12 @@ class ComposerOperationService
     {
         $this->ensureSuperuserAllowed();
 
-        $composerBin = getenv('COMPOSER_BINARY') ?: 'composer';
         $envPrefix = $this->buildEnvironmentPrefix();
-        
+
         return sprintf(
             '%s%s ' . $commandTemplate,
             $envPrefix,
-            escapeshellcmd($composerBin),
+            escapeshellcmd($this->composerBinary),
             ...$args
         );
     }
