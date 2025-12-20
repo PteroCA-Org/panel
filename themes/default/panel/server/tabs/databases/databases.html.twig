@@ -2,7 +2,7 @@
     <div class="tab-pane" id="databases">
         <div class="row pt-3">
             <div class="col-12 mb-4">
-                {% if serverData.pterodactylServer.relationships.databases.toArray()|length == 0 %}
+                {% if serverData.pterodactylServer.relationships.databases|length == 0 %}
                     <div class="alert alert-info col-6 offset-3" role="alert">
                         <i class="fas fa-info-circle pe-1"></i>
                         {{ 'pteroca.server.no_databases'|trans }}
@@ -18,7 +18,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for database in serverData.pterodactylServer.relationships.databases.toArray() %}
+                            {% for database in serverData.pterodactylServer.relationships.databases %}
                                 <tr>
                                     <td>{{ database.database }}</td>
                                     <td class="pt-4"><pre>{{ database.remote }}</pre></td>
@@ -80,7 +80,7 @@
             </div>
             {% if hasServerPermission(serverData.serverPermissions, 'database.create') %}
             <div class="col-12 mb-3">
-                {% set currentDatabases = serverData.pterodactylServer.relationships.databases.toArray()|length %}
+                {% set currentDatabases = serverData.pterodactylServer.relationships.databases|length %}
                 {% set databaseLimit = serverData.pterodactylServer.feature_limits.databases %}
                 {% set canCreateDatabase = currentDatabases < databaseLimit %}
                 <button type="button" class="btn primary float-end{% if not canCreateDatabase %} disabled{% endif %}" 
@@ -99,13 +99,13 @@
         </div>
     </div>
 
-    {% set currentDatabases = serverData.pterodactylServer.relationships.databases.toArray()|length %}
+    {% set currentDatabases = serverData.pterodactylServer.relationships.databases|length %}
     {% set databaseLimit = serverData.pterodactylServer.feature_limits.databases %}
     {% if currentDatabases < databaseLimit and hasServerPermission(serverData.serverPermissions, 'database.create') %}
         {% include 'panel/server/tabs/databases/components/create_database_modal.html.twig' %}
     {% endif %}
 
-    {% if serverData.pterodactylServer.relationships.databases.toArray()|length > 0 %}
+    {% if serverData.pterodactylServer.relationships.databases|length > 0 %}
         {% if hasServerPermission(serverData.serverPermissions, 'database.delete') %}
             {% include 'panel/server/tabs/databases/components/delete_database_modal.html.twig' %}
         {% endif %}
