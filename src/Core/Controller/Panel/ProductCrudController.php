@@ -114,6 +114,9 @@ class ProductCrudController extends AbstractPanelController
                 ->hideOnIndex(),
             BooleanField::new('isActive', $this->translator->trans('pteroca.crud.product.is_active'))
                 ->setColumns(6),
+            NumberField::new('priority', $this->translator->trans('pteroca.crud.product.priority'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.priority_hint'))
+                ->setColumns(6),
             FormField::addRow(),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.product.image'))
                 ->setBasePath($this->getParameter('products_base_path'))
@@ -294,7 +297,7 @@ class ProductCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.product.product'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.product.products'))
-            ->setDefaultSort(['createdAt' => 'DESC'])
+            ->setDefaultSort(['priority' => 'ASC', 'createdAt' => 'DESC'])
         ;
 
         return parent::configureCrud($crud);
@@ -304,6 +307,7 @@ class ProductCrudController extends AbstractPanelController
     {
         $filters
             ->add('name')
+            ->add('priority')
             ->add('description')
             ->add('isActive')
             ->add('category')

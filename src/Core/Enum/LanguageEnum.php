@@ -17,4 +17,5 @@ enum LanguageEnum: string
     case हिन्दी = 'hi';
     case Dutch = 'nl';
     case Deutsch_Switzerland = 'de_CH';
+    case Indonesian = 'id';
 }

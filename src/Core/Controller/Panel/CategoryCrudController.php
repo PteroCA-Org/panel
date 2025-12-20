@@ -46,6 +46,9 @@ class CategoryCrudController extends AbstractPanelController
             NumberField::new('id', 'ID')->onlyOnIndex(),
             TextField::new('name', $this->translator->trans('pteroca.crud.category.name'))
                 ->setColumns(6),
+            NumberField::new('priority', $this->translator->trans('pteroca.crud.category.priority'))
+                ->setHelp($this->translator->trans('pteroca.crud.category.priority_hint'))
+                ->setColumns(6),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.category.image'))
                 ->setBasePath($this->getParameter('categories_base_path'))
                 ->setUploadDir($uploadDirectory)
@@ -76,6 +79,7 @@ class CategoryCrudController extends AbstractPanelController
         $crud
             ->setEntityLabelInSingular($this->translator->trans('pteroca.crud.category.category'))
             ->setEntityLabelInPlural($this->translator->trans('pteroca.crud.category.categories'))
+            ->setDefaultSort(['priority' => 'ASC', 'name' => 'ASC'])
             ;
 
         return parent::configureCrud($crud);
@@ -87,6 +91,7 @@ class CategoryCrudController extends AbstractPanelController
             ->add('id')
             ->add('name')
             ->add('description')
+            ->add('priority')
         ;
         return parent::configureFilters($filters);
     }

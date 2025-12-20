@@ -30,6 +30,9 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\Column(type: "boolean")]
     private bool $isActive = false;
 
+    #[ORM\Column(type: "integer")]
+    private int $priority = 0;
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $imagePath = null;
 
@@ -82,6 +85,17 @@ class Product extends AbstractEntity implements ProductInterface
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+        return $this;
+    }
+
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
         return $this;
     }
 

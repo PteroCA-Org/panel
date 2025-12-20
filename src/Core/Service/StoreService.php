@@ -42,7 +42,7 @@ readonly class StoreService
                 $category->setImagePath( $imagePath . $category->getImagePath());
             }
             return $category;
-        }, $this->categoryRepository->findAll());
+        }, $this->categoryRepository->findBy([], ['priority' => 'ASC', 'name' => 'ASC']));
     }
 
     public function getCategory(int $categoryId): ?Category
@@ -58,11 +58,14 @@ readonly class StoreService
                 $product->setImagePath($imagePath . $product->getImagePath());
             }
             return $product;
-        }, $this->productRepository->findBy([
-            'category' => $category,
-            'isActive' => true,
-            'deletedAt' => null,
-        ]));
+        }, $this->productRepository->findBy(
+            [
+                'category' => $category,
+                'isActive' => true,
+                'deletedAt' => null,
+            ],
+            ['priority' => 'ASC', 'id' => 'ASC']
+        ));
     }
 
     public function getActiveProduct(int $productId): ?Product

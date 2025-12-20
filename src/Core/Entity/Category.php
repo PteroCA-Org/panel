@@ -19,6 +19,9 @@ class Category extends AbstractEntity
     #[ORM\Column(length: 255)]
     private string $name;
 
+    #[ORM\Column(type: "integer")]
+    private int $priority = 0;
+
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $description;
 
@@ -43,6 +46,17 @@ class Category extends AbstractEntity
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
         return $this;
     }
 
