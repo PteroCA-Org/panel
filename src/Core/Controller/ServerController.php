@@ -16,6 +16,7 @@ use App\Core\Service\Pterodactyl\PterodactylRedirectService;
 use App\Core\Service\Tab\ServerTabRegistry;
 use App\Core\Service\Server\ServerDataService;
 use App\Core\Service\Server\ServerService;
+use App\Core\Service\System\DemoModeService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -60,6 +61,7 @@ class ServerController extends AbstractController
         ServerDataService $serverDataService,
         ServerTabRegistry $serverTabRegistry,
         PterodactylRedirectService $pterodactylRedirectService,
+        DemoModeService $demoModeService,
     ): Response
     {
         $this->checkPermission();
@@ -153,6 +155,7 @@ class ServerController extends AbstractController
                 'tabContext' => $tabContext,
                 'visibleTabs' => $visibleTabs,
                 'tabAssets' => $tabAssets,
+                'demoMode' => $demoModeService->isDemoModeEnabled(),
             ],
             $request
         );

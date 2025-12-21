@@ -37,7 +37,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="badge">{{ log.ipAddress }}</span>
+                                    <span class="badge">{{ demoMode ? '***.***.***.**' : log.ipAddress }}</span>
                                 </td>
                                 <td>
                                     <small class="text-muted">{{ log.createdAt|date('Y-m-d H:i:s') }}</small>

@@ -29,6 +29,7 @@ use App\Core\Repository\ServerRepository;
 use App\Core\Service\Logs\LogService;
 use App\Core\Service\Server\ServerService;
 use App\Core\Service\SettingService;
+use App\Core\Service\System\DemoModeService;
 use App\Core\Service\System\SystemVersionService;
 use App\Core\Service\Template\TemplateManager;
 use App\Core\Trait\EventContextTrait;
@@ -66,6 +67,7 @@ class DashboardController extends AbstractDashboardController
         private readonly QuickActionsWidget $quickActionsWidget,
         private readonly MenuBuilder $menuBuilder,
         private readonly WidgetRegistry $widgetRegistry,
+        private readonly DemoModeService $demoModeService,
     ) {}
 
     #[Route('/panel', name: 'panel')]
@@ -87,7 +89,10 @@ class DashboardController extends AbstractDashboardController
         $this->registerBuiltinWidgets($this->widgetRegistry);
 
         // Dispatch event for plugins to register custom widgets
-        $contextData = ['user' => $user];
+        $contextData = [
+            'user' => $user,
+            'demoMode' => $this->demoModeService->isDemoModeEnabled(),
+        ];
         $widgetEvent = new WidgetsCollectedEvent(
             $this->widgetRegistry,
             WidgetContext::DASHBOARD,

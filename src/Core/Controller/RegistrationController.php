@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Core\Service\Mailer\EmailVerificationService;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Core\Service\Authorization\RegistrationService;
+use App\Core\Service\System\DemoModeService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -26,6 +27,7 @@ class RegistrationController extends AbstractController
         private readonly RegistrationService $registrationService,
         private readonly TranslatorInterface $translator,
         private readonly EmailVerificationService $emailVerificationService,
+        private readonly DemoModeService $demoModeService,
     ) {}
 
     #[Route('/register', name: 'app_register')]
@@ -35,6 +37,14 @@ class RegistrationController extends AbstractController
         #[Autowire(service: 'App\Core\Security\UserAuthenticator')]
         AuthenticatorInterface $authenticator,
     ): Response {
+        if ($this->demoModeService->isDemoModeEnabled()) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans($this->demoModeService->getDemoModeMessage())
+            );
+            return $this->redirectToRoute('app_login');
+        }
+
         if ($this->getUser() !== null) {
             return $this->redirectToRoute('panel');
         }

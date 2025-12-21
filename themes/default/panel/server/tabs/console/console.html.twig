@@ -4,6 +4,12 @@
 
 {% block main %}
     <div class="tab-pane active" id="console">
+        {% if demoMode %}
+            <div class="alert alert-warning mb-3">
+                <i class="fas fa-info-circle me-2"></i>
+                {{ 'pteroca.demo_mode.websocket_disabled'|trans }}
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-12 col-xl-9">
                 {% if hasServerPermission(serverData.serverPermissions, 'websocket.connect') %}
@@ -39,6 +45,8 @@
 {% block body_javascript %}
     <script src="{{ template_asset('js/libraries/xterm.min.js') }}"></script>
     <script>
+        const demoMode = {{ demoMode ? 'true' : 'false' }};
+
         document.addEventListener('DOMContentLoaded', function() {
             {% if hasServerPermission(serverData.serverPermissions, 'websocket.connect') %}
                 terminal.initializeTerminal();
@@ -137,10 +145,20 @@
                 };
             },
             sendCommand: function(command) {
+                if (typeof demoMode !== 'undefined' && demoMode) {
+                    this.showAlert('{{ "pteroca.demo_mode.action_disabled"|trans }}', 'danger');
+                    return;
+                }
+
                 this.ws.send(JSON.stringify({ event: 'send command', args: [command] }));
                 this.terminal.write('> ' + command + '\r\n');
             },
             sendState: function(state) {
+                if (typeof demoMode !== 'undefined' && demoMode) {
+                    this.showAlert('{{ "pteroca.demo_mode.action_disabled"|trans }}', 'danger');
+                    return;
+                }
+
                 this.ws.send(JSON.stringify({ event: 'set state', args: [state] }));
             },
             loadStatisticsFromWebsocket: function(stats) {

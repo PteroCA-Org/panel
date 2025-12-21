@@ -6,6 +6,7 @@ namespace App\Core\Controller\Panel;
 use App\Core\Entity\Log;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Service\Crud\PanelCrudService;
+use App\Core\Service\System\DemoModeService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -24,6 +25,7 @@ class LogCrudController extends AbstractPanelController
         PanelCrudService $panelCrudService,
         RequestStack $requestStack,
         private readonly TranslatorInterface $translator,
+        private readonly DemoModeService $demoModeService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -43,7 +45,8 @@ class LogCrudController extends AbstractPanelController
             CodeEditorField::new('details', $this->translator->trans('pteroca.crud.log.details'))
                 ->setDisabled()
                 ->formatValue(fn ($value) => $value === '[]' ? '' : json_encode(json_decode($value), JSON_PRETTY_PRINT)),
-            TextField::new('ipAddress', $this->translator->trans('pteroca.crud.log.ip_address')),
+            TextField::new('ipAddress', $this->translator->trans('pteroca.crud.log.ip_address'))
+                ->formatValue(fn ($value) => $this->demoModeService->isDemoModeEnabled() ? '***.***.***.**' : $value),
             DateTimeField::new('createdAt', $this->translator->trans('pteroca.crud.log.created_at'))
                 ->setDisabled(),
             AssociationField::new('user', $this->translator->trans('pteroca.crud.log.user'))

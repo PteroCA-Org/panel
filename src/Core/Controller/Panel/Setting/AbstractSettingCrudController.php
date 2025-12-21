@@ -89,31 +89,8 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
         $valueLabel = $this->translator->trans('pteroca.crud.setting.value');
         $normalizedType = $this->typeMapper->toDisplayType($this->currentEntity?->getType() ?? 'text');
 
-        $valueField = match ($normalizedType) {
-            SettingTypeEnum::COLOR->value => TextField::new('value', $valueLabel)
-                ->setFormType(ColorType::class),
-            SettingTypeEnum::BOOLEAN->value => ChoiceField::new('value', $valueLabel)
-                ->setChoices([
-                    $this->translator->trans('pteroca.crud.setting.yes') => '1',
-                    $this->translator->trans('pteroca.crud.setting.no') => '0',
-                ])
-                ->formatValue(fn ($value) => $value ? '1' : '0'),
-            SettingTypeEnum::NUMBER->value => NumberField::new('value', $valueLabel),
-            SettingTypeEnum::TEXT->value => TextField::new('value', $valueLabel),
-            SettingTypeEnum::TWIG->value => CodeEditorField::new('value', $valueLabel)
-                ->setLanguage('twig')
-                ->setNumOfRows(20),
-            SettingTypeEnum::LOCALE->value => ChoiceField::new('value', $valueLabel)
-                ->setChoices(array_flip($this->localeService->getAvailableLocales(false))),
-            SettingTypeEnum::URL->value => UrlField::new('value', $valueLabel),
-            SettingTypeEnum::EMAIL->value => EmailField::new('value', $valueLabel),
-            SettingTypeEnum::IMAGE->value => ImageField::new('value', $valueLabel)
-                ->setUploadDir('public/uploads/settings')
-                ->setBasePath('/uploads/settings')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
-            SettingTypeEnum::SELECT->value => ChoiceField::new('value', $valueLabel)
-                ->setChoices($this->getSelectOptions($this->currentEntity?->getName())),
-            default => TextareaField::new('value', $valueLabel)
+        if ($pageName === Crud::PAGE_INDEX) {
+            $valueField = TextareaField::new('value', $valueLabel)
                 ->formatValue(function ($value, $entity) {
                     if (!$entity) {
                         return $value;
@@ -125,8 +102,46 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
                             : $this->translator->trans('pteroca.crud.setting.no'),
                         default => $value,
                     };
-                }),
-        };
+                });
+        } else {
+            $valueField = match ($normalizedType) {
+                SettingTypeEnum::COLOR->value => TextField::new('value', $valueLabel)
+                    ->setFormType(ColorType::class),
+                SettingTypeEnum::BOOLEAN->value => ChoiceField::new('value', $valueLabel)
+                    ->setChoices([
+                        $this->translator->trans('pteroca.crud.setting.yes') => '1',
+                        $this->translator->trans('pteroca.crud.setting.no') => '0',
+                    ])
+                    ->formatValue(fn ($value) => $value ? '1' : '0'),
+                SettingTypeEnum::NUMBER->value => NumberField::new('value', $valueLabel),
+                SettingTypeEnum::TEXT->value => TextField::new('value', $valueLabel),
+                SettingTypeEnum::TWIG->value => CodeEditorField::new('value', $valueLabel)
+                    ->setLanguage('twig')
+                    ->setNumOfRows(20),
+                SettingTypeEnum::LOCALE->value => ChoiceField::new('value', $valueLabel)
+                    ->setChoices(array_flip($this->localeService->getAvailableLocales(false))),
+                SettingTypeEnum::URL->value => UrlField::new('value', $valueLabel),
+                SettingTypeEnum::EMAIL->value => EmailField::new('value', $valueLabel),
+                SettingTypeEnum::IMAGE->value => ImageField::new('value', $valueLabel)
+                    ->setUploadDir('public/uploads/settings')
+                    ->setBasePath('/uploads/settings')
+                    ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                SettingTypeEnum::SELECT->value => ChoiceField::new('value', $valueLabel)
+                    ->setChoices($this->getSelectOptions($this->currentEntity?->getName())),
+                default => TextareaField::new('value', $valueLabel)
+                    ->formatValue(function ($value, $entity) {
+                        if (!$entity) {
+                            return $value;
+                        }
+                        return match ($entity->getType()) {
+                            SettingTypeEnum::BOOLEAN->value => $value
+                                ? $this->translator->trans('pteroca.crud.setting.yes')
+                                : $this->translator->trans('pteroca.crud.setting.no'),
+                            default => $value,
+                        };
+                    }),
+            };
+        }
 
         $isNullable = $this->currentEntity?->isNullable() ?? false;
 

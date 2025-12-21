@@ -52,6 +52,7 @@ readonly class ActivityWidget implements WidgetInterface
 
         return [
             'logs' => $this->logService->getLogsByUser($user, 5),
+            'demoMode' => $contextData['demoMode'] ?? false,
         ];
     }
 
