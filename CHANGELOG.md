@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.6.1] - 2025-12-21
+
+### Added
+- Added automatic plugin dependency installation on plugin enable.
+- Added product and category priority support.
+- Added missing Indonesian language enum.
+
+### Changed
+- Improved product egg sanitization.
+- Optimized product validation logic.
+- Improved server management handling.
+- Allowed servers without assigned products (post-migration).
+- Minor UI and CSS adjustments.
+
+### Fixed
+- Fixed duplicated server purchase emails.
+- Fixed 500 error when loading server databases.
+- Fixed EULA acceptance on server management page.
+- Fixed various server management edge cases.
+
+---
+
 ## [0.6.0] - 2025-12-16
 
 ### Added

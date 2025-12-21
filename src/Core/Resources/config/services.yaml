@@ -1,5 +1,5 @@
 parameters:
-  version: '0.6.0'
+  version: '0.6.1'
   categories_base_path: '/uploads/categories'
   categories_directory: 'public/uploads/categories'
   products_base_path: '/uploads/products'
@@ -145,7 +145,7 @@ services:
 
   App\Core\Service\Plugin\ManifestValidator:
     arguments:
-      $pterocaVersion: '0.6.0'
+      $pterocaVersion: '%version%'
 
   App\Core\Service\Plugin\PluginScanner:
     arguments:
