@@ -55,12 +55,10 @@
     </div>
 </div>
 
-<!-- Hidden input do przechowywania ID harmonogramu -->
 <input type="hidden" id="addingTaskScheduleId" value="">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Zmiana typu akcji - aktualizacja opisu payload
     document.getElementById('newTaskAction').addEventListener('change', function() {
         const payloadHelp = document.getElementById('newPayloadHelp');
         const payloadField = document.getElementById('newTaskPayload');
@@ -84,10 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Event listener dla zamknięcia modala dodawania zadania
     const addTaskModal = document.getElementById('addTaskModal');
     addTaskModal.addEventListener('hidden.bs.modal', function () {
-        // Po zamknięciu modala dodawania zadania, otwórz z powrotem modal harmonogramu
         setTimeout(function() {
             reopenScheduleModal();
         }, 100);
@@ -95,19 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function openAddTaskModal(scheduleId) {
-    // Ustaw ID harmonogramu
     document.getElementById('addingTaskScheduleId').value = scheduleId;
     
-    // Wyczyść formularz
     document.getElementById('newTaskAction').value = 'command';
     document.getElementById('newTaskTimeOffset').value = 0;
     document.getElementById('newTaskPayload').value = '';
     document.getElementById('newTaskContinueOnFailure').checked = false;
     
-    // Wywołaj event change żeby zaktualizować opis payload
     document.getElementById('newTaskAction').dispatchEvent(new Event('change'));
     
-    // Otwórz modal
     const modal = new bootstrap.Modal(document.getElementById('addTaskModal'));
     modal.show();
 }
@@ -140,39 +132,37 @@ function saveNewTask() {
             continue_on_failure: continueOnFailure
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert('{{ 'pteroca.server.error'|trans }}: ' + data.error);
-        } else {
+    .then(response => {
+        if (response.ok) {
             alert('{{ 'pteroca.server.task_created_successfully'|trans }}');
-            
-            // Pobierz zaktualizowane dane harmonogramu
+
             fetch('{{ path('server_schedules_get', { id: server.id, scheduleId: '__SCHEDULE_ID__' }) }}'.replace('__SCHEDULE_ID__', scheduleId), {
                 method: 'GET',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => response.json())
-            .then(updatedScheduleData => {
-                if (!updatedScheduleData.error) {
-                    // Zaktualizuj dane harmonogramu w pamięci
-                    if (typeof updateCurrentScheduleData === 'function') {
-                        updateCurrentScheduleData(updatedScheduleData);
-                    }
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
                 }
-                
-                // Zamknij modal - to automatycznie otworzy modal harmonogramu dzięki event listenerowi
+                throw new Error('Failed to refresh schedule data');
+            })
+            .then(updatedScheduleData => {
+                if (typeof updateCurrentScheduleData === 'function') {
+                    updateCurrentScheduleData(updatedScheduleData);
+                }
+
                 const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
                 modal.hide();
             })
             .catch(error => {
                 console.error('Error refreshing schedule data:', error);
-                // Zamknij modal nawet jeśli nie udało się odświeżyć danych
                 const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
                 modal.hide();
             });
+        } else {
+            showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}');
         }
     })
     .catch(error => {

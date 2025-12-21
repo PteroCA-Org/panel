@@ -5,9 +5,12 @@ namespace App\Core\Controller\API;
 use App\Core\Enum\ServerPermissionEnum;
 use App\Core\Repository\ServerRepository;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Pterodactyl\PterodactylExceptionHandler;
 use App\Core\Service\Server\ServerBackupService;
+use App\Core\Trait\HandlesPterodactylExceptions;
 use App\Core\Trait\InternalServerApiTrait;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +20,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServerBackupController extends APIAbstractController
 {
     use InternalServerApiTrait;
+    use HandlesPterodactylExceptions;
 
     public function __construct(
         private readonly ServerRepository $serverRepository,
         private readonly ServerBackupService $serverBackupService,
         private readonly PterodactylApplicationService $pterodactylApplicationService,
+        private readonly LoggerInterface $logger,
+        private readonly PterodactylExceptionHandler $pterodactylExceptionHandler,
     ) {}
+
+    protected function getPterodactylExceptionHandler(): PterodactylExceptionHandler
+    {
+        return $this->pterodactylExceptionHandler;
+    }
+
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
 
     #[Route('/panel/api/server/{id}/backup/create', name: 'server_backup_create', methods: ['POST'])]
     public function createBackup(
@@ -44,9 +60,11 @@ class ServerBackupController extends APIAbstractController
         } catch (TooManyRequestsHttpException) {
             $response->setStatusCode(429);
         } catch (Exception $exception) {
-            $errorData = json_decode($exception->getMessage(), true);
-            $error = current($errorData['errors'] ?? []);
-            $response->setStatusCode($error['status'] ?? 400);
+            return $this->handlePterodactylException($exception, 'create backup', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'backup_name' => $request->request->all('Backup')['name'] ?? 'unknown',
+            ]);
         }
 
         return $response;
@@ -68,8 +86,12 @@ class ServerBackupController extends APIAbstractController
                 $backupId,
             );
             $response->setData(['url' => $downloadUrl]);
-        } catch (Exception) {
-            $response->setStatusCode(400);
+        } catch (Exception $e) {
+            return $this->handlePterodactylException($e, 'download backup', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'backup_id' => $backupId,
+            ]);
         }
 
         return $response;
@@ -91,8 +113,12 @@ class ServerBackupController extends APIAbstractController
                 $backupId,
             );
             $response->setStatusCode(204);
-        } catch (Exception) {
-            $response->setStatusCode(400);
+        } catch (Exception $e) {
+            return $this->handlePterodactylException($e, 'delete backup', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'backup_id' => $backupId,
+            ]);
         }
 
         return $response;
@@ -118,8 +144,12 @@ class ServerBackupController extends APIAbstractController
                 $truncate,
             );
             $response->setStatusCode(204);
-        } catch (Exception) {
-            $response->setStatusCode(400);
+        } catch (Exception $e) {
+            return $this->handlePterodactylException($e, 'restore backup', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'backup_id' => $backupId,
+            ]);
         }
 
         return $response;

@@ -62,7 +62,17 @@
                         if (response.ok) {
                             window.location.reload()
                         } else {
-                            alert('{{ 'pteroca.server.error_during_creating_database'|trans }}')
+                            return response.json().then(function (data) {
+                                let errorMessage = '{{ 'pteroca.server.error_during_creating_database'|trans }}'
+                                if (data.detail) {
+                                    errorMessage += '\n\n' + data.detail
+                                } else if (data.error) {
+                                    errorMessage += '\n\n' + data.error
+                                }
+                                alert(errorMessage)
+                            }).catch(function () {
+                                alert('{{ 'pteroca.server.error_during_creating_database'|trans }}')
+                            })
                         }
                     })
                     .catch(function (error) {

@@ -5,9 +5,12 @@ namespace App\Core\Controller\API;
 use App\Core\Enum\ServerPermissionEnum;
 use App\Core\Repository\ServerRepository;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Pterodactyl\PterodactylExceptionHandler;
 use App\Core\Service\Server\ServerScheduleService;
+use App\Core\Trait\HandlesPterodactylExceptions;
 use App\Core\Trait\InternalServerApiTrait;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,13 +19,26 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ServerScheduleController extends APIAbstractController
 {
     use InternalServerApiTrait;
+    use HandlesPterodactylExceptions;
 
     public function __construct(
         private readonly ServerRepository $serverRepository,
         private readonly ServerScheduleService $serverScheduleService,
         private readonly PterodactylApplicationService $pterodactylApplicationService,
         private readonly TranslatorInterface $translator,
+        private readonly LoggerInterface $logger,
+        private readonly PterodactylExceptionHandler $pterodactylExceptionHandler,
     ) {}
+
+    protected function getPterodactylExceptionHandler(): PterodactylExceptionHandler
+    {
+        return $this->pterodactylExceptionHandler;
+    }
+
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
 
     #[Route('/panel/api/server/{id}/schedules/create', name: 'server_schedules_create', methods: ['POST'])]
     public function createSchedule(int $id, Request $request): JsonResponse
@@ -67,8 +83,11 @@ class ServerScheduleController extends APIAbstractController
 
             $response->setData(['success' => true, 'schedule' => $result]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'create schedule', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_name' => $data['name'] ?? 'unknown',
+            ]);
         }
 
         return $response;
@@ -107,8 +126,11 @@ class ServerScheduleController extends APIAbstractController
 
             $response->setData(['success' => true, 'schedule' => $result]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'update schedule', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+            ]);
         }
 
         return $response;
@@ -124,8 +146,11 @@ class ServerScheduleController extends APIAbstractController
             $this->serverScheduleService->deleteSchedule($server, $this->getUser(), $scheduleId);
             $response->setData(['success' => true]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'delete schedule', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+            ]);
         }
 
         return $response;
@@ -141,8 +166,11 @@ class ServerScheduleController extends APIAbstractController
             $schedule = $this->serverScheduleService->getSchedule($server, $this->getUser(), $scheduleId);
             $response->setData($schedule);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'get schedule', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+            ]);
         }
 
         return $response;
@@ -175,8 +203,12 @@ class ServerScheduleController extends APIAbstractController
 
             $response->setData(['success' => true, 'task' => $result]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'update schedule task', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+                'task_id' => $taskId,
+            ]);
         }
 
         return $response;
@@ -208,8 +240,11 @@ class ServerScheduleController extends APIAbstractController
 
             $response->setData(['success' => true, 'task' => $result]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'create schedule task', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+            ]);
         }
 
         return $response;
@@ -225,8 +260,12 @@ class ServerScheduleController extends APIAbstractController
             $this->serverScheduleService->deleteScheduleTask($server, $this->getUser(), $scheduleId, $taskId);
             $response->setData(['success' => true]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'delete schedule task', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'schedule_id' => $scheduleId,
+                'task_id' => $taskId,
+            ]);
         }
 
         return $response;

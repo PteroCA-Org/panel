@@ -54,16 +54,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Close modal
                         const modal = bootstrap.Modal.getInstance(document.getElementById('restoreBackupModal'));
                         modal.hide();
-                        
+
                         // Show success message
                         showToast('{{ 'pteroca.server.restore_backup'|trans }}', 'success');
-                        
+
                         // Reload page after a short delay
                         setTimeout(() => {
                             window.location.reload();
                         }, 1500);
                     } else {
-                        throw new Error('{{ 'pteroca.server.error_during_restoring_backup'|trans }}');
+                        showApiError(response, '{{ 'pteroca.server.error_during_restoring_backup'|trans }}');
                     }
                 })
                 .catch(error => {

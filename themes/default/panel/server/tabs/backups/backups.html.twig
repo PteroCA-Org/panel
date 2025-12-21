@@ -162,11 +162,21 @@
 
                     if (actionName === 'download') {
                         sendRequest(endpointUrl)
-                            .then(response => response.json())
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json()
+                                } else {
+                                    showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}')
+                                    throw new Error('Download failed')
+                                }
+                            })
                             .then(data => {
                                 if (data.url) {
                                     window.open(data.url, '_blank')
                                 }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error)
                             })
                     }
                 })

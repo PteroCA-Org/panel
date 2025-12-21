@@ -5,9 +5,12 @@ namespace App\Core\Controller\API;
 use App\Core\Enum\ServerPermissionEnum;
 use App\Core\Repository\ServerRepository;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Pterodactyl\PterodactylExceptionHandler;
 use App\Core\Service\Server\ServerUserService;
+use App\Core\Trait\HandlesPterodactylExceptions;
 use App\Core\Trait\InternalServerApiTrait;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServerUserController extends APIAbstractController
 {
     use InternalServerApiTrait;
+    use HandlesPterodactylExceptions;
 
     public function __construct(
         private readonly ServerRepository $serverRepository,
         private readonly ServerUserService $serverUserService,
         private readonly PterodactylApplicationService $pterodactylApplicationService,
+        private readonly LoggerInterface $logger,
+        private readonly PterodactylExceptionHandler $pterodactylExceptionHandler,
     ) {}
+
+    protected function getPterodactylExceptionHandler(): PterodactylExceptionHandler
+    {
+        return $this->pterodactylExceptionHandler;
+    }
+
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
 
     #[Route('/panel/api/server/{id}/users/all', name: 'server_users_get_all', methods: ['GET'])]
     public function getAllUsers(int $id): JsonResponse
@@ -32,8 +48,10 @@ class ServerUserController extends APIAbstractController
             $subusers = $this->serverUserService->getAllSubusers($server, $this->getUser());
             $response->setData($subusers);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'get all subusers', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+            ]);
         }
 
         return $response;
@@ -68,8 +86,11 @@ class ServerUserController extends APIAbstractController
             );
             $response->setData($result);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'create subuser', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'email' => $data['email'] ?? 'unknown',
+            ]);
         }
 
         return $response;
@@ -85,8 +106,11 @@ class ServerUserController extends APIAbstractController
             $subuser = $this->serverUserService->getSubuser($server, $this->getUser(), $userUuid);
             $response->setData($subuser);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'get subuser', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'subuser_uuid' => $userUuid,
+            ]);
         }
 
         return $response;
@@ -128,8 +152,12 @@ class ServerUserController extends APIAbstractController
             );
             $response->setData($result);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'update subuser permissions', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'subuser_uuid' => $userUuid,
+                'email' => $data['email'] ?? 'unknown',
+            ]);
         }
 
         return $response;
@@ -153,8 +181,12 @@ class ServerUserController extends APIAbstractController
             $this->serverUserService->deleteSubuser($server, $this->getUser(), $userUuid, $data['email']);
             $response->setData(['success' => true]);
         } catch (Exception $e) {
-            $response->setStatusCode(400);
-            $response->setData(['error' => $e->getMessage()]);
+            return $this->handlePterodactylException($e, 'delete subuser', [
+                'server_id' => $id,
+                'user_id' => $this->getUser()->getId(),
+                'subuser_uuid' => $userUuid,
+                'email' => $data['email'] ?? 'unknown',
+            ]);
         }
 
         return $response;

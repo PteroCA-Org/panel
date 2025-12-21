@@ -150,7 +150,17 @@
                                     alert('Password rotated successfully');
                                     window.location.reload();
                                 } else {
-                                    alert('Error rotating password');
+                                    return response.json().then(data => {
+                                        let errorMessage = 'Error rotating password'
+                                        if (data.detail) {
+                                            errorMessage += '\n\n' + data.detail
+                                        } else if (data.error) {
+                                            errorMessage += '\n\n' + data.error
+                                        }
+                                        alert(errorMessage)
+                                    }).catch(() => {
+                                        alert('Error rotating password')
+                                    })
                                 }
                             })
                             .catch(error => {

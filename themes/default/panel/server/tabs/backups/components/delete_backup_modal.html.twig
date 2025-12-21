@@ -52,13 +52,12 @@
                         } else {
                             submitButton.disabled = false
                             spinner.classList.add('d-none')
-
-                            alert('{{ 'pteroca.server.error_during_deleting_backup'|trans }}')
+                            showApiError(response, '{{ 'pteroca.server.error_during_deleting_backup'|trans }}')
                         }
-                    }).catch(() => {
+                    }).catch(error => {
                         submitButton.disabled = false
                         spinner.classList.add('d-none')
-
+                        console.error('Error:', error)
                         alert('{{ 'pteroca.server.error_during_deleting_backup'|trans }}')
                     })
             })
