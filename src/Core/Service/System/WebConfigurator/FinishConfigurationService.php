@@ -5,6 +5,7 @@ namespace App\Core\Service\System\WebConfigurator;
 use App\Core\DTO\Action\Result\ConfiguratorVerificationResult;
 use App\Core\Entity\User;
 use App\Core\Enum\SettingEnum;
+use App\Core\Enum\SystemRoleEnum;
 use App\Core\Repository\UserRepository;
 use App\Core\Service\Authorization\RegistrationService;
 use App\Core\Service\Security\RoleManager;
@@ -138,7 +139,7 @@ class FinishConfigurationService
         }
 
         // Assign admin role using RoleManager
-        $adminRole = $this->roleManager->getRoleByName('admin');
+        $adminRole = $this->roleManager->getRoleByName(SystemRoleEnum::ROLE_ADMIN->value);
         if ($adminRole && $registerResult->user) {
             $registerResult->user->addUserRole($adminRole);
             $this->userRepository->save($registerResult->user);
