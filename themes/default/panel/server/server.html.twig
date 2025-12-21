@@ -93,6 +93,28 @@
 
             return fetch(endpointUrl, requestObject)
         }
+
+        /**
+         * Show detailed error message from API response
+         * @param {Response} response - Fetch API response object
+         * @param {string} defaultMessage - Default error message to show
+         * @returns {Promise<void>}
+         */
+        function showApiError(response, defaultMessage) {
+            if (!response.ok) {
+                return response.json().then(data => {
+                    let errorMessage = defaultMessage
+                    if (data.detail) {
+                        errorMessage += '\n\n' + data.detail
+                    } else if (data.error) {
+                        errorMessage += '\n\n' + data.error
+                    }
+                    alert(errorMessage)
+                }).catch(() => {
+                    alert(defaultMessage)
+                })
+            }
+        }
     </script>
     {% for js in tabAssets.javascripts %}
         <script src="{{ template_asset(js) }}"></script>

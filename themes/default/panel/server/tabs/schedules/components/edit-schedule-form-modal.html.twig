@@ -106,12 +106,10 @@
     </div>
 </div>
 
-<!-- Hidden input do przechowywania ID edytowanego harmonogramu -->
 <input type="hidden" id="editingScheduleId" value="">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle cron cheatsheet for edit modal
     document.getElementById('editShowCheatsheet').addEventListener('change', function() {
         const cheatsheet = document.getElementById('editCronCheatsheet');
         if (this.checked) {
@@ -123,21 +121,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function openEditScheduleForm(scheduleId) {
-    // Pobierz dane harmonogramu
     fetch('{{ path('server_schedules_get', { id: server.id, scheduleId: '__SCHEDULE_ID__' }) }}'.replace('__SCHEDULE_ID__', scheduleId), {
         method: 'GET',
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
         }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert('{{ 'pteroca.server.error'|trans }}: ' + data.error);
-            return;
+    .then(response => {
+        if (!response.ok) {
+            showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}');
+            throw new Error('API Error');
         }
-        
-        // Wypełnij formularz danymi
+        return response.json();
+    })
+    .then(data => {
         document.getElementById('editingScheduleId').value = scheduleId;
         document.getElementById('editScheduleName').value = data.name || '';
         document.getElementById('editCronMinute').value = data.cron?.minute || '*';
@@ -148,7 +145,6 @@ function openEditScheduleForm(scheduleId) {
         document.getElementById('editOnlyWhenOnline').checked = data.only_when_online || false;
         document.getElementById('editScheduleEnabled').checked = data.is_active || false;
         
-        // Otwórz modal
         const modal = new bootstrap.Modal(document.getElementById('editScheduleFormModal'));
         modal.show();
     })
@@ -199,13 +195,12 @@ function saveEditedSchedule() {
             only_when_online: onlyWhenOnline
         })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert('{{ 'pteroca.server.error'|trans }}: ' + data.error);
-        } else {
+    .then(response => {
+        if (response.ok) {
             alert('{{ 'pteroca.server.data_updated_successfully'|trans }}');
             location.reload();
+        } else {
+            showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}');
         }
     })
     .catch(error => {
@@ -213,7 +208,6 @@ function saveEditedSchedule() {
         alert('{{ 'pteroca.server.error_occurred'|trans }}');
     });
     
-    // Zamknij modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('editScheduleFormModal'));
     modal.hide();
 }

@@ -65,21 +65,17 @@
                             submitButton.disabled = false
                             spinner.classList.add('d-none')
 
-                            response.json().then(function () {
-                                const responseCode = response.status
-
-                                if (responseCode === 429) {
-                                    alert('{{ 'pteroca.server.backup_time_limit'|trans }}')
-                                } else {
-                                    alert('{{ 'pteroca.server.error_during_backup'|trans }}')
-                                }
-                            })
+                            if (response.status === 429) {
+                                alert('{{ 'pteroca.server.backup_time_limit'|trans }}')
+                            } else {
+                                showApiError(response, '{{ 'pteroca.server.error_during_backup'|trans }}')
+                            }
                         }
                     })
-                    .catch(function () {
+                    .catch(function (error) {
                         submitButton.disabled = false
                         spinner.classList.add('d-none')
-
+                        console.error('Error:', error)
                         alert('{{ 'pteroca.server.error_during_backup'|trans }}')
                     })
             })

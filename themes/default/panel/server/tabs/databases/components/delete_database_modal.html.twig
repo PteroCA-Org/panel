@@ -50,10 +50,20 @@
                         if (response.ok) {
                             window.location.reload()
                         } else {
-                            submitButton.disabled = false
-                            spinner.classList.add('d-none')
-
-                            alert('{{ 'pteroca.server.error_during_deleting_database'|trans }}')
+                            return response.json().then(data => {
+                                let errorMessage = '{{ 'pteroca.server.error_during_deleting_database'|trans }}'
+                                if (data.detail) {
+                                    errorMessage += '\n\n' + data.detail
+                                } else if (data.error) {
+                                    errorMessage += '\n\n' + data.error
+                                }
+                                alert(errorMessage)
+                            }).catch(() => {
+                                alert('{{ 'pteroca.server.error_during_deleting_database'|trans }}')
+                            }).finally(() => {
+                                submitButton.disabled = false
+                                spinner.classList.add('d-none')
+                            })
                         }
                     }).catch(() => {
                     submitButton.disabled = false

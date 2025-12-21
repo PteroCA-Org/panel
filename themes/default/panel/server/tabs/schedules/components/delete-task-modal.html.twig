@@ -69,25 +69,21 @@
                 spinner.classList.remove('d-none')
 
                 sendRequest(endpointUrl, 'DELETE')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.error) {
-                            submitButton.disabled = false
-                            spinner.classList.add('d-none')
-                            alert('{{ 'pteroca.server.error'|trans }}: ' + data.error)
-                        } else {
-                            // Zamknij modal
+                    .then(response => {
+                        if (response.ok) {
                             const modal = bootstrap.Modal.getInstance(document.getElementById('deleteTaskModal'))
                             modal.hide()
-                            
-                            // Pokaż komunikat o sukcesie
+
                             alert('{{ 'pteroca.server.task_deleted_successfully'|trans }}')
-                            
-                            // Odśwież widok harmonogramu - otwórz ponownie modal edycji harmonogramu
+
                             const currentScheduleId = document.getElementById('currentScheduleId').value
                             if (currentScheduleId) {
                                 editSchedule(currentScheduleId)
                             }
+                        } else {
+                            submitButton.disabled = false
+                            spinner.classList.add('d-none')
+                            showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}')
                         }
                     }).catch(error => {
                         submitButton.disabled = false

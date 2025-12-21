@@ -8,6 +8,7 @@ use App\Core\Entity\Server;
 use App\Core\Enum\ServerLogActionEnum;
 use App\Core\Service\Logs\ServerLogService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Pterodactyl\PterodactylExceptionHandler;
 use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Core\Event\Server\Network\ServerAllocationCreatedEvent;
@@ -39,6 +40,7 @@ class ServerNetworkService
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly RequestStack $requestStack,
         private readonly EventContextService $eventContextService,
+        private readonly PterodactylExceptionHandler $pterodactylExceptionHandler,
     ) {}
 
     public function createAllocation(
@@ -72,18 +74,11 @@ class ServerNetworkService
                 ->network()
                 ->assignAllocation($server);
         } catch (Exception $exception) {
-            $errorObject = json_decode($exception->getMessage(), true)['errors'][0] ?? null;
-            $errorDetail = $errorObject['detail'] ?? null;
-
+            $parsedError = $this->pterodactylExceptionHandler->parseException($exception);
+            $errorDetail = $parsedError['detail'] ?? $parsedError['error'];
 
             if ($errorDetail === self::AUTO_ALLOCATION_DISABLED_ERROR) {
                 $errorDetail = $this->translator->trans('pteroca.server.auto_allocation_disabled_for_this_instance');
-            } else {
-                $errorDetail = sprintf(
-                    '%s: %s',
-                    $this->translator->trans('pteroca.server.error_during_creating_allocation'),
-                    $exception->getMessage(),
-                );
             }
         }
 
@@ -157,11 +152,8 @@ class ServerNetworkService
                 ->network()
                 ->setPrimaryAllocation($server, $allocationId);
         } catch (Exception $exception) {
-            $errorDetail = sprintf(
-                '%s: %s',
-                $this->translator->trans('pteroca.server.error_during_editing_allocation'),
-                $exception->getMessage(),
-            );
+            $parsedError = $this->pterodactylExceptionHandler->parseException($exception);
+            $errorDetail = $parsedError['detail'] ?? $parsedError['error'];
         }
 
         if (!empty($errorDetail)) {
@@ -241,11 +233,8 @@ class ServerNetworkService
                 ->network()
                 ->updateAllocationNotes($server, $allocationId, $notes);
         } catch (Exception $exception) {
-            $errorDetail = sprintf(
-                '%s: %s',
-                $this->translator->trans('pteroca.server.error_during_editing_allocation'),
-                $exception->getMessage(),
-            );
+            $parsedError = $this->pterodactylExceptionHandler->parseException($exception);
+            $errorDetail = $parsedError['detail'] ?? $parsedError['error'];
         }
 
         if (!empty($errorDetail)) {
@@ -326,17 +315,11 @@ class ServerNetworkService
                 ->network()
                 ->removeAllocation($server, $allocationId);
         } catch (Exception $exception) {
-            $errorObject = json_decode($exception->getMessage(), true)['errors'][0] ?? null;
-            $errorDetail = $errorObject['detail'] ?? null;
+            $parsedError = $this->pterodactylExceptionHandler->parseException($exception);
+            $errorDetail = $parsedError['detail'] ?? $parsedError['error'];
 
             if ($errorDetail === self::DELETE_PRIMARY_ALLOCATION_ERROR) {
                 $errorDetail = $this->translator->trans('pteroca.server.cannot_delete_primary_allocation');
-            } else {
-                $errorDetail = sprintf(
-                    '%s: %s',
-                    $this->translator->trans('pteroca.server.error_during_deleting_allocation'),
-                    $exception->getMessage(),
-                );
             }
         }
 

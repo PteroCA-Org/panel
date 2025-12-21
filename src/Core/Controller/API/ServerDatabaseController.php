@@ -5,7 +5,9 @@ namespace App\Core\Controller\API;
 use App\Core\Enum\ServerPermissionEnum;
 use App\Core\Repository\ServerRepository;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Pterodactyl\PterodactylExceptionHandler;
 use App\Core\Service\Server\ServerDatabaseService;
+use App\Core\Trait\HandlesPterodactylExceptions;
 use App\Core\Trait\InternalServerApiTrait;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -16,13 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServerDatabaseController extends APIAbstractController
 {
     use InternalServerApiTrait;
+    use HandlesPterodactylExceptions;
 
     public function __construct(
         private readonly ServerRepository $serverRepository,
         private readonly ServerDatabaseService $serverDatabaseService,
         private readonly PterodactylApplicationService $pterodactylApplicationService,
         private readonly LoggerInterface $logger,
+        private readonly PterodactylExceptionHandler $pterodactylExceptionHandler,
     ) {}
+
+    protected function getPterodactylExceptionHandler(): PterodactylExceptionHandler
+    {
+        return $this->pterodactylExceptionHandler;
+    }
+
+    protected function getLogger(): LoggerInterface
+    {
+        return $this->logger;
+    }
 
     #[Route('/panel/api/server/{id}/database/all', name: 'server_database_get_all', methods: ['GET'])]
     public function getAllDatabases(
@@ -39,13 +53,10 @@ class ServerDatabaseController extends APIAbstractController
             );
             $response->setData($pterodactylDatabases);
         } catch (Exception $e) {
-            $this->logger->error('Failed to get all Pterodactyl databases', [
+            return $this->handlePterodactylException($e, 'get all Pterodactyl databases', [
                 'server_id' => $id,
                 'user_id' => $this->getUser()->getId(),
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
             ]);
-            $response->setStatusCode(400);
         }
 
         return $response;
@@ -69,15 +80,12 @@ class ServerDatabaseController extends APIAbstractController
                 $payload['connections_from'],
             );
         } catch (Exception $e) {
-            $this->logger->error('Failed to create Pterodactyl database', [
+            return $this->handlePterodactylException($e, 'create Pterodactyl database', [
                 'server_id' => $id,
                 'user_id' => $this->getUser()->getId(),
                 'database_name' => $payload['name'] ?? 'unknown',
                 'connections_from' => $payload['connections_from'] ?? 'unknown',
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
             ]);
-            $response->setStatusCode(400);
         }
 
         return $response;
@@ -99,14 +107,11 @@ class ServerDatabaseController extends APIAbstractController
                 $databaseId,
             );
         } catch (Exception $e) {
-            $this->logger->error('Failed to delete Pterodactyl database', [
+            return $this->handlePterodactylException($e, 'delete Pterodactyl database', [
                 'server_id' => $id,
                 'user_id' => $this->getUser()->getId(),
                 'database_id' => $databaseId,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
             ]);
-            $response->setStatusCode(400);
         }
 
         return $response;
@@ -129,14 +134,11 @@ class ServerDatabaseController extends APIAbstractController
             );
             $response->setData($changedDatabaseData);
         } catch (Exception $e) {
-            $this->logger->error('Failed to rotate Pterodactyl database password', [
+            return $this->handlePterodactylException($e, 'rotate Pterodactyl database password', [
                 'server_id' => $id,
                 'user_id' => $this->getUser()->getId(),
                 'database_id' => $databaseId,
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
             ]);
-            $response->setStatusCode(400);
         }
 
         return $response;

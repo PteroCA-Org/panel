@@ -70,9 +70,11 @@ readonly class ServerBackupService
         }
 
         try {
+            $ignoredFilesArray = $this->parseIgnoredFiles($ignoredFiles);
+
             $createdBackup = $this->getPterodactylClientApi($user)
                 ->backups()
-                ->createBackup($server, $backupName, $ignoredFiles, $isLocked)
+                ->createBackup($server, $backupName, $ignoredFilesArray, $isLocked)
                 ->toArray();
 
             $this->serverLogService->logServerAction(
@@ -290,5 +292,17 @@ readonly class ServerBackupService
     {
         return $this->pterodactylApplicationService
             ->getClientApi($user);
+    }
+
+    private function parseIgnoredFiles(?string $ignoredFiles): ?array
+    {
+        if (empty($ignoredFiles)) {
+            return null;
+        }
+
+        return array_filter(
+            array_map('trim', explode("\n", $ignoredFiles)),
+            fn($line) => $line !== ''
+        );
     }
 }

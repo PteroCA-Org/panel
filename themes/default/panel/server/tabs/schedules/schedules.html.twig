@@ -131,7 +131,7 @@
 {% block body_javascript %}
     <script>
         let currentSchedules = {{ serverData.serverSchedules|json_encode|raw }};
-        let currentScheduleData = null; // Przechowuje dane aktualnie wyświetlanego harmonogramu
+        let currentScheduleData = null;
         
         function getCurrentScheduleData() {
             return currentScheduleData;
@@ -151,35 +151,35 @@
         }
         
         function editSchedule(scheduleId) {
-            // Pobierz szczegóły harmonogramu z API (wraz z zadaniami)
             fetch('{{ path('server_schedules_get', { id: server.id, scheduleId: '__SCHEDULE_ID__' }) }}'.replace('__SCHEDULE_ID__', scheduleId), {
                 method: 'GET',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('{{ 'pteroca.server.error'|trans }}: ' + data.error);
-                } else {
-                    showEditScheduleModal(data);
+            .then(response => {
+                if (!response.ok) {
+                    showApiError(response, '{{ 'pteroca.server.error_occurred'|trans }}');
+                    throw new Error('API Error');
                 }
+                return response.json();
+            })
+            .then(data => {
+                showEditScheduleModal(data);
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('{{ 'pteroca.server.error_occurred'|trans }}');
+                if (error.message !== 'API Error') {
+                    console.error('Error:', error);
+                    alert('{{ 'pteroca.server.error_occurred'|trans }}');
+                }
             });
         }
         
         function showEditScheduleModal(scheduleData) {
-            // Zapisz dane harmonogramu do zmiennej globalnej
             currentScheduleData = scheduleData;
             
-            // Ustaw ID harmonogramu
             document.getElementById('currentScheduleId').value = scheduleData.id;
             
-            // Ustaw nazwę i status
             document.getElementById('scheduleNameTitle').textContent = scheduleData.name;
             const statusBadge = document.getElementById('scheduleStatusBadge');
             if (scheduleData.is_active) {
@@ -190,24 +190,20 @@
                 statusBadge.className = 'badge ms-2 bg-secondary text-white';
             }
             
-            // Ustaw daty ostatniego i następnego uruchomienia
-            document.getElementById('scheduleLastRun').textContent = scheduleData.last_run_at ? 
+            document.getElementById('scheduleLastRun').textContent = scheduleData.last_run_at ?
                 new Date(scheduleData.last_run_at).toLocaleString('pl-PL') : '{{ 'pteroca.server.never'|trans }}';
             document.getElementById('scheduleNextRun').textContent = scheduleData.next_run_at ? 
                 new Date(scheduleData.next_run_at).toLocaleString('pl-PL') : '-';
             
-            // Ustaw wyrażenie cron
             document.getElementById('cronMinute').textContent = scheduleData.cron.minute;
             document.getElementById('cronHour').textContent = scheduleData.cron.hour;
             document.getElementById('cronDayOfMonth').textContent = scheduleData.cron.day_of_month;
             document.getElementById('cronMonth').textContent = scheduleData.cron.month;
             document.getElementById('cronDayOfWeek').textContent = scheduleData.cron.day_of_week;
             
-            // Załaduj taski z relationships
             const tasks = scheduleData.relationships?.tasks || [];
             loadScheduleTasks(tasks);
             
-            // Pokaż modal
             const modal = new bootstrap.Modal(document.getElementById('editScheduleModal'));
             modal.show();
         }
@@ -285,20 +281,17 @@
                 return;
             }
             
-            // Zamknij modal edycji harmonogramu
             const scheduleModal = bootstrap.Modal.getInstance(document.getElementById('editScheduleModal'));
             if (scheduleModal) {
                 scheduleModal.hide();
             }
             
-            // Otwórz modal dodawania zadania
             openAddTaskModal(scheduleId);
         }
         
         function editTask(taskId) {
             const scheduleId = document.getElementById('currentScheduleId').value;
             
-            // Znajdź dane zadania w aktualnie załadowanych danych
             const currentScheduleData = getCurrentScheduleData();
             if (!currentScheduleData || !currentScheduleData.relationships || !currentScheduleData.relationships.tasks) {
                 alert('{{ 'pteroca.server.error_loading_task_data'|trans }}');
@@ -311,20 +304,17 @@
                 return;
             }
             
-            // Zamknij modal edycji harmonogramu
             const scheduleModal = bootstrap.Modal.getInstance(document.getElementById('editScheduleModal'));
             if (scheduleModal) {
                 scheduleModal.hide();
             }
             
-            // Otwórz modal edycji zadania
             openEditTaskModal(taskId, scheduleId, taskData);
         }
         
         function deleteTask(taskId) {
             const scheduleId = document.getElementById('currentScheduleId').value;
             
-            // Znajdź dane zadania w aktualnie załadowanych danych
             const currentScheduleData = getCurrentScheduleData();
             if (!currentScheduleData || !currentScheduleData.relationships || !currentScheduleData.relationships.tasks) {
                 alert('{{ 'pteroca.server.error_loading_task_data'|trans }}');
@@ -337,24 +327,20 @@
                 return;
             }
             
-            // Zamknij modal edycji harmonogramu
             const scheduleModal = bootstrap.Modal.getInstance(document.getElementById('editScheduleModal'));
             if (scheduleModal) {
                 scheduleModal.hide();
             }
             
-            // Ustaw dane w modalu usuwania zadania
             document.getElementById('deleteTaskId').value = taskId;
             document.getElementById('deleteTaskScheduleId').value = scheduleId;
             
-            // Ustaw ikonę i typ zadania
             const taskIcon = getTaskTypeIcon(taskData.action);
             const taskType = getTaskTypeName(taskData.action);
             document.getElementById('task-delete-icon').className = taskIcon + ' me-2';
             document.getElementById('task-delete-type').textContent = taskType;
             document.getElementById('task-delete-payload').textContent = taskData.payload || '-';
             
-            // Pokaż modal usuwania zadania
             const modal = new bootstrap.Modal(document.getElementById('deleteTaskModal'));
             modal.show();
         }
@@ -362,11 +348,9 @@
         function editCurrentSchedule() {
             const scheduleId = document.getElementById('currentScheduleId').value;
             if (scheduleId) {
-                // Zamknij modal szczegółów
                 const detailModal = bootstrap.Modal.getInstance(document.getElementById('editScheduleModal'));
                 detailModal.hide();
                 
-                // Otwórz modal formularza edycji
                 openEditScheduleForm(scheduleId);
             }
         }
@@ -374,30 +358,24 @@
         function deleteCurrentSchedule() {
             const scheduleId = document.getElementById('currentScheduleId').value;
             if (scheduleId) {
-                // Zamknij modal
                 const modal = bootstrap.Modal.getInstance(document.getElementById('editScheduleModal'));
                 modal.hide();
                 
-                // Wywołaj funkcję usuwania
                 deleteSchedule(scheduleId);
             }
         }
         
         function deleteSchedule(scheduleId) {
-            // Znajdź dane harmonogramu
             const schedule = currentSchedules.find(s => s.id == scheduleId);
             if (schedule) {
-                // Ustaw dane w modalu
                 document.getElementById('schedule-delete-name').textContent = schedule.name;
                 document.getElementById('deleteScheduleId').value = scheduleId;
                 
-                // Pokaż modal
                 const modal = new bootstrap.Modal(document.getElementById('deleteScheduleModal'));
                 modal.show();
             }
         }
         
-        // Event listenery dla dropdown actions
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('#schedules .dropdown-actions .dropdown-menu .dropdown-item').forEach(function (element) {
                 element.addEventListener('click', function (event) {

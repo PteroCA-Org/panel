@@ -128,13 +128,11 @@
         let currentSubusers = {{ serverData.subusers|json_encode|raw }};
         
         function addNewUser() {
-            // Wyczyść formularz
             document.getElementById('addUserForm').reset();
             document.querySelectorAll('#addUserModal input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;
             });
             
-            // Pokaż modal
             const modal = new bootstrap.Modal(document.getElementById('addUserModal'));
             modal.show();
         }
@@ -180,29 +178,24 @@
                 alert('{{ 'pteroca.server.error_occurred'|trans }}');
             });
             
-            // Zamknij modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
             modal.hide();
         }
         
         function editUser(userUuid) {
-            // Znajdź użytkownika w danych
             const user = currentSubusers.find(u => u.uuid === userUuid);
             if (!user) {
-                alert('Nie znaleziono użytkownika');
+                alert('User not found');
                 return;
             }
             
-            // Ustaw email w tytule modala
             document.getElementById('userEmail').textContent = user.email;
             document.getElementById('editUserUuid').value = userUuid;
             
-            // Wyczyść wszystkie checkboxy w modalu edycji
             document.querySelectorAll('#editUserForm input[type="checkbox"]').forEach(checkbox => {
                 checkbox.checked = false;
             });
             
-            // Zaznacz uprawnienia użytkownika
             if (user.permissions && user.permissions.length > 0) {
                 user.permissions.forEach(permission => {
                     const checkbox = document.querySelector(`#editUserForm input[value="${permission}"]`);
@@ -212,17 +205,14 @@
                 });
             }
             
-            // Aktualizuj checkboxy grup
             updateGroupCheckboxes('#editUserForm');
             
-            // Pokaż modal
             const modal = new bootstrap.Modal(document.getElementById('editUserModal'));
             modal.show();
         }
         
         function removeUser(userUuid) {
             if (confirm('{{ 'pteroca.server.confirm_remove_user'|trans }}')) {
-                // Znajdź email użytkownika na podstawie UUID
                 const user = currentSubusers.find(u => u.uuid === userUuid);
                 if (!user || !user.email) {
                     alert('{{ 'pteroca.server.error_occurred'|trans }}');
@@ -266,7 +256,6 @@
                 return;
             }
             
-            // Znajdź email użytkownika na podstawie UUID
             const user = currentSubusers.find(u => u.uuid === userUuid);
             if (!user || !user.email) {
                 alert('{{ 'pteroca.server.error_occurred'|trans }}');
@@ -298,13 +287,11 @@
                 alert('{{ 'pteroca.server.error_occurred'|trans }}');
             });
             
-            // Zamknij modal
             const modal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
             modal.hide();
         }
         
         function updateGroupCheckboxes(formSelector = '') {
-            // Aktualizuj checkboxy grup na podstawie zaznaczonych uprawnień
             const selector = formSelector ? `${formSelector} .group-checkbox` : '.group-checkbox';
             document.querySelectorAll(selector).forEach(groupCheckbox => {
                 const group = groupCheckbox.dataset.group;
@@ -327,9 +314,7 @@
             });
         }
         
-        // Event listenery dla checkboxów grup
         document.addEventListener('DOMContentLoaded', function() {
-            // Obsługa dropdown actions
             document.querySelectorAll('#users .dropdown-actions .dropdown-menu .dropdown-item').forEach(function (element) {
                 element.addEventListener('click', function (event) {
                     event.preventDefault();
@@ -346,7 +331,6 @@
                 });
             });
             
-            // Obsługa checkboxów grup
             document.querySelectorAll('.group-checkbox').forEach(groupCheckbox => {
                 groupCheckbox.addEventListener('change', function() {
                     const group = this.dataset.group;
@@ -363,7 +347,6 @@
                 });
             });
             
-            // Obsługa pojedynczych checkboxów uprawnień
             document.querySelectorAll('.permission-checkbox').forEach(permissionCheckbox => {
                 permissionCheckbox.addEventListener('change', function() {
                     const form = this.closest('form');
