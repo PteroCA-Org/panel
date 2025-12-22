@@ -19,6 +19,11 @@ readonly class DemoModeSubscriber implements EventSubscriberInterface
         'security_logout',
     ];
 
+    private const BLOCKED_ROUTES = [
+        'payment_callback_success',  // /wallet/{provider}/success - adds money to wallet
+        'stripe_success',            // /wallet/recharge/success - adds money (deprecated but active)
+    ];
+
     public function __construct(
         private DemoModeService $demoModeService,
         private TranslatorInterface $translator,
@@ -39,6 +44,17 @@ readonly class DemoModeSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
         $method = $request->getMethod();
         $routeName = $request->attributes->get('_route');
+
+        // Block dangerous routes that modify data (e.g., payment callbacks)
+        if (in_array($routeName, self::BLOCKED_ROUTES, true)) {
+            $message = $this->translator->trans($this->demoModeService->getDemoModeMessage());
+            $session = $this->requestStack->getSession();
+            $session->getFlashBag()->add('danger', $message);
+
+            // Redirect to wallet page for payment routes
+            $event->setResponse(new RedirectResponse('/panel?routeName=recharge_balance'));
+            return;
+        }
 
         // Special handling for Settings CRUD - block viewing settings (even GET requests)
         // to protect sensitive information (API keys, passwords, etc.)
