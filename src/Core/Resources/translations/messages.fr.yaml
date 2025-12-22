@@ -1662,3 +1662,7 @@ pteroca:
       user_features: 'Fonctionnalités utilisateur'
       pterodactyl_integration: 'Intégration Pterodactyl'
       'pterodactyl_integration (admin)': 'Intégration Pterodactyl (Admin)'
+  demo_mode:
+    action_disabled: "Ceci est une version de démonstration - cette action est désactivée"
+    websocket_disabled: "Le contrôle du serveur (démarrer/arrêter/redémarrer/tuer) et l'exécution de commandes sont désactivés en mode démonstration"
+    settings_view_disabled: "L'affichage des paramètres est désactivé en mode démonstration pour protéger les informations sensibles"

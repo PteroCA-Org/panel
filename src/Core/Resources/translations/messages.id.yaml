@@ -1581,3 +1581,7 @@ pteroca:
       user_features: 'Fitur Pengguna'
       pterodactyl_integration: 'Integrasi Pterodactyl'
       'pterodactyl_integration (admin)': 'Integrasi Pterodactyl (Admin)'
+  demo_mode:
+    action_disabled: 'Ini adalah versi demo - tindakan ini dinonaktifkan'
+    websocket_disabled: 'Kontrol server (mulai/stop/restart/bunuh) dan eksekusi perintah dinonaktifkan dalam mode demo'
+    settings_view_disabled: 'Melihat pengaturan dinonaktifkan dalam mode demo untuk melindungi informasi sensitif'

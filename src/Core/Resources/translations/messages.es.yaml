@@ -1663,3 +1663,7 @@ pteroca:
       user_features: 'Características de usuario'
       pterodactyl_integration: 'Integración Pterodactyl'
       'pterodactyl_integration (admin)': 'Integración Pterodactyl (Admin)'
+  demo_mode:
+    action_disabled: 'Esta es una versión de demostración - esta acción está deshabilitada'
+    websocket_disabled: 'El control del servidor (iniciar/detener/reiniciar/matar) y la ejecución de comandos están deshabilitados en el modo de demostración'
+    settings_view_disabled: 'Ver la configuración está deshabilitado en el modo de demostración para proteger información sensible'

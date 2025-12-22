@@ -1677,3 +1677,7 @@ pteroca:
       user_features: '用户功能'
       pterodactyl_integration: '翼龙集成'
       'pterodactyl_integration (admin)': '翼龙集成 (Admin)'
+  demo_mode:
+    action_disabled: '这是演示版本 - 此操作已禁用'
+    websocket_disabled: '在演示模式下，服务器控制（启动/停止/重启/终止）和命令执行已禁用'
+    settings_view_disabled: '在演示模式下，查看设置已禁用以保护敏感信息'

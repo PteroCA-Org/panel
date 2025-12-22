@@ -1662,3 +1662,7 @@ pteroca:
       user_features: 'Функції користувача'
       pterodactyl_integration: 'Інтеграція Pterodactyl'
       'pterodactyl_integration (admin)': 'Інтеграція Pterodactyl (Admin)'
+  demo_mode:
+    action_disabled: 'Це демо-версія - ця дія вимкнена'
+    websocket_disabled: 'Керування сервером (запуск/зупинка/перезапуск/вбивство) та виконання команд вимкнені в демо-режимі'
+    settings_view_disabled: 'Перегляд налаштувань вимкнено в демо-режимі для захисту конфіденційної інформації'

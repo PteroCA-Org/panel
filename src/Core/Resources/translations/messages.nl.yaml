@@ -1647,3 +1647,7 @@ pteroca:
       user_features: 'Gebruikersfuncties'
       pterodactyl_integration: 'Pterodactyl-integratie'
       'pterodactyl_integration (admin)': 'Pterodactyl-integratie (Admin)'
+  demo_mode:
+    action_disabled: 'Dit is een demo-versie - deze actie is uitgeschakeld'
+    websocket_disabled: 'Serverbeheer (starten/stoppen/herstarten/doden) en opdrachtuitvoering zijn uitgeschakeld in demo-modus'
+    settings_view_disabled: 'Het bekijken van instellingen is uitgeschakeld in demo-modus om gevoelige informatie te beschermen'

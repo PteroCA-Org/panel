@@ -1663,3 +1663,7 @@ pteroca:
       user_features: 'उपयोगकर्ता सुविधाएँ'
       pterodactyl_integration: 'Pterodactyl एकीकरण'
       'pterodactyl_integration (admin)': 'Pterodactyl एकीकरण (एडमिन)'
+  demo_mode:
+    action_disabled: 'यह एक डेमो संस्करण है - यह कार्रवाई अक्षम है'
+    websocket_disabled: 'डेमो मोड में सर्वर नियंत्रण (प्रारंभ/रोक/पुनः प्रारंभ/मार) और कमांड निष्पादन अक्षम हैं'
+    settings_view_disabled: 'संवेदनशील जानकारी की सुरक्षा के लिए डेमो मोड में सेटिंग देखना अक्षम है'
