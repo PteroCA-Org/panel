@@ -152,7 +152,7 @@ class PluginCrudController extends AbstractPanelController
             ->linkToCrudAction('enablePlugin')
             ->displayIf(function (Plugin $plugin) {
                 $state = $plugin->getState();
-                return in_array($state, [PluginStateEnum::DISCOVERED, PluginStateEnum::DISABLED], true) &&
+                return $state->canBeEnabled() &&
                     $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
             });
 
