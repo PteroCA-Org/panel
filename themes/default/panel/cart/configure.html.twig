@@ -334,6 +334,7 @@
             const slotsRange = document.getElementById('slots');
             const selectedSlotsDisplay = document.getElementById('selected-slots');
             const eggSelect = document.getElementById('egg');
+            const slotsFormField = document.getElementById('server_order_slots');
             
             {% if initialSlots %}
             const initialSlots = {{ initialSlots }};
@@ -426,6 +427,9 @@
                 const slotsCount = slotsRange.value;
                 const slotText = slotsCount === '1' ? '{{ 'pteroca.product.slot'|trans }}' : '{{ 'pteroca.product.slots'|trans }}';
                 selectedSlotsDisplay.textContent = `${slotsCount} ${slotText}`;
+                if (slotsFormField) {
+                    slotsFormField.value = slotsCount;
+                }
             }
 
             handleDurationChange();

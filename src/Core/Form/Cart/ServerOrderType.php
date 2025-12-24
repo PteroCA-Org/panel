@@ -105,6 +105,10 @@ class ServerOrderType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'min' => 1,
+                    'style' => 'display:none',
+                ],
+                'label_attr' => [
+                    'style' => 'display:none',
                 ],
             ]);
         }
