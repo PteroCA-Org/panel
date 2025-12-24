@@ -17,6 +17,10 @@ pteroca:
     dont_have_permission: 'U bent niet bevoegd om deze functie te gebruiken.'
     experimental_feature: 'Deze functie is experimenteel en werkt mogelijk niet correct.'
     or_resend_verification_email: 'of klik hier om de verificatie-e-mail opnieuw te verzenden.'
+  page:
+    terms_of_service: 'Servicevoorwaarden'
+    terms_of_service_description: 'Lees onze voorwaarden en condities zorgvuldig door'
+    back: 'Terug'
   login:
     title: 'Aanmelden'
     email_address: 'Email adres'

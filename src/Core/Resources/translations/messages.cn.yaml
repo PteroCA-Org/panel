@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: '此功能为实验性功能，可能无法正常工作。'
     or_resend_verification_email: '或点击此处重新发送验证邮件。'
 
+  page:
+    terms_of_service: '服务条款'
+    terms_of_service_description: '请仔细阅读我们的条款和条件'
+    back: '返回'
+
   login:
     title: '登录'
     email_address: '电子邮件地址'

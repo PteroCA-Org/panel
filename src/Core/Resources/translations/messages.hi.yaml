@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: 'यह फीचर परीक्षणाधीन है और सही से काम नहीं कर सकता है।'
     or_resend_verification_email: 'या सत्यापन ईमेल को फिर से भेजने के लिए यहाँ क्लिक करें।'
 
+  page:
+    terms_of_service: 'सेवा की शर्तें'
+    terms_of_service_description: 'कृपया हमारी शर्तों और नियमों को ध्यान से पढ़ें'
+    back: 'वापस'
+
   login:
     title: 'लॉगिन'
     email_address: 'ईमेल पता'

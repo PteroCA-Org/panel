@@ -99,6 +99,11 @@ pteroca:
     success_password_changed: 'Your password has been successfully changed.'
     back_to_login: 'Back to login'
 
+  page:
+    terms_of_service: 'Terms of Service'
+    terms_of_service_description: 'Please read our terms and conditions carefully'
+    back: 'Back'
+
   dashboard:
     account_balance: 'Account balance'
     account_balance_description: 'Your current account balance.'

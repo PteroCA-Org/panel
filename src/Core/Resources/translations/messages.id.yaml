@@ -18,6 +18,11 @@ pteroca:
     dont_have_permission: 'Anda tidak memiliki izin untuk melakukan tindakan ini.'
     experimental_feature: 'Fitur ini eksperimental dan mungkin tidak berfungsi dengan benar.'
 
+  page:
+    terms_of_service: 'Syarat Layanan'
+    terms_of_service_description: 'Harap baca syarat dan ketentuan kami dengan hati-hati'
+    back: 'Kembali'
+
   login:
     title: 'Masuk'
     email_address: 'Alamat email'

@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: 'Ta funkcja jest eksperymentalna i może nie działać poprawnie.'
     or_resend_verification_email: 'lub kliknij tutaj, aby ponownie wysłać e-mail weryfikacyjny.'
 
+  page:
+    terms_of_service: 'Regulamin'
+    terms_of_service_description: 'Proszę uważnie przeczytać nasze warunki i postanowienia'
+    back: 'Wstecz'
+
   login:
     title: 'Zaloguj się'
     email_address: 'Adres e-mail'

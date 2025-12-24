@@ -11,9 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PageController extends AbstractController
 {
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+    ) {
+    }
+
     #[Route('/terms-of-service', name: 'terms_of_service')]
     public function index(
         SettingService $settingService,
@@ -42,7 +48,18 @@ class PageController extends AbstractController
         }
 
         $viewData = [
+            'pageTitle' => $this->translator->trans('pteroca.page.terms_of_service'),
+            'pageDescription' => $this->translator->trans('pteroca.page.terms_of_service_description'),
+            'pageIcon' => 'fa-file-contract',
             'pageContent' => $pageContent,
+            'footerLinks' => [
+                [
+                    'url' => 'javascript:history.back()',
+                    'text' => 'pteroca.page.back',
+                    'icon' => 'fa-arrow-left',
+                    'isRoute' => false,
+                ],
+            ],
         ];
 
         return $this->renderWithEvent(

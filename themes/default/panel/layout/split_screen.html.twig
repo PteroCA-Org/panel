@@ -136,5 +136,7 @@
         }
     </script>
 
-    <script src="{{ asset('login.js', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}"></script>
+    {% if loadLoginJs|default(false) %}
+        <script src="{{ asset('login.js', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}"></script>
+    {% endif %}
 {% endblock %}
