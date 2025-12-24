@@ -150,6 +150,21 @@ readonly class PluginManager
         // Persist to database
         $this->pluginRepository->save($plugin);
 
+        // Initialize default settings from config_schema immediately after registration
+        if ($plugin->getState() === PluginStateEnum::REGISTERED) {
+            try {
+                $initializedSettings = $this->settingService->initializeDefaults($plugin);
+                if ($initializedSettings > 0) {
+                    $this->logger->info("Initialized $initializedSettings default settings during registration for plugin {$plugin->getName()}");
+                }
+            } catch (Exception $e) {
+                // Log error but don't fail registration
+                $this->logger->error("Failed to initialize settings during registration: {$e->getMessage()}", [
+                    'plugin' => $plugin->getName(),
+                ]);
+            }
+        }
+
         return $plugin;
     }
 
@@ -162,15 +177,12 @@ readonly class PluginManager
             // Provide helpful error for DISCOVERED state
             if ($plugin->getState() === PluginStateEnum::DISCOVERED) {
                 throw new InvalidStateTransitionException(
-                    sprintf(
-                        "Cannot enable plugin '%s' in DISCOVERED state. " .
-                        "Plugin must be REGISTERED first. " .
-                        "This usually indicates a registration failure. " .
-                        "Check plugin compatibility and composer.json validation.",
-                        $plugin->getName()
-                    ),
-                    0,
-                    $e
+                    $plugin->getName(),
+                    PluginStateEnum::DISCOVERED,
+                    PluginStateEnum::ENABLED,
+                    "Plugin must be REGISTERED first. " .
+                    "This usually indicates a registration failure. " .
+                    "Check plugin compatibility and composer.json validation."
                 );
             }
             throw $e;
@@ -335,10 +347,10 @@ readonly class PluginManager
         try {
             $this->pluginLoader->load($plugin);
 
-            // Initialize default settings from config_schema
+            // Initialize default settings from config_schema (skip if already initialized during registration)
             $initializedSettings = $this->settingService->initializeDefaults($plugin);
             if ($initializedSettings > 0) {
-                $this->logger->info("Initialized $initializedSettings default settings for plugin {$plugin->getName()}");
+                $this->logger->info("Initialized $initializedSettings additional settings for plugin {$plugin->getName()}");
             }
 
             // Execute database migrations
