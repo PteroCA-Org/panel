@@ -613,8 +613,21 @@ readonly class PluginManager
                 }
                 $plugins[] = $existingPlugin;
             } else {
-                // Create virtual plugin entity (not persisted)
-                $plugin = $this->createPluginFromManifest($pluginPath, $manifest);
+                // Auto-register plugin found on filesystem but not in database
+                try {
+                    $plugin = $this->registerPlugin($pluginPath, $manifest);
+                    $this->logger->info("Auto-registered plugin discovered in filesystem", [
+                        'plugin' => $manifest->name,
+                        'state' => $plugin->getState()->value,
+                    ]);
+                } catch (Exception $e) {
+                    // If registration fails, fall back to virtual entity for display
+                    $this->logger->warning("Failed to auto-register plugin, showing as virtual entity", [
+                        'plugin' => $manifest->name,
+                        'error' => $e->getMessage(),
+                    ]);
+                    $plugin = $this->createPluginFromManifest($pluginPath, $manifest);
+                }
                 $plugins[] = $plugin;
             }
         }
