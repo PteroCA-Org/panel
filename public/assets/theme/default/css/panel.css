@@ -1395,6 +1395,21 @@ table .badge-primary,
     color: #fff !important;
 }
 
+.btn-danger {
+    --button-danger-bg: #dc2626;
+    --button-danger-color: #fff;
+    --button-danger-border-color: #dc2626;
+    --button-danger-hover-bg: #b91c1c;
+    --button-danger-hover-color: #fff;
+}
+
+.ea-dark-scheme .btn-danger {
+    --button-danger-bg: #b62324;
+    --button-danger-color: #fff;
+    --button-danger-hover-bg: #9a1b22;
+    --button-danger-hover-color: #fff;
+}
+
 .btn-outline-primary {
     border-color: var(--stripe-gray-300);
     color: var(--stripe-gray-700);
@@ -3149,4 +3164,38 @@ hr {
 .btn.info:focus i,
 .btn.info:active i {
     color: #fff !important;
+}
+
+.datagrid .dropdown-actions .dropdown-toggle {
+    padding: 4px 6px;
+    min-width: 32px;
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.datagrid .dropdown-actions .dropdown-toggle .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.datagrid .dropdown-actions .dropdown-toggle .icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.datagrid tr:not(.selected-row):hover .actions-as-dropdown .dropdown-actions > .dropdown-toggle {
+    background: var(--dropdown-toggle-bg);
+    border-color: var(--dropdown-toggle-border-color);
+}
+
+.ea-dark-scheme .datagrid .dropdown-actions .dropdown-toggle {
+    padding: 4px 6px;
+    min-width: 32px;
+    min-height: 28px;
 }

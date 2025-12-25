@@ -238,7 +238,8 @@ class VoucherCrudController extends AbstractPanelController
         return Action::new(
             'showVoucherUsages',
             $this->translator->trans('pteroca.crud.voucher.show_voucher_usages')
-        )->linkToUrl(
+        )->setIcon('fa fa-list')
+        ->linkToUrl(
             fn (Voucher $entity) => $this->generateUrl(
                 'panel',
                 [

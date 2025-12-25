@@ -262,6 +262,7 @@ class ProductCrudController extends AbstractPanelController
         $copyAction = Action::new('copyProduct', $this->translator->trans('pteroca.crud.product.copy'))
             ->linkToCrudAction('copyProduct')
             ->setCssClass('action-copy-product')
+            ->setIcon('fa fa-copy')
             ->displayIf(fn (Product $entity) =>
                 $this->getUser()?->hasPermission(PermissionEnum::COPY_PRODUCT) &&
                 empty($entity->getDeletedAt())

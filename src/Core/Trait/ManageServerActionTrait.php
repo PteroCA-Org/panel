@@ -37,7 +37,8 @@ trait ManageServerActionTrait
         return Action::new(
             'showServerLogs',
             $this->translator->trans('pteroca.crud.server.show_server_logs'),
-        )->linkToUrl(
+        )->setIcon('fa fa-file-text')
+        ->linkToUrl(
             fn (Server|ServerProduct $entity) => $this->generateUrl(
                 'panel',
                 [
@@ -61,7 +62,8 @@ trait ManageServerActionTrait
         $manageServerAction = Action::new(
             'manageServer',
             $this->translator->trans('pteroca.crud.server.show_server_dashboard'),
-        )->displayIf(function (Server|ServerProduct $entity) {
+        )->setIcon('fa fa-tachometer')
+        ->displayIf(function (Server|ServerProduct $entity) {
             if ($entity instanceof Server) {
                 return empty($entity->getDeletedAt());
             }

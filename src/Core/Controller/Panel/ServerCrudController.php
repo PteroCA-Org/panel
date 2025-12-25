@@ -196,10 +196,16 @@ class ServerCrudController extends AbstractPanelController
 
     private function getServerProductAction(string $action): Action
     {
+        $iconMap = [
+            Action::EDIT => 'fa fa-cog',
+            Action::DETAIL => 'fa fa-eye',
+        ];
+
         return Action::new(
             sprintf('serverProduct_%s', $action),
             $this->translator->trans(sprintf('pteroca.crud.server.server_product_%s', $action)),
-        )->linkToUrl(
+        )->setIcon($iconMap[$action] ?? 'fa fa-info-circle')
+        ->linkToUrl(
             fn (Server $entity) => $this->generateUrl(
                 'panel',
                 [
