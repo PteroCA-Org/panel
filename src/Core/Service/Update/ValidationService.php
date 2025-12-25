@@ -142,6 +142,7 @@ class ValidationService
             $rootPath . '/var/backups',
             $rootPath . '/composer.lock',
             $rootPath . '/config',
+            $rootPath . '/plugins',
         ];
 
         $issues = [];
