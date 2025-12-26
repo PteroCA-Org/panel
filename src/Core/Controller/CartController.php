@@ -237,6 +237,8 @@ class CartController extends AbstractController
             'eggs' => $preparedEggs,
             'form' => $form,
             'request' => $requestData,
+            'selectedDuration' => $requestData['duration'] ?? null,
+            'selectedEgg' => $requestData['egg'] ?? null,
             'isProductAvailable' => $this->storeService->productHasNodeWithResources($product),
             'hasSlotPrices' => $hasSlotPrices,
             'initialSlots' => $requestData['slots'] ?? null,

@@ -384,12 +384,14 @@
             function handleDurationChange() {
                 const selectedOption = durationSelect.options[durationSelect.selectedIndex];
                 const priceType = selectedOption.getAttribute('data-type');
-                
+
                 if (priceType === 'slot') {
                     slotSelection.style.display = 'block';
+                    slotsRange.disabled = false;
                     updateMaxSlots();
                 } else {
                     slotSelection.style.display = 'none';
+                    slotsRange.disabled = true;
                 }
             }
             
