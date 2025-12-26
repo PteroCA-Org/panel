@@ -3199,3 +3199,7 @@ hr {
     min-width: 32px;
     min-height: 28px;
 }
+
+#flash-messages .alert {
+    margin: 0.5rem 0;
+}

@@ -1234,6 +1234,7 @@ pteroca:
     verification:
       subject: "Verifica e-mail - %siteName%"
       title: "Verifica e-mail"
+      subtitle: "Si prega di verificare il proprio indirizzo email per continuare"
       hello: "Ciao %name%!"
       message: "Grazie per esserti registrato su %siteName%. Verifica il tuo indirizzo e-mail cliccando sul pulsante qui sotto."
       verify_button: "Verifica indirizzo e-mail"
@@ -1249,6 +1250,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Registrazione'
+      subtitle: 'Il tuo account è stato creato con successo'
       welcome: 'Benvenuto nel nostro servizio! Grazie per esserti registrato.'
       account_ready: 'Il tuo account è pronto per l''uso. Ora puoi accedere al tuo account e iniziare a utilizzare i nostri servizi.'
       email_verification_required: 'Verifica e-mail richiesta'
@@ -1258,6 +1260,8 @@ pteroca:
       if_not_registered: 'Se non ti sei registrato sul nostro sito, ignora questo messaggio.'
     recovery:
       subject: 'Reimpostazione della password'
+      title: 'Richiesta di reimpostazione password'
+      subtitle: 'Abbiamo ricevuto la tua richiesta di reimpostazione password'
       we_received_request: 'Abbiamo ricevuto una richiesta di reimpostazione della password per il tuo account.'
       click_link_to_reset: 'Clicca sul link qui sotto per reimpostare la tua password:'
       reset_password: 'Reimposta password'
@@ -1265,6 +1269,8 @@ pteroca:
       if_not_requested: 'Se non hai richiesto la reimpostazione della password, ignora questo messaggio.'
     store:
       subject: 'Acquisto server'
+      title: 'Server acquistato con successo'
+      subtitle: 'Il tuo server è pronto per l''uso'
       server_purchased: 'Hai acquistato un server nel nostro negozio.'
       expiration_date: 'Data di scadenza'
       product_details: 'Dettagli prodotto'
@@ -1277,21 +1283,32 @@ pteroca:
       panel_password: 'Password'
       panel_password_hint: 'La password è la stessa del tuo account nel pannello clienti.'
       management_panel_hint: 'Per ottenere i dati FTP, accedi al pannello di gestione.'
+      access_panel: 'Accedi al pannello del server'
     renew:
       subject: 'Rinnovo server'
+      title: 'Server rinnovato con successo'
+      subtitle: 'Il tuo server è stato esteso'
       server_renewed: 'Hai rinnovato un server acquistato nella nostra offerta.'
       new_expiration: 'Nuova data di scadenza:'
     payment:
       subject: 'Pagamento'
+      title: 'Pagamento ricevuto'
+      subtitle: 'Grazie per il tuo pagamento'
       payment_received: 'Confermiamo di aver ricevuto il tuo pagamento.'
       balance_updated: 'Il tuo saldo è stato aggiornato di'
+      amount_paid: 'Importo pagato'
+      new_balance: 'Nuovo saldo'
+      thank_you: 'Grazie per averci scelto!'
     suspended:
       subject: 'Sospensione server'
+      subtitle: 'Azione richiesta per ripristinare il tuo server'
       server_suspended: 'Ti informiamo che uno dei tuoi server è stato sospeso perché non è stato rinnovato.'
       extend_server: 'Per ripristinare il server, rinnova nel pannello clienti.'
       server_details: 'Dettagli server'
       server_name: 'Server: %serverName%'
       suspension_date: 'Sospeso il: %suspensionDate%'
+      suspension_date_label: 'Data di sospensione'
+      auto_delete_title: 'Avviso di eliminazione automatica'
       auto_delete_warning: 'Importante: Il tuo server verrà eliminato automaticamente dopo %days% giorni (%deleteDate%) se non rinnovato.'
       panel_access: 'Accesso al pannello'
 

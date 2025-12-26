@@ -1220,6 +1220,7 @@ pteroca:
     verification:
       subject: "E-mail verificatie - %siteName%"
       title: "E-mail verificatie"
+      subtitle: "Gelieve uw e-mailadres te verifiëren om door te gaan"
       hello: "Hallo %name%!"
       message: "Bedankt voor het registreren bij %siteName%. Verificeer je e-mailadres door op de onderstaande knop te klikken."
       verify_button: "Verificeer e-mailadres"
@@ -1235,6 +1236,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Registratie'
+      subtitle: 'Uw account is succesvol aangemaakt'
       welcome: 'Welkom bij onze dienst! Bedankt voor het registreren.'
       account_ready: 'Uw account is klaar voor gebruik. U kunt nu inloggen op uw account en beginnen met het gebruik van onze diensten.'
       email_verification_required: 'E-mail verificatie vereist'
@@ -1244,6 +1246,8 @@ pteroca:
       if_not_registered: 'Als u niet voor onze site aangemeld bent, kunt u deze e-mail negeren.'
     recovery:
       subject: 'Wachtwoord opnieuw instellen'
+      title: 'Wachtwoord reset verzoek'
+      subtitle: 'We hebben uw wachtwoord reset verzoek ontvangen'
       we_received_request: 'We hebben een aanvraag ontvangen om het wachtwoord voor uw account te resetten.'
       click_link_to_reset: 'Klik op de onderstaande link om uw wachtwoord opnieuw in te stellen:'
       reset_password: 'Wachtwoord opnieuw instellen'
@@ -1251,6 +1255,8 @@ pteroca:
       if_not_requested: 'Als u geen wachtwoord reset heeft aangevraagd, negeer dan deze e-mail.'
     store:
       subject: 'Server aankoop'
+      title: 'Server succesvol gekocht'
+      subtitle: 'Uw server is klaar voor gebruik'
       server_purchased: 'U heeft een server in onze winkel gekocht.'
       expiration_date: 'Vervaldatum'
       product_details: 'Productinformatie'
@@ -1263,21 +1269,32 @@ pteroca:
       panel_password: 'Paneel wachtwoord'
       panel_password_hint: 'Het wachtwoord is hetzelfde als het wachtwoord van uw client panel account.'
       management_panel_hint: 'Log in op het server beheerpaneel om FTP gegevens te verkrijgen.'
+      access_panel: 'Toegang tot serverpaneel'
     renew:
       subject: 'Server verlenging'
+      title: 'Server succesvol verlengd'
+      subtitle: 'Uw server is verlengd'
       server_renewed: 'U heeft de server die u in onze winkel hebt aangeschaft, verlengd.'
       new_expiration: 'Nieuwe vervaldatum:'
     payment:
       subject: 'Betaling'
+      title: 'Betaling ontvangen'
+      subtitle: 'Bedankt voor uw betaling'
       payment_received: 'Wij hebben uw betaling ontvangen.'
       balance_updated: 'Uw saldo is bijgewerkt met het bedrag van'
+      amount_paid: 'Betaald bedrag'
+      new_balance: 'Nieuw saldo'
+      thank_you: 'Bedankt dat u voor ons heeft gekozen!'
     suspended:
       subject: 'Server Schorsing'
+      subtitle: 'Actie vereist om uw server te herstellen'
       server_suspended: 'We informeren u dat een van uw servers is opgeschort omdat het niet vernieuwd is.'
       extend_server: 'Om de server te herstellen, verleng deze in het klantenpaneel.'
       server_details: 'Server gegevens'
       server_name: 'Server: %serverName%'
       suspension_date: 'Opgeschort op: %suspensionDate%'
+      suspension_date_label: 'Opschortingsdatum'
+      auto_delete_title: 'Automatische verwijderingswaarschuwing'
       auto_delete_warning: 'Belangrijk: Uw server wordt automatisch verwijderd na %days% dagen (%deleteDate%) als deze niet wordt verlengd.'
       panel_access: 'Toegang tot paneel'
   verification:

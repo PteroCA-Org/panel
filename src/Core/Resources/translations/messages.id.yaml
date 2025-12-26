@@ -1219,6 +1219,7 @@ pteroca:
     verification:
       subject: "Verifikasi Email - %siteName%"
       title: "Verifikasi Email"
+      subtitle: "Silakan verifikasi alamat email Anda untuk melanjutkan"
       hello: "Halo %name%!"
       message: "Terima kasih telah mendaftar di %siteName%. Silakan verifikasi alamat email Anda dengan mengklik tombol di bawah."
       verify_button: "Verifikasi Alamat Email"
@@ -1234,6 +1235,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Pendaftaran'
+      subtitle: 'Akun Anda telah berhasil dibuat'
       welcome: 'Selamat datang di layanan kami! Terima kasih telah mendaftar.'
       account_ready: 'Akun Anda siap digunakan. Anda sekarang dapat masuk ke akun Anda dan mulai menggunakan layanan kami.'
       email_verification_required: 'Verifikasi Email Diperlukan'
@@ -1243,6 +1245,8 @@ pteroca:
       if_not_registered: 'Jika Anda tidak mendaftar di situs kami, silakan abaikan email ini.'
     recovery:
       subject: 'Pengaturan Ulang Kata Sandi'
+      title: 'Permintaan Reset Kata Sandi'
+      subtitle: 'Kami telah menerima permintaan reset kata sandi Anda'
       we_received_request: 'Kami menerima permintaan untuk mengatur ulang kata sandi akun Anda.'
       click_link_to_reset: 'Klik tautan di bawah untuk mengatur ulang kata sandi Anda:'
       reset_password: 'Atur ulang kata sandi'
@@ -1250,6 +1254,9 @@ pteroca:
       if_not_requested: 'Jika Anda tidak meminta pengaturan ulang kata sandi, silakan abaikan email ini.'
     store:
       subject: 'Pembelian Server'
+      title: 'Server Berhasil Dibeli'
+      subtitle: 'Server Anda siap digunakan'
+      access_panel: 'Akses ke panel server'
       server_purchased: 'Anda telah membeli server dari toko kami.'
       expiration_date: 'Tanggal kedaluwarsa'
       product_details: 'Detail produk'
@@ -1264,14 +1271,24 @@ pteroca:
       management_panel_hint: 'Untuk mendapatkan kredensial FTP, masuk ke panel manajemen server.'
     renew:
       subject: 'Perpanjangan Server'
+      title: 'Server Berhasil Diperpanjang'
+      subtitle: 'Server Anda telah diperpanjang'
       server_renewed: 'Anda telah memperpanjang server yang dibeli di penawaran kami.'
       new_expiration: 'Tanggal kedaluwarsa baru:'
     payment:
       subject: 'Pembayaran'
+      title: 'Pembayaran Diterima'
+      subtitle: 'Terima kasih atas pembayaran Anda'
+      amount_paid: 'Jumlah yang Dibayar'
+      new_balance: 'Saldo Baru'
+      thank_you: 'Terima kasih telah memilih kami!'
       payment_received: 'Kami telah menerima pembayaran Anda.'
       balance_updated: 'Saldo Anda telah diperbarui dengan jumlah'
     suspended:
       subject: 'Penangguhan Server'
+      subtitle: 'Tindakan yang diperlukan untuk memulihkan server Anda'
+      suspension_date_label: 'Tanggal Penangguhan'
+      auto_delete_title: 'Peringatan Penghapusan Otomatis'
       server_suspended: 'Kami memberitahu Anda bahwa salah satu server Anda telah ditangguhkan karena tidak diperpanjang.'
       extend_server: 'Untuk memulihkan server, perpanjang di panel klien.'
       server_details: 'Detail Server'

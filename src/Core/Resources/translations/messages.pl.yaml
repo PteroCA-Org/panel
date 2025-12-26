@@ -1234,6 +1234,7 @@ pteroca:
     verification:
       subject: "Weryfikacja e-mail - %siteName%"
       title: "Weryfikacja e-mail"
+      subtitle: "Proszę zweryfikować swój adres e-mail, aby kontynuować"
       hello: "Cześć %name%!"
       message: "Dziękujemy za rejestrację w %siteName%. Zweryfikuj swój adres e-mail, klikając przycisk poniżej."
       verify_button: "Zweryfikuj adres e-mail"
@@ -1249,6 +1250,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Rejestracja'
+      subtitle: 'Twoje konto zostało pomyślnie utworzone'
       welcome: 'Witaj w naszym serwisie! Dziękujemy za rejestrację.'
       account_ready: 'Twoje konto jest gotowe do użytku. Możesz teraz zalogować się na swoje konto i rozpocząć korzystanie z naszych usług.'
       email_verification_required: 'Weryfikacja e-mail wymagana'
@@ -1258,6 +1260,8 @@ pteroca:
       if_not_registered: 'Jeśli nie rejestrowałeś się na naszej stronie, zignoruj tę wiadomość.'
     recovery:
       subject: 'Resetowanie hasła'
+      title: 'Żądanie resetowania hasła'
+      subtitle: 'Otrzymaliśmy Twoje żądanie resetowania hasła'
       we_received_request: 'Otrzymaliśmy prośbę o zresetowanie hasła dla Twojego konta.'
       click_link_to_reset: 'Kliknij poniższy link, aby zresetować hasło:'
       reset_password: 'Zresetuj hasło'
@@ -1265,6 +1269,8 @@ pteroca:
       if_not_requested: 'Jeśli nie prosiłeś o zresetowanie hasła, zignoruj tę wiadomość.'
     store:
       subject: 'Zakup serwera'
+      title: 'Serwer pomyślnie zakupiony'
+      subtitle: 'Twój serwer jest gotowy do użycia'
       server_purchased: 'Zakupiłeś serwer w naszym sklepie.'
       expiration_date: 'Data wygaśnięcia'
       product_details: 'Szczegóły produktu'
@@ -1277,21 +1283,32 @@ pteroca:
       panel_password: 'Hasło'
       panel_password_hint: 'Hasło jest takie samo jak do Twojego konta w panelu klienta.'
       management_panel_hint: 'Aby uzyskać dane do FTP zaloguj się do panelu zarządzania serwerem.'
+      access_panel: 'Dostęp do panelu serwera'
     renew:
       subject: 'Przedłużenie serwera'
+      title: 'Serwer pomyślnie odnowiony'
+      subtitle: 'Twój serwer został przedłużony'
       server_renewed: 'Przedłużyłeś serwer zakupiony w naszej ofercie.'
       new_expiration: 'Nowa data wygaśnięcia:'
     payment:
       subject: 'Płatność'
+      title: 'Płatność otrzymana'
+      subtitle: 'Dziękujemy za płatność'
       payment_received: 'Informujemy, że otrzymaliśmy od Ciebie płatność'
       balance_updated: 'Twoje saldo zostało zaktualizowane o kwotę'
+      amount_paid: 'Kwota zapłacona'
+      new_balance: 'Nowe saldo'
+      thank_you: 'Dziękujemy za wybór nas!'
     suspended:
       subject: 'Zawieszenie serwera'
+      subtitle: 'Wymagane działanie w celu przywrócenia serwera'
       server_suspended: 'Informujemy, że jeden z Twoich serwer został zawieszony, ponieważ nie został przedłużony.'
       extend_server: 'Aby przywrócić serwer, przedłuż go w panelu klienta.'
       server_details: 'Szczegóły serwera'
       server_name: 'Serwer: %serverName%'
       suspension_date: 'Zawieszony dnia: %suspensionDate%'
+      suspension_date_label: 'Data zawieszenia'
+      auto_delete_title: 'Ostrzeżenie o automatycznym usunięciu'
       auto_delete_warning: 'Ważne: Twój serwer zostanie automatycznie usunięty po %days% dniach (%deleteDate%), jeśli nie zostanie przedłużony.'
       panel_access: 'Dostęp do panelu'
 

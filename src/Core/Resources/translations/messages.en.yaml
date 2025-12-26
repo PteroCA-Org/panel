@@ -1220,6 +1220,7 @@ pteroca:
     verification:
       subject: "Email Verification - %siteName%"
       title: "Email Verification"
+      subtitle: "Please verify your email address to continue"
       hello: "Hello %name%!"
       message: "Thank you for registering at %siteName%. Please verify your email address by clicking the button below."
       verify_button: "Verify Email Address"
@@ -1235,6 +1236,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Registration'
+      subtitle: 'Your account has been created successfully'
       welcome: 'Welcome to our service! Thank you for registering.'
       account_ready: 'Your account is ready to use. You can now log in to your account and start using our services.'
       email_verification_required: 'Email Verification Required'
@@ -1244,6 +1246,8 @@ pteroca:
       if_not_registered: 'If you did not register on our site, please ignore this email.'
     recovery:
       subject: 'Password Reset'
+      title: 'Password Reset Request'
+      subtitle: 'We received your password reset request'
       we_received_request: 'We received a request to reset the password for your account.'
       click_link_to_reset: 'Click the link below to reset your password:'
       reset_password: 'Reset password'
@@ -1251,6 +1255,8 @@ pteroca:
       if_not_requested: 'If you did not request a password reset, please ignore this email.'
     store:
       subject: 'Server Purchase'
+      title: 'Server Purchased Successfully'
+      subtitle: 'Your server is ready to use'
       server_purchased: 'You have purchased a server from our store.'
       expiration_date: 'Expiration date'
       product_details: 'Product details'
@@ -1263,21 +1269,32 @@ pteroca:
       panel_password: 'Panel password'
       panel_password_hint: 'The password is the same as your client panel account password.'
       management_panel_hint: 'To obtain FTP credentials, log in to the server management panel.'
+      access_panel: 'Access Server Panel'
     renew:
       subject: 'Server Renewal'
+      title: 'Server Renewed Successfully'
+      subtitle: 'Your server has been extended'
       server_renewed: 'You have renewed the server purchased in our offer.'
       new_expiration: 'New expiration date:'
     payment:
       subject: 'Payment'
+      title: 'Payment Received'
+      subtitle: 'Thank you for your payment'
       payment_received: 'We have received your payment.'
       balance_updated: 'Your balance has been updated with the amount of'
+      amount_paid: 'Amount Paid'
+      new_balance: 'New Balance'
+      thank_you: 'Thank you for choosing us!'
     suspended:
       subject: 'Server Suspension'
+      subtitle: 'Action required to restore your server'
       server_suspended: 'We inform you that one of your servers has been suspended because it has not been renewed.'
       extend_server: 'To restore the server, renew it in the client panel.'
       server_details: 'Server Details'
       server_name: 'Server: %serverName%'
       suspension_date: 'Suspended on: %suspensionDate%'
+      suspension_date_label: 'Suspension Date'
+      auto_delete_title: 'Auto-Deletion Warning'
       auto_delete_warning: 'Important: Your server will be automatically deleted after %days% days (%deleteDate%) if not renewed.'
       panel_access: 'Access Panel'
 

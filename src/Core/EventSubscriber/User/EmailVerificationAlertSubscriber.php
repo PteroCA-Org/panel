@@ -62,7 +62,13 @@ readonly class EmailVerificationAlertSubscriber implements EventSubscriberInterf
             $translatedLinkText
         );
 
-        $this->notificationService->warning($message);
+        $session = $request->getSession();
+        $flashBag = $session->getFlashBag();
+        $existingWarnings = $flashBag->peek('warning');
+
+        if (!in_array($message, $existingWarnings, true)) {
+            $this->notificationService->warning($message);
+        }
     }
 
     private function shouldShowEmailVerificationAlert(): bool

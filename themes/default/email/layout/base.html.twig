@@ -1,0 +1,156 @@
+{% trans_default_domain 'messages' %}
+{% set defaultThemeColors = get_default_theme_colors() %}
+{% set accentColor = defaultThemeColors.theme_default_light_mode_color|default('#635bff') %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ emailTitle|default(get_title()) }}</title>
+    <style>
+        body, table, td, a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: #f6f9fc;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+
+        h1, h2, h3, h4 {
+            margin: 0 0 16px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #1a1a1a;
+        }
+        h1 { font-size: 28px; }
+        h2 { font-size: 24px; }
+        h3 { font-size: 20px; }
+        h4 { font-size: 18px; }
+
+        p {
+            margin: 0 0 16px;
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        a {
+            color: {{ accentColor }};
+            text-decoration: none;
+        }
+
+        .link {
+            color: {{ accentColor }};
+            text-decoration: underline;
+        }
+
+        .text-sm {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                border-radius: 0 !important;
+            }
+            .mobile-padding {
+                padding-left: 24px !important;
+                padding-right: 24px !important;
+            }
+            .mobile-text-center {
+                text-align: center !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a !important;
+            }
+            .email-wrapper {
+                background-color: #1a1a1a !important;
+            }
+            .email-container {
+                background-color: #2d2d2d !important;
+            }
+            h1, h2, h3, h4, p {
+                color: #ffffff !important;
+            }
+            .text-sm {
+                color: #9ca3af !important;
+            }
+            .email-footer {
+                background-color: #1f1f1f !important;
+                border-top-color: #374151 !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f9fc;">
+    <!-- Wrapper table -->
+    <table role="presentation" class="email-wrapper" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f6f9fc; padding: 40px 0;">
+        <tr>
+            <td align="center" style="padding: 0;">
+                <!-- Main container (600px max width) -->
+                <table role="presentation" class="email-container" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); margin: 0 auto;">
+
+                    <!-- Logo Header -->
+                    <tr>
+                        <td align="center" style="padding: 40px 40px 0 40px;" class="mobile-padding">
+                            <img src="cid:logo.png" alt="{{ get_title() }}" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
+                        </td>
+                    </tr>
+
+                    <!-- Content Area -->
+                    <tr>
+                        <td class="email-content" style="padding: 40px;" class="mobile-padding">
+                            {% block content %}
+                            {% endblock %}
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td class="email-footer" style="padding: 32px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; text-align: center;" class="mobile-padding">
+                            <p style="margin: 0 0 8px; font-size: 14px; color: #6b7280; line-height: 1.5;">
+                                {{ 'pteroca.email.general.best_regards'|trans }},<br>
+                                {{ get_title() }}
+                            </p>
+                            <p style="margin: 16px 0 0; font-size: 14px; color: #6b7280; line-height: 1.5;">
+                                <a href="{{ get_site_url() }}" style="color: #6b7280; text-decoration: none;">{{ get_title() }}</a>
+                            </p>
+                            <p style="margin: 16px 0 0; font-size: 12px; color: #9ca3af; line-height: 1.5;">
+                                &copy; {{ "now"|date("Y") }} {{ get_title() }}. {{ 'pteroca.email.general.copyright'|trans }}
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

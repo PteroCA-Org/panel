@@ -1,35 +1,44 @@
+{% extends 'email/layout/base.html.twig' %}
 {% trans_default_domain 'messages' %}
-{% set title = 'pteroca.email.registration.subject'|trans %}
-{% include 'email/header.html.twig' %}
 
-<p>
-    {{ 'pteroca.email.registration.welcome'|trans }}
-</p>
+{% set emailTitle = 'pteroca.email.registration.subject'|trans %}
 
-<p>
-    {{ 'pteroca.email.registration.account_ready'|trans }}
-</p>
+{% block content %}
+    {% include 'email/components/icon_section.html.twig' with {
+        icon: '✓',
+        iconColor: '#22c55e',
+        title: 'pteroca.email.registration.welcome'|trans,
+        message: 'pteroca.email.registration.subtitle'|trans
+    } %}
 
-{% if verificationUrl %}
-<hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+    <p style="text-align: center; color: #374151; font-size: 16px; margin: 0 0 24px;">
+        {{ 'pteroca.email.registration.account_ready'|trans }}
+    </p>
 
-<p>
-    <strong>{{ 'pteroca.email.registration.email_verification_required'|trans }}</strong><br>
-    {{ 'pteroca.email.registration.confirm_email'|trans }}
-</p>
+    {% if verificationUrl %}
+        {% include 'email/components/divider.html.twig' %}
 
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ verificationUrl }}" class="button">{{ 'pteroca.email.registration.confirm_email_button'|trans }}</a>
-</p>
+        {% include 'email/components/alert.html.twig' with {
+            type: 'info',
+            title: 'pteroca.email.registration.email_verification_required'|trans,
+            message: 'pteroca.email.registration.confirm_email'|trans
+        } %}
 
-<p style="font-size: 12px; color: #666;">
-    {{ 'pteroca.email.registration.alternative_text'|trans }}<br>
-    <a href="{{ verificationUrl }}">{{ verificationUrl }}</a>
-</p>
-{% endif %}
+        {% include 'email/components/button.html.twig' with {
+            url: verificationUrl,
+            text: 'pteroca.email.registration.confirm_email_button'|trans
+        } %}
 
-<p>
-    {{ 'pteroca.email.registration.if_not_registered'|trans }}
-</p>
+        <p style="text-align: center; font-size: 14px; color: #6b7280; margin: 8px 0;">
+            {{ 'pteroca.email.registration.alternative_text'|trans }}<br>
+            <a href="{{ verificationUrl }}" style="color: #3b82f6; word-break: break-all;">{{ verificationUrl }}</a>
+        </p>
 
-{% include 'email/footer.html.twig' %}
+        {% include 'email/components/divider.html.twig' %}
+    {% endif %}
+
+    {% include 'email/components/alert.html.twig' with {
+        type: 'warning',
+        message: 'pteroca.email.registration.if_not_registered'|trans
+    } %}
+{% endblock %}

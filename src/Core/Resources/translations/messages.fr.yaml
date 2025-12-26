@@ -1233,6 +1233,7 @@ pteroca:
     verification:
       subject: "Vérification d'e-mail - %siteName%"
       title: "Vérification d'e-mail"
+      subtitle: "Veuillez vérifier votre adresse e-mail pour continuer"
       hello: "Bonjour %name% !"
       message: "Merci de vous être inscrit sur %siteName%. Veuillez vérifier votre adresse e-mail en cliquant sur le bouton ci-dessous."
       verify_button: "Vérifier l'adresse e-mail"
@@ -1248,6 +1249,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Inscription'
+      subtitle: 'Votre compte a été créé avec succès'
       welcome: 'Bienvenue sur notre site ! Merci pour votre inscription.'
       account_ready: 'Votre compte est prêt à être utilisé. Vous pouvez maintenant vous connecter à votre compte et commencer à utiliser nos services.'
       email_verification_required: 'Vérification d''e-mail requise'
@@ -1257,6 +1259,8 @@ pteroca:
       if_not_registered: 'Si vous ne vous êtes pas inscrit sur notre site, ignorez ce message.'
     recovery:
       subject: 'Réinitialisation du mot de passe'
+      title: 'Demande de réinitialisation de mot de passe'
+      subtitle: 'Nous avons reçu votre demande de réinitialisation de mot de passe'
       we_received_request: 'Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte.'
       click_link_to_reset: 'Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :'
       reset_password: 'Réinitialiser le mot de passe'
@@ -1264,6 +1268,8 @@ pteroca:
       if_not_requested: 'Si vous n’avez pas demandé de réinitialisation de mot de passe, ignorez ce message.'
     store:
       subject: 'Achat de serveur'
+      title: 'Serveur acheté avec succès'
+      subtitle: 'Votre serveur est prêt à être utilisé'
       server_purchased: 'Vous avez acheté un serveur dans notre boutique.'
       expiration_date: 'Date d’expiration'
       product_details: 'Détails du produit'
@@ -1276,21 +1282,32 @@ pteroca:
       panel_password: 'Mot de passe'
       panel_password_hint: 'Le mot de passe est identique à celui de votre compte client.'
       management_panel_hint: 'Pour obtenir les informations FTP, connectez-vous au panneau de gestion.'
+      access_panel: 'Accéder au panneau du serveur'
     renew:
       subject: 'Renouvellement du serveur'
+      title: 'Serveur renouvelé avec succès'
+      subtitle: 'Votre serveur a été prolongé'
       server_renewed: 'Vous avez renouvelé un serveur acheté dans notre offre.'
       new_expiration: 'Nouvelle date d’expiration :'
     payment:
       subject: 'Paiement'
+      title: 'Paiement reçu'
+      subtitle: 'Merci pour votre paiement'
       payment_received: 'Nous confirmons avoir reçu un paiement de votre part.'
       balance_updated: 'Votre solde a été mis à jour du montant'
+      amount_paid: 'Montant payé'
+      new_balance: 'Nouveau solde'
+      thank_you: 'Merci de nous avoir choisis !'
     suspended:
       subject: 'Suspension de serveur'
+      subtitle: 'Action requise pour restaurer votre serveur'
       server_suspended: 'Nous vous informons qu’un de vos serveurs a été suspendu, car il n’a pas été renouvelé.'
       extend_server: 'Pour restaurer le serveur, prolongez-le depuis le panneau client.'
       server_details: 'Détails du serveur'
       server_name: 'Serveur : %serverName%'
       suspension_date: 'Suspendu le : %suspensionDate%'
+      suspension_date_label: 'Date de suspension'
+      auto_delete_title: 'Avertissement de suppression automatique'
       auto_delete_warning: 'Important : Votre serveur sera automatiquement supprimé après %days% jours (%deleteDate%) s''il n''est pas renouvelé.'
       panel_access: 'Accès au panneau'
 

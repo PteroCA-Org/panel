@@ -1,0 +1,33 @@
+{% trans_default_domain 'messages' %}
+{% set defaultThemeColors = get_default_theme_colors() %}
+{% set variant = variant|default('primary') %}
+
+{% set buttonStyles = {
+  'primary': {
+    'bg': defaultThemeColors.theme_default_light_mode_color|default('#635bff'),
+    'text': '#ffffff',
+    'borderColor': defaultThemeColors.theme_default_light_mode_color|default('#635bff')
+  },
+  'secondary': {
+    'bg': '#ffffff',
+    'text': '#374151',
+    'borderColor': '#d1d5db'
+  }
+} %}
+{% set style = buttonStyles[variant] %}
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 24px 0;">
+    <tr>
+        <td align="center" style="padding: 0;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                <tr>
+                    <td style="border-radius: 6px; background-color: {{ style.bg }}; border: 2px solid {{ style.borderColor }};">
+                        <a href="{{ url }}" target="_blank" style="display: inline-block; padding: 12px 32px; font-size: 16px; font-weight: 600; color: {{ style.text }}; text-decoration: none; border-radius: 6px; line-height: 1.4;">
+                            {{ text }}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
