@@ -3,12 +3,14 @@
 namespace App\Core\Service\Pterodactyl;
 
 use App\Core\Contract\ProductInterface;
+use App\Core\Contract\Pterodactyl\AllocationIpPrioritizationServiceInterface;
 use Exception;
 
 readonly class NodeSelectionService
 {
     public function __construct(
         private PterodactylApplicationService $pterodactylApplicationService,
+        private AllocationIpPrioritizationServiceInterface $allocationIpPrioritizationService,
     ) {}
 
     /**
@@ -48,12 +50,12 @@ readonly class NodeSelectionService
             ->all($bestNode['id'])
             ->toArray();
 
-        foreach ($allocations as $allocation) {
-            if (!$allocation['assigned']) {
-                return $allocation['id'];
-            }
+        $bestAllocation = $this->allocationIpPrioritizationService->getBestAllocation($allocations);
+
+        if (!$bestAllocation) {
+            throw new Exception('No suitable allocation found on the best node (only localhost addresses available)');
         }
 
-        throw new Exception('No suitable allocation found on the best node');
+        return $bestAllocation['id'];
     }
 }
