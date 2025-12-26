@@ -119,7 +119,7 @@
 
                     <!-- Logo Header -->
                     <tr>
-                        <td align="center" style="padding: 40px 40px 0 40px;" class="mobile-padding">
+                        <td align="center" style="padding: 48px 40px; background-color: {{ accentColor }}; border-top-left-radius: 8px; border-top-right-radius: 8px;" class="mobile-padding">
                             <img src="cid:logo.png" alt="{{ get_title() }}" style="max-width: 150px; height: auto; display: block; margin: 0 auto;">
                         </td>
                     </tr>
@@ -135,14 +135,11 @@
                     <!-- Footer -->
                     <tr>
                         <td class="email-footer" style="padding: 32px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; text-align: center;" class="mobile-padding">
-                            <p style="margin: 0 0 8px; font-size: 14px; color: #6b7280; line-height: 1.5;">
+                            <p style="margin: 0 0 16px; font-size: 14px; color: #6b7280; line-height: 1.5;">
                                 {{ 'pteroca.email.general.best_regards'|trans }},<br>
-                                {{ get_title() }}
+                                <a href="{{ get_site_url() }}" style="color: #635bff; text-decoration: none;">{{ get_title() }}</a>
                             </p>
-                            <p style="margin: 16px 0 0; font-size: 14px; color: #6b7280; line-height: 1.5;">
-                                <a href="{{ get_site_url() }}" style="color: #6b7280; text-decoration: none;">{{ get_title() }}</a>
-                            </p>
-                            <p style="margin: 16px 0 0; font-size: 12px; color: #9ca3af; line-height: 1.5;">
+                            <p style="margin: 0; font-size: 12px; color: #9ca3af; line-height: 1.5;">
                                 &copy; {{ "now"|date("Y") }} {{ get_title() }}. {{ 'pteroca.email.general.copyright'|trans }}
                             </p>
                         </td>
