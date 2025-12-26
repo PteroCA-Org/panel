@@ -997,6 +997,9 @@ pteroca:
       test_smtp_connection: '测试 SMTP 连接'
       smtp_connection_success: 'SMTP 连接成功！'
       smtp_connection_failed: 'SMTP 连接失败！'
+      test_pterodactyl_connection: '测试 Pterodactyl 连接'
+      pterodactyl_connection_success: 'Pterodactyl 连接成功！'
+      pterodactyl_connection_failed: 'Pterodactyl 连接失败！'
     user:
       email: '电子邮件'
       roles: '角色'

@@ -984,6 +984,9 @@ pteroca:
       test_smtp_connection: 'SMTP-verbinding testen'
       smtp_connection_success: 'SMTP-verbinding succesvol!'
       smtp_connection_failed: 'SMTP-verbinding mislukt!'
+      test_pterodactyl_connection: 'Test Pterodactyl-verbinding'
+      pterodactyl_connection_success: 'Pterodactyl-verbinding succesvol!'
+      pterodactyl_connection_failed: 'Pterodactyl-verbinding mislukt!'
     user:
       email: 'E-mail'
       roles: 'Rollen'

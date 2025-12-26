@@ -996,6 +996,9 @@ pteroca:
       test_smtp_connection: 'Тестувати SMTP-з''єднання'
       smtp_connection_success: 'SMTP-з''єднання успішне!'
       smtp_connection_failed: 'SMTP-з''єднання не вдалося!'
+      test_pterodactyl_connection: 'Перевірити з''єднання Pterodactyl'
+      pterodactyl_connection_success: 'З''єднання з Pterodactyl успішне!'
+      pterodactyl_connection_failed: 'З''єднання з Pterodactyl не вдалося!'
     user:
       email: 'Електронна пошта'
       roles: 'Ролі'

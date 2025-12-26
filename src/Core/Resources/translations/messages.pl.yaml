@@ -997,6 +997,9 @@ pteroca:
       test_smtp_connection: 'Testuj połączenie SMTP'
       smtp_connection_success: 'Połączenie SMTP powiodło się!'
       smtp_connection_failed: 'Połączenie SMTP nie powiodło się!'
+      test_pterodactyl_connection: 'Przetestuj połączenie Pterodactyl'
+      pterodactyl_connection_success: 'Połączenie z Pterodactyl powiodło się!'
+      pterodactyl_connection_failed: 'Połączenie z Pterodactyl nie powiodło się!'
     user:
       email: 'Email'
       roles: 'Role'

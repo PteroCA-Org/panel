@@ -1019,6 +1019,9 @@ pteroca:
       test_smtp_connection: 'Uji Koneksi SMTP'
       smtp_connection_success: 'Koneksi SMTP berhasil!'
       smtp_connection_failed: 'Koneksi SMTP gagal!'
+      test_pterodactyl_connection: 'Uji Koneksi Pterodactyl'
+      pterodactyl_connection_success: 'Koneksi Pterodactyl berhasil!'
+      pterodactyl_connection_failed: 'Koneksi Pterodactyl gagal!'
     user:
       email: 'Email'
       roles: 'Peran'

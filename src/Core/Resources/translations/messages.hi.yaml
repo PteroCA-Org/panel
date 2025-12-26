@@ -997,6 +997,9 @@ pteroca:
       test_smtp_connection: 'SMTP कनेक्शन का परीक्षण करें'
       smtp_connection_success: 'SMTP कनेक्शन सफल!'
       smtp_connection_failed: 'SMTP कनेक्शन विफल!'
+      test_pterodactyl_connection: 'Pterodactyl कनेक्शन का परीक्षण करें'
+      pterodactyl_connection_success: 'Pterodactyl कनेक्शन सफल!'
+      pterodactyl_connection_failed: 'Pterodactyl कनेक्शन विफल!'
     user:
       email: 'ईमेल'
       roles: 'भूमिकाएँ'

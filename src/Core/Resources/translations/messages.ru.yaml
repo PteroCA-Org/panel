@@ -991,6 +991,9 @@ pteroca:
       test_smtp_connection: 'Тестировать SMTP-соединение'
       smtp_connection_success: 'SMTP-соединение успешно!'
       smtp_connection_failed: 'SMTP-соединение не удалось!'
+      test_pterodactyl_connection: 'Проверить подключение Pterodactyl'
+      pterodactyl_connection_success: 'Подключение к Pterodactyl успешно!'
+      pterodactyl_connection_failed: 'Подключение к Pterodactyl не удалось!'
     user:
       email: 'Электронная почта'
       roles: 'Роли'
