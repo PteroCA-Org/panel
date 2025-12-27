@@ -45,7 +45,7 @@ abstract class AbstractPanelController extends AbstractCrudController
 
     public function __construct(
         private readonly PanelCrudService $panelCrudService,
-        private readonly RequestStack $requestStack,
+        protected readonly RequestStack $requestStack,
     ) {
     }
 

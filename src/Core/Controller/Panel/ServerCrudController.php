@@ -35,7 +35,7 @@ class ServerCrudController extends AbstractPanelController
 
     public function __construct(
         PanelCrudService $panelCrudService,
-        private readonly RequestStack $requestStack,
+        RequestStack $requestStack,
         private readonly UpdateServerService $updateServerService,
         private readonly DeleteServerService $deleteServerService,
         private readonly SettingService $settingService,
