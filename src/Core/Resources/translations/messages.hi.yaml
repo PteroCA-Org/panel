@@ -915,6 +915,7 @@ pteroca:
       server_edit: 'सर्वर मालिक बदलें'
       server_product_detail: 'सर्वर विवरण दिखाएँ'
       show_server_logs: 'सर्वर लॉग दिखाएँ'
+      show_server_in_pterodactyl: 'Pterodactyl में सर्वर दिखाएं'
       build_updated_successfully: 'सर्वर बिल्ड सफलतापूर्वक अपडेट किया गया है.'
       build_update_error: 'सर्वर बिल्ड को अपडेट करते समय त्रुटि हुई.'
       startup_updated_successfully: 'सर्वर स्टार्टअप सफलतापूर्वक अपडेट किया गया है.'

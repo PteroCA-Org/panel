@@ -914,6 +914,7 @@ pteroca:
       server_edit: 'Змінити власника сервера'
       server_product_detail: 'Показати деталі сервера'
       show_server_logs: 'Показати логи сервера'
+      show_server_in_pterodactyl: 'Показати сервер у Pterodactyl'
       build_updated_successfully: 'Збірка сервера успішно оновлена.'
       build_update_error: 'Виникла помилка під час оновлення збірки сервера.'
       startup_updated_successfully: 'Запуск сервера успішно оновлено.'

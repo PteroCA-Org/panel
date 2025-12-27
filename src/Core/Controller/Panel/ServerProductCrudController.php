@@ -221,7 +221,9 @@ class ServerProductCrudController extends AbstractPanelController
             ->add(Crud::PAGE_EDIT, $this->getServerAction(Crud::PAGE_EDIT))
             ->add(Crud::PAGE_EDIT, $this->getManageServerAction())
             ->add(Crud::PAGE_DETAIL, $this->getManageServerAction())
-            ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction());
+            ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction())
+            ->add(Crud::PAGE_EDIT, $this->getShowServerInPterodactylAction())
+            ->add(Crud::PAGE_DETAIL, $this->getShowServerInPterodactylAction());
 
         return parent::configureActions($actions);
     }

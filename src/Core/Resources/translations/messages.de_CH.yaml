@@ -909,6 +909,7 @@ pteroca:
       server_edit: 'Serverbesitzer ändern'
       server_product_detail: 'Serverdetails anzeigen'
       show_server_logs: 'Serverprotokolle anzeigen'
+      show_server_in_pterodactyl: 'Server in Pterodactyl anzeigen'
       build_updated_successfully: 'Der Server-Build wurde erfolgreich aktualisiert.'
       build_update_error: 'Beim Aktualisieren des Server-Builds ist ein Fehler aufgetreten.'
       startup_updated_successfully: 'Der Server-Start wurde erfolgreich aktualisiert.'

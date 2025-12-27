@@ -902,6 +902,7 @@ pteroca:
       server_edit: 'Server eigenaar wijzigen'
       server_product_detail: 'Toon server details'
       show_server_logs: 'Toon server logboeken'
+      show_server_in_pterodactyl: 'Toon server in Pterodactyl'
       build_updated_successfully: 'De server build is succesvol bijgewerkt.'
       build_update_error: 'Er is een fout opgetreden tijdens het bijwerken van de server build.'
       startup_updated_successfully: 'De server startup is succesvol bijgewerkt.'

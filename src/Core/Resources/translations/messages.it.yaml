@@ -915,6 +915,7 @@ pteroca:
       server_edit: 'Cambia il proprietario del server'
       server_product_detail: 'Mostra i dettagli del server'
       show_server_logs: 'Mostra i log del server'
+      show_server_in_pterodactyl: 'Mostra server in Pterodactyl'
       build_updated_successfully: 'La build del server è stata aggiornata con successo.'
       build_update_error: 'Si è verificato un errore durante l''aggiornamento della build del server.'
       startup_updated_successfully: 'L''avvio del server è stato aggiornato con successo.'

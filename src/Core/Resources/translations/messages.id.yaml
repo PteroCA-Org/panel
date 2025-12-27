@@ -948,6 +948,7 @@ pteroca:
       server_edit: 'Ubah pemilik server'
       server_product_detail: 'Tampilkan detail server'
       show_server_logs: 'Tampilkan log server'
+      show_server_in_pterodactyl: 'Tampilkan server di Pterodactyl'
       build_updated_successfully: 'Build server telah berhasil diperbarui.'
       build_update_error: 'Terjadi kesalahan saat memperbarui build server.'
       startup_updated_successfully: 'Startup server telah berhasil diperbarui.'

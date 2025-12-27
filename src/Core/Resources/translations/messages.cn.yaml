@@ -915,6 +915,7 @@ pteroca:
       server_edit: '更改服务器所有者'
       server_product_detail: '显示服务器详细信息'
       show_server_logs: '显示服务器日志'
+      show_server_in_pterodactyl: '在 Pterodactyl 中显示服务器'
       build_updated_successfully: '服务器构建已成功更新。'
       build_update_error: '更新服务器构建时发生错误。'
       startup_updated_successfully: '服务器启动已成功更新。'
