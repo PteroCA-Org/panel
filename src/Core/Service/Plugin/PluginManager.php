@@ -108,6 +108,26 @@ readonly class PluginManager
 
     public function registerPlugin(string $pluginPath, PluginManifestDTO $manifest): Plugin
     {
+        // Check if plugin with this name already exists in DB
+        $existingPlugin = $this->pluginRepository->findByName($manifest->name);
+
+        if ($existingPlugin !== null) {
+            // Plugin already registered - update version if needed
+            if ($existingPlugin->getVersion() !== $manifest->version) {
+                $this->handlePluginUpdate($existingPlugin, $manifest);
+            }
+            return $existingPlugin;
+        }
+
+        // Clean up any orphaned settings from previous installations
+        $orphanedSettingsCount = $this->settingService->deleteAll($manifest->name);
+        if ($orphanedSettingsCount > 0) {
+            $this->logger->info("Cleaned up orphaned settings during plugin re-registration", [
+                'plugin' => $manifest->name,
+                'count' => $orphanedSettingsCount,
+            ]);
+        }
+
         // Create plugin entity
         $plugin = $this->createPluginEntityFromManifest($pluginPath, $manifest);
 
@@ -130,13 +150,43 @@ readonly class PluginManager
         // Persist to database
         $this->pluginRepository->save($plugin);
 
+        // Initialize default settings from config_schema immediately after registration
+        if ($plugin->getState() === PluginStateEnum::REGISTERED) {
+            try {
+                $initializedSettings = $this->settingService->initializeDefaults($plugin);
+                if ($initializedSettings > 0) {
+                    $this->logger->info("Initialized $initializedSettings default settings during registration for plugin {$plugin->getName()}");
+                }
+            } catch (Exception $e) {
+                // Log error but don't fail registration
+                $this->logger->error("Failed to initialize settings during registration: {$e->getMessage()}", [
+                    'plugin' => $plugin->getName(),
+                ]);
+            }
+        }
+
         return $plugin;
     }
 
     public function enablePlugin(Plugin $plugin): void
     {
         // Validate state transition
-        $this->stateMachine->validateTransition($plugin, PluginStateEnum::ENABLED);
+        try {
+            $this->stateMachine->validateTransition($plugin, PluginStateEnum::ENABLED);
+        } catch (InvalidStateTransitionException $e) {
+            // Provide helpful error for DISCOVERED state
+            if ($plugin->getState() === PluginStateEnum::DISCOVERED) {
+                throw new InvalidStateTransitionException(
+                    $plugin->getName(),
+                    PluginStateEnum::DISCOVERED,
+                    PluginStateEnum::ENABLED,
+                    "Plugin must be REGISTERED first. " .
+                    "This usually indicates a registration failure. " .
+                    "Check plugin compatibility and composer.json validation."
+                );
+            }
+            throw $e;
+        }
 
         // Validate dependencies
         $dependencyErrors = $this->dependencyResolver->validateDependencies($plugin);
@@ -297,10 +347,10 @@ readonly class PluginManager
         try {
             $this->pluginLoader->load($plugin);
 
-            // Initialize default settings from config_schema
+            // Initialize default settings from config_schema (skip if already initialized during registration)
             $initializedSettings = $this->settingService->initializeDefaults($plugin);
             if ($initializedSettings > 0) {
-                $this->logger->info("Initialized $initializedSettings default settings for plugin {$plugin->getName()}");
+                $this->logger->info("Initialized $initializedSettings additional settings for plugin {$plugin->getName()}");
             }
 
             // Execute database migrations
@@ -416,16 +466,20 @@ readonly class PluginManager
     }
 
     /**
-     * Reset a faulted plugin back to REGISTERED state.
+     * Reset a plugin to REGISTERED state.
      *
-     * This allows retrying enablement after fixing the issue that caused the fault.
+     * Supported transitions:
+     * - FAULTED → REGISTERED: Retry enablement after fixing the issue
+     * - DISCOVERED → REGISTERED: Fix plugins stuck in discovered state
      *
      * @param Plugin $plugin The plugin to reset
-     * @throws InvalidStateTransitionException If plugin is not in FAULTED state
+     * @throws InvalidStateTransitionException If transition is not allowed
      */
     public function resetPlugin(Plugin $plugin): void
     {
-        // Validate state transition (FAULTED → REGISTERED)
+        $currentState = $plugin->getState();
+
+        // Validate state transition to REGISTERED
         $this->stateMachine->validateTransition($plugin, PluginStateEnum::REGISTERED);
 
         $oldFaultReason = $plugin->getFaultReason();
@@ -433,13 +487,14 @@ readonly class PluginManager
         // Transition to REGISTERED state
         $this->stateMachine->transitionToRegistered($plugin);
 
-        // Clear fault reason
+        // Clear fault reason (if any)
         $plugin->setFaultReason(null);
 
         // Persist changes
         $this->pluginRepository->save($plugin);
 
-        $this->logger->info("Plugin reset from FAULTED to REGISTERED: {$plugin->getName()}", [
+        $this->logger->info("Plugin reset to REGISTERED: {$plugin->getName()}", [
+            'previous_state' => $currentState->value,
             'previous_fault_reason' => $oldFaultReason,
         ]);
     }
@@ -558,8 +613,21 @@ readonly class PluginManager
                 }
                 $plugins[] = $existingPlugin;
             } else {
-                // Create virtual plugin entity (not persisted)
-                $plugin = $this->createPluginFromManifest($pluginPath, $manifest);
+                // Auto-register plugin found on filesystem but not in database
+                try {
+                    $plugin = $this->registerPlugin($pluginPath, $manifest);
+                    $this->logger->info("Auto-registered plugin discovered in filesystem", [
+                        'plugin' => $manifest->name,
+                        'state' => $plugin->getState()->value,
+                    ]);
+                } catch (Exception $e) {
+                    // If registration fails, fall back to virtual entity for display
+                    $this->logger->warning("Failed to auto-register plugin, showing as virtual entity", [
+                        'plugin' => $manifest->name,
+                        'error' => $e->getMessage(),
+                    ]);
+                    $plugin = $this->createPluginFromManifest($pluginPath, $manifest);
+                }
                 $plugins[] = $plugin;
             }
         }
@@ -593,15 +661,9 @@ readonly class PluginManager
             );
         }
 
-        // Create plugin entity from manifest
-        $plugin = $this->createPluginFromManifest($pluginData['path'], $pluginData['manifest']);
-
-        // Persist to database
-        $this->pluginRepository->save($plugin);
-
-        // Dispatch events
-        $this->eventDispatcher->dispatch(new PluginDiscoveredEvent($pluginData['path'], $pluginData['manifest']));
-        $this->eventDispatcher->dispatch(new PluginRegisteredEvent($plugin));
+        // Create and register plugin entity from manifest
+        // This ensures proper state transition (DISCOVERED -> REGISTERED or FAULTED)
+        $plugin = $this->registerPlugin($pluginData['path'], $pluginData['manifest']);
 
         $this->logger->info("Created plugin entity: $pluginName");
 

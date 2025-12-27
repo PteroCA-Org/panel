@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: 'Ця функція є експериментальною і може працювати некоректно.'
     or_resend_verification_email: 'або натисніть тут, щоб повторно надіслати лист підтвердження.'
 
+  page:
+    terms_of_service: 'Умови обслуговування'
+    terms_of_service_description: 'Будь ласка, уважно прочитайте наші умови та положення'
+    back: 'Назад'
+
   login:
     title: 'Увійти'
     email_address: 'Електронна пошта'
@@ -685,6 +690,12 @@ pteroca:
       save: 'Зберегти категорію'
       category: 'Категорія'
       categories: 'Категорії'
+      created_successfully: 'Категорію успішно створено.'
+      updated_successfully: 'Категорію успішно оновлено.'
+      deleted_successfully: 'Категорію успішно видалено.'
+      create_error: 'Сталася помилка під час створення категорії: %error%'
+      update_error: 'Сталася помилка під час оновлення категорії: %error%'
+      delete_error: 'Сталася помилка під час видалення категорії: %error%'
     product:
       details: 'Деталі продукту'
       name: 'Назва продукту'
@@ -801,6 +812,12 @@ pteroca:
       health_status.no_prices: 'Немає Цін'
       health_status.nest_unavailable: 'Помилка Гнізда'
       health_status.unknown: 'Невідомо'
+      created_successfully: 'Продукт успішно створено.'
+      updated_successfully: 'Продукт успішно оновлено.'
+      deleted_successfully: 'Продукт успішно видалено.'
+      create_error: 'Сталася помилка під час створення продукту: %error%'
+      update_error: 'Сталася помилка під час оновлення продукту: %error%'
+      delete_error: 'Сталася помилка під час видалення продукту: %error%'
     plugin:
       plugins: 'Плагіни'
       name: 'Ім''я'
@@ -897,6 +914,7 @@ pteroca:
       server_edit: 'Змінити власника сервера'
       server_product_detail: 'Показати деталі сервера'
       show_server_logs: 'Показати логи сервера'
+      show_server_in_pterodactyl: 'Показати сервер у Pterodactyl'
       build_updated_successfully: 'Збірка сервера успішно оновлена.'
       build_update_error: 'Виникла помилка під час оновлення збірки сервера.'
       startup_updated_successfully: 'Запуск сервера успішно оновлено.'
@@ -908,6 +926,12 @@ pteroca:
       details_updated_successfully: 'Деталі сервера успішно оновлено.'
       details_update_error: 'Виникла помилка під час оновлення деталей сервера.'
       deleted_at: 'Видалено'
+      created_successfully: 'Сервер успішно створено.'
+      updated_successfully: 'Сервер успішно оновлено.'
+      deleted_successfully: 'Сервер успішно видалено.'
+      create_error: 'Сталася помилка під час створення сервера: %error%'
+      update_error: 'Сталася помилка під час оновлення сервера: %error%'
+      delete_error: 'Сталася помилка під час видалення сервера: %error%'
     setting:
       name: 'Назва налаштування'
       value: 'Значення'
@@ -991,6 +1015,15 @@ pteroca:
       test_smtp_connection: 'Тестувати SMTP-з''єднання'
       smtp_connection_success: 'SMTP-з''єднання успішне!'
       smtp_connection_failed: 'SMTP-з''єднання не вдалося!'
+      test_pterodactyl_connection: 'Перевірити з''єднання Pterodactyl'
+      pterodactyl_connection_success: 'З''єднання з Pterodactyl успішне!'
+      pterodactyl_connection_failed: 'З''єднання з Pterodactyl не вдалося!'
+      created_successfully: 'Налаштування успішно створено.'
+      updated_successfully: 'Налаштування успішно оновлено.'
+      deleted_successfully: 'Налаштування успішно видалено.'
+      create_error: 'Сталася помилка під час створення налаштування: %error%'
+      update_error: 'Сталася помилка під час оновлення налаштування: %error%'
+      delete_error: 'Сталася помилка під час видалення налаштування: %error%'
     user:
       email: 'Електронна пошта'
       roles: 'Ролі'
@@ -1022,6 +1055,10 @@ pteroca:
       restore: 'Відновити'
       pterodactyl_user_not_found: 'Користувача не знайдено в Pterodactyl, але успішно видалено з PteroCA.'
       cannot_delete_user_with_active_servers: 'Неможливо видалити користувача з {{ count }} активним(и) сервером(ами). Спочатку видаліть або призупиніть сервери.'
+      updated_successfully: 'Користувача успішно оновлено.'
+      create_error: 'Сталася помилка під час створення користувача: %error%'
+      update_error: 'Сталася помилка під час оновлення користувача: %error%'
+      delete_error: 'Сталася помилка під час видалення користувача: %error%'
     role:
       name: 'Ім’я'
       name_help: 'Внутрішній ідентифікатор ролі (маленькі літери, буквено-цифрові, тільки підкреслення). Не може бути змінений після створення.'
@@ -1102,6 +1139,12 @@ pteroca:
       gateway: 'Платіжний шлюз'
     user_account:
       description: 'Редагуйте свої персональні дані, змінюйте пароль та керуйте налаштуваннями акаунта'
+      created_successfully: 'Обліковий запис користувача успішно створено.'
+      updated_successfully: 'Обліковий запис користувача успішно оновлено.'
+      deleted_successfully: 'Обліковий запис користувача успішно видалено.'
+      create_error: 'Сталася помилка під час створення облікового запису користувача: %error%'
+      update_error: 'Сталася помилка під час оновлення облікового запису користувача: %error%'
+      delete_error: 'Сталася помилка під час видалення облікового запису користувача: %error%'
     log:
       log: 'Журнал'
       logs: 'Журнали'
@@ -1150,6 +1193,12 @@ pteroca:
       payment_discount: 'Знижка на оплату'
       server_discount: 'Знижка на сервер'
       show_voucher_usages: 'Показати використані ваучери'
+      created_successfully: 'Ваучер успішно створено.'
+      updated_successfully: 'Ваучер успішно оновлено.'
+      deleted_successfully: 'Ваучер успішно видалено.'
+      create_error: 'Сталася помилка під час створення ваучера: %error%'
+      update_error: 'Сталася помилка під час оновлення ваучера: %error%'
+      delete_error: 'Сталася помилка під час видалення ваучера: %error%'
     voucher_usage:
       voucher_usage: 'Використаний ваучер'
       voucher_usages: 'Використані ваучери'
@@ -1228,6 +1277,7 @@ pteroca:
     verification:
       subject: "Підтвердження електронної пошти - %siteName%"
       title: "Підтвердження електронної пошти"
+      subtitle: "Будь ласка, підтвердіть свою електронну адресу, щоб продовжити"
       hello: "Привіт %name%!"
       message: "Дякуємо за реєстрацію в %siteName%. Підтвердіть свою електронну адресу, натиснувши кнопку нижче."
       verify_button: "Підтвердити адресу електронної пошти"
@@ -1243,6 +1293,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Реєстрація'
+      subtitle: 'Ваш обліковий запис було успішно створено'
       welcome: 'Ласкаво просимо до нашого сервісу! Дякуємо за реєстрацію.'
       account_ready: 'Ваш обліковий запис готовий до використання. Тепер ви можете увійти до свого облікового запису та почати використовувати наші послуги.'
       email_verification_required: 'Потрібне підтвердження електронної пошти'
@@ -1252,6 +1303,8 @@ pteroca:
       if_not_registered: 'Якщо ви не реєструвалися на нашому сайті, проігноруйте це повідомлення.'
     recovery:
       subject: 'Скидання пароля'
+      title: 'Запит на скидання пароля'
+      subtitle: 'Ми отримали ваш запит на скидання пароля'
       we_received_request: 'Ми отримали запит на скидання пароля для вашого облікового запису.'
       click_link_to_reset: 'Натисніть на посилання нижче, щоб скинути пароль:'
       reset_password: 'Скинути пароль'
@@ -1259,6 +1312,9 @@ pteroca:
       if_not_requested: 'Якщо ви не запитували скидання пароля, проігноруйте це повідомлення.'
     store:
       subject: 'Покупка сервера'
+      title: 'Сервер успішно куплено'
+      subtitle: 'Ваш сервер готовий до використання'
+      access_panel: 'Доступ до панелі сервера'
       server_purchased: 'Ви придбали сервер у нашому магазині.'
       expiration_date: 'Дата закінчення'
       product_details: 'Деталі продукту'
@@ -1273,14 +1329,24 @@ pteroca:
       management_panel_hint: 'Для отримання даних FTP увійдіть до панелі керування сервером.'
     renew:
       subject: 'Продовження сервера'
+      title: 'Сервер успішно подовжено'
+      subtitle: 'Ваш сервер було подовжено'
       server_renewed: 'Ви продовжили сервер, придбаний у нашій пропозиції.'
       new_expiration: 'Нова дата закінчення:'
     payment:
       subject: 'Платіж'
+      title: 'Платіж отримано'
+      subtitle: 'Дякуємо за ваш платіж'
+      amount_paid: 'Сума оплати'
+      new_balance: 'Новий баланс'
+      thank_you: 'Дякуємо, що обрали нас!'
       payment_received: 'Ми підтверджуємо отримання вашого платежу.'
       balance_updated: 'Ваш баланс було оновлено на суму'
     suspended:
       subject: 'Призупинення сервера'
+      subtitle: 'Необхідні дії для відновлення вашого сервера'
+      suspension_date_label: 'Дата призупинення'
+      auto_delete_title: 'Попередження про автоматичне видалення'
       server_suspended: 'Повідомляємо вас, що один із ваших серверів був призупинений, оскільки він не був продовжений.'
       extend_server: 'Щоб відновити сервер, продовжіть його у панелі клієнта.'
       server_details: 'Деталі сервера'

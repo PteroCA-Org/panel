@@ -18,6 +18,11 @@ pteroca:
     dont_have_permission: 'Anda tidak memiliki izin untuk melakukan tindakan ini.'
     experimental_feature: 'Fitur ini eksperimental dan mungkin tidak berfungsi dengan benar.'
 
+  page:
+    terms_of_service: 'Syarat Layanan'
+    terms_of_service_description: 'Harap baca syarat dan ketentuan kami dengan hati-hati'
+    back: 'Kembali'
+
   login:
     title: 'Masuk'
     email_address: 'Alamat email'
@@ -686,6 +691,12 @@ pteroca:
       save: 'Simpan kategori'
       category: 'Kategori'
       categories: 'Kategori'
+      created_successfully: 'Kategori berhasil dibuat.'
+      updated_successfully: 'Kategori berhasil diperbarui.'
+      deleted_successfully: 'Kategori berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat kategori: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui kategori: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus kategori: %error%'
     product:
       details: 'Detail produk'
       name: 'Nama produk'
@@ -802,6 +813,12 @@ pteroca:
         details: 'Produk baru akan dibuat dengan konfigurasi yang sama. Anda dapat mengeditnya nanti.'
         cancel: 'Batal'
         confirm: 'Salin Produk'
+      created_successfully: 'Produk berhasil dibuat.'
+      updated_successfully: 'Produk berhasil diperbarui.'
+      deleted_successfully: 'Produk berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat produk: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui produk: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus produk: %error%'
     plugin:
       plugins: 'Plugin'
       name: 'Nama'
@@ -931,6 +948,7 @@ pteroca:
       server_edit: 'Ubah pemilik server'
       server_product_detail: 'Tampilkan detail server'
       show_server_logs: 'Tampilkan log server'
+      show_server_in_pterodactyl: 'Tampilkan server di Pterodactyl'
       build_updated_successfully: 'Build server telah berhasil diperbarui.'
       build_update_error: 'Terjadi kesalahan saat memperbarui build server.'
       startup_updated_successfully: 'Startup server telah berhasil diperbarui.'
@@ -942,6 +960,12 @@ pteroca:
       details_updated_successfully: 'Detail server telah berhasil diperbarui.'
       details_update_error: 'Terjadi kesalahan saat memperbarui detail server.'
       deleted_at: 'Dihapus pada'
+      created_successfully: 'Server berhasil dibuat.'
+      updated_successfully: 'Server berhasil diperbarui.'
+      deleted_successfully: 'Server berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat server: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui server: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus server: %error%'
     setting:
       name: 'Nama pengaturan'
       value: 'Nilai'
@@ -1014,6 +1038,15 @@ pteroca:
       test_smtp_connection: 'Uji Koneksi SMTP'
       smtp_connection_success: 'Koneksi SMTP berhasil!'
       smtp_connection_failed: 'Koneksi SMTP gagal!'
+      test_pterodactyl_connection: 'Uji Koneksi Pterodactyl'
+      pterodactyl_connection_success: 'Koneksi Pterodactyl berhasil!'
+      pterodactyl_connection_failed: 'Koneksi Pterodactyl gagal!'
+      created_successfully: 'Pengaturan berhasil dibuat.'
+      updated_successfully: 'Pengaturan berhasil diperbarui.'
+      deleted_successfully: 'Pengaturan berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat pengaturan: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui pengaturan: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus pengaturan: %error%'
     user:
       email: 'Email'
       roles: 'Peran'
@@ -1042,6 +1075,10 @@ pteroca:
       cannot_delete_user_with_active_servers: 'Tidak dapat menghapus pengguna dengan {{ count }} server aktif. Silakan hapus atau tangguhkan server terlebih dahulu.'
       account_restored: 'Akun pengguna telah dipulihkan dari akun yang sebelumnya dihapus.'
       created_successfully: 'Pengguna telah berhasil dibuat.'
+      updated_successfully: 'Pengguna berhasil diperbarui.'
+      create_error: 'Terjadi kesalahan saat membuat pengguna: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui pengguna: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus pengguna: %error%'
     role:
       name: 'Nama'
       name_help: 'Pengidentifikasi peran internal (huruf kecil, alfanumerik, garis bawah saja). Tidak dapat diubah setelah pembuatan.'
@@ -1122,6 +1159,12 @@ pteroca:
       detail: 'Detail'
     user_account:
       description: 'Edit data pribadi Anda, ubah kata sandi dan kelola pengaturan akun'
+      created_successfully: 'Akun pengguna berhasil dibuat.'
+      updated_successfully: 'Akun pengguna berhasil diperbarui.'
+      deleted_successfully: 'Akun pengguna berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat akun pengguna: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui akun pengguna: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus akun pengguna: %error%'
     log:
       log: 'Log'
       logs: 'Log'
@@ -1170,6 +1213,12 @@ pteroca:
       payment_discount: 'Diskon pembayaran'
       server_discount: 'Diskon server'
       show_voucher_usages: 'Tampilkan voucher yang ditebus'
+      created_successfully: 'Voucher berhasil dibuat.'
+      updated_successfully: 'Voucher berhasil diperbarui.'
+      deleted_successfully: 'Voucher berhasil dihapus.'
+      create_error: 'Terjadi kesalahan saat membuat voucher: %error%'
+      update_error: 'Terjadi kesalahan saat memperbarui voucher: %error%'
+      delete_error: 'Terjadi kesalahan saat menghapus voucher: %error%'
     voucher_usage:
       voucher_usage: 'Voucher yang ditebus'
       voucher_usages: 'Voucher yang ditebus'
@@ -1214,6 +1263,7 @@ pteroca:
     verification:
       subject: "Verifikasi Email - %siteName%"
       title: "Verifikasi Email"
+      subtitle: "Silakan verifikasi alamat email Anda untuk melanjutkan"
       hello: "Halo %name%!"
       message: "Terima kasih telah mendaftar di %siteName%. Silakan verifikasi alamat email Anda dengan mengklik tombol di bawah."
       verify_button: "Verifikasi Alamat Email"
@@ -1229,6 +1279,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Pendaftaran'
+      subtitle: 'Akun Anda telah berhasil dibuat'
       welcome: 'Selamat datang di layanan kami! Terima kasih telah mendaftar.'
       account_ready: 'Akun Anda siap digunakan. Anda sekarang dapat masuk ke akun Anda dan mulai menggunakan layanan kami.'
       email_verification_required: 'Verifikasi Email Diperlukan'
@@ -1238,6 +1289,8 @@ pteroca:
       if_not_registered: 'Jika Anda tidak mendaftar di situs kami, silakan abaikan email ini.'
     recovery:
       subject: 'Pengaturan Ulang Kata Sandi'
+      title: 'Permintaan Reset Kata Sandi'
+      subtitle: 'Kami telah menerima permintaan reset kata sandi Anda'
       we_received_request: 'Kami menerima permintaan untuk mengatur ulang kata sandi akun Anda.'
       click_link_to_reset: 'Klik tautan di bawah untuk mengatur ulang kata sandi Anda:'
       reset_password: 'Atur ulang kata sandi'
@@ -1245,6 +1298,9 @@ pteroca:
       if_not_requested: 'Jika Anda tidak meminta pengaturan ulang kata sandi, silakan abaikan email ini.'
     store:
       subject: 'Pembelian Server'
+      title: 'Server Berhasil Dibeli'
+      subtitle: 'Server Anda siap digunakan'
+      access_panel: 'Akses ke panel server'
       server_purchased: 'Anda telah membeli server dari toko kami.'
       expiration_date: 'Tanggal kedaluwarsa'
       product_details: 'Detail produk'
@@ -1259,14 +1315,24 @@ pteroca:
       management_panel_hint: 'Untuk mendapatkan kredensial FTP, masuk ke panel manajemen server.'
     renew:
       subject: 'Perpanjangan Server'
+      title: 'Server Berhasil Diperpanjang'
+      subtitle: 'Server Anda telah diperpanjang'
       server_renewed: 'Anda telah memperpanjang server yang dibeli di penawaran kami.'
       new_expiration: 'Tanggal kedaluwarsa baru:'
     payment:
       subject: 'Pembayaran'
+      title: 'Pembayaran Diterima'
+      subtitle: 'Terima kasih atas pembayaran Anda'
+      amount_paid: 'Jumlah yang Dibayar'
+      new_balance: 'Saldo Baru'
+      thank_you: 'Terima kasih telah memilih kami!'
       payment_received: 'Kami telah menerima pembayaran Anda.'
       balance_updated: 'Saldo Anda telah diperbarui dengan jumlah'
     suspended:
       subject: 'Penangguhan Server'
+      subtitle: 'Tindakan yang diperlukan untuk memulihkan server Anda'
+      suspension_date_label: 'Tanggal Penangguhan'
+      auto_delete_title: 'Peringatan Penghapusan Otomatis'
       server_suspended: 'Kami memberitahu Anda bahwa salah satu server Anda telah ditangguhkan karena tidak diperpanjang.'
       extend_server: 'Untuk memulihkan server, perpanjang di panel klien.'
       server_details: 'Detail Server'

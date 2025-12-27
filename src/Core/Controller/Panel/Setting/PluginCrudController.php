@@ -152,7 +152,7 @@ class PluginCrudController extends AbstractPanelController
             ->linkToCrudAction('enablePlugin')
             ->displayIf(function (Plugin $plugin) {
                 $state = $plugin->getState();
-                return in_array($state, [PluginStateEnum::DISCOVERED, PluginStateEnum::DISABLED], true) &&
+                return $state->canBeEnabled() &&
                     $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
             });
 
@@ -569,7 +569,7 @@ class PluginCrudController extends AbstractPanelController
                 ['plugin' => $plugin->getName(), 'version' => $plugin->getVersion()]
             );
 
-            // Optional: Enable
+            // Handle plugin state based on "enable immediately" checkbox
             if ($enableAfterUpload) {
                 try {
                     $this->pluginManager->enablePlugin($plugin);
@@ -587,7 +587,17 @@ class PluginCrudController extends AbstractPanelController
                     ));
                 }
             } else {
-                // Show security warnings if any
+                // If plugin was previously enabled (e.g., re-upload after folder deletion), disable it
+                if ($plugin->getState() === PluginStateEnum::ENABLED) {
+                    try {
+                        $this->pluginManager->disablePlugin($plugin);
+                    } catch (Exception) {
+                        // If disabling fails (e.g., due to dependencies), continue
+                        // Plugin will stay enabled, user can manually disable it later
+                    }
+                }
+
+                // Show success message with security warnings if any
                 $warningMessage = sprintf(
                     $this->translator->trans('pteroca.plugin.upload.success'),
                     $plugin->getDisplayName(),

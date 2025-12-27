@@ -157,15 +157,15 @@
                                     <select id="duration" name="server_order[duration]" class="form-select form-select-lg">
                                         {% for price in product.prices %}
                                             {% if price.type.value == 'static' %}
-                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if request.duration is defined and request.duration == price.id %}selected{% endif %}>
+                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if selectedDuration is defined and selectedDuration == price.id %}selected{% endif %}>
                                                     {{ price.value }} {{ ('pteroca.product.' ~ price.unit.value)|trans }} - {{ price.price|number_format(2, ',', ' ') }} {{ get_currency() }}
                                                 </option>
                                             {% elseif price.type.value == 'on_demand' %}
-                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if request.duration is defined and request.duration == price.id %}selected{% endif %}>
+                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if selectedDuration is defined and selectedDuration == price.id %}selected{% endif %}>
                                                     {{ 'pteroca.product.on_demand'|trans }} - {{ price.price|number_format(2, ',', ' ') }} {{ get_currency() }}/{{ 'pteroca.product.minute_short'|trans }}
                                                 </option>
                                             {% elseif price.type.value == 'slot' %}
-                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if request.duration is defined and request.duration == price.id %}selected{% endif %}>
+                                                <option value="{{ price.id }}" data-type="{{ price.type.value }}" data-value="{{ price.value }}" data-unit="{{ price.unit.value }}" data-price="{{ price.price }}" {% if selectedDuration is defined and selectedDuration == price.id %}selected{% endif %}>
                                                     {{ 'pteroca.store.slot_pricing'|trans }} - {{ price.value }} {{ ('pteroca.product.' ~ price.unit.value)|trans }} - {{ price.price|number_format(2, ',', ' ') }} {{ get_currency() }}/{{ 'pteroca.product.slot'|trans }}
                                                 </option>
                                             {% endif %}
@@ -179,7 +179,7 @@
                                     </label>
                                     <select id="egg" name="server_order[egg]" class="form-select form-select-lg">
                                         {% for egg in eggs %}
-                                            <option value="{{ egg.id }}" {% if request.egg is defined and request.egg == egg.id %}selected{% endif %}>
+                                            <option value="{{ egg.id }}" {% if selectedEgg is defined and selectedEgg == egg.id %}selected{% endif %}>
                                                 {{ egg.name }}
                                             </option>
                                         {% endfor %}
@@ -334,25 +334,43 @@
             const slotsRange = document.getElementById('slots');
             const selectedSlotsDisplay = document.getElementById('selected-slots');
             const eggSelect = document.getElementById('egg');
+            const slotsFormField = document.getElementById('server_order_slots');
             
             {% if initialSlots %}
             const initialSlots = {{ initialSlots }};
+            {% if selectedDuration is not defined or not selectedDuration %}
+            // Only auto-select slot pricing if no specific duration was selected
             if (initialSlots && slotsRange) {
-                const slotOptions = Array.from(durationSelect.options).filter(option => 
+                const slotOptions = Array.from(durationSelect.options).filter(option =>
                     option.getAttribute('data-type') === 'slot'
                 );
                 if (slotOptions.length > 0) {
                     durationSelect.value = slotOptions[0].value;
                     slotSelection.style.display = 'block';
-                    
+
                     updateMaxSlots();
-                    
+
                     const maxSlots = parseInt(slotsRange.max);
                     const finalSlots = Math.min(initialSlots, maxSlots);
                     slotsRange.value = finalSlots;
                     handleSlotsChange();
                 }
             }
+            {% else %}
+            // Respect user's selected duration even with slot pricing
+            if (initialSlots && slotsRange) {
+                const selectedOption = durationSelect.options[durationSelect.selectedIndex];
+                if (selectedOption && selectedOption.getAttribute('data-type') === 'slot') {
+                    slotSelection.style.display = 'block';
+                    updateMaxSlots();
+
+                    const maxSlots = parseInt(slotsRange.max);
+                    const finalSlots = Math.min(initialSlots, maxSlots);
+                    slotsRange.value = finalSlots;
+                    handleSlotsChange();
+                }
+            }
+            {% endif %}
             {% endif %}
             {% endif %}
 
@@ -426,6 +444,9 @@
                 const slotsCount = slotsRange.value;
                 const slotText = slotsCount === '1' ? '{{ 'pteroca.product.slot'|trans }}' : '{{ 'pteroca.product.slots'|trans }}';
                 selectedSlotsDisplay.textContent = `${slotsCount} ${slotText}`;
+                if (slotsFormField) {
+                    slotsFormField.value = slotsCount;
+                }
             }
 
             handleDurationChange();

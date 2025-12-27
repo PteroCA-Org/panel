@@ -4,6 +4,7 @@ namespace App\Core\Service\Plugin;
 
 use App\Core\DTO\PluginSecurityCheckResultDTO;
 use App\Core\Entity\Plugin;
+use App\Core\Service\Composer\ComposerBinaryResolverService;
 use ArrayIterator;
 use Exception;
 use Iterator;
@@ -35,16 +36,21 @@ class PluginSecurityValidator
     private const SEVERITY_MEDIUM = 'medium';
     private const SEVERITY_LOW = 'low';
 
+    private readonly string $composerBinary;
+
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly ComposerDependencyManager $composerManager,
+        private readonly ComposerBinaryResolverService $composerResolver,
         #[Autowire(param: 'plugin_security.dangerous_functions')]
         private readonly array $dangerousFunctions,
         #[Autowire(param: 'plugin_security.checks')]
         private readonly array $securityChecks,
         #[Autowire(param: 'kernel.project_dir')]
         private readonly string $projectDir,
-    ) {}
+    ) {
+        $this->composerBinary = $this->composerResolver->resolveComposerBinary();
+    }
 
     /**
      * Validate plugin security.
@@ -455,7 +461,7 @@ class PluginSecurityValidator
         }
 
         // Validation 3: Run composer validate
-        $process = new Process(['composer', 'validate', '--no-check-publish', '--strict'], $pluginPath);
+        $process = new Process([$this->composerBinary, 'validate', '--no-check-publish', '--strict'], $pluginPath);
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -508,7 +514,7 @@ class PluginSecurityValidator
 
         // Validation 6: Run security audit (if vendor/ exists)
         if ($this->composerManager->hasVendorDirectory($plugin)) {
-            $auditProcess = new Process(['composer', 'audit', '--format=json', '--no-dev'], $pluginPath, timeout: 60);
+            $auditProcess = new Process([$this->composerBinary, 'audit', '--format=json', '--no-dev'], $pluginPath, timeout: 60);
             $auditProcess->run();
 
             if (!$auditProcess->isSuccessful()) {

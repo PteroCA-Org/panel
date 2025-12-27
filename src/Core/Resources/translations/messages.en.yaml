@@ -99,6 +99,11 @@ pteroca:
     success_password_changed: 'Your password has been successfully changed.'
     back_to_login: 'Back to login'
 
+  page:
+    terms_of_service: 'Terms of Service'
+    terms_of_service_description: 'Please read our terms and conditions carefully'
+    back: 'Back'
+
   dashboard:
     account_balance: 'Account balance'
     account_balance_description: 'Your current account balance.'
@@ -686,6 +691,12 @@ pteroca:
       save: 'Save category'
       category: 'Category'
       categories: 'Categories'
+      created_successfully: 'Category created successfully.'
+      updated_successfully: 'Category updated successfully.'
+      deleted_successfully: 'Category deleted successfully.'
+      create_error: 'An error occurred while creating the category: %error%'
+      update_error: 'An error occurred while updating the category: %error%'
+      delete_error: 'An error occurred while deleting the category: %error%'
     product:
       details: 'Product details'
       name: 'Product name'
@@ -802,6 +813,12 @@ pteroca:
       health_status.no_prices: 'No Prices'
       health_status.nest_unavailable: 'Nest Error'
       health_status.unknown: 'Unknown'
+      created_successfully: 'Product created successfully.'
+      updated_successfully: 'Product updated successfully.'
+      deleted_successfully: 'Product deleted successfully.'
+      create_error: 'An error occurred while creating the product: %error%'
+      update_error: 'An error occurred while updating the product: %error%'
+      delete_error: 'An error occurred while deleting the product: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Name'
@@ -898,6 +915,7 @@ pteroca:
       server_edit: 'Change server owner'
       server_product_detail: 'Show server details'
       show_server_logs: 'Show server logs'
+      show_server_in_pterodactyl: 'Show server in Pterodactyl'
       build_updated_successfully: 'The server build has been successfully updated.'
       build_update_error: 'An error occurred while updating the server build.'
       startup_updated_successfully: 'The server startup has been successfully updated.'
@@ -908,6 +926,8 @@ pteroca:
       unsuspended_error: 'An error occurred while unsuspending the server.'
       details_updated_successfully: 'The server details have been successfully updated.'
       details_update_error: 'An error occurred while updating the server details.'
+      deleted_successfully: 'Server deleted successfully.'
+      delete_error: 'An error occurred while deleting the server: %error%'
       deleted_at: 'Deleted at'
     setting:
       name: 'Setting name'
@@ -924,6 +944,10 @@ pteroca:
       hint: 'Description'
       set_as_empty: 'Set as empty'
       set_as_empty_help: 'Check this to set the value as empty (null).'
+      updated_successfully: 'Setting updated successfully.'
+      created_successfully: 'Setting created successfully.'
+      create_error: 'An error occurred while creating the setting: %error%'
+      update_error: 'An error occurred while updating the setting: %error%'
       hints:
         site_logo: 'Site logo'
         site_url: 'Site URL'
@@ -981,6 +1005,9 @@ pteroca:
       test_smtp_connection: 'Test SMTP Connection'
       smtp_connection_success: 'SMTP connection successful!'
       smtp_connection_failed: 'SMTP connection failed!'
+      test_pterodactyl_connection: 'Test Pterodactyl Connection'
+      pterodactyl_connection_success: 'Pterodactyl connection successful!'
+      pterodactyl_connection_failed: 'Pterodactyl connection failed!'
     user:
       email: 'Email'
       roles: 'Roles'
@@ -1009,6 +1036,10 @@ pteroca:
       cannot_delete_user_with_active_servers: 'Cannot delete user with {{ count }} active server(s). Please delete or suspend the servers first.'
       account_restored: 'User account has been restored from previously deleted account.'
       created_successfully: 'User has been created successfully.'
+      updated_successfully: 'User updated successfully.'
+      create_error: 'An error occurred while creating the user: %error%'
+      update_error: 'An error occurred while updating the user: %error%'
+      delete_error: 'An error occurred while deleting the user: %error%'
     role:
       name: 'Name'
       name_help: 'Internal role identifier (lowercase, alphanumeric, underscores only). Cannot be changed after creation.'
@@ -1089,6 +1120,8 @@ pteroca:
       detail: 'Detail'
     user_account:
       description: 'Edit your personal data, change password and manage account settings'
+      updated_successfully: 'Account updated successfully.'
+      update_error: 'An error occurred while updating the account: %error%'
     log:
       log: 'Log'
       logs: 'Logs'
@@ -1137,6 +1170,12 @@ pteroca:
       payment_discount: 'Payment discount'
       server_discount: 'Server discount'
       show_voucher_usages: 'Show redeemed vouchers'
+      created_successfully: 'Voucher created successfully.'
+      updated_successfully: 'Voucher updated successfully.'
+      deleted_successfully: 'Voucher deleted successfully.'
+      create_error: 'An error occurred while creating the voucher: %error%'
+      update_error: 'An error occurred while updating the voucher: %error%'
+      delete_error: 'An error occurred while deleting the voucher: %error%'
     voucher_usage:
       voucher_usage: 'Redeemed voucher'
       voucher_usages: 'Redeemed vouchers'
@@ -1215,6 +1254,7 @@ pteroca:
     verification:
       subject: "Email Verification - %siteName%"
       title: "Email Verification"
+      subtitle: "Please verify your email address to continue"
       hello: "Hello %name%!"
       message: "Thank you for registering at %siteName%. Please verify your email address by clicking the button below."
       verify_button: "Verify Email Address"
@@ -1230,6 +1270,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Registration'
+      subtitle: 'Your account has been created successfully'
       welcome: 'Welcome to our service! Thank you for registering.'
       account_ready: 'Your account is ready to use. You can now log in to your account and start using our services.'
       email_verification_required: 'Email Verification Required'
@@ -1239,6 +1280,8 @@ pteroca:
       if_not_registered: 'If you did not register on our site, please ignore this email.'
     recovery:
       subject: 'Password Reset'
+      title: 'Password Reset Request'
+      subtitle: 'We received your password reset request'
       we_received_request: 'We received a request to reset the password for your account.'
       click_link_to_reset: 'Click the link below to reset your password:'
       reset_password: 'Reset password'
@@ -1246,6 +1289,8 @@ pteroca:
       if_not_requested: 'If you did not request a password reset, please ignore this email.'
     store:
       subject: 'Server Purchase'
+      title: 'Server Purchased Successfully'
+      subtitle: 'Your server is ready to use'
       server_purchased: 'You have purchased a server from our store.'
       expiration_date: 'Expiration date'
       product_details: 'Product details'
@@ -1258,21 +1303,32 @@ pteroca:
       panel_password: 'Panel password'
       panel_password_hint: 'The password is the same as your client panel account password.'
       management_panel_hint: 'To obtain FTP credentials, log in to the server management panel.'
+      access_panel: 'Access Server Panel'
     renew:
       subject: 'Server Renewal'
+      title: 'Server Renewed Successfully'
+      subtitle: 'Your server has been extended'
       server_renewed: 'You have renewed the server purchased in our offer.'
       new_expiration: 'New expiration date:'
     payment:
       subject: 'Payment'
+      title: 'Payment Received'
+      subtitle: 'Thank you for your payment'
       payment_received: 'We have received your payment.'
       balance_updated: 'Your balance has been updated with the amount of'
+      amount_paid: 'Amount Paid'
+      new_balance: 'New Balance'
+      thank_you: 'Thank you for choosing us!'
     suspended:
       subject: 'Server Suspension'
+      subtitle: 'Action required to restore your server'
       server_suspended: 'We inform you that one of your servers has been suspended because it has not been renewed.'
       extend_server: 'To restore the server, renew it in the client panel.'
       server_details: 'Server Details'
       server_name: 'Server: %serverName%'
       suspension_date: 'Suspended on: %suspensionDate%'
+      suspension_date_label: 'Suspension Date'
+      auto_delete_title: 'Auto-Deletion Warning'
       auto_delete_warning: 'Important: Your server will be automatically deleted after %days% days (%deleteDate%) if not renewed.'
       panel_access: 'Access Panel'
 

@@ -7,6 +7,7 @@ use App\Core\Controller\Panel\ServerLogCrudController;
 use App\Core\Controller\Panel\ServerProductCrudController;
 use App\Core\Entity\Server;
 use App\Core\Entity\ServerProduct;
+use App\Core\Enum\PermissionEnum;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 
 trait ManageServerActionTrait
@@ -37,7 +38,8 @@ trait ManageServerActionTrait
         return Action::new(
             'showServerLogs',
             $this->translator->trans('pteroca.crud.server.show_server_logs'),
-        )->linkToUrl(
+        )->setIcon('fa fa-file-text')
+        ->linkToUrl(
             fn (Server|ServerProduct $entity) => $this->generateUrl(
                 'panel',
                 [
@@ -61,7 +63,8 @@ trait ManageServerActionTrait
         $manageServerAction = Action::new(
             'manageServer',
             $this->translator->trans('pteroca.crud.server.show_server_dashboard'),
-        )->displayIf(function (Server|ServerProduct $entity) {
+        )->setIcon('fa fa-tachometer')
+        ->displayIf(function (Server|ServerProduct $entity) {
             if ($entity instanceof Server) {
                 return empty($entity->getDeletedAt());
             }
@@ -94,6 +97,30 @@ trait ManageServerActionTrait
         }
 
         return $manageServerAction;
+    }
+
+    private function getShowServerInPterodactylAction(): Action
+    {
+        return Action::new(
+            'showServerInPterodactyl',
+            $this->translator->trans('pteroca.crud.server.show_server_in_pterodactyl'),
+        )->setIcon('fa fa-external-link-square')
+        ->setHtmlAttributes(['target' => '_blank'])
+        ->linkToUrl(
+            fn (Server|ServerProduct $entity) => $this->pterodactylRedirectService->getServerUrl(
+                $this->getEntityPterodactylServerIdentifier($entity)
+            )
+        )->displayIf(function (Server|ServerProduct $entity) {
+            if (!$this->getUser()?->hasPermission(PermissionEnum::EDIT_SERVER_PRODUCT)) {
+                return false;
+            }
+
+            if ($entity instanceof Server) {
+                return empty($entity->getDeletedAt());
+            }
+
+            return empty($entity->getServer()->getDeletedAt());
+        });
     }
 
     private function getEntityPterodactylServerIdentifier(Server|ServerProduct $entity): string

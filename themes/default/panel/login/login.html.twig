@@ -1,5 +1,7 @@
 {% extends 'panel/layout/split_screen.html.twig' %}
 
+{% set loadLoginJs = true %}
+
 {% block page_title %}{{ get_title() }} | {{ 'pteroca.login.title'|trans }}{% endblock %}
 
 {% block form_content %}

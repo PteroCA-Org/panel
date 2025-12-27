@@ -14,6 +14,7 @@ use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
 use App\Core\Service\SettingTypeMapperService;
+use App\Core\Trait\CrudFlashMessagesTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -33,12 +34,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Exception;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractSettingCrudController extends AbstractPanelController
 {
+    use CrudFlashMessagesTrait;
+
     protected bool $useConventionBasedPermissions = false;
 
     protected ?Setting $currentEntity = null;
@@ -47,7 +51,7 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
 
     public function __construct(
         PanelCrudService $panelCrudService,
-        private readonly RequestStack $requestStack,
+        RequestStack $requestStack,
         private readonly TranslatorInterface $translator,
         private readonly SettingRepository $settingRepository,
         private readonly SettingOptionRepository $settingOptionRepository,
@@ -263,16 +267,30 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->handleSetAsEmpty($entityInstance);
-        $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
-        parent::persistEntity($entityManager, $entityInstance);
+        try {
+            $this->handleSetAsEmpty($entityInstance);
+            $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
+            parent::persistEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.created_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.create_error', ['%error%' => $e->getMessage()]));
+            throw $e;
+        }
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->handleSetAsEmpty($entityInstance);
-        $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
-        parent::updateEntity($entityManager, $entityInstance);
+        try {
+            $this->handleSetAsEmpty($entityInstance);
+            $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.updated_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.update_error', ['%error%' => $e->getMessage()]));
+            throw $e;
+        }
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void

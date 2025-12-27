@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: 'यह फीचर परीक्षणाधीन है और सही से काम नहीं कर सकता है।'
     or_resend_verification_email: 'या सत्यापन ईमेल को फिर से भेजने के लिए यहाँ क्लिक करें।'
 
+  page:
+    terms_of_service: 'सेवा की शर्तें'
+    terms_of_service_description: 'कृपया हमारी शर्तों और नियमों को ध्यान से पढ़ें'
+    back: 'वापस'
+
   login:
     title: 'लॉगिन'
     email_address: 'ईमेल पता'
@@ -686,6 +691,12 @@ pteroca:
       save: 'श्रेणी सहेजें'
       category: 'श्रेणी'
       categories: 'श्रेणियाँ'
+      created_successfully: 'श्रेणी सफलतापूर्वक बनाई गई।'
+      updated_successfully: 'श्रेणी सफलतापूर्वक अपडेट की गई।'
+      deleted_successfully: 'श्रेणी सफलतापूर्वक हटाई गई।'
+      create_error: 'श्रेणी बनाने में त्रुटि हुई: %error%'
+      update_error: 'श्रेणी अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'श्रेणी हटाने में त्रुटि हुई: %error%'
     product:
       details: 'उत्पाद विवरण'
       name: 'उत्पाद का नाम'
@@ -802,6 +813,12 @@ pteroca:
       health_status.no_prices: 'कोई कीमत नहीं'
       health_status.nest_unavailable: 'नेस्ट त्रुटि'
       health_status.unknown: 'अज्ञात'
+      created_successfully: 'उत्पाद सफलतापूर्वक बनाया गया।'
+      updated_successfully: 'उत्पाद सफलतापूर्वक अपडेट किया गया।'
+      deleted_successfully: 'उत्पाद सफलतापूर्वक हटाया गया।'
+      create_error: 'उत्पाद बनाने में त्रुटि हुई: %error%'
+      update_error: 'उत्पाद अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'उत्पाद हटाने में त्रुटि हुई: %error%'
     plugin:
       plugins: 'प्लगइन्स'
       name: 'नाम'
@@ -898,6 +915,7 @@ pteroca:
       server_edit: 'सर्वर मालिक बदलें'
       server_product_detail: 'सर्वर विवरण दिखाएँ'
       show_server_logs: 'सर्वर लॉग दिखाएँ'
+      show_server_in_pterodactyl: 'Pterodactyl में सर्वर दिखाएं'
       build_updated_successfully: 'सर्वर बिल्ड सफलतापूर्वक अपडेट किया गया है.'
       build_update_error: 'सर्वर बिल्ड को अपडेट करते समय त्रुटि हुई.'
       startup_updated_successfully: 'सर्वर स्टार्टअप सफलतापूर्वक अपडेट किया गया है.'
@@ -909,6 +927,8 @@ pteroca:
       details_updated_successfully: 'सर्वर विवरण सफलतापूर्वक अपडेट किए गए हैं.'
       details_update_error: 'सर्वर विवरण को अपडेट करते समय त्रुटि हुई.'
       deleted_at: 'हटाने की तारीख'
+      deleted_successfully: 'सर्वर सफलतापूर्वक हटाया गया।'
+      delete_error: 'सर्वर हटाने में त्रुटि हुई: %error%'
     setting:
       name: 'सेटिंग नाम'
       value: 'सेटिंग मान'
@@ -992,6 +1012,13 @@ pteroca:
       test_smtp_connection: 'SMTP कनेक्शन का परीक्षण करें'
       smtp_connection_success: 'SMTP कनेक्शन सफल!'
       smtp_connection_failed: 'SMTP कनेक्शन विफल!'
+      test_pterodactyl_connection: 'Pterodactyl कनेक्शन का परीक्षण करें'
+      pterodactyl_connection_success: 'Pterodactyl कनेक्शन सफल!'
+      pterodactyl_connection_failed: 'Pterodactyl कनेक्शन विफल!'
+      updated_successfully: 'सेटिंग सफलतापूर्वक अपडेट की गई।'
+      created_successfully: 'सेटिंग सफलतापूर्वक बनाई गई।'
+      create_error: 'सेटिंग बनाने में त्रुटि हुई: %error%'
+      update_error: 'सेटिंग अपडेट करने में त्रुटि हुई: %error%'
     user:
       email: 'ईमेल'
       roles: 'भूमिकाएँ'
@@ -1023,6 +1050,10 @@ pteroca:
       restore: 'बहाल करें'
       pterodactyl_user_not_found: 'Pterodactyl में उपयोगकर्ता नहीं मिला, लेकिन PteroCA से सफलतापूर्वक हटाया गया।'
       cannot_delete_user_with_active_servers: '{{ count }} सक्रिय सर्वर के साथ उपयोगकर्ता को हटा नहीं सकता। कृपया पहले सर्वर को हटाएं या निलंबित करें।'
+      updated_successfully: 'उपयोगकर्ता सफलतापूर्वक अपडेट किया गया।'
+      create_error: 'उपयोगकर्ता बनाने में त्रुटि हुई: %error%'
+      update_error: 'उपयोगकर्ता अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'उपयोगकर्ता हटाने में त्रुटि हुई: %error%'
     role:
       name: 'नाम'
       name_help: 'आंतरिक भूमिका पहचानकर्ता (लोअरकेस, अल्फान्यूमेरिक, अंडरस्कोर केवल)। निर्माण के बाद बदला नहीं जा सकता।'
@@ -1103,6 +1134,8 @@ pteroca:
       gateway: 'भुगतान गेटवे'
     user_account:
       description: 'अपना व्यक्तिगत डेटा संपादित करें, पासवर्ड बदलें और खाता सेटिंग्स प्रबंधित करें'
+      updated_successfully: 'खाता सफलतापूर्वक अपडेट किया गया।'
+      update_error: 'खाता अपडेट करने में त्रुटि हुई: %error%'
     log:
       log: 'लॉग'
       logs: 'लॉग्स'
@@ -1151,6 +1184,12 @@ pteroca:
       payment_discount: 'भुगतान छूट'
       server_discount: 'सर्वर छूट'
       show_voucher_usages: 'भुगतान किए गए वाउचर दिखाएँ'
+      created_successfully: 'वाउचर सफलतापूर्वक बनाया गया।'
+      updated_successfully: 'वाउचर सफलतापूर्वक अपडेट किया गया।'
+      deleted_successfully: 'वाउचर सफलतापूर्वक हटाया गया।'
+      create_error: 'वाउचर बनाने में त्रुटि हुई: %error%'
+      update_error: 'वाउचर अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'वाउचर हटाने में त्रुटि हुई: %error%'
     voucher_usage:
       voucher_usage: 'भुगतान किया गया वाउचर'
       voucher_usages: 'भुगतान किए गए वाउचर'
@@ -1229,6 +1268,7 @@ pteroca:
     verification:
       subject: "ईमेल सत्यापन - %siteName%"
       title: "ईमेल सत्यापन"
+      subtitle: "कृपया जारी रखने के लिए अपना ईमेल पता सत्यापित करें"
       hello: "नमस्ते %name%!"
       message: "%siteName% में पंजीकरण करने के लिए धन्यवाद। कृपया नीचे दिए गए बटन पर क्लिक करके अपना ईमेल पता सत्यापित करें।"
       verify_button: "ईमेल पता सत्यापित करें"
@@ -1244,6 +1284,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'पंजीकरण'
+      subtitle: 'आपका खाता सफलतापूर्वक बनाया गया है'
       welcome: 'हमारी सेवा में आपका स्वागत है! पंजीकरण के लिए धन्यवाद।'
       account_ready: 'आपका खाता उपयोग के लिए तैयार है। अब आप अपने खाते में लॉग इन कर सकते हैं और हमारी सेवाओं का उपयोग शुरू कर सकते हैं।'
       email_verification_required: 'ईमेल सत्यापन आवश्यक'
@@ -1253,6 +1294,8 @@ pteroca:
       if_not_registered: 'यदि आपने हमारी साइट पर पंजीकरण नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।'
     recovery:
       subject: 'पासवर्ड रीसेट'
+      title: 'पासवर्ड रीसेट अनुरोध'
+      subtitle: 'हमने आपका पासवर्ड रीसेट अनुरोध प्राप्त किया है'
       we_received_request: 'हमें आपके खाते के लिए पासवर्ड रीसेट करने का अनुरोध प्राप्त हुआ है।'
       click_link_to_reset: 'अपना पासवर्ड रीसेट करने के लिए नीचे दिए गए लिंक पर क्लिक करें:'
       reset_password: 'पासवर्ड रीसेट करें'
@@ -1260,6 +1303,8 @@ pteroca:
       if_not_requested: 'यदि आपने पासवर्ड रीसेट का अनुरोध नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।'
     store:
       subject: 'सर्वर खरीद'
+      title: 'सर्वर सफलतापूर्वक खरीदा गया'
+      subtitle: 'आपका सर्वर उपयोग के लिए तैयार है'
       server_purchased: 'आपने हमारे स्टोर से एक सर्वर खरीदा है।'
       expiration_date: 'समाप्ति तिथि'
       product_details: 'उत्पाद विवरण'
@@ -1272,21 +1317,32 @@ pteroca:
       panel_password: 'पैनल पासवर्ड'
       panel_password_hint: 'पासवर्ड वही है जो आपके ग्राहक पैनल खाते का पासवर्ड है।'
       management_panel_hint: 'FTP क्रेडेंशियल प्राप्त करने के लिए, सर्वर प्रबंधन पैनल में लॉग इन करें।'
+      access_panel: 'सर्वर पैनल तक पहुंचें'
     renew:
       subject: 'सर्वर नवीनीकरण'
+      title: 'सर्वर सफलतापूर्वक नवीनीकृत'
+      subtitle: 'आपका सर्वर बढ़ाया गया है'
       server_renewed: 'आपने हमारे ऑफर में खरीदे गए सर्वर को नवीनीकरण कर लिया है।'
       new_expiration: 'नई समाप्ति तिथि:'
     payment:
       subject: 'भुगतान'
+      title: 'भुगतान प्राप्त हुआ'
+      subtitle: 'आपके भुगतान के लिए धन्यवाद'
       payment_received: 'हमें आपका भुगतान प्राप्त हो गया है।'
       balance_updated: 'आपकी शेष राशि इस राशि से अपडेट कर दी गई है:'
+      amount_paid: 'भुगतान की गई राशि'
+      new_balance: 'नया बैलेंस'
+      thank_you: 'हमें चुनने के लिए धन्यवाद!'
     suspended:
       subject: 'सर्वर निलंबन'
+      subtitle: 'आपके सर्वर को पुनर्स्थापित करने के लिए कार्रवाई आवश्यक'
       server_suspended: 'हम आपको सूचित करना चाहते हैं कि आपका एक सर्वर नवीनीकरण न होने के कारण निलंबित कर दिया गया है।'
       extend_server: 'सर्वर को पुनर्स्थापित करने के लिए, ग्राहक पैनल में इसका नवीनीकरण करें।'
       server_details: 'सर्वर विवरण'
       server_name: 'सर्वर: %serverName%'
       suspension_date: 'निलंबित: %suspensionDate%'
+      suspension_date_label: 'निलंबन तिथि'
+      auto_delete_title: 'स्वत: हटाने की चेतावनी'
       auto_delete_warning: 'महत्वपूर्ण: यदि नवीनीकृत नहीं किया गया तो आपका सर्वर %days% दिनों के बाद (%deleteDate%) स्वचालित रूप से हटा दिया जाएगा।'
       panel_access: 'पैनल पहुंच'
 

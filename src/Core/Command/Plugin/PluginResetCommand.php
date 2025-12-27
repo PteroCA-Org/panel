@@ -2,6 +2,7 @@
 
 namespace App\Core\Command\Plugin;
 
+use App\Core\Enum\PluginStateEnum;
 use App\Core\Exception\Plugin\InvalidStateTransitionException;
 use App\Core\Service\Plugin\ManifestParser;
 use App\Core\Service\Plugin\PluginManager;
@@ -16,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[AsCommand(
     name: 'pteroca:plugin:reset',
-    description: 'Reset a faulted plugin or register a discovered plugin',
+    description: 'Reset a plugin to REGISTERED state (FAULTED, DISCOVERED, or from filesystem)',
     aliases: ['plugin:reset']
 )]
 class PluginResetCommand extends Command
@@ -40,21 +41,25 @@ class PluginResetCommand extends Command
                 'Plugin name to reset'
             )
             ->setHelp(<<<'HELP'
-The <info>%command.name%</info> command resets a faulted plugin or registers a discovered plugin.
+The <info>%command.name%</info> command resets a plugin to REGISTERED state.
 
 Use cases:
-1. Reset a FAULTED plugin back to REGISTERED state
-2. Register a plugin found on filesystem but not in database (DISCOVERED state)
+1. Reset a FAULTED plugin back to REGISTERED state (after fixing the issue)
+2. Reset a DISCOVERED plugin to REGISTERED state (fixes stuck plugins after v0.6.0/v0.6.1 bug)
+3. Register a plugin found on filesystem but not in database
 
 Usage:
   <info>php %command.full_name% plugin-name</info>
 
 Examples:
-  # Register a discovered plugin
+  # Fix a plugin stuck in DISCOVERED state
   <info>php %command.full_name% paypal-payment</info>
 
   # Reset a faulted plugin
   <info>php %command.full_name% broken-plugin</info>
+
+  # Register a plugin from filesystem
+  <info>php %command.full_name% new-plugin</info>
 
 HELP
             );
@@ -115,10 +120,10 @@ HELP
 
         $currentState = $plugin->getState();
 
-        if (!$currentState->isFaulted()) {
-            $io->warning("Plugin '$pluginName' is not in FAULTED state.");
-            $io->text("Current state: " . $this->translator->trans($currentState->getLabel()));
-            $io->note("Reset command is only for faulted plugins. Use 'plugin:enable' or 'plugin:disable' instead.");
+        // Check if plugin can be reset (DISCOVERED or FAULTED)
+        if (!in_array($currentState, [PluginStateEnum::DISCOVERED, PluginStateEnum::FAULTED], true)) {
+            $io->warning("Plugin '$pluginName' is in " . $this->translator->trans($currentState->getLabel()) . " state.");
+            $io->note("Reset command is only for DISCOVERED or FAULTED plugins. Use 'plugin:enable' or 'plugin:disable' instead.");
             return Command::SUCCESS;
         }
 
@@ -136,19 +141,30 @@ HELP
         );
 
         if ($plugin->getFaultReason()) {
-            $io->warning("Previous Fault Reason:");
+            $io->warning("Fault Reason:");
             $io->text($plugin->getFaultReason());
         }
 
         $io->section('Reset Action');
-        $io->text([
-            'This will:',
-            '  • Reset plugin state from FAULTED to REGISTERED',
-            '  • Clear the fault reason',
-            '  • Allow you to try enabling the plugin again',
-            '',
-            'Make sure you have fixed the issue that caused the fault before proceeding.',
-        ]);
+
+        if ($currentState === PluginStateEnum::DISCOVERED) {
+            $io->text([
+                'This will:',
+                '  • Reset plugin state from DISCOVERED to REGISTERED',
+                '  • Allow you to enable the plugin',
+                '',
+                'Note: This fixes plugins stuck in DISCOVERED state after the v0.6.0/v0.6.1 bug.',
+            ]);
+        } else {
+            $io->text([
+                'This will:',
+                '  • Reset plugin state from FAULTED to REGISTERED',
+                '  • Clear the fault reason',
+                '  • Allow you to try enabling the plugin again',
+                '',
+                'Make sure you have fixed the issue that caused the fault before proceeding.',
+            ]);
+        }
 
         if (!$io->confirm('Do you want to reset this plugin?', false)) {
             $io->note('Operation cancelled');

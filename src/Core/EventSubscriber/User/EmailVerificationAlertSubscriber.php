@@ -7,7 +7,6 @@ use App\Core\Enum\EmailVerificationValueEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Service\Plugin\PluginNotificationService;
 use App\Core\Service\SettingService;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -22,7 +21,6 @@ readonly class EmailVerificationAlertSubscriber implements EventSubscriberInterf
         private SettingService $settingService,
         private UrlGeneratorInterface $urlGenerator,
         private PluginNotificationService $notificationService,
-        private LoggerInterface $logger,
         private TranslatorInterface $translator,
     ) {}
 
@@ -62,7 +60,13 @@ readonly class EmailVerificationAlertSubscriber implements EventSubscriberInterf
             $translatedLinkText
         );
 
-        $this->notificationService->warning($message);
+        $session = $request->getSession();
+        $flashBag = $session->getFlashBag();
+        $existingWarnings = $flashBag->peek('warning');
+
+        if (!in_array($message, $existingWarnings, true)) {
+            $this->notificationService->warning($message);
+        }
     }
 
     private function shouldShowEmailVerificationAlert(): bool

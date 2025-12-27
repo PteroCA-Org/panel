@@ -1,17 +1,67 @@
-{% extends 'base.html.twig' %}
+{% extends 'panel/layout/split_screen.html.twig' %}
 
-{% block body_class 'page-login' %}
-{% block title %}{{ get_title() }} | {{ 'pteroca.register.title'|trans }}{% endblock %}
+{% block page_title %}{{ get_title() }} | {{ pageTitle|default('Page') }}{% endblock %}
 
-{% block stylesheets %}
-<link rel="stylesheet" href="{{ template_asset('css/app.css') }}">
-<link rel="stylesheet" href="{{ template_asset('css/panel.css?v=' ~ get_app_version()) }}">
-{% endblock %}
+{% block left_content %}
+    <h2 class="login-brand-title">{{ pageTitle|default('Page') }}</h2>
+    {% if pageDescription is defined %}
+        <p class="login-brand-subtitle">{{ pageDescription }}</p>
+    {% endif %}
 
-{% block body %}
-    <div class="default-page container">
-        <div class="row">
-            {{ pageContent|raw }}
+    <div class="login-features">
+        <div class="login-feature-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>{{ 'pteroca.login.feature_secure'|trans }}</span>
+        </div>
+        <div class="login-feature-item">
+            <i class="fas fa-bolt"></i>
+            <span>{{ 'pteroca.login.feature_fast'|trans }}</span>
+        </div>
+        <div class="login-feature-item">
+            <i class="fas fa-heart"></i>
+            <span>{{ 'pteroca.login.feature_reliable'|trans }}</span>
         </div>
     </div>
+{% endblock %}
+
+{% block form_title %}
+    <h1 class="h4 fw-bold text-dark mb-1">{{ pageTitle|default('Page') }}</h1>
+{% endblock %}
+
+{% block form_subtitle %}
+    {% if pageDescription is defined %}
+        <p class="text-muted small mb-0">{{ pageDescription }}</p>
+    {% endif %}
+{% endblock %}
+
+{% block form_content %}
+    <div class="page-content text-center mb-5 mt-5">
+        {{ pageContent|raw }}
+    </div>
+{% endblock %}
+
+{% block footer_links %}
+    {% if footerLinks is defined and footerLinks is iterable %}
+        <div class="text-center">
+            {% for link in footerLinks %}
+                <p class="text-muted small mb-0">
+                    <a href="{% if link.isRoute is defined and not link.isRoute %}{{ link.url }}{% else %}{{ path(link.url) }}{% endif %}" class="text-decoration-none">
+                        {% if link.icon is defined %}
+                            <i class="fas {{ link.icon }} me-1"></i>
+                        {% endif %}
+                        {{ link.text|trans }}
+                    </a>
+                </p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center">
+            <p class="text-muted small mb-0">
+                <a href="javascript:history.back()" class="text-decoration-none">
+                    <i class="fas fa-arrow-left me-1"></i>
+                    {{ 'pteroca.page.back'|trans }}
+                </a>
+            </p>
+        </div>
+    {% endif %}
 {% endblock %}

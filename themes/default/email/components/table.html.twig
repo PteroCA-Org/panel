@@ -1,0 +1,18 @@
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 16px 0;">
+    <tr>
+        <td>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="border: 1px solid #e5e7eb; border-radius: 6px; overflow: hidden;">
+                {% for row in rows %}
+                <tr style="{% if not loop.last %}border-bottom: 1px solid #e5e7eb;{% endif %}">
+                    <td style="padding: 12px 16px; background-color: #f9fafb; font-weight: 600; color: #6b7280; font-size: 14px; width: 40%; vertical-align: top;">
+                        {{ row.label }}
+                    </td>
+                    <td style="padding: 12px 16px; background-color: #ffffff; color: #1a1a1a; font-size: 14px; vertical-align: top;">
+                        {{ row.value|raw }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+    </tr>
+</table>

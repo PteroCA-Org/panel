@@ -197,9 +197,36 @@ class Product extends AbstractEntity implements ProductInterface
 
     public function getPrices(): Collection
     {
-        return $this->prices->filter(function (ProductPriceInterface $price) {
+        $filtered = $this->prices->filter(function (ProductPriceInterface $price) {
             return $price->getDeletedAt() === null;
         });
+
+        $iterator = $filtered->getIterator();
+        $iterator->uasort(function (ProductPriceInterface $a, ProductPriceInterface $b) {
+            // Logical sorting: type → value → id
+            $typePriority = [
+                ProductPriceTypeEnum::STATIC->value => 1,
+                ProductPriceTypeEnum::ON_DEMAND->value => 2,
+                ProductPriceTypeEnum::SLOT->value => 3,
+            ];
+
+            // First compare by type
+            $typeComparison = ($typePriority[$a->getType()->value] ?? 99) <=> ($typePriority[$b->getType()->value] ?? 99);
+            if ($typeComparison !== 0) {
+                return $typeComparison;
+            }
+
+            // Then by value (ascending)
+            $valueComparison = $a->getValue() <=> $b->getValue();
+            if ($valueComparison !== 0) {
+                return $valueComparison;
+            }
+
+            // Finally by ID
+            return $a->getId() <=> $b->getId();
+        });
+
+        return new ArrayCollection(iterator_to_array($iterator));
     }
 
     public function setStaticPrices(iterable $incomingPrices): self

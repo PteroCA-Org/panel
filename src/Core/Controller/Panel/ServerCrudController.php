@@ -23,6 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Core\Enum\PermissionEnum;
@@ -34,7 +35,7 @@ class ServerCrudController extends AbstractPanelController
 
     public function __construct(
         PanelCrudService $panelCrudService,
-        private readonly RequestStack $requestStack,
+        RequestStack $requestStack,
         private readonly UpdateServerService $updateServerService,
         private readonly DeleteServerService $deleteServerService,
         private readonly SettingService $settingService,
@@ -139,7 +140,10 @@ class ServerCrudController extends AbstractPanelController
             ->add(Crud::PAGE_INDEX, $this->getShowServerLogsAction())
             ->add(Crud::PAGE_EDIT, $this->getShowServerLogsAction())
             ->add(Crud::PAGE_DETAIL, $this->getManageServerAction())
-            ->add(Crud::PAGE_EDIT, $this->getManageServerAction());
+            ->add(Crud::PAGE_EDIT, $this->getManageServerAction())
+            ->add(Crud::PAGE_INDEX, $this->getShowServerInPterodactylAction())
+            ->add(Crud::PAGE_EDIT, $this->getShowServerInPterodactylAction())
+            ->add(Crud::PAGE_DETAIL, $this->getShowServerInPterodactylAction());
 
         return parent::configureActions($actions);
     }
@@ -185,21 +189,33 @@ class ServerCrudController extends AbstractPanelController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->deleteServerService->deleteServer($entityInstance);
+        try {
+            $this->deleteServerService->deleteServer($entityInstance);
 
-        if ($entityInstance instanceof Server) {
-            $entityInstance->setDeletedAtValue();
+            if ($entityInstance instanceof Server) {
+                $entityInstance->setDeletedAtValue();
+            }
+
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.server.deleted_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.server.delete_error', ['%error%' => $e->getMessage()]));
         }
-
-        parent::updateEntity($entityManager, $entityInstance);
     }
 
     private function getServerProductAction(string $action): Action
     {
+        $iconMap = [
+            Action::EDIT => 'fa fa-cog',
+            Action::DETAIL => 'fa fa-eye',
+        ];
+
         return Action::new(
             sprintf('serverProduct_%s', $action),
             $this->translator->trans(sprintf('pteroca.crud.server.server_product_%s', $action)),
-        )->linkToUrl(
+        )->setIcon($iconMap[$action] ?? 'fa fa-info-circle')
+        ->linkToUrl(
             fn (Server $entity) => $this->generateUrl(
                 'panel',
                 [

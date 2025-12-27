@@ -4,7 +4,6 @@ namespace App\Core\Controller\Panel\Setting;
 
 use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingContextEnum;
-use App\Core\Enum\SettingEnum;
 use App\Core\Repository\SettingRepository;
 use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
@@ -16,7 +15,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Exception;
-use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +26,7 @@ class EmailSettingCrudController extends AbstractSettingCrudController
         PanelCrudService $panelCrudService,
         RequestStack $requestStack,
         private readonly TranslatorInterface $translator,
-        private readonly SettingRepository $settingRepository,
+        SettingRepository $settingRepository,
         SettingOptionRepository $settingOptionRepository,
         SettingService $settingService,
         LocaleService $localeService,
@@ -48,7 +46,7 @@ class EmailSettingCrudController extends AbstractSettingCrudController
         $testSmtpAction = Action::new('testSmtpConnection', $this->translator->trans('pteroca.crud.setting.test_smtp_connection'))
             ->linkToRoute('admin_email_test_smtp')
             ->setIcon('fa fa-envelope-circle-check')
-            ->setCssClass('btn info')
+            ->setCssClass('btn-info')
             ->displayIf(fn () => $this->getUser()?->hasPermission(PermissionEnum::EDIT_SETTINGS_EMAIL))
             ->createAsGlobalAction();
 
@@ -62,21 +60,7 @@ class EmailSettingCrudController extends AbstractSettingCrudController
     public function testSmtpConnection(): RedirectResponse
     {
         try {
-            $smtpServer = $this->settingRepository->getSetting(SettingEnum::EMAIL_SMTP_SERVER);
-            $smtpPort = $this->settingRepository->getSetting(SettingEnum::EMAIL_SMTP_PORT);
-            $smtpUsername = $this->settingRepository->getSetting(SettingEnum::EMAIL_SMTP_USERNAME);
-            $smtpPassword = $this->settingRepository->getSetting(SettingEnum::EMAIL_SMTP_PASSWORD);
-
-            if (empty($smtpServer) || empty($smtpPort) || empty($smtpUsername) || empty($smtpPassword)) {
-                throw new InvalidArgumentException('Missing SMTP configuration');
-            }
-
-            $result = $this->emailConnectionVerificationService->validateConnection(
-                $smtpUsername,
-                $smtpPassword,
-                $smtpServer,
-                $smtpPort
-            );
+            $result = $this->emailConnectionVerificationService->validateExistingConnection();
 
             if ($result->isVerificationSuccessful) {
                 $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.smtp_connection_success'));

@@ -1,24 +1,34 @@
+{% extends 'email/layout/base.html.twig' %}
 {% trans_default_domain 'messages' %}
-{% set title = 'pteroca.email.verification.title'|trans %}
-{% include 'email/header.html.twig' %}
 
-<p>
-    {{ 'pteroca.email.verification.message'|trans({'%siteName%': siteName}) }}
-</p>
+{% set emailTitle = 'pteroca.email.verification.title'|trans %}
 
-<p style="text-align: center; margin: 30px 0;">
-    <a href="{{ verificationUrl }}" class="button">
-        {{ 'pteroca.email.verification.verify_button'|trans }}
-    </a>
-</p>
+{% block content %}
+    {% include 'email/components/icon_section.html.twig' with {
+        icon: 'ⓘ',
+        iconColor: '#3b82f6',
+        title: 'pteroca.email.verification.title'|trans,
+        message: 'pteroca.email.verification.subtitle'|trans
+    } %}
 
-<p>
-    {{ 'pteroca.email.verification.alternative_text'|trans }}<br>
-    <a href="{{ verificationUrl }}">{{ verificationUrl }}</a>
-</p>
+    {% include 'email/components/alert.html.twig' with {
+        type: 'info',
+        message: 'pteroca.email.verification.message'|trans({'%siteName%': siteName})
+    } %}
 
-<p style="font-size: 12px; color: #666;">
-    {{ 'pteroca.email.verification.footer_text'|trans({'%siteName%': siteName, '%siteUrl%': siteUrl}) }}
-</p>
+    {% include 'email/components/button.html.twig' with {
+        url: verificationUrl,
+        text: 'pteroca.email.verification.verify_button'|trans
+    } %}
 
-{% include 'email/footer.html.twig' %}
+    <p style="text-align: center; font-size: 14px; color: #6b7280; margin: 8px 0;">
+        {{ 'pteroca.email.verification.alternative_text'|trans }}<br>
+        <a href="{{ verificationUrl }}" style="color: #3b82f6; word-break: break-all;">{{ verificationUrl }}</a>
+    </p>
+
+    {% include 'email/components/divider.html.twig' %}
+
+    <p style="text-align: center; font-size: 12px; color: #9ca3af; margin: 0;">
+        {{ 'pteroca.email.verification.footer_text'|trans({'%siteName%': siteName, '%siteUrl%': siteUrl}) }}
+    </p>
+{% endblock %}

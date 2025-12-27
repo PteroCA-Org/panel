@@ -225,6 +225,7 @@ class SystemOperationService
             'var/log',
             'var/backups',
             'var/locks',
+            'plugins',
         ];
 
         $rootPath = dirname(__DIR__, 5);

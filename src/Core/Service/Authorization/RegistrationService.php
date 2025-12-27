@@ -156,25 +156,29 @@ class RegistrationService
 
             $deletedUser->setRoles($rolesToSet);
 
-            // NOTE: For reactivation, UserEventSubscriber does NOT emit events automatically,
-            // because this is an UPDATE, not INSERT (prePersist/postPersist are not triggered)
-            // IMPORTANT: Save user BEFORE calling Pterodactyl services to persist role changes
-            $this->userRepository->save($deletedUser);
-
+            // Prepare password for Pterodactyl operations (if provided)
             if (!empty($plainPassword)) {
                 $deletedUser->setPlainPassword($plainPassword);
+            }
 
+            // CRITICAL: Execute Pterodactyl operations BEFORE saving user to database
+            // If Pterodactyl fails, the outer try-catch will handle it and user won't be reactivated
+            if (!empty($plainPassword)) {
                 if ($deletedUser->getPterodactylUserId()) {
                     $this->userService->updateUserInPterodactyl($deletedUser, $plainPassword);
                 } else {
                     $this->userService->createUserWithPterodactylAccount($deletedUser, $plainPassword);
                 }
-
-                $this->userRepository->save($deletedUser);
             }
+
+            // NOTE: For reactivation, UserEventSubscriber does NOT emit events automatically,
+            // because this is an UPDATE, not INSERT (prePersist/postPersist are not triggered)
+            // IMPORTANT: Save user ONLY AFTER Pterodactyl operations succeed
+            $this->userRepository->save($deletedUser);
             $this->logService->logAction($deletedUser, LogActionEnum::USER_REGISTERED);
 
             // Manually emit UserRegisteredEvent for reactivated user
+            // This triggers registration email via UserRegistrationSubscriber
             $request = $this->requestStack->getCurrentRequest();
             $registeredEvent = new UserRegisteredEvent(
                 $deletedUser->getId(),

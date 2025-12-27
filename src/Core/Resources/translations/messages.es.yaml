@@ -18,6 +18,11 @@ pteroca:
     experimental_feature: 'Esta función es experimental y puede no funcionar correctamente.'
     or_resend_verification_email: 'o haz clic aquí para reenviar el correo de verificación.'
 
+  page:
+    terms_of_service: 'Términos de Servicio'
+    terms_of_service_description: 'Por favor lea nuestros términos y condiciones cuidadosamente'
+    back: 'Atrás'
+
   login:
     title: 'Iniciar sesión'
     email_address: 'Dirección de correo electrónico'
@@ -686,6 +691,12 @@ pteroca:
       save: 'Guardar categoría'
       category: 'Categoría'
       categories: 'Categorías'
+      created_successfully: 'Categoría creada exitosamente.'
+      updated_successfully: 'Categoría actualizada exitosamente.'
+      deleted_successfully: 'Categoría eliminada exitosamente.'
+      create_error: 'Se produjo un error al crear la categoría: %error%'
+      update_error: 'Se produjo un error al actualizar la categoría: %error%'
+      delete_error: 'Se produjo un error al eliminar la categoría: %error%'
     product:
       details: 'Detalles del producto'
       name: 'Nombre del producto'
@@ -802,6 +813,12 @@ pteroca:
       health_status.no_prices: 'Sin Precios'
       health_status.nest_unavailable: 'Error de Nest'
       health_status.unknown: 'Desconocido'
+      created_successfully: 'Producto creado exitosamente.'
+      updated_successfully: 'Producto actualizado exitosamente.'
+      deleted_successfully: 'Producto eliminado exitosamente.'
+      create_error: 'Se produjo un error al crear el producto: %error%'
+      update_error: 'Se produjo un error al actualizar el producto: %error%'
+      delete_error: 'Se produjo un error al eliminar el producto: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Nombre'
@@ -898,6 +915,7 @@ pteroca:
       server_edit: 'Cambiar propietario del servidor'
       server_product_detail: 'Mostrar detalles del servidor'
       show_server_logs: 'Mostrar registros del servidor'
+      show_server_in_pterodactyl: 'Mostrar servidor en Pterodactyl'
       build_updated_successfully: 'La compilación del servidor se ha actualizado correctamente.'
       build_update_error: 'Ocurrió un error al actualizar la compilación del servidor.'
       startup_updated_successfully: 'La configuración de inicio del servidor se ha actualizado correctamente.'
@@ -909,6 +927,8 @@ pteroca:
       details_updated_successfully: 'Los detalles del servidor se han actualizado correctamente.'
       details_update_error: 'Ocurrió un error al actualizar los detalles del servidor.'
       deleted_at: 'Eliminado en'
+      deleted_successfully: 'Servidor eliminado exitosamente.'
+      delete_error: 'Ocurrió un error al eliminar el servidor: %error%'
     setting:
       name: 'Nombre del ajuste'
       value: 'Valor'
@@ -992,6 +1012,13 @@ pteroca:
       test_smtp_connection: 'Probar conexión SMTP'
       smtp_connection_success: '¡Conexión SMTP exitosa!'
       smtp_connection_failed: '¡Conexión SMTP fallida!'
+      test_pterodactyl_connection: 'Probar conexión de Pterodactyl'
+      pterodactyl_connection_success: '¡Conexión de Pterodactyl exitosa!'
+      pterodactyl_connection_failed: '¡Conexión de Pterodactyl fallida!'
+      updated_successfully: 'Configuración actualizada exitosamente.'
+      created_successfully: 'Configuración creada exitosamente.'
+      create_error: 'Se produjo un error al crear la configuración: %error%'
+      update_error: 'Se produjo un error al actualizar la configuración: %error%'
     user:
       email: 'Correo electrónico'
       roles: 'Roles'
@@ -1023,6 +1050,10 @@ pteroca:
       restore: 'Restaurar'
       pterodactyl_user_not_found: 'Usuario no encontrado en Pterodactyl, pero eliminado exitosamente de PteroCA.'
       cannot_delete_user_with_active_servers: 'No se puede eliminar el usuario con {{ count }} servidor(es) activo(s). Por favor, elimine o suspenda los servidores primero.'
+      updated_successfully: 'Usuario actualizado exitosamente.'
+      create_error: 'Se produjo un error al crear el usuario: %error%'
+      update_error: 'Se produjo un error al actualizar el usuario: %error%'
+      delete_error: 'Se produjo un error al eliminar el usuario: %error%'
     role:
       name: 'Nombre'
       name_help: 'Identificador de rol interno (minúsculas, alfanumérico, guiones bajos únicamente). No se puede cambiar después de la creación.'
@@ -1103,6 +1134,8 @@ pteroca:
       gateway: 'Pasarela de pago'
     user_account:
       description: 'Edita tus datos personales, cambia la contraseña y gestiona la configuración de la cuenta'
+      updated_successfully: 'Cuenta actualizada exitosamente.'
+      update_error: 'Se produjo un error al actualizar la cuenta: %error%'
     log:
       log: 'Registro'
       logs: 'Registros'
@@ -1151,6 +1184,12 @@ pteroca:
       payment_discount: 'Descuento de pago'
       server_discount: 'Descuento de servidor'
       show_voucher_usages: 'Mostrar cupones canjeados'
+      created_successfully: 'Cupón creado exitosamente.'
+      updated_successfully: 'Cupón actualizado exitosamente.'
+      deleted_successfully: 'Cupón eliminado exitosamente.'
+      create_error: 'Se produjo un error al crear el cupón: %error%'
+      update_error: 'Se produjo un error al actualizar el cupón: %error%'
+      delete_error: 'Se produjo un error al eliminar el cupón: %error%'
     voucher_usage:
       voucher_usage: 'Cupón canjeado'
       voucher_usages: 'Cupones canjeados'
@@ -1229,6 +1268,7 @@ pteroca:
     verification:
       subject: "Verificación de correo electrónico - %siteName%"
       title: "Verificación de correo electrónico"
+      subtitle: "Por favor, verifica tu dirección de correo electrónico para continuar"
       hello: "¡Hola %name%!"
       message: "Gracias por registrarte en %siteName%. Por favor verifica tu dirección de correo electrónico haciendo clic en el botón de abajo."
       verify_button: "Verificar dirección de correo electrónico"
@@ -1244,6 +1284,7 @@ pteroca:
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
       subject: 'Registro'
+      subtitle: 'Su cuenta ha sido creada exitosamente'
       welcome: '¡Bienvenido a nuestro servicio! Gracias por registrarte.'
       account_ready: 'Tu cuenta está lista para usar. Ahora puedes iniciar sesión en tu cuenta y comenzar a usar nuestros servicios.'
       email_verification_required: 'Verificación de correo electrónico requerida'
@@ -1253,6 +1294,8 @@ pteroca:
       if_not_registered: 'Si no te has registrado en nuestro sitio, ignora este mensaje.'
     recovery:
       subject: 'Restablecimiento de contraseña'
+      title: 'Solicitud de restablecimiento de contraseña'
+      subtitle: 'Hemos recibido su solicitud de restablecimiento de contraseña'
       we_received_request: 'Hemos recibido una solicitud para restablecer la contraseña de tu cuenta.'
       click_link_to_reset: 'Haz clic en el siguiente enlace para restablecer tu contraseña:'
       reset_password: 'Restablecer contraseña'
@@ -1260,6 +1303,8 @@ pteroca:
       if_not_requested: 'Si no solicitaste el restablecimiento de la contraseña, ignora este mensaje.'
     store:
       subject: 'Compra de servidor'
+      title: 'Servidor comprado exitosamente'
+      subtitle: 'Su servidor está listo para usar'
       server_purchased: 'Has comprado un servidor en nuestra tienda.'
       expiration_date: 'Fecha de expiración'
       product_details: 'Detalles del producto'
@@ -1272,21 +1317,32 @@ pteroca:
       panel_password: 'Contraseña'
       panel_password_hint: 'La contraseña es la misma que para tu cuenta en el panel de cliente.'
       management_panel_hint: 'Para obtener los datos FTP, inicia sesión en el panel de gestión.'
+      access_panel: 'Acceder al panel del servidor'
     renew:
       subject: 'Renovación del servidor'
+      title: 'Servidor renovado exitosamente'
+      subtitle: 'Su servidor ha sido extendido'
       server_renewed: 'Has renovado un servidor que adquiriste en nuestra oferta.'
       new_expiration: 'Nueva fecha de expiración:'
     payment:
       subject: 'Pago'
+      title: 'Pago recibido'
+      subtitle: 'Gracias por su pago'
       payment_received: 'Confirmamos que hemos recibido un pago de tu parte.'
       balance_updated: 'Tu saldo ha sido actualizado con el monto'
+      amount_paid: 'Monto pagado'
+      new_balance: 'Nuevo saldo'
+      thank_you: '¡Gracias por elegirnos!'
     suspended:
       subject: 'Suspensión del servidor'
+      subtitle: 'Acción requerida para restaurar su servidor'
       server_suspended: 'Te informamos que uno de tus servidores ha sido suspendido porque no fue renovado.'
       extend_server: 'Para restaurar el servidor, renueva tu suscripción en el panel de cliente.'
       server_details: 'Detalles del servidor'
       server_name: 'Servidor: %serverName%'
       suspension_date: 'Suspendido el: %suspensionDate%'
+      suspension_date_label: 'Fecha de suspensión'
+      auto_delete_title: 'Advertencia de eliminación automática'
       auto_delete_warning: 'Importante: Tu servidor será eliminado automáticamente después de %days% días (%deleteDate%) si no se renueva.'
       panel_access: 'Acceso al panel'
 

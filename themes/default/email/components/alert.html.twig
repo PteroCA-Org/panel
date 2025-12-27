@@ -1,0 +1,60 @@
+{% set showIcon = showIcon is defined ? showIcon : true %}
+{% set alertStyles = {
+  'success': {
+    'bg': '#f0fdf4',
+    'border': '#22c55e',
+    'text': '#166534',
+    'icon': '✓'
+  },
+  'info': {
+    'bg': '#eff6ff',
+    'border': '#3b82f6',
+    'text': '#1e40af',
+    'icon': 'ⓘ'
+  },
+  'warning': {
+    'bg': '#fffbeb',
+    'border': '#f59e0b',
+    'text': '#92400e',
+    'icon': '⚠'
+  },
+  'danger': {
+    'bg': '#fef2f2',
+    'border': '#ef4444',
+    'text': '#991b1b',
+    'icon': '✕'
+  }
+} %}
+{% set style = alertStyles[type] %}
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 16px 0;">
+    <tr>
+        <td>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: {{ style.bg }}; border-left: 4px solid {{ style.border }}; border-radius: 6px;">
+                <tr>
+                    <td style="padding: 16px 20px;">
+                        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                {% if showIcon %}
+                                <td style="width: 32px; vertical-align: top; padding-right: 12px;">
+                                    <span style="font-size: 20px; line-height: 1; color: {{ style.border }};">{{ style.icon }}</span>
+                                </td>
+                                {% endif %}
+                                <td style="vertical-align: top;">
+                                    {% if title is defined and title %}
+                                    <p style="margin: 0 0 8px; font-weight: 600; font-size: 16px; color: {{ style.text }}; line-height: 1.4;">
+                                        {{ title }}
+                                    </p>
+                                    {% endif %}
+                                    <p style="margin: 0; font-size: 14px; color: {{ style.text }}; line-height: 1.5;">
+                                        {{ message|raw }}
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

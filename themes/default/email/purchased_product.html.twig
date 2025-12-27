@@ -1,24 +1,58 @@
+{% extends 'email/layout/base.html.twig' %}
 {% trans_default_domain 'messages' %}
-{% include 'email/header.html.twig' %}
-<p>
-    {{ 'pteroca.email.store.server_purchased'|trans }}<br>
-    {{ 'pteroca.email.store.expiration_date'|trans }}: {{ server.expiresAt|date('Y-m-d H:i') }}<br><br>
-</p>
-<p>
-    <b>{{ 'pteroca.email.store.product_details'|trans }}:</b><br>
-    {{ 'pteroca.email.store.product_name'|trans }}: {{ product.name }}<br>
-    {{ 'pteroca.email.store.product_price'|trans }}: {{ priceCalculation.formattedDescription }}<br>
-</p>
-<p>
-    <b>{{ 'pteroca.email.store.server_details'|trans }}:</b><br>
-    {{ 'pteroca.email.store.ip_address'|trans }}: {{ server.ip }}<br>
-    {{ 'pteroca.email.store.management_panel'|trans }}: {{ panel.url }}<br>
+
+{% set emailTitle = 'pteroca.email.store.subject'|trans %}
+
+{% block content %}
+    {% include 'email/components/icon_section.html.twig' with {
+        icon: '✓',
+        iconColor: '#22c55e',
+        title: 'pteroca.email.store.title'|trans,
+        message: 'pteroca.email.store.subtitle'|trans
+    } %}
+
+    {% include 'email/components/alert.html.twig' with {
+        type: 'success',
+        message: 'pteroca.email.store.server_purchased'|trans ~ ' ' ~ 'pteroca.email.store.expiration_date'|trans ~ ': ' ~ server.expiresAt|date('Y-m-d H:i')
+    } %}
+
+    {% include 'email/components/divider.html.twig' %}
+
+    <h3 style="margin: 0 0 16px; font-size: 18px; font-weight: 600; color: #1a1a1a;">
+        {{ 'pteroca.email.store.product_details'|trans }}
+    </h3>
+    {% include 'email/components/table.html.twig' with {
+        rows: [
+            {label: 'pteroca.email.store.product_name'|trans, value: product.name},
+            {label: 'pteroca.email.store.product_price'|trans, value: priceCalculation.formattedDescription}
+        ]
+    } %}
+
+    {% include 'email/components/divider.html.twig' %}
+
+    <h3 style="margin: 0 0 16px; font-size: 18px; font-weight: 600; color: #1a1a1a;">
+        {{ 'pteroca.email.store.server_details'|trans }}
+    </h3>
+    {% set serverRows = [
+        {label: 'pteroca.email.store.ip_address'|trans, value: server.ip},
+        {label: 'pteroca.email.store.management_panel'|trans, value: '<a href="' ~ panel.url ~ '" style="color: #3b82f6;">' ~ panel.url ~ '</a>'}
+    ] %}
     {% if use_pterodactyl_panel_as_client_panel() and not is_pterodactyl_sso_enabled() %}
-        {{ 'pteroca.email.store.panel_username'|trans }}: {{ panel.username }}<br>
-        {{ 'pteroca.email.store.panel_password'|trans }}: {{ 'pteroca.email.store.panel_password_hint'|trans }}<br>
+        {% set serverRows = serverRows|merge([
+            {label: 'pteroca.email.store.panel_username'|trans, value: panel.username},
+            {label: 'pteroca.email.store.panel_password'|trans, value: 'pteroca.email.store.panel_password_hint'|trans}
+        ]) %}
     {% endif %}
-</p>
-<p>
-    {{ 'pteroca.email.store.management_panel_hint'|trans }}
-</p>
-{% include 'email/footer.html.twig' %}
+    {% include 'email/components/table.html.twig' with {
+        rows: serverRows
+    } %}
+
+    {% include 'email/components/button.html.twig' with {
+        url: panel.url,
+        text: 'pteroca.email.store.access_panel'|trans
+    } %}
+
+    <p style="text-align: center; color: #6b7280; font-size: 14px; margin: 16px 0 0;">
+        {{ 'pteroca.email.store.management_panel_hint'|trans }}
+    </p>
+{% endblock %}

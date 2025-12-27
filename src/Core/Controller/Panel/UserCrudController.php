@@ -233,8 +233,8 @@ class UserCrudController extends AbstractPanelController
                 } else {
                     $this->addFlash('success', $this->translator->trans('pteroca.crud.user.created_successfully'));
                 }
-            } catch (Exception) {
-                $this->addFlash('danger', $this->translator->trans('pteroca.system.pterodactyl_error'));
+            } catch (Exception $e) {
+                $this->addFlash('danger', $this->translator->trans('pteroca.crud.user.create_error', ['%error%' => $e->getMessage()]));
                 return;
             }
         }
@@ -247,12 +247,15 @@ class UserCrudController extends AbstractPanelController
         if ($entityInstance instanceof UserInterface) {
             try {
                 $this->userService->updateUserInPterodactyl($entityInstance, $entityInstance->getPlainPassword());
-            } catch (Exception) {
-                $this->addFlash('danger', $this->translator->trans('pteroca.system.pterodactyl_error'));
+            } catch (Exception $e) {
+                $this->addFlash('danger', $this->translator->trans('pteroca.crud.user.update_error', ['%error%' => $e->getMessage()]));
+                throw $e;
             }
         }
 
         parent::updateEntity($entityManager, $entityInstance);
+
+        $this->addFlash('success', $this->translator->trans('pteroca.crud.user.updated_successfully'));
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -274,8 +277,8 @@ class UserCrudController extends AbstractPanelController
                 $this->userService->deleteUserFromPterodactyl($entityInstance);
             } catch (PterodactylUserNotFoundException) {
                 $pterodactylUserNotFound = true;
-            } catch (Exception) {
-                $this->addFlash('danger', $this->translator->trans('pteroca.system.pterodactyl_error'));
+            } catch (Exception $e) {
+                $this->addFlash('danger', $this->translator->trans('pteroca.crud.user.delete_error', ['%error%' => $e->getMessage()]));
                 return;
             }
 
