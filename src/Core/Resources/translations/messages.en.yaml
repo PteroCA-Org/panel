@@ -691,6 +691,12 @@ pteroca:
       save: 'Save category'
       category: 'Category'
       categories: 'Categories'
+      created_successfully: 'Category created successfully.'
+      updated_successfully: 'Category updated successfully.'
+      deleted_successfully: 'Category deleted successfully.'
+      create_error: 'An error occurred while creating the category: %error%'
+      update_error: 'An error occurred while updating the category: %error%'
+      delete_error: 'An error occurred while deleting the category: %error%'
     product:
       details: 'Product details'
       name: 'Product name'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'No Prices'
       health_status.nest_unavailable: 'Nest Error'
       health_status.unknown: 'Unknown'
+      created_successfully: 'Product created successfully.'
+      updated_successfully: 'Product updated successfully.'
+      deleted_successfully: 'Product deleted successfully.'
+      create_error: 'An error occurred while creating the product: %error%'
+      update_error: 'An error occurred while updating the product: %error%'
+      delete_error: 'An error occurred while deleting the product: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Name'
@@ -913,6 +925,8 @@ pteroca:
       unsuspended_error: 'An error occurred while unsuspending the server.'
       details_updated_successfully: 'The server details have been successfully updated.'
       details_update_error: 'An error occurred while updating the server details.'
+      deleted_successfully: 'Server deleted successfully.'
+      delete_error: 'An error occurred while deleting the server: %error%'
       deleted_at: 'Deleted at'
     setting:
       name: 'Setting name'
@@ -929,6 +943,10 @@ pteroca:
       hint: 'Description'
       set_as_empty: 'Set as empty'
       set_as_empty_help: 'Check this to set the value as empty (null).'
+      updated_successfully: 'Setting updated successfully.'
+      created_successfully: 'Setting created successfully.'
+      create_error: 'An error occurred while creating the setting: %error%'
+      update_error: 'An error occurred while updating the setting: %error%'
       hints:
         site_logo: 'Site logo'
         site_url: 'Site URL'
@@ -1017,6 +1035,10 @@ pteroca:
       cannot_delete_user_with_active_servers: 'Cannot delete user with {{ count }} active server(s). Please delete or suspend the servers first.'
       account_restored: 'User account has been restored from previously deleted account.'
       created_successfully: 'User has been created successfully.'
+      updated_successfully: 'User updated successfully.'
+      create_error: 'An error occurred while creating the user: %error%'
+      update_error: 'An error occurred while updating the user: %error%'
+      delete_error: 'An error occurred while deleting the user: %error%'
     role:
       name: 'Name'
       name_help: 'Internal role identifier (lowercase, alphanumeric, underscores only). Cannot be changed after creation.'
@@ -1097,6 +1119,8 @@ pteroca:
       detail: 'Detail'
     user_account:
       description: 'Edit your personal data, change password and manage account settings'
+      updated_successfully: 'Account updated successfully.'
+      update_error: 'An error occurred while updating the account: %error%'
     log:
       log: 'Log'
       logs: 'Logs'
@@ -1145,6 +1169,12 @@ pteroca:
       payment_discount: 'Payment discount'
       server_discount: 'Server discount'
       show_voucher_usages: 'Show redeemed vouchers'
+      created_successfully: 'Voucher created successfully.'
+      updated_successfully: 'Voucher updated successfully.'
+      deleted_successfully: 'Voucher deleted successfully.'
+      create_error: 'An error occurred while creating the voucher: %error%'
+      update_error: 'An error occurred while updating the voucher: %error%'
+      delete_error: 'An error occurred while deleting the voucher: %error%'
     voucher_usage:
       voucher_usage: 'Redeemed voucher'
       voucher_usages: 'Redeemed vouchers'

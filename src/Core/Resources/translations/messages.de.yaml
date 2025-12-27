@@ -691,6 +691,12 @@ pteroca:
       save: 'Kategorie speichern'
       category: 'Kategorie'
       categories: 'Kategorien'
+      created_successfully: 'Kategorie erfolgreich erstellt.'
+      updated_successfully: 'Kategorie erfolgreich aktualisiert.'
+      deleted_successfully: 'Kategorie erfolgreich gelöscht.'
+      create_error: 'Beim Erstellen der Kategorie ist ein Fehler aufgetreten: %error%'
+      update_error: 'Beim Aktualisieren der Kategorie ist ein Fehler aufgetreten: %error%'
+      delete_error: 'Beim Löschen der Kategorie ist ein Fehler aufgetreten: %error%'
     product:
       details: 'Produktdetails'
       name: 'Produktname'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'Keine Preise'
       health_status.nest_unavailable: 'Nest-Fehler'
       health_status.unknown: 'Unbekannt'
+      created_successfully: 'Produkt erfolgreich erstellt.'
+      updated_successfully: 'Produkt erfolgreich aktualisiert.'
+      deleted_successfully: 'Produkt erfolgreich gelöscht.'
+      create_error: 'Beim Erstellen des Produkts ist ein Fehler aufgetreten: %error%'
+      update_error: 'Beim Aktualisieren des Produkts ist ein Fehler aufgetreten: %error%'
+      delete_error: 'Beim Löschen des Produkts ist ein Fehler aufgetreten: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Name'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: 'Die Serverdetails wurden erfolgreich aktualisiert.'
       details_update_error: 'Beim Aktualisieren der Serverdetails ist ein Fehler aufgetreten.'
       deleted_at: 'Gelöscht am'
+      deleted_successfully: 'Server erfolgreich gelöscht.'
+      delete_error: 'Beim Löschen des Servers ist ein Fehler aufgetreten: %error%'
     setting:
       name: 'Einstellungsname'
       value: 'Wert'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: 'Pterodactyl-Verbindung testen'
       pterodactyl_connection_success: 'Pterodactyl-Verbindung erfolgreich!'
       pterodactyl_connection_failed: 'Pterodactyl-Verbindung fehlgeschlagen!'
+      updated_successfully: 'Einstellung erfolgreich aktualisiert.'
+      created_successfully: 'Einstellung erfolgreich erstellt.'
+      create_error: 'Beim Erstellen der Einstellung ist ein Fehler aufgetreten: %error%'
+      update_error: 'Beim Aktualisieren der Einstellung ist ein Fehler aufgetreten: %error%'
     user:
       email: 'E-Mail'
       roles: 'Rollen'
@@ -1031,6 +1049,10 @@ pteroca:
       cannot_delete_user_with_active_servers: 'Benutzer mit {{ count }} aktiven Server(n) kann nicht gelöscht werden. Bitte löschen oder suspendieren Sie die Server zuerst.'
       account_restored: 'Das Benutzerkonto wurde aus einem zuvor gelöschten Konto wiederhergestellt.'
       created_successfully: 'Der Benutzer wurde erfolgreich erstellt.'
+      updated_successfully: 'Benutzer erfolgreich aktualisiert.'
+      create_error: 'Beim Erstellen des Benutzers ist ein Fehler aufgetreten: %error%'
+      update_error: 'Beim Aktualisieren des Benutzers ist ein Fehler aufgetreten: %error%'
+      delete_error: 'Beim Löschen des Benutzers ist ein Fehler aufgetreten: %error%'
     role:
       name: 'Name'
       name_help: 'Interner Rollenbezeichner (Kleinbuchstaben, alphanumerisch, Unterstriche nur). Kann nach der Erstellung nicht geändert werden.'
@@ -1111,6 +1133,8 @@ pteroca:
       gateway: 'Zahlungs-Gateway'
     user_account:
       description: 'Bearbeiten Sie Ihre persönlichen Daten, ändern Sie das Passwort und verwalten Sie Kontoeinstellungen'
+      updated_successfully: 'Konto erfolgreich aktualisiert.'
+      update_error: 'Beim Aktualisieren des Kontos ist ein Fehler aufgetreten: %error%'
     log:
       log: 'Log'
       logs: 'Logs'
@@ -1159,6 +1183,12 @@ pteroca:
       payment_discount: 'Zahlungsrabatt'
       server_discount: 'Serverrabatt'
       show_voucher_usages: 'Eingelöste Gutscheine anzeigen'
+      created_successfully: 'Gutschein erfolgreich erstellt.'
+      updated_successfully: 'Gutschein erfolgreich aktualisiert.'
+      deleted_successfully: 'Gutschein erfolgreich gelöscht.'
+      create_error: 'Beim Erstellen des Gutscheins ist ein Fehler aufgetreten: %error%'
+      update_error: 'Beim Aktualisieren des Gutscheins ist ein Fehler aufgetreten: %error%'
+      delete_error: 'Beim Löschen des Gutscheins ist ein Fehler aufgetreten: %error%'
     voucher_usage:
       voucher_usage: 'Eingelöster Gutschein'
       voucher_usages: 'Eingelöste Gutscheine'

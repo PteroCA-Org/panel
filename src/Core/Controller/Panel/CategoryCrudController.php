@@ -5,6 +5,7 @@ namespace App\Core\Controller\Panel;
 use App\Core\Entity\Category;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Service\Crud\PanelCrudService;
+use App\Core\Trait\CrudFlashMessagesTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -14,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -21,6 +23,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CategoryCrudController extends AbstractPanelController
 {
+    use CrudFlashMessagesTrait;
+
     public function __construct(
         PanelCrudService $panelCrudService,
         RequestStack $requestStack,
@@ -98,20 +102,40 @@ class CategoryCrudController extends AbstractPanelController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->handleFileUpload($entityInstance);
-        parent::persistEntity($entityManager, $entityInstance);
+        try {
+            $this->handleFileUpload($entityInstance);
+            parent::persistEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.category.created_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.category.create_error', ['%error%' => $e->getMessage()]));
+            throw $e;
+        }
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->handleFileUpload($entityInstance);
-        parent::updateEntity($entityManager, $entityInstance);
+        try {
+            $this->handleFileUpload($entityInstance);
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.category.updated_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.category.update_error', ['%error%' => $e->getMessage()]));
+            throw $e;
+        }
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->removeFile($entityInstance);
-        parent::deleteEntity($entityManager, $entityInstance);
+        try {
+            $this->removeFile($entityInstance);
+            parent::deleteEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.category.deleted_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.category.delete_error', ['%error%' => $e->getMessage()]));
+        }
     }
 
     private function handleFileUpload($entityInstance): void

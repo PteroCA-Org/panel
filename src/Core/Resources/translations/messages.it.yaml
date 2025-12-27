@@ -691,6 +691,12 @@ pteroca:
       save: 'Salva categoria'
       category: 'Categoria'
       categories: 'Categorie'
+      created_successfully: 'Categoria creata con successo.'
+      updated_successfully: 'Categoria aggiornata con successo.'
+      deleted_successfully: 'Categoria eliminata con successo.'
+      create_error: 'Si è verificato un errore durante la creazione della categoria: %error%'
+      update_error: 'Si è verificato un errore durante l''aggiornamento della categoria: %error%'
+      delete_error: 'Si è verificato un errore durante l''eliminazione della categoria: %error%'
     product:
       details: 'Dettagli prodotto'
       name: 'Nome prodotto'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'Nessun Prezzo'
       health_status.nest_unavailable: 'Errore Nest'
       health_status.unknown: 'Sconosciuto'
+      created_successfully: 'Prodotto creato con successo.'
+      updated_successfully: 'Prodotto aggiornato con successo.'
+      deleted_successfully: 'Prodotto eliminato con successo.'
+      create_error: 'Si è verificato un errore durante la creazione del prodotto: %error%'
+      update_error: 'Si è verificato un errore durante l''aggiornamento del prodotto: %error%'
+      delete_error: 'Si è verificato un errore durante l''eliminazione del prodotto: %error%'
     plugin:
       plugins: 'Plugin'
       name: 'Nome'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: 'I dettagli del server sono stati aggiornati con successo.'
       details_update_error: 'Si è verificato un errore durante l''aggiornamento dei dettagli del server.'
       deleted_at: 'Eliminato in data'
+      deleted_successfully: 'Server eliminato con successo.'
+      delete_error: 'Si è verificato un errore durante l''eliminazione del server: %error%'
     setting:
       name: 'Nome impostazione'
       value: 'Valore'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: 'Test connessione Pterodactyl'
       pterodactyl_connection_success: 'Connessione Pterodactyl riuscita!'
       pterodactyl_connection_failed: 'Connessione Pterodactyl fallita!'
+      updated_successfully: 'Impostazione aggiornata con successo.'
+      created_successfully: 'Impostazione creata con successo.'
+      create_error: 'Si è verificato un errore durante la creazione dell''impostazione: %error%'
+      update_error: 'Si è verificato un errore durante l''aggiornamento dell''impostazione: %error%'
     user:
       email: 'E-mail'
       roles: 'Ruoli'
@@ -1031,6 +1049,10 @@ pteroca:
       restore: 'Ripristina'
       pterodactyl_user_not_found: 'Utente non trovato in Pterodactyl, ma eliminato con successo da PteroCA.'
       cannot_delete_user_with_active_servers: 'Impossibile eliminare l''utente con {{ count }} server attivo(i). Si prega di eliminare o sospendere i server prima.'
+      updated_successfully: 'Utente aggiornato con successo.'
+      create_error: 'Si è verificato un errore durante la creazione dell''utente: %error%'
+      update_error: 'Si è verificato un errore durante l''aggiornamento dell''utente: %error%'
+      delete_error: 'Si è verificato un errore durante l''eliminazione dell''utente: %error%'
     role:
       name: 'Nome'
       name_help: 'Identificatore di ruolo interno (minuscolo, alfanumerico, trattini bassi solo). Non può essere cambiato dopo la creazione.'
@@ -1111,6 +1133,8 @@ pteroca:
       gateway: 'Gateway di pagamento'
     user_account:
       description: 'Modifica i tuoi dati personali, cambia la password e gestisci le impostazioni dell''account'
+      updated_successfully: 'Account aggiornato con successo.'
+      update_error: 'Si è verificato un errore durante l''aggiornamento dell''account: %error%'
     log:
       log: 'Registro'
       logs: 'Registri'
@@ -1159,6 +1183,12 @@ pteroca:
       payment_discount: 'Sconto pagamento'
       server_discount: 'Sconto server'
       show_voucher_usages: 'Mostra voucher riscattati'
+      created_successfully: 'Buono creato con successo.'
+      updated_successfully: 'Buono aggiornato con successo.'
+      deleted_successfully: 'Buono eliminato con successo.'
+      create_error: 'Si è verificato un errore durante la creazione del buono: %error%'
+      update_error: 'Si è verificato un errore durante l''aggiornamento del buono: %error%'
+      delete_error: 'Si è verificato un errore durante l''eliminazione del buono: %error%'
     voucher_usage:
       voucher_usage: 'Voucher riscattato'
       voucher_usages: 'Voucher riscattati'

@@ -15,6 +15,7 @@ use App\Core\Service\Product\NestEggsCacheService;
 use App\Core\Service\Product\ProductHealthStatusFormatter;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use App\Core\Service\SettingService;
+use App\Core\Trait\CrudFlashMessagesTrait;
 use App\Core\Trait\ExperimentalFeatureMessageTrait;
 use App\Core\Trait\ProductCrudControllerTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,6 +37,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -44,6 +46,7 @@ class ProductCrudController extends AbstractPanelController
 {
     use ProductCrudControllerTrait;
     use ExperimentalFeatureMessageTrait;
+    use CrudFlashMessagesTrait;
 
     public function __construct(
         PanelCrudService $panelCrudService,
@@ -332,36 +335,56 @@ class ProductCrudController extends AbstractPanelController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Product) {
-            $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
-            $entityInstance->setCreatedAtValue();
-            $entityInstance->setUpdatedAtValue();
+        try {
+            if ($entityInstance instanceof Product) {
+                $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
+                $entityInstance->setCreatedAtValue();
+                $entityInstance->setUpdatedAtValue();
 
-            $this->validateProductEggs($entityInstance);
+                $this->validateProductEggs($entityInstance);
+            }
+
+            parent::persistEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.product.created_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.product.create_error', ['%error%' => $e->getMessage()]));
+            throw $e;
         }
-
-        parent::persistEntity($entityManager, $entityInstance);
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Product) {
-            $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
-            $entityInstance->setUpdatedAtValue();
+        try {
+            if ($entityInstance instanceof Product) {
+                $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
+                $entityInstance->setUpdatedAtValue();
 
-            $this->validateProductEggs($entityInstance);
+                $this->validateProductEggs($entityInstance);
+            }
+
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.product.updated_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.product.update_error', ['%error%' => $e->getMessage()]));
+            throw $e;
         }
-
-        parent::updateEntity($entityManager, $entityInstance);
     }
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Product) {
-            $entityInstance->setDeletedAtValue();
-        }
+        try {
+            if ($entityInstance instanceof Product) {
+                $entityInstance->setDeletedAtValue();
+            }
 
-        parent::updateEntity($entityManager, $entityInstance);
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.product.deleted_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.product.delete_error', ['%error%' => $e->getMessage()]));
+        }
     }
 
     public function copyProduct(AdminContext $context): RedirectResponse

@@ -691,6 +691,12 @@ pteroca:
       save: '保存类别'
       category: '类别'
       categories: '类别'
+      created_successfully: '类别创建成功。'
+      updated_successfully: '类别更新成功。'
+      deleted_successfully: '类别删除成功。'
+      create_error: '创建类别时发生错误：%error%'
+      update_error: '更新类别时发生错误：%error%'
+      delete_error: '删除类别时发生错误：%error%'
     product:
       details: '产品详情'
       name: '产品名称'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: '无价格'
       health_status.nest_unavailable: 'Nest 错误'
       health_status.unknown: '未知'
+      created_successfully: '产品创建成功。'
+      updated_successfully: '产品更新成功。'
+      deleted_successfully: '产品删除成功。'
+      create_error: '创建产品时发生错误：%error%'
+      update_error: '更新产品时发生错误：%error%'
+      delete_error: '删除产品时发生错误：%error%'
     plugin:
       plugins: '插件'
       name: '名称'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: '服务器详情已成功更新。'
       details_update_error: '更新服务器详情时发生错误。'
       deleted_at: '已删除于'
+      deleted_successfully: '服务器删除成功。'
+      delete_error: '删除服务器时发生错误：%error%'
     setting:
       name: '设置名称'
       value: '值'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: '测试 Pterodactyl 连接'
       pterodactyl_connection_success: 'Pterodactyl 连接成功！'
       pterodactyl_connection_failed: 'Pterodactyl 连接失败！'
+      updated_successfully: '设置更新成功。'
+      created_successfully: '设置创建成功。'
+      create_error: '创建设置时发生错误：%error%'
+      update_error: '更新设置时发生错误：%error%'
     user:
       email: '电子邮件'
       roles: '角色'
@@ -1031,6 +1049,10 @@ pteroca:
       restore: '恢复'
       pterodactyl_user_not_found: '在 Pterodactyl 中未找到用户，但在 PteroCA 中已成功删除。'
       cannot_delete_user_with_active_servers: '无法删除拥有 {{ count }} 个活跃服务器的用户。请先删除或暂停这些服务器。'
+      updated_successfully: '用户更新成功。'
+      create_error: '创建用户时发生错误：%error%'
+      update_error: '更新用户时发生错误：%error%'
+      delete_error: '删除用户时发生错误：%error%'
     role:
       name: '角色名称'
       name_help: '内部角色标识符（小写字母、数字、下划线）。创建后无法更改。'
@@ -1125,6 +1147,8 @@ pteroca:
       gateway: '支付网关'
     user_account:
       description: '编辑您的个人数据，更改密码并管理账户设置'
+      updated_successfully: '账户更新成功。'
+      update_error: '更新账户时发生错误：%error%'
     log:
       log: '日志'
       logs: '日志'
@@ -1173,6 +1197,12 @@ pteroca:
       payment_discount: '支付折扣'
       server_discount: '服务器折扣'
       show_voucher_usages: '显示已兑换的代金券'
+      created_successfully: '优惠券创建成功。'
+      updated_successfully: '优惠券更新成功。'
+      deleted_successfully: '优惠券删除成功。'
+      create_error: '创建优惠券时发生错误：%error%'
+      update_error: '更新优惠券时发生错误：%error%'
+      delete_error: '删除优惠券时发生错误：%error%'
     voucher_usage:
       voucher_usage: '已兑换的代金券'
       voucher_usages: '已兑换的代金券'

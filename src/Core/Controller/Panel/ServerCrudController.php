@@ -23,6 +23,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use App\Core\Enum\PermissionEnum;
@@ -185,13 +186,19 @@ class ServerCrudController extends AbstractPanelController
 
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        $this->deleteServerService->deleteServer($entityInstance);
+        try {
+            $this->deleteServerService->deleteServer($entityInstance);
 
-        if ($entityInstance instanceof Server) {
-            $entityInstance->setDeletedAtValue();
+            if ($entityInstance instanceof Server) {
+                $entityInstance->setDeletedAtValue();
+            }
+
+            parent::updateEntity($entityManager, $entityInstance);
+
+            $this->addFlash('success', $this->translator->trans('pteroca.crud.server.deleted_successfully'));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.server.delete_error', ['%error%' => $e->getMessage()]));
         }
-
-        parent::updateEntity($entityManager, $entityInstance);
     }
 
     private function getServerProductAction(string $action): Action

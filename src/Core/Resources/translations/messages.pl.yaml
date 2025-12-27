@@ -691,6 +691,12 @@ pteroca:
       save: 'Zapisz kategorię'
       category: 'Kategoria'
       categories: 'Kategorie'
+      created_successfully: 'Kategoria została pomyślnie utworzona.'
+      updated_successfully: 'Kategoria została pomyślnie zaktualizowana.'
+      deleted_successfully: 'Kategoria została pomyślnie usunięta.'
+      create_error: 'Wystąpił błąd podczas tworzenia kategorii: %error%'
+      update_error: 'Wystąpił błąd podczas aktualizacji kategorii: %error%'
+      delete_error: 'Wystąpił błąd podczas usuwania kategorii: %error%'
     product:
       details: 'Szczegóły produktu'
       name: 'Nazwa produktu'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'Brak Cen'
       health_status.nest_unavailable: 'Błąd Gniazda'
       health_status.unknown: 'Nieznany'
+      created_successfully: 'Produkt został pomyślnie utworzony.'
+      updated_successfully: 'Produkt został pomyślnie zaktualizowany.'
+      deleted_successfully: 'Produkt został pomyślnie usunięty.'
+      create_error: 'Wystąpił błąd podczas tworzenia produktu: %error%'
+      update_error: 'Wystąpił błąd podczas aktualizacji produktu: %error%'
+      delete_error: 'Wystąpił błąd podczas usuwania produktu: %error%'
     plugin:
       plugins: 'Wtyczki'
       name: 'Nazwa'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: 'Szczegóły serwera zostały pomyślnie zaktualizowane.'
       details_update_error: 'Wystąpił błąd podczas aktualizowania szczegółów serwera.'
       deleted_at: 'Usunięto'
+      deleted_successfully: 'Serwer został pomyślnie usunięty.'
+      delete_error: 'Wystąpił błąd podczas usuwania serwera: %error%'
     setting:
       name: 'Nazwa ustawienia'
       value: 'Wartość ustawienia'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: 'Przetestuj połączenie Pterodactyl'
       pterodactyl_connection_success: 'Połączenie z Pterodactyl powiodło się!'
       pterodactyl_connection_failed: 'Połączenie z Pterodactyl nie powiodło się!'
+      updated_successfully: 'Ustawienie zostało pomyślnie zaktualizowane.'
+      created_successfully: 'Ustawienie zostało pomyślnie utworzone.'
+      create_error: 'Wystąpił błąd podczas tworzenia ustawienia: %error%'
+      update_error: 'Wystąpił błąd podczas aktualizacji ustawienia: %error%'
     user:
       email: 'Email'
       roles: 'Role'
@@ -1031,6 +1049,10 @@ pteroca:
       restore: 'Przywróć'
       pterodactyl_user_not_found: 'Użytkownik nie został znaleziony w Pterodactyl, ale został pomyślnie usunięty z PteroCA.'
       cannot_delete_user_with_active_servers: 'Nie można usunąć użytkownika z {{ count }} aktywnym(i) serwerem(ami). Najpierw usuń lub zawieś serwery.'
+      updated_successfully: 'Użytkownik został pomyślnie zaktualizowany.'
+      create_error: 'Wystąpił błąd podczas tworzenia użytkownika: %error%'
+      update_error: 'Wystąpił błąd podczas aktualizacji użytkownika: %error%'
+      delete_error: 'Wystąpił błąd podczas usuwania użytkownika: %error%'
     role:
       name: 'Nazwa'
       name_help: 'Wewnętrzny identyfikator roli (małe litery, alfanumeryczne, tylko podkreślenia). Nie można zmienić po utworzeniu.'
@@ -1111,6 +1133,8 @@ pteroca:
       gateway: 'Bramka płatności'
     user_account:
       description: 'Edytuj swoje dane osobowe, zmień hasło i zarządzaj ustawieniami konta'
+      updated_successfully: 'Konto zostało pomyślnie zaktualizowane.'
+      update_error: 'Wystąpił błąd podczas aktualizacji konta: %error%'
     log:
       log: 'Log'
       logs: 'Logi'
@@ -1159,6 +1183,12 @@ pteroca:
       payment_discount: 'Rabat na płatność'
       server_discount: 'Rabat na serwer'
       show_voucher_usages: 'Pokaż wykorzystane vouchery'
+      created_successfully: 'Kupon został pomyślnie utworzony.'
+      updated_successfully: 'Kupon został pomyślnie zaktualizowany.'
+      deleted_successfully: 'Kupon został pomyślnie usunięty.'
+      create_error: 'Wystąpił błąd podczas tworzenia kuponu: %error%'
+      update_error: 'Wystąpił błąd podczas aktualizacji kuponu: %error%'
+      delete_error: 'Wystąpił błąd podczas usuwania kuponu: %error%'
     voucher_usage:
       voucher_usage: 'Wykorzystany voucher'
       voucher_usages: 'Wykorzystane vouchery'

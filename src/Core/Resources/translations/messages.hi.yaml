@@ -691,6 +691,12 @@ pteroca:
       save: 'श्रेणी सहेजें'
       category: 'श्रेणी'
       categories: 'श्रेणियाँ'
+      created_successfully: 'श्रेणी सफलतापूर्वक बनाई गई।'
+      updated_successfully: 'श्रेणी सफलतापूर्वक अपडेट की गई।'
+      deleted_successfully: 'श्रेणी सफलतापूर्वक हटाई गई।'
+      create_error: 'श्रेणी बनाने में त्रुटि हुई: %error%'
+      update_error: 'श्रेणी अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'श्रेणी हटाने में त्रुटि हुई: %error%'
     product:
       details: 'उत्पाद विवरण'
       name: 'उत्पाद का नाम'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'कोई कीमत नहीं'
       health_status.nest_unavailable: 'नेस्ट त्रुटि'
       health_status.unknown: 'अज्ञात'
+      created_successfully: 'उत्पाद सफलतापूर्वक बनाया गया।'
+      updated_successfully: 'उत्पाद सफलतापूर्वक अपडेट किया गया।'
+      deleted_successfully: 'उत्पाद सफलतापूर्वक हटाया गया।'
+      create_error: 'उत्पाद बनाने में त्रुटि हुई: %error%'
+      update_error: 'उत्पाद अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'उत्पाद हटाने में त्रुटि हुई: %error%'
     plugin:
       plugins: 'प्लगइन्स'
       name: 'नाम'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: 'सर्वर विवरण सफलतापूर्वक अपडेट किए गए हैं.'
       details_update_error: 'सर्वर विवरण को अपडेट करते समय त्रुटि हुई.'
       deleted_at: 'हटाने की तारीख'
+      deleted_successfully: 'सर्वर सफलतापूर्वक हटाया गया।'
+      delete_error: 'सर्वर हटाने में त्रुटि हुई: %error%'
     setting:
       name: 'सेटिंग नाम'
       value: 'सेटिंग मान'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: 'Pterodactyl कनेक्शन का परीक्षण करें'
       pterodactyl_connection_success: 'Pterodactyl कनेक्शन सफल!'
       pterodactyl_connection_failed: 'Pterodactyl कनेक्शन विफल!'
+      updated_successfully: 'सेटिंग सफलतापूर्वक अपडेट की गई।'
+      created_successfully: 'सेटिंग सफलतापूर्वक बनाई गई।'
+      create_error: 'सेटिंग बनाने में त्रुटि हुई: %error%'
+      update_error: 'सेटिंग अपडेट करने में त्रुटि हुई: %error%'
     user:
       email: 'ईमेल'
       roles: 'भूमिकाएँ'
@@ -1031,6 +1049,10 @@ pteroca:
       restore: 'बहाल करें'
       pterodactyl_user_not_found: 'Pterodactyl में उपयोगकर्ता नहीं मिला, लेकिन PteroCA से सफलतापूर्वक हटाया गया।'
       cannot_delete_user_with_active_servers: '{{ count }} सक्रिय सर्वर के साथ उपयोगकर्ता को हटा नहीं सकता। कृपया पहले सर्वर को हटाएं या निलंबित करें।'
+      updated_successfully: 'उपयोगकर्ता सफलतापूर्वक अपडेट किया गया।'
+      create_error: 'उपयोगकर्ता बनाने में त्रुटि हुई: %error%'
+      update_error: 'उपयोगकर्ता अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'उपयोगकर्ता हटाने में त्रुटि हुई: %error%'
     role:
       name: 'नाम'
       name_help: 'आंतरिक भूमिका पहचानकर्ता (लोअरकेस, अल्फान्यूमेरिक, अंडरस्कोर केवल)। निर्माण के बाद बदला नहीं जा सकता।'
@@ -1111,6 +1133,8 @@ pteroca:
       gateway: 'भुगतान गेटवे'
     user_account:
       description: 'अपना व्यक्तिगत डेटा संपादित करें, पासवर्ड बदलें और खाता सेटिंग्स प्रबंधित करें'
+      updated_successfully: 'खाता सफलतापूर्वक अपडेट किया गया।'
+      update_error: 'खाता अपडेट करने में त्रुटि हुई: %error%'
     log:
       log: 'लॉग'
       logs: 'लॉग्स'
@@ -1159,6 +1183,12 @@ pteroca:
       payment_discount: 'भुगतान छूट'
       server_discount: 'सर्वर छूट'
       show_voucher_usages: 'भुगतान किए गए वाउचर दिखाएँ'
+      created_successfully: 'वाउचर सफलतापूर्वक बनाया गया।'
+      updated_successfully: 'वाउचर सफलतापूर्वक अपडेट किया गया।'
+      deleted_successfully: 'वाउचर सफलतापूर्वक हटाया गया।'
+      create_error: 'वाउचर बनाने में त्रुटि हुई: %error%'
+      update_error: 'वाउचर अपडेट करने में त्रुटि हुई: %error%'
+      delete_error: 'वाउचर हटाने में त्रुटि हुई: %error%'
     voucher_usage:
       voucher_usage: 'भुगतान किया गया वाउचर'
       voucher_usages: 'भुगतान किए गए वाउचर'

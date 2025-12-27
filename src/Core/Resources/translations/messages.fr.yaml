@@ -690,6 +690,12 @@ pteroca:
       save: 'Enregistrer la catégorie'
       category: 'Catégorie'
       categories: 'Catégories'
+      created_successfully: 'Catégorie créée avec succès.'
+      updated_successfully: 'Catégorie mise à jour avec succès.'
+      deleted_successfully: 'Catégorie supprimée avec succès.'
+      create_error: 'Une erreur s''est produite lors de la création de la catégorie : %error%'
+      update_error: 'Une erreur s''est produite lors de la mise à jour de la catégorie : %error%'
+      delete_error: 'Une erreur s''est produite lors de la suppression de la catégorie : %error%'
     product:
       details: 'Détails du produit'
       name: 'Nom du produit'
@@ -806,6 +812,12 @@ pteroca:
       health_status.no_prices: 'Aucun Prix'
       health_status.nest_unavailable: 'Erreur de Nest'
       health_status.unknown: 'Inconnu'
+      created_successfully: 'Produit créé avec succès.'
+      updated_successfully: 'Produit mis à jour avec succès.'
+      deleted_successfully: 'Produit supprimé avec succès.'
+      create_error: 'Une erreur s''est produite lors de la création du produit : %error%'
+      update_error: 'Une erreur s''est produite lors de la mise à jour du produit : %error%'
+      delete_error: 'Une erreur s''est produite lors de la suppression du produit : %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Nom'
@@ -913,6 +925,8 @@ pteroca:
       details_updated_successfully: 'Les détails du serveur ont été mis à jour avec succès.'
       details_update_error: 'Une erreur s''est produite lors de la mise à jour des détails du serveur.'
       deleted_at: 'Supprimé le'
+      deleted_successfully: 'Serveur supprimé avec succès.'
+      delete_error: 'Une erreur s''est produite lors de la suppression du serveur : %error%'
     setting:
       name: 'Nom du paramètre'
       value: 'Valeur'
@@ -999,6 +1013,10 @@ pteroca:
       test_pterodactyl_connection: 'Tester la connexion Pterodactyl'
       pterodactyl_connection_success: 'Connexion Pterodactyl réussie !'
       pterodactyl_connection_failed: 'Échec de la connexion Pterodactyl !'
+      updated_successfully: 'Paramètre mis à jour avec succès.'
+      created_successfully: 'Paramètre créé avec succès.'
+      create_error: 'Une erreur s''est produite lors de la création du paramètre : %error%'
+      update_error: 'Une erreur s''est produite lors de la mise à jour du paramètre : %error%'
     user:
       email: 'E-mail'
       roles: 'Rôles'
@@ -1030,6 +1048,10 @@ pteroca:
       restore: 'Restaurer'
       pterodactyl_user_not_found: 'Utilisateur non trouvé dans Pterodactyl, mais supprimé avec succès de PteroCA.'
       cannot_delete_user_with_active_servers: 'Impossible de supprimer l''utilisateur avec {{ count }} serveur(s) actif(s). Veuillez d''abord supprimer ou suspendre les serveurs.'
+      updated_successfully: 'Utilisateur mis à jour avec succès.'
+      create_error: 'Une erreur s''est produite lors de la création de l''utilisateur : %error%'
+      update_error: 'Une erreur s''est produite lors de la mise à jour de l''utilisateur : %error%'
+      delete_error: 'Une erreur s''est produite lors de la suppression de l''utilisateur : %error%'
     role:
       name: 'Nom'
       name_help: 'Identifiant de rôle interne (minuscules, alphanumérique, traits de soulignement uniquement). Ne peut pas être changé après la création.'
@@ -1110,6 +1132,8 @@ pteroca:
       gateway: 'Passerelle de paiement'
     user_account:
       description: 'Modifiez vos données personnelles, changez le mot de passe et gérez les paramètres du compte'
+      updated_successfully: 'Compte mis à jour avec succès.'
+      update_error: 'Une erreur s''est produite lors de la mise à jour du compte : %error%'
     log:
       log: 'Journal'
       logs: 'Journaux'
@@ -1158,6 +1182,12 @@ pteroca:
       payment_discount: 'Remise sur paiement'
       server_discount: 'Remise sur serveur'
       show_voucher_usages: 'Afficher les bons utilisés'
+      created_successfully: 'Bon créé avec succès.'
+      updated_successfully: 'Bon mis à jour avec succès.'
+      deleted_successfully: 'Bon supprimé avec succès.'
+      create_error: 'Une erreur s''est produite lors de la création du bon : %error%'
+      update_error: 'Une erreur s''est produite lors de la mise à jour du bon : %error%'
+      delete_error: 'Une erreur s''est produite lors de la suppression du bon : %error%'
     voucher_usage:
       voucher_usage: 'Bon utilisé'
       voucher_usages: 'Bons utilisés'

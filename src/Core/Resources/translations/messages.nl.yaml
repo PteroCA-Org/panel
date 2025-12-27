@@ -678,6 +678,12 @@ pteroca:
       save: 'Categorie opslaan'
       category: 'Categorie'
       categories: 'Categorieën'
+      created_successfully: 'Categorie succesvol aangemaakt.'
+      updated_successfully: 'Categorie succesvol bijgewerkt.'
+      deleted_successfully: 'Categorie succesvol verwijderd.'
+      create_error: 'Er is een fout opgetreden bij het aanmaken van de categorie: %error%'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van de categorie: %error%'
+      delete_error: 'Er is een fout opgetreden bij het verwijderen van de categorie: %error%'
     product:
       details: 'Productinformatie'
       name: 'Productnaam'
@@ -794,6 +800,12 @@ pteroca:
       health_status.no_prices: 'Geen Prijzen'
       health_status.nest_unavailable: 'Nest Fout'
       health_status.unknown: 'Onbekend'
+      created_successfully: 'Product succesvol aangemaakt.'
+      updated_successfully: 'Product succesvol bijgewerkt.'
+      deleted_successfully: 'Product succesvol verwijderd.'
+      create_error: 'Er is een fout opgetreden bij het aanmaken van het product: %error%'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van het product: %error%'
+      delete_error: 'Er is een fout opgetreden bij het verwijderen van het product: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Naam'
@@ -901,6 +913,8 @@ pteroca:
       details_updated_successfully: 'De server details zijn succesvol bijgewerkt.'
       details_update_error: 'Er is een fout opgetreden tijdens het bijwerken van de server details.'
       deleted_at: 'Verwijderd op'
+      deleted_successfully: 'Server succesvol verwijderd.'
+      delete_error: 'Er is een fout opgetreden bij het verwijderen van de server: %error%'
     setting:
       name: 'Instellingsnaam'
       value: 'Instellingswaarde'
@@ -987,6 +1001,10 @@ pteroca:
       test_pterodactyl_connection: 'Test Pterodactyl-verbinding'
       pterodactyl_connection_success: 'Pterodactyl-verbinding succesvol!'
       pterodactyl_connection_failed: 'Pterodactyl-verbinding mislukt!'
+      updated_successfully: 'Instelling succesvol bijgewerkt.'
+      created_successfully: 'Instelling succesvol aangemaakt.'
+      create_error: 'Er is een fout opgetreden bij het aanmaken van de instelling: %error%'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van de instelling: %error%'
     user:
       email: 'E-mail'
       roles: 'Rollen'
@@ -1018,6 +1036,10 @@ pteroca:
       restore: 'Herstellen'
       pterodactyl_user_not_found: 'Gebruiker niet gevonden in Pterodactyl, maar succesvol verwijderd uit PteroCA.'
       cannot_delete_user_with_active_servers: 'Kan gebruiker met {{ count }} actieve server(s) niet verwijderen. Verwijder of schort de servers eerst op.'
+      updated_successfully: 'Gebruiker succesvol bijgewerkt.'
+      create_error: 'Er is een fout opgetreden bij het aanmaken van de gebruiker: %error%'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van de gebruiker: %error%'
+      delete_error: 'Er is een fout opgetreden bij het verwijderen van de gebruiker: %error%'
     role:
       name: 'Naam'
       name_help: 'Interne rol identificatie (kleine letters, alfanumeriek, underscores alleen). Kan niet worden gewijzigd na aanmaak.'
@@ -1098,6 +1120,8 @@ pteroca:
       gateway: 'Betalingsgateway'
     user_account:
       description: 'Bewerk je persoonlijke gegevens, wijzig je wachtwoord en beheer je accountinstellingen'
+      updated_successfully: 'Account succesvol bijgewerkt.'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van het account: %error%'
     voucher:
       voucher: 'Voucher'
       vouchers: 'Vouchers'
@@ -1127,6 +1151,12 @@ pteroca:
       payment_discount: 'Betalingskorting'
       server_discount: 'Server korting'
       show_voucher_usages: 'Bekijk inwisselingen'
+      created_successfully: 'Voucher succesvol aangemaakt.'
+      updated_successfully: 'Voucher succesvol bijgewerkt.'
+      deleted_successfully: 'Voucher succesvol verwijderd.'
+      create_error: 'Er is een fout opgetreden bij het aanmaken van de voucher: %error%'
+      update_error: 'Er is een fout opgetreden bij het bijwerken van de voucher: %error%'
+      delete_error: 'Er is een fout opgetreden bij het verwijderen van de voucher: %error%'
     voucher_usage:
       voucher_usage: 'Ingewisselde voucher'
       voucher_usages: 'Ingewisselde vouchers'

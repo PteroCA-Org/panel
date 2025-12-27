@@ -691,6 +691,12 @@ pteroca:
       save: 'Guardar categoría'
       category: 'Categoría'
       categories: 'Categorías'
+      created_successfully: 'Categoría creada exitosamente.'
+      updated_successfully: 'Categoría actualizada exitosamente.'
+      deleted_successfully: 'Categoría eliminada exitosamente.'
+      create_error: 'Se produjo un error al crear la categoría: %error%'
+      update_error: 'Se produjo un error al actualizar la categoría: %error%'
+      delete_error: 'Se produjo un error al eliminar la categoría: %error%'
     product:
       details: 'Detalles del producto'
       name: 'Nombre del producto'
@@ -807,6 +813,12 @@ pteroca:
       health_status.no_prices: 'Sin Precios'
       health_status.nest_unavailable: 'Error de Nest'
       health_status.unknown: 'Desconocido'
+      created_successfully: 'Producto creado exitosamente.'
+      updated_successfully: 'Producto actualizado exitosamente.'
+      deleted_successfully: 'Producto eliminado exitosamente.'
+      create_error: 'Se produjo un error al crear el producto: %error%'
+      update_error: 'Se produjo un error al actualizar el producto: %error%'
+      delete_error: 'Se produjo un error al eliminar el producto: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Nombre'
@@ -914,6 +926,8 @@ pteroca:
       details_updated_successfully: 'Los detalles del servidor se han actualizado correctamente.'
       details_update_error: 'Ocurrió un error al actualizar los detalles del servidor.'
       deleted_at: 'Eliminado en'
+      deleted_successfully: 'Servidor eliminado exitosamente.'
+      delete_error: 'Ocurrió un error al eliminar el servidor: %error%'
     setting:
       name: 'Nombre del ajuste'
       value: 'Valor'
@@ -1000,6 +1014,10 @@ pteroca:
       test_pterodactyl_connection: 'Probar conexión de Pterodactyl'
       pterodactyl_connection_success: '¡Conexión de Pterodactyl exitosa!'
       pterodactyl_connection_failed: '¡Conexión de Pterodactyl fallida!'
+      updated_successfully: 'Configuración actualizada exitosamente.'
+      created_successfully: 'Configuración creada exitosamente.'
+      create_error: 'Se produjo un error al crear la configuración: %error%'
+      update_error: 'Se produjo un error al actualizar la configuración: %error%'
     user:
       email: 'Correo electrónico'
       roles: 'Roles'
@@ -1031,6 +1049,10 @@ pteroca:
       restore: 'Restaurar'
       pterodactyl_user_not_found: 'Usuario no encontrado en Pterodactyl, pero eliminado exitosamente de PteroCA.'
       cannot_delete_user_with_active_servers: 'No se puede eliminar el usuario con {{ count }} servidor(es) activo(s). Por favor, elimine o suspenda los servidores primero.'
+      updated_successfully: 'Usuario actualizado exitosamente.'
+      create_error: 'Se produjo un error al crear el usuario: %error%'
+      update_error: 'Se produjo un error al actualizar el usuario: %error%'
+      delete_error: 'Se produjo un error al eliminar el usuario: %error%'
     role:
       name: 'Nombre'
       name_help: 'Identificador de rol interno (minúsculas, alfanumérico, guiones bajos únicamente). No se puede cambiar después de la creación.'
@@ -1111,6 +1133,8 @@ pteroca:
       gateway: 'Pasarela de pago'
     user_account:
       description: 'Edita tus datos personales, cambia la contraseña y gestiona la configuración de la cuenta'
+      updated_successfully: 'Cuenta actualizada exitosamente.'
+      update_error: 'Se produjo un error al actualizar la cuenta: %error%'
     log:
       log: 'Registro'
       logs: 'Registros'
@@ -1159,6 +1183,12 @@ pteroca:
       payment_discount: 'Descuento de pago'
       server_discount: 'Descuento de servidor'
       show_voucher_usages: 'Mostrar cupones canjeados'
+      created_successfully: 'Cupón creado exitosamente.'
+      updated_successfully: 'Cupón actualizado exitosamente.'
+      deleted_successfully: 'Cupón eliminado exitosamente.'
+      create_error: 'Se produjo un error al crear el cupón: %error%'
+      update_error: 'Se produjo un error al actualizar el cupón: %error%'
+      delete_error: 'Se produjo un error al eliminar el cupón: %error%'
     voucher_usage:
       voucher_usage: 'Cupón canjeado'
       voucher_usages: 'Cupones canjeados'

@@ -11,6 +11,7 @@ use App\Core\Event\User\Account\UserAccountUpdateRequestedEvent;
 use App\Core\Event\User\Account\UserAccountUpdatedEvent;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Trait\CrudFlashMessagesTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
@@ -27,6 +28,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Exception;
 use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -40,6 +42,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserAccountCrudController extends AbstractPanelController
 {
+    use CrudFlashMessagesTrait;
+
     protected bool $useConventionBasedPermissions = false;
 
     public function __construct(
@@ -171,80 +175,87 @@ class UserAccountCrudController extends AbstractPanelController
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if ($entityInstance instanceof UserAccount) {
-            // Get request and build context
-            $request = $this->container->get('request_stack')->getCurrentRequest();
-            $eventContext = $request ? $this->buildMinimalEventContext($request) : [];
+            try {
+                // Get request and build context
+                $request = $this->container->get('request_stack')->getCurrentRequest();
+                $eventContext = $request ? $this->buildMinimalEventContext($request) : [];
 
-            // Check if passwords match
-            if ($entityInstance->getPlainPassword() && $entityInstance->getRepeatPassword()) {
-                if ($entityInstance->getPlainPassword() !== $entityInstance->getRepeatPassword()) {
-                    throw new InvalidArgumentException($this->translator->trans('pteroca.crud.user.passwords_must_match'));
+                // Check if passwords match
+                if ($entityInstance->getPlainPassword() && $entityInstance->getRepeatPassword()) {
+                    if ($entityInstance->getPlainPassword() !== $entityInstance->getRepeatPassword()) {
+                        throw new InvalidArgumentException($this->translator->trans('pteroca.crud.user.passwords_must_match'));
+                    }
                 }
-            }
 
-            $plainPassword = $entityInstance->getPlainPassword();
+                $plainPassword = $entityInstance->getPlainPassword();
 
-            // Dispatch UserAccountUpdateRequestedEvent
-            $updateRequestedEvent = new UserAccountUpdateRequestedEvent(
-                $entityInstance,
-                $plainPassword,
-                $eventContext
-            );
-            $updateRequestedEvent = $this->dispatchEvent($updateRequestedEvent);
-
-            if ($updateRequestedEvent->isPropagationStopped()) {
-                throw new RuntimeException($this->translator->trans('pteroca.crud.user.update_blocked'));
-            }
-
-            $passwordWasChanged = false;
-            if ($plainPassword) {
-                $hashedPassword = $this->passwordHasher->hashPassword($entityInstance, $plainPassword);
-                $entityInstance->setPassword($hashedPassword);
-                $passwordWasChanged = true;
-            }
-
-            $pterodactylAccount = $this->pterodactylApplicationService
-                ->getApplicationApi()
-                ->users()
-                ->getUser($entityInstance->getPterodactylUserId());
-            if (!empty($pterodactylAccount->username)) {
-                $pterodactylAccountDetails = [
-                    'username' => $pterodactylAccount->username,
-                    'email' => $entityInstance->getEmail(),
-                    'first_name' => $entityInstance->getName(),
-                    'last_name' => $entityInstance->getSurname(),
-                ];
-                if ($plainPassword) {
-                    $pterodactylAccountDetails['password'] = $plainPassword;
-                }
-                $this->pterodactylApplicationService
-                    ->getApplicationApi()
-                    ->users()
-                    ->updateUser(
-                        $entityInstance->getPterodactylUserId(),
-                        $pterodactylAccountDetails
-                    );
-
-                // Dispatch PterodactylAccountSyncedEvent
-                $pterodactylSyncedEvent = new PterodactylAccountSyncedEvent(
+                // Dispatch UserAccountUpdateRequestedEvent
+                $updateRequestedEvent = new UserAccountUpdateRequestedEvent(
                     $entityInstance,
-                    $entityInstance->getPterodactylUserId(),
-                    $plainPassword !== null,
+                    $plainPassword,
                     $eventContext
                 );
-                $this->dispatchEvent($pterodactylSyncedEvent);
+                $updateRequestedEvent = $this->dispatchEvent($updateRequestedEvent);
+
+                if ($updateRequestedEvent->isPropagationStopped()) {
+                    throw new RuntimeException($this->translator->trans('pteroca.crud.user.update_blocked'));
+                }
+
+                $passwordWasChanged = false;
+                if ($plainPassword) {
+                    $hashedPassword = $this->passwordHasher->hashPassword($entityInstance, $plainPassword);
+                    $entityInstance->setPassword($hashedPassword);
+                    $passwordWasChanged = true;
+                }
+
+                $pterodactylAccount = $this->pterodactylApplicationService
+                    ->getApplicationApi()
+                    ->users()
+                    ->getUser($entityInstance->getPterodactylUserId());
+                if (!empty($pterodactylAccount->username)) {
+                    $pterodactylAccountDetails = [
+                        'username' => $pterodactylAccount->username,
+                        'email' => $entityInstance->getEmail(),
+                        'first_name' => $entityInstance->getName(),
+                        'last_name' => $entityInstance->getSurname(),
+                    ];
+                    if ($plainPassword) {
+                        $pterodactylAccountDetails['password'] = $plainPassword;
+                    }
+                    $this->pterodactylApplicationService
+                        ->getApplicationApi()
+                        ->users()
+                        ->updateUser(
+                            $entityInstance->getPterodactylUserId(),
+                            $pterodactylAccountDetails
+                        );
+
+                    // Dispatch PterodactylAccountSyncedEvent
+                    $pterodactylSyncedEvent = new PterodactylAccountSyncedEvent(
+                        $entityInstance,
+                        $entityInstance->getPterodactylUserId(),
+                        $plainPassword !== null,
+                        $eventContext
+                    );
+                    $this->dispatchEvent($pterodactylSyncedEvent);
+                }
+
+                // Call parent to handle the CrudEntity events
+                parent::updateEntity($entityManager, $entityInstance);
+
+                // Dispatch UserAccountUpdatedEvent
+                $accountUpdatedEvent = new UserAccountUpdatedEvent(
+                    $entityInstance,
+                    $passwordWasChanged,
+                    $eventContext
+                );
+                $this->dispatchEvent($accountUpdatedEvent);
+
+                $this->addFlash('success', $this->translator->trans('pteroca.crud.user_account.updated_successfully'));
+            } catch (Exception $e) {
+                $this->addFlash('danger', $this->translator->trans('pteroca.crud.user_account.update_error', ['%error%' => $e->getMessage()]));
+                throw $e;
             }
-
-            // Call parent to handle the CrudEntity events
-            parent::updateEntity($entityManager, $entityInstance);
-
-            // Dispatch UserAccountUpdatedEvent
-            $accountUpdatedEvent = new UserAccountUpdatedEvent(
-                $entityInstance,
-                $passwordWasChanged,
-                $eventContext
-            );
-            $this->dispatchEvent($accountUpdatedEvent);
         } else {
             parent::updateEntity($entityManager, $entityInstance);
         }

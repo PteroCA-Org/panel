@@ -693,6 +693,12 @@ pteroca:
       save: 'Salvar categoria'
       category: 'Categoria'
       categories: 'Categorias'
+      created_successfully: 'Categoria criada com sucesso.'
+      updated_successfully: 'Categoria atualizada com sucesso.'
+      deleted_successfully: 'Categoria excluída com sucesso.'
+      create_error: 'Ocorreu um erro ao criar a categoria: %error%'
+      update_error: 'Ocorreu um erro ao atualizar a categoria: %error%'
+      delete_error: 'Ocorreu um erro ao excluir a categoria: %error%'
     product:
       details: 'Detalhes do produto'
       name: 'Nome do produto'
@@ -809,6 +815,12 @@ pteroca:
       health_status.no_prices: 'Sem Preços'
       health_status.nest_unavailable: 'Erro de Ninho'
       health_status.unknown: 'Desconhecido'
+      created_successfully: 'Produto criado com sucesso.'
+      updated_successfully: 'Produto atualizado com sucesso.'
+      deleted_successfully: 'Produto excluído com sucesso.'
+      create_error: 'Ocorreu um erro ao criar o produto: %error%'
+      update_error: 'Ocorreu um erro ao atualizar o produto: %error%'
+      delete_error: 'Ocorreu um erro ao excluir o produto: %error%'
     plugin:
       plugins: 'Plugins'
       name: 'Nome'
@@ -916,6 +928,8 @@ pteroca:
       details_updated_successfully: 'Os detalhes do servidor foram atualizados com sucesso.'
       details_update_error: 'Ocorreu um erro ao atualizar os detalhes do servidor.'
       deleted_at: 'Excluído em'
+      deleted_successfully: 'Servidor excluído com sucesso.'
+      delete_error: 'Ocorreu um erro ao excluir o servidor: %error%'
     setting:
       name: 'Nome da configuração'
       value: 'Valor'
@@ -1002,6 +1016,10 @@ pteroca:
       test_pterodactyl_connection: 'Testar conexão Pterodactyl'
       pterodactyl_connection_success: 'Conexão Pterodactyl bem-sucedida!'
       pterodactyl_connection_failed: 'Falha na conexão Pterodactyl!'
+      updated_successfully: 'Configuração atualizada com sucesso.'
+      created_successfully: 'Configuração criada com sucesso.'
+      create_error: 'Ocorreu um erro ao criar a configuração: %error%'
+      update_error: 'Ocorreu um erro ao atualizar a configuração: %error%'
     user:
       email: 'E-mail'
       roles: 'Funções'
@@ -1033,6 +1051,10 @@ pteroca:
       restore: 'Restaurar'
       pterodactyl_user_not_found: 'Usuário não encontrado no Pterodactyl, mas excluído com sucesso do PteroCA.'
       cannot_delete_user_with_active_servers: 'Não é possível excluir o usuário com {{ count }} servidor(es) ativo(s). Exclua ou suspenda os servidores primeiro.'
+      updated_successfully: 'Usuário atualizado com sucesso.'
+      create_error: 'Ocorreu um erro ao criar o usuário: %error%'
+      update_error: 'Ocorreu um erro ao atualizar o usuário: %error%'
+      delete_error: 'Ocorreu um erro ao excluir o usuário: %error%'
     role:
       name: 'Nome'
       name_help: 'Identificador de função interno (minúsculas, alfanumérico, sublinhados apenas). Não pode ser alterado após a criação.'
@@ -1113,6 +1135,8 @@ pteroca:
       gateway: 'Gateway de pagamento'
     user_account:
       description: 'Edite seus dados pessoais, altere sua senha e gerencie as configurações da conta'
+      updated_successfully: 'Conta atualizada com sucesso.'
+      update_error: 'Ocorreu um erro ao atualizar a conta: %error%'
     log:
       log: 'Registro'
       logs: 'Registros'
@@ -1161,6 +1185,12 @@ pteroca:
       payment_discount: 'Desconto de pagamento'
       server_discount: 'Desconto de servidor'
       show_voucher_usages: 'Mostrar vouchers usados'
+      created_successfully: 'Voucher criado com sucesso.'
+      updated_successfully: 'Voucher atualizado com sucesso.'
+      deleted_successfully: 'Voucher excluído com sucesso.'
+      create_error: 'Ocorreu um erro ao criar o voucher: %error%'
+      update_error: 'Ocorreu um erro ao atualizar o voucher: %error%'
+      delete_error: 'Ocorreu um erro ao excluir o voucher: %error%'
     voucher_usage:
       voucher_usage: 'Voucher usado'
       voucher_usages: 'Vouchers usados'
