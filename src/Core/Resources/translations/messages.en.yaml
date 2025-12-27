@@ -31,7 +31,7 @@ pteroca:
     user_blocked: 'Your account has been blocked.'
     account_deleted: 'Your account has been deleted.'
     invalid_credentials: 'Invalid email or password.'
-    dont_have_account_yet: "Don't have an account yet? Register now!"
+    dont_have_account_yet: "Don't have login credentials? Click here"
     subtitle: 'Sign in to your account'
     welcome_back: 'Welcome Back'
     brand_description: 'Manage your game servers with ease. Powerful, secure, and reliable hosting platform.'
