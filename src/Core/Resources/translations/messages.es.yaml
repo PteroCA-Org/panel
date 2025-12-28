@@ -241,6 +241,7 @@ pteroca:
     product_configuration_unavailable: 'Este producto no se puede comprar porque los recursos requeridos no están disponibles. Por favor, contacte con soporte para asistencia.'
     no_eggs_available: 'No hay opciones de software de servidor disponibles'
     product_unavailable_title: 'Producto Temporalmente No Disponible'
+    auto_renewal_not_allowed: 'La renovación automática no está disponible para este producto.'
   cart_configuration:
     title: 'Configura tu servidor'
     configuration: 'Configuración'
@@ -752,6 +753,8 @@ pteroca:
       egg_variable_user_viewable: 'Visible para el usuario'
       egg_variable_user_editable: 'Editable por el usuario'
       egg_allow_change: 'Permitir cambiar el egg con la reinstalación'
+      allow_auto_renewal: 'Permitir renovación automática'
+      allow_auto_renewal_hint: 'Si está habilitado, los clientes pueden configurar la renovación automática para servidores creados a partir de este producto. Si está deshabilitado, la opción de renovación automática estará oculta y no disponible.'
       disk_space_hint: 'La cantidad total de almacenamiento en disco asignado para este servidor (en MB). Por ejemplo, 10240 equivale a 10 GB.'
       memory_hint: 'El límite total de RAM asignado a este servidor (en MB). El servidor no puede exceder este límite de memoria.'
       io_hint: 'Prioridad de E/S relativa para el contenedor del servidor. Valores más altos significan mayor prioridad (el valor predeterminado es 500).'

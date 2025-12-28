@@ -211,6 +211,7 @@
                                     {{ form_widget(form['server-name'], {'attr': {'placeholder': product.name, 'id': 'server-name'}}) }}
                                 </div>
 
+                                {% if allowAutoRenewal %}
                                 <div class="col-md-6">
                                     <label for="auto-renewal" class="form-label fw-semibold">
                                         <i class="fas fa-sync-alt me-2 text-info"></i>
@@ -218,6 +219,7 @@
                                     </label>
                                     {{ form_widget(form['auto-renewal'], {'attr': {'id': 'auto-renewal'}}) }}
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

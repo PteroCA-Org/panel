@@ -207,8 +207,15 @@ class ServerConfigurationController extends APIAbstractController
         if (empty($server) || ($server->getUser() !== $this->getUser() && !$this->isGranted(PermissionEnum::EDIT_SERVER))) {
             throw $this->createAccessDeniedException();
         }
-        
+
         $requestData = $request->toArray();
+
+        if ($requestData['value'] && !$server->getServerProduct()->getAllowAutoRenewal()) {
+            return new JsonResponse([
+                'error' => $this->translator->trans('pteroca.store.auto_renewal_not_allowed')
+            ], 400);
+        }
+
         $serverAutoRenewalService->toggleAutoRenewal($server, $requestData['value'], $this->getUser()->getId());
 
         $this->serverLogService->logServerAction(

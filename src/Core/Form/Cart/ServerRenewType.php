@@ -26,8 +26,10 @@ class ServerRenewType extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Positive(),
                 ],
-            ])
-            ->add('auto-renewal', ChoiceType::class, [
+            ]);
+
+        if ($options['allow_auto_renewal']) {
+            $builder->add('auto-renewal', ChoiceType::class, [
                 'label' => 'pteroca.cart_configuration.auto_renewal',
                 'choices' => [
                     'pteroca.cart_configuration.enable' => '1',
@@ -39,8 +41,10 @@ class ServerRenewType extends AbstractType
                 'attr' => [
                     'class' => 'form-select form-select-lg',
                 ],
-            ])
-            ->add('voucher', HiddenType::class, [
+            ]);
+        }
+
+        $builder->add('voucher', HiddenType::class, [
                 'required' => false,
                 'data' => '',
             ]);
@@ -67,6 +71,7 @@ class ServerRenewType extends AbstractType
             'is_owner' => false,
             'has_slot_pricing' => false,
             'server_slots' => null,
+            'allow_auto_renewal' => true,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'server_renew',
@@ -78,5 +83,6 @@ class ServerRenewType extends AbstractType
         $resolver->setAllowedTypes('is_owner', 'bool');
         $resolver->setAllowedTypes('has_slot_pricing', 'bool');
         $resolver->setAllowedTypes('server_slots', ['int', 'null']);
+        $resolver->setAllowedTypes('allow_auto_renewal', 'bool');
     }
 }

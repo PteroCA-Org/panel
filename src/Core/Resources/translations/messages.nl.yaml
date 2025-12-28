@@ -234,6 +234,7 @@ pteroca:
     product_configuration_unavailable: 'Dit product kan niet worden gekocht omdat vereiste bronnen niet beschikbaar zijn. Neem contact op met ondersteuning voor hulp.'
     no_eggs_available: 'Geen server software opties beschikbaar'
     product_unavailable_title: 'Product Tijdelijk Niet Beschikbaar'
+    auto_renewal_not_allowed: 'Automatische verlenging is niet beschikbaar voor dit product.'
   renew:
     title: 'Server verlengen'
     renew: 'Server verlengen'
@@ -738,6 +739,8 @@ pteroca:
       egg_variable_user_viewable: 'Gebruiker zichtbaar'
       egg_variable_user_editable: 'Gebruiker aanpasbaar'
       egg_allow_change: 'Sta het veranderen van egg toe bij herinstallatie'
+      allow_auto_renewal: 'Automatische verlenging toestaan'
+      allow_auto_renewal_hint: 'Indien ingeschakeld, kunnen klanten automatische verlenging instellen voor servers die zijn gemaakt op basis van dit product. Indien uitgeschakeld, is de optie voor automatische verlenging verborgen en niet beschikbaar.'
       disk_space_hint: 'De totale hoeveelheid schijfopslag toegewezen aan deze server (in MB). Bijvoorbeeld, 10240 is gelijk aan 10 GB.'
       memory_hint: 'De totale RAM limiet toegewezen aan deze server (in MB). De server kan deze geheugenlimiet niet overschrijden.'
       io_hint: 'Relatieve I/O-prioriteit voor de servercontainer. Hogere waarden betekent hogere prioriteit (standaard is 500).'

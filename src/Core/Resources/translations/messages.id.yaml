@@ -241,6 +241,7 @@ pteroca:
     product_configuration_unavailable: 'Produk ini tidak dapat dibeli karena sumber daya yang diperlukan tidak tersedia. Silakan hubungi dukungan untuk bantuan.'
     no_eggs_available: 'Tidak ada opsi perangkat lunak server yang tersedia'
     product_unavailable_title: 'Produk Sementara Tidak Tersedia'
+    auto_renewal_not_allowed: 'Pembaruan otomatis tidak tersedia untuk produk ini.'
   cart_configuration:
     title: 'Konfigurasi server Anda'
     configuration: 'Konfigurasi'
@@ -749,6 +750,8 @@ pteroca:
       slot_variables_unconfigured_eggs: 'Beberapa egg memiliki variabel slot yang tidak dikonfigurasi'
       see_product_configuration_guide: 'Klik di sini untuk membuka panduan terperinci tentang cara mengatur produk.'
       egg_allow_change: 'Izinkan perubahan egg dengan penginstalan ulang'
+      allow_auto_renewal: 'Izinkan pembaruan otomatis'
+      allow_auto_renewal_hint: 'Jika diaktifkan, pelanggan dapat mengatur pembaruan otomatis untuk server yang dibuat dari produk ini. Jika dinonaktifkan, opsi pembaruan otomatis akan tersembunyi dan tidak tersedia.'
       disk_space_hint: 'Jumlah total ruang disk yang dialokasikan untuk server ini (dalam MB). Contoh, 10240 sama dengan 10 GB.'
       memory_hint: 'Batas RAM total yang dialokasikan ke server ini (dalam MB). Server tidak dapat melebihi batas memori ini.'
       io_hint: 'Prioritas I/O relatif untuk kontainer server. Nilai yang lebih tinggi berarti prioritas yang lebih tinggi (default adalah 500).'

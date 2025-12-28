@@ -241,6 +241,7 @@ pteroca:
     product_configuration_unavailable: '此产品无法购买，因为所需资源不可用。请联系支持寻求帮助。'
     no_eggs_available: '没有可用的服务器软件选项'
     product_unavailable_title: '产品暂时不可用'
+    auto_renewal_not_allowed: '此产品不支持自动续费。'
   cart_configuration:
     title: '配置你的服务器'
     configuration: '配置'
@@ -752,6 +753,8 @@ pteroca:
       egg_variable_user_viewable: '用户可见'
       egg_variable_user_editable: '用户可编辑'
       egg_allow_change: '允许在重新安装时更改egg'
+      allow_auto_renewal: '允许自动续费'
+      allow_auto_renewal_hint: '如果启用，客户可以为此产品创建的服务器设置自动续费。如果禁用，自动续费选项将被隐藏且不可用。'
       disk_space_hint: '为此服务器分配的总磁盘存储量（以MB为单位）。例如，10240等于10 GB。'
       memory_hint: '为此服务器分配的总RAM限制（以MB为单位）。服务器不能超过此内存限制。'
       io_hint: '服务器容器的相对I/O优先级。值越高，优先级越高（默认值为500）。'

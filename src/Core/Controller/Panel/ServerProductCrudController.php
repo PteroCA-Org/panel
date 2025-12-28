@@ -185,6 +185,11 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setRequired(false)
                 ->setColumns(6)
                 ->hideOnIndex(),
+            BooleanField::new('allowAutoRenewal', $this->translator->trans('pteroca.crud.product.allow_auto_renewal'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_auto_renewal_hint'))
+                ->setRequired(false)
+                ->setColumns(6)
+                ->hideOnIndex(),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))

@@ -74,8 +74,10 @@ class ServerOrderType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'pteroca.store.enter_server_name',
                 ],
-            ])
-            ->add('auto-renewal', ChoiceType::class, [
+            ]);
+
+        if ($options['allow_auto_renewal']) {
+            $builder->add('auto-renewal', ChoiceType::class, [
                 'label' => 'pteroca.cart_configuration.auto_renewal',
                 'choices' => [
                     'pteroca.cart_configuration.enable' => '1',
@@ -86,8 +88,10 @@ class ServerOrderType extends AbstractType
                 'attr' => [
                     'class' => 'form-select form-select-lg',
                 ],
-            ])
-            ->add('voucher', HiddenType::class, [
+            ]);
+        }
+
+        $builder->add('voucher', HiddenType::class, [
                 'required' => false,
                 'data' => '',
             ]);
@@ -122,6 +126,7 @@ class ServerOrderType extends AbstractType
             'prices' => [],
             'has_slot_prices' => false,
             'initial_slots' => null,
+            'allow_auto_renewal' => true,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'server_order',
@@ -133,5 +138,6 @@ class ServerOrderType extends AbstractType
         $resolver->setAllowedTypes('prices', 'array');
         $resolver->setAllowedTypes('has_slot_prices', 'bool');
         $resolver->setAllowedTypes('initial_slots', ['int', 'null']);
+        $resolver->setAllowedTypes('allow_auto_renewal', 'bool');
     }
 }
