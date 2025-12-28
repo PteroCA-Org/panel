@@ -4,54 +4,100 @@
     {{ parent() }}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Find the setAsEmpty checkbox
             const setAsEmptyCheckbox = document.querySelector('input[name="Setting[setAsEmpty]"]');
 
             if (!setAsEmptyCheckbox) {
-                // No nullable setting, exit
                 return;
             }
 
-            // Find the value field - it can be various types (input, textarea, select)
-            const valueInput = document.querySelector('input[name="Setting[value]"]') ||
-                             document.querySelector('textarea[name="Setting[value]"]') ||
-                             document.querySelector('select[name="Setting[value]"]');
+            const valueInput = document.querySelector('input[name^="Setting[value"]') ||
+                             document.querySelector('textarea[name^="Setting[value"]') ||
+                             document.querySelector('select[name^="Setting[value"]');
 
             if (!valueInput) {
                 console.warn('Could not find value input field');
                 return;
             }
 
-            // Function to handle checkbox state
-            function handleCheckboxChange() {
-                if (setAsEmptyCheckbox.checked) {
-                    // Disable value input and clear it
-                    valueInput.disabled = true;
+            let codeMirrorEditor = null;
+            let tomSelectInstance = null;
+            let isProgrammaticChange = false;
 
-                    // Store original value in data attribute if not already stored
-                    if (!valueInput.hasAttribute('data-original-value')) {
-                        valueInput.setAttribute('data-original-value', valueInput.value || '');
+            if (valueInput.tagName.toLowerCase() === 'textarea' && valueInput.hasAttribute('data-ea-code-editor-field')) {
+                setTimeout(() => {
+                    const wrapper = valueInput.nextElementSibling;
+                    if (wrapper && wrapper.classList.contains('CodeMirror')) {
+                        codeMirrorEditor = wrapper.CodeMirror;
+                        if (codeMirrorEditor) {
+                            codeMirrorEditor.on('change', handleValueChange);
+                        }
                     }
+                }, 150);
+            }
 
-                    // Clear the value
-                    valueInput.value = '';
+            if (valueInput.tagName.toLowerCase() === 'select') {
+                if (valueInput.tomselect) {
+                    tomSelectInstance = valueInput.tomselect;
+                    tomSelectInstance.on('change', handleValueChange);
                 } else {
-                    // Enable value input
-                    valueInput.disabled = false;
-
-                    // Restore original value if it exists
-                    if (valueInput.hasAttribute('data-original-value')) {
-                        valueInput.value = valueInput.getAttribute('data-original-value');
-                        valueInput.removeAttribute('data-original-value');
-                    }
+                    document.addEventListener('ea.autocomplete.connect', function(event) {
+                        if (event.detail.tomSelect && event.detail.tomSelect.input === valueInput) {
+                            tomSelectInstance = event.detail.tomSelect;
+                            tomSelectInstance.on('change', handleValueChange);
+                        }
+                    });
                 }
             }
 
-            // Initialize state on page load
-            handleCheckboxChange();
+            function handleValueChange() {
+                if (isProgrammaticChange) {
+                    return;
+                }
 
-            // Listen to checkbox changes
+                if (setAsEmptyCheckbox.checked) {
+                    setAsEmptyCheckbox.checked = false;
+                }
+            }
+
+            function handleCheckboxChange() {
+                if (setAsEmptyCheckbox.checked) {
+                    isProgrammaticChange = true;
+
+                    if (tomSelectInstance) {
+                        tomSelectInstance.clear();
+                    } else if (codeMirrorEditor) {
+                        codeMirrorEditor.setValue('');
+                    } else {
+                        if (valueInput.type === 'color') {
+                        } else {
+                            valueInput.value = '';
+                            valueInput.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+
+                        if (valueInput.type === 'file') {
+                            const formGroup = valueInput.closest('.form-group');
+                            if (formGroup) {
+                                const preview = formGroup.querySelector('.ea-fileupload-preview');
+                                if (preview) {
+                                    preview.remove();
+                                }
+
+                                const filenameDisplay = formGroup.querySelector('.custom-file-label');
+                                if (filenameDisplay) {
+                                    filenameDisplay.textContent = filenameDisplay.getAttribute('data-placeholder') || 'Choose file';
+                                }
+                            }
+                        }
+                    }
+
+                    isProgrammaticChange = false;
+                }
+            }
+
             setAsEmptyCheckbox.addEventListener('change', handleCheckboxChange);
+
+            valueInput.addEventListener('input', handleValueChange);
+            valueInput.addEventListener('change', handleValueChange);
         });
     </script>
 {% endblock %}
