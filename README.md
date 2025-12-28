@@ -52,7 +52,7 @@ Version 0.6 introduces a plugin-first architecture that fundamentally changes ho
 ## 📺 See It In Action
 
 <div align="center">
-  <img src="https://2313594578-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F134rFblgKKOucO0ArkzV%2Fuploads%2Fgit-blob-be498df7f3f831c8f1a996dafa8b8deb4641d468%2Fpteroca.gif?alt=media" alt="PteroCA Demo - Login, Purchase, Server Management" width="100%">
+  <img src="https://2313594578-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F134rFblgKKOucO0ArkzV%2Fuploads%2Fgit-blob-be498df7f3f831c8f1a996dafa8b8deb4641d468%2Fpteroca.gif?alt=media" alt="PteroCA Demo - Login, Purchase, Server Management" width="480">
   <p><em>Complete workflow: User login → Server purchase → Real-time management (console, stats, controls)</em></p>
 </div>
 
