@@ -1018,7 +1018,7 @@ pteroca:
         pterodactyl_sso_secret: 'Kunci Rahasia Login SSO Pterodactyl'
         show_pterodactyl_logs_in_server_activity: 'Tampilkan log Pterodactyl di aktivitas server'
         current_theme: 'Tema saat ini dari panel'
-        smtp_from: 'Email pengirim di bidang 'From' (mis. noreply@example.com). Harus cocok dengan pengirim yang diizinkan SMTP.'
+        smtp_from: "Email pengirim di bidang 'From' (mis. noreply@example.com). Harus cocok dengan pengirim yang diizinkan SMTP."
         renewal_notification_enabled: 'Kirim konfirmasi email saat server diperpanjang. Sakelar utama untuk semua notifikasi perpanjangan.'
         renewal_notification_min_period_hours: 'Jam minimum antara email perpanjangan per server. Mencegah spam. Mis. 24 = maks sekali sehari.'
         renewal_notification_on_demand_min_hours: 'Jam min untuk perpanjangan server sesuai permintaan untuk memicu email. Mis. 24 = beri tahu hanya jika 24+ jam.'

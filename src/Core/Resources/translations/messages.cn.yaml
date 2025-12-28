@@ -976,7 +976,7 @@ pteroca:
         smtp_port: 'SMTP端口：587（TLS，推荐）、465（SSL）或25（未加密）。必须匹配服务器配置。'
         smtp_username: 'SMTP认证用户名。通常是完整的邮箱地址（如noreply@example.com）。'
         smtp_password: 'SMTP认证密码或应用令牌。Gmail使用应用专用密码。安全存储。'
-        smtp_from: ''发件人'字段中的发件人邮箱（如noreply@example.com）。应匹配SMTP允许的发件人。'
+        smtp_from: "'发件人'字段中的发件人邮箱（如noreply@example.com）。应匹配SMTP允许的发件人。"
         customer_motd_message: 'MOTD组件内容。支持HTML和Twig语法，用于格式化、链接、动态内容。'
         customer_motd_enabled: '在仪表板上显示每日消息组件。用于公告和通知。'
         customer_motd_title: 'MOTD组件标题（如重要通知、欢迎）。在卡片顶部以粗体显示。'
