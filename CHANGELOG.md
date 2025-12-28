@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.6.2] – 2025-12-28
+
+### Added
+- Added “Allow Auto Renewal” option for products.
+- Added “Test Pterodactyl Connection” button in Settings → Pterodactyl.
+- Added loading spinners to authentication pages (login, register, password reset).
+- Added server IP display hierarchy (public → internal → `0.0.0.0`).
+- Added direct Pterodactyl server redirect button in Admin Product CRUD.
+
+### Changed
+- Refactored and redesigned email templates with fully new styling.
+- Updated settings hints to be more user-friendly and descriptive.
+- Improved CRUD action notifications – every action now shows proper feedback.
+- Improved telemetry logging reliability.
+- Improved CSS styling and overall UI consistency.
+- Completely restyled the Terms of Service page.
+
+### Fixed
+- Fixed `set as empty` option handling in settings (added JS field validation).
+- Fixed product option sorting on product pages.
+- Fixed handling of selected option argument on server configuration page.
+- Fixed unwanted input visibility on product/server configuration page.
+- Fixed plugin state handling when plugin files are removed (plugin is now automatically marked as disabled in the database).
+
+---
+
 ## [0.6.1] - 2025-12-21
 
 ### Added
