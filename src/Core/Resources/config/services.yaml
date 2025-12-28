@@ -1,5 +1,5 @@
 parameters:
-  version: '0.6.1'
+  version: '0.6.2'
   categories_base_path: '/uploads/categories'
   categories_directory: 'public/uploads/categories'
   products_base_path: '/uploads/products'
