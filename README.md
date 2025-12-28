@@ -13,7 +13,7 @@
   <!-- Technical Quality -->
   ![Build Status](https://img.shields.io/github/actions/workflow/status/PteroCA-Org/panel/symfony.yml?branch=main)
   ![PHP 8.2+](https://img.shields.io/badge/PHP-8.2%2B-777BB4?logo=php&logoColor=white)
-  ![Dependencies](https://img.shields.io/librariesio/github/PteroCA-Org/panel)
+  ![Dependencies](https://img.shields.io/librariesio/github/pteroca-com/panel)
 
   <!-- Community -->
   [![Discord](https://img.shields.io/discord/1330902668826382367?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/Gz5phhuZym)
