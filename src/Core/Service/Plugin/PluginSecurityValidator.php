@@ -461,7 +461,11 @@ class PluginSecurityValidator
         }
 
         // Validation 3: Run composer validate
-        $process = new Process([$this->composerBinary, 'validate', '--no-check-publish', '--strict'], $pluginPath);
+        $process = new Process(
+            [$this->composerBinary, 'validate', '--no-check-publish', '--strict'],
+            $pluginPath,
+            $this->composerManager->buildProcessEnvironment()
+        );
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -514,7 +518,12 @@ class PluginSecurityValidator
 
         // Validation 6: Run security audit (if vendor/ exists)
         if ($this->composerManager->hasVendorDirectory($plugin)) {
-            $auditProcess = new Process([$this->composerBinary, 'audit', '--format=json', '--no-dev'], $pluginPath, timeout: 60);
+            $auditProcess = new Process(
+                [$this->composerBinary, 'audit', '--format=json', '--no-dev'],
+                $pluginPath,
+                $this->composerManager->buildProcessEnvironment(),
+                timeout: 60
+            );
             $auditProcess->run();
 
             if (!$auditProcess->isSuccessful()) {
