@@ -129,8 +129,11 @@ class CategoryCrudController extends AbstractPanelController
     public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         try {
-            $this->removeFile($entityInstance);
-            parent::deleteEntity($entityManager, $entityInstance);
+            if ($entityInstance instanceof Category) {
+                $entityInstance->setDeletedAtValue();
+            }
+
+            parent::updateEntity($entityManager, $entityInstance);
 
             $this->addFlash('success', $this->translator->trans('pteroca.crud.category.deleted_successfully'));
         } catch (Exception $e) {
@@ -146,18 +149,6 @@ class CategoryCrudController extends AbstractPanelController
             $fileName = uniqid() . '.' . $file->guessExtension();
             $file->move($this->getParameter('categories_directory'), $fileName);
             $entityInstance->setImagePath($fileName);
-        }
-    }
-
-    private function removeFile($entityInstance): void
-    {
-        /** @var Category $entityInstance */
-        $imagePath = $entityInstance->getImagePath();
-        if ($imagePath) {
-            $filePath = $this->getParameter('categories_directory') . '/' . $imagePath;
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
         }
     }
 }

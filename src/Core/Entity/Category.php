@@ -2,6 +2,7 @@
 
 namespace App\Core\Entity;
 
+use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -32,6 +33,9 @@ class Category extends AbstractEntity
     private ?File $imageFile = null;
 
     private DateTimeImmutable $updatedAt;
+
+    #[ORM\Column(type: "datetime", nullable: true)]
+    private ?DateTime $deletedAt = null;
 
     public function getId(): int
     {
@@ -95,6 +99,16 @@ class Category extends AbstractEntity
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    public function setDeletedAtValue(): void
+    {
+        $this->deletedAt = new DateTime();
+    }
+
+    public function getDeletedAt(): ?DateTime
+    {
+        return $this->deletedAt;
     }
 
     public function __toString(): string
