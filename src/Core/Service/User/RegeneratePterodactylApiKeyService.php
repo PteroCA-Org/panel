@@ -33,7 +33,7 @@ readonly class RegeneratePterodactylApiKeyService
      *
      * @param UserInterface $user User to regenerate API key for
      * @param UserInterface $actor User performing the action (for logging)
-     * @return array{success: bool, message: string, masked_key?: string, full_key?: string}
+     * @return array{success: bool, message: string, masked_key?: string, full_key?: string, error?: string}
      * @throws InvalidArgumentException
      * @throws ClientExceptionInterface
      * @throws RedirectionExceptionInterface
