@@ -16,6 +16,7 @@ enum LogActionEnum
    case ENTITY_RESTORE;
    case USER_REGISTERED;
    case USER_VERIFY_EMAIL;
+   case USER_API_KEY_REGENERATED;
    case VOUCHER_REDEEMED;
    case PLUGIN_ENABLED;
    case PLUGIN_DISABLED;

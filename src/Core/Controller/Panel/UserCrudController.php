@@ -10,12 +10,15 @@ use App\Core\Enum\PermissionEnum;
 use App\Core\Contract\UserInterface;
 use App\Core\Service\Logs\LogService;
 use App\Core\Service\User\UserService;
+use App\Core\Service\User\RegeneratePterodactylApiKeyService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Service\Crud\PanelCrudService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -38,6 +41,7 @@ class UserCrudController extends AbstractPanelController
         private readonly UserService $userService,
         private readonly TranslatorInterface $translator,
         private readonly LogService $logService,
+        private readonly RegeneratePterodactylApiKeyService $regeneratePterodactylApiKeyService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -161,6 +165,16 @@ class UserCrudController extends AbstractPanelController
                 ->setFormat('dd.MM.yyyy HH:mm:ss');
             $fields[] = DateField::new('deletedAt', $this->translator->trans('pteroca.crud.user.deleted_at'))
                 ->setFormat('dd.MM.yyyy HH:mm:ss');
+        }
+
+        if ($pageName === Crud::PAGE_EDIT || $pageName === Crud::PAGE_DETAIL) {
+            $fields[] = TextField::new('pterodactylUserApiKey', $this->translator->trans('pteroca.crud.user.pterodactyl_api_key'))
+                ->setFormTypeOption('attr', [
+                    'readonly' => true,
+                ])
+                ->setDisabled()
+                ->setColumns(12)
+                ->setHelp($this->translator->trans('pteroca.crud.user.pterodactyl_api_key_help'));
         }
 
         return $fields;
@@ -303,5 +317,44 @@ class UserCrudController extends AbstractPanelController
         }
 
         parent::deleteEntity($entityManager, $entityInstance);
+    }
+
+    public function regenerateApiKey(AdminContext $context): JsonResponse
+    {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::EDIT_USER)) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $this->translator->trans('pteroca.error.no_permission')
+            ], 403);
+        }
+
+        $user = $context->getEntity()->getInstance();
+
+        if (!$user instanceof UserInterface) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $this->translator->trans('pteroca.crud.user.invalid_user')
+            ], 400);
+        }
+
+        $result = $this->regeneratePterodactylApiKeyService->regenerateApiKey($user, $this->getUser());
+
+        if (isset($result['message'])) {
+            $result['message'] = $this->translator->trans($result['message'], [
+                '%error%' => $result['error'] ?? ''
+            ]);
+            unset($result['error']);
+        }
+
+        $statusCode = 200;
+        if (!$result['success']) {
+            if (str_contains($result['message'], 'not found')) {
+                $statusCode = 404;
+            } else {
+                $statusCode = 500;
+            }
+        }
+
+        return new JsonResponse($result, $statusCode);
     }
 }

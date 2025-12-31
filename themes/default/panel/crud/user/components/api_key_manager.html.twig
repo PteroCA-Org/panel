@@ -1,0 +1,201 @@
+<script>
+(function() {
+    document.addEventListener('DOMContentLoaded', function () {
+        let apiKeyField = document.querySelector('input[name*="pterodactylUserApiKey"]');
+        let isDetailPage = false;
+
+        if (!apiKeyField) {
+            const labels = Array.from(document.querySelectorAll('.form-label, .field-label, label, th, dt'));
+            const apiKeyLabel = labels.find(label =>
+                label.textContent.includes('Pterodactyl API Key') ||
+                label.textContent.includes('API Key')
+            );
+
+            if (apiKeyLabel) {
+                let valueElement = null;
+
+                if (apiKeyLabel.tagName === 'TH' || apiKeyLabel.tagName === 'DT') {
+                    valueElement = apiKeyLabel.nextElementSibling;
+                }
+
+                if (!valueElement || !valueElement.textContent.trim()) {
+                    const row = apiKeyLabel.closest('tr, .row, .field-group, .form-group');
+                    if (row) {
+                        valueElement = Array.from(row.children).find(el =>
+                            el !== apiKeyLabel &&
+                            el.textContent.trim() &&
+                            el.textContent.trim().length > 20 &&
+                            !el.querySelector('label')
+                        );
+                    }
+                }
+
+                if (valueElement && valueElement.textContent.trim()) {
+                    const fullText = valueElement.textContent.trim();
+
+                    isDetailPage = true;
+                    apiKeyField = document.createElement('span');
+                    apiKeyField.textContent = fullText;
+                    apiKeyField.style.fontFamily = 'monospace';
+
+                    valueElement.textContent = '';
+                    valueElement.appendChild(apiKeyField);
+                }
+            }
+        }
+
+        if (!apiKeyField) {
+            return;
+        }
+
+        let fullApiKey = isDetailPage ? apiKeyField.textContent.trim() : apiKeyField.value;
+
+        if (!fullApiKey || fullApiKey.trim() === '') {
+            return;
+        }
+
+        let isKeyVisible = false;
+
+        const maskedKey = fullApiKey.substring(0, 5) + '*'.repeat(24);
+        if (isDetailPage) {
+            apiKeyField.textContent = maskedKey;
+            apiKeyField.style.fontFamily = 'monospace';
+        } else {
+            apiKeyField.value = maskedKey;
+            apiKeyField.classList.add('font-monospace');
+        }
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'mt-2';
+        buttonsDiv.style.marginTop = '8px';
+
+        const showBtn = document.createElement('button');
+        showBtn.type = 'button';
+        showBtn.className = 'btn sm secondary me-2';
+        showBtn.innerHTML = '<i class="fa fa-eye"></i> {{ 'pteroca.crud.user.show_api_key'|trans }}';
+        showBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            isKeyVisible = !isKeyVisible;
+            if (isKeyVisible) {
+                if (isDetailPage) {
+                    apiKeyField.textContent = fullApiKey;
+                } else {
+                    apiKeyField.value = fullApiKey;
+                }
+                showBtn.innerHTML = '<i class="fa fa-eye-slash"></i> {{ 'pteroca.crud.user.hide_api_key'|trans }}';
+            } else {
+                if (isDetailPage) {
+                    apiKeyField.textContent = maskedKey;
+                } else {
+                    apiKeyField.value = maskedKey;
+                }
+                showBtn.innerHTML = '<i class="fa fa-eye"></i> {{ 'pteroca.crud.user.show_api_key'|trans }}';
+            }
+        };
+
+        buttonsDiv.appendChild(showBtn);
+
+        if (!isDetailPage) {
+            const regenerateBtn = document.createElement('button');
+            regenerateBtn.type = 'button';
+            regenerateBtn.className = 'btn sm warning';
+            regenerateBtn.innerHTML = '<i class="fa fa-sync"></i> {{ 'pteroca.crud.user.regenerate_api_key'|trans }}';
+            regenerateBtn.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const modal = new bootstrap.Modal(document.getElementById('regenerateApiKeyModal'));
+                modal.show();
+            };
+
+            buttonsDiv.appendChild(regenerateBtn);
+        }
+
+        const insertAfter = apiKeyField.parentElement || apiKeyField.parentNode;
+        if (insertAfter && insertAfter.parentElement) {
+            insertAfter.parentElement.insertBefore(buttonsDiv, insertAfter.nextSibling);
+        }
+
+        window.confirmRegenerateApiKey = function() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('regenerateApiKeyModal'));
+            const confirmBtn = document.getElementById('confirmRegenerateBtn');
+            const spinner = confirmBtn.querySelector('i.fa-spinner');
+
+            confirmBtn.disabled = true;
+            if (spinner) spinner.classList.remove('d-none');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const entityId = urlParams.get('entityId');
+            const crudControllerFqcn = urlParams.get('crudControllerFqcn');
+            const menuIndex = urlParams.get('menuIndex');
+            const submenuIndex = urlParams.get('submenuIndex');
+
+            let url = window.location.pathname + '?crudAction=regenerateApiKey';
+            url += '&crudControllerFqcn=' + encodeURIComponent(crudControllerFqcn);
+            url += '&entityId=' + encodeURIComponent(entityId);
+            if (menuIndex) url += '&menuIndex=' + encodeURIComponent(menuIndex);
+            if (submenuIndex) url += '&submenuIndex=' + encodeURIComponent(submenuIndex);
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    fullApiKey = data.full_key;
+
+                    if (isDetailPage) {
+                        apiKeyField.textContent = data.masked_key;
+                    } else {
+                        apiKeyField.value = data.masked_key;
+                    }
+
+                    isKeyVisible = false;
+                    showBtn.innerHTML = '<i class="fa fa-eye"></i> {{ 'pteroca.crud.user.show_api_key'|trans }}';
+
+                    showFlashMessage('success', data.message);
+                    modal.hide();
+                } else {
+                    showFlashMessage('danger', data.message);
+                }
+            })
+            .catch(error => {
+                showFlashMessage('danger', 'Network error occurred');
+            })
+            .finally(() => {
+                confirmBtn.disabled = false;
+                if (spinner) spinner.classList.add('d-none');
+            });
+        };
+
+        function showFlashMessage(type, message) {
+            const contentPanel = document.querySelector('.content-panel')
+                              || document.querySelector('main')
+                              || document.querySelector('.content')
+                              || document.querySelector('body');
+
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.setAttribute('role', 'alert');
+            alertDiv.style.margin = '1rem';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+
+            contentPanel.insertBefore(alertDiv, contentPanel.firstChild);
+
+            setTimeout(() => {
+                alertDiv.classList.remove('show');
+                setTimeout(() => alertDiv.remove(), 150);
+            }, 5000);
+        }
+    });
+})();
+</script>

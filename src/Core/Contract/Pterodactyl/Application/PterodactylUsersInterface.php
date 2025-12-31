@@ -23,4 +23,6 @@ interface PterodactylUsersInterface
     public function deleteUser(int|string $userId): bool;
 
     public function createApiKeyForUser(int|string $userId, string $description): PterodactylApiKey;
+
+    public function deleteApiKeyForUser(int|string $userId, string $identifier): bool;
 }

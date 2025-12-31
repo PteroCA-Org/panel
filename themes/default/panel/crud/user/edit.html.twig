@@ -1,0 +1,7 @@
+{% extends '@EasyAdmin/crud/edit.html.twig' %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    {% include 'panel/crud/user/components/api_key_manager.html.twig' %}
+    {% include 'panel/crud/user/components/regenerate_api_key_modal.html.twig' %}
+{% endblock %}

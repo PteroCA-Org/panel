@@ -126,6 +126,24 @@ class PterodactylUsers extends AbstractPterodactylApplicationAdapter implements 
     }
 
     /**
+     * Delete API key for a user
+     *
+     * @param int|string $userId
+     * @param string $identifier
+     * @return bool
+     * @throws TransportExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     */
+    public function deleteApiKeyForUser(int|string $userId, string $identifier): bool
+    {
+        $response = $this->makeRequest('DELETE', "users/$userId/api-keys/$identifier");
+        return $this->validateServerResponse($response, 204) !== null;
+    }
+
+    /**
      * @param array $parameters
      * @return Collection
      * @throws ClientExceptionInterface
