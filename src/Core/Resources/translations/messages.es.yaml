@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'No hay opciones de software de servidor disponibles'
     product_unavailable_title: 'Producto Temporalmente No Disponible'
     auto_renewal_not_allowed: 'La renovación automática no está disponible para este producto.'
+    insufficient_balance: 'Saldo insuficiente'
   cart_configuration:
     title: 'Configura tu servidor'
     configuration: 'Configuración'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: 'Plugin activado'
     plugin_disabled: 'Plugin desactivado'
     plugin_faulted: 'Plugin defectuoso'
+    plugin_deleted: 'Plugin eliminado'
+    plugin_uploaded: 'Plugin subido'
+    admin_create_server: 'Servidor creado (admin)'
+    admin_create_free_server: 'Servidor gratuito creado (admin)'
+    user_api_key_regenerated: 'Clave API regenerada'
 
   server_actions:
     change_details: 'Detalles del servidor cambiados'
@@ -944,6 +950,9 @@ pteroca:
       details_updated_successfully: 'Los detalles del servidor se han actualizado correctamente.'
       details_update_error: 'Ocurrió un error al actualizar los detalles del servidor.'
       deleted_at: 'Eliminado en'
+      create_server: 'Crear Servidor'
+      pterodactyl_creation_failed: 'Falló la creación del servidor en Pterodactyl'
+      base_product: 'Producto Base'
       deleted_successfully: 'Servidor eliminado exitosamente.'
       delete_error: 'Ocurrió un error al eliminar el servidor: %error%'
     setting:
@@ -1429,6 +1438,15 @@ pteroca:
       up_to_date: 'Actualizado'
       update_available: 'Actualización disponible'
       pteroca_plugin_not_detected: 'No detectado'
+    server_create:
+      select_user_help: 'Seleccione el usuario que será propietario de este servidor'
+      base_product_help: 'Opcionalmente seleccione una plantilla de producto para prellenar los valores de configuración'
+      free_server: 'Servidor gratuito (no cargar al saldo del usuario)'
+      free_server_help: 'Habilite esto para crear un servidor sin deducir del saldo del usuario'
+      success: 'Servidor creado exitosamente para el usuario %user%'
+      eggs_required: 'Debe seleccionarse al menos un huevo'
+      use_as_starting_egg: 'Usar como huevo inicial'
+      starting_egg_help: 'Este huevo se usará al crear el servidor'
 
   first_configuration:
     title: 'Primera Configuración'

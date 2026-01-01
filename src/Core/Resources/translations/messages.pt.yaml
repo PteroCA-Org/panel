@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'Nenhuma opção de software de servidor disponível'
     product_unavailable_title: 'Produto Temporariamente Indisponível'
     auto_renewal_not_allowed: 'A renovação automática não está disponível para este produto.'
+    insufficient_balance: 'Saldo insuficiente'
   cart_configuration:
     title: 'Configure seu servidor'
     configuration: 'Configuração'
@@ -645,6 +646,11 @@ pteroca:
     plugin_enabled: 'Plugin ativado'
     plugin_disabled: 'Plugin desativado'
     plugin_faulted: 'Plugin com falha'
+    plugin_deleted: 'Plugin excluído'
+    plugin_uploaded: 'Plugin enviado'
+    admin_create_server: 'Servidor criado (admin)'
+    admin_create_free_server: 'Servidor gratuito criado (admin)'
+    user_api_key_regenerated: 'Chave API regenerada'
 
   server_actions:
     change_details: 'Detalhes do servidor alterados'
@@ -946,6 +952,9 @@ pteroca:
       details_updated_successfully: 'Os detalhes do servidor foram atualizados com sucesso.'
       details_update_error: 'Ocorreu um erro ao atualizar os detalhes do servidor.'
       deleted_at: 'Excluído em'
+      create_server: 'Criar Servidor'
+      pterodactyl_creation_failed: 'Falha ao criar servidor no Pterodactyl'
+      base_product: 'Produto Base'
       deleted_successfully: 'Servidor excluído com sucesso.'
       delete_error: 'Ocorreu um erro ao excluir o servidor: %error%'
     setting:
@@ -1431,6 +1440,15 @@ pteroca:
       up_to_date: 'Atualizado'
       update_available: 'Atualização disponível'
       pteroca_plugin_not_detected: 'Não detectado'
+    server_create:
+      select_user_help: 'Selecione o usuário que será proprietário deste servidor'
+      base_product_help: 'Selecione opcionalmente um modelo de produto para pré-preencher os valores de configuração'
+      free_server: 'Servidor gratuito (não cobrar do saldo do usuário)'
+      free_server_help: 'Ative isso para criar um servidor sem deduzir do saldo do usuário'
+      success: 'Servidor criado com sucesso para o usuário %user%'
+      eggs_required: 'Pelo menos um ovo deve ser selecionado'
+      use_as_starting_egg: 'Usar como ovo inicial'
+      starting_egg_help: 'Este ovo será usado ao criar o servidor'
 
   first_configuration:
     title: "Primeira Configuração"

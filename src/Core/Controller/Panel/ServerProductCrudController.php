@@ -2,19 +2,23 @@
 
 namespace App\Core\Controller\Panel;
 
+use App\Core\Entity\Product;
 use App\Core\Entity\ServerProduct;
+use App\Core\Entity\User;
+use App\Core\Repository\ProductRepository;
 use App\Core\Enum\CrudTemplateContextEnum;
+use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Form\ServerProductPriceDynamicFormType;
 use App\Core\Form\ServerProductPriceFixedFormType;
 use App\Core\Form\ServerProductPriceSlotFormType;
 use App\Core\Repository\ServerProductRepository;
+use App\Core\Repository\UserRepository;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Product\NestEggsCacheService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
-use App\Core\Service\Pterodactyl\PterodactylClientService;
 use App\Core\Service\Pterodactyl\PterodactylRedirectService;
-use App\Core\Service\Pterodactyl\PterodactylService;
+use App\Core\Service\Server\AdminServerCreationService;
 use App\Core\Service\Server\DeleteServerService;
 use App\Core\Service\Server\UpdateServerService;
 use App\Core\Service\SettingService;
@@ -33,13 +37,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use DateTime;
 use Exception;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,6 +72,9 @@ class ServerProductCrudController extends AbstractPanelController
         private readonly TranslatorInterface $translator,
         private readonly PterodactylRedirectService $pterodactylRedirectService,
         private readonly NestEggsCacheService $nestEggsCacheService,
+        private readonly UserRepository $userRepository,
+        private readonly ProductRepository $productRepository,
+        private readonly AdminServerCreationService $adminServerCreationService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -74,42 +84,116 @@ class ServerProductCrudController extends AbstractPanelController
         return ServerProduct::class;
     }
 
+    protected function getPermissionMapping(): array
+    {
+        $mapping = parent::getPermissionMapping();
+        $mapping[Action::NEW] = PermissionEnum::CREATE_SERVER;
+        return $mapping;
+    }
+
     public function configureFields(string $pageName): iterable
     {
+        $isNewPage = ($pageName === Crud::PAGE_NEW);
+
         $nests = $this->getNestsChoices();
 
         $internalCurrency = $this->settingService
             ->getSetting(SettingEnum::INTERNAL_CURRENCY_NAME->value);
 
+        $productChoices = [];
+        if ($isNewPage) {
+            $products = $this->productRepository
+                ->createQueryBuilder('p')
+                ->where('p.deletedAt IS NULL')
+                ->andWhere('p.isActive = true')
+                ->orderBy('p.name', 'ASC')
+                ->getQuery()
+                ->getResult();
+
+            foreach ($products as $product) {
+                $productChoices[$product->getName()] = $product->getId();
+            }
+        }
+
         return [
             FormField::addTab($this->translator->trans('pteroca.crud.product.server_details'))
                 ->setIcon('fa fa-info-circle'),
+
+            Field::new('user', $this->translator->trans('pteroca.crud.server.user'))
+                ->setFormType(EntityType::class)
+                ->setFormTypeOptions([
+                    'class' => User::class,
+                    'choice_label' => 'email',
+                    'query_builder' => function ($repository) {
+                        return $repository->createQueryBuilder('u')
+                            ->where('u.deletedAt IS NULL')
+                            ->orderBy('u.email', 'ASC');
+                    },
+                    'mapped' => false,
+                ])
+                ->onlyOnForms()
+                ->setRequired(true)
+                ->setColumns(6)
+                ->setHelp($this->translator->trans('pteroca.admin.server_create.select_user_help'))
+                ->hideWhenUpdating(),
+
+            ChoiceField::new('baseProduct', $this->translator->trans('pteroca.crud.server.base_product'))
+                ->onlyOnForms()
+                ->setChoices($productChoices)
+                ->setRequired(false)
+                ->setColumns(6)
+                ->setHelp($this->translator->trans('pteroca.admin.server_create.base_product_help'))
+                ->setFormTypeOption('mapped', false)
+                ->hideWhenUpdating(),
+
+            BooleanField::new('freeServer', $this->translator->trans('pteroca.admin.server_create.free_server'))
+                ->onlyOnForms()
+                ->setColumns(12)
+                ->setHelp($this->translator->trans('pteroca.admin.server_create.free_server_help'))
+                ->setFormTypeOption('mapped', false)
+                ->hideWhenUpdating(),
+
             IdField::new('server.id')
                 ->hideOnForm()
                 ->setColumns(3),
             IntegerField::new('server.pterodactylServerId', $this->translator->trans('pteroca.crud.server.pterodactyl_server_id'))
                 ->setDisabled()
+                ->hideWhenCreating()
                 ->setColumns(3),
             TextField::new('server.pterodactylServerIdentifier', $this->translator->trans('pteroca.crud.server.pterodactyl_server_identifier'))
                 ->setDisabled()
+                ->hideWhenCreating()
                 ->setColumns(3),
             TextField::new('server.user', $this->translator->trans('pteroca.crud.server.user'))
                 ->setDisabled()
+                ->hideWhenCreating()
                 ->setColumns(3),
-            TextField::new('server.name', $this->translator->trans('pteroca.crud.server.name'))
-                ->setDisabled(),
+            TextField::new($isNewPage ? 'newServerName' : 'server.name', $this->translator->trans('pteroca.crud.server.name'))
+                ->setRequired(true)
+                ->setColumns(12)
+                ->setFormTypeOptions($isNewPage ? ['mapped' => false] : []),
+
             DateTimeField::new('server.createdAt', $this->translator->trans('pteroca.crud.server.created_at'))
                 ->setDisabled()
+                ->hideWhenCreating()
                 ->setColumns(3),
             DateTimeField::new('server.deletedAt', $this->translator->trans('pteroca.crud.server.deleted_at'))
                 ->setDisabled()
+                ->hideWhenCreating()
                 ->setColumns(3),
-            DateTimeField::new('server.expiresAt', $this->translator->trans('pteroca.crud.server.expires_at'))
-                ->setColumns(3),
-            BooleanField::new('server.isSuspended', $this->translator->trans('pteroca.crud.server.is_suspended'))
-                ->setColumns(3),
-            BooleanField::new('server.autoRenewal', $this->translator->trans('pteroca.crud.server.auto_renewal'))
+
+            DateTimeField::new($isNewPage ? 'newServerExpiresAt' : 'server.expiresAt', $this->translator->trans('pteroca.crud.server.expires_at'))
+                ->setRequired(true)
                 ->setColumns(3)
+                ->setFormTypeOptions($isNewPage ? ['mapped' => false] : []),
+
+            BooleanField::new($isNewPage ? 'newServerIsSuspended' : 'server.isSuspended', $this->translator->trans('pteroca.crud.server.is_suspended'))
+                ->setColumns(3)
+                ->setFormTypeOptions($isNewPage ? ['mapped' => false] : []),
+
+            BooleanField::new($isNewPage ? 'newServerAutoRenewal' : 'server.autoRenewal', $this->translator->trans('pteroca.crud.server.auto_renewal'))
+                ->setColumns(3)
+                ->setFormTypeOptions($isNewPage ? ['mapped' => false] : [])
                 ->hideOnIndex(),
 
             FormField::addTab($this->translator->trans('pteroca.crud.product.build_details'))
@@ -119,10 +203,12 @@ class ServerProductCrudController extends AbstractPanelController
             FormField::addRow(),
             AssociationField::new('originalProduct', $this->translator->trans('pteroca.crud.product.original_product'))
                 ->setColumns(7)
-                ->setDisabled(),
+                ->setDisabled()
+                ->hideWhenCreating(),
             AssociationField::new('server', $this->translator->trans('pteroca.crud.product.server'))
                 ->setColumns(5)
-                ->setDisabled(),
+                ->setDisabled()
+                ->hideWhenCreating(),
 
             ...$this->getServerBuildFields(),
 
@@ -265,17 +351,51 @@ class ServerProductCrudController extends AbstractPanelController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof ServerProduct) {
-            $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
+        if (!$entityInstance instanceof ServerProduct) {
+            parent::persistEntity($entityManager, $entityInstance);
+            return;
         }
 
-        $this->setFlashMessages(
-            $this->updateServerService
-                ->updateServer($entityInstance)
-                ->getMessages()
-        );
+        $this->createNewServer($entityInstance);
+    }
 
-        parent::persistEntity($entityManager, $entityInstance);
+    private function createNewServer(ServerProduct $serverProduct): void
+    {
+        try {
+            $request = $this->requestStack->getCurrentRequest();
+            $formData = $request->request->all()['ServerProduct'] ?? [];
+
+            $user = $this->loadUserFromForm($formData);
+
+            $baseProduct = $this->loadBaseProductFromForm($formData);
+            if ($baseProduct) {
+                $serverProduct->setOriginalProduct($baseProduct);
+            }
+
+            $serverProduct->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
+
+            $startingEggId = $this->extractStartingEggId($formData);
+
+            $this->adminServerCreationService->createServerForUser(
+                user: $user,
+                serverProduct: $serverProduct,
+                serverName: $formData['newServerName'] ?? 'New Server',
+                expiresAt: $this->parseExpiresAt($formData),
+                autoRenewal: isset($formData['newServerAutoRenewal']) && $formData['newServerAutoRenewal'],
+                isSuspended: isset($formData['newServerIsSuspended']) && $formData['newServerIsSuspended'],
+                eggId: $startingEggId,
+                freeServer: isset($formData['freeServer']) && $formData['freeServer'],
+                createdByAdmin: $this->getUser()
+            );
+
+            $this->addFlash('success', $this->translator->trans(
+                'pteroca.admin.server_create.success',
+                ['%user%' => $user->getEmail()]
+            ));
+        } catch (Exception $e) {
+            $this->addFlash('danger', $e->getMessage());
+            throw $e;
+        }
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -309,6 +429,54 @@ class ServerProductCrudController extends AbstractPanelController
             'crudControllerFqcn' => ServerCrudController::class,
             'crudAction' => 'index',
         ]));
+    }
+
+    private function loadUserFromForm(array $formData): User
+    {
+        $userId = $formData['user'] ?? null;
+        $user = $this->userRepository->find($userId);
+
+        if (!$user) {
+            throw new Exception($this->translator->trans('pteroca.error.user_not_found'));
+        }
+
+        return $user;
+    }
+
+    private function loadBaseProductFromForm(array $formData): ?Product
+    {
+        $baseProductId = $formData['baseProduct'] ?? null;
+
+        if (!$baseProductId) {
+            return null;
+        }
+
+        return $this->productRepository->find($baseProductId);
+    }
+
+    private function parseExpiresAt(array $formData): DateTime
+    {
+        $expiresAtString = $formData['newServerExpiresAt'] ?? null;
+        return $expiresAtString ? new DateTime($expiresAtString) : new DateTime('+30 days');
+    }
+
+    private function extractStartingEggId(array $formData): int
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        $allRequestData = $request->request->all();
+        $startingEggId = $allRequestData['starting_egg_id'] ?? null;
+
+        if ($startingEggId !== null) {
+            return (int) $startingEggId;
+        }
+
+        $eggs = $formData['eggs'] ?? [];
+
+        if (empty($eggs)) {
+            throw new Exception($this->translator->trans('pteroca.admin.server_create.eggs_required'));
+        }
+
+        return (int) $eggs[0];
     }
 
     private function getServerBuildFields(): array

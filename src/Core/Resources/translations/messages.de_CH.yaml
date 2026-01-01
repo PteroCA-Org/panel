@@ -238,6 +238,7 @@ pteroca:
     no_eggs_available: 'Keine Server-Software-Optionen verfügbar'
     product_unavailable_title: 'Produkt vorübergehend nicht verfügbar'
     auto_renewal_not_allowed: 'Automatische Verlängerung ist für dieses Produkt nicht verfügbar.'
+    insufficient_balance: 'Unzureichendes Guthaben'
   cart_configuration:
     title: 'Konfigurieren Sie Ihren Server'
     configuration: 'Konfiguration'
@@ -637,6 +638,11 @@ pteroca:
     plugin_enabled: 'Plugin aktiviert'
     plugin_disabled: 'Plugin deaktiviert'
     plugin_faulted: 'Plugin fehlerhaft'
+    plugin_deleted: 'Plugin gelöscht'
+    plugin_uploaded: 'Plugin hochgeladen'
+    admin_create_server: 'Server erstellt (Admin)'
+    admin_create_free_server: 'Kostenloser Server erstellt (Admin)'
+    user_api_key_regenerated: 'API-Schlüssel neu generiert'
 
   server_actions:
     change_details: 'Serverdetails geändert'
@@ -938,6 +944,9 @@ pteroca:
       details_updated_successfully: 'Die Serverdetails wurden erfolgreich aktualisiert.'
       details_update_error: 'Beim Aktualisieren der Serverdetails ist ein Fehler aufgetreten.'
       deleted_at: 'Gelöscht am'
+      create_server: 'Server erstellen'
+      pterodactyl_creation_failed: 'Servererstellung auf Pterodactyl fehlgeschlagen'
+      base_product: 'Basisprodukt'
       deleted_successfully: 'Server erfolgreich gelöscht.'
       delete_error: 'Beim Löschen des Servers ist ein Fehler aufgetreten: %error%'
     setting:
@@ -1421,6 +1430,15 @@ pteroca:
       up_to_date: 'Aktuell'
       update_available: 'Update verfügbar'
       pteroca_plugin_not_detected: 'Nicht erkannt'
+    server_create:
+      select_user_help: 'Wählen Sie den Benutzer aus, der Eigentümer dieses Servers sein wird'
+      base_product_help: 'Wählen Sie optional eine Produktvorlage, um Konfigurationswerte vorab auszufüllen'
+      free_server: 'Kostenloser Server (Benutzerguthaben nicht belasten)'
+      free_server_help: 'Aktivieren Sie dies, um einen Server zu erstellen, ohne vom Benutzerguthaben abzubuchen'
+      success: 'Server erfolgreich für Benutzer %user% erstellt'
+      eggs_required: 'Mindestens ein Ei muss ausgewählt werden'
+      use_as_starting_egg: 'Als Start-Ei verwenden'
+      starting_egg_help: 'Dieses Ei wird bei der Servererstellung verwendet'
   first_configuration:
     title: 'Erste Konfiguration'
     description: 'Diese Seite ist nur einmal nach der Installation verfügbar. Bitte füllen Sie die erforderlichen Felder aus, um das Panel zu konfigurieren.'

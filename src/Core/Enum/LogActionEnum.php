@@ -10,6 +10,8 @@ enum LogActionEnum
    case BOUGHT_BALANCE;
    case BOUGHT_SERVER;
    case RENEW_SERVER;
+   case ADMIN_CREATE_SERVER;
+   case ADMIN_CREATE_FREE_SERVER;
    case ENTITY_ADD;
    case ENTITY_EDIT;
    case ENTITY_DELETE;

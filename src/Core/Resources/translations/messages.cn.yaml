@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: '没有可用的服务器软件选项'
     product_unavailable_title: '产品暂时不可用'
     auto_renewal_not_allowed: '此产品不支持自动续费。'
+    insufficient_balance: '余额不足'
   cart_configuration:
     title: '配置你的服务器'
     configuration: '配置'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: '插件已启用'
     plugin_disabled: '插件已禁用'
     plugin_faulted: '插件故障'
+    plugin_deleted: '插件已删除'
+    plugin_uploaded: '插件已上传'
+    admin_create_server: '服务器已创建（管理员）'
+    admin_create_free_server: '免费服务器已创建（管理员）'
+    user_api_key_regenerated: 'API 密钥已重新生成'
 
   server_actions:
     change_details: '更改了服务器详细信息'
@@ -944,6 +950,9 @@ pteroca:
       details_updated_successfully: '服务器详情已成功更新。'
       details_update_error: '更新服务器详情时发生错误。'
       deleted_at: '已删除于'
+      create_server: '创建服务器'
+      pterodactyl_creation_failed: '在 Pterodactyl 上创建服务器失败'
+      base_product: '基础产品'
       deleted_successfully: '服务器删除成功。'
       delete_error: '删除服务器时发生错误：%error%'
     setting:
@@ -1443,6 +1452,15 @@ pteroca:
       up_to_date: '最新'
       update_available: '有可用更新'
       pteroca_plugin_not_detected: '未检测到'
+    server_create:
+      select_user_help: '选择将成为此服务器所有者的用户'
+      base_product_help: '可选选择产品模板以预填充配置值'
+      free_server: '免费服务器（不从用户余额中扣除）'
+      free_server_help: '启用此项以创建服务器而不从用户余额中扣除'
+      success: '为用户 %user% 成功创建服务器'
+      eggs_required: '必须至少选择一个蛋'
+      use_as_starting_egg: '用作起始蛋'
+      starting_egg_help: '创建服务器时将使用此蛋'
 
   first_configuration:
     title: '首次配置'

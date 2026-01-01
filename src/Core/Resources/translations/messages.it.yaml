@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'Nessuna opzione software server disponibile'
     product_unavailable_title: 'Prodotto Temporaneamente Non Disponibile'
     auto_renewal_not_allowed: 'Il rinnovo automatico non è disponibile per questo prodotto.'
+    insufficient_balance: 'Saldo insufficiente'
   cart_configuration:
     title: 'Configura il tuo server'
     configuration: 'Configurazione'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: 'Plugin abilitato'
     plugin_disabled: 'Plugin disabilitato'
     plugin_faulted: 'Plugin difettoso'
+    plugin_deleted: 'Plugin eliminato'
+    plugin_uploaded: 'Plugin caricato'
+    admin_create_server: 'Server creato (admin)'
+    admin_create_free_server: 'Server gratuito creato (admin)'
+    user_api_key_regenerated: 'Chiave API rigenerata'
 
   server_actions:
     change_details: 'Dettagli del server modificati'
@@ -944,6 +950,9 @@ pteroca:
       details_updated_successfully: 'I dettagli del server sono stati aggiornati con successo.'
       details_update_error: 'Si è verificato un errore durante l''aggiornamento dei dettagli del server.'
       deleted_at: 'Eliminato in data'
+      create_server: 'Crea Server'
+      pterodactyl_creation_failed: 'Creazione del server su Pterodactyl fallita'
+      base_product: 'Prodotto Base'
       deleted_successfully: 'Server eliminato con successo.'
       delete_error: 'Si è verificato un errore durante l''eliminazione del server: %error%'
     setting:
@@ -1429,6 +1438,15 @@ pteroca:
       up_to_date: 'Aggiornato'
       update_available: 'Aggiornamento disponibile'
       pteroca_plugin_not_detected: 'Non rilevato'
+    server_create:
+      select_user_help: 'Seleziona l''utente che sarà proprietario di questo server'
+      base_product_help: 'Seleziona opzionalmente un modello di prodotto per pre-compilare i valori di configurazione'
+      free_server: 'Server gratuito (non addebitare il saldo dell''utente)'
+      free_server_help: 'Abilita questo per creare un server senza dedurre dal saldo dell''utente'
+      success: 'Server creato con successo per l''utente %user%'
+      eggs_required: 'Deve essere selezionato almeno un uovo'
+      use_as_starting_egg: 'Usa come uovo iniziale'
+      starting_egg_help: 'Questo uovo verrà utilizzato durante la creazione del server'
 
   first_configuration:
     title: "Prima Configurazione"

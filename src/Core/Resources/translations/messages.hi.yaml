@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'कोई सर्वर सॉफ़्टवेयर विकल्प उपलब्ध नहीं'
     product_unavailable_title: 'उत्पाद अस्थायी रूप से अनुपलब्ध'
     auto_renewal_not_allowed: 'इस उत्पाद के लिए ऑटो-रिन्यूअल उपलब्ध नहीं है।'
+    insufficient_balance: 'अपर्याप्त शेष'
   cart_configuration:
     title: 'अपने सर्वर को कॉन्फ़िगर करें'
     configuration: 'कॉन्फ़िगरेशन'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: 'प्लगइन सक्षम'
     plugin_disabled: 'प्लगइन अक्षम'
     plugin_faulted: 'प्लगइन विफल'
+    plugin_deleted: 'प्लगइन हटाया गया'
+    plugin_uploaded: 'प्लगइन अपलोड किया गया'
+    admin_create_server: 'सर्वर बनाया गया (एडमिन)'
+    admin_create_free_server: 'मुफ्त सर्वर बनाया गया (एडमिन)'
+    user_api_key_regenerated: 'API कुंजी पुनर्जीवित'
 
   server_actions:
     change_details: 'सर्वर विवरण बदला गया'
@@ -944,6 +950,9 @@ pteroca:
       details_updated_successfully: 'सर्वर विवरण सफलतापूर्वक अपडेट किए गए हैं.'
       details_update_error: 'सर्वर विवरण को अपडेट करते समय त्रुटि हुई.'
       deleted_at: 'हटाने की तारीख'
+      create_server: 'सर्वर बनाएं'
+      pterodactyl_creation_failed: 'Pterodactyl पर सर्वर बनाने में विफल'
+      base_product: 'आधार उत्पाद'
       deleted_successfully: 'सर्वर सफलतापूर्वक हटाया गया।'
       delete_error: 'सर्वर हटाने में त्रुटि हुई: %error%'
     setting:
@@ -1429,6 +1438,15 @@ pteroca:
       up_to_date: 'अप टू डेट'
       update_available: 'अपडेट उपलब्ध'
       pteroca_plugin_not_detected: 'पता नहीं चला'
+    server_create:
+      select_user_help: 'उस उपयोगकर्ता का चयन करें जो इस सर्वर का मालिक होगा'
+      base_product_help: 'वैकल्पिक रूप से कॉन्फ़िगरेशन मानों को पूर्व-भरने के लिए एक उत्पाद टेम्प्लेट चुनें'
+      free_server: 'मुफ्त सर्वर (उपयोगकर्ता शेष से न काटें)'
+      free_server_help: 'उपयोगकर्ता शेष से काटे बिना सर्वर बनाने के लिए इसे सक्षम करें'
+      success: 'उपयोगकर्ता %user% के लिए सर्वर सफलतापूर्वक बनाया गया'
+      eggs_required: 'कम से कम एक अंडा चुना जाना चाहिए'
+      use_as_starting_egg: 'प्रारंभिक अंडे के रूप में उपयोग करें'
+      starting_egg_help: 'सर्वर बनाने के समय यह अंडा उपयोग किया जाएगा'
 
   first_configuration:
     title: "प्रथम विन्यास"

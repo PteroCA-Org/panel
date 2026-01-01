@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'Tidak ada opsi perangkat lunak server yang tersedia'
     product_unavailable_title: 'Produk Sementara Tidak Tersedia'
     auto_renewal_not_allowed: 'Pembaruan otomatis tidak tersedia untuk produk ini.'
+    insufficient_balance: 'Saldo tidak mencukupi'
   cart_configuration:
     title: 'Konfigurasi server Anda'
     configuration: 'Konfigurasi'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: 'Plugin diaktifkan'
     plugin_disabled: 'Plugin dinonaktifkan'
     plugin_faulted: 'Plugin rusak'
+    plugin_deleted: 'Plugin dihapus'
+    plugin_uploaded: 'Plugin diunggah'
+    admin_create_server: 'Server dibuat (admin)'
+    admin_create_free_server: 'Server gratis dibuat (admin)'
+    user_api_key_regenerated: 'Kunci API diregenerasi'
 
   server_actions:
     change_details: 'Ubah detail server'
@@ -977,6 +983,9 @@ pteroca:
       details_updated_successfully: 'Detail server telah berhasil diperbarui.'
       details_update_error: 'Terjadi kesalahan saat memperbarui detail server.'
       deleted_at: 'Dihapus pada'
+      create_server: 'Buat Server'
+      pterodactyl_creation_failed: 'Gagal membuat server di Pterodactyl'
+      base_product: 'Produk Dasar'
       created_successfully: 'Server berhasil dibuat.'
       updated_successfully: 'Server berhasil diperbarui.'
       deleted_successfully: 'Server berhasil dihapus.'
@@ -1424,6 +1433,15 @@ pteroca:
       up_to_date: 'Terkini'
       update_available: 'Pembaruan tersedia'
       pteroca_plugin_not_detected: 'Tidak Terdeteksi'
+    server_create:
+      select_user_help: 'Pilih pengguna yang akan menjadi pemilik server ini'
+      base_product_help: 'Secara opsional pilih template produk untuk mengisi nilai konfigurasi sebelumnya'
+      free_server: 'Server gratis (jangan potong dari saldo pengguna)'
+      free_server_help: 'Aktifkan ini untuk membuat server tanpa memotong dari saldo pengguna'
+      success: 'Server berhasil dibuat untuk pengguna %user%'
+      eggs_required: 'Setidaknya satu telur harus dipilih'
+      use_as_starting_egg: 'Gunakan sebagai telur awal'
+      starting_egg_help: 'Telur ini akan digunakan saat membuat server'
 
   first_configuration:
     title: 'Konfigurasi Pertama'

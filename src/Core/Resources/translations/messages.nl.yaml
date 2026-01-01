@@ -235,6 +235,7 @@ pteroca:
     no_eggs_available: 'Geen server software opties beschikbaar'
     product_unavailable_title: 'Product Tijdelijk Niet Beschikbaar'
     auto_renewal_not_allowed: 'Automatische verlenging is niet beschikbaar voor dit product.'
+    insufficient_balance: 'Onvoldoende saldo'
   renew:
     title: 'Server verlengen'
     renew: 'Server verlengen'
@@ -610,6 +611,11 @@ pteroca:
     plugin_enabled: 'Plugin ingeschakeld'
     plugin_disabled: 'Plugin uitgeschakeld'
     plugin_faulted: 'Plugin defect'
+    plugin_deleted: 'Plugin verwijderd'
+    plugin_uploaded: 'Plugin geüpload'
+    admin_create_server: 'Server aangemaakt (admin)'
+    admin_create_free_server: 'Gratis server aangemaakt (admin)'
+    user_api_key_regenerated: 'API-sleutel opnieuw gegenereerd'
   server_actions:
     change_details: 'Gewijzigde servergegevens'
     reinstall: 'Herinstalleer server'
@@ -931,6 +937,9 @@ pteroca:
       details_updated_successfully: 'De server details zijn succesvol bijgewerkt.'
       details_update_error: 'Er is een fout opgetreden tijdens het bijwerken van de server details.'
       deleted_at: 'Verwijderd op'
+      create_server: 'Server Aanmaken'
+      pterodactyl_creation_failed: 'Server aanmaken op Pterodactyl mislukt'
+      base_product: 'Basisproduct'
       deleted_successfully: 'Server succesvol verwijderd.'
       delete_error: 'Er is een fout opgetreden bij het verwijderen van de server: %error%'
     setting:
@@ -1413,6 +1422,15 @@ pteroca:
       up_to_date: 'Up-to-date'
       update_available: 'Update beschikbaar'
       pteroca_plugin_not_detected: 'Niet gedetecteerd'
+    server_create:
+      select_user_help: 'Selecteer de gebruiker die eigenaar wordt van deze server'
+      base_product_help: 'Selecteer optioneel een productsjabloon om configuratiewaarden voor te vullen'
+      free_server: 'Gratis server (gebruikerssaldo niet belasten)'
+      free_server_help: 'Schakel dit in om een server aan te maken zonder af te schrijven van het gebruikerssaldo'
+      success: 'Server succesvol aangemaakt voor gebruiker %user%'
+      eggs_required: 'Er moet minimaal één ei worden geselecteerd'
+      use_as_starting_egg: 'Gebruik als start-ei'
+      starting_egg_help: 'Dit ei wordt gebruikt bij het aanmaken van de server'
   first_configuration:
     title: 'Eerste configuratie'
     description: 'Deze pagina is slechts één keer na installatie beschikbaar. Vul de vereiste velden in om het paneel te configureren.'

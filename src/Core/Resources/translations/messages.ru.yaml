@@ -237,6 +237,7 @@ pteroca:
     no_eggs_available: 'Нет доступных вариантов программного обеспечения сервера'
     product_unavailable_title: 'Продукт Временно Недоступен'
     auto_renewal_not_allowed: 'Автоматическое продление недоступно для этого продукта.'
+    insufficient_balance: 'Недостаточно средств'
   cart_configuration:
     title: 'Настроить сервер'
     configuration: 'Конфигурация'
@@ -637,6 +638,11 @@ pteroca:
     plugin_enabled: 'Плагин включен'
     plugin_disabled: 'Плагин отключен'
     plugin_faulted: 'Плагин неисправен'
+    plugin_deleted: 'Плагин удален'
+    plugin_uploaded: 'Плагин загружен'
+    admin_create_server: 'Сервер создан (админ)'
+    admin_create_free_server: 'Бесплатный сервер создан (админ)'
+    user_api_key_regenerated: 'API-ключ перегенерирован'
 
   server_actions:
     change_details: 'Данные сервера изменены'
@@ -938,6 +944,9 @@ pteroca:
       details_updated_successfully: 'Данные сервера успешно обновлены.'
       details_update_error: 'Произошла ошибка при обновлении данных сервера.'
       deleted_at: 'Удалено'
+      create_server: 'Создать Сервер'
+      pterodactyl_creation_failed: 'Не удалось создать сервер на Pterodactyl'
+      base_product: 'Базовый Продукт'
       created_successfully: 'Сервер успешно создан.'
       updated_successfully: 'Сервер успешно обновлен.'
       deleted_successfully: 'Сервер успешно удален.'
@@ -1430,6 +1439,15 @@ pteroca:
       up_to_date: 'Последняя версия'
       update_available: 'Имеется обновление'
       pteroca_plugin_not_detected: 'Не обнаружен'
+    server_create:
+      select_user_help: 'Выберите пользователя, который станет владельцем этого сервера'
+      base_product_help: 'При желании выберите шаблон продукта для предварительного заполнения значений конфигурации'
+      free_server: 'Бесплатный сервер (не списывать с баланса пользователя)'
+      free_server_help: 'Включите это, чтобы создать сервер без списания с баланса пользователя'
+      success: 'Сервер успешно создан для пользователя %user%'
+      eggs_required: 'Должно быть выбрано хотя бы одно яйцо'
+      use_as_starting_egg: 'Использовать как начальное яйцо'
+      starting_egg_help: 'Это яйцо будет использоваться при создании сервера'
 
   first_configuration:
     title: "Первая настройка"

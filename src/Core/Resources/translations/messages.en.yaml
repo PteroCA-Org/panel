@@ -242,6 +242,7 @@ pteroca:
     no_eggs_available: 'No server software options available'
     product_unavailable_title: 'Product Temporarily Unavailable'
     auto_renewal_not_allowed: 'Auto-renewal is not available for this product.'
+    insufficient_balance: 'Insufficient balance'
   cart_configuration:
     title: 'Configure your server'
     configuration: 'Configuration'
@@ -643,6 +644,11 @@ pteroca:
     plugin_enabled: 'Plugin enabled'
     plugin_disabled: 'Plugin disabled'
     plugin_faulted: 'Plugin faulted'
+    plugin_deleted: 'Plugin deleted'
+    plugin_uploaded: 'Plugin uploaded'
+    admin_create_server: 'Server created (admin)'
+    admin_create_free_server: 'Free server created (admin)'
+    user_api_key_regenerated: 'API key regenerated'
 
   server_actions:
     change_details: 'Changed server details'
@@ -946,6 +952,9 @@ pteroca:
       deleted_successfully: 'Server deleted successfully.'
       delete_error: 'An error occurred while deleting the server: %error%'
       deleted_at: 'Deleted at'
+      create_server: 'Create Server'
+      pterodactyl_creation_failed: 'Failed to create server on Pterodactyl'
+      base_product: 'Base Product'
     setting:
       name: 'Setting name'
       value: 'Setting value'
@@ -1415,6 +1424,15 @@ pteroca:
       up_to_date: 'Up to date'
       update_available: 'Update available'
       pteroca_plugin_not_detected: 'Not Detected'
+    server_create:
+      select_user_help: 'Select the user who will own this server'
+      base_product_help: 'Optionally select a product template to pre-fill configuration values'
+      free_server: 'Free Server (do not charge user balance)'
+      free_server_help: 'Enable this to create server without deducting from user balance'
+      success: 'Server created successfully for user %user%'
+      eggs_required: 'At least one egg must be selected'
+      use_as_starting_egg: 'Use as starting egg'
+      starting_egg_help: 'This egg will be used when the server is created'
 
   first_configuration:
     title: 'First Configuration'
