@@ -24,7 +24,12 @@
                     {% if plugin_actions is defined %}
                         {% for action in plugin_actions %}
                             <a href="{{ action.url }}"
-                               class="btn {{ action.class }}">
+                               class="btn {{ action.class }}"
+                               {% if action.data_attrs is defined %}
+                                   {% for attr, value in action.data_attrs %}
+                                       data-{{ attr }}="{{ value }}"
+                                   {% endfor %}
+                               {% endif %}>
                                 <i class="{{ action.icon }}"></i> {{ action.label }}
                             </a>
                         {% endfor %}
@@ -447,5 +452,10 @@
                 </table>
             </div>
         </div>
+    {% endif %}
+
+    {# Delete Plugin Confirmation Modal #}
+    {% if plugin.id is not null and app.user.hasPermission(constant('App\\Core\\Enum\\PermissionEnum::UNINSTALL_PLUGIN')) %}
+        {% include 'panel/crud/plugin/components/delete-modal.html.twig' %}
     {% endif %}
 {% endblock %}

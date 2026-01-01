@@ -1,0 +1,68 @@
+{# Delete Plugin Confirmation Modal #}
+<div class="modal fade" id="deletePluginModal" tabindex="-1" aria-labelledby="deletePluginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger fw-bold" id="deletePluginModalLabel">
+                    <i class="fa fa-exclamation-triangle"></i> {{ 'pteroca.crud.plugin.delete_plugin_title'|trans }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'pteroca.crud.plugin.close'|trans }}"></button>
+            </div>
+            <form method="post" action="{{ ea_url({ crudAction: 'deletePlugin', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\PluginCrudController' }) }}" id="delete-plugin-form">
+                <input type="hidden" name="pluginName" id="deletePluginName">
+                <div class="modal-body">
+                    <div class="alert alert-danger mb-2">
+                        <i class="fa fa-exclamation-circle"></i>
+                        <strong>{{ 'pteroca.crud.plugin.warning'|trans }}</strong>
+                    </div>
+                    <p>{{ 'pteroca.crud.plugin.delete_confirmation_message'|trans }}</p>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <strong>{{ 'pteroca.crud.plugin.plugin_name'|trans }}:</strong>
+                            <code id="deletePluginDisplayName"></code>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-danger mb-1">
+                            <strong>{{ 'pteroca.crud.plugin.this_will_delete'|trans }}:</strong>
+                        </p>
+                        <ul class="text-muted">
+                            <li>{{ 'pteroca.crud.plugin.database_record'|trans }}</li>
+                            <li>{{ 'pteroca.crud.plugin.all_plugin_settings'|trans }}</li>
+                            <li>{{ 'pteroca.crud.plugin.filesystem_files'|trans }}</li>
+                        </ul>
+                        <p class="text-danger mb-0">
+                            <i class="fa fa-exclamation-triangle"></i>
+                            <strong>{{ 'pteroca.crud.plugin.this_action_cannot_be_undone'|trans }}</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn secondary" data-bs-dismiss="modal">
+                        {{ 'pteroca.crud.plugin.cancel'|trans }}
+                    </button>
+                    <button type="submit" class="btn danger">
+                        <i class="fa fa-trash"></i> {{ 'pteroca.crud.plugin.delete_plugin'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const deleteModal = document.getElementById('deletePluginModal');
+
+        if (deleteModal) {
+            deleteModal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const pluginName = button.getAttribute('data-plugin-name');
+                const pluginDisplayName = button.getAttribute('data-plugin-display-name');
+
+                document.getElementById('deletePluginName').value = pluginName;
+                document.getElementById('deletePluginDisplayName').textContent = pluginDisplayName;
+            });
+        }
+    });
+</script>

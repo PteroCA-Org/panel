@@ -897,6 +897,20 @@ pteroca:
       plugin_reset_successfully: "Le plugin \"%s\" a été réinitialisé avec succès. Vous pouvez maintenant essayer de l'activer à nouveau."
       failed_to_reset_plugin: 'Échec de la réinitialisation du plugin : %s'
       plugin_not_faulted: "Le plugin \"%s\" n'est pas en état de panne. Aucune réinitialisation nécessaire."
+      delete: 'Supprimer'
+      delete_plugin: 'Supprimer le Plugin'
+      delete_plugin_title: 'Supprimer le Plugin'
+      delete_confirmation_message: 'Êtes-vous sûr de vouloir supprimer définitivement ce plugin ?'
+      this_will_delete: 'Cela supprimera'
+      database_record: 'Enregistrement de base de données et état du plugin'
+      all_plugin_settings: 'Tous les paramètres et configurations du plugin'
+      filesystem_files: 'Tous les fichiers du plugin du répertoire /plugins/{name}/'
+      this_action_cannot_be_undone: 'Cette action ne peut pas être annulée !'
+      plugin_deleted_successfully: 'Le plugin "%s" a été supprimé avec succès.'
+      failed_to_delete_plugin: 'Échec de la suppression du plugin : %s'
+      warning: 'Avertissement'
+      cancel: 'Annuler'
+      close: 'Fermer'
     server:
       pterodactyl_server_id: 'ID du serveur Pterodactyl'
       pterodactyl_server_identifier: 'Identifiant Pterodactyl'

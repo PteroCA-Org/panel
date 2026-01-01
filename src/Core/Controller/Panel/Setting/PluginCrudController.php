@@ -78,6 +78,7 @@ class PluginCrudController extends AbstractPanelController
             'disableAction' => PermissionEnum::DISABLE_PLUGIN->value,
             'resetAction' => PermissionEnum::ENABLE_PLUGIN->value,
             'uploadPlugin' => PermissionEnum::UPLOAD_PLUGIN->value,
+            'deletePlugin' => PermissionEnum::UNINSTALL_PLUGIN->value,
         ];
     }
 
@@ -170,6 +171,14 @@ class PluginCrudController extends AbstractPanelController
                     $this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN);
             });
 
+        $deleteAction = Action::new('uninstall', $this->translator->trans('pteroca.crud.plugin.delete'), 'fa fa-trash')
+            ->linkToCrudAction('deletePlugin')
+            ->displayIf(function (Plugin $plugin) {
+                return $plugin->getId() !== null &&
+                    $this->getUser()?->hasPermission(PermissionEnum::UNINSTALL_PLUGIN);
+            })
+            ->addCssClass('btn-danger');
+
         $actions = $actions
             ->add(Crud::PAGE_INDEX, $settingsAction)
             ->add(Crud::PAGE_INDEX, $enableAction)
@@ -179,6 +188,7 @@ class PluginCrudController extends AbstractPanelController
             ->add(Crud::PAGE_DETAIL, $enableAction)
             ->add(Crud::PAGE_DETAIL, $disableAction)
             ->add(Crud::PAGE_DETAIL, $resetAction)
+            ->add(Crud::PAGE_DETAIL, $deleteAction)
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::DELETE)
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
@@ -232,7 +242,7 @@ class PluginCrudController extends AbstractPanelController
         // Prepare actions for each plugin
         $pluginActions = [];
         foreach ($plugins as $plugin) {
-            $pluginActions[$plugin->getName()] = $this->getPluginActions($plugin);
+            $pluginActions[$plugin->getName()] = $this->getPluginActions($plugin, Crud::PAGE_INDEX);
         }
 
         $viewData = [
@@ -330,7 +340,7 @@ class PluginCrudController extends AbstractPanelController
         }
 
         // Prepare actions for this plugin
-        $pluginActions = $this->getPluginActions($plugin);
+        $pluginActions = $this->getPluginActions($plugin, Crud::PAGE_DETAIL);
 
         $viewData = [
             'plugin' => $plugin,
@@ -527,6 +537,60 @@ class PluginCrudController extends AbstractPanelController
         return new RedirectResponse($url);
     }
 
+    public function deletePlugin(AdminContext $context): RedirectResponse
+    {
+        $request = $context->getRequest();
+        $pluginName = $request->request->get('pluginName');
+
+        try {
+            $pluginEntity = $this->pluginManager->getPluginByName($pluginName);
+
+            if ($pluginEntity === null) {
+                throw new RuntimeException('Plugin not found in database');
+            }
+
+            $displayName = $pluginEntity->getDisplayName();
+
+            $this->pluginManager->deletePlugin($pluginEntity);
+
+            $this->logService->logAction(
+                $this->getUser(),
+                LogActionEnum::PLUGIN_DELETED,
+                ['plugin' => $pluginName]
+            );
+
+            $this->addFlash('success', sprintf(
+                $this->translator->trans('pteroca.crud.plugin.plugin_deleted_successfully'),
+                $displayName
+            ));
+        } catch (PluginDependencyException $e) {
+            $this->addFlash('danger', sprintf(
+                '%s',
+                nl2br(htmlspecialchars($e->getMessage()))
+            ));
+        } catch (Exception $e) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.plugin.failed_to_delete_plugin'),
+                $e->getMessage()
+            ));
+        }
+
+        $url = $this->adminUrlGenerator
+            ->setController(self::class)
+            ->setAction(Action::INDEX)
+            ->generateUrl();
+
+        $response = new RedirectResponse($url);
+
+        // Send the response immediately and terminate to prevent profiler from running
+        // The profiler would try to collect Doctrine metadata which references deleted plugin paths
+        $response->send();
+        if (function_exists('fastcgi_finish_request')) {
+            fastcgi_finish_request();
+        }
+        exit(0);
+    }
+
     public function uploadPlugin(): Response
     {
         $form = $this->createForm(PluginUploadFormType::class);
@@ -639,7 +703,7 @@ class PluginCrudController extends AbstractPanelController
      * Get visible actions for a plugin based on configured actions
      * This method is exposed to Twig templates for dynamic action rendering
      */
-    public function getPluginActions(Plugin $plugin): array
+    public function getPluginActions(Plugin $plugin, string $pageName = Crud::PAGE_INDEX): array
     {
         $actions = [];
 
@@ -701,6 +765,23 @@ class PluginCrudController extends AbstractPanelController
                     ->set('pluginName', $plugin->getName())
                     ->generateUrl(),
                 'class' => 'info',
+            ];
+        }
+
+        // Delete action (modal trigger) - only on detail page
+        if ($pageName === Crud::PAGE_DETAIL && $plugin->getId() !== null && $this->getUser()?->hasPermission(PermissionEnum::UNINSTALL_PLUGIN)) {
+            $actions[] = [
+                'name' => 'uninstall',
+                'label' => $this->translator->trans('pteroca.crud.plugin.delete'),
+                'icon' => 'fa fa-trash',
+                'url' => '#',
+                'class' => 'danger',
+                'data_attrs' => [
+                    'bs-toggle' => 'modal',
+                    'bs-target' => '#deletePluginModal',
+                    'plugin-name' => $plugin->getName(),
+                    'plugin-display-name' => $plugin->getDisplayName(),
+                ],
             ];
         }
 
