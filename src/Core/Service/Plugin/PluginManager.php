@@ -500,20 +500,21 @@ readonly class PluginManager
     }
 
     /**
-     * Delete a plugin completely (database + filesystem).
+     * Delete a plugin completely (database + optionally filesystem).
      *
      * This operation:
      * - Checks for enabled dependent plugins (blocks deletion if found)
      * - Disables the plugin if it's enabled (unloads, unpublishes assets)
-     * - Deletes plugin directory from filesystem
+     * - Deletes plugin directory from filesystem (if $removeFiles is true)
      * - Deletes all plugin settings from database
      * - Removes plugin database record
      *
      * @param Plugin $plugin The plugin to delete
+     * @param bool $removeFiles Whether to delete plugin files from filesystem (default: true)
      * @throws PluginDependencyException If enabled plugins depend on this one
      * @throws RuntimeException If filesystem deletion fails
      */
-    public function deletePlugin(Plugin $plugin): void
+    public function deletePlugin(Plugin $plugin, bool $removeFiles = true): void
     {
         // 1. Check for enabled dependents (fail fast before any changes)
         $dependents = $this->dependencyResolver->getDependents($plugin);
@@ -560,39 +561,45 @@ readonly class PluginManager
         // 4. Delete all plugin settings
         $this->settingService->deleteAll($plugin->getName());
 
-        // 5. Delete plugin directory from filesystem
-        $pluginPath = $this->kernel->getProjectDir() . '/plugins/' . $plugin->getName();
+        // 5. Delete plugin directory from filesystem (if requested)
+        if ($removeFiles) {
+            $pluginPath = $this->kernel->getProjectDir() . '/plugins/' . $plugin->getName();
 
-        if (file_exists($pluginPath)) {
-            try {
-                $this->removeDirectory($pluginPath);
-                $this->logger->info("Deleted plugin directory: {$plugin->getName()}", [
-                    'path' => $pluginPath,
-                ]);
-            } catch (Exception $e) {
-                $this->logger->critical("Failed to delete plugin directory after DB cleanup - manual cleanup required", [
+            if (file_exists($pluginPath)) {
+                try {
+                    $this->removeDirectory($pluginPath);
+                    $this->logger->info("Deleted plugin directory: {$plugin->getName()}", [
+                        'path' => $pluginPath,
+                    ]);
+                } catch (Exception $e) {
+                    $this->logger->critical("Failed to delete plugin directory after DB cleanup - manual cleanup required", [
+                        'plugin' => $plugin->getName(),
+                        'path' => $pluginPath,
+                        'error' => $e->getMessage(),
+                    ]);
+
+                    // Still throw exception to inform user
+                    throw new RuntimeException(
+                        sprintf(
+                            "Plugin '%s' was removed from database, but failed to delete directory '%s': %s\n" .
+                            "Manual cleanup of the plugin directory is required.",
+                            $plugin->getDisplayName(),
+                            $pluginPath,
+                            $e->getMessage()
+                        ),
+                        0,
+                        $e
+                    );
+                }
+            } else {
+                $this->logger->warning("Plugin directory already missing during deletion", [
                     'plugin' => $plugin->getName(),
                     'path' => $pluginPath,
-                    'error' => $e->getMessage(),
                 ]);
-
-                // Still throw exception to inform user
-                throw new RuntimeException(
-                    sprintf(
-                        "Plugin '%s' was removed from database, but failed to delete directory '%s': %s\n" .
-                        "Manual cleanup of the plugin directory is required.",
-                        $plugin->getDisplayName(),
-                        $pluginPath,
-                        $e->getMessage()
-                    ),
-                    0,
-                    $e
-                );
             }
         } else {
-            $this->logger->warning("Plugin directory already missing during deletion", [
-                'plugin' => $plugin->getName(),
-                'path' => $pluginPath,
+            $this->logger->info("Skipped filesystem deletion for plugin: {$plugin->getName()}", [
+                'removeFiles' => false,
             ]);
         }
 
