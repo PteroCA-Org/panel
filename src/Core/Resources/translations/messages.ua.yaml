@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Змінити пароль'
     change_password_subtitle: 'Введіть новий пароль для скидання'
     success_password_changed: 'Пароль успішно змінено.'
+    plugin_validation_failed: 'Скидання пароля було заблоковано плагіном безпеки. Будь ласка, зверніться до підтримки.'
     back_to_login: 'Повернутися до входу'
 
   dashboard:

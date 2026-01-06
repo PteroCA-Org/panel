@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Zmień hasło'
     change_password_subtitle: 'Wprowadź nowe hasło, aby je zresetować'
     success_password_changed: 'Hasło zostało pomyślnie zmienione.'
+    plugin_validation_failed: 'Resetowanie hasła zostało zablokowane przez wtyczkę bezpieczeństwa. Skontaktuj się z pomocą techniczną.'
     back_to_login: 'Powrót do logowania'
 
   dashboard:

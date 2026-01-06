@@ -98,6 +98,7 @@ pteroca:
     change_password: 'Wachtwoord wijzigen'
     change_password_subtitle: 'Voer uw nieuwe wachtwoord in om het te resetten'
     success_password_changed: 'Uw wachtwoord is succesvol gewijzigd.'
+    plugin_validation_failed: 'Het wachtwoord resetten werd geblokkeerd door een beveiligingsplugin. Neem contact op met de ondersteuning.'
     back_to_login: 'Terug naar inloggen'
   dashboard:
     account_balance: 'Account saldo'

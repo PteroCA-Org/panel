@@ -100,6 +100,7 @@ pteroca:
     change_password: 'Изменить пароль'
     change_password_subtitle: 'Введите новый пароль для сброса'
     success_password_changed: 'Ваш пароль успешно изменен.'
+    plugin_validation_failed: 'Сброс пароля был заблокирован плагином безопасности. Пожалуйста, обратитесь в поддержку.'
     back_to_login: 'Вернуться к входу'
   dashboard:
     account_balance: 'Баланс аккаунта'

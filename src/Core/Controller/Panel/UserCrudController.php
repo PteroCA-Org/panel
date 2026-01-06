@@ -261,6 +261,13 @@ class UserCrudController extends AbstractPanelController
         if ($entityInstance instanceof UserInterface) {
             try {
                 $this->userService->updateUserInPterodactyl($entityInstance, $entityInstance->getPlainPassword());
+
+                // Force Doctrine to recompute the changeset because the password
+                // was modified inside the service method, outside normal entity lifecycle tracking
+                $entityManager->getUnitOfWork()->recomputeSingleEntityChangeSet(
+                    $entityManager->getClassMetadata(User::class),
+                    $entityInstance
+                );
             } catch (Exception $e) {
                 $this->addFlash('danger', $this->translator->trans('pteroca.crud.user.update_error', ['%error%' => $e->getMessage()]));
                 throw $e;

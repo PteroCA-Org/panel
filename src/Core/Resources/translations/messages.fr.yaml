@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Changer le mot de passe'
     change_password_subtitle: 'Entrez votre nouveau mot de passe pour le réinitialiser'
     success_password_changed: 'Le mot de passe a été changé avec succès.'
+    plugin_validation_failed: 'La réinitialisation du mot de passe a été bloquée par un plugin de sécurité. Veuillez contacter le support.'
     back_to_login: 'Retour à la connexion'
 
   dashboard:

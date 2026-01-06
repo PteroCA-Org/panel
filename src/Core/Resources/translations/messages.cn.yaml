@@ -102,6 +102,7 @@ pteroca:
     change_password: '更改密码'
     change_password_subtitle: '输入新密码以重置'
     success_password_changed: '密码已成功更改。'
+    plugin_validation_failed: '密码重置被安全插件阻止。请联系支持。'
     back_to_login: '返回登录'
 
   dashboard:

@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Ubah kata sandi'
     change_password_subtitle: 'Masukkan kata sandi baru Anda untuk mengatur ulang'
     success_password_changed: 'Kata sandi Anda telah berhasil diubah.'
+    plugin_validation_failed: 'Reset kata sandi diblokir oleh plugin keamanan. Silakan hubungi dukungan.'
     back_to_login: 'Kembali ke masuk'
 
   dashboard:

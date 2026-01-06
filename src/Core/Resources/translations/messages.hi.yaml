@@ -102,6 +102,7 @@ pteroca:
     change_password: 'पासवर्ड बदलें'
     change_password_subtitle: 'रीसेट करने के लिए अपना नया पासवर्ड दर्ज करें'
     success_password_changed: 'आपका पासवर्ड सफलतापूर्वक बदल दिया गया है।'
+    plugin_validation_failed: 'पासवर्ड रीसेट सुरक्षा प्लगइन द्वारा अवरुद्ध किया गया था। कृपया सहायता से संपर्क करें।'
     back_to_login: 'लॉगिन पर वापस जाएं'
 
   dashboard:

@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Alterar senha'
     change_password_subtitle: 'Digite sua nova senha para redefini-la'
     success_password_changed: 'A senha foi alterada com sucesso.'
+    plugin_validation_failed: 'A redefinição de senha foi bloqueada por um plugin de segurança. Entre em contato com o suporte.'
     back_to_login: 'Voltar ao login'
 
   dashboard:
