@@ -91,10 +91,11 @@
             const container = document.createElement('div');
             container.className = 'nav-tabs-custom form-tabs-tablist eggs-tabs';
             const ul = document.createElement('ul');
-            ul.className = 'nav nav-tabs eggs-data mt-3';
+            ul.className = 'nav nav-tabs eggs-data mt-4 mb-0 border-bottom';
+            ul.setAttribute('role', 'tablist');
             container.appendChild(ul);
             const contentContainer = document.createElement('div');
-            contentContainer.className = 'tab-content eggs-data-content';
+            contentContainer.className = 'tab-content eggs-data-content border border-top-0 rounded-bottom';
 
             currentEggIds.forEach((eggId, index) => {
                 const li = document.createElement('li'),
@@ -103,16 +104,24 @@
                 if (!eggData) {
                     return;
                 }
+                li.className = 'nav-item';
+                li.setAttribute('role', 'presentation');
+
                 a.href = '#tab_' + eggId;
-                a.textContent = eggData.name;
+                a.innerHTML = '<i class="fas fa-egg me-2"></i>' + eggData.name;
                 a.dataset.bsToggle = 'tab';
                 a.dataset.tab = 'tab';
                 a.className = 'nav-link';
-                
+                a.setAttribute('role', 'tab');
+                a.setAttribute('aria-controls', 'tab_' + eggId);
+
                 if ((newEggId && eggId === newEggId) || (!newEggId && index === 0)) {
                     a.classList.add('active');
+                    a.setAttribute('aria-selected', 'true');
+                } else {
+                    a.setAttribute('aria-selected', 'false');
                 }
-                
+
                 li.appendChild(a);
                 ul.appendChild(li);
 
@@ -128,20 +137,67 @@
                 observeSlotPricesChanges();
                 updateEggTabIndicators();
                 saveEggsConfigurationToHiddenField();
+                ensureOneStartingEggSelected();
             }, 1000);
         }
 
         function prepareEggTabContent(index, eggData, isActive = false) {
             const tabContent = document.createElement('div');
             tabContent.id = 'tab_' + eggData.id;
-            tabContent.className = 'tab-pane';
+            tabContent.className = 'tab-pane p-3';
 
             if (isActive) {
                 tabContent.classList.add('active');
             }
 
-            tabContent.innerHTML = '<h4 class="mb-4 mt-4">' + eggData.name + ' - ' + loadedTranslations.configuration + '</h4>';
-            tabContent.innerHTML += '<h5 class="mb-3 mt-4">' + loadedTranslations.default_configuration + '</h5>';
+            tabContent.innerHTML = `
+                <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                    <i class="fas fa-egg me-2 text-primary fs-4"></i>
+                    <h4 class="mb-0 mt-3">${eggData.name} - ${loadedTranslations.configuration}</h4>
+                </div>
+            `;
+
+            tabContent.innerHTML += `
+                <div class="alert alert-info d-flex align-items-start mb-5" role="alert">
+                    <i class="fas fa-info-circle me-2 mt-1"></i>
+                    <div>${loadedTranslations.alert}</div>
+                </div>
+            `;
+
+            const isNewMode = isCreatingNewServer();
+            if (isNewMode) {
+                tabContent.innerHTML += `
+                    <div class="card mb-4 border-primary">
+                        <div class="card-body bg-light">
+                            <div class="form-check">
+                                <input class="form-check-input starting-egg-radio"
+                                       type="radio"
+                                       name="starting_egg_id"
+                                       id="starting-egg-${eggData.id}"
+                                       value="${eggData.id}"
+                                       ${index === 0 ? 'checked' : ''}>
+                                <label class="form-check-label fw-bold" for="starting-egg-${eggData.id}">
+                                    <i class="fas fa-rocket me-1 text-primary"></i>
+                                    ${loadedTranslations.use_as_starting_egg}
+                                </label>
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb me-1"></i>
+                                    ${loadedTranslations.starting_egg_help}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            tabContent.innerHTML += `
+                <div class="mb-4">
+                    <h5 class="d-flex align-items-center mb-1 text-secondary">
+                        <i class="fas fa-cog me-2"></i>
+                        ${loadedTranslations.default_configuration}
+                    </h5>
+                    <div class="table-responsive">
+            `;
             tabContent.innerHTML += generateVariablesTable({
                 0: {
                     id: 'startup',
@@ -163,8 +219,24 @@
                     options: eggData.docker_images
                 }
             })
-            tabContent.innerHTML += '<h5 class="mb-3 mt-4">' + loadedTranslations.variables + '</h5>';
-            tabContent.innerHTML += generateVariablesTable(eggData?.relationships?.variables, true)
+            tabContent.innerHTML += `
+                    </div>
+                </div>
+            `;
+
+            tabContent.innerHTML += `
+                <div class="mb-4">
+                    <h5 class="d-flex align-items-center mb-1 text-secondary">
+                        <i class="fas fa-sliders-h me-2"></i>
+                        ${loadedTranslations.variables}
+                    </h5>
+                    <div class="table-responsive">
+            `;
+            tabContent.innerHTML += generateVariablesTable(eggData?.relationships?.variables, true);
+            tabContent.innerHTML += `
+                    </div>
+                </div>
+            `;
 
             return tabContent;
         }
@@ -184,14 +256,27 @@
                 thUserViewable = document.createElement('th'),
                 thUserEditable = document.createElement('th');
 
-            table.className = 'table table-bordered table-striped';
-            thName.textContent = loadedTranslations.egg_variable_name;
-            thDescription.textContent = loadedTranslations.egg_variable_description;
+            table.className = 'table table-hover table-striped align-middle mb-5';
+            thead.className = 'table-light';
+
+            thName.innerHTML = '<i class="fas fa-tag me-1 text-muted"></i>' + loadedTranslations.egg_variable_name;
+            thName.className = 'fw-semibold';
+
+            thDescription.innerHTML = '<i class="fas fa-align-left me-1 text-muted"></i>' + loadedTranslations.egg_variable_description;
+            thDescription.className = 'fw-semibold';
             thDescription.style.minWidth = '200px';
-            thValue.textContent = loadedTranslations.egg_variable_value;
+
+            thValue.innerHTML = '<i class="fas fa-keyboard me-1 text-muted"></i>' + loadedTranslations.egg_variable_value;
+            thValue.className = 'fw-semibold';
             thValue.style.minWidth = '300px';
-            thUserEditable.textContent = loadedTranslations.egg_variable_user_editable;
-            thUserViewable.textContent = loadedTranslations.egg_variable_user_viewable;
+
+            thUserViewable.innerHTML = '<i class="fas fa-eye me-1 text-muted"></i>' + loadedTranslations.egg_variable_user_viewable;
+            thUserViewable.className = 'fw-semibold text-center';
+            thUserViewable.style.width = '120px';
+
+            thUserEditable.innerHTML = '<i class="fas fa-edit me-1 text-muted"></i>' + loadedTranslations.egg_variable_user_editable;
+            thUserEditable.className = 'fw-semibold text-center';
+            thUserEditable.style.width = '120px';
 
             tr.appendChild(thName);
             tr.appendChild(thDescription);
@@ -202,7 +287,9 @@
             let thSlotVariable = null;
             if (isVariablesSection && hasSlotPrices()) {
                 thSlotVariable = document.createElement('th');
-                thSlotVariable.innerHTML = loadedTranslations.egg_variable_slot_variable + ' <i class="fas fa-info-circle text-info ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="' + loadedTranslations.egg_variable_slot_variable_hint + '"></i>';
+                thSlotVariable.innerHTML = '<i class="fas fa-sliders-h me-1 text-muted"></i>' + loadedTranslations.egg_variable_slot_variable + ' <i class="fas fa-info-circle text-info ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="' + loadedTranslations.egg_variable_slot_variable_hint + '"></i>';
+                thSlotVariable.className = 'fw-semibold text-center';
+                thSlotVariable.style.width = '120px';
                 tr.appendChild(thSlotVariable);
             }
 
@@ -219,11 +306,20 @@
 
                 tr.dataset.id = value.id;
                 tr.dataset.eggId = value.egg_id;
+
                 tdName.textContent = value.name;
+                tdName.className = 'fw-medium';
+
                 tdDescription.textContent = value.description;
+                tdDescription.className = 'text-muted small';
+
                 tdValue.innerHTML = createInput((value.default_value || ''), value.egg_id, value.id, value.options, 'value');
+
                 tdUserViewable.innerHTML = createCheckbox(value.user_viewable, value.egg_id, value.id, 'user_viewable');
+                tdUserViewable.className = 'text-center';
+
                 tdUserEditable.innerHTML = createCheckbox(value.user_editable, value.egg_id, value.id, 'user_editable');
+                tdUserEditable.className = 'text-center';
 
                 tr.appendChild(tdName);
                 tr.appendChild(tdDescription);
@@ -233,6 +329,7 @@
 
                 if (isVariablesSection && hasSlotPrices()) {
                     const tdSlotVariable = document.createElement('td');
+                    tdSlotVariable.className = 'text-center';
                     const isNumeric = isValueNumeric(value.default_value || '');
                     tdSlotVariable.innerHTML = createSlotVariableCheckbox(false, value.egg_id, value.id, 'slot_variable', !isNumeric);
                     tr.appendChild(tdSlotVariable);
@@ -270,22 +367,22 @@
                 return createSelect(value, eggId, options, name);
             }
             const v = escAttr(value);
-            return `<input type="text" value="${v}" name="${getInputName(eggId, variableId || 'startup', name)}" class="form-control" onchange="saveEggsConfigurationToHiddenField()">`;
+            return `<input type="text" value="${v}" name="${getInputName(eggId, variableId || 'startup', name)}" class="form-control form-control-sm" onchange="saveEggsConfigurationToHiddenField()">`;
         }
 
         function createCheckbox(checked, eggId, variableId, name) {
-            return `<input type="checkbox" class="form-check-input" name="${getInputName(eggId, variableId, name)}" ${checked ? 'checked' : ''} onchange="saveEggsConfigurationToHiddenField()">`;
+            return `<div class="form-check d-flex justify-content-center"><input type="checkbox" class="form-check-input" name="${getInputName(eggId, variableId, name)}" ${checked ? 'checked' : ''} onchange="saveEggsConfigurationToHiddenField()"></div>`;
         }
 
         function createSlotVariableCheckbox(checked, eggId, variableId, name, disabled = false) {
             const checkboxId = `slot_var_${eggId}_${variableId}`;
             const disabledAttr = disabled ? 'disabled' : '';
             const onChangeHandler = disabled ? '' : `onchange="handleSlotVariableChange(this, '${eggId}')"`;
-            return `<input type="checkbox" class="form-check-input slot-variable-checkbox" id="${checkboxId}" name="${getInputName(eggId, variableId, name)}" ${checked ? 'checked' : ''} ${disabledAttr} ${onChangeHandler} data-egg-id="${eggId}" data-variable-id="${variableId}">`;
+            return `<div class="form-check d-flex justify-content-center"><input type="checkbox" class="form-check-input slot-variable-checkbox" id="${checkboxId}" name="${getInputName(eggId, variableId, name)}" ${checked ? 'checked' : ''} ${disabledAttr} ${onChangeHandler} data-egg-id="${eggId}" data-variable-id="${variableId}"></div>`;
         }
 
         function createSelect(value, eggId, options, name) {
-            let select = `<select name="${getInputName(eggId, 'docker_image', name)}" class="form-control" style="font-size: 14px;" onchange="saveEggsConfigurationToHiddenField()">`;
+            let select = `<select name="${getInputName(eggId, 'docker_image', name)}" class="form-select form-select-sm" onchange="saveEggsConfigurationToHiddenField()">`;
             for (const [key, option] of Object.entries(options)) {
                 const optVal = escAttr(option);
                 const selected = (value === key) ? 'selected' : '';
@@ -704,15 +801,15 @@
                 const nameMatch = input.name.match(/eggs_configuration\[(\d+)\]\[(options|variables)\]\[([^\]]+)\]\[([^\]]+)\]/);
                 if (nameMatch) {
                     const [, eggId, type, itemId, property] = nameMatch;
-                    
+
                     if (!currentValues[eggId]) {
                         currentValues[eggId] = { options: {}, variables: {} };
                     }
-                    
+
                     if (!currentValues[eggId][type][itemId]) {
                         currentValues[eggId][type][itemId] = {};
                     }
-                    
+
                     if (input.type === 'checkbox') {
                         currentValues[eggId][type][itemId][property] = input.checked;
                     } else {
@@ -723,7 +820,7 @@
 
             if (Object.keys(currentValues).length > 0) {
                 loadedEggsConfigurations = currentValues;
-                
+
                 Object.entries(currentValues).forEach(([eggId, configurations]) => {
                     const inputName = `eggs_configuration[${eggId}]`;
                     if (configurations.options) {
@@ -738,6 +835,22 @@
                     }
                 });
             }
+        }
+
+        function ensureOneStartingEggSelected() {
+            const radios = document.querySelectorAll('.starting-egg-radio');
+            const checkedRadios = document.querySelectorAll('.starting-egg-radio:checked');
+
+            if (checkedRadios.length === 0 && radios.length > 0) {
+                radios[0].checked = true;
+            }
+        }
+
+        function isCreatingNewServer() {
+            const userField = document.querySelector('select[name="ServerProduct[user]"]');
+            const freeServerField = document.querySelector('input[name="ServerProduct[freeServer]"]');
+
+            return userField !== null || freeServerField !== null;
         }
     </script>
 {% endblock %}

@@ -63,7 +63,7 @@
                             <!-- IP Address -->
                             <div class="mb-4">
                                 <div class="d-flex align-items-center">
-                                    <div class="bg-primary bg-opacity-10 rounded-circle me-3">
+                                    <div class="me-3">
                                         <i class="fas fa-globe p-3 text-primary"></i>
                                     </div>
                                     <div>
@@ -207,6 +207,7 @@
                                 </div>
                                 {% endif %}
 
+                                {% if allowAutoRenewal %}
                                 <div class="col-md-6">
                                     <label for="auto-renewal" class="form-label fw-semibold">
                                         <i class="fas fa-sync-alt me-2 text-info"></i>
@@ -217,6 +218,7 @@
                                     </label>
                                     {{ form_widget(form['auto-renewal'], {'attr': {'id': 'auto-renewal'}}) }}
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

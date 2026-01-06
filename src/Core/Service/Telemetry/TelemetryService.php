@@ -5,6 +5,7 @@ namespace App\Core\Service\Telemetry;
 use App\Core\Enum\SettingEnum;
 use App\Core\Service\SettingService;
 use App\Core\Service\System\SystemVersionService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 readonly class TelemetryService
@@ -32,12 +33,37 @@ readonly class TelemetryService
         ]);
     }
 
-    public function send500ErrorEvent(\Throwable $exception): void
+    public function send500ErrorEvent(\Throwable $exception, ?Request $request = null): void
     {
-        $this->sendEvent('error.500', [
+        $payload = [
             'error_class' => get_class($exception),
             'error_code' => $exception->getCode(),
-        ]);
+            'error_message' => $this->sanitizeExceptionMessage($exception->getMessage()),
+        ];
+
+        if ($request !== null) {
+            $routeName = $request->attributes->get('_route');
+            if ($routeName !== null && is_string($routeName)) {
+                $payload['route'] = $routeName;
+            }
+        }
+
+        $this->sendEvent('error.500', $payload);
+    }
+
+    private function sanitizeExceptionMessage(string $message): string
+    {
+        $message = preg_replace(
+            '/https?:\/\/[^\s]+/i',
+            '[URL_REDACTED]',
+            $message
+        );
+
+        if (mb_strlen($message) > 500) {
+            $message = mb_substr($message, 0, 500) . '... [truncated]';
+        }
+
+        return $message;
     }
 
     private function sendEvent(string $eventType, array $payload): void

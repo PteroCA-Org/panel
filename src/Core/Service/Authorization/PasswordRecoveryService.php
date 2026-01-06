@@ -20,6 +20,7 @@ use App\Core\Repository\UserRepository;
 use App\Core\Service\Email\EmailNotificationService;
 use App\Core\Service\Event\EventContextService;
 use App\Core\Service\SettingService;
+use App\Core\Service\User\UserService;
 use DateTime;
 use DateTimeInterface;
 use Exception;
@@ -27,7 +28,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\Exception\ExceptionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\ByteString;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -42,12 +42,12 @@ class PasswordRecoveryService
         private readonly MessageBusInterface $messageBus,
         private readonly TranslatorInterface $translator,
         private readonly SettingService $settingService,
-        private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly LoggerInterface $logger,
         private readonly EmailNotificationService $emailNotificationService,
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly EventContextService $eventContextService,
         private readonly RequestStack $requestStack,
+        private readonly UserService $userService,
     ) {}
 
     /**
@@ -177,8 +177,8 @@ class PasswordRecoveryService
                 return false;
             }
 
-            // Change password
-            $user->setPassword($this->passwordHasher->hashPassword($user, $password));
+            // Update user password and sync with Pterodactyl using UserService
+            $this->userService->updateUserInPterodactyl($user, $password);
             $this->userRepository->save($user);
 
             // Emit PasswordChangedEvent (post-commit)

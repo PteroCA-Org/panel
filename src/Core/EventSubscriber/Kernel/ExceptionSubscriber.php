@@ -41,7 +41,7 @@ class ExceptionSubscriber
         $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
 
         if ($statusCode === 500) {
-            $this->telemetryService->send500ErrorEvent($exception);
+            $this->telemetryService->send500ErrorEvent($exception, $event->getRequest());
         }
 
         $currentTheme = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value) ?? 'default';

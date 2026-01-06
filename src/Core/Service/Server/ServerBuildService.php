@@ -8,7 +8,6 @@ use App\Core\Entity\ServerProduct;
 use App\Core\Contract\UserInterface;
 use App\Core\DTO\Pterodactyl\Resource;
 use App\Core\Contract\ProductInterface;
-use App\Core\DTO\Pterodactyl\Collection;
 use App\Core\Service\Pterodactyl\NodeSelectionService;
 use App\Core\DTO\Pterodactyl\Application\PterodactylServer;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
@@ -18,6 +17,7 @@ readonly class ServerBuildService
     public function __construct(
         private PterodactylApplicationService $pterodactylApplicationService,
         private NodeSelectionService          $nodeSelectionService,
+        private ServerEggEnvironmentService   $serverEggEnvironmentService,
     ) {}
 
     /**
@@ -60,7 +60,7 @@ readonly class ServerBuildService
             'egg' => $selectedEgg->get('id'),
             'docker_image' => $dockerImage,
             'startup' => $startup,
-            'environment' => $this->prepareEnvironmentVariables($selectedEgg, $productEggConfiguration, $slots),
+            'environment' => $this->serverEggEnvironmentService->buildEnvironmentVariables($selectedEgg, $productEggConfiguration, $slots),
             'limits' => [
                 'memory' => $product->getMemory(),
                 'swap' => $product->getSwap(),
@@ -127,39 +127,11 @@ readonly class ServerBuildService
 
         return [
             'startup' => $startup,
-            'environment' => $this->prepareEnvironmentVariables($selectedEgg, $productEggConfiguration),
+            'environment' => $this->serverEggEnvironmentService->buildEnvironmentVariables($selectedEgg, $productEggConfiguration),
             'egg' => $eggId,
             'image' => $dockerImage,
             'skip_scripts' => false,
         ];
-    }
-
-    private function prepareEnvironmentVariables(Resource $egg, array $productEggConfiguration, ?int $slots = null): array
-    {
-        $environmentVariables = [];
-
-        if (!$egg->has('relationships')) {
-            return $environmentVariables;
-        }
-
-        $variables = $egg->get('relationships')['variables'] ?? null;
-        if (!$variables instanceof Collection) {
-            return $environmentVariables;
-        }
-        
-        foreach ($variables->toArray() as $variable) {
-            $variableFromProduct = $productEggConfiguration[$egg->get('id')]['variables'][$variable['id']] ?? null;
-            $valueToSet = $variableFromProduct['value'] ?? $variable['default_value'] ?? null;;
-
-
-            if ($slots !== null && !empty($variableFromProduct['slot_variable']) && $variableFromProduct['slot_variable'] === 'on') {
-                $valueToSet = $slots;
-            }
-
-            $environmentVariables[$variable['env_variable']] = $valueToSet;
-        }
-
-        return $environmentVariables;
     }
 
     private function getSelectedEgg(int $eggId, ProductInterface $product): Resource

@@ -224,6 +224,7 @@ class CartController extends AbstractController
             'prices' => $priceChoices,
             'has_slot_prices' => $hasSlotPrices,
             'initial_slots' => isset($requestData['slots']) ? (int) $requestData['slots'] : null,
+            'allow_auto_renewal' => $product->getAllowAutoRenewal(),
         ]);
 
         $this->dispatchDataEvent(
@@ -243,6 +244,7 @@ class CartController extends AbstractController
             'hasSlotPrices' => $hasSlotPrices,
             'initialSlots' => $requestData['slots'] ?? null,
             'purchase_token' => $purchaseToken,
+            'allowAutoRenewal' => $product->getAllowAutoRenewal(),
         ];
 
         return $this->renderWithEvent(ViewNameEnum::CART_CONFIGURE, 'panel/cart/configure.html.twig', $viewData, $request);
@@ -287,6 +289,7 @@ class CartController extends AbstractController
                 'prices' => $priceChoices,
                 'has_slot_prices' => $hasSlotPrices,
                 'initial_slots' => null,
+                'allow_auto_renewal' => $product->getAllowAutoRenewal(),
             ]);
 
             $form->handleRequest($request);
@@ -303,6 +306,10 @@ class CartController extends AbstractController
             $autoRenewal = $formData['auto-renewal'] ?? false;
             $slots = $formData['slots'] ?? null;
             $voucher = $formData['voucher'] ?? '';
+
+            if ($autoRenewal && !$product->getAllowAutoRenewal()) {
+                throw new \Exception($this->translator->trans('pteroca.store.auto_renewal_not_allowed'));
+            }
 
             $this->dispatchDataEvent(
                 CartBuyRequestedEvent::class,
@@ -394,6 +401,7 @@ class CartController extends AbstractController
             'is_owner' => $isOwner,
             'has_slot_pricing' => $hasSlotPrices,
             'server_slots' => $serverSlots,
+            'allow_auto_renewal' => $server->getServerProduct()->getAllowAutoRenewal(),
         ]);
 
         $this->dispatchDataEvent(
@@ -409,6 +417,7 @@ class CartController extends AbstractController
             'hasSlotPrices' => $hasSlotPrices,
             'serverSlots' => $serverSlots ?? null,
             'purchase_token' => $purchaseToken,
+            'allowAutoRenewal' => $server->getServerProduct()->getAllowAutoRenewal(),
         ];
 
         return $this->renderWithEvent(ViewNameEnum::CART_RENEW, 'panel/cart/renew.html.twig', $viewData, $request);
@@ -442,6 +451,7 @@ class CartController extends AbstractController
                 'is_owner'             => $isOwner,
                 'has_slot_pricing'     => $hasActiveSlotPricing,
                 'server_slots'         => $serverSlots,
+                'allow_auto_renewal'   => $server->getServerProduct()->getAllowAutoRenewal(),
             ]);
             $form->handleRequest($request);
 
@@ -490,7 +500,13 @@ class CartController extends AbstractController
                 );
 
                 if ($isOwner && array_key_exists('auto-renewal', $formData)) {
-                    $server->setAutoRenewal(($formData['auto-renewal'] ?? '') === '1');
+                    $newAutoRenewal = ($formData['auto-renewal'] ?? '') === '1';
+
+                    if ($newAutoRenewal && !$server->getServerProduct()->getAllowAutoRenewal()) {
+                        throw new \Exception($this->translator->trans('pteroca.store.auto_renewal_not_allowed'));
+                    }
+
+                    $server->setAutoRenewal($newAutoRenewal);
                     $this->serverRepository->save($server);
                 }
             });

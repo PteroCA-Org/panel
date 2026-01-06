@@ -3,13 +3,18 @@
 namespace App\Core\Service\Server\ServerConfiguration;
 
 use App\Core\Contract\UserInterface;
+use App\Core\DTO\Pterodactyl\Collection;
+use App\Core\DTO\Pterodactyl\Resource;
 use App\Core\Entity\Server;
 use App\Core\Event\Server\Configuration\ServerReinstallInitiatedEvent;
 use App\Core\Event\Server\Configuration\ServerReinstallRequestedEvent;
 use App\Core\Event\Server\Configuration\ServerReinstalledEvent;
 use App\Core\Service\Event\EventContextService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
+use App\Core\Service\Server\ServerEggEnvironmentService;
 use Exception;
+use JsonException;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -21,6 +26,8 @@ class ServerReinstallationService extends AbstractServerConfiguration
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly RequestStack $requestStack,
         private readonly EventContextService $eventContextService,
+        private readonly LoggerInterface $logger,
+        private readonly ServerEggEnvironmentService $serverEggEnvironmentService,
     )
     {
         parent::__construct($this->pterodactylApplicationService);
@@ -53,13 +60,56 @@ class ServerReinstallationService extends AbstractServerConfiguration
             throw new Exception($reason);
         }
 
-        if ($selectedEgg && $selectedEgg !== $currentEgg) {
+        if ($selectedEgg) {
             $this->validateEgg($server, $selectedEgg);
-            $startupPayload = $this->serverConfigurationStartupService
-                ->getStartupPayload('egg', $selectedEgg, $serverDetails);
+
+            $newEgg = $this->pterodactylApplicationService
+                ->getApplicationApi()
+                ->nestEggs()
+                ->getEgg(
+                    $server->getServerProduct()->getNest(),
+                    $selectedEgg,
+                    ['include' => 'variables']
+                );
+
+            if (!$newEgg->has('id')) {
+                throw new Exception('Failed to fetch egg data from Pterodactyl');
+            }
+
+            try {
+                $productEggConfiguration = json_decode(
+                    $server->getServerProduct()->getEggsConfiguration(),
+                    true,
+                    512,
+                    JSON_THROW_ON_ERROR
+                );
+            } catch (JsonException) {
+                $productEggConfiguration = [];
+            }
+
+            $slots = $this->extractSlotCount($server, $selectedEgg, $newEgg, $productEggConfiguration, $serverDetails);
+
+            $environment = $this->serverEggEnvironmentService->buildEnvironmentVariables(
+                $newEgg,
+                $productEggConfiguration,
+                $slots
+            );
+
+            $dockerImage = $productEggConfiguration[$selectedEgg]['options']['docker_image']['value']
+                ?? $newEgg->get('docker_image');
+            $startup = $productEggConfiguration[$selectedEgg]['options']['startup']['value']
+                ?? $newEgg->get('startup');
+
+            $startupPayload = [
+                'startup' => $startup,
+                'egg' => $selectedEgg,
+                'environment' => $environment,
+                'image' => $dockerImage,
+                'skip_scripts' => false,
+            ];
 
             $this->serverConfigurationStartupService->updateServerStartup($server, $startupPayload);
-            $eggChanged = true;
+            $eggChanged = ($selectedEgg !== $currentEgg);
         }
 
         $initiatedEvent = new ServerReinstallInitiatedEvent(
@@ -73,10 +123,18 @@ class ServerReinstallationService extends AbstractServerConfiguration
         );
         $this->eventDispatcher->dispatch($initiatedEvent);
 
-        $this->pterodactylApplicationService
-            ->getClientApi($user)
-            ->servers()
-            ->reinstallServer($server->getPterodactylServerIdentifier());
+        try {
+            $this->pterodactylApplicationService
+                ->getClientApi($user)
+                ->servers()
+                ->reinstallServer($server->getPterodactylServerIdentifier());
+        } catch (Exception $e) {
+            $this->logger->error('Pterodactyl API reinstall failed', [
+                'server_id' => $server->getId(),
+                'error' => $e->getMessage(),
+            ]);
+            throw new Exception('Failed to reinstall server: ' . $e->getMessage());
+        }
 
         $reinstalledEvent = new ServerReinstalledEvent(
             $user->getId(),
@@ -98,5 +156,45 @@ class ServerReinstallationService extends AbstractServerConfiguration
         if (!in_array($selectedEgg, $server->getServerProduct()->getEggs())) {
             throw new Exception('Invalid egg');
         }
+    }
+
+    /**
+     * Extract current slot count from server environment if slot-based pricing is used.
+     */
+    private function extractSlotCount(
+        Server $server,
+        int $selectedEgg,
+        Resource $newEgg,
+        array $productEggConfiguration,
+        array $serverDetails
+    ): ?int
+    {
+        if (empty($productEggConfiguration[$selectedEgg]['variables'])) {
+            return null;
+        }
+
+        foreach ($productEggConfiguration[$selectedEgg]['variables'] as $variableId => $variableConfig) {
+            if (empty($variableConfig['slot_variable']) || $variableConfig['slot_variable'] !== 'on') {
+                continue;
+            }
+
+            $variables = $newEgg->get('relationships')['variables'] ?? null;
+            if (!$variables instanceof Collection) {
+                continue;
+            }
+
+            foreach ($variables->toArray() as $eggVariable) {
+                if ($eggVariable['id'] === $variableId) {
+                    $envVarName = $eggVariable['env_variable'];
+                    $currentValue = $serverDetails['container']['environment'][$envVarName] ?? null;
+
+                    if ($currentValue !== null) {
+                        return (int) $currentValue;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }

@@ -1,0 +1,34 @@
+<!-- Regenerate API Key Modal -->
+<div class="modal fade" id="regenerateApiKeyModal" tabindex="-1" aria-labelledby="regenerateApiKeyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regenerateApiKeyModalLabel">
+                    {{ 'pteroca.crud.user.regenerate_api_key_modal.title'|trans }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    {{ 'pteroca.crud.user.regenerate_api_key_modal.warning'|trans }}
+                </div>
+                <p>{{ 'pteroca.crud.user.regenerate_api_key_modal.description'|trans }}</p>
+                <ul class="text-muted">
+                    <li>{{ 'pteroca.crud.user.regenerate_api_key_modal.consequence_1'|trans }}</li>
+                    <li>{{ 'pteroca.crud.user.regenerate_api_key_modal.consequence_2'|trans }}</li>
+                    <li>{{ 'pteroca.crud.user.regenerate_api_key_modal.consequence_3'|trans }}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{ 'pteroca.crud.user.regenerate_api_key_modal.cancel'|trans }}
+                </button>
+                <button type="button" class="btn btn-warning" id="confirmRegenerateBtn" onclick="confirmRegenerateApiKey()">
+                    <i class="fa fa-spinner fa-spin d-none"></i>
+                    {{ 'pteroca.crud.user.regenerate_api_key_modal.confirm'|trans }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -61,6 +61,9 @@ trait ProductEntityTrait
     #[ORM\Column(type: "boolean")]
     private bool $allowChangeEgg = false;
 
+    #[ORM\Column(type: "boolean")]
+    private bool $allowAutoRenewal = true;
+
     private ?int $sanitizedEggsCount = null;
 
     public function getId(): int
@@ -241,6 +244,17 @@ trait ProductEntityTrait
     public function setAllowChangeEgg(bool $allowChangeEgg): self
     {
         $this->allowChangeEgg = $allowChangeEgg;
+        return $this;
+    }
+
+    public function getAllowAutoRenewal(): bool
+    {
+        return $this->allowAutoRenewal;
+    }
+
+    public function setAllowAutoRenewal(bool $allowAutoRenewal): self
+    {
+        $this->allowAutoRenewal = $allowAutoRenewal;
         return $this;
     }
 

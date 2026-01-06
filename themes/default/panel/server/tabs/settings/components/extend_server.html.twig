@@ -29,7 +29,7 @@
                             {{ 'pteroca.server.extend_server'|trans }}
                         </a>
                     </div>
-                    {% if server.getServerProduct().getSelectedPrice().getType().value != 'on_demand' %}
+                    {% if server.getServerProduct().getSelectedPrice().getType().value != 'on_demand' and server.serverProduct.allowAutoRenewal %}
                         <div class="col-12">
                             <div class="row pt-4 px-4 pb-1 text-muted">
                                 <div class="col-10">

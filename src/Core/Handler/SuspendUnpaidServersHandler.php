@@ -149,7 +149,15 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
 
     private function tryToRenewServer(Server $server): ?array
     {
-        if (!$server->isAutoRenewal() || !$server->getServerProduct()) {
+        if (!$server->getServerProduct()) {
+            return null;
+        }
+
+        if (!$server->getServerProduct()->getAllowAutoRenewal()) {
+            return null;
+        }
+
+        if (!$server->isAutoRenewal()) {
             return null;
         }
 

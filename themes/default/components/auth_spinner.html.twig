@@ -1,0 +1,47 @@
+<script>
+(function() {
+    'use strict';
+
+    function initAuthSpinner() {
+        const form = document.querySelector('form');
+        if (!form) return;
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (!submitButton) return;
+
+        const originalIcon = submitButton.querySelector('i:not(.fa-spin)');
+        const spinner = submitButton.querySelector('i.fa-spin');
+
+        if (!spinner) {
+            console.warn('Auth spinner: No spinner icon found in submit button');
+            return;
+        }
+
+        form.addEventListener('submit', function() {
+            submitButton.disabled = true;
+
+            if (originalIcon) {
+                originalIcon.classList.add('d-none');
+            }
+
+            spinner.classList.remove('d-none');
+        }, false);
+
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                submitButton.disabled = false;
+                spinner.classList.add('d-none');
+                if (originalIcon) {
+                    originalIcon.classList.remove('d-none');
+                }
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAuthSpinner);
+    } else {
+        initAuthSpinner();
+    }
+})();
+</script>

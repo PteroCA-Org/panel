@@ -230,7 +230,13 @@ class ProductCrudController extends AbstractPanelController
             HiddenField::new('eggsConfiguration')->onlyOnForms(),
             BooleanField::new('allowChangeEgg', $this->translator->trans('pteroca.crud.product.egg_allow_change'))
                 ->setRequired(false)
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->setColumns(6),
+            BooleanField::new('allowAutoRenewal', $this->translator->trans('pteroca.crud.product.allow_auto_renewal'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_auto_renewal_hint'))
+                ->setRequired(false)
+                ->hideOnIndex()
+                ->setColumns(6),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
@@ -326,6 +332,7 @@ class ProductCrudController extends AbstractPanelController
             ->add('schedules')
             ->add('threads')
             ->add('allowChangeEgg')
+            ->add('allowAutoRenewal')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('deletedAt')

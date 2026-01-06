@@ -294,7 +294,8 @@ class CreateServerService extends AbstractActionServerService
             ->setNest($product->getNest())
             ->setEggs($product->getEggs())
             ->setEggsConfiguration($product->getEggsConfiguration())
-            ->setAllowChangeEgg($product->getAllowChangeEgg());
+            ->setAllowChangeEgg($product->getAllowChangeEgg())
+            ->setAllowAutoRenewal($product->getAllowAutoRenewal());
 
         $this->serverProductRepository->save($entityServerProduct);
         
