@@ -29,6 +29,7 @@ readonly class ServerBuildService
         int $eggId,
         string $serverName = '',
         ?int $slots = null,
+        ?int $selectedNodeId = null,
     ): array
     {
         $selectedEgg = $this->getSelectedEgg($eggId, $product);
@@ -47,7 +48,7 @@ readonly class ServerBuildService
             $productEggConfiguration = [];
         }
 
-        $bestAllocationId = $this->nodeSelectionService->getBestAllocationId($product);
+        $bestAllocationId = $this->nodeSelectionService->getBestAllocationId($product, $selectedNodeId);
         $dockerImage = $productEggConfiguration[$eggId]['options']['docker_image']['value']
             ?? $selectedEgg->get('docker_image');
         $startup = $productEggConfiguration[$eggId]['options']['startup']['value']

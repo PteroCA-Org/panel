@@ -10,6 +10,7 @@ use App\Core\Event\Store\StoreCategoryAccessedEvent;
 use App\Core\Event\Store\StoreCategoryDataLoadedEvent;
 use App\Core\Event\Store\StoreProductViewedEvent;
 use App\Core\Event\Store\StoreProductDataLoadedEvent;
+use App\Core\Service\Product\LocationService;
 use App\Core\Service\StoreService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ class StoreController extends AbstractController
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly StoreService $storeService,
+        private readonly LocationService $locationService,
     ) {}
 
     #[Route('/store', name: 'store')]
@@ -114,9 +116,15 @@ class StoreController extends AbstractController
             [$productId, $product, $preparedEggs, count($preparedEggs)]
         );
 
+        $groupedLocations = null;
+        if ($product->getAllowUserSelectLocation()) {
+            $groupedLocations = $this->locationService->getGroupedNodesForProduct($product);
+        }
+
         $viewData = [
             'product' => $product,
             'eggs' => $preparedEggs,
+            'groupedLocations' => $groupedLocations,
         ];
 
         return $this->renderWithEvent(ViewNameEnum::STORE_PRODUCT, 'panel/store/product.html.twig', $viewData, $request);
