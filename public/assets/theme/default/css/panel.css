@@ -248,7 +248,6 @@
 
 .login-logo img {
     max-height: 100px;
-    filter: brightness(0) invert(1);
 }
 
 .login-brand-title {
@@ -641,7 +640,6 @@ body.page-configurator::before {
 
 .configurator-logo img {
     max-height: 80px;
-    filter: brightness(0) invert(1);
 }
 
 .configurator-title {
