@@ -77,6 +77,7 @@ class CreateServerService extends AbstractActionServerService
         UserInterface $user,
         ?string $voucherCode = null,
         ?int $slots = null,
+        ?int $selectedNodeId = null,
     ): array
     {
         if (!empty($voucherCode)) {
@@ -109,7 +110,7 @@ class CreateServerService extends AbstractActionServerService
             throw new Exception($this->translator->trans('pteroca.store.server_creation_blocked'));
         }
 
-        $createdPterodactylServer = $this->createPterodactylServer($product, $eggId, $serverName, $user, $slots);
+        $createdPterodactylServer = $this->createPterodactylServer($product, $eggId, $serverName, $user, $slots, $selectedNodeId);
 
         $createdOnPterodactylEvent = new ServerCreatedOnPterodactylEvent(
             $user->getId(),
@@ -135,7 +136,7 @@ class CreateServerService extends AbstractActionServerService
         );
         $this->eventDispatcher->dispatch($entityCreatedEvent);
 
-        $createdEntityServerProduct = $this->createEntityServerProduct($createdEntityServer, $product);
+        $createdEntityServerProduct = $this->createEntityServerProduct($createdEntityServer, $product, $selectedNodeId);
         $this->createEntitiesServerProductPrice($createdEntityServerProduct, $priceId);
 
         $productCreatedEvent = new ServerProductCreatedEvent(
@@ -214,12 +215,13 @@ class CreateServerService extends AbstractActionServerService
         int $eggId,
         string $serverName,
         UserInterface $user,
-        ?int $slots = null
+        ?int $slots = null,
+        ?int $selectedNodeId = null
     ): PterodactylServer
     {
         try {
             $preparedServerBuild = $this->serverBuildService
-                ->prepareServerBuild($product, $user, $eggId, $serverName, $slots);
+                ->prepareServerBuild($product, $user, $eggId, $serverName, $slots, $selectedNodeId);
 
             return $this->pterodactylApplicationService
                 ->getApplicationApi()
@@ -276,7 +278,7 @@ class CreateServerService extends AbstractActionServerService
         return $entityServer;
     }
 
-    private function createEntityServerProduct(Server $server, Product $product): ServerProduct
+    private function createEntityServerProduct(Server $server, Product $product, ?int $selectedNodeId = null): ServerProduct
     {
         $entityServerProduct = (new ServerProduct())
             ->setServer($server)
@@ -295,7 +297,9 @@ class CreateServerService extends AbstractActionServerService
             ->setEggs($product->getEggs())
             ->setEggsConfiguration($product->getEggsConfiguration())
             ->setAllowChangeEgg($product->getAllowChangeEgg())
-            ->setAllowAutoRenewal($product->getAllowAutoRenewal());
+            ->setAllowAutoRenewal($product->getAllowAutoRenewal())
+            ->setAllowUserSelectLocation($product->getAllowUserSelectLocation())
+            ->setSelectedNodeId($selectedNodeId);
 
         $this->serverProductRepository->save($entityServerProduct);
         
