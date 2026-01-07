@@ -171,6 +171,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     </select>
+                                    {% do form.duration.setRendered %}
                                 </div>
                                 <div class="col-md-6">
                                     <label for="egg" class="form-label fw-semibold">
@@ -184,6 +185,7 @@
                                             </option>
                                         {% endfor %}
                                     </select>
+                                    {% do form.egg.setRendered %}
                                     {% if product.allowChangeEgg %}
                                         <div class="form-text">
                                             <i class="fas fa-info-circle text-info me-1"></i>
