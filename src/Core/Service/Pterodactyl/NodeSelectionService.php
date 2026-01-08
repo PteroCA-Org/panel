@@ -46,45 +46,59 @@ readonly class NodeSelectionService
             throw new Exception('No suitable node found with enough resources');
         }
 
-        $allocations = $this->pterodactylApplicationService
-            ->getApplicationApi()
-            ->nodeAllocations()
-            ->all($bestNode['id'])
-            ->toArray();
+        $currentPage = 1;
+        $allAllocationsForSummary = [];
 
-        $bestAllocation = $this->allocationIpPrioritizationService->getBestAllocation($allocations);
+        do {
+            $collection = $this->pterodactylApplicationService
+                ->getApplicationApi()
+                ->nodeAllocations()
+                ->paginate($bestNode['id'], ['page' => $currentPage, 'per_page' => 100]);
 
-        if (!$bestAllocation) {
-            $summary = $this->allocationIpPrioritizationService->getAvailableAllocationsSummary($allocations);
+            $allocations = $collection->toArray();
+            $allAllocationsForSummary = array_merge($allAllocationsForSummary, $allocations);
 
-            $this->logger->warning('No suitable allocation found', [
-                'node_id' => $bestNode['id'],
-                'node_name' => $bestNode['name'] ?? 'unknown',
-                'allocation_summary' => $summary,
-            ]);
+            $bestAllocation = $this->allocationIpPrioritizationService->getBestAllocation($allocations);
 
-            if ($summary['total'] === 0) {
-                throw new Exception('No allocations configured on the selected node. Please add allocations to the node.');
+            if ($bestAllocation) {
+                return $bestAllocation['id'];
             }
 
-            if ($summary['unassigned'] === 0) {
-                throw new Exception(sprintf(
-                    'No unassigned allocations available on the selected node. All %d allocation(s) are currently in use.',
-                    $summary['total']
-                ));
-            }
+            $meta = $collection->getMeta();
+            $pagination = $meta['pagination'] ?? [];
+            $totalPages = $pagination['total_pages'] ?? 1;
+            $hasMorePages = $currentPage < $totalPages;
 
-            $localhostOnly = $summary['unassigned'] === $summary['by_category']['localhost']['unassigned'];
-            if ($localhostOnly) {
-                throw new Exception(
-                    'Only localhost allocations are available on the selected node. ' .
-                    'For production use, please add public or private IP allocations to the node.'
-                );
-            }
+            $currentPage++;
+        } while ($hasMorePages);
 
-            throw new Exception('No suitable allocation found on the selected node');
+        $summary = $this->allocationIpPrioritizationService->getAvailableAllocationsSummary($allAllocationsForSummary);
+
+        $this->logger->warning('No suitable allocation found', [
+            'node_id' => $bestNode['id'],
+            'node_name' => $bestNode['name'] ?? 'unknown',
+            'allocation_summary' => $summary,
+        ]);
+
+        if ($summary['total'] === 0) {
+            throw new Exception('No allocations configured on the selected node. Please add allocations to the node.');
         }
 
-        return $bestAllocation['id'];
+        if ($summary['unassigned'] === 0) {
+            throw new Exception(sprintf(
+                'No unassigned allocations available on the selected node. All %d allocation(s) are currently in use.',
+                $summary['total']
+            ));
+        }
+
+        $localhostOnly = $summary['unassigned'] === $summary['by_category']['localhost']['unassigned'];
+        if ($localhostOnly) {
+            throw new Exception(
+                'Only localhost allocations are available on the selected node. ' .
+                'For production use, please add public or private IP allocations to the node.'
+            );
+        }
+
+        throw new Exception('No suitable allocation found on the selected node');
     }
 }
