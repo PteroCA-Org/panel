@@ -3,8 +3,7 @@
 namespace App\Core\Service\Crud;
 
 use App\Core\Enum\OverwriteableCrudTemplatesEnum;
-use App\Core\Enum\SettingEnum;
-use App\Core\Service\SettingService;
+use App\Core\Service\Template\CurrentThemeService;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -16,7 +15,7 @@ class CrudTemplateService
     private const DEFAULT_TEMPLATE = 'default';
 
     public function __construct(
-        private readonly SettingService $settingService,
+        private readonly CurrentThemeService $currentThemeService,
         private readonly CacheInterface $cache,
         private readonly Filesystem $fileSystem,
         private readonly string $projectDirectory,
@@ -31,7 +30,7 @@ class CrudTemplateService
     public function getTemplatesToOverride(array $templateContext): array
     {
         $templateContext = $this->prepareTemplateContext($templateContext);
-        $currentTemplate = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value);
+        $currentTemplate = $this->currentThemeService->getCurrentTheme();
 
         // In dev environment, skip cache to see template changes immediately
         if ($this->environment === 'dev') {

@@ -1,14 +1,14 @@
-{% extends 'landing/layout/base.html.twig' %}
+{% extends 'layout/base.html.twig' %}
 
 {% block body %}
     {# Hero section #}
-    {{ include('landing/components/hero.html.twig') }}
+    {{ include('components/hero.html.twig') }}
 
     {# Featured categories #}
     <section class="section">
         <div class="container">
             <h2 class="text-center mb-5">{{ 'pteroca.landing.categories.title'|trans }}</h2>
-            {{ include('landing/components/category-grid.html.twig', {
+            {{ include('components/category-grid.html.twig', {
                 categories: categories
             }) }}
         </div>
@@ -18,12 +18,12 @@
     <section class="section bg-light">
         <div class="container">
             <h2 class="text-center mb-5">{{ 'pteroca.landing.products.title'|trans }}</h2>
-            {{ include('landing/components/featured-products.html.twig', {
+            {{ include('components/featured-products.html.twig', {
                 products: featuredProducts
             }) }}
         </div>
     </section>
 
     {# Call to action #}
-    {{ include('landing/components/cta-section.html.twig') }}
+    {{ include('components/cta-section.html.twig') }}
 {% endblock %}

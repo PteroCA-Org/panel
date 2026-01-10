@@ -62,12 +62,6 @@ services:
       $projectDirectory: '%kernel.project_dir%'
       $environment: '%kernel.environment%'
 
-  App\Core\Twig\ContextAwareTwigLoader:
-    arguments:
-      $templatesBaseDir: '%kernel.project_dir%/themes'
-    tags:
-      - { name: 'twig.loader', priority: 1 }
-
   App\Core\Contract\Pterodactyl\Application\PterodactylAdapterInterface:
     alias: App\Core\Adapter\Pterodactyl\Application\PterodactylAdapter
 

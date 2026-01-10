@@ -2,9 +2,8 @@
 
 namespace App\Core\EventSubscriber\Kernel;
 
-use App\Core\Enum\SettingEnum;
-use App\Core\Service\SettingService;
 use App\Core\Service\Telemetry\TelemetryService;
+use App\Core\Service\Template\CurrentThemeService;
 use Exception;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +20,7 @@ class ExceptionSubscriber
 {
     public function __construct(
         private Environment     $twig,
-        private SettingService  $settingService,
+        private CurrentThemeService $currentThemeService,
         private KernelInterface $kernel,
         private TelemetryService $telemetryService,
     ) {
@@ -44,7 +43,7 @@ class ExceptionSubscriber
             $this->telemetryService->send500ErrorEvent($exception, $event->getRequest());
         }
 
-        $currentTheme = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value) ?? 'default';
+        $currentTheme = $this->currentThemeService->getCurrentTheme();
 
         $template = $this->findTemplate($statusCode, $currentTheme);
 

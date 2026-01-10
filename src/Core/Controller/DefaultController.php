@@ -38,7 +38,7 @@ class DefaultController extends AbstractController
             ? $this->storeService->getFeaturedProducts(6)
             : [];
 
-        return $this->render('landing/index.html.twig', [
+        return $this->render('index.html.twig', [
             'categories' => $categories,
             'featuredProducts' => $featuredProducts,
         ]);
@@ -52,7 +52,7 @@ class DefaultController extends AbstractController
             ? $this->storeService->getPublicCategories()
             : [];
 
-        return $this->render('landing/store.html.twig', [
+        return $this->render('store.html.twig', [
             'categories' => $categories,
         ]);
     }

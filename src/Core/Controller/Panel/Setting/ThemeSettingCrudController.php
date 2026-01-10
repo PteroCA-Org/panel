@@ -70,12 +70,6 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
 
         if ($pageName === Crud::PAGE_EDIT) {
             switch ($this->currentEntity->getName()) {
-                case SettingEnum::CURRENT_THEME->value:
-                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
-                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
-                        ->setChoices($this->templateService->getAvailableTemplates())
-                        ->setRequired(true);
-                    break;
                 case SettingEnum::PANEL_THEME->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
@@ -116,6 +110,9 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $hiddenSettings = [];
+
+        // Hide legacy current_theme setting (replaced by context-based themes)
+        $hiddenSettings[] = 'current_theme';
 
         if (!$this->currentTemplateOptions->isSupportDarkMode()) {
             $hiddenSettings[] = SettingEnum::THEME_DISABLE_DARK_MODE->value;

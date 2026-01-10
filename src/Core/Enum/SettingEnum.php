@@ -40,7 +40,6 @@ enum SettingEnum: string
     case TERMS_OF_SERVICE = 'terms_of_service';
     case DELETE_SUSPENDED_SERVERS_ENABLED = 'delete_suspended_servers_enabled';
     case DELETE_SUSPENDED_SERVERS_DAYS_AFTER = 'delete_suspended_servers_days_after';
-    case CURRENT_THEME = 'current_theme';
     case PANEL_THEME = 'panel_theme';
     case LANDING_THEME = 'landing_theme';
     case EMAIL_THEME = 'email_theme';
