@@ -120,6 +120,9 @@ class ProductCrudController extends AbstractPanelController
             NumberField::new('priority', $this->translator->trans('pteroca.crud.product.priority'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.priority_hint'))
                 ->setColumns(6),
+            BooleanField::new('featured', $this->translator->trans('pteroca.crud.product.featured'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.featured_hint'))
+                ->setColumns(6),
             FormField::addRow(),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.product.image'))
                 ->setBasePath($this->getParameter('products_base_path'))

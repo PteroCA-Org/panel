@@ -53,6 +53,9 @@ class CategoryCrudController extends AbstractPanelController
             NumberField::new('priority', $this->translator->trans('pteroca.crud.category.priority'))
                 ->setHelp($this->translator->trans('pteroca.crud.category.priority_hint'))
                 ->setColumns(6),
+            BooleanField::new('featured', $this->translator->trans('pteroca.crud.category.featured'))
+                ->setHelp($this->translator->trans('pteroca.crud.category.featured_hint'))
+                ->setColumns(6),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.category.image'))
                 ->setBasePath($this->getParameter('categories_base_path'))
                 ->setUploadDir($uploadDirectory)

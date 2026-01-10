@@ -62,7 +62,7 @@ services:
       $projectDirectory: '%kernel.project_dir%'
       $environment: '%kernel.environment%'
 
-  App\Core\Twig\DynamicTwigLoader:
+  App\Core\Twig\ContextAwareTwigLoader:
     arguments:
       $templatesBaseDir: '%kernel.project_dir%/themes'
     tags:
@@ -240,3 +240,8 @@ services:
   App\Core\Security\PluginPermissionVoter:
     tags:
       - { name: security.voter, priority: 50 }
+
+  # Twig context-aware template loading
+  App\Core\EventSubscriber\TwigContextSubscriber:
+    arguments:
+      $templatesBaseDir: '%kernel.project_dir%/themes'

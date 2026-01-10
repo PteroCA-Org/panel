@@ -211,6 +211,21 @@ pteroca:
     slots: 'Slots'
     processing: 'Processing...'
 
+  landing:
+    hero:
+      title: 'Game Server Hosting Made Easy'
+      subtitle: 'Start your gaming server in minutes with our powerful panel'
+      browse_servers: 'Browse Servers'
+      get_started: 'Get Started'
+    categories:
+      title: 'Popular Categories'
+    products:
+      title: 'Featured Servers'
+    cta:
+      title: 'Ready to start?'
+      subtitle: 'Create your account and launch your first server today'
+      button: 'Create Account'
+
   store:
     title: 'Store'
     order: 'Order'
@@ -695,6 +710,8 @@ pteroca:
       image: 'Image'
       priority: 'Priority'
       priority_hint: 'Lower numbers appear first (e.g., 1 appears before 2). Use this to control display order.'
+      featured: 'Featured on Landing Page'
+      featured_hint: 'Display this category on the landing page as a featured item'
       add: 'Add category'
       save: 'Save category'
       category: 'Category'
@@ -713,6 +730,8 @@ pteroca:
       is_active: 'Active'
       priority: 'Priority'
       priority_hint: 'Lower numbers appear first (e.g., 1 appears before 2). Use this to control display order.'
+      featured: 'Featured on Landing Page'
+      featured_hint: 'Display this product on the landing page as a featured item'
       category: 'Category'
       image: 'Image'
       image_help: 'The image will be displayed in the store.'

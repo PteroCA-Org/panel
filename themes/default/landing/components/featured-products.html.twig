@@ -1,0 +1,21 @@
+<div class="row">
+    {% for product in products %}
+        <div class="col-md-4">
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image }}" class="img-fluid mb-3" alt="{{ product.name }}">
+                {% else %}
+                    <i class="fas fa-server fa-3x mb-3 text-primary"></i>
+                {% endif %}
+                <h4>{{ product.name }}</h4>
+                <p class="text-muted">{{ product.description|slice(0, 100) }}...</p>
+                <div class="pricing mb-3">
+                    <span class="h5 text-primary">{{ product.price }} {{ get_currency() }}</span>
+                </div>
+                <a href="{{ path('app_register') }}" class="btn btn-primary">
+                    {{ 'pteroca.landing.products.order'|trans }}
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

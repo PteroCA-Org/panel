@@ -33,6 +33,9 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\Column(type: "integer")]
     private int $priority = 0;
 
+    #[ORM\Column(type: "boolean", options: ["default" => false])]
+    private bool $featured = false;
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $imagePath = null;
 
@@ -96,6 +99,17 @@ class Product extends AbstractEntity implements ProductInterface
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+        return $this;
+    }
+
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(bool $featured): self
+    {
+        $this->featured = $featured;
         return $this;
     }
 

@@ -23,7 +23,7 @@ class StoreController extends AbstractController
         private readonly StoreService $storeService,
     ) {}
 
-    #[Route('/store', name: 'store')]
+    #[Route('/panel/store', name: 'panel_store')]
     public function store(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);
@@ -47,7 +47,7 @@ class StoreController extends AbstractController
         return $this->renderWithEvent(ViewNameEnum::STORE_INDEX, 'panel/store/index.html.twig', $viewData, $request);
     }
 
-    #[Route('/store/category', name: 'store_category')]
+    #[Route('/panel/store/category', name: 'panel_store_category')]
     public function category(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);
@@ -80,7 +80,7 @@ class StoreController extends AbstractController
         return $this->renderWithEvent(ViewNameEnum::STORE_CATEGORY, 'panel/store/list.html.twig', $viewData, $request);
     }
 
-    #[Route('/store/product', name: 'store_product')]
+    #[Route('/panel/store/product', name: 'panel_store_product')]
     public function product(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);

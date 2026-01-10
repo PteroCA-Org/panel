@@ -1,0 +1,14 @@
+<div class="row">
+    {% for category in categories %}
+        <div class="col-md-4">
+            <div class="category-card">
+                <i class="fas fa-gamepad fa-3x mb-3 text-primary"></i>
+                <h3>{{ category.name }}</h3>
+                <p class="text-muted">{{ category.description|slice(0, 100) }}...</p>
+                <a href="{{ path('landing_store') }}" class="btn btn-outline-primary">
+                    {{ 'pteroca.landing.categories.view'|trans }}
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>

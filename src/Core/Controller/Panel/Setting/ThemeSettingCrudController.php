@@ -76,6 +76,27 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
                         ->setChoices($this->templateService->getAvailableTemplates())
                         ->setRequired(true);
                     break;
+                case SettingEnum::PANEL_THEME->value:
+                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
+                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('panel'))
+                        ->setRequired(true)
+                        ->setHelp('Theme for user panel (dashboard, servers, store)');
+                    break;
+                case SettingEnum::LANDING_THEME->value:
+                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
+                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('landing'))
+                        ->setRequired(true)
+                        ->setHelp('Theme for landing page (homepage for visitors)');
+                    break;
+                case SettingEnum::EMAIL_THEME->value:
+                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
+                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('email'))
+                        ->setRequired(true)
+                        ->setHelp('Theme for email templates');
+                    break;
                 case SettingEnum::THEME_DEFAULT_MODE->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))

@@ -86,7 +86,7 @@ class MenuBuilder
             $mainItems[] = MenuItem::linkToRoute(
                 $this->translator->trans('pteroca.crud.menu.shop'),
                 'fa fa-shopping-cart',
-                'store'
+                'panel_store'
             );
         }
 

@@ -190,7 +190,7 @@ class CartController extends AbstractController
             );
 
             return $this->redirectToRoute('panel', [
-                'routeName' => 'store_product',
+                'routeName' => 'panel_store_product',
                 'id' => $product->getId()
             ]);
         }

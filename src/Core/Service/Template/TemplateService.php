@@ -89,6 +89,32 @@ class TemplateService
         return $assetsPath;
     }
 
+    public function themeSupportsContext(string $themeName, string $context): bool
+    {
+        $metadata = $this->getRawTemplateInfo($themeName);
+
+        // If no contexts declared, assume it's old theme supporting only "panel"
+        if (!isset($metadata['contexts'])) {
+            return $context === 'panel';
+        }
+
+        return in_array($context, $metadata['contexts'], true);
+    }
+
+    public function getAvailableTemplatesForContext(string $context): array
+    {
+        $allTemplates = $this->getAvailableTemplates();
+        $contextTemplates = [];
+
+        foreach ($allTemplates as $templateName) {
+            if ($this->themeSupportsContext($templateName, $context)) {
+                $contextTemplates[$templateName] = $templateName;
+            }
+        }
+
+        return $contextTemplates;
+    }
+
     private function loadTemplateMetadata(string $templatePath, bool $loadRawData = false): array
     {
         $metadataPath = $templatePath . DIRECTORY_SEPARATOR . self::METADATA_FILE;
@@ -116,7 +142,7 @@ class TemplateService
                 $value = $this->prepareTemplateMetadata($value, $loadRawData);
             }
 
-            if (!empty($label)) {
+            if ($label !== '' && $label !== null) {
                 $preparedMetaData[$label] = $value;
             }
         }

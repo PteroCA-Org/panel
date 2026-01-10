@@ -1,0 +1,36 @@
+{% extends 'landing/layout/base.html.twig' %}
+
+{% block title %}{{ 'pteroca.landing.store.title'|trans }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <h1 class="text-center mb-5">{{ 'pteroca.landing.store.title'|trans }}</h1>
+            <p class="text-center lead mb-5">{{ 'pteroca.landing.store.subtitle'|trans }}</p>
+
+            {% for category in categories %}
+                <div class="mb-5">
+                    <h2 class="mb-4">{{ category.name }}</h2>
+                    <div class="row">
+                        {% for product in category.products %}
+                            {% if product.active %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="product-card">
+                                        <h4>{{ product.name }}</h4>
+                                        <p class="text-muted">{{ product.description|slice(0, 100) }}...</p>
+                                        <div class="pricing mb-3">
+                                            <span class="h5 text-primary">{{ product.price }} {{ get_currency() }}</span>
+                                        </div>
+                                        <a href="{{ path('app_register') }}" class="btn btn-primary">
+                                            {{ 'pteroca.landing.products.order'|trans }}
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
