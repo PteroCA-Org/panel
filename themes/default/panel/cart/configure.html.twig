@@ -205,6 +205,17 @@
                                 </div>
                                 {% endif %}
 
+                                {% if allowLocationSelection and groupedLocations is not empty %}
+                                <div class="col-md-6">
+                                    <label for="location" class="form-label fw-semibold">
+                                        <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                                        {{ 'pteroca.cart_configuration.location'|trans }}
+                                    </label>
+                                    {{ form_widget(form.node, {'attr': {'id': 'location', 'class': 'form-select form-select-lg'}}) }}
+                                    <div id="location-availability-message" class="form-text mt-2"></div>
+                                </div>
+                                {% endif %}
+
                                 <div class="col-md-6">
                                     <label for="server-name" class="form-label fw-semibold">
                                         <i class="fas fa-tag me-2 text-success"></i>
@@ -559,5 +570,74 @@
             document.querySelector('div[data-alert="not_enough_balance"]').classList.toggle('d-none', !insufficientBalance);
             document.querySelector('button#order-submit').disabled = insufficientBalance || !isProductAvailable;
         }
+
+        {% if allowLocationSelection and groupedLocations is not empty %}
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationSelect = document.getElementById('location');
+            const messageDiv = document.getElementById('location-availability-message');
+            const currentProductId = {{ product.id }};
+
+            if (locationSelect) {
+                locationSelect.addEventListener('change', function() {
+                    const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+                    const nodeId = selectedOption.value;
+                    const nodeProductId = parseInt(selectedOption.getAttribute('data-product-id'));
+
+                    if (!nodeId) {
+                        messageDiv.innerHTML = '';
+                        return;
+                    }
+
+                    if (nodeProductId !== currentProductId) {
+                        const durationSelect = document.getElementById('duration');
+                        const eggSelect = document.getElementById('egg');
+
+                        const urlParams = new URLSearchParams();
+                        urlParams.append('routeName', 'cart_configure');
+                        urlParams.append('id', nodeProductId);
+                        urlParams.append('node', nodeId);
+                        if (durationSelect && durationSelect.value) {
+                            const priceId = durationSelect.value;
+                            urlParams.append('duration', priceId);
+                        }
+                        if (eggSelect && eggSelect.value) {
+                            urlParams.append('egg', eggSelect.value);
+                        }
+
+                        window.location.href = '{{ path('panel') }}?' + urlParams.toString();
+                        return;
+                    }
+
+                    messageDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>{{ 'pteroca.store.checking_availability'|trans }}';
+                    messageDiv.className = 'form-text mt-2 text-muted';
+
+                    fetch('{{ path('api_check_node_resources') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams({
+                            productId: currentProductId,
+                            nodeId: nodeId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.available) {
+                            messageDiv.innerHTML = '<i class="fas fa-check-circle me-1"></i>{{ 'pteroca.store.location_available'|trans }}';
+                            messageDiv.className = 'form-text mt-2 text-success';
+                        } else {
+                            messageDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>' + data.message;
+                            messageDiv.className = 'form-text mt-2 text-warning';
+                        }
+                    })
+                    .catch(error => {
+                        messageDiv.innerHTML = '<i class="fas fa-times-circle me-1"></i>{{ 'pteroca.store.location_check_failed'|trans }}';
+                        messageDiv.className = 'form-text mt-2 text-danger';
+                    });
+                });
+            }
+        });
+        {% endif %}
     </script>
 {% endblock %}

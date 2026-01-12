@@ -64,6 +64,9 @@ trait ProductEntityTrait
     #[ORM\Column(type: "boolean")]
     private bool $allowAutoRenewal = true;
 
+    #[ORM\Column(type: "boolean")]
+    private bool $allowUserSelectLocation = false;
+
     private ?int $sanitizedEggsCount = null;
 
     public function getId(): int
@@ -255,6 +258,17 @@ trait ProductEntityTrait
     public function setAllowAutoRenewal(bool $allowAutoRenewal): self
     {
         $this->allowAutoRenewal = $allowAutoRenewal;
+        return $this;
+    }
+
+    public function getAllowUserSelectLocation(): bool
+    {
+        return $this->allowUserSelectLocation;
+    }
+
+    public function setAllowUserSelectLocation(bool $allowUserSelectLocation): self
+    {
+        $this->allowUserSelectLocation = $allowUserSelectLocation;
         return $this;
     }
 
