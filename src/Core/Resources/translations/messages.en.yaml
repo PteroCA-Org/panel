@@ -253,6 +253,7 @@ pteroca:
     store:
       title: 'Store'
       subtitle: 'Browse our high-performance game servers'
+      show_all_categories: 'Show all categories'
 
   store:
     title: 'Store'

@@ -6,6 +6,7 @@ use App\Core\Enum\SettingEnum;
 use App\Core\Service\SettingService;
 use App\Core\Service\StoreService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,42 +42,68 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/store', name: 'landing_store')]
-    public function store(): Response
+    public function store(Request $request): Response
     {
+        $categoryId = $request->query->get('category');
         $categories = method_exists($this->storeService, 'getPublicCategories')
             ? $this->storeService->getPublicCategories()
             : [];
 
         $storeData = [];
-        foreach ($categories as $category) {
-            $products = method_exists($this->storeService, 'getCategoryProducts')
-                ? $this->storeService->getCategoryProducts($category)
-                : [];
-            
-            if (empty($products)) {
-                continue;
+
+        if ($categoryId) {
+            $selectedCategory = null;
+            foreach ($categories as $category) {
+                if ($category->getId() == $categoryId) {
+                    $selectedCategory = $category;
+                    break;
+                }
             }
-                
-            $storeData[] = [
-                'category' => $category,
-                'products' => $products
-            ];
-        }
 
-        $uncategorizedProducts = method_exists($this->storeService, 'getCategoryProducts')
-            ? $this->storeService->getCategoryProducts(null)
-            : [];
+            if ($selectedCategory) {
+                $products = method_exists($this->storeService, 'getCategoryProducts')
+                    ? $this->storeService->getCategoryProducts($selectedCategory)
+                    : [];
 
-        if (!empty($uncategorizedProducts)) {
-            $storeData[] = [
-                'category' => (object) ['name' => 'pteroca.store.products_with_no_category'], // Using translation key as name
-                'products' => $uncategorizedProducts,
-                'is_translation_key' => true
-            ];
+                if (!empty($products)) {
+                    $storeData[] = [
+                        'category' => $selectedCategory,
+                        'products' => $products
+                    ];
+                }
+            }
+        } else {
+            foreach ($categories as $category) {
+                $products = method_exists($this->storeService, 'getCategoryProducts')
+                    ? $this->storeService->getCategoryProducts($category)
+                    : [];
+
+                if (empty($products)) {
+                    continue;
+                }
+
+                $storeData[] = [
+                    'category' => $category,
+                    'products' => $products
+                ];
+            }
+
+            $uncategorizedProducts = method_exists($this->storeService, 'getCategoryProducts')
+                ? $this->storeService->getCategoryProducts(null)
+                : [];
+
+            if (!empty($uncategorizedProducts)) {
+                $storeData[] = [
+                    'category' => (object) ['name' => 'pteroca.store.products_with_no_category'],
+                    'products' => $uncategorizedProducts,
+                    'is_translation_key' => true
+                ];
+            }
         }
 
         return $this->render('store.html.twig', [
             'storeData' => $storeData,
+            'selectedCategoryId' => $categoryId,
         ]);
     }
 }
