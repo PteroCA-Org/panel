@@ -89,8 +89,8 @@ class CrudTemplateService
     /**
      * Find template using hierarchical fallback strategy.
      *
-     * For a template context like 'setting/current_theme', it will search:
-     * 1. themes/{theme}/panel/crud/setting/current_theme/{template}.html.twig
+     * For a template context like 'setting/panel_theme', it will search:
+     * 1. themes/{theme}/panel/crud/setting/panel_theme/{template}.html.twig
      * 2. themes/{theme}/panel/crud/setting/{template}.html.twig
      * 3. If theme != default, repeat 1-2 for 'default' theme
      * 4. Returns null if not found (EasyAdmin default will be used)
@@ -131,8 +131,8 @@ class CrudTemplateService
     /**
      * Build hierarchical context array.
      *
-     * Example: 'setting/current_theme' becomes:
-     * - ['setting/current_theme', 'setting']
+     * Example: 'setting/panel_theme' becomes:
+     * - ['setting/panel_theme', 'setting']
      *
      * Example: 'product' becomes:
      * - ['product']

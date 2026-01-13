@@ -19,18 +19,14 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(): Response
     {
-        // Check if landing page is enabled
         $landingPageEnabled = (bool) $this->settingService->getSetting(
             SettingEnum::LANDING_PAGE_ENABLED->value
         );
 
-        // If landing page is disabled, redirect to login
         if (!$landingPageEnabled) {
             return $this->redirectToRoute('app_login');
         }
 
-        // Render landing page
-        // Note: getFeaturedProducts/Categories methods will be added in next phase
         $categories = method_exists($this->storeService, 'getFeaturedCategories')
             ? $this->storeService->getFeaturedCategories(6)
             : [];
@@ -47,7 +43,6 @@ class DefaultController extends AbstractController
     #[Route('/store', name: 'landing_store')]
     public function store(): Response
     {
-        // Full product listing on landing page
         $categories = method_exists($this->storeService, 'getPublicCategories')
             ? $this->storeService->getPublicCategories()
             : [];

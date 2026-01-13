@@ -5,7 +5,7 @@
     "author": "PteroCA.com",
     "version": "1.2.0",
     "license": "MIT",
-    "pterocaVersion": "0.7.0",
+    "pterocaVersion": "0.6.3",
     "phpVersion": ">=8.2",
     "contexts": ["panel", "landing", "email"],
     "options": {

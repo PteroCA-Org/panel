@@ -75,21 +75,21 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
                         ->setChoices($this->templateService->getAvailableTemplatesForContext('panel'))
                         ->setRequired(true)
-                        ->setHelp('Theme for user panel (dashboard, servers, store)');
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.panel_theme.help'));
                     break;
                 case SettingEnum::LANDING_THEME->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
                         ->setChoices($this->templateService->getAvailableTemplatesForContext('landing'))
                         ->setRequired(true)
-                        ->setHelp('Theme for landing page (homepage for visitors)');
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.landing_theme.help'));
                     break;
                 case SettingEnum::EMAIL_THEME->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
                         ->setChoices($this->templateService->getAvailableTemplatesForContext('email'))
                         ->setRequired(true)
-                        ->setHelp('Theme for email templates');
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.email_theme.help'));
                     break;
                 case SettingEnum::THEME_DEFAULT_MODE->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
@@ -110,9 +110,6 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
         $hiddenSettings = [];
-
-        // Hide legacy current_theme setting (replaced by context-based themes)
-        $hiddenSettings[] = 'current_theme';
 
         if (!$this->currentTemplateOptions->isSupportDarkMode()) {
             $hiddenSettings[] = SettingEnum::THEME_DISABLE_DARK_MODE->value;

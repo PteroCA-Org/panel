@@ -218,9 +218,13 @@ pteroca:
       browse_servers: 'Browse Servers'
       get_started: 'Get Started'
     categories:
-      title: 'Popular Categories'
+      title: 'Featured Categories'
     products:
-      title: 'Featured Servers'
+      title: 'Featured Products'
+      order: 'Order Now'
+    store:
+      title: 'Our Products'
+      subtitle: 'Browse our full catalog of game server hosting products'
     cta:
       title: 'Ready to start?'
       subtitle: 'Create your account and launch your first server today'
@@ -994,6 +998,12 @@ pteroca:
       created_successfully: 'Setting created successfully.'
       create_error: 'An error occurred while creating the setting: %error%'
       update_error: 'An error occurred while updating the setting: %error%'
+      panel_theme:
+        help: 'Theme for user panel (dashboard, servers, store). Controls the look of all admin and user-facing pages.'
+      landing_theme:
+        help: 'Theme for landing page (homepage for visitors). Displayed to non-logged users on the public site.'
+      email_theme:
+        help: 'Theme for email templates. Controls the styling of notification, registration, and purchase emails.'
       hints:
         site_logo: 'Custom logo for dashboard and login pages. Upload PNG, JPG, or SVG. Falls back to default if empty.'
         site_url: 'Base URL of your panel (e.g., https://panel.example.com). Used in emails, SSO, and redirects.'
@@ -1030,7 +1040,11 @@ pteroca:
         pterodactyl_sso_enabled: 'Enable Single Sign-On Login with Pterodactyl Panel (SSO Secret must be set)'
         pterodactyl_sso_secret: 'Pterodactyl SSO Login Secret Key'
         show_pterodactyl_logs_in_server_activity: 'Show Pterodactyl logs in server activity'
-        current_theme: 'Current theme of the panel'
+        current_theme: 'Current theme of the panel (LEGACY - replaced by context-based themes)'
+        panel_theme: 'Theme for user panel (dashboard, servers, store). Controls the look of all admin and user-facing pages.'
+        landing_theme: 'Theme for landing page (homepage for visitors). Displayed to non-logged users on the public site.'
+        email_theme: 'Theme for email templates. Controls the styling of notification, registration, and purchase emails.'
+        landing_page_enabled: 'Enable public landing page. When disabled, visitors are redirected to login page.'
         smtp_from: 'Sender email in ''From'' field (e.g., noreply@example.com). Should match SMTP allowed senders.'
         renewal_notification_enabled: 'Send email confirmations when servers are renewed. Master toggle for all renewal notifications.'
         renewal_notification_min_period_hours: 'Minimum hours between renewal emails per server. Prevents spam. E.g., 24 = max once daily.'
@@ -1045,6 +1059,7 @@ pteroca:
         pterocaVersion: 'Pteroca version'
         outdated: 'The template version is behind the current version of PteroCA. Some features may not work correctly'
         phpVersion: 'PHP version'
+        contexts: 'Supported contexts'
         options: 'Options'
         supportDarkMode: 'Support dark mode'
         supportCustomColors: 'Allow configuring custom colors'
@@ -1709,7 +1724,3 @@ pteroca:
       plugins: 'Plugins'
       'plugins (admin)': 'Plugins (Admin)'
       role_management: 'Roles & Permissions'
-      'role_management (admin)': 'Roles & Permissions (Admin)'
-      user_features: 'User Features'
-      pterodactyl_integration: 'Pterodactyl Integration'
-      'pterodactyl_integration (admin)': 'Pterodactyl Integration (Admin)'

@@ -93,7 +93,10 @@ class TemplateService
     {
         $metadata = $this->getRawTemplateInfo($themeName);
 
-        // If no contexts declared, assume it's old theme supporting only "panel"
+        // DEPRECATED: Backward compatibility for legacy themes (introduced in v0.6.3)
+        // This fallback will be REMOVED in a future version (v0.8.0+)
+        // Legacy themes without 'contexts' field are assumed to support only "panel" context
+        // ACTION REQUIRED: Update your template.json to include "contexts": ["panel", "landing", "email"]
         if (!isset($metadata['contexts'])) {
             return $context === 'panel';
         }

@@ -35,49 +35,37 @@ class TwigContextSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // Get current context (panel, landing, email)
         $context = $this->contextManager->getCurrentContext();
-
-        // Get theme for this context
         $theme = $this->contextManager->getThemeForContext($context);
 
-        // Clear existing paths to avoid conflicts
-        foreach ($loader->getPaths() as $path) {
-            if (str_contains($path, '/themes/')) {
-                // Don't remove, just prepend new paths (they have priority)
-            }
-        }
-
-        // Context-specific paths
         if ($context === 'landing') {
-            // LANDING CONTEXT: Only themes/{theme}/landing/
             $landingPath = "$this->templatesBaseDir/$theme/landing";
             if (is_dir($landingPath)) {
                 $loader->prependPath($landingPath);
             }
         }
         elseif ($context === 'email') {
-            // EMAIL CONTEXT: Only themes/{theme}/email/
             $emailPath = "$this->templatesBaseDir/$theme/email";
             if (is_dir($emailPath)) {
                 $loader->prependPath($emailPath);
             }
         }
         elseif ($context === 'panel') {
-            // PANEL CONTEXT: Dual paths for backward compatibility
-            // 1. New location (preferred): themes/{theme}/panel/
             $panelPath = "$this->templatesBaseDir/$theme/panel";
             if (is_dir($panelPath)) {
                 $loader->prependPath($panelPath);
             }
 
-            // 2. Legacy location (fallback): themes/{theme}/
+            // DEPRECATED: Legacy location (fallback): themes/{theme}/ (introduced in v0.6.3)
+            // This fallback will be REMOVED in a future version (v0.8.0+)
+            // Legacy themes store templates directly in theme root instead of panel/ subdirectory
+            // ACTION REQUIRED: Migrate your custom templates to themes/{theme}/panel/ structure
             $loader->prependPath("$this->templatesBaseDir/$theme");
 
-            // EasyAdmin bundle overrides
             if (is_dir("$panelPath/bundles/EasyAdminBundle")) {
                 $loader->prependPath("$panelPath/bundles/EasyAdminBundle", 'EasyAdmin');
             }
+            // DEPRECATED: Legacy EasyAdmin location (will be removed in v0.8.0+)
             elseif (is_dir("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle")) {
                 $loader->prependPath("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle", 'EasyAdmin');
             }
