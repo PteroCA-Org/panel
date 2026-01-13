@@ -367,10 +367,14 @@ class ProductCrudController extends AbstractPanelController
     {
         try {
             if ($entityInstance instanceof Product) {
-                $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
-                $entityInstance->setUpdatedAtValue();
+                $eggsConfig = $this->getEggsConfigurationFromRequest();
 
-                $this->validateProductEggs($entityInstance);
+                if (!empty($eggsConfig)) {
+                    $entityInstance->setEggsConfiguration(json_encode($eggsConfig));
+                    $this->validateProductEggs($entityInstance);
+                }
+
+                $entityInstance->setUpdatedAtValue();
             }
 
             parent::updateEntity($entityManager, $entityInstance);

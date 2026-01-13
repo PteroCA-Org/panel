@@ -47,8 +47,36 @@ class DefaultController extends AbstractController
             ? $this->storeService->getPublicCategories()
             : [];
 
+        $storeData = [];
+        foreach ($categories as $category) {
+            $products = method_exists($this->storeService, 'getCategoryProducts')
+                ? $this->storeService->getCategoryProducts($category)
+                : [];
+            
+            if (empty($products)) {
+                continue;
+            }
+                
+            $storeData[] = [
+                'category' => $category,
+                'products' => $products
+            ];
+        }
+
+        $uncategorizedProducts = method_exists($this->storeService, 'getCategoryProducts')
+            ? $this->storeService->getCategoryProducts(null)
+            : [];
+
+        if (!empty($uncategorizedProducts)) {
+            $storeData[] = [
+                'category' => (object) ['name' => 'pteroca.store.products_with_no_category'], // Using translation key as name
+                'products' => $uncategorizedProducts,
+                'is_translation_key' => true
+            ];
+        }
+
         return $this->render('store.html.twig', [
-            'categories' => $categories,
+            'storeData' => $storeData,
         ]);
     }
 }

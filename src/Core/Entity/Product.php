@@ -335,6 +335,24 @@ class Product extends AbstractEntity implements ProductInterface
         );
     }
 
+    public function getLowestPrice(): ?float
+    {
+        $prices = $this->getPrices();
+
+        if ($prices->isEmpty()) {
+            return null;
+        }
+
+        $lowestPrice = null;
+        foreach ($prices as $price) {
+            if ($lowestPrice === null || $price->getPrice() < $lowestPrice) {
+                $lowestPrice = $price->getPrice();
+            }
+        }
+
+        return $lowestPrice;
+    }
+
     public function __toString(): string
     {
         return $this->name;

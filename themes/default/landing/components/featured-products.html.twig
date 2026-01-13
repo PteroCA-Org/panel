@@ -1,21 +1,40 @@
-<div class="row">
+{# Featured Products #}
+<div class="row g-4 justify-content-center">
     {% for product in products %}
-        <div class="col-md-4">
-            <div class="product-card">
-                {% if product.image %}
-                    <img src="{{ product.image }}" class="img-fluid mb-3" alt="{{ product.name }}">
-                {% else %}
-                    <i class="fas fa-server fa-3x mb-3 text-primary"></i>
-                {% endif %}
-                <h4>{{ product.name }}</h4>
-                <p class="text-muted">{{ product.description|slice(0, 100) }}...</p>
-                <div class="pricing mb-3">
-                    <span class="h5 text-primary">{{ product.price }} {{ get_currency() }}</span>
+        <div class="col-lg-4 col-md-6">
+            <div class="custom-card {{ product.imagePath is defined and product.imagePath ? 'custom-card-bg' : '' }} text-center position-relative overflow-hidden d-flex flex-column h-100" 
+                 style="{{ product.imagePath is defined and product.imagePath ? 'background-image: url(' ~ asset(product.imagePath) ~ ');' : '' }}">
+                <div class="position-absolute top-0 start-50 translate-middle-x mt-n1 w-50 h-1 bg-primary rounded-bottom" style="opacity: 0.5;"></div>
+                
+                <h4 class="text-white mb-1 mt-2">{{ product.name }}</h4>
+                <p class="text-muted small mb-3">{{ product.category ? product.category.name : 'pteroca.landing.products.default_game_server'|trans }}</p>
+                
+                <div class="product-price">
+                    {% set lowestPrice = product.lowestPrice %}
+                    {% if lowestPrice %}
+                        <small>{{ get_currency() }}</small>{{ lowestPrice|number_format(2, ',', ' ') }}<small>{{ 'pteroca.landing.products.per_month'|trans }}</small>
+                    {% else %}
+                        <small>{{ 'pteroca.landing.products.contact_us'|trans }}</small>
+                    {% endif %}
                 </div>
-                <a href="{{ path('app_register') }}" class="btn btn-primary">
-                    {{ 'pteroca.landing.products.order'|trans }}
+                
+                <div class="flex-grow-1">
+                    <ul class="list-unstyled text-muted mb-4 text-start mx-auto d-inline-block">
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>{{ 'pteroca.landing.features.instant_setup'|trans }}</li>
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>{{ 'pteroca.landing.features.ddos_protection'|trans }}</li>
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>{{ 'pteroca.landing.features.uptime'|trans }}</li>
+                        {# If product has features or description, we could parse it here #}
+                    </ul>
+                </div>
+                
+                <a href="{{ path('panel', { routeName: 'panel_store_product', id: product.id }) }}" class="btn btn-primary w-100 mt-auto">
+                    {{ 'pteroca.landing.products.configure_order'|trans }}
                 </a>
             </div>
+        </div>
+    {% else %}
+        <div class="col-12 text-center text-muted py-5">
+            <p>{{ 'pteroca.landing.products.empty'|trans }}</p>
         </div>
     {% endfor %}
 </div>

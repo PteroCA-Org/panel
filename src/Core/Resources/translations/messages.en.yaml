@@ -212,23 +212,47 @@ pteroca:
     processing: 'Processing...'
 
   landing:
+    nav:
+      get_started: 'Get Started'
+      login: 'Login'
+      dashboard: 'Dashboard'
     hero:
-      title: 'Game Server Hosting Made Easy'
-      subtitle: 'Start your gaming server in minutes with our powerful panel'
+      badge: 'High Performance Hosting'
+      title_pre: 'Game Server Hosting'
+      title_highlight: 'Made Easy'
+      subtitle: 'Start your gaming server in minutes with our powerful, user-friendly panel. Experience low latency, high availability, and premium support.'
       browse_servers: 'Browse Servers'
       get_started: 'Get Started'
     categories:
       title: 'Featured Categories'
+      default_description: 'Premium hosting for %name%'
+      empty: 'No categories available at the moment.'
     products:
       title: 'Featured Products'
+      default_game_server: 'Game Server'
+      per_month: '/mo'
+      configure_order: 'Configure & Order'
       order: 'Order Now'
-    store:
-      title: 'Our Products'
-      subtitle: 'Browse our full catalog of game server hosting products'
+      empty: 'No featured products found. Check back soon!'
+      contact_us: 'Contact us'
+    features:
+      instant_setup: 'Instant Setup'
+      ddos_protection: 'DDoS Protection'
+      uptime: '99.9% Uptime'
     cta:
-      title: 'Ready to start?'
-      subtitle: 'Create your account and launch your first server today'
-      button: 'Create Account'
+      badge: 'Get Started Today'
+      title: 'Ready to Level Up?'
+      subtitle: 'Join thousands of gamers and communities who trust us with their hosting needs. Deploy your server instantly and get back to the game.'
+      create_account: 'Create Free Account'
+      view_plans: 'View All Plans'
+      instant_deployment: 'Instant deployment'
+      refund_guarantee: 'Refund guarantee'
+    footer:
+      copyright: 'All rights reserved.'
+      powered_by: 'Powered by <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
+    store:
+      title: 'Store'
+      subtitle: 'Browse our high-performance game servers'
 
   store:
     title: 'Store'
@@ -1266,6 +1290,7 @@ pteroca:
       used_at: 'Used at'
     menu:
       menu: 'Menu'
+      login: 'Login'
       dashboard: 'Dashboard'
       servers: 'Servers'
       my_servers: 'My servers'

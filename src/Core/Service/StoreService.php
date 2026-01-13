@@ -271,4 +271,23 @@ readonly class StoreService
     {
         return $this->getCategories();
     }
+
+    public function getPublicCategoriesWithProducts(): array
+    {
+        $categories = $this->getCategories();
+        $result = [];
+
+        foreach ($categories as $category) {
+            $products = $this->getCategoryProducts($category);
+
+            if (!empty($products)) {
+                $result[] = [
+                    'category' => $category,
+                    'products' => $products,
+                ];
+            }
+        }
+
+        return $result;
+    }
 }

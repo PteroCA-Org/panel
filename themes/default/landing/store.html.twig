@@ -3,32 +3,47 @@
 {% block title %}{{ 'pteroca.landing.store.title'|trans }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <section class="section">
+    <section class="section py-5" style="margin-top: 100px;">
         <div class="container">
             <h1 class="text-center mb-5">{{ 'pteroca.landing.store.title'|trans }}</h1>
             <p class="text-center lead mb-5">{{ 'pteroca.landing.store.subtitle'|trans }}</p>
 
-            {% for category in categories %}
+            {% for item in storeData %}
                 <div class="mb-5">
-                    <h2 class="mb-4">{{ category.name }}</h2>
+                    <h2 class="mb-4">
+                        {% if item.is_translation_key is defined and item.is_translation_key %}
+                            {{ item.category.name|trans }}
+                        {% else %}
+                            {{ item.category.name }}
+                        {% endif %}
+                    </h2>
                     <div class="row">
-                        {% for product in category.products %}
-                            {% if product.active %}
-                                <div class="col-md-4 mb-4">
-                                    <div class="product-card">
-                                        <h4>{{ product.name }}</h4>
+                        {% for product in item.products %}
+                            <div class="col-md-4 mb-4">
+                                <div class="product-card">
+                                    <h4>{{ product.name }}</h4>
+                                    {% if product.description %}
                                         <p class="text-muted">{{ product.description|slice(0, 100) }}...</p>
-                                        <div class="pricing mb-3">
-                                            <span class="h5 text-primary">{{ product.price }} {{ get_currency() }}</span>
-                                        </div>
-                                        <a href="{{ path('app_register') }}" class="btn btn-primary">
-                                            {{ 'pteroca.landing.products.order'|trans }}
-                                        </a>
+                                    {% endif %}
+                                    <div class="pricing mb-3">
+                                        {% set lowestPrice = product.lowestPrice %}
+                                        {% if lowestPrice %}
+                                            <span class="h5 text-primary">{{ lowestPrice|number_format(2, ',', ' ') }} {{ get_currency() }}</span>
+                                        {% else %}
+                                            <span class="h5 text-muted">{{ 'pteroca.landing.products.contact_us'|trans }}</span>
+                                        {% endif %}
                                     </div>
+                                    <a href="{{ path('panel', { routeName: 'panel_store_product', id: product.id }) }}" class="btn btn-primary">
+                                        {{ 'pteroca.landing.products.order'|trans }}
+                                    </a>
                                 </div>
-                            {% endif %}
+                            </div>
                         {% endfor %}
                     </div>
+                </div>
+            {% else %}
+                <div class="text-center py-5">
+                    <p class="text-muted">{{ 'pteroca.landing.products.empty'|trans }}</p>
                 </div>
             {% endfor %}
         </div>

@@ -1,59 +1,46 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ app.request.locale }}" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ get_title() }}{% endblock %}</title>
     <link rel="icon" href="{{ get_favicon() }}">
 
+    {# Google Fonts: Inter #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     {% block stylesheets %}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <style>
-            .hero-section {
-                padding: 100px 0;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                text-align: center;
-            }
-            .hero-section h1 { font-size: 3.5rem; font-weight: bold; margin-bottom: 1.5rem; }
-            .hero-subtitle { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
-            .hero-actions .btn { margin: 0.5rem; padding: 0.75rem 2rem; font-size: 1.1rem; }
-            .section { padding: 80px 0; }
-            .category-card, .product-card {
-                transition: transform 0.3s;
-                border: 1px solid #e0e0e0;
-                border-radius: 8px;
-                padding: 1.5rem;
-                margin-bottom: 2rem;
-                text-align: center;
-            }
-            .category-card:hover, .product-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('assets/theme/default/css/landing.css') }}">
     {% endblock %}
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     {% block navigation %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ path('homepage') }}">
-                    <img src="{{ get_logo() }}" alt="{{ get_title() }}" height="40">
+                    <img src="{{ get_logo() }}" alt="{{ get_title() }}" height="40" class="d-inline-block align-text-top me-2">
                 </a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav ms-auto">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         {% if app.user %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('panel') }}">Dashboard</a>
+                                <a class="btn btn-primary btn-sm ms-3" href="{{ path('panel') }}">
+                                    <i class="fas fa-tachometer-alt me-2"></i>{{ 'pteroca.landing.nav.dashboard'|trans }}
+                                </a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                                <a class="nav-link" href="{{ path('app_login') }}">{{ 'pteroca.landing.nav.login'|trans }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary" href="{{ path('app_register') }}">Register</a>
+                                <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -62,11 +49,19 @@
         </nav>
     {% endblock %}
 
-    {% block body %}{% endblock %}
+    <main class="flex-grow-1">
+        {% block body %}{% endblock %}
+    </main>
 
     {% block footer %}
-        <footer class="bg-dark text-white text-center py-4">
-            <p>&copy; {{ 'now'|date('Y') }} {{ get_title() }}</p>
+        <footer>
+            <div class="container text-center">
+                <div class="mb-4">
+                    <img src="{{ get_logo() }}" alt="{{ get_title() }}" height="30" style="opacity: 0.7;">
+                </div>
+                <p class="text-muted mb-2">&copy; {{ 'now'|date('Y') }} {{ get_title() }}. {{ 'pteroca.landing.footer.copyright'|trans }}</p>
+                <p class="text-muted small">{{ 'pteroca.landing.footer.powered_by'|trans({'%version%': get_app_version()})|raw }}</p>
+            </div>
         </footer>
     {% endblock %}
 
