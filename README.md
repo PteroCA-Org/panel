@@ -232,6 +232,14 @@ Extend PteroCA with custom functionality through the comprehensive v0.6 plugin s
 - [Buy Me a Coffee](https://www.buymeacoffee.com/pteroca)
 - [Ko-fi](https://ko-fi.com/pteroca)
 
+> 🎁 **Sponsor Perks:** Supporters get a special Discord role + access to a priority support channel.
+
+### Sponsors 💜
+
+<a href="https://github.com/lostchunks">
+  <img src="https://images.weserv.nl/?url=github.com/lostchunks.png&h=60&w=60&fit=cover&mask=circle" alt="lostchunks" />
+</a>
+
 ---
 
 ## 🗺️ Roadmap
