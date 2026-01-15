@@ -8,6 +8,7 @@
     "pterocaVersion": "0.6.3",
     "phpVersion": ">=8.2",
     "contexts": ["panel", "landing", "email"],
+    "translations": [],
     "options": {
       "supportDarkMode": true,
       "supportCustomColors": true
