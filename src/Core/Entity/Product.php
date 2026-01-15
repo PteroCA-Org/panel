@@ -335,7 +335,7 @@ class Product extends AbstractEntity implements ProductInterface
         );
     }
 
-    public function getLowestPrice(): ?float
+    public function getLowestPriceObject(): ?ProductPrice
     {
         $prices = $this->getPrices();
 
@@ -343,14 +343,14 @@ class Product extends AbstractEntity implements ProductInterface
             return null;
         }
 
-        $lowestPrice = null;
+        $lowestPriceObj = null;
         foreach ($prices as $price) {
-            if ($lowestPrice === null || $price->getPrice() < $lowestPrice) {
-                $lowestPrice = $price->getPrice();
+            if ($lowestPriceObj === null || $price->getPrice() < $lowestPriceObj->getPrice()) {
+                $lowestPriceObj = $price;
             }
         }
 
-        return $lowestPrice;
+        return $lowestPriceObj;
     }
 
     public function __toString(): string

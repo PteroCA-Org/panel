@@ -221,7 +221,7 @@ pteroca:
       title_pre: 'Game Server Hosting'
       title_highlight: 'Made Easy'
       subtitle: 'Start your gaming server in minutes with our powerful, user-friendly panel. Experience low latency, high availability, and premium support.'
-      browse_servers: 'Browse Servers'
+      browse_servers: 'View Plans'
       get_started: 'Get Started'
     categories:
       title: 'Featured Categories'
@@ -235,10 +235,7 @@ pteroca:
       order: 'Order Now'
       empty: 'No featured products found. Check back soon!'
       contact_us: 'Contact us'
-    features:
-      instant_setup: 'Instant Setup'
-      ddos_protection: 'DDoS Protection'
-      uptime: '99.9% Uptime'
+      view_details: 'Click to view the offer'
     cta:
       badge: 'Get Started Today'
       title: 'Ready to Level Up?'

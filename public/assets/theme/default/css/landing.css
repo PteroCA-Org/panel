@@ -7,7 +7,7 @@
     --primary-color: #6366f1;
     --primary-hover: #4f46e5;
     --secondary-color: #8b5cf6;
-    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --accent-gradient: linear-gradient(135deg, #463edc 0%, #42228b 100%);
     --navbar-bg: rgba(15, 23, 42, 0.8);
     --border-color: #334155;
 }

@@ -37,9 +37,15 @@
                                         <p class="text-muted small mb-3">{{ product.description|slice(0, 100) }}...</p>
                                     {% endif %}
                                     <div class="pricing mb-3 mt-auto">
-                                        {% set lowestPrice = product.lowestPrice %}
-                                        {% if lowestPrice %}
-                                            <span class="h5 text-primary">{{ lowestPrice|number_format(2, ',', ' ') }} {{ get_currency() }}</span>
+                                        {% set lowestPriceObj = product.lowestPriceObject %}
+                                        {% if lowestPriceObj %}
+                                            {% if lowestPriceObj.type.value == 'static' %}
+                                                <span class="h5 text-primary">{{ lowestPriceObj.price|number_format(2, ',', ' ') }} {{ get_currency() }}/{{ ('pteroca.product.' ~ lowestPriceObj.unit.value)|trans|lower }}</span>
+                                            {% elseif lowestPriceObj.type.value == 'on_demand' %}
+                                                <span class="h5 text-primary">{{ lowestPriceObj.price|number_format(2, ',', ' ') }} {{ get_currency() }}/{{ 'pteroca.product.minute_short'|trans }}</span>
+                                            {% elseif lowestPriceObj.type.value == 'slot' %}
+                                                <span class="h5 text-primary">{{ lowestPriceObj.price|number_format(2, ',', ' ') }} {{ get_currency() }}/{{ 'pteroca.product.slot'|trans }}</span>
+                                            {% endif %}
                                         {% else %}
                                             <span class="h5 text-muted">{{ 'pteroca.landing.products.contact_us'|trans }}</span>
                                         {% endif %}

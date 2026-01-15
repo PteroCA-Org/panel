@@ -107,6 +107,16 @@ class ProductCrudController extends AbstractPanelController
         $internalCurrency = $this->settingService
             ->getSetting(SettingEnum::INTERNAL_CURRENCY_NAME->value);
 
+        $landingPageEnabled = (bool) $this->settingService->getSetting(SettingEnum::LANDING_PAGE_ENABLED->value);
+
+        $featuredField = BooleanField::new('featured', $this->translator->trans('pteroca.crud.product.featured'))
+            ->setHelp($this->translator->trans('pteroca.crud.product.featured_hint'))
+            ->setColumns(6);
+
+        if (!$landingPageEnabled) {
+            $featuredField->hideOnIndex()->hideOnForm();
+        }
+
         $fields = [
             FormField::addTab($this->translator->trans('pteroca.crud.product.details'))
                 ->setIcon('fa fa-info-circle'),
@@ -127,9 +137,7 @@ class ProductCrudController extends AbstractPanelController
             NumberField::new('priority', $this->translator->trans('pteroca.crud.product.priority'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.priority_hint'))
                 ->setColumns(6),
-            BooleanField::new('featured', $this->translator->trans('pteroca.crud.product.featured'))
-                ->setHelp($this->translator->trans('pteroca.crud.product.featured_hint'))
-                ->setColumns(6),
+            $featuredField,
             FormField::addRow(),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.product.image'))
                 ->setBasePath($this->getParameter('products_base_path'))
