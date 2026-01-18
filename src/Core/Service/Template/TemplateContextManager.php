@@ -38,6 +38,19 @@ class TemplateContextManager
             return self::CONTEXT_LANDING;
         }
 
+        // If no route matched (404), determine context by URL path
+        if (!$route) {
+            $pathInfo = $request->getPathInfo();
+
+            // If path starts with /panel, use panel context
+            if (str_starts_with($pathInfo, '/panel')) {
+                return self::CONTEXT_PANEL;
+            }
+
+            // Otherwise, use landing context (public area is default)
+            return self::CONTEXT_LANDING;
+        }
+
         // Default: panel context
         return self::CONTEXT_PANEL;
     }
