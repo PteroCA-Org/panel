@@ -13,6 +13,8 @@ namespace App\Core\Enum;
  * - ADMIN_OVERVIEW: Admin overview page (/admin/overview)
  * - SERVER_DETAIL: Server detail page (future)
  * - USER_PROFILE: User profile page (future)
+ * - LANDING_HOMEPAGE: Landing page homepage (/)
+ * - LANDING_STORE: Landing page store (/store)
  */
 enum WidgetContext: string
 {
@@ -20,4 +22,6 @@ enum WidgetContext: string
     case ADMIN_OVERVIEW = 'admin_overview';
     case SERVER_DETAIL = 'server_detail';
     case USER_PROFILE = 'user_profile';
+    case LANDING_HOMEPAGE = 'landing_homepage';
+    case LANDING_STORE = 'landing_store';
 }

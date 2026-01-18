@@ -29,19 +29,38 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto align-items-center">
-                        {% if app.user %}
-                            <li class="nav-item">
-                                <a class="btn btn-primary btn-sm ms-3" href="{{ path('panel') }}">
-                                    <i class="fas fa-tachometer-alt me-2"></i>{{ 'pteroca.landing.nav.dashboard'|trans }}
-                                </a>
-                            </li>
+                        {# Left positioned buttons #}
+                        {% if navigationButtons is defined %}
+                            {% for button in navigationButtons %}
+                                {% if button.position == 'left' %}
+                                    {{ include('components/nav-button.html.twig', {button: button}) }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {# Right positioned buttons #}
+                        {% if navigationButtons is defined %}
+                            {% for button in navigationButtons %}
+                                {% if button.position == 'right' %}
+                                    {{ include('components/nav-button.html.twig', {button: button}) }}
+                                {% endif %}
+                            {% endfor %}
                         {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login') }}">{{ 'pteroca.landing.nav.login'|trans }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
-                            </li>
+                            {# Fallback to hardcoded buttons if navigationButtons not available #}
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="btn btn-primary btn-sm ms-3" href="{{ path('panel') }}">
+                                        <i class="fas fa-tachometer-alt me-2"></i>{{ 'pteroca.landing.nav.dashboard'|trans }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_login') }}">{{ 'pteroca.landing.nav.login'|trans }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
+                                </li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 </div>

@@ -24,4 +24,6 @@ enum ViewNameEnum: string
     case ADMIN_OVERVIEW = 'admin_overview';
     case PLUGIN_INDEX = 'plugin_index';
     case PLUGIN_DETAILS = 'plugin_details';
+    case LANDING_HOMEPAGE = 'landing_homepage';
+    case LANDING_STORE = 'landing_store';
 }
