@@ -38,6 +38,11 @@ class TwigContextSubscriber implements EventSubscriberInterface
         $context = $this->contextManager->getCurrentContext();
         $theme = $this->contextManager->getThemeForContext($context);
 
+        // Fallback to default theme if configured theme doesn't exist
+        if (!is_dir("$this->templatesBaseDir/$theme")) {
+            $theme = 'default';
+        }
+
         if ($context === 'landing') {
             $landingPath = "$this->templatesBaseDir/$theme/landing";
             if (is_dir($landingPath)) {
@@ -60,7 +65,9 @@ class TwigContextSubscriber implements EventSubscriberInterface
             // This fallback will be REMOVED in a future version (v0.8.0+)
             // Legacy themes store templates directly in theme root instead of panel/ subdirectory
             // ACTION REQUIRED: Migrate your custom templates to themes/{theme}/panel/ structure
-            $loader->prependPath("$this->templatesBaseDir/$theme");
+            if (is_dir("$this->templatesBaseDir/$theme")) {
+                $loader->prependPath("$this->templatesBaseDir/$theme");
+            }
 
             if (is_dir("$panelPath/bundles/EasyAdminBundle")) {
                 $loader->prependPath("$panelPath/bundles/EasyAdminBundle", 'EasyAdmin');

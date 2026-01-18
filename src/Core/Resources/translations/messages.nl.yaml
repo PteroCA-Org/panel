@@ -72,6 +72,46 @@ pteroca:
     already_have_account: 'Heeft u al een account? Meld u aan!'
     email_placeholder: 'uw@email.com'
     password_placeholder: 'Voer uw wachtwoord in'
+  landing:
+    nav:
+      get_started: 'Aan de slag'
+      login: 'Inloggen'
+      dashboard: 'Dashboard'
+    hero:
+      badge: 'Hoge Prestatie Hosting'
+      title_pre: 'Game Server Hosting'
+      title_highlight: 'Gemakkelijk Gemaakt'
+      subtitle: 'Start je game server in minuten met ons krachtige, gebruiksvriendelijke panel. Ervaar lage latentie, hoge beschikbaarheid en premium ondersteuning.'
+      browse_servers: 'Plannen Bekijken'
+      get_started: 'Aan de slag'
+    categories:
+      title: 'Uitgelichte Categorieën'
+      default_description: 'Premium hosting voor %name%'
+      empty: 'Geen categorieën beschikbaar op dit moment.'
+    products:
+      title: 'Uitgelichte Producten'
+      default_game_server: 'Game Server'
+      per_month: '/maand'
+      configure_order: 'Configureer & Bestel'
+      order: 'Nu Bestellen'
+      empty: 'Geen uitgelichte producten gevonden. Kom snel terug!'
+      contact_us: 'Neem contact op'
+      view_details: 'Klik om het aanbod te bekijken'
+    cta:
+      badge: 'Vandaag Beginnen'
+      title: 'Klaar om te Levelen?'
+      subtitle: 'Sluit je aan bij duizenden gamers en gemeenschappen die ons vertrouwen voor hun hosting behoeften. Implementeer je server direct en keer terug naar het spel.'
+      create_account: 'Gratis Account Aanmaken'
+      view_plans: 'Bekijk Alle Plannen'
+      instant_deployment: 'Directe Implementatie'
+      refund_guarantee: 'Terugbetalingsgarantie'
+    footer:
+      copyright: 'Alle rechten voorbehouden.'
+      powered_by: 'Aangedreven door <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
+    store:
+      title: 'Winkel'
+      subtitle: 'Ontdek onze hoogwaardige game servers'
+      show_all_categories: 'Toon alle categorieën'
   recovery:
     title: 'Wachtwoord herstellen'
     request_title: 'Wachtwoord vergeten?'
@@ -682,6 +722,8 @@ pteroca:
       image: 'Afbeelding'
       priority: 'Prioriteit'
       priority_hint: 'Lagere nummers verschijnen eerst (bijvoorbeeld, 1 verschijnt voor 2). Gebruik dit om de weergavevolgorde te controleren.'
+      featured: 'Uitgelicht op landingspagina'
+      featured_hint: 'Toon deze categorie op de landingspagina als uitgelicht item'
       add: 'Voeg categorie toe'
       save: 'Categorie opslaan'
       category: 'Categorie'
@@ -700,6 +742,8 @@ pteroca:
       is_active: 'Actief'
       priority: 'Prioriteit'
       priority_hint: 'Lagere nummers verschijnen eerst (bijvoorbeeld, 1 verschijnt voor 2). Gebruik dit om de weergavevolgorde te controleren.'
+      featured: 'Uitgelicht op landingspagina'
+      featured_hint: 'Toon dit product op de landingspagina als uitgelicht item'
       category: 'Categorie'
       image: 'Afbeelding'
       image_help: 'De afbeelding zal in de winkel worden weergegeven.'
@@ -958,6 +1002,12 @@ pteroca:
       hint: 'Omschrijving'
       set_as_empty: 'Instellen als leeg'
       set_as_empty_help: 'Vink dit aan om de waarde als leeg (null) in te stellen.'
+      panel_theme:
+        help: 'Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina''s.'
+      landing_theme:
+        help: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
+      email_theme:
+        help: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'
       hints:
         site_logo: 'Aangepast logo voor dashboard en loginpagina''s. Upload PNG, JPG of SVG. Standaard indien leeg.'
         site_url: 'Basis-URL van paneel (bijv. https://panel.example.com). Gebruikt in e-mails, SSO en redirects.'
@@ -1010,6 +1060,10 @@ pteroca:
         renewal_notification_min_period_hours: 'Minimale uren tussen verlengings-e-mails per server. Voorkomt spam. Bijv. 24 = max eenmaal daags.'
         renewal_notification_on_demand_min_hours: 'Min uren voor on-demand serververlengingen om e-mail te activeren. Bijv. 24 = alleen melden bij 24u+.'
         telemetry_consent: 'Sta het verzenden van anonieme gebruiksgegevens toe om PteroCA te helpen verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
+        panel_theme: 'Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina''s.'
+        landing_theme: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
+        email_theme: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'
+        landing_page_enabled: 'Publieke landingspagina inschakelen. Indien uitgeschakeld, worden bezoekers doorgestuurd naar de inlogpagina.'
       template:
         name: 'Sjabloonnaam'
         description: 'Sjabloonbeschrijving'
@@ -1022,6 +1076,9 @@ pteroca:
         options: 'Opties'
         supportDarkMode: 'Donkere modus ondersteuning'
         supportCustomColors: 'Aangepaste kleuren configureren toestaan'
+        contexts: 'Ondersteunde contexten'
+        translations: 'Thema vertalingen'
+        translation_validation_errors: 'Vertalingsconfiguratiefouten'
       smtp_from: 'Afzender e-mailadres'
       test_smtp_connection: 'SMTP-verbinding testen'
       smtp_connection_success: 'SMTP-verbinding succesvol!'
@@ -1233,6 +1290,7 @@ pteroca:
       server: 'Server'
     menu:
       menu: 'Menu'
+      login: 'Inloggen'
       dashboard: 'Dashboard'
       servers: 'Servers'
       my_servers: 'Mijn servers'

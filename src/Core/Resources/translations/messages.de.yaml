@@ -76,6 +76,47 @@ pteroca:
     email_placeholder: 'ihre@email.com'
     password_placeholder: 'Passwort eingeben'
 
+  landing:
+    nav:
+      get_started: 'Erste Schritte'
+      login: 'Anmelden'
+      dashboard: 'Dashboard'
+    hero:
+      badge: 'Hochleistungs-Hosting'
+      title_pre: 'Game-Server-Hosting'
+      title_highlight: 'Einfach gemacht'
+      subtitle: 'Starten Sie Ihren Gaming-Server in Minuten mit unserem leistungsstarken, benutzerfreundlichen Panel. Erleben Sie geringe Latenz, hohe Verfügbarkeit und erstklassigen Support.'
+      browse_servers: 'Pläne ansehen'
+      get_started: 'Erste Schritte'
+    categories:
+      title: 'Ausgewählte Kategorien'
+      default_description: 'Premium-Hosting für %name%'
+      empty: 'Derzeit sind keine Kategorien verfügbar.'
+    products:
+      title: 'Ausgewählte Produkte'
+      default_game_server: 'Game-Server'
+      per_month: '/Monat'
+      configure_order: 'Konfigurieren & Bestellen'
+      order: 'Jetzt bestellen'
+      empty: 'Keine ausgewählten Produkte gefunden. Schauen Sie bald wieder vorbei!'
+      contact_us: 'Kontaktieren Sie uns'
+      view_details: 'Klicken Sie, um das Angebot anzusehen'
+    cta:
+      badge: 'Heute starten'
+      title: 'Bereit zum Aufleveln?'
+      subtitle: 'Treten Sie Tausenden von Gamern und Communities bei, die uns mit ihren Hosting-Anforderungen vertrauen. Stellen Sie Ihren Server sofort bereit und kehren Sie zum Spiel zurück.'
+      create_account: 'Kostenloses Konto erstellen'
+      view_plans: 'Alle Pläne ansehen'
+      instant_deployment: 'Sofortige Bereitstellung'
+      refund_guarantee: 'Rückerstattungsgarantie'
+    footer:
+      copyright: 'Alle Rechte vorbehalten.'
+      powered_by: 'Unterstützt von <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
+    store:
+      title: 'Shop'
+      subtitle: 'Entdecken Sie unsere leistungsstarken Game-Server'
+      show_all_categories: 'Alle Kategorien anzeigen'
+
   recovery:
     title: 'Passwort zurücksetzen'
     request_title: 'Passwort vergessen?'
@@ -695,6 +736,8 @@ pteroca:
       image: 'Bild'
       priority: 'Priorität'
       priority_hint: 'Niedrigere Zahlen erscheinen zuerst (z. B. 1 erscheint vor 2). Verwenden Sie dies, um die Anzeigereihenfolge zu steuern.'
+      featured: 'Auf der Landingpage hervorheben'
+      featured_hint: 'Diese Kategorie auf der Landingpage als hervorgehobenes Element anzeigen'
       add: 'Kategorie hinzufügen'
       save: 'Kategorie speichern'
       category: 'Kategorie'
@@ -713,6 +756,8 @@ pteroca:
       is_active: 'Aktiv'
       priority: 'Priorität'
       priority_hint: 'Niedrigere Zahlen erscheinen zuerst (z. B. 1 erscheint vor 2). Verwenden Sie dies, um die Anzeigereihenfolge zu steuern.'
+      featured: 'Auf der Landingpage hervorheben'
+      featured_hint: 'Dieses Produkt auf der Landingpage als hervorgehobenes Element anzeigen'
       category: 'Kategorie'
       image: 'Bild'
       image_help: 'Das Bild wird im Shop angezeigt.'
@@ -971,6 +1016,12 @@ pteroca:
       hint: 'Beschreibung'
       set_as_empty: 'Als leer setzen'
       set_as_empty_help: 'Aktivieren Sie dies, um den Wert als leer (null) zu setzen.'
+      panel_theme:
+        help: 'Theme für das Benutzerpanel (Dashboard, Server, Shop). Steuert das Aussehen aller Admin- und benutzerseitigen Seiten.'
+      landing_theme:
+        help: 'Theme für die Landingpage (Homepage für Besucher). Wird nicht angemeldeten Benutzern auf der öffentlichen Website angezeigt.'
+      email_theme:
+        help: 'Theme für E-Mail-Vorlagen. Steuert die Gestaltung von Benachrichtigungs-, Registrierungs- und Kaufe-Mails.'
       hints:
         site_logo: 'Eigenes Logo für Dashboard und Anmeldeseiten. PNG, JPG oder SVG hochladen. Standard wenn leer.'
         site_url: 'Basis-URL des Panels (z.B. https://panel.example.com). Verwendet in E-Mails, SSO und Weiterleitungen.'
@@ -1022,6 +1073,10 @@ pteroca:
         renewal_notification_min_period_hours: 'Mindest-Stunden zwischen Verlängerungs-E-Mails pro Server. Verhindert Spam. Z.B. 24 = max einmal täglich.'
         renewal_notification_on_demand_min_hours: 'Min. Stunden für On-Demand-Server-Verlängerungen um E-Mail auszulösen. Z.B. 24 = nur bei 24+ Stunden benachrichtigen.'
         telemetry_consent: 'Erlaube das Senden anonymer Nutzungsdaten, um PteroCA zu verbessern. Es werden nur Installationsereignisse und Fehler verfolgt. Keine persönlichen Daten, API-Schlüssel oder URLs werden gesammelt.'
+        panel_theme: 'Theme für das Benutzerpanel (Dashboard, Server, Shop). Steuert das Aussehen aller Admin- und benutzerseitigen Seiten.'
+        landing_theme: 'Theme für die Landingpage (Homepage für Besucher). Wird nicht angemeldeten Benutzern auf der öffentlichen Website angezeigt.'
+        email_theme: 'Theme für E-Mail-Vorlagen. Steuert die Gestaltung von Benachrichtigungs-, Registrierungs- und Kaufe-Mails.'
+        landing_page_enabled: 'Öffentliche Landingpage aktivieren. Wenn deaktiviert, werden Besucher zur Anmeldeseite weitergeleitet.'
         current_theme: 'Aktuelles Thema des Panels'
       template:
         name: 'Vorlagenname'
@@ -1035,6 +1090,9 @@ pteroca:
         options: 'Optionen'
         supportDarkMode: 'Dunklen Modus unterstützen'
         supportCustomColors: 'Konfiguration benutzerdefinierter Farben erlauben'
+        contexts: 'Unterstützte Kontexte'
+        translations: 'Theme-Übersetzungen'
+        translation_validation_errors: 'Übersetzungskonfigurationsfehler'
       smtp_from: 'Absender-E-Mail-Adresse'
       test_smtp_connection: 'SMTP-Verbindung testen'
       smtp_connection_success: 'SMTP-Verbindung erfolgreich!'
@@ -1246,6 +1304,7 @@ pteroca:
       used_at: 'Verwendet am'
     menu:
       menu: 'Menü'
+      login: 'Anmelden'
       dashboard: 'Dashboard'
       servers: 'Server'
       my_servers: 'Meine Server'

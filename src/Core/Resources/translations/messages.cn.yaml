@@ -76,6 +76,47 @@ pteroca:
     email_placeholder: '您的邮箱@email.com'
     password_placeholder: '输入密码'
 
+  landing:
+    nav:
+      get_started: '开始使用'
+      login: '登录'
+      dashboard: '仪表盘'
+    hero:
+      badge: '高性能托管'
+      title_pre: '游戏服务器托管'
+      title_highlight: '变得简单'
+      subtitle: '使用我们强大、用户友好的面板在几分钟内启动您的游戏服务器。体验低延迟、高可用性和优质支持。'
+      browse_servers: '查看计划'
+      get_started: '开始使用'
+    categories:
+      title: '特色类别'
+      default_description: '为 %name% 提供优质托管'
+      empty: '目前没有可用类别。'
+    products:
+      title: '特色产品'
+      default_game_server: '游戏服务器'
+      per_month: '/月'
+      configure_order: '配置并订购'
+      order: '立即订购'
+      empty: '未找到特色产品。稍后回来查看！'
+      contact_us: '联系我们'
+      view_details: '点击查看优惠'
+    cta:
+      badge: '今天开始'
+      title: '准备升级了吗？'
+      subtitle: '加入数千名游戏玩家和社区，他们信任我们处理他们的托管需求。即刻部署您的服务器并回到游戏中。'
+      create_account: '创建免费账户'
+      view_plans: '查看所有计划'
+      instant_deployment: '即时部署'
+      refund_guarantee: '退款保证'
+    footer:
+      copyright: '版权所有。'
+      powered_by: '由 <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version% 提供支持'
+    store:
+      title: '商店'
+      subtitle: '浏览我们高性能游戏服务器'
+      show_all_categories: '显示所有类别'
+
   recovery:
     title: '找回密码'
     request_title: '忘记密码？'
@@ -695,6 +736,8 @@ pteroca:
       image: '图片'
       priority: '优先级'
       priority_hint: '较低的数字先出现（例如，1 在 2 之前出现）。使用此选项控制显示顺序。'
+      featured: '在登录页面上展示'
+      featured_hint: '将此类别在登录页面上作为特色项目显示'
       add: '添加类别'
       save: '保存类别'
       category: '类别'
@@ -713,6 +756,8 @@ pteroca:
       is_active: '活跃'
       priority: '优先级'
       priority_hint: '较低的数字先出现（例如，1 在 2 之前出现）。使用此选项控制显示顺序。'
+      featured: '在登录页面上展示'
+      featured_hint: '将此产品在登录页面上作为特色项目显示'
       category: '类别'
       image: '图片'
       image_help: '图片将显示在商店中。'
@@ -971,6 +1016,12 @@ pteroca:
       hint: '说明'
       set_as_empty: '设为空'
       set_as_empty_help: '选中此项以将值设为空（null）。'
+      panel_theme:
+        help: '用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。'
+      landing_theme:
+        help: '登录页面的主题（访客的主页）。显示给未登录用户在公共站点上。'
+      email_theme:
+        help: '电子邮件模板的主题。控制通知、注册和购买电子邮件的样式。'
       hints:
         site_logo: '仪表板和登录页的自定义标志。上传PNG、JPG或SVG。为空时使用默认值。'
         site_url: '面板的基础URL（如https://panel.example.com）。用于邮件、SSO和重定向。'
@@ -1023,6 +1074,10 @@ pteroca:
         renewal_notification_min_period_hours: '每个服务器续订邮件之间的最小小时数。防止垃圾邮件。如24 = 每天最多一次。'
         renewal_notification_on_demand_min_hours: '按需服务器续订触发邮件的最小小时数。如24 = 仅在24小时以上时通知。'
         telemetry_consent: '允许发送匿名使用数据以帮助改进 PteroCA。仅跟踪安装事件和错误。不收集个人数据、API 密钥或 URL。'
+        panel_theme: '用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。'
+        landing_theme: '登录页面的主题（访客的主页）。显示给未登录用户在公共站点上。'
+        email_theme: '电子邮件模板的主题。控制通知、注册和购买电子邮件的样式。'
+        landing_page_enabled: '启用公共登录页面。当禁用时，访客将被重定向到登录页面。'
       template:
         name: '模板名称'
         description: '模板描述'
@@ -1035,6 +1090,9 @@ pteroca:
         options: '选项'
         supportDarkMode: '支持深色模式'
         supportCustomColors: '允许配置自定义颜色'
+        contexts: '支持的上下文'
+        translations: '主题翻译'
+        translation_validation_errors: '翻译配置错误'
       smtp_from: '发件人电子邮件地址'
       test_smtp_connection: '测试 SMTP 连接'
       smtp_connection_success: 'SMTP 连接成功！'
@@ -1260,6 +1318,7 @@ pteroca:
       used_at: '使用时间'
     menu:
       menu: '菜单'
+      login: '登录'
       dashboard: '仪表盘'
       servers: '服务器'
       my_servers: '我的服务器'

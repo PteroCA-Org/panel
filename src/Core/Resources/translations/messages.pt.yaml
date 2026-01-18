@@ -76,6 +76,47 @@ pteroca:
     email_placeholder: 'seu@email.com'
     password_placeholder: 'Digite sua senha'
 
+  landing:
+    nav:
+      get_started: 'Começar'
+      login: 'Entrar'
+      dashboard: 'Painel'
+    hero:
+      badge: 'Hospedagem de Alto Desempenho'
+      title_pre: 'Hospedagem de Servidores de Jogos'
+      title_highlight: 'Feito Fácil'
+      subtitle: 'Inicie seu servidor de jogos em minutos com nosso painel poderoso e fácil de usar. Experimente baixa latência, alta disponibilidade e suporte premium.'
+      browse_servers: 'Ver Planos'
+      get_started: 'Começar'
+    categories:
+      title: 'Categorias em Destaque'
+      default_description: 'Hospedagem premium para %name%'
+      empty: 'Nenhuma categoria disponível no momento.'
+    products:
+      title: 'Produtos em Destaque'
+      default_game_server: 'Servidor de Jogos'
+      per_month: '/mês'
+      configure_order: 'Configurar e Pedir'
+      order: 'Pedir Agora'
+      empty: 'Nenhum produto em destaque encontrado. Volte em breve!'
+      contact_us: 'Entre em contato conosco'
+      view_details: 'Clique para ver a oferta'
+    cta:
+      badge: 'Comece Hoje'
+      title: 'Pronto para Subir de Nível?'
+      subtitle: 'Junte-se a milhares de jogadores e comunidades que confiam em nós para suas necessidades de hospedagem. Implante seu servidor instantaneamente e volte ao jogo.'
+      create_account: 'Criar Conta Gratuita'
+      view_plans: 'Ver Todos os Planos'
+      instant_deployment: 'Implantação Instantânea'
+      refund_guarantee: 'Garantia de Reembolso'
+    footer:
+      copyright: 'Todos os direitos reservados.'
+      powered_by: 'Desenvolvido por <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
+    store:
+      title: 'Loja'
+      subtitle: 'Descubra nossos servidores de jogos de alto desempenho'
+      show_all_categories: 'Mostrar todas as categorias'
+
   recovery:
     title: 'Recuperar senha'
     request_title: 'Esqueceu sua senha?'
@@ -697,6 +738,8 @@ pteroca:
       image: 'Imagem'
       priority: 'Prioridade'
       priority_hint: 'Números mais baixos aparecem primeiro (por exemplo, 1 aparece antes de 2). Use isso para controlar a ordem de exibição.'
+      featured: 'Em destaque na página de destino'
+      featured_hint: 'Mostrar esta categoria na página de destino como um item em destaque'
       add: 'Adicionar categoria'
       save: 'Salvar categoria'
       category: 'Categoria'
@@ -715,6 +758,8 @@ pteroca:
       is_active: 'Ativo'
       priority: 'Prioridade'
       priority_hint: 'Números mais baixos aparecem primeiro (por exemplo, 1 aparece antes de 2). Use isso para controlar a ordem de exibição.'
+      featured: 'Em destaque na página de destino'
+      featured_hint: 'Mostrar este produto na página de destino como um item em destaque'
       category: 'Categoria'
       image: 'Imagem'
       image_help: 'A imagem será exibida na loja.'
@@ -973,6 +1018,12 @@ pteroca:
       hint: 'Descrição'
       set_as_empty: 'Definir como vazio'
       set_as_empty_help: 'Marque isso para definir o valor como vazio (null).'
+      panel_theme:
+        help: 'Tema para o painel do usuário (dashboard, servidores, loja). Controla a aparência de todas as páginas admin e user-facing.'
+      landing_theme:
+        help: 'Tema para a página de destino (página inicial para visitantes). Exibida a usuários não logados no site público.'
+      email_theme:
+        help: 'Tema para modelos de email. Controla o estilo de notificações, registro e emails de compra.'
       hints:
         site_logo: 'Logo personalizado para painel e páginas de login. Envie PNG, JPG ou SVG. Padrão se vazio.'
         site_url: 'URL base do painel (ex. https://panel.example.com). Usado em emails, SSO e redirecionamentos.'
@@ -1024,6 +1075,10 @@ pteroca:
         renewal_notification_min_period_hours: 'Horas mínimas entre emails renovação por servidor. Previne spam. Ex. 24 = máx uma vez/dia.'
         renewal_notification_on_demand_min_hours: 'Horas mín para renovações servidores sob demanda para ativar email. Ex. 24 = notificar apenas se 24h+.'
         telemetry_consent: 'Permitir o envio de dados de uso anônimos para ajudar a melhorar o PteroCA. Apenas eventos de instalação e erros são rastreados. Nenhum dado pessoal, chaves de API ou URLs são coletados.'
+        panel_theme: 'Tema para o painel do usuário (dashboard, servidores, loja). Controla a aparência de todas as páginas admin e user-facing.'
+        landing_theme: 'Tema para a página de destino (página inicial para visitantes). Exibida a usuários não logados no site público.'
+        email_theme: 'Tema para modelos de email. Controla o estilo de notificações, registro e emails de compra.'
+        landing_page_enabled: 'Habilitar página de destino pública. Se desabilitado, visitantes são redirecionados para a página de login.'
         show_pterodactyl_logs_in_server_activity: 'Mostrar logs do Pterodactyl na atividade do servidor'
       template:
         name: 'Nome do modelo'
@@ -1034,6 +1089,9 @@ pteroca:
         pterocaVersion: 'Versão do PteroCA'
         outdated: 'A versão do modelo está atrás da versão atual do PteroCA. Alguns recursos podem não funcionar corretamente'
         phpVersion: 'Versão do PHP'
+        contexts: 'Contextos disponíveis para este modelo. Define onde o modelo pode ser usado (ex: email, landing page).'
+        translations: 'Traduções para este modelo. Permite personalização em diferentes idiomas.'
+        translation_validation_errors: 'Erros de validação encontrados nas traduções do modelo. Corrija-os para salvar.'
         options: 'Opções'
         supportDarkMode: 'Suportar modo escuro'
         supportCustomColors: 'Permitir configurar cores personalizadas'
@@ -1265,6 +1323,7 @@ pteroca:
       email: 'Email'
       users: 'Usuários'
       logout: 'Sair'
+      login: 'Entrar'
       phpmyadmin: 'PHPMyAdmin'
       payments: 'Pagamentos'
       logs: 'Registros'
