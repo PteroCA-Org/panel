@@ -1085,7 +1085,7 @@ pteroca:
         options: 'Options'
         supportDarkMode: 'Support dark mode'
         supportCustomColors: 'Allow configuring custom colors'
-        translations: 'Available translations'
+        translations: 'Theme translations'
         translation_validation_errors: 'Translation configuration errors'
       test_smtp_connection: 'Test SMTP Connection'
       smtp_connection_success: 'SMTP connection successful!'
