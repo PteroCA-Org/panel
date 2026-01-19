@@ -52,6 +52,12 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\OneToMany(targetEntity: ProductPrice::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: false)]
     private Collection $prices;
 
+    #[ORM\ManyToMany(targetEntity: Product::class)]
+    #[ORM\JoinTable(name: 'product_variant')]
+    #[ORM\JoinColumn(name: 'product_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'variant_product_id', referencedColumnName: 'id')]
+    private Collection $variantProducts;
+
     #[ORM\Column(type: "datetime")]
     private DateTime $createdAt;
 
@@ -64,6 +70,7 @@ class Product extends AbstractEntity implements ProductInterface
     public function __construct()
     {
         $this->prices = new ArrayCollection();
+        $this->variantProducts = new ArrayCollection();
     }
 
     public function getDescription(): ?string
@@ -300,6 +307,27 @@ class Product extends AbstractEntity implements ProductInterface
                 $price->setDeletedAt(new DateTime());
             }
         }
+
+        return $this;
+    }
+
+    public function getVariantProducts(): Collection
+    {
+        return $this->variantProducts;
+    }
+
+    public function addVariantProduct(Product $product): self
+    {
+        if (!$this->variantProducts->contains($product) && $product !== $this) {
+            $this->variantProducts[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeVariantProduct(Product $product): self
+    {
+        $this->variantProducts->removeElement($product);
 
         return $this;
     }
