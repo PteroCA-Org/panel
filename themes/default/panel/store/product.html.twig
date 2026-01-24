@@ -68,7 +68,7 @@
                                             </div>
                                             <div>
                                                 <strong>{{ 'pteroca.product.ram'|trans }}:</strong>
-                                                <span class="ms-2">{{ ((product.memory * 1.048576) / 100)|round * 100 }} MB</span>
+                                                <span class="ms-2">{{ ((product.memory * 1.048576) / 100)|round(0, 'ceil') * 100 }} MB</span>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                             </div>
                                             <div>
                                                 <strong>{{ 'pteroca.product.disk'|trans }}:</strong>
-                                                <span class="ms-2">{{ ((product.diskSpace * 1.048576) / 100)|round * 100 }} MB</span>
+                                                <span class="ms-2">{{ ((product.diskSpace * 1.048576) / 100)|round(0, 'ceil') * 100 }} MB</span>
                                             </div>
                                         </div>
                                     </div>
@@ -127,7 +127,7 @@
                                             </div>
                                             <div>
                                                 <strong>{{ 'pteroca.product.swap'|trans }}:</strong>
-                                                <span class="ms-2">{{ ((product.swap * 1.048576) / 100)|round * 100 }} MB</span>
+                                                <span class="ms-2">{{ ((product.swap * 1.048576) / 100)|round(0, 'ceil') * 100 }} MB</span>
                                             </div>
                                         </div>
                                     </div>
