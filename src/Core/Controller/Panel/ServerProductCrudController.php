@@ -499,15 +499,15 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setIcon('fa fa-server')
                 ->setDisabled($this->isServerOffline),
             $panelField,
-            NumberField::new('diskSpace', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.disk_space')))
+            NumberField::new('diskSpace', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.disk_space')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.disk_space_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),
-            NumberField::new('memory', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.memory')))
+            NumberField::new('memory', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.memory')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.memory_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),
-            NumberField::new('swap', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.swap')))
+            NumberField::new('swap', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.swap')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.swap_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),
