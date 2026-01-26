@@ -1365,7 +1365,7 @@ pteroca:
       panel_password: 'Hasło'
       panel_password_hint: 'Hasło jest takie samo jak do Twojego konta w panelu klienta.'
       management_panel_hint: 'Aby uzyskać dane do FTP zaloguj się do panelu zarządzania serwerem.'
-      access_panel: 'Dostęp do panelu serwera'
+      access_panel: 'Dostęp do panelu klienta'
     renew:
       subject: 'Przedłużenie serwera'
       title: 'Serwer pomyślnie odnowiony'
@@ -1392,7 +1392,6 @@ pteroca:
       suspension_date_label: 'Data zawieszenia'
       auto_delete_title: 'Ostrzeżenie o automatycznym usunięciu'
       auto_delete_warning: 'Ważne: Twój serwer zostanie automatycznie usunięty po %days% dniach (%deleteDate%), jeśli nie zostanie przedłużony.'
-      panel_access: 'Dostęp do panelu'
 
   verification:
     title: 'Weryfikacja e-mail wymagana'

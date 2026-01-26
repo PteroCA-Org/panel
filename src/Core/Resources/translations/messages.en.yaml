@@ -1351,7 +1351,7 @@ pteroca:
       panel_password: 'Panel password'
       panel_password_hint: 'The password is the same as your client panel account password.'
       management_panel_hint: 'To obtain FTP credentials, log in to the server management panel.'
-      access_panel: 'Access Server Panel'
+      access_panel: 'Access Client Panel'
     renew:
       subject: 'Server Renewal'
       title: 'Server Renewed Successfully'
@@ -1378,7 +1378,6 @@ pteroca:
       suspension_date_label: 'Suspension Date'
       auto_delete_title: 'Auto-Deletion Warning'
       auto_delete_warning: 'Important: Your server will be automatically deleted after %days% days (%deleteDate%) if not renewed.'
-      panel_access: 'Access Panel'
 
   verification:
     title: 'Email Verification Required'
