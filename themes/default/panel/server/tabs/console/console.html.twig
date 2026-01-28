@@ -150,9 +150,9 @@
                 uptimeIcon.classList.toggle('text-success', isOnline);
                 uptimeIcon.classList.toggle('text-danger', !isOnline);
 
-                this.updateStatisticValue('[data-disk]', `${this.parseBytesToBestFit(stats.disk_bytes)} / ${this.parseBytesToBestFit(this.parseMegabytesToBytes('{{ serverData.serverDetails.limits.disk }}'))}`);
+                this.updateStatisticValue('[data-disk]', `${this.parseBytesToBestFit(stats.disk_bytes)} / ${this.parseBytesToBestFit(this.parseMebibytesToBytes('{{ serverData.serverDetails.limits.disk }}'))}`);
                 this.updateStatisticValue('[data-uptime]', isOnline ? `${this.parseMillisecondsToHumanReadable(stats.uptime)}` : 'Offline');
-                this.updateStatisticValue('[data-memory]', isOnline ? `${this.parseBytesToBestFit(stats.memory_bytes)} / ${this.parseBytesToBestFit(this.parseMegabytesToBytes('{{ serverData.serverDetails.limits.memory }}'))}` : 'Offline');
+                this.updateStatisticValue('[data-memory]', isOnline ? `${this.parseBytesToBestFit(stats.memory_bytes)} / ${this.parseBytesToBestFit(this.parseMebibytesToBytes('{{ serverData.serverDetails.limits.memory }}'))}` : 'Offline');
                 this.updateStatisticValue('[data-cpu-load]', isOnline ? `${this.parseToPercentage(stats.cpu_absolute)}% / {{ serverData.serverDetails.limits.cpu }}%` : 'Offline');
                 this.updateStatisticValue('[data-network-inbound]', isOnline ? `${this.parseBytesToBestFit(stats.network.rx_bytes)}` : 'Offline');
                 this.updateStatisticValue('[data-network-outbound]', isOnline ? `${this.parseBytesToBestFit(stats.network.tx_bytes)}` : 'Offline');
@@ -178,7 +178,7 @@
 
                 return `${bytes.toFixed(2)} ${units[unitIndex]}`;
             },
-            parseMegabytesToBytes: function(value) {
+            parseMebibytesToBytes: function(value) {
                 return value * 1024 * 1024;
             },
             parseToPercentage: function(value) {
