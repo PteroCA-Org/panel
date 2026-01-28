@@ -73,18 +73,21 @@ class VoucherCrudController extends AbstractPanelController
             TextField::new('code', $this->translator->trans('pteroca.crud.voucher.code'))
                 ->setColumns(4)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.code_help')),
-            IntegerField::new('value', $this->translator->trans('pteroca.crud.voucher.value'))
+            NumberField::new('value', $this->translator->trans('pteroca.crud.voucher.value'))
+                ->setNumDecimals(2)
                 ->setColumns(4)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.value_help')),
             TextareaField::new('description', $this->translator->trans('pteroca.crud.voucher.description'))
                 ->hideOnIndex()
                 ->setColumns(6)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.description_help')),
-            IntegerField::new('minimumTopupAmount', $this->translator->trans('pteroca.crud.voucher.minimum_top_up_amount'))
+            NumberField::new('minimumTopupAmount', $this->translator->trans('pteroca.crud.voucher.minimum_top_up_amount'))
+                ->setNumDecimals(2)
                 ->setColumns(3)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.minimum_top_up_amount_help')),
             FormField::addRow(),
-            IntegerField::new('minimumOrderAmount', $this->translator->trans('pteroca.crud.voucher.minimum_order_amount'))
+            NumberField::new('minimumOrderAmount', $this->translator->trans('pteroca.crud.voucher.minimum_order_amount'))
+                ->setNumDecimals(2)
                 ->setColumns(2)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.minimum_order_amount_help')),
             IntegerField::new('maxGlobalUses', $this->translator->trans('pteroca.crud.voucher.max_global_uses'))
