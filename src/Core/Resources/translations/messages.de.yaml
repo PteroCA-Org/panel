@@ -1209,7 +1209,7 @@ pteroca:
       code: 'Code'
       code_help: 'Gib den Gutscheincode ein.'
       value: 'Wert'
-      value_help: 'Gib den Gutscheinwert ein. Der Wert muss eine Zahl sein.'
+      value_help: 'Gib den Gutscheinwert ein. Dezimalwerte (z.B. 1,5) werden unterstützt.'
       new_accounts_only: 'Nur für neue Konten'
       new_accounts_only_help: 'Der Gutschein kann nur von neuen Konten verwendet werden.'
       minimum_top_up_amount: 'Mindestaufladebetrag'

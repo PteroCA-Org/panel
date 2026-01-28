@@ -1177,7 +1177,7 @@ pteroca:
       code: 'Code'
       code_help: 'Voer de voucher code in.'
       value: 'Waarde'
-      value_help: 'Voer de voucher waarde in. De waarde moet een getal zijn.'
+      value_help: 'Voer de voucher waarde in. Decimale waarden (bijv. 1.5) worden ondersteund.'
       new_accounts_only: 'Alleen voor nieuwe accounts'
       new_accounts_only_help: 'De voucher kan alleen gebruikt worden door nieuwe accounts.'
       minimum_top_up_amount: 'Minimaal opwaardeerbedrag'

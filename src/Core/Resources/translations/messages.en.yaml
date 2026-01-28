@@ -1195,7 +1195,7 @@ pteroca:
       code: 'Code'
       code_help: 'Enter the voucher code.'
       value: 'Value'
-      value_help: 'Enter the voucher value. The value must be a number.'
+      value_help: 'Enter the voucher value. Decimal values (e.g., 1.5) are supported.'
       new_accounts_only: 'For new accounts only'
       new_accounts_only_help: 'The voucher can only be used by new accounts.'
       minimum_top_up_amount: 'Minimum top-up amount'

@@ -1211,7 +1211,7 @@ pteroca:
       code: 'Código'
       code_help: 'Insira o código do voucher.'
       value: 'Valor'
-      value_help: 'Insira o valor do voucher. O valor deve ser um número.'
+      value_help: 'Insira o valor do voucher. Valores decimais (por exemplo, 1.5) são suportados.'
       new_accounts_only: 'Apenas para novas contas'
       new_accounts_only_help: 'O voucher só pode ser utilizado por novas contas.'
       minimum_top_up_amount: 'Valor mínimo de recarga'

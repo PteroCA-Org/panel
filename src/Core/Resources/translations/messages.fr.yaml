@@ -1208,7 +1208,7 @@ pteroca:
       code: 'Code'
       code_help: 'Entrez le code du bon.'
       value: 'Valeur'
-      value_help: 'Entrez la valeur du bon. La valeur doit être un nombre.'
+      value_help: 'Entrez la valeur du bon. Les valeurs décimales (par ex. 1.5) sont prises en charge.'
       new_accounts_only: 'Uniquement pour les nouveaux comptes'
       new_accounts_only_help: 'Le bon ne peut être utilisé que par de nouveaux comptes.'
       minimum_top_up_amount: 'Montant minimum de rechargement'

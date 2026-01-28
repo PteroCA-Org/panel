@@ -1223,7 +1223,7 @@ pteroca:
       code: '优惠码'
       code_help: '输入代金券代码。'
       value: '金额'
-      value_help: '输入代金券的数值。数值必须是数字。'
+      value_help: '输入代金券的数值。支持小数值（例如 1.5）。'
       new_accounts_only: '仅限新用户'
       new_accounts_only_help: '此代金券仅限新账户使用。'
       minimum_top_up_amount: '最低充值金额'

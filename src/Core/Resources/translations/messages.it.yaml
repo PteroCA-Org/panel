@@ -1209,7 +1209,7 @@ pteroca:
       code: 'Codice'
       code_help: 'Inserisci il codice del voucher.'
       value: 'Valore'
-      value_help: 'Inserisci il valore del voucher. Deve essere un numero.'
+      value_help: 'Inserisci il valore del voucher. Sono supportati valori decimali (es. 1.5).'
       new_accounts_only: 'Solo per nuovi account'
       new_accounts_only_help: 'Il voucher può essere utilizzato solo da nuovi account.'
       minimum_top_up_amount: 'Importo minimo di ricarica'

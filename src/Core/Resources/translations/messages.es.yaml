@@ -1209,7 +1209,7 @@ pteroca:
       code: 'Código'
       code_help: 'Introduce el código del cupón.'
       value: 'Valor'
-      value_help: 'Introduce el valor del cupón. El valor debe ser un número.'
+      value_help: 'Introduce el valor del cupón. Se admiten valores decimales (p. ej., 1.5).'
       new_accounts_only: 'Solo para cuentas nuevas'
       new_accounts_only_help: 'El cupón solo puede ser utilizado por cuentas nuevas.'
       minimum_top_up_amount: 'Cantidad mínima de recarga'

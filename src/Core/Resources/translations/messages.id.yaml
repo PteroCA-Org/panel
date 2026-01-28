@@ -1238,7 +1238,7 @@ pteroca:
       code: 'Kode'
       code_help: 'Masukkan kode voucher.'
       value: 'Nilai'
-      value_help: 'Masukkan nilai voucher. Nilai harus berupa angka.'
+      value_help: 'Masukkan nilai voucher. Nilai desimal (mis. 1.5) didukung.'
       new_accounts_only: 'Hanya untuk akun baru'
       new_accounts_only_help: 'Voucher hanya dapat digunakan oleh akun baru.'
       minimum_top_up_amount: 'Jumlah isi ulang minimum'
