@@ -1356,7 +1356,7 @@ pteroca:
       subject: 'Покупка сервера'
       title: 'Сервер успешно куплен'
       subtitle: 'Ваш сервер готов к использованию'
-      access_panel: 'Доступ к панели сервера'
+      access_panel: 'Доступ к панели клиента'
       server_purchased: 'Вы приобрели сервер в нашем магазине.'
       expiration_date: 'Дата окончания'
       product_details: 'Детали товара'
@@ -1395,7 +1395,6 @@ pteroca:
       server_name: 'Сервер: %serverName%'
       suspension_date: 'Приостановлен: %suspensionDate%'
       auto_delete_warning: 'Важно: Ваш сервер будет автоматически удален через %days% дней (%deleteDate%), если не будет продлен.'
-      panel_access: 'Доступ к панели'
   verification:
     title: 'Требуется подтверждение электронной почты'
     subtitle: 'Подтвердите свой адрес электронной почты, чтобы продолжить'
