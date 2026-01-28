@@ -81,8 +81,12 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
      */
     private function handleDeleteInactiveServers(array &$stats, int $daysAfter, array $context): void
     {
-        $dateObject = new DateTime(sprintf('now - %d days', $daysAfter));
-        $serversToDelete = $this->serverRepository->getServersExpiredBefore($dateObject);
+        if ($daysAfter === 0) {
+            $serversToDelete = $this->serverRepository->getAllSuspendedServers();
+        } else {
+            $dateObject = new DateTime(sprintf('now - %d days', $daysAfter));
+            $serversToDelete = $this->serverRepository->getServersExpiredBefore($dateObject);
+        }
 
         foreach ($serversToDelete as $server) {
             $stats['checked']++;

@@ -41,6 +41,18 @@ class ServerRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Server[]
+     */
+    public function getAllSuspendedServers(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.isSuspended = true')
+            ->andWhere('s.deletedAt IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getServersToSuspend(DateTime $expiresBefore): array
     {
         return $this->createQueryBuilder('s')
