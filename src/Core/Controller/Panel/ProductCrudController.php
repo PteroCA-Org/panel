@@ -157,13 +157,13 @@ class ProductCrudController extends AbstractPanelController
 
             FormField::addTab($this->translator->trans('pteroca.crud.product.server_resources'))
                 ->setIcon('fa fa-server'),
-            NumberField::new('diskSpace', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.disk_space')))
+            NumberField::new('diskSpace', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.disk_space')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.disk_space_hint'))
                 ->setColumns(4),
-            NumberField::new('memory', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.memory')))
+            NumberField::new('memory', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.memory')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.memory_hint'))
                 ->setColumns(4),
-            NumberField::new('swap', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.swap')))
+            NumberField::new('swap', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.swap')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.swap_hint'))
                 ->setColumns(4),
             FormField::addRow(),
