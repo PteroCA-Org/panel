@@ -153,7 +153,7 @@
                                 if (dataKey === 'limits-memory' || dataKey === 'limits-disk') {
                                     const numericValue = parseFloat(value);
                                     if (!Number.isNaN(numericValue)) {
-                                        displayValue = Math.round(numericValue * 1.048576 * 100) / 100;
+                                        displayValue = Math.ceil(numericValue * 1.048576 / 100) * 100;
                                     }
                                 }
 
