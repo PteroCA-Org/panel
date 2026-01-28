@@ -62,6 +62,11 @@
                 /You need to agree to the EULA in order to run the server/i,
                 /Go to eula.txt for more info/i,
             ],
+            previousNetworkStats: {
+                rx_bytes: 0,
+                tx_bytes: 0,
+                timestamp: null
+            },
             colors: {
                 red: "\x1b[38;2;248;113;133m",
                 green: "\x1b[38;2;134;239;172m",
@@ -159,7 +164,8 @@
 
                 addChartData(cpuLoadChart, new Date().toLocaleTimeString(), this.parseToPercentage(stats.cpu_absolute));
                 addChartData(memoryChart, new Date().toLocaleTimeString(), stats.memory_bytes / 1024 / 1024);
-                addChartData(networkChart, new Date().toLocaleTimeString(), stats.network.rx_bytes / 1024);
+                const networkRate = this.calculateNetworkRate(stats);
+                addChartData(networkChart, new Date().toLocaleTimeString(), networkRate);
             },
             updateStatisticValue(selector, value) {
                 const element = document.querySelector(selector);
@@ -191,6 +197,37 @@
                 const days = Math.floor(hours / 24);
 
                 return `${days}d ${hours % 24}h ${minutes % 60}m ${seconds % 60}s`;
+            },
+            calculateNetworkRate: function(currentStats) {
+                if (this.previousNetworkStats.timestamp === null) {
+                    this.previousNetworkStats = {
+                        rx_bytes: currentStats.network.rx_bytes,
+                        tx_bytes: currentStats.network.tx_bytes,
+                        timestamp: Date.now()
+                    };
+                    return 0;
+                }
+
+                if (currentStats.network.rx_bytes < this.previousNetworkStats.rx_bytes) {
+                    this.previousNetworkStats = {
+                        rx_bytes: currentStats.network.rx_bytes,
+                        tx_bytes: currentStats.network.tx_bytes,
+                        timestamp: Date.now()
+                    };
+                    return 0;
+                }
+
+                const timeDeltaSeconds = (Date.now() - this.previousNetworkStats.timestamp) / 1000;
+                const rxDelta = currentStats.network.rx_bytes - this.previousNetworkStats.rx_bytes;
+                const rateKiBPerSecond = (rxDelta / 1024) / timeDeltaSeconds;
+
+                this.previousNetworkStats = {
+                    rx_bytes: currentStats.network.rx_bytes,
+                    tx_bytes: currentStats.network.tx_bytes,
+                    timestamp: Date.now()
+                };
+
+                return Math.max(0, rateKiBPerSecond).toFixed(2);
             },
             bindButtons: function() {
                 document.querySelector('#send-command').addEventListener('click', function() {
