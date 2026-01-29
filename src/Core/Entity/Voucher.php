@@ -231,6 +231,11 @@ class Voucher extends AbstractEntity
         return $this;
     }
 
+    public function setDeletedAtValue(): void
+    {
+        $this->deletedAt = new DateTime();
+    }
+
     #[Assert\Callback]
     public function validateVoucher(ExecutionContextInterface $context): void
     {

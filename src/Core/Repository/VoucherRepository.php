@@ -23,6 +23,7 @@ class VoucherRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.code = :code')
+            ->andWhere('v.deletedAt IS NULL')
             ->setParameter('code', $code)
             ->getQuery()
             ->getOneOrNullResult();

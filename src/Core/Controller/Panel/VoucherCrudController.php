@@ -248,7 +248,8 @@ class VoucherCrudController extends AbstractPanelController
             $voucherId = $entityInstance->getId();
             $voucherCode = $entityInstance->getCode();
 
-            parent::deleteEntity($entityManager, $entityInstance);
+            $entityInstance->setDeletedAtValue();
+            parent::updateEntity($entityManager, $entityInstance);
 
             // Dispatch VoucherDeletedEvent
             $deletedEvent = new VoucherDeletedEvent($voucherId, $voucherCode, $eventContext);
