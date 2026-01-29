@@ -117,7 +117,8 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
                         ->servers()
                         ->deleteServer($server->getPterodactylServerId());
 
-                    $this->serverRepository->delete($server);
+                    $server->setDeletedAtValue();
+                    $this->serverRepository->save($server);
 
                     $stats['suspended']++;
 
@@ -226,8 +227,8 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
         $settingValue = $this->settingRepository
             ->getSetting(SettingEnum::DELETE_SUSPENDED_SERVERS_DAYS_AFTER);
 
-        if (empty($settingValue) || !is_numeric($settingValue)) {
-            return 30; // Default value
+        if ($settingValue === '' || !is_numeric($settingValue)) {
+            return DeleteInactiveServersHandler::DEFAULT_DELETE_INACTIVE_SERVERS_DAYS_AFTER;
         }
 
         return (int) $settingValue;
