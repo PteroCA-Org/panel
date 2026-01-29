@@ -1365,7 +1365,7 @@ pteroca:
       panel_password: 'पैनल पासवर्ड'
       panel_password_hint: 'पासवर्ड वही है जो आपके ग्राहक पैनल खाते का पासवर्ड है।'
       management_panel_hint: 'FTP क्रेडेंशियल प्राप्त करने के लिए, सर्वर प्रबंधन पैनल में लॉग इन करें।'
-      access_panel: 'सर्वर पैनल तक पहुंचें'
+      access_panel: 'क्लाइंट पैनल तक पहुंचें'
     renew:
       subject: 'सर्वर नवीनीकरण'
       title: 'सर्वर सफलतापूर्वक नवीनीकृत'
@@ -1392,7 +1392,6 @@ pteroca:
       suspension_date_label: 'निलंबन तिथि'
       auto_delete_title: 'स्वत: हटाने की चेतावनी'
       auto_delete_warning: 'महत्वपूर्ण: यदि नवीनीकृत नहीं किया गया तो आपका सर्वर %days% दिनों के बाद (%deleteDate%) स्वचालित रूप से हटा दिया जाएगा।'
-      panel_access: 'पैनल पहुंच'
 
   verification:
     title: 'ईमेल सत्यापन आवश्यक'
