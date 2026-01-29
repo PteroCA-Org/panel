@@ -159,6 +159,12 @@ pteroca:
     view_transaction_history: 'View transaction history'
     view_all_payments_description: 'View all payments that have been made on your account.'
     amount_must_be_positive: 'The amount must be positive.'
+    balance_topup_only: 'BALANCE_TOPUP vouchers only'
+    voucher_types_title: 'Voucher Types'
+    balance_topup_vouchers: 'Balance Top-up Vouchers'
+    balance_topup_description: 'Add credits directly to your account. Use them on this page.'
+    payment_discount_vouchers: 'Payment Discount Vouchers'
+    payment_discount_description: 'Get a discount when making a payment. Apply on the next step.'
 
   payment:
     no_gateways_available: 'No payment gateways are currently available. Please configure a payment gateway or contact the administrator.'
@@ -1290,6 +1296,9 @@ pteroca:
       minimum_order_amount_required: 'You must order at least {{ amount }} to use this voucher.'
       error_during_redeeming: 'An error occurred while redeeming the voucher.'
       only_during_order: 'Voucher can only be used during the order.'
+      wrong_page_payment_discount: 'This voucher type can only be used on the payment page. Please proceed to the next step to apply PAYMENT_DISCOUNT vouchers, or use BALANCE_TOPUP vouchers here.'
+      server_discount_only_on_purchase: 'This SERVER_DISCOUNT voucher can only be used when purchasing or renewing a server. Please go to the store to use this voucher.'
+      payment_discount_only_on_payment: 'This PAYMENT_DISCOUNT voucher can only be used on the payment page. Please proceed to the checkout to apply this voucher.'
 
   email:
     creation_not_sent_misconfigured: 'Server was created successfully, but the confirmation email could not be sent due to email configuration issues. Please check your email settings.'
