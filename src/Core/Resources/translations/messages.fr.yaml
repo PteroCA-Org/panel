@@ -1303,6 +1303,8 @@ pteroca:
       minimum_order_amount_required: 'Vous devez commander pour au moins {{ amount }} pour utiliser ce bon.'
       error_during_redeeming: 'Une erreur est survenue lors de l''utilisation du bon.'
       only_during_order: 'Le bon ne peut être utilisé que lors de la commande.'
+      server_discount_only_on_purchase: 'Ce bon d''achat ne peut être utilisé que lors de l''achat ou du renouvellement d''un serveur. Veuillez vous rendre à la boutique pour utiliser ce bon d''achat.'
+      payment_discount_only_on_payment: 'Ce bon d''achat ne peut être utilisé que sur la page de paiement. Veuillez procéder à la caisse pour appliquer ce bon d''achat.'
 
   email:
     creation_not_sent_misconfigured: 'Le serveur a été créé avec succès, mais l''e-mail de confirmation n''a pas pu être envoyé en raison de problèmes de configuration de l''e-mail. Veuillez vérifier vos paramètres d''e-mail.'

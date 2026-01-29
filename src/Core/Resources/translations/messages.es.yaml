@@ -1304,6 +1304,8 @@ pteroca:
       minimum_order_amount_required: 'Debes hacer un pedido de al menos {{ amount }} para usar este cupón.'
       error_during_redeeming: 'Ocurrió un error al canjear el cupón.'
       only_during_order: 'El cupón solo puede usarse durante el pedido.'
+      server_discount_only_on_purchase: 'Este cupón solo se puede usar al comprar o renovar un servidor. Por favor, ve a la tienda para usar este cupón.'
+      payment_discount_only_on_payment: 'Este cupón solo se puede usar en la página de pago. Por favor, procede al checkout para aplicar este cupón.'
 
   email:
     creation_not_sent_misconfigured: 'Se creó el servidor correctamente, pero no se pudo enviar el correo electrónico de confirmación debido a problemas de configuración del correo electrónico. Por favor, verifica tu configuración de correo electrónico.'

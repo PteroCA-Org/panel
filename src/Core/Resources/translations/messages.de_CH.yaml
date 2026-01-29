@@ -1298,6 +1298,8 @@ pteroca:
       minimum_order_amount_required: 'Sie müssen für mindestens {{ amount }} bestellen, um diesen Gutschein zu verwenden.'
       error_during_redeeming: 'Beim Einlösen des Gutscheins ist ein Fehler aufgetreten.'
       only_during_order: 'Der Gutschein kann nur während der Bestellung verwendet werden.'
+      server_discount_only_on_purchase: 'Dieser Gutschein kann nur beim Kauf oder der Verlängerung eines Servers verwendet werden. Bitte gehen Sie zum Shop, um diesen Gutschein zu verwenden.'
+      payment_discount_only_on_payment: 'Dieser Gutschein kann nur auf der Zahlungsseite verwendet werden. Bitte fahren Sie mit der Kasse fort, um diesen Gutschein anzuwenden.'
 
   email:
     creation_not_sent_misconfigured: 'Server wurde erfolgreich erstellt, aber die Bestätigungs-E-Mail konnte aufgrund von E-Mail-Konfigurationsproblemen nicht gesendet werden. Bitte überprüfen Sie Ihre E-Mail-Einstellungen.'
