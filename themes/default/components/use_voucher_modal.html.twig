@@ -85,7 +85,7 @@
                                     return
                                 }
 
-                                const discountCodeInput = document.querySelector('#voucher-code')
+                                const discountCodeInput = document.querySelector('[name$="[voucher]"]');
                                 if (!discountCodeInput || data.type !== discountCodeInput.dataset.voucherType) {
                                     let voucherTypeMsg = data.type === 'server_discount'
                                         ? '{{ 'pteroca.api.voucher.server_discount_only_on_purchase'|trans }}'
