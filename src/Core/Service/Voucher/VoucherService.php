@@ -133,6 +133,28 @@ readonly class VoucherService
     }
 
     /**
+     * Validates if a voucher can be redeemed WITHOUT actually consuming it.
+     * Use this for pre-validation checks before calling redeemVoucher().
+     *
+     * @param string $code Voucher code to validate
+     * @param float|null $orderAmount Order amount for minimum validation
+     * @param UserInterface $user User attempting to redeem
+     * @return Voucher The validated voucher entity
+     * @throws Exception if voucher is invalid or cannot be used
+     */
+    public function validateVoucherForRedemption(string $code, ?float $orderAmount, UserInterface $user): Voucher
+    {
+        $voucher = $this->getValidVoucher($code);
+        $this->userVerificationService->validateUserVerification($user);
+        $this->validateNewAccountRequirementIfNeeded($voucher, $user);
+        $this->validateOneUsePerUserRequirementIfNeeded($voucher, $user);
+        $this->validateMinimumTopupAmountRequirementIfNeeded($voucher, $user);
+        $this->validateMinimumOrderAmountRequirementIfNeeded($orderAmount, $voucher);
+
+        return $voucher;
+    }
+
+    /**
      * @throws Exception
      */
     public function getValidVoucher(string $code): Voucher

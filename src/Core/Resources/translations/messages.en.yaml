@@ -1290,6 +1290,8 @@ pteroca:
       minimum_order_amount_required: 'You must order at least {{ amount }} to use this voucher.'
       error_during_redeeming: 'An error occurred while redeeming the voucher.'
       only_during_order: 'Voucher can only be used during the order.'
+      server_discount_only_on_purchase: 'This voucher can only be used when purchasing or renewing a server. Please go to the store to use this voucher.'
+      payment_discount_only_on_payment: 'This voucher can only be used on the payment page. Please proceed to the checkout to apply this voucher.'
 
   email:
     creation_not_sent_misconfigured: 'Server was created successfully, but the confirmation email could not be sent due to email configuration issues. Please check your email settings.'

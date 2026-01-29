@@ -31,12 +31,9 @@ readonly class VoucherPaymentService
      */
     public function validateVoucherCode(string $voucherCode, UserInterface $user, VoucherTypeEnum $voucherType): void
     {
-        $redeemResult = $this->voucherService->redeemVoucher($voucherCode, null, $user);
-        if (false === $redeemResult->isSuccess()) {
-            throw new Exception($redeemResult->getMessage());
-        }
+        $voucher = $this->voucherService->validateVoucherForRedemption($voucherCode, null, $user);
 
-        if ($redeemResult->getType() !== $voucherType->value) {
+        if ($voucher->getType() !== $voucherType) {
             throw new Exception($this->translator->trans('pteroca.voucher.invalid_voucher_type'));
         }
     }
@@ -46,14 +43,9 @@ readonly class VoucherPaymentService
      */
     public function redeemPaymentVoucher(float $amount, string $voucherCode, UserInterface $user): float
     {
-        $redeemResult = $this->voucherService->redeemVoucher($voucherCode, $amount, $user);
-        if (false === $redeemResult->isSuccess()) {
-            throw new Exception($redeemResult->getMessage());
-        }
-
-        $voucher = $this->voucherService->getValidVoucher($voucherCode);
+        $voucher = $this->voucherService->validateVoucherForRedemption($voucherCode, $amount, $user);
         $this->voucherService->redeemVoucherForUser($voucher, $user);
 
-        return $amount * (1 - $redeemResult->getValue() / 100);
+        return $amount * (1 - $voucher->getValue() / 100);
     }
 }

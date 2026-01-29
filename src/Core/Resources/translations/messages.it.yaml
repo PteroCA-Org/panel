@@ -1304,6 +1304,8 @@ pteroca:
       minimum_order_amount_required: 'Devi effettuare un ordine di almeno {{ amount }} per utilizzare questo voucher.'
       error_during_redeeming: 'Si è verificato un errore durante il riscatto del voucher.'
       only_during_order: 'Il voucher può essere utilizzato solo durante l''ordine.'
+      server_discount_only_on_purchase: 'Questo buono può essere utilizzato solo durante l''acquisto o il rinnovo di un server. Si prega di andare al negozio per utilizzare questo buono.'
+      payment_discount_only_on_payment: 'Questo buono può essere utilizzato solo nella pagina di pagamento. Si prega di procedere al checkout per applicare questo buono.'
 
   email:
     creation_not_sent_misconfigured: 'Il server è stato creato con successo, ma l''email di conferma non è stata inviata a causa di problemi di configurazione dell''email. Si prega di controllare le impostazioni email.'

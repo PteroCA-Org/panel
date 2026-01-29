@@ -1299,6 +1299,8 @@ pteroca:
       minimum_order_amount_required: 'Anda harus memesan setidaknya {{ amount }} untuk menggunakan voucher ini.'
       error_during_redeeming: 'Terjadi kesalahan saat menebus voucher.'
       only_during_order: 'Voucher hanya dapat digunakan selama pemesanan.'
+      server_discount_only_on_purchase: 'Voucher ini hanya dapat digunakan saat membeli atau memperpanjang server. Silakan pergi ke toko untuk menggunakan voucher ini.'
+      payment_discount_only_on_payment: 'Voucher ini hanya dapat digunakan di halaman pembayaran. Silakan lanjutkan ke checkout untuk menerapkan voucher ini.'
 
   email:
     creation_not_sent_misconfigured: 'Server dibuat dengan sukses, tetapi email konfirmasi tidak dapat dikirim karena masalah konfigurasi email. Silakan periksa pengaturan email Anda.'
