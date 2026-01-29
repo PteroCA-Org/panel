@@ -1363,6 +1363,8 @@ pteroca:
       minimum_order_amount_required: 'Aby użyć tego vouchera, musisz zamówić za co najmniej {{ amount }}.'
       error_during_redeeming: 'Wystąpił błąd podczas realizacji vouchera.'
       only_during_order: 'Voucher może być użyty tylko podczas składania zamówienia.'
+      server_discount_only_on_purchase: 'Ten kupon może być używany tylko podczas zakupu lub odnawiania serwera. Przejdź do sklepu, aby użyć tego kuponu.'
+      payment_discount_only_on_payment: 'Ten kupon może być używany tylko na stronie płatności. Przejdź do kasy, aby zastosować ten kupon.'
 
   email:
     creation_not_sent_misconfigured: 'Serwer został pomyślnie utworzony, ale wiadomość e-mail z potwierdzeniem nie mogła zostać wysłana z powodu problemów z konfiguracją poczty e-mail. Sprawdź ustawienia poczty e-mail.'

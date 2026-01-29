@@ -1349,6 +1349,8 @@ pteroca:
       minimum_order_amount_required: 'U moet minimaal {{ amount }} bestellen om deze voucher te gebruiken.'
       error_during_redeeming: 'Er is een fout opgetreden tijdens het inwisselen van de voucher.'
       only_during_order: 'Voucher kan alleen worden gebruikt tijdens de bestelling.'
+      server_discount_only_on_purchase: 'Deze voucher kan alleen worden gebruikt bij het kopen of verlengen van een server. Ga naar de winkel om deze voucher te gebruiken.'
+      payment_discount_only_on_payment: 'Deze voucher kan alleen worden gebruikt op de betalings pagina. Ga naar de checkout om deze voucher toe te passen.'
   email:
     creation_not_sent_misconfigured: 'Server is succesvol aangemaakt, maar de bevestigingsmail kon niet worden verzonden vanwege e-mailconfiguratieproblemen. Controleer uw e-mailinstellingen.'
     renewal_not_sent_misconfigured: 'Server is succesvol verlengd, maar de bevestigingsmail kon niet worden verzonden vanwege e-mailconfiguratieproblemen. Controleer uw e-mailinstellingen.'

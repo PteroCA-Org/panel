@@ -1377,6 +1377,8 @@ pteroca:
       minimum_order_amount_required: '您必须至少订购 {{ amount }} 才能使用此代金券。'
       error_during_redeeming: '兑换代金券时发生错误。'
       only_during_order: '代金券仅可在下单时使用。'
+      server_discount_only_on_purchase: '此优惠券只能在购买或续订服务器时使用。请前往商店使用此优惠券。'
+      payment_discount_only_on_payment: '此优惠券只能在付款页面使用。请前往结账以应用此优惠券。'
 
   email:
     creation_not_sent_misconfigured: '服务器已成功创建，但由于电子邮件配置问题，无法发送确认电子邮件。请检查您的电子邮件设置。'
