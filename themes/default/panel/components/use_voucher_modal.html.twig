@@ -76,13 +76,17 @@
                             } else {
                                 const appliedDiscountElement = document.querySelector('#applied-discount')
                                 if (!appliedDiscountElement || typeof applyDiscountCode !== 'function') {
-                                    alert('{{ 'pteroca.api.voucher.only_during_order'|trans }}')
+                                    let errorMessage = '{{ 'pteroca.api.voucher.wrong_page_payment_discount'|trans }}';
+                                    alert(errorMessage);
                                     return
                                 }
 
                                 const discountCodeInput = document.querySelector('#voucher-code')
                                 if ((!discountCodeInput || data.type !== discountCodeInput.dataset.voucherType) && data.type !== 'balance_topup') {
-                                    alert('{{ 'pteroca.voucher.voucher_type_invalid'|trans }}')
+                                    let voucherTypeMsg = data.type === 'server_discount'
+                                        ? '{{ 'pteroca.api.voucher.server_discount_only_on_purchase'|trans }}'
+                                        : '{{ 'pteroca.api.voucher.payment_discount_only_on_payment'|trans }}';
+                                    alert(voucherTypeMsg);
                                     return
                                 }
 
