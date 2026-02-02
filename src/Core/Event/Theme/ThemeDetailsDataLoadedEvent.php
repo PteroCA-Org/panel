@@ -2,7 +2,7 @@
 
 namespace App\Core\Event\Theme;
 
-use App\Core\DTO\Theme\ThemeDTO;
+use App\Core\DTO\ThemeDTO;
 use App\Core\Event\AbstractDomainEvent;
 
 class ThemeDetailsDataLoadedEvent extends AbstractDomainEvent
