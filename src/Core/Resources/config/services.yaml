@@ -251,3 +251,7 @@ services:
   App\Core\Service\Theme\TemplateManifestValidator:
     arguments:
       $currentPterocaVersion: '%version%'
+
+  App\Core\Service\Template\ThemeCopyService:
+    arguments:
+      $projectDir: '%kernel.project_dir%'

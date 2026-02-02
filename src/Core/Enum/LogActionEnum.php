@@ -33,5 +33,6 @@ enum LogActionEnum
    case PLUGIN_SETTING_CHANGED;
    case PLUGIN_DELETED;
    case THEME_UPLOADED;
+   case THEME_COPIED;
    case THEME_DELETED;
 }

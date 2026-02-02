@@ -19,6 +19,7 @@ use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Logs\LogService;
 use App\Core\Service\SettingService;
 use App\Core\Service\Template\TemplateService;
+use App\Core\Service\Template\ThemeCopyService;
 use App\Core\Service\Theme\ThemeUploadService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -45,6 +46,7 @@ class ThemeCrudController extends AbstractPanelController
         private readonly AdminUrlGenerator $adminUrlGenerator,
         private readonly LogService $logService,
         private readonly ThemeUploadService $themeUploadService,
+        private readonly ThemeCopyService $themeCopyService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -60,7 +62,8 @@ class ThemeCrudController extends AbstractPanelController
     {
         // Disable all default CRUD operations since we use custom actions
         return $crud
-            ->overrideTemplate('crud/index', 'panel/crud/theme/index.html.twig');
+            ->overrideTemplate('crud/index', 'panel/crud/theme/index.html.twig')
+            ->setSearchFields(null);
     }
 
     protected function getPermissionMapping(): array
@@ -71,6 +74,7 @@ class ThemeCrudController extends AbstractPanelController
             'setDefaultTheme' => PermissionEnum::SET_DEFAULT_THEME->value,
             'uploadTheme' => PermissionEnum::UPLOAD_THEME->value,
             'processUpload' => PermissionEnum::UPLOAD_THEME->value,
+            'copyTheme' => PermissionEnum::COPY_THEME->value,
         ];
     }
 
@@ -379,6 +383,85 @@ class ThemeCrudController extends AbstractPanelController
             ->generateUrl());
     }
 
+    #[Route('/admin/theme/copy', name: 'admin_theme_copy', methods: ['POST'])]
+    public function copyTheme(AdminContext $context): RedirectResponse
+    {
+        $request = $context->getRequest();
+        $sourceThemeName = $request->request->get('sourceThemeName');
+        $newThemeName = trim($request->request->get('newThemeName'));
+        $themeContext = $request->request->get('context', 'panel');
+
+        // Validate context
+        if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
+            $themeContext = 'panel';
+        }
+
+        // Sanitize theme name
+        $newThemeName = strtolower($newThemeName);
+        $newThemeName = preg_replace('/[^a-z0-9\-_]/', '', $newThemeName);
+
+        // Validate source theme exists
+        if (!$this->templateService->themeSupportsContext($sourceThemeName, $themeContext)) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.theme.theme_not_found'),
+                $sourceThemeName
+            ));
+            return $this->redirect($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction('index')
+                ->set('context', $themeContext)
+                ->generateUrl());
+        }
+
+        try {
+            // Validate new theme name
+            $validationErrors = $this->themeCopyService->validateThemeName($newThemeName);
+            if (!empty($validationErrors)) {
+                $this->addFlash('danger', implode(' ', $validationErrors));
+                return $this->redirect($this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('index')
+                    ->set('context', $themeContext)
+                    ->generateUrl());
+            }
+
+            // Get source theme display name
+            $sourceMetadata = $this->templateService->getRawTemplateInfo($sourceThemeName);
+            $sourceDisplayName = $sourceMetadata['name'] ?? $sourceThemeName;
+
+            // Copy theme
+            $this->themeCopyService->copyTheme($sourceThemeName, $newThemeName);
+
+            // Log action
+            $this->logService->logAction(
+                $this->getUser(),
+                LogActionEnum::THEME_COPIED,
+                [
+                    'source_theme' => $sourceThemeName,
+                    'new_theme' => $newThemeName,
+                    'context' => $themeContext,
+                ]
+            );
+
+            $this->addFlash('success', sprintf(
+                $this->translator->trans('pteroca.crud.theme.copy_success'),
+                $sourceDisplayName,
+                $newThemeName
+            ));
+        } catch (\Exception $e) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.theme.copy_error'),
+                $e->getMessage()
+            ));
+        }
+
+        return $this->redirect($this->adminUrlGenerator
+            ->setController(self::class)
+            ->setAction('index')
+            ->set('context', $themeContext)
+            ->generateUrl());
+    }
+
     #[Route('/admin/theme/upload', name: 'admin_theme_upload')]
     public function uploadTheme(AdminContext $context): Response
     {
@@ -546,6 +629,24 @@ class ThemeCrudController extends AbstractPanelController
                 'data_attrs' => [
                     'bs-toggle' => 'modal',
                     'bs-target' => '#setDefaultThemeModal',
+                    'theme-name' => $theme->getName(),
+                    'theme-display-name' => $theme->getDisplayName(),
+                    'theme-context' => $themeContext,
+                ],
+            ];
+        }
+
+        // Copy action
+        if ($this->getUser()?->hasPermission(PermissionEnum::COPY_THEME)) {
+            $actions[] = [
+                'name' => 'copy',
+                'label' => $this->translator->trans('pteroca.crud.theme.copy_theme'),
+                'icon' => 'fa fa-copy',
+                'url' => '#',
+                'class' => 'primary',
+                'data_attrs' => [
+                    'bs-toggle' => 'modal',
+                    'bs-target' => '#copyThemeModal',
                     'theme-name' => $theme->getName(),
                     'theme-display-name' => $theme->getDisplayName(),
                     'theme-context' => $themeContext,

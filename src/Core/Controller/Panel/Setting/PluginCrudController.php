@@ -208,7 +208,8 @@ class PluginCrudController extends AbstractPanelController
             ->setDefaultSort(['name' => 'ASC'])
             ->setPageTitle(Crud::PAGE_INDEX, $this->translator->trans('pteroca.crud.plugin.plugin_management'))
             ->setPageTitle(Crud::PAGE_DETAIL, fn (Plugin $plugin) => sprintf('%s: %s', $this->translator->trans('pteroca.crud.plugin.plugin'), $plugin->getDisplayName()))
-            ->showEntityActionsInlined();
+            ->showEntityActionsInlined()
+            ->setSearchFields(null);
     }
 
     public function configureFilters(Filters $filters): Filters

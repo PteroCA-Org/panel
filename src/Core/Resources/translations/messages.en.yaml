@@ -1026,6 +1026,26 @@ pteroca:
       cannot_delete_default_theme: 'Cannot delete the default theme. Please set another theme as default first.'
       cannot_delete_active_theme: 'Cannot delete this theme. It is currently set as default for "%s" context. Please set another theme as default first.'
       cannot_delete_system_default: 'Cannot delete the system default theme. This theme is required for the application to function properly.'
+      # Copy
+      copy_theme: 'Copy Theme'
+      confirm_copy: 'Copy Theme'
+      confirm_copy_message: 'Create a copy of the theme'
+      new_theme_name: 'New Theme Name'
+      new_theme_name_placeholder: 'e.g., my-custom-theme'
+      theme_name_rules: 'Only lowercase letters, numbers, hyphens, and underscores (3-50 characters)'
+      copy_warning: 'A new theme will be created with all files from the original theme. You can customize it independently.'
+      copy_confirm: 'Copy Theme'
+      copy_success: 'Theme "%s" has been successfully copied as "%s"'
+      copy_error: 'Failed to copy theme: %s'
+      # Validation
+      validation:
+        name_required: 'Theme name is required'
+        name_too_short: 'Theme name must be at least 3 characters'
+        name_too_long: 'Theme name cannot exceed 50 characters'
+        name_invalid_chars: 'Theme name can only contain lowercase letters, numbers, hyphens, and underscores'
+        name_invalid_edges: 'Theme name cannot start or end with a hyphen or underscore'
+        name_reserved: 'This theme name is reserved and cannot be used'
+        name_already_exists: 'A theme with this name already exists'
     server:
       pterodactyl_server_id: 'Pterodactyl Server ID'
       pterodactyl_server_identifier: 'Pterodactyl Identifier'
