@@ -17,6 +17,7 @@ use App\Core\Entity\ServerLog;
 use App\Core\Entity\User;
 use App\Core\Entity\Voucher;
 use App\Core\Entity\VoucherUsage;
+use App\Core\Controller\Panel\Setting\PluginCrudController;
 use App\Core\Controller\Panel\Setting\ThemeCrudController;
 use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingContextEnum;
@@ -167,13 +168,10 @@ class MenuBuilder
             $adminItems[] = $themesSubmenu;
         }
 
-        // Plugins
-        if ($this->security->isGranted(PermissionEnum::ACCESS_PLUGINS->value)) {
-            $adminItems[] = MenuItem::linkToCrud(
-                $this->translator->trans('pteroca.crud.plugin.plugins'),
-                'fa fa-puzzle-piece',
-                Plugin::class
-            );
+        // Plugins submenu
+        $pluginsSubmenu = $this->buildPluginsSubmenu();
+        if ($pluginsSubmenu !== null) {
+            $adminItems[] = $pluginsSubmenu;
         }
 
         // Users
@@ -407,6 +405,37 @@ class MenuBuilder
             ->setAction('index')
             ->set('context', $context)
             ->generateUrl();
+    }
+
+    private function buildPluginsSubmenu(): ?SubMenuItem
+    {
+        if (!$this->security->isGranted(PermissionEnum::ACCESS_PLUGINS->value)) {
+            return null;
+        }
+
+        $pluginItems = [];
+
+        $pluginItems[] = MenuItem::linkToCrud(
+            $this->translator->trans('pteroca.crud.plugin.manage_plugins'),
+            'fa fa-list',
+            Plugin::class
+        );
+
+        if ($this->security->isGranted(PermissionEnum::UPLOAD_PLUGIN->value)) {
+            $pluginItems[] = MenuItem::linkToUrl(
+                $this->translator->trans('pteroca.plugin.upload.upload_plugin'),
+                'fa fa-upload',
+                $this->adminUrlGenerator
+                    ->setController(PluginCrudController::class)
+                    ->setAction('uploadPlugin')
+                    ->generateUrl()
+            );
+        }
+
+        return MenuItem::subMenu(
+            $this->translator->trans('pteroca.crud.plugin.plugins'),
+            'fa fa-puzzle-piece'
+        )->setSubItems($pluginItems);
     }
 
     private function buildVouchersSubmenu(): ?SubMenuItem

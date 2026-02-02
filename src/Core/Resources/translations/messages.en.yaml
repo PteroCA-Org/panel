@@ -890,6 +890,7 @@ pteroca:
       original_product: 'Original product'
     plugin:
       plugins: 'Plugins'
+      manage_plugins: 'Manage Plugins'
       name: 'Name'
       display_name: 'Display Name'
       version: 'Version'
@@ -1004,6 +1005,7 @@ pteroca:
       currently_active_in_contexts: 'This theme is currently active in the following contexts'
       # Actions
       set_as_default: 'Set as Default'
+      set_as_default_in_context: 'Set as Default in %s'
       confirm_set_default: 'Set Theme as Default'
       confirm_set_default_message: 'Are you sure you want to set'
       for_context: 'as the default theme for'

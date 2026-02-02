@@ -536,7 +536,10 @@ class ThemeCrudController extends AbstractPanelController
         if (!$theme->isActive() && $this->getUser()?->hasPermission(PermissionEnum::SET_DEFAULT_THEME)) {
             $actions[] = [
                 'name' => 'set_default',
-                'label' => $this->translator->trans('pteroca.crud.theme.set_as_default'),
+                'label' => sprintf(
+                    $this->translator->trans('pteroca.crud.theme.set_as_default_in_context'),
+                    ucfirst($themeContext)
+                ),
                 'icon' => 'fa fa-check',
                 'url' => '#',
                 'class' => 'success',
