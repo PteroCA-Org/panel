@@ -1046,6 +1046,10 @@ pteroca:
         name_invalid_edges: 'Theme name cannot start or end with a hyphen or underscore'
         name_reserved: 'This theme name is reserved and cannot be used'
         name_already_exists: 'A theme with this name already exists'
+      # Export
+      export_theme: 'Export Theme'
+      export_success: 'Theme "%s" has been successfully exported'
+      export_error: 'Failed to export theme: %s'
     server:
       pterodactyl_server_id: 'Pterodactyl Server ID'
       pterodactyl_server_identifier: 'Pterodactyl Identifier'

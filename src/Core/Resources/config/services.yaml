@@ -255,3 +255,7 @@ services:
   App\Core\Service\Template\ThemeCopyService:
     arguments:
       $projectDir: '%kernel.project_dir%'
+
+  App\Core\Service\Template\ThemeExportService:
+    arguments:
+      $projectDir: '%kernel.project_dir%'

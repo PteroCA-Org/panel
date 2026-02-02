@@ -20,6 +20,7 @@ use App\Core\Service\Logs\LogService;
 use App\Core\Service\SettingService;
 use App\Core\Service\Template\TemplateService;
 use App\Core\Service\Template\ThemeCopyService;
+use App\Core\Service\Template\ThemeExportService;
 use App\Core\Service\Theme\ThemeUploadService;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -47,6 +48,7 @@ class ThemeCrudController extends AbstractPanelController
         private readonly LogService $logService,
         private readonly ThemeUploadService $themeUploadService,
         private readonly ThemeCopyService $themeCopyService,
+        private readonly ThemeExportService $themeExportService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -75,6 +77,7 @@ class ThemeCrudController extends AbstractPanelController
             'uploadTheme' => PermissionEnum::UPLOAD_THEME->value,
             'processUpload' => PermissionEnum::UPLOAD_THEME->value,
             'copyTheme' => PermissionEnum::COPY_THEME->value,
+            'exportTheme' => PermissionEnum::EXPORT_THEME->value,
         ];
     }
 
@@ -462,6 +465,60 @@ class ThemeCrudController extends AbstractPanelController
             ->generateUrl());
     }
 
+    #[Route('/admin/theme/export', name: 'admin_theme_export', methods: ['GET'])]
+    public function exportTheme(AdminContext $context): Response
+    {
+        $request = $context->getRequest();
+        $themeName = $request->query->get('themeName');
+        $themeContext = $request->query->get('context', 'panel');
+
+        // Validate context
+        if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
+            $themeContext = 'panel';
+        }
+
+        // Validate theme exists
+        if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.theme.theme_not_found'),
+                $themeName
+            ));
+            return $this->redirect($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction('index')
+                ->set('context', $themeContext)
+                ->generateUrl());
+        }
+
+        try {
+            // Export theme to ZIP
+            $zipFilePath = $this->themeExportService->exportTheme($themeName);
+
+            // Log action
+            $this->logService->logAction(
+                $this->getUser(),
+                LogActionEnum::THEME_EXPORTED,
+                [
+                    'theme' => $themeName,
+                    'context' => $themeContext,
+                ]
+            );
+
+            // Return download response
+            return $this->themeExportService->createDownloadResponse($zipFilePath, $themeName);
+        } catch (\Exception $e) {
+            $this->addFlash('danger', sprintf(
+                $this->translator->trans('pteroca.crud.theme.export_error'),
+                $e->getMessage()
+            ));
+            return $this->redirect($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction('index')
+                ->set('context', $themeContext)
+                ->generateUrl());
+        }
+    }
+
     #[Route('/admin/theme/upload', name: 'admin_theme_upload')]
     public function uploadTheme(AdminContext $context): Response
     {
@@ -651,6 +708,22 @@ class ThemeCrudController extends AbstractPanelController
                     'theme-display-name' => $theme->getDisplayName(),
                     'theme-context' => $themeContext,
                 ],
+            ];
+        }
+
+        // Export action
+        if ($this->getUser()?->hasPermission(PermissionEnum::EXPORT_THEME)) {
+            $actions[] = [
+                'name' => 'export',
+                'label' => $this->translator->trans('pteroca.crud.theme.export_theme'),
+                'icon' => 'fa fa-download',
+                'url' => $this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('exportTheme')
+                    ->set('themeName', $theme->getName())
+                    ->set('context', $themeContext)
+                    ->generateUrl(),
+                'class' => 'secondary',
             ];
         }
 
