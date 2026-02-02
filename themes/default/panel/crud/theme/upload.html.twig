@@ -1,0 +1,59 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content_header_wrapper %}
+    <div class="dashboard-header rounded-3 p-4 mb-4 mt-4">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary rounded-circle me-3">
+                        <i class="fas fa-upload p-3 text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-1 fw-bold">{{ page_title }}</h4>
+                        <p class="text-muted mb-0">{{ 'pteroca.theme.upload.description'|trans }}</p>
+                    </div>
+                </div>
+                <div>
+                    <a href="{{ back_url }}" class="btn secondary">
+                        <i class="fa fa-arrow-left"></i> {{ 'pteroca.theme.upload.back_to_list'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body p-4">
+            {{ form_start(form, {'action': path('admin_theme_upload_process'), 'method': 'POST'}) }}
+
+            <div class="mb-3">
+                {{ form_label(form.themeFile) }}
+                {{ form_widget(form.themeFile) }}
+                {{ form_errors(form.themeFile) }}
+                <div class="form-text">{{ 'pteroca.theme.upload.file_help'|trans }}</div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                {{ form_widget(form.submit) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    {# Requirements info box #}
+    <div class="card border-0 shadow-sm rounded-3 mt-4">
+        <div class="card-body p-4">
+            <h5 class="mb-3"><i class="fas fa-info-circle me-2"></i>{{ 'pteroca.theme.upload.requirements'|trans }}</h5>
+            <ul class="mb-0">
+                <li>{{ 'pteroca.theme.upload.req_zip_format'|trans }}</li>
+                <li>{{ 'pteroca.theme.upload.req_max_size'|trans }}</li>
+                <li>{{ 'pteroca.theme.upload.req_structure'|trans }}</li>
+                <li>{{ 'pteroca.theme.upload.req_manifest'|trans }}</li>
+                <li>{{ 'pteroca.theme.upload.req_contexts'|trans }}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

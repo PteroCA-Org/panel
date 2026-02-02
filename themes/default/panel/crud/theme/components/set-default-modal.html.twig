@@ -1,0 +1,53 @@
+{# Set Default Theme Confirmation Modal #}
+<div class="modal fade" id="setDefaultThemeModal" tabindex="-1" aria-labelledby="setDefaultThemeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="setDefaultThemeModalLabel">
+                    <i class="fa fa-check"></i> {{ 'pteroca.crud.theme.confirm_set_default'|trans }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'pteroca.crud.theme.cancel'|trans }}"></button>
+            </div>
+            <form method="post" action="{{ ea_url({ crudAction: 'setDefaultTheme', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\ThemeCrudController' }) }}" id="set-default-theme-form">
+                <input type="hidden" name="themeName" id="setDefaultThemeName">
+                <input type="hidden" name="context" id="setDefaultThemeContext">
+                <div class="modal-body">
+                    <p>{{ 'pteroca.crud.theme.confirm_set_default_message'|trans }} <strong id="modal-theme-name"></strong> {{ 'pteroca.crud.theme.for_context'|trans }} <strong id="modal-theme-context"></strong>?</p>
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        {{ 'pteroca.crud.theme.set_default_warning'|trans }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn secondary" data-bs-dismiss="modal">
+                        {{ 'pteroca.crud.theme.cancel'|trans }}
+                    </button>
+                    <button type="submit" class="btn success">
+                        <i class="fa fa-check"></i> {{ 'pteroca.crud.theme.confirm'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('setDefaultThemeModal');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const themeName = button.getAttribute('data-theme-name');
+                const themeDisplayName = button.getAttribute('data-theme-display-name');
+                const themeContext = button.getAttribute('data-theme-context');
+
+                // Populate modal fields
+                document.getElementById('modal-theme-name').textContent = themeDisplayName;
+                document.getElementById('modal-theme-context').textContent = themeContext;
+                document.getElementById('setDefaultThemeName').value = themeName;
+                document.getElementById('setDefaultThemeContext').value = themeContext;
+            });
+        }
+    });
+</script>
