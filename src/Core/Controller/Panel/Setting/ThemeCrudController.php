@@ -10,6 +10,26 @@ use App\Core\Enum\LogActionEnum;
 use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingEnum;
 use App\Core\Enum\ViewNameEnum;
+use App\Core\Event\Theme\ThemeCopiedEvent;
+use App\Core\Event\Theme\ThemeCopyFailedEvent;
+use App\Core\Event\Theme\ThemeCopyRequestedEvent;
+use App\Core\Event\Theme\ThemeDefaultChangedEvent;
+use App\Core\Event\Theme\ThemeDefaultChangeFailedEvent;
+use App\Core\Event\Theme\ThemeDefaultChangeRequestedEvent;
+use App\Core\Event\Theme\ThemeDeletedEvent;
+use App\Core\Event\Theme\ThemeDeletingEvent;
+use App\Core\Event\Theme\ThemeDeletionFailedEvent;
+use App\Core\Event\Theme\ThemeDetailsDataLoadedEvent;
+use App\Core\Event\Theme\ThemeDetailsPageAccessedEvent;
+use App\Core\Event\Theme\ThemeExportedEvent;
+use App\Core\Event\Theme\ThemeExportFailedEvent;
+use App\Core\Event\Theme\ThemeExportRequestedEvent;
+use App\Core\Event\Theme\ThemeIndexDataLoadedEvent;
+use App\Core\Event\Theme\ThemeIndexPageAccessedEvent;
+use App\Core\Event\Theme\ThemeUploadedEvent;
+use App\Core\Event\Theme\ThemeUploadFailedEvent;
+use App\Core\Event\Theme\ThemeUploadPageAccessedEvent;
+use App\Core\Event\Theme\ThemeUploadRequestedEvent;
 use App\Core\Exception\Theme\InvalidTemplateManifestException;
 use App\Core\Exception\Theme\InvalidThemeStructureException;
 use App\Core\Exception\Theme\ThemeAlreadyExistsException;
@@ -84,6 +104,12 @@ class ThemeCrudController extends AbstractPanelController
             $themeContext = 'panel';
         }
 
+        $this->dispatchDataEvent(
+            ThemeIndexPageAccessedEvent::class,
+            $request,
+            [$themeContext]
+        );
+
         $activeThemeSetting = match($themeContext) {
             'panel' => SettingEnum::PANEL_THEME->value,
             'landing' => SettingEnum::LANDING_THEME->value,
@@ -92,6 +118,12 @@ class ThemeCrudController extends AbstractPanelController
         $activeThemeName = $this->settingService->getSetting($activeThemeSetting);
 
         $themes = $this->templateService->getThemesForContext($themeContext, $activeThemeName);
+
+        $this->dispatchDataEvent(
+            ThemeIndexDataLoadedEvent::class,
+            $request,
+            [$themeContext, $themes, count($themes), $activeThemeName]
+        );
 
         $themeActions = [];
         foreach ($themes as $theme) {
@@ -132,6 +164,12 @@ class ThemeCrudController extends AbstractPanelController
             $themeContext = 'panel';
         }
 
+        $this->dispatchDataEvent(
+            ThemeDetailsPageAccessedEvent::class,
+            $request,
+            [$themeName, $themeContext]
+        );
+
         if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -169,6 +207,12 @@ class ThemeCrudController extends AbstractPanelController
         $theme = $this->templateService->getThemeDTO($themeName, $themeContext, $themeName === $activeThemeName);
         $themeInfo = $this->templateService->getTemplateInfo($themeName);
         $themeActions = $this->getThemeActions($theme);
+
+        $this->dispatchDataEvent(
+            ThemeDetailsDataLoadedEvent::class,
+            $request,
+            [$themeName, $themeContext, $theme, $themeInfo, $activeContexts]
+        );
 
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
         $this->appendCrudTemplateContext('theme');
@@ -219,6 +263,12 @@ class ThemeCrudController extends AbstractPanelController
                 'email' => SettingEnum::EMAIL_THEME->value,
             };
 
+            $this->dispatchDataEvent(
+                ThemeDefaultChangeRequestedEvent::class,
+                $request,
+                [$themeName, $themeContext, $settingName]
+            );
+
             $this->settingService->saveSettingInCache($settingName, $themeName);
 
             $this->logService->logAction(
@@ -234,12 +284,24 @@ class ThemeCrudController extends AbstractPanelController
             $themeMetadata = $this->templateService->getRawTemplateInfo($themeName);
             $displayName = $themeMetadata['name'] ?? $themeName;
 
+            $this->dispatchDataEvent(
+                ThemeDefaultChangedEvent::class,
+                $request,
+                [$themeName, $displayName, $themeContext, $settingName]
+            );
+
             $this->addFlash('success', sprintf(
                 $this->translator->trans('pteroca.crud.theme.set_as_default_success'),
                 $displayName,
                 $themeContext
             ));
         } catch (\Exception $e) {
+            $this->dispatchDataEvent(
+                ThemeDefaultChangeFailedEvent::class,
+                $request,
+                [$themeName, $themeContext, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.set_as_default_error'),
                 $e->getMessage()
@@ -313,6 +375,22 @@ class ThemeCrudController extends AbstractPanelController
             $themeMetadata = $this->templateService->getRawTemplateInfo($themeName);
             $displayName = $themeMetadata['name'] ?? $themeName;
 
+            $event = $this->dispatchDataEvent(
+                ThemeDeletingEvent::class,
+                $request,
+                [$themeName, $displayName, $themeContext]
+            );
+
+            if ($event->isPropagationStopped()) {
+                $this->addFlash('warning', $this->translator->trans('pteroca.crud.theme.deletion_prevented'));
+
+                return $this->redirect($this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction('index')
+                    ->set('context', $themeContext)
+                    ->generateUrl());
+            }
+
             $themePath = $this->getParameter('kernel.project_dir') . '/themes/' . $themeName;
             $assetsPath = $this->getParameter('kernel.project_dir') . '/public/assets/theme/' . $themeName;
 
@@ -333,11 +411,23 @@ class ThemeCrudController extends AbstractPanelController
                 ]
             );
 
+            $this->dispatchDataEvent(
+                ThemeDeletedEvent::class,
+                $request,
+                [$themeName, $displayName, $themeContext]
+            );
+
             $this->addFlash('success', sprintf(
                 $this->translator->trans('pteroca.crud.theme.delete_success'),
                 $displayName
             ));
         } catch (\Exception $e) {
+            $this->dispatchDataEvent(
+                ThemeDeletionFailedEvent::class,
+                $request,
+                [$themeName, $themeContext, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.delete_error'),
                 $e->getMessage()
@@ -396,6 +486,12 @@ class ThemeCrudController extends AbstractPanelController
             $sourceMetadata = $this->templateService->getRawTemplateInfo($sourceThemeName);
             $sourceDisplayName = $sourceMetadata['name'] ?? $sourceThemeName;
 
+            $this->dispatchDataEvent(
+                ThemeCopyRequestedEvent::class,
+                $request,
+                [$sourceThemeName, $newThemeName, $themeContext]
+            );
+
             $this->themeCopyService->copyTheme($sourceThemeName, $newThemeName);
 
             $this->logService->logAction(
@@ -408,12 +504,24 @@ class ThemeCrudController extends AbstractPanelController
                 ]
             );
 
+            $this->dispatchDataEvent(
+                ThemeCopiedEvent::class,
+                $request,
+                [$sourceThemeName, $sourceDisplayName, $newThemeName, $themeContext]
+            );
+
             $this->addFlash('success', sprintf(
                 $this->translator->trans('pteroca.crud.theme.copy_success'),
                 $sourceDisplayName,
                 $newThemeName
             ));
         } catch (\Exception $e) {
+            $this->dispatchDataEvent(
+                ThemeCopyFailedEvent::class,
+                $request,
+                [$sourceThemeName, $newThemeName, $themeContext, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.copy_error'),
                 $e->getMessage()
@@ -455,6 +563,12 @@ class ThemeCrudController extends AbstractPanelController
         }
 
         try {
+            $this->dispatchDataEvent(
+                ThemeExportRequestedEvent::class,
+                $request,
+                [$themeName, $themeContext]
+            );
+
             $zipFilePath = $this->themeExportService->exportTheme($themeName);
 
             $this->logService->logAction(
@@ -466,8 +580,20 @@ class ThemeCrudController extends AbstractPanelController
                 ]
             );
 
+            $this->dispatchDataEvent(
+                ThemeExportedEvent::class,
+                $request,
+                [$themeName, $themeContext, $zipFilePath]
+            );
+
             return $this->themeExportService->createDownloadResponse($zipFilePath, $themeName);
         } catch (\Exception $e) {
+            $this->dispatchDataEvent(
+                ThemeExportFailedEvent::class,
+                $request,
+                [$themeName, $themeContext, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.export_error'),
                 $e->getMessage()
@@ -484,6 +610,9 @@ class ThemeCrudController extends AbstractPanelController
     public function uploadTheme(AdminContext $context): Response
     {
         $request = $context->getRequest();
+
+        $this->dispatchSimpleEvent(ThemeUploadPageAccessedEvent::class, $request);
+
         $form = $this->createForm(ThemeUploadFormType::class);
 
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
@@ -521,6 +650,13 @@ class ThemeCrudController extends AbstractPanelController
 
         try {
             $file = $form->get('themeFile')->getData();
+
+            $this->dispatchDataEvent(
+                ThemeUploadRequestedEvent::class,
+                $request,
+                [$file->getClientOriginalName()]
+            );
+
             $result = $this->themeUploadService->uploadTheme($file, true);
 
             $this->logService->logAction(
@@ -530,6 +666,12 @@ class ThemeCrudController extends AbstractPanelController
                     'theme' => $result->manifest->name,
                     'version' => $result->manifest->version,
                 ]
+            );
+
+            $this->dispatchDataEvent(
+                ThemeUploadedEvent::class,
+                $request,
+                [$result->manifest->name, $result->manifest->version, $result->hasWarnings(), count($result->warnings)]
             );
 
             $this->addFlash('success', sprintf(
@@ -580,19 +722,50 @@ class ThemeCrudController extends AbstractPanelController
                 ->generateUrl());
 
         } catch (ThemeAlreadyExistsException $e) {
+            $this->dispatchDataEvent(
+                ThemeUploadFailedEvent::class,
+                $request,
+                [$e->getMessage(), get_class($e)]
+            );
+
             $this->addFlash('danger', $e->getMessage());
         } catch (InvalidThemeStructureException $e) {
+            $this->dispatchDataEvent(
+                ThemeUploadFailedEvent::class,
+                $request,
+                [$e->getMessage(), get_class($e)]
+            );
+
             $this->addFlash('danger', $this->translator->trans('pteroca.theme.upload.errors.invalid_structure'));
         } catch (InvalidTemplateManifestException $e) {
             $details = $e->getDetails();
             $errors = isset($details['errors']) ? implode(', ', $details['errors']) : $e->getMessage();
+
+            $this->dispatchDataEvent(
+                ThemeUploadFailedEvent::class,
+                $request,
+                [$errors, get_class($e)]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.theme.upload.errors.invalid_manifest'),
                 $errors
             ));
         } catch (ThemeSecurityException $e) {
+            $this->dispatchDataEvent(
+                ThemeUploadFailedEvent::class,
+                $request,
+                [$e->getMessage(), get_class($e)]
+            );
+
             $this->addFlash('danger', $this->translator->trans('pteroca.theme.upload.errors.security_critical'));
         } catch (\Exception $e) {
+            $this->dispatchDataEvent(
+                ThemeUploadFailedEvent::class,
+                $request,
+                [$e->getMessage(), get_class($e)]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.theme.upload.errors.generic'),
                 $e->getMessage()
