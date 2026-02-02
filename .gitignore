@@ -36,6 +36,14 @@ phpstan.neon
 !plugins/.gitkeep
 ###< pteroca/plugin-system ###
 
+###> pteroca/theme-system ###
+# Ignore custom themes but track default theme
+/themes/*/
+!themes/default/
+/public/assets/theme/*/
+!public/assets/theme/default/
+###< pteroca/theme-system ###
+
 ###> custom ###
 CLAUDE.md
 docs/

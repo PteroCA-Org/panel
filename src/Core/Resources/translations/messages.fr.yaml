@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Changer le mot de passe'
     change_password_subtitle: 'Entrez votre nouveau mot de passe pour le réinitialiser'
     success_password_changed: 'Le mot de passe a été changé avec succès.'
+    plugin_validation_failed: 'La réinitialisation du mot de passe a été bloquée par un plugin de sécurité. Veuillez contacter le support.'
     back_to_login: 'Retour à la connexion'
 
   dashboard:
@@ -758,12 +759,12 @@ pteroca:
       egg_allow_change: 'Permettre de changer l''egg lors de la réinstallation'
       allow_auto_renewal: 'Autoriser le renouvellement automatique'
       allow_auto_renewal_hint: 'Si activé, les clients peuvent configurer le renouvellement automatique pour les serveurs créés à partir de ce produit. Si désactivé, l''option de renouvellement automatique sera masquée et indisponible.'
-      disk_space_hint: 'La quantité totale de stockage disque allouée pour ce serveur (en Mo). Par exemple, 10240 équivaut à 10 Go.'
-      memory_hint: 'La limite totale de RAM allouée à ce serveur (en Mo). Le serveur ne peut pas dépasser cette limite de mémoire.'
+      disk_space_hint: 'La quantité totale de stockage disque allouée pour ce serveur (en Mio). Par exemple, 9500 Mio ≈ 10 Go.'
+      memory_hint: 'La limite totale de RAM allouée à ce serveur (en Mio). Le serveur ne peut pas dépasser cette limite de mémoire.'
       io_hint: 'Priorité d''E/S relative pour le conteneur du serveur. Des valeurs plus élevées signifient une priorité plus élevée (la valeur par défaut est 500).'
       cpu_hint: 'Limite de CPU en pourcentage, où 100% équivaut à un cœur de CPU complet. Par exemple, 200% équivaut à deux cœurs de CPU complets.'
       db_count_hint: 'Le nombre maximum de bases de données que ce serveur peut créer ou utiliser.'
-      swap_hint: 'Quantité de mémoire swap (en Mo) allouée à ce serveur. Réglez sur 0 pour désactiver le swap.'
+      swap_hint: 'Quantité de mémoire swap (en Mio) allouée à ce serveur. Réglez sur 0 pour désactiver le swap.'
       backups_hint: 'Le nombre maximum de sauvegardes pouvant être stockées pour ce serveur.'
       ports_hint: 'Nombre de ports supplémentaires (en plus du principal) que le serveur peut allouer. 0 signifie pas de ports supplémentaires.'
       nodes_hint: 'Sélectionnez une ou plusieurs machines physiques ou virtuelles (nœuds) de votre configuration Pterodactyl.'
@@ -1207,7 +1208,7 @@ pteroca:
       code: 'Code'
       code_help: 'Entrez le code du bon.'
       value: 'Valeur'
-      value_help: 'Entrez la valeur du bon. La valeur doit être un nombre.'
+      value_help: 'Entrez la valeur du bon. Les valeurs décimales (par ex. 1.5) sont prises en charge.'
       new_accounts_only: 'Uniquement pour les nouveaux comptes'
       new_accounts_only_help: 'Le bon ne peut être utilisé que par de nouveaux comptes.'
       minimum_top_up_amount: 'Montant minimum de rechargement'
@@ -1302,6 +1303,8 @@ pteroca:
       minimum_order_amount_required: 'Vous devez commander pour au moins {{ amount }} pour utiliser ce bon.'
       error_during_redeeming: 'Une erreur est survenue lors de l''utilisation du bon.'
       only_during_order: 'Le bon ne peut être utilisé que lors de la commande.'
+      server_discount_only_on_purchase: 'Ce bon d''achat ne peut être utilisé que lors de l''achat ou du renouvellement d''un serveur. Veuillez vous rendre à la boutique pour utiliser ce bon d''achat.'
+      payment_discount_only_on_payment: 'Ce bon d''achat ne peut être utilisé que sur la page de paiement. Veuillez procéder à la caisse pour appliquer ce bon d''achat.'
 
   email:
     creation_not_sent_misconfigured: 'Le serveur a été créé avec succès, mais l''e-mail de confirmation n''a pas pu être envoyé en raison de problèmes de configuration de l''e-mail. Veuillez vérifier vos paramètres d''e-mail.'

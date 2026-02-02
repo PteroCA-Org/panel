@@ -60,16 +60,14 @@ class ResetPasswordFormType extends AbstractType
         $this->eventDispatcher->dispatch($formBuildEvent);
     }
 
-    public function validatePasswordMatch(ExecutionContextInterface $context): void
+    public function validatePasswordMatch(mixed $value, ExecutionContextInterface $context): void
     {
         $form = $context->getRoot();
         $newPassword = $form->get('newPassword')->getData();
-        $confirmPassword = $form->get('confirmPassword')->getData();
 
-        if ($newPassword !== $confirmPassword) {
+        if ($newPassword !== $value) {
             $context
                 ->buildViolation($this->translator->trans('pteroca.recovery.passwords_must_match'))
-                ->atPath('confirmPassword')
                 ->addViolation();
         }
     }

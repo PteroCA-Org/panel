@@ -148,7 +148,16 @@
                             if (dataKey === 'state') {
                                 updateServerStateBadge(targetElement, value);
                             } else if (targetElement.hasAttribute('data-unit')) {
-                                targetElement.textContent = `${value} ${targetElement.getAttribute('data-unit')}`;
+                                let displayValue = value;
+
+                                if (dataKey === 'limits-memory' || dataKey === 'limits-disk') {
+                                    const numericValue = parseFloat(value);
+                                    if (!Number.isNaN(numericValue)) {
+                                        displayValue = Math.ceil(numericValue * 1.048576 / 100) * 100;
+                                    }
+                                }
+
+                                targetElement.textContent = `${displayValue} ${targetElement.getAttribute('data-unit')}`;
                             } else {
                                 targetElement.textContent = value;
                             }

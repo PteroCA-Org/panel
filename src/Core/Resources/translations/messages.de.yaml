@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Passwort ändern'
     change_password_subtitle: 'Geben Sie Ihr neues Passwort ein, um es zurückzusetzen'
     success_password_changed: 'Das Passwort wurde erfolgreich geändert.'
+    plugin_validation_failed: 'Das Zurücksetzen des Passworts wurde durch ein Sicherheits-Plugin blockiert. Bitte wenden Sie sich an den Support.'
     back_to_login: 'Zurück zur Anmeldung'
 
   dashboard:
@@ -761,12 +762,12 @@ pteroca:
       egg_allow_change: 'Änderung des Eggs bei Neuinstallation zulassen'
       allow_auto_renewal: 'Automatische Verlängerung erlauben'
       allow_auto_renewal_hint: 'Wenn aktiviert, können Kunden die automatische Verlängerung für Server einrichten, die aus diesem Produkt erstellt wurden. Wenn deaktiviert, ist die Option für automatische Verlängerung ausgeblendet und nicht verfügbar.'
-      disk_space_hint: 'Die insgesamt für diesen Server zugewiesene Festplattenspeichermenge (in MB). Zum Beispiel entspricht 10240 10 GB.'
-      memory_hint: 'Das insgesamt für diesen Server zugewiesene RAM-Limit (in MB). Der Server kann dieses Speicherlimit nicht überschreiten.'
+      disk_space_hint: 'Die insgesamt für diesen Server zugewiesene Festplattenspeichermenge (in MiB). Zum Beispiel entspricht 9500 MiB ≈ 10 GB.'
+      memory_hint: 'Das insgesamt für diesen Server zugewiesene RAM-Limit (in MiB). Der Server kann dieses Speicherlimit nicht überschreiten.'
       io_hint: 'Relative I/O-Priorität für den Server-Container. Höhere Werte bedeuten höhere Priorität (Standard ist 500).'
       cpu_hint: 'CPU-Limit als Prozentsatz, wobei 100% einem vollständigen CPU-Kern entspricht. Zum Beispiel entsprechen 200% zwei vollständigen CPU-Kernen.'
       db_count_hint: 'Die maximale Anzahl von Datenbanken, die dieser Server erstellen oder verwenden kann.'
-      swap_hint: 'Die Menge an Swap-Speicher (in MB), die diesem Server zugewiesen ist. Auf 0 setzen, um Swap zu deaktivieren.'
+      swap_hint: 'Die Menge an Swap-Speicher (in MiB), die diesem Server zugewiesen ist. Auf 0 setzen, um Swap zu deaktivieren.'
       backups_hint: 'Die maximale Anzahl von Backups, die für diesen Server gespeichert werden können.'
       ports_hint: 'Anzahl der zusätzlichen Ports (neben dem primären), die der Server zuweisen kann. 0 bedeutet keine zusätzlichen Ports.'
       nodes_hint: 'Wählen Sie eine oder mehrere physische oder virtuelle Maschinen (Knoten) aus Ihrer Pterodactyl-Konfiguration aus.'
@@ -1208,7 +1209,7 @@ pteroca:
       code: 'Code'
       code_help: 'Gib den Gutscheincode ein.'
       value: 'Wert'
-      value_help: 'Gib den Gutscheinwert ein. Der Wert muss eine Zahl sein.'
+      value_help: 'Gib den Gutscheinwert ein. Dezimalwerte (z.B. 1,5) werden unterstützt.'
       new_accounts_only: 'Nur für neue Konten'
       new_accounts_only_help: 'Der Gutschein kann nur von neuen Konten verwendet werden.'
       minimum_top_up_amount: 'Mindestaufladebetrag'
@@ -1303,6 +1304,8 @@ pteroca:
       minimum_order_amount_required: 'Sie müssen mindestens {{ amount }} bestellen, um diesen Gutschein zu verwenden.'
       error_during_redeeming: 'Fehler beim Einlösen des Gutscheins.'
       only_during_order: 'Gutschein kann nur während der Bestellung verwendet werden.'
+      server_discount_only_on_purchase: 'Dieser Gutschein kann nur beim Kauf oder der Verlängerung eines Servers verwendet werden. Bitte gehen Sie zum Shop, um diesen Gutschein zu verwenden.'
+      payment_discount_only_on_payment: 'Dieser Gutschein kann nur auf der Zahlungsseite verwendet werden. Bitte fahren Sie mit der Kasse fort, um diesen Gutschein anzuwenden.'
 
   email:
     creation_not_sent_misconfigured: 'Server wurde erfolgreich erstellt, aber die Bestätigungs-E-Mail konnte aufgrund von E-Mail-Konfigurationsproblemen nicht gesendet werden. Bitte überprüfen Sie Ihre E-Mail-Einstellungen.'

@@ -25,15 +25,27 @@ class SystemOperationService
 
     public function clearCache(): void
     {
-        exec('php bin/console cache:clear', $output, $returnCode);
+        exec('php bin/console cache:clear --no-warmup', $output, $returnCode);
         if ($returnCode !== 0) {
             throw new RuntimeException('Failed to clear cache. Output: ' . implode("\n", $output));
         }
 
         if ($this->options['verbose'] ?? false) {
-            $this->io->success('Application cache cleared successfully.');
+            $this->io->text('Cache cleared successfully.');
             if (!empty($output)) {
                 $this->io->text('Cache clear output: ' . implode("\n", $output));
+            }
+        }
+
+        exec('php bin/console cache:warmup', $warmupOutput, $warmupReturnCode);
+        if ($warmupReturnCode !== 0) {
+            throw new RuntimeException('Failed to warmup cache. Output: ' . implode("\n", $warmupOutput));
+        }
+
+        if ($this->options['verbose'] ?? false) {
+            $this->io->success('Cache warmed up successfully.');
+            if (!empty($warmupOutput)) {
+                $this->io->text('Cache warmup output: ' . implode("\n", $warmupOutput));
             }
         }
     }

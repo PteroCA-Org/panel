@@ -97,6 +97,7 @@ pteroca:
     change_password: 'Change password'
     change_password_subtitle: 'Enter your new password to reset it'
     success_password_changed: 'Your password has been successfully changed.'
+    plugin_validation_failed: 'Password reset was blocked by a security plugin. Please contact support.'
     back_to_login: 'Back to login'
 
   page:
@@ -770,12 +771,12 @@ pteroca:
       allow_user_select_location_hint: 'When enabled, users can choose which node/location their server will be created on'
       variant_products: 'Linked Products (Variants)'
       variant_products_hint: 'Link other products as variants. When location selection is enabled, nodes from linked products will also be available for selection'
-      disk_space_hint: 'The total amount of disk storage allocated for this server (in MB). For example, 10240 equals 10 GB.'
-      memory_hint: 'The total RAM limit allocated to this server (in MB). The server cannot exceed this memory limit.'
+      disk_space_hint: 'The total amount of disk storage allocated for this server (in MiB). For example, 9500 MiB ≈ 10 GB.'
+      memory_hint: 'The total RAM limit allocated to this server (in MiB). The server cannot exceed this memory limit.'
       io_hint: 'Relative I/O priority for the server container. Higher values mean higher priority (default is 500).'
       cpu_hint: 'CPU limit as a percentage, where 100% is equal to one full CPU core. For example, 200% is equal to two full CPU cores.'
       db_count_hint: 'The maximum number of databases this server can create or use.'
-      swap_hint: 'Amount of swap memory (in MB) allocated to this server. Set to 0 to disable swap.'
+      swap_hint: 'Amount of swap memory (in MiB) allocated to this server. Set to 0 to disable swap.'
       backups_hint: 'The maximum number of backups that can be stored for this server.'
       ports_hint: 'Number of additional ports (besides the primary one) that the server can allocate. 0 means no extra ports.'
       nodes_hint: 'Select one or more physical or virtual machines (nodes) from your Pterodactyl setup.'
@@ -1208,7 +1209,7 @@ pteroca:
       code: 'Code'
       code_help: 'Enter the voucher code.'
       value: 'Value'
-      value_help: 'Enter the voucher value. The value must be a number.'
+      value_help: 'Enter the voucher value. Decimal values (e.g., 1.5) are supported.'
       new_accounts_only: 'For new accounts only'
       new_accounts_only_help: 'The voucher can only be used by new accounts.'
       minimum_top_up_amount: 'Minimum top-up amount'
@@ -1303,6 +1304,8 @@ pteroca:
       minimum_order_amount_required: 'You must order at least {{ amount }} to use this voucher.'
       error_during_redeeming: 'An error occurred while redeeming the voucher.'
       only_during_order: 'Voucher can only be used during the order.'
+      server_discount_only_on_purchase: 'This voucher can only be used when purchasing or renewing a server. Please go to the store to use this voucher.'
+      payment_discount_only_on_payment: 'This voucher can only be used on the payment page. Please proceed to the checkout to apply this voucher.'
 
   email:
     creation_not_sent_misconfigured: 'Server was created successfully, but the confirmation email could not be sent due to email configuration issues. Please check your email settings.'

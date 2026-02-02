@@ -102,6 +102,7 @@ pteroca:
     change_password: '更改密码'
     change_password_subtitle: '输入新密码以重置'
     success_password_changed: '密码已成功更改。'
+    plugin_validation_failed: '密码重置被安全插件阻止。请联系支持。'
     back_to_login: '返回登录'
 
   dashboard:
@@ -761,12 +762,12 @@ pteroca:
       egg_allow_change: '允许在重新安装时更改egg'
       allow_auto_renewal: '允许自动续费'
       allow_auto_renewal_hint: '如果启用，客户可以为此产品创建的服务器设置自动续费。如果禁用，自动续费选项将被隐藏且不可用。'
-      disk_space_hint: '为此服务器分配的总磁盘存储量（以MB为单位）。例如，10240等于10 GB。'
-      memory_hint: '为此服务器分配的总RAM限制（以MB为单位）。服务器不能超过此内存限制。'
+      disk_space_hint: '为此服务器分配的总磁盘存储量（以MiB为单位）。例如，9500 MiB等于10 GB。'
+      memory_hint: '为此服务器分配的总RAM限制（以MiB为单位）。服务器不能超过此内存限制。'
       io_hint: '服务器容器的相对I/O优先级。值越高，优先级越高（默认值为500）。'
       cpu_hint: 'CPU限制，以百分比表示，其中100%等于一个完整的CPU核心。例如，200%等于两个完整的CPU核心。'
       db_count_hint: '此服务器可以创建或使用的最大数据库数量。'
-      swap_hint: '为此服务器分配的交换内存量（以MB为单位）。设置为0以禁用交换。'
+      swap_hint: '为此服务器分配的交换内存量（以MiB为单位）。设置为0以禁用交换。'
       backups_hint: '此服务器可以存储的最大备份数量。'
       ports_hint: '服务器可以分配的额外端口数量（除了主要端口之外）。0表示没有额外端口。'
       nodes_hint: '从您的Pterodactyl设置中选择一个或多个物理或虚拟机器（节点）。'
@@ -1222,7 +1223,7 @@ pteroca:
       code: '优惠码'
       code_help: '输入代金券代码。'
       value: '金额'
-      value_help: '输入代金券的数值。数值必须是数字。'
+      value_help: '输入代金券的数值。支持小数值（例如 1.5）。'
       new_accounts_only: '仅限新用户'
       new_accounts_only_help: '此代金券仅限新账户使用。'
       minimum_top_up_amount: '最低充值金额'
@@ -1317,6 +1318,8 @@ pteroca:
       minimum_order_amount_required: '您必须至少订购 {{ amount }} 才能使用此代金券。'
       error_during_redeeming: '兑换代金券时发生错误。'
       only_during_order: '代金券仅可在下单时使用。'
+      server_discount_only_on_purchase: '此优惠券只能在购买或续订服务器时使用。请前往商店使用此优惠券。'
+      payment_discount_only_on_payment: '此优惠券只能在付款页面使用。请前往结账以应用此优惠券。'
 
   email:
     creation_not_sent_misconfigured: '服务器已成功创建，但由于电子邮件配置问题，无法发送确认电子邮件。请检查您的电子邮件设置。'

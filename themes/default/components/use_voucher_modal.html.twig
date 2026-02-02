@@ -67,29 +67,35 @@
                         spinner.classList.add('d-none')
 
                         response.json().then(data => {
+                            if (!response.ok) {
+                                alert(data.message || '{{ 'pteroca.api.voucher.error_during_redeeming'|trans }}')
+                                return
+                            }
+
                             if (data.type === 'balance_topup') {
                                 alert(data.message)
-
-                                if (response.ok) {
-                                    window.location.reload()
-                                }
+                                window.location.reload()
                             } else {
                                 const appliedDiscountElement = document.querySelector('#applied-discount')
                                 if (!appliedDiscountElement || typeof applyDiscountCode !== 'function') {
-                                    alert('{{ 'pteroca.api.voucher.only_during_order'|trans }}')
+                                    let errorMessage = data.type === 'server_discount'
+                                        ? '{{ 'pteroca.api.voucher.server_discount_only_on_purchase'|trans }}'
+                                        : '{{ 'pteroca.api.voucher.payment_discount_only_on_payment'|trans }}';
+                                    alert(errorMessage);
                                     return
                                 }
 
-                                const discountCodeInput = document.querySelector('#voucher-code')
-                                if ((!discountCodeInput || data.type !== discountCodeInput.dataset.voucherType) && data.type !== 'balance_topup') {
-                                    alert('{{ 'pteroca.voucher.voucher_type_invalid'|trans }}')
+                                const discountCodeInput = document.querySelector('[name$="[voucher]"]');
+                                if (!discountCodeInput || data.type !== discountCodeInput.dataset.voucherType) {
+                                    let voucherTypeMsg = data.type === 'server_discount'
+                                        ? '{{ 'pteroca.api.voucher.server_discount_only_on_purchase'|trans }}'
+                                        : '{{ 'pteroca.api.voucher.payment_discount_only_on_payment'|trans }}';
+                                    alert(voucherTypeMsg);
                                     return
                                 }
 
                                 alert(data.message)
-                                if (response.ok) {
-                                    applyDiscountCode(voucherCode, data.value)
-                                }
+                                applyDiscountCode(voucherCode, data.value)
                             }
                         })
                     }).catch(() => {

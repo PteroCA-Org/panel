@@ -29,10 +29,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Exception;
-use InvalidArgumentException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RuntimeException;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -90,7 +91,7 @@ class UserAccountCrudController extends AbstractPanelController
             IdField::new('id')->hideOnForm(),
             EmailField::new('email', $this->translator->trans('pteroca.crud.user.email'))
                 ->setFormTypeOption('disabled', true)
-                ->setColumns(5),
+                ->setColumns(6),
             ImageField::new('avatarPath', $this->translator->trans('pteroca.crud.user.avatar'))
                 ->setBasePath($this->getParameter('avatar_base_path'))
                 ->setUploadDir($uploadDirectory)
@@ -100,28 +101,35 @@ class UserAccountCrudController extends AbstractPanelController
                     'maxSize' => $this->getParameter('avatar_max_size'),
                     'mimeTypes' => $this->getParameter('avatar_allowed_extensions'),
                 ]))
-                ->setColumns(5),
+                ->setColumns(6),
 
             FormField::addRow(),
             TextField::new('name', $this->translator->trans('pteroca.crud.user.name'))
                 ->setMaxLength(255)
-                ->setColumns(5),
+                ->setColumns(6),
             TextField::new('surname', $this->translator->trans('pteroca.crud.user.surname'))
                 ->setMaxLength(255)
-                ->setColumns(5),
+                ->setColumns(6),
 
             FormField::addRow(),
             TextField::new('plainPassword', $this->translator->trans('pteroca.crud.user.password'))
-                ->setFormTypeOption('attr', ['type' => 'password'])
+                ->setFormType(RepeatedType::class)
+                ->setFormTypeOptions([
+                    'type' => PasswordType::class,
+                    'first_options' => [
+                        'label' => $this->translator->trans('pteroca.crud.user.password'),
+                        'help' => $this->translator->trans('pteroca.crud.user.password_hint'),
+                    ],
+                    'second_options' => [
+                        'label' => $this->translator->trans('pteroca.crud.user.repeat_password'),
+                        'help' => $this->translator->trans('pteroca.crud.user.repeat_password_hint'),
+                    ],
+                    'invalid_message' => $this->translator->trans('pteroca.crud.user.passwords_must_match'),
+                ])
                 ->onlyOnForms()
-                ->setHelp($this->translator->trans('pteroca.crud.user.password_hint'))
-                ->setColumns(5),
-            TextField::new('repeatPassword', $this->translator->trans('pteroca.crud.user.repeat_password'))
-                ->setFormTypeOption('attr', ['type' => 'password'])
-                ->onlyOnForms()
-                ->setHelp($this->translator->trans('pteroca.crud.user.repeat_password_hint'))
-                ->setColumns(5),
-            
+                ->setRequired(false)
+                ->setColumns(6),
+
         ];
     }
 
@@ -179,14 +187,6 @@ class UserAccountCrudController extends AbstractPanelController
                 // Get request and build context
                 $request = $this->container->get('request_stack')->getCurrentRequest();
                 $eventContext = $request ? $this->buildMinimalEventContext($request) : [];
-
-                // Check if passwords match
-                if ($entityInstance->getPlainPassword() && $entityInstance->getRepeatPassword()) {
-                    if ($entityInstance->getPlainPassword() !== $entityInstance->getRepeatPassword()) {
-                        throw new InvalidArgumentException($this->translator->trans('pteroca.crud.user.passwords_must_match'));
-                    }
-                }
-
                 $plainPassword = $entityInstance->getPlainPassword();
 
                 // Dispatch UserAccountUpdateRequestedEvent

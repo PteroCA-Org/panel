@@ -102,6 +102,7 @@ pteroca:
     change_password: 'Zmień hasło'
     change_password_subtitle: 'Wprowadź nowe hasło, aby je zresetować'
     success_password_changed: 'Hasło zostało pomyślnie zmienione.'
+    plugin_validation_failed: 'Resetowanie hasła zostało zablokowane przez wtyczkę bezpieczeństwa. Skontaktuj się z pomocą techniczną.'
     back_to_login: 'Powrót do logowania'
 
   dashboard:
@@ -759,13 +760,13 @@ pteroca:
       egg_allow_change: 'Zezwól na zmianę egga przy reinstalacji'
       allow_auto_renewal: 'Zezwól na automatyczne odnawianie'
       allow_auto_renewal_hint: 'Jeśli włączone, klienci mogą skonfigurować automatyczne odnawianie dla serwerów utworzonych z tego produktu. Jeśli wyłączone, opcja automatycznego odnawiania będzie ukryta i niedostępna.'
-      disk_space_hint: 'Całkowita ilość miejsca na dysku przydzielona dla tego serwera (w MB). Na przykład, 10240 to 10 GB.'
-      memory_hint: 'Całkowity limit RAM przydzielony dla tego serwera (w MB). Serwer nie może przekroczyć tego limitu pamięci.'
+      disk_space_hint: 'Całkowita ilość miejsca na dysku przydzielona dla tego serwera (w MiB). Na przykład, 9500 MiB ≈ 10 GB.'
+      memory_hint: 'Całkowity limit RAM przydzielony dla tego serwera (w MiB). Serwer nie może przekroczyć tego limitu pamięci.'
       io_hint: 'Względny priorytet I/O dla kontenera serwera. Wyższe wartości oznaczają wyższy priorytet (domyślnie 500).'
       cpu_hint: 'Limit CPU jako procent, gdzie 100% to jeden pełny rdzeń CPU. Na przykład, 200% to dwa pełne rdzenie CPU.'
       threads_hint: 'Określone wątki CPU, na których może działać ten proces, lub pozostaw puste, aby zezwolić na wszystkie wątki. Może to być pojedyncza liczba lub lista oddzielona przecinkami. Przykład: 0, 0-1,3 lub 0,1,3,4.'
       db_count_hint: 'Maksymalna liczba baz danych, które ten serwer może utworzyć lub używać.'
-      swap_hint: 'Ilość pamięci swap (w MB) przydzielona dla tego serwera. Ustaw na 0, aby wyłączyć swap.'
+      swap_hint: 'Ilość pamięci swap (w MiB) przydzielona dla tego serwera. Ustaw na 0, aby wyłączyć swap.'
       backups_hint: 'Maksymalna liczba kopii zapasowych, które można przechowywać dla tego serwera.'
       ports_hint: 'Liczba dodatkowych portów (oprócz głównego), które serwer może przydzielić. 0 oznacza brak dodatkowych portów.'
       schedules_hint: 'Maksymalna liczba harmonogramów, które można utworzyć dla tego serwera. 0 oznacza brak możliwości korzystania z harmonogramów.'
@@ -1208,7 +1209,7 @@ pteroca:
       code: 'Kod'
       code_help: 'Wprowadź kod vouchera.'
       value: 'Wartość'
-      value_help: 'Wprowadź wartość vouchera. Wartość musi być liczbą.'
+      value_help: 'Wprowadź wartość vouchera. Obsługiwane są wartości dziesiętne (np. 1.5).'
       new_accounts_only: 'Tylko dla nowych kont'
       new_accounts_only_help: 'Voucher może być użyty tylko przez nowe konta.'
       minimum_top_up_amount: 'Minimalna kwota doładowania'
@@ -1303,6 +1304,8 @@ pteroca:
       minimum_order_amount_required: 'Aby użyć tego vouchera, musisz zamówić za co najmniej {{ amount }}.'
       error_during_redeeming: 'Wystąpił błąd podczas realizacji vouchera.'
       only_during_order: 'Voucher może być użyty tylko podczas składania zamówienia.'
+      server_discount_only_on_purchase: 'Ten kupon może być używany tylko podczas zakupu lub odnawiania serwera. Przejdź do sklepu, aby użyć tego kuponu.'
+      payment_discount_only_on_payment: 'Ten kupon może być używany tylko na stronie płatności. Przejdź do kasy, aby zastosować ten kupon.'
 
   email:
     creation_not_sent_misconfigured: 'Serwer został pomyślnie utworzony, ale wiadomość e-mail z potwierdzeniem nie mogła zostać wysłana z powodu problemów z konfiguracją poczty e-mail. Sprawdź ustawienia poczty e-mail.'
