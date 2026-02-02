@@ -2,6 +2,7 @@
 
 namespace App\Core\Service\Template;
 
+use App\Core\DTO\ThemeDTO;
 use App\Core\Service\System\SystemVersionService;
 use DirectoryIterator;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -207,6 +208,55 @@ class TemplateService
         }
 
         return $locales;
+    }
+
+    /**
+     * Get all themes for a specific context as DTOs
+     */
+    public function getThemesForContext(string $context, ?string $activeThemeName = null): array
+    {
+        $allThemes = $this->getAvailableTemplates();
+        $themes = [];
+
+        foreach ($allThemes as $themeName) {
+            if ($this->themeSupportsContext($themeName, $context)) {
+                $themes[] = $this->createThemeDTO($themeName, $context, $themeName === $activeThemeName);
+            }
+        }
+
+        return $themes;
+    }
+
+    /**
+     * Get single theme as DTO
+     */
+    public function getThemeDTO(string $themeName, string $context, bool $isActive): ThemeDTO
+    {
+        return $this->createThemeDTO($themeName, $context, $isActive);
+    }
+
+    /**
+     * Create a ThemeDTO from theme metadata
+     */
+    private function createThemeDTO(string $themeName, string $context, bool $isActive): ThemeDTO
+    {
+        $metadata = $this->getRawTemplateInfo($themeName);
+
+        return new ThemeDTO(
+            name: $metadata['name'] ?? $themeName,
+            displayName: $metadata['name'] ?? $themeName,
+            version: $metadata['version'] ?? 'unknown',
+            author: $metadata['author'] ?? 'Unknown',
+            description: $metadata['description'] ?? '',
+            license: $metadata['license'] ?? 'Unknown',
+            contexts: $metadata['contexts'] ?? [],
+            translations: $metadata['translations'] ?? [],
+            options: $metadata['options'] ?? [],
+            pterocaVersion: $metadata['pterocaVersion'] ?? 'unknown',
+            phpVersion: $metadata['phpVersion'] ?? 'unknown',
+            isActive: $isActive,
+            context: $context,
+        );
     }
 
     private function loadTemplateMetadata(string $templatePath, bool $loadRawData = false): array

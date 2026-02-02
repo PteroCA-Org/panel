@@ -978,6 +978,39 @@ pteroca:
       warning: 'Warning'
       cancel: 'Cancel'
       close: 'Close'
+    theme:
+      # List view
+      panel_themes: 'Panel Themes'
+      landing_themes: 'Landing Page Themes'
+      email_themes: 'Email Themes'
+      theme_management_description: 'Manage and configure themes for different contexts'
+      name: 'Theme Name'
+      version: 'Version'
+      author: 'Author'
+      status: 'Status'
+      actions: 'Actions'
+      active: 'Active'
+      inactive: 'Inactive'
+      no_themes_found: 'No themes found for this context'
+      # Detail view
+      theme_details: 'Theme Details'
+      theme_information: 'Theme Information'
+      back_to_list: 'Back to List'
+      show_details: 'Show Details'
+      currently_active: 'Currently Active Theme'
+      currently_active_message: 'This theme is currently being used for this context'
+      # Actions
+      set_as_default: 'Set as Default'
+      confirm_set_default: 'Set Theme as Default'
+      confirm_set_default_message: 'Are you sure you want to set'
+      for_context: 'as the default theme for'
+      set_default_warning: 'This will change the appearance immediately for all users'
+      cancel: 'Cancel'
+      confirm: 'Confirm'
+      # Messages
+      set_as_default_success: 'Theme "%s" has been set as default for %s context'
+      set_as_default_error: 'Failed to set theme as default: %s'
+      theme_not_found: 'Theme "%s" not found'
     server:
       pterodactyl_server_id: 'Pterodactyl Server ID'
       pterodactyl_server_identifier: 'Pterodactyl Identifier'
@@ -1336,6 +1369,10 @@ pteroca:
       roles_and_permissions: 'Roles & Permissions'
       roles: 'Roles'
       permissions: 'Permissions'
+      themes: 'Themes'
+      panel_themes: 'Panel Themes'
+      landing_themes: 'Landing Themes'
+      email_themes: 'Email Themes'
 
   api:
     servers:
