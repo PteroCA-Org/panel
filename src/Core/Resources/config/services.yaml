@@ -239,3 +239,15 @@ services:
   App\Core\EventSubscriber\TwigContextSubscriber:
     arguments:
       $templatesBaseDir: '%kernel.project_dir%/themes'
+
+  # Theme Upload System Services
+  App\Core\Service\Theme\ThemeUploadService:
+    arguments:
+      $themesDirectory: '%kernel.project_dir%/themes'
+      $publicAssetsDirectory: '%kernel.project_dir%/public/assets/theme'
+      $tempDirectory: '%kernel.project_dir%/var/tmp'
+      $currentPterocaVersion: '%version%'
+
+  App\Core\Service\Theme\TemplateManifestValidator:
+    arguments:
+      $currentPterocaVersion: '%version%'

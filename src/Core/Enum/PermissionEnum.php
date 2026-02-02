@@ -92,11 +92,13 @@ enum PermissionEnum: string
     case UPLOAD_PLUGIN = 'upload_plugin';
     case CONFIGURE_PLUGIN = 'configure_plugin';
 
-    // Themes (4)
+    // Themes (6)
     case ACCESS_THEMES = 'access_themes';
     case VIEW_THEME = 'view_theme';
     case SET_DEFAULT_THEME = 'set_default_theme';
     case CONFIGURE_THEME = 'configure_theme';
+    case UPLOAD_THEME = 'upload_theme';
+    case DELETE_THEME = 'delete_theme';
 
     // Role Management (7)
     case ACCESS_ROLES = 'access_roles';
@@ -221,6 +223,8 @@ enum PermissionEnum: string
                 self::VIEW_THEME,
                 self::SET_DEFAULT_THEME,
                 self::CONFIGURE_THEME,
+                self::UPLOAD_THEME,
+                self::DELETE_THEME,
             ],
             'role_management' => [
                 self::ACCESS_ROLES,

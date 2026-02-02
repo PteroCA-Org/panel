@@ -384,6 +384,16 @@ class MenuBuilder
             $this->generateThemeUrl('email')
         );
 
+        if ($this->security->isGranted(PermissionEnum::UPLOAD_THEME->value)) {
+            $themeItems[] = MenuItem::linkToUrl(
+                $this->translator->trans('pteroca.theme.upload.upload_theme'),
+                'fa fa-upload',
+                $this->adminUrlGenerator
+                    ->setRoute('admin_theme_upload')
+                    ->generateUrl()
+            );
+        }
+
         return MenuItem::subMenu(
             $this->translator->trans('pteroca.crud.menu.themes'),
             'fa fa-brush'

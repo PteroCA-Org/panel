@@ -43,13 +43,18 @@
 {% endblock %}
 
 {% block main %}
-    {# Show alert if theme is currently active #}
-    {% if theme.isActive %}
+    {# Show alert if theme is currently active in any context #}
+    {% if active_contexts is defined and active_contexts|length > 0 %}
         <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
             <i class="fas fa-check-circle me-2"></i>
             <div>
                 <strong>{{ 'pteroca.crud.theme.currently_active'|trans }}</strong>
-                <p class="mb-0">{{ 'pteroca.crud.theme.currently_active_message'|trans }}</p>
+                <p class="mb-0">
+                    {{ 'pteroca.crud.theme.currently_active_in_contexts'|trans }}:
+                    {% for context in active_contexts %}
+                        <span class="badge bg-success ms-1">{{ context|capitalize }}</span>
+                    {% endfor %}
+                </p>
             </div>
         </div>
     {% endif %}

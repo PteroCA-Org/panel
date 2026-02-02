@@ -13,6 +13,20 @@
                         <p class="text-muted mb-0">{{ 'pteroca.crud.theme.theme_management_description'|trans }}</p>
                     </div>
                 </div>
+                <div class="d-flex gap-2">
+                    {% block header_custom_actions %}
+                        {% if is_granted('upload_theme') %}
+                            <a href="{{ ea_url().setRoute('admin_theme_upload') }}" class="btn primary p-3">
+                                <i class="fa fa-upload"></i> {{ 'pteroca.theme.upload.upload_theme'|trans }}
+                            </a>
+                        {% endif %}
+                        {% if is_granted('configure_theme') %}
+                            <a href="{{ ea_url().setController('App\\Core\\Controller\\Panel\\Setting\\ThemeSettingCrudController').setAction('index') }}" class="btn secondary p-3">
+                                <i class="fa fa-palette"></i> {{ 'pteroca.crud.theme.appearance_settings'|trans }}
+                            </a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </div>
@@ -27,6 +41,7 @@
                     <th>{{ 'pteroca.crud.theme.name'|trans }}</th>
                     <th>{{ 'pteroca.crud.theme.version'|trans }}</th>
                     <th>{{ 'pteroca.crud.theme.author'|trans }}</th>
+                    <th>{{ 'pteroca.crud.theme.contexts'|trans }}</th>
                     <th>{{ 'pteroca.crud.theme.status'|trans }}</th>
                     <th class="text-center">{{ 'pteroca.crud.theme.actions'|trans }}</th>
                 </tr>
@@ -37,6 +52,15 @@
                         <td>{{ theme.displayName }}</td>
                         <td>{{ theme.version }}</td>
                         <td>{{ theme.author }}</td>
+                        <td>
+                            {% if theme.contexts is defined and theme.contexts|length > 0 %}
+                                {% for context in theme.contexts %}
+                                    <span class="badge bg-info me-1">{{ context|capitalize }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="text-muted">-</span>
+                            {% endif %}
+                        </td>
                         <td>
                             {% if theme.isActive %}
                                 <span class="badge bg-success">
@@ -53,7 +77,7 @@
                             {% if theme_actions[theme.name] is defined and theme_actions[theme.name]|length > 0 %}
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-light p-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v"></i>
+                                        <i class="fa fa-ellipsis-h"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         {% for action in theme_actions[theme.name] %}
@@ -76,7 +100,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5" class="text-center">
+                        <td colspan="6" class="text-center">
                             <em>{{ 'pteroca.crud.theme.no_themes_found'|trans }}</em>
                         </td>
                     </tr>
@@ -86,6 +110,7 @@
         </div>
     </div>
 
-    {# Include modal component #}
+    {# Include modal components #}
     {% include 'panel/crud/theme/components/set-default-modal.html.twig' %}
+    {% include 'panel/crud/theme/components/delete-theme-modal.html.twig' %}
 {% endblock %}
