@@ -78,6 +78,7 @@ class ThemeCrudController extends AbstractPanelController
             'processUpload' => PermissionEnum::UPLOAD_THEME->value,
             'copyTheme' => PermissionEnum::COPY_THEME->value,
             'exportTheme' => PermissionEnum::EXPORT_THEME->value,
+            'deleteTheme' => PermissionEnum::DELETE_THEME->value,
         ];
     }
 
@@ -389,6 +390,11 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/copy', name: 'admin_theme_copy', methods: ['POST'])]
     public function copyTheme(AdminContext $context): RedirectResponse
     {
+        // Check permission
+        if (!$this->getUser()?->hasPermission(PermissionEnum::COPY_THEME)) {
+            throw $this->createAccessDeniedException('You do not have permission to copy themes.');
+        }
+
         $request = $context->getRequest();
         $sourceThemeName = $request->request->get('sourceThemeName');
         $newThemeName = trim($request->request->get('newThemeName'));
@@ -468,6 +474,11 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/export', name: 'admin_theme_export', methods: ['GET'])]
     public function exportTheme(AdminContext $context): Response
     {
+        // Check permission
+        if (!$this->getUser()?->hasPermission(PermissionEnum::EXPORT_THEME)) {
+            throw $this->createAccessDeniedException('You do not have permission to export themes.');
+        }
+
         $request = $context->getRequest();
         $themeName = $request->query->get('themeName');
         $themeContext = $request->query->get('context', 'panel');

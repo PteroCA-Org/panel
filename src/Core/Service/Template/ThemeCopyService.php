@@ -9,14 +9,10 @@ class ThemeCopyService
 {
     public function __construct(
         private readonly Filesystem $filesystem,
-        private readonly TemplateService $templateService,
         private readonly TranslatorInterface $translator,
         private readonly string $projectDir,
     ) {}
 
-    /**
-     * Validate new theme name
-     */
     public function validateThemeName(string $themeName): array
     {
         $errors = [];
@@ -55,9 +51,6 @@ class ThemeCopyService
         return $errors;
     }
 
-    /**
-     * Copy theme with new name
-     */
     public function copyTheme(string $sourceThemeName, string $newThemeName): void
     {
         $sourceThemePath = $this->projectDir . '/themes/' . $sourceThemeName;
@@ -66,15 +59,12 @@ class ThemeCopyService
         $targetAssetsPath = $this->projectDir . '/public/assets/theme/' . $newThemeName;
 
         try {
-            // Copy theme directory
             $this->filesystem->mirror($sourceThemePath, $targetThemePath);
 
-            // Copy assets directory if exists
             if ($this->filesystem->exists($sourceAssetsPath)) {
                 $this->filesystem->mirror($sourceAssetsPath, $targetAssetsPath);
             }
 
-            // Update template.json with new theme name
             $templateJsonPath = $targetThemePath . '/template.json';
             if ($this->filesystem->exists($templateJsonPath)) {
                 $templateJson = json_decode(file_get_contents($templateJsonPath), true);
@@ -82,7 +72,6 @@ class ThemeCopyService
                 file_put_contents($templateJsonPath, json_encode($templateJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             }
         } catch (\Exception $e) {
-            // Cleanup on error
             if ($this->filesystem->exists($targetThemePath)) {
                 $this->filesystem->remove($targetThemePath);
             }

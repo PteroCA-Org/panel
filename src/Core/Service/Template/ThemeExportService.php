@@ -14,9 +14,6 @@ class ThemeExportService
         private readonly string $projectDir,
     ) {}
 
-    /**
-     * Export theme as ZIP file
-     */
     public function exportTheme(string $themeName): string
     {
         $themePath = $this->projectDir . '/themes/' . $themeName;
@@ -39,10 +36,8 @@ class ThemeExportService
         }
 
         try {
-            // Add theme files to ZIP under themes/{theme-name}/
             $this->addDirectoryToZip($zip, $themePath, 'themes/' . $themeName);
 
-            // Add assets to ZIP under public/assets/theme/{theme-name}/ if they exist
             if ($this->filesystem->exists($assetsPath)) {
                 $this->addDirectoryToZip($zip, $assetsPath, 'public/assets/theme/' . $themeName);
             }
@@ -59,9 +54,6 @@ class ThemeExportService
         }
     }
 
-    /**
-     * Add directory contents to ZIP recursively
-     */
     private function addDirectoryToZip(ZipArchive $zip, string $sourcePath, string $zipPath): void
     {
         $files = new \RecursiveIteratorIterator(
@@ -82,9 +74,6 @@ class ThemeExportService
         }
     }
 
-    /**
-     * Create a download response for the exported ZIP file
-     */
     public function createDownloadResponse(string $zipFilePath, string $themeName): BinaryFileResponse
     {
         $response = new BinaryFileResponse($zipFilePath);
