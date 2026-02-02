@@ -498,6 +498,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function resetPlugin(AdminContext $context): RedirectResponse
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to reset plugins.');
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->query->get('pluginName');
 
@@ -568,6 +572,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function deletePlugin(AdminContext $context): RedirectResponse
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UNINSTALL_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to delete plugins.');
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->request->get('pluginName');
 
@@ -657,6 +665,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function uploadPlugin(): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload plugins.');
+        }
+
         $request = $this->requestStack->getCurrentRequest();
         $this->dispatchSimpleEvent(PluginUploadPageAccessedEvent::class, $request);
 
@@ -670,6 +682,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function processUpload(AdminContext $context): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload plugins.');
+        }
+
         $request = $context->getRequest();
         $form = $this->createForm(PluginUploadFormType::class);
         $form->handleRequest($request);

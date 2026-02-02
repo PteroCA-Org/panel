@@ -318,6 +318,10 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/delete', name: 'admin_theme_delete', methods: ['POST'])]
     public function deleteTheme(AdminContext $context): RedirectResponse
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::DELETE_THEME)) {
+            throw $this->createAccessDeniedException('You do not have permission to delete themes.');
+        }
+
         $request = $context->getRequest();
         $themeName = $request->request->get('themeName');
         $themeContext = $request->request->get('context', 'panel');
@@ -609,6 +613,10 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/upload', name: 'admin_theme_upload')]
     public function uploadTheme(AdminContext $context): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_THEME)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload themes.');
+        }
+
         $request = $context->getRequest();
 
         $this->dispatchSimpleEvent(ThemeUploadPageAccessedEvent::class, $request);
@@ -639,6 +647,10 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/upload/process', name: 'admin_theme_upload_process', methods: ['POST'])]
     public function processUpload(): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_THEME)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload themes.');
+        }
+
         $request = $this->requestStack->getCurrentRequest();
         $form = $this->createForm(ThemeUploadFormType::class);
         $form->handleRequest($request);
