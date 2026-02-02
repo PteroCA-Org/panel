@@ -32,10 +32,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-/**
- * Theme CRUD Controller
- * Manages themes for different contexts (panel, landing, email)
- */
 class ThemeCrudController extends AbstractPanelController
 {
     public function __construct(
@@ -55,14 +51,11 @@ class ThemeCrudController extends AbstractPanelController
 
     public static function getEntityFqcn(): string
     {
-        // Return dummy entity class to satisfy EasyAdmin
-        // Actual theme data comes from filesystem via TemplateService
         return Setting::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
-        // Disable all default CRUD operations since we use custom actions
         return $crud
             ->overrideTemplate('crud/index', 'panel/crud/theme/index.html.twig')
             ->setSearchFields(null);
@@ -87,12 +80,10 @@ class ThemeCrudController extends AbstractPanelController
         $request = $context->getRequest();
         $themeContext = $request->query->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Get active theme for this context
         $activeThemeSetting = match($themeContext) {
             'panel' => SettingEnum::PANEL_THEME->value,
             'landing' => SettingEnum::LANDING_THEME->value,
@@ -100,16 +91,13 @@ class ThemeCrudController extends AbstractPanelController
         };
         $activeThemeName = $this->settingService->getSetting($activeThemeSetting);
 
-        // Get all themes for this context
         $themes = $this->templateService->getThemesForContext($themeContext, $activeThemeName);
 
-        // Prepare actions for each theme
         $themeActions = [];
         foreach ($themes as $theme) {
             $themeActions[$theme->getName()] = $this->getThemeActions($theme);
         }
 
-        // Set appropriate page title based on context
         $pageTitle = match($themeContext) {
             'panel' => $this->translator->trans('pteroca.crud.theme.panel_themes'),
             'landing' => $this->translator->trans('pteroca.crud.theme.landing_themes'),
@@ -140,12 +128,10 @@ class ThemeCrudController extends AbstractPanelController
         $themeName = $request->query->get('themeName');
         $themeContext = $request->query->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Validate theme exists and supports this context
         if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -159,7 +145,6 @@ class ThemeCrudController extends AbstractPanelController
             ]);
         }
 
-        // Get active theme for this context
         $activeThemeSetting = match($themeContext) {
             'panel' => SettingEnum::PANEL_THEME->value,
             'landing' => SettingEnum::LANDING_THEME->value,
@@ -167,7 +152,6 @@ class ThemeCrudController extends AbstractPanelController
         };
         $activeThemeName = $this->settingService->getSetting($activeThemeSetting);
 
-        // Check all contexts where this theme is active
         $activeContexts = [];
         $contextSettings = [
             'panel' => SettingEnum::PANEL_THEME->value,
@@ -182,13 +166,8 @@ class ThemeCrudController extends AbstractPanelController
             }
         }
 
-        // Create ThemeDTO
         $theme = $this->templateService->getThemeDTO($themeName, $themeContext, $themeName === $activeThemeName);
-
-        // Get formatted metadata
         $themeInfo = $this->templateService->getTemplateInfo($themeName);
-
-        // Prepare actions for this theme
         $themeActions = $this->getThemeActions($theme);
 
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
@@ -216,12 +195,10 @@ class ThemeCrudController extends AbstractPanelController
         $themeName = $request->request->get('themeName');
         $themeContext = $request->request->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Validate theme exists and supports this context
         if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -236,17 +213,14 @@ class ThemeCrudController extends AbstractPanelController
         }
 
         try {
-            // Determine setting name based on context
             $settingName = match($themeContext) {
                 'panel' => SettingEnum::PANEL_THEME->value,
                 'landing' => SettingEnum::LANDING_THEME->value,
                 'email' => SettingEnum::EMAIL_THEME->value,
             };
 
-            // Save setting
             $this->settingService->saveSettingInCache($settingName, $themeName);
 
-            // Log action
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::ENTITY_EDIT,
@@ -257,7 +231,6 @@ class ThemeCrudController extends AbstractPanelController
                 ]
             );
 
-            // Get theme display name
             $themeMetadata = $this->templateService->getRawTemplateInfo($themeName);
             $displayName = $themeMetadata['name'] ?? $themeName;
 
@@ -287,12 +260,10 @@ class ThemeCrudController extends AbstractPanelController
         $themeName = $request->request->get('themeName');
         $themeContext = $request->request->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Prevent deletion of system default theme
         if ($themeName === 'default') {
             $this->addFlash('danger', $this->translator->trans('pteroca.crud.theme.cannot_delete_system_default'));
 
@@ -303,7 +274,6 @@ class ThemeCrudController extends AbstractPanelController
                 ->generateUrl());
         }
 
-        // Validate theme exists
         if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -317,7 +287,6 @@ class ThemeCrudController extends AbstractPanelController
                 ->generateUrl());
         }
 
-        // Check if theme is not the default theme in ANY context
         $contexts = [
             'panel' => SettingEnum::PANEL_THEME->value,
             'landing' => SettingEnum::LANDING_THEME->value,
@@ -341,25 +310,20 @@ class ThemeCrudController extends AbstractPanelController
         }
 
         try {
-            // Get theme display name before deletion
             $themeMetadata = $this->templateService->getRawTemplateInfo($themeName);
             $displayName = $themeMetadata['name'] ?? $themeName;
 
-            // Get theme paths
             $themePath = $this->getParameter('kernel.project_dir') . '/themes/' . $themeName;
             $assetsPath = $this->getParameter('kernel.project_dir') . '/public/assets/theme/' . $themeName;
 
-            // Delete theme directory
             if (is_dir($themePath)) {
                 $this->deleteDirectory($themePath);
             }
 
-            // Delete assets directory if exists
             if (is_dir($assetsPath)) {
                 $this->deleteDirectory($assetsPath);
             }
 
-            // Log action
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_DELETED,
@@ -390,7 +354,6 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/copy', name: 'admin_theme_copy', methods: ['POST'])]
     public function copyTheme(AdminContext $context): RedirectResponse
     {
-        // Check permission
         if (!$this->getUser()?->hasPermission(PermissionEnum::COPY_THEME)) {
             throw $this->createAccessDeniedException('You do not have permission to copy themes.');
         }
@@ -400,16 +363,13 @@ class ThemeCrudController extends AbstractPanelController
         $newThemeName = trim($request->request->get('newThemeName'));
         $themeContext = $request->request->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Sanitize theme name
         $newThemeName = strtolower($newThemeName);
         $newThemeName = preg_replace('/[^a-z0-9\-_]/', '', $newThemeName);
 
-        // Validate source theme exists
         if (!$this->templateService->themeSupportsContext($sourceThemeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -423,7 +383,6 @@ class ThemeCrudController extends AbstractPanelController
         }
 
         try {
-            // Validate new theme name
             $validationErrors = $this->themeCopyService->validateThemeName($newThemeName);
             if (!empty($validationErrors)) {
                 $this->addFlash('danger', implode(' ', $validationErrors));
@@ -434,14 +393,11 @@ class ThemeCrudController extends AbstractPanelController
                     ->generateUrl());
             }
 
-            // Get source theme display name
             $sourceMetadata = $this->templateService->getRawTemplateInfo($sourceThemeName);
             $sourceDisplayName = $sourceMetadata['name'] ?? $sourceThemeName;
 
-            // Copy theme
             $this->themeCopyService->copyTheme($sourceThemeName, $newThemeName);
 
-            // Log action
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_COPIED,
@@ -474,7 +430,6 @@ class ThemeCrudController extends AbstractPanelController
     #[Route('/admin/theme/export', name: 'admin_theme_export', methods: ['GET'])]
     public function exportTheme(AdminContext $context): Response
     {
-        // Check permission
         if (!$this->getUser()?->hasPermission(PermissionEnum::EXPORT_THEME)) {
             throw $this->createAccessDeniedException('You do not have permission to export themes.');
         }
@@ -483,12 +438,10 @@ class ThemeCrudController extends AbstractPanelController
         $themeName = $request->query->get('themeName');
         $themeContext = $request->query->get('context', 'panel');
 
-        // Validate context
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        // Validate theme exists
         if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
@@ -502,10 +455,8 @@ class ThemeCrudController extends AbstractPanelController
         }
 
         try {
-            // Export theme to ZIP
             $zipFilePath = $this->themeExportService->exportTheme($themeName);
 
-            // Log action
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_EXPORTED,
@@ -515,7 +466,6 @@ class ThemeCrudController extends AbstractPanelController
                 ]
             );
 
-            // Return download response
             return $this->themeExportService->createDownloadResponse($zipFilePath, $themeName);
         } catch (\Exception $e) {
             $this->addFlash('danger', sprintf(
@@ -539,7 +489,6 @@ class ThemeCrudController extends AbstractPanelController
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
         $this->appendCrudTemplateContext('theme');
 
-        // Generate back URL
         $backUrl = $this->adminUrlGenerator
             ->setController(self::class)
             ->setAction('index')
@@ -574,7 +523,6 @@ class ThemeCrudController extends AbstractPanelController
             $file = $form->get('themeFile')->getData();
             $result = $this->themeUploadService->uploadTheme($file, true);
 
-            // Success
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_UPLOADED,
@@ -590,9 +538,7 @@ class ThemeCrudController extends AbstractPanelController
                 $result->manifest->version
             ));
 
-            // Show warnings as info messages if any (grouped by type)
             if ($result->hasWarnings()) {
-                // Group warnings by type
                 $groupedWarnings = [];
                 foreach ($result->warnings as $warning) {
                     if (!isset($groupedWarnings[$warning->type])) {
@@ -607,11 +553,9 @@ class ThemeCrudController extends AbstractPanelController
                     }
                 }
 
-                // Create flash messages for each warning type
                 foreach ($groupedWarnings as $type => $data) {
                     $warningMessage = $this->translator->trans('pteroca.theme.upload.warning.' . $type);
 
-                    // Add count if more than one occurrence
                     if ($data['count'] > 1) {
                         $warningMessage .= sprintf(' (%d %s)',
                             $data['count'],
@@ -619,7 +563,6 @@ class ThemeCrudController extends AbstractPanelController
                         );
                     }
 
-                    // Add unique messages if any
                     if (!empty($data['messages'])) {
                         $warningMessage .= ': ' . implode(', ', array_slice($data['messages'], 0, 3));
                         if (count($data['messages']) > 3) {
@@ -659,9 +602,6 @@ class ThemeCrudController extends AbstractPanelController
         return $this->redirect($this->adminUrlGenerator->setRoute('admin_theme_upload')->generateUrl());
     }
 
-    /**
-     * Get visible actions for a theme
-     */
     private function getThemeActions(ThemeDTO $theme): array
     {
         $actions = [];
@@ -683,7 +623,6 @@ class ThemeCrudController extends AbstractPanelController
             ];
         }
 
-        // Set as Default action (only if not already active)
         if (!$theme->isActive() && $this->getUser()?->hasPermission(PermissionEnum::SET_DEFAULT_THEME)) {
             $actions[] = [
                 'name' => 'set_default',
@@ -704,7 +643,6 @@ class ThemeCrudController extends AbstractPanelController
             ];
         }
 
-        // Copy action
         if ($this->getUser()?->hasPermission(PermissionEnum::COPY_THEME)) {
             $actions[] = [
                 'name' => 'copy',
@@ -722,7 +660,6 @@ class ThemeCrudController extends AbstractPanelController
             ];
         }
 
-        // Export action
         if ($this->getUser()?->hasPermission(PermissionEnum::EXPORT_THEME)) {
             $actions[] = [
                 'name' => 'export',
@@ -738,7 +675,6 @@ class ThemeCrudController extends AbstractPanelController
             ];
         }
 
-        // Delete action (only if not active/default theme and not the system default theme)
         if (!$theme->isActive() && $theme->getName() !== 'default' && $this->getUser()?->hasPermission(PermissionEnum::DELETE_THEME)) {
             $actions[] = [
                 'name' => 'delete',
