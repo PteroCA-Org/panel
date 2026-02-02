@@ -9,12 +9,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class TwigContextSubscriber implements EventSubscriberInterface
+readonly class TwigContextSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly Environment $twig,
-        private readonly TemplateContextManager $contextManager,
-        private readonly string $templatesBaseDir,
+        private Environment $twig,
+        private TemplateContextManager $contextManager,
+        private string $templatesBaseDir,
     ) {}
 
     public static function getSubscribedEvents(): array
@@ -43,74 +43,112 @@ class TwigContextSubscriber implements EventSubscriberInterface
             $theme = 'default';
         }
 
-        if ($context === 'landing') {
-            // Add default theme as fallback first (searched last)
-            $defaultLandingPath = "$this->templatesBaseDir/default/landing";
-            if ($theme !== 'default' && is_dir($defaultLandingPath)) {
-                $loader->prependPath($defaultLandingPath);
-            }
+        match ($context) {
+            'landing' => $this->registerLandingPaths($loader, $theme),
+            'email' => $this->registerEmailPaths($loader, $theme),
+            'panel' => $this->registerPanelPaths($loader, $theme),
+            default => null,
+        };
+    }
 
-            // Then add current theme (searched first)
-            $landingPath = "$this->templatesBaseDir/$theme/landing";
-            if (is_dir($landingPath)) {
-                $loader->prependPath($landingPath);
-            }
+    /**
+     * Register standard template paths for a context (landing, email, panel)
+     *
+     * Path priority (last added = highest priority):
+     * 1. Default theme context path (fallback, searched last)
+     * 2. Current theme context path (searched first)
+     */
+    private function registerStandardContextPaths(
+        FilesystemLoader $loader,
+        string $theme,
+        string $context
+    ): void {
+        // Add default theme as fallback first (searched last)
+        $defaultContextPath = "$this->templatesBaseDir/default/$context";
+        if ($theme !== 'default' && is_dir($defaultContextPath)) {
+            $loader->prependPath($defaultContextPath);
         }
-        elseif ($context === 'email') {
-            // Add default theme as fallback first (searched last)
-            $defaultEmailPath = "$this->templatesBaseDir/default/email";
-            if ($theme !== 'default' && is_dir($defaultEmailPath)) {
-                $loader->prependPath($defaultEmailPath);
-            }
 
-            // Then add current theme (searched first)
-            $emailPath = "$this->templatesBaseDir/$theme/email";
-            if (is_dir($emailPath)) {
-                $loader->prependPath($emailPath);
-            }
+        // Then add current theme (searched first)
+        $themeContextPath = "$this->templatesBaseDir/$theme/$context";
+        if (is_dir($themeContextPath)) {
+            $loader->prependPath($themeContextPath);
         }
-        elseif ($context === 'panel') {
-            // Add default theme as fallback first (searched last)
-            $defaultPanelPath = "$this->templatesBaseDir/default/panel";
-            if ($theme !== 'default' && is_dir($defaultPanelPath)) {
-                $loader->prependPath($defaultPanelPath);
-            }
+    }
 
-            // Then add current theme (searched first)
-            $panelPath = "$this->templatesBaseDir/$theme/panel";
-            if (is_dir($panelPath)) {
-                $loader->prependPath($panelPath);
-            }
+    /**
+     * Register template paths for landing context
+     */
+    private function registerLandingPaths(FilesystemLoader $loader, string $theme): void
+    {
+        $this->registerStandardContextPaths($loader, $theme, 'landing');
+    }
 
-            // DEPRECATED: Legacy location (fallback): themes/{theme}/ (introduced in v0.6.3)
-            // This fallback will be REMOVED in a future version (v0.8.0+)
-            // Legacy themes store templates directly in theme root instead of panel/ subdirectory
-            // ACTION REQUIRED: Migrate your custom templates to themes/{theme}/panel/ structure
+    /**
+     * Register template paths for email context
+     */
+    private function registerEmailPaths(FilesystemLoader $loader, string $theme): void
+    {
+        $this->registerStandardContextPaths($loader, $theme, 'email');
+    }
 
-            // Add default theme legacy location as fallback first
-            if ($theme !== 'default' && is_dir("$this->templatesBaseDir/default")) {
-                $loader->prependPath("$this->templatesBaseDir/default");
-            }
+    /**
+     * Register template paths for panel context with legacy support
+     */
+    private function registerPanelPaths(FilesystemLoader $loader, string $theme): void
+    {
+        // Standard panel paths (new structure)
+        $this->registerStandardContextPaths($loader, $theme, 'panel');
 
-            // Then add current theme legacy location
-            if (is_dir("$this->templatesBaseDir/$theme")) {
-                $loader->prependPath("$this->templatesBaseDir/$theme");
-            }
+        // DEPRECATED: Legacy location support (will be removed in v0.8.0+)
+        $this->registerPanelLegacyPaths($loader, $theme);
 
-            // Add default theme EasyAdmin bundle as fallback first
-            $defaultEasyAdminPath = "$defaultPanelPath/bundles/EasyAdminBundle";
-            if ($theme !== 'default' && is_dir($defaultEasyAdminPath)) {
-                $loader->prependPath($defaultEasyAdminPath, 'EasyAdmin');
-            }
+        // EasyAdmin bundle paths (both new and legacy)
+        $this->registerPanelEasyAdminPaths($loader, $theme);
+    }
 
-            // Then add current theme EasyAdmin bundle
-            if (is_dir("$panelPath/bundles/EasyAdminBundle")) {
-                $loader->prependPath("$panelPath/bundles/EasyAdminBundle", 'EasyAdmin');
-            }
-            // DEPRECATED: Legacy EasyAdmin location (will be removed in v0.8.0+)
-            elseif (is_dir("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle")) {
-                $loader->prependPath("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle", 'EasyAdmin');
-            }
+    /**
+     * DEPRECATED: Register legacy panel paths (themes/{theme}/)
+     *
+     * This method will be REMOVED in v0.8.0+
+     * Legacy themes store templates directly in theme root instead of panel/ subdirectory
+     * ACTION REQUIRED: Migrate your custom templates to themes/{theme}/panel/ structure
+     */
+    private function registerPanelLegacyPaths(FilesystemLoader $loader, string $theme): void
+    {
+        // Add default theme legacy location as fallback first
+        if ($theme !== 'default' && is_dir("$this->templatesBaseDir/default")) {
+            $loader->prependPath("$this->templatesBaseDir/default");
+        }
+
+        // Then add current theme legacy location
+        if (is_dir("$this->templatesBaseDir/$theme")) {
+            $loader->prependPath("$this->templatesBaseDir/$theme");
+        }
+    }
+
+    /**
+     * Register EasyAdmin bundle paths for panel context
+     * Supports both new (panel/bundles/EasyAdminBundle) and legacy (bundles/EasyAdminBundle) locations
+     */
+    private function registerPanelEasyAdminPaths(FilesystemLoader $loader, string $theme): void
+    {
+        $panelPath = "$this->templatesBaseDir/$theme/panel";
+        $defaultPanelPath = "$this->templatesBaseDir/default/panel";
+
+        // Add default theme EasyAdmin bundle as fallback first
+        $defaultEasyAdminPath = "$defaultPanelPath/bundles/EasyAdminBundle";
+        if ($theme !== 'default' && is_dir($defaultEasyAdminPath)) {
+            $loader->prependPath($defaultEasyAdminPath, 'EasyAdmin');
+        }
+
+        // Then add current theme EasyAdmin bundle
+        if (is_dir("$panelPath/bundles/EasyAdminBundle")) {
+            $loader->prependPath("$panelPath/bundles/EasyAdminBundle", 'EasyAdmin');
+        }
+        // DEPRECATED: Legacy EasyAdmin location (will be removed in v0.8.0+)
+        elseif (is_dir("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle")) {
+            $loader->prependPath("$this->templatesBaseDir/$theme/bundles/EasyAdminBundle", 'EasyAdmin');
         }
     }
 }
