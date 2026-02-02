@@ -91,12 +91,27 @@ class ServerOrderType extends AbstractType
             ]);
         }
 
+        if ($options['allow_location_selection']) {
+            $builder->add('node', ChoiceType::class, [
+                'label' => 'pteroca.cart_configuration.location',
+                'choices' => $this->buildLocationChoices($options['grouped_locations']),
+                'required' => true,
+                'mapped' => false,
+                'constraints' => [
+                    new Assert\NotBlank(message: 'pteroca.store.please_select_location'),
+                ],
+                'attr' => [
+                    'class' => 'form-select form-select-lg',
+                    'id' => 'location',
+                ],
+            ]);
+        }
+
         $builder->add('voucher', HiddenType::class, [
                 'required' => false,
                 'data' => '',
             ]);
 
-        // Add slots field only if product has slot pricing
         if ($options['has_slot_prices']) {
             $builder->add('slots', IntegerType::class, [
                 'label' => 'pteroca.store.slots',
@@ -118,6 +133,23 @@ class ServerOrderType extends AbstractType
         }
     }
 
+    private function buildLocationChoices(?array $groupedLocations): array
+    {
+        if (empty($groupedLocations)) {
+            return [];
+        }
+
+        $choices = [];
+        foreach ($groupedLocations as $locationName => $locationData) {
+            $choices[$locationName] = [];
+            foreach ($locationData['nodes'] as $node) {
+                $choices[$locationName][$node['name']] = $node['id'];
+            }
+        }
+
+        return $choices;
+    }
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -127,6 +159,8 @@ class ServerOrderType extends AbstractType
             'has_slot_prices' => false,
             'initial_slots' => null,
             'allow_auto_renewal' => true,
+            'allow_location_selection' => false,
+            'grouped_locations' => null,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'server_order',
@@ -139,5 +173,7 @@ class ServerOrderType extends AbstractType
         $resolver->setAllowedTypes('has_slot_prices', 'bool');
         $resolver->setAllowedTypes('initial_slots', ['int', 'null']);
         $resolver->setAllowedTypes('allow_auto_renewal', 'bool');
+        $resolver->setAllowedTypes('allow_location_selection', 'bool');
+        $resolver->setAllowedTypes('grouped_locations', ['array', 'null']);
     }
 }

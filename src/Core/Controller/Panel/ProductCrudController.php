@@ -255,6 +255,20 @@ class ProductCrudController extends AbstractPanelController
                 ->setRequired(false)
                 ->hideOnIndex()
                 ->setColumns(6),
+            BooleanField::new('allowUserSelectLocation', $this->translator->trans('pteroca.crud.product.allow_user_select_location'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_user_select_location_hint'))
+                ->setRequired(false)
+                ->hideOnIndex()
+                ->setColumns(6),
+            AssociationField::new('variantProducts', $this->translator->trans('pteroca.crud.product.variant_products'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.variant_products_hint'))
+                ->setFormTypeOptions([
+                    'by_reference' => false,
+                    'choice_label' => 'name',
+                    'query_builder' => fn($repository) => $this->getVariantProductsQueryBuilder($repository, $pageName)
+                ])
+                ->onlyOnForms()
+                ->setColumns(12),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
@@ -440,6 +454,28 @@ class ProductCrudController extends AbstractPanelController
             ->generateUrl();
 
         return new RedirectResponse($url);
+    }
+
+    private function getVariantProductsQueryBuilder($repository, string $pageName)
+    {
+        $qb = $repository->createQueryBuilder('p');
+        $qb->where('p.isActive = :active')
+           ->andWhere('p.deletedAt IS NULL')
+           ->setParameter('active', true);
+
+        // Exclude current product from variant selection
+        if ($pageName === Crud::PAGE_EDIT) {
+            $context = $this->getContext();
+            if ($context && $context->getEntity()->getInstance()) {
+                $currentProduct = $context->getEntity()->getInstance();
+                if ($currentProduct->getId()) {
+                    $qb->andWhere('p.id != :currentId')
+                       ->setParameter('currentId', $currentProduct->getId());
+                }
+            }
+        }
+
+        return $qb;
     }
 
     private function validateProductEggs(Product $product): void
