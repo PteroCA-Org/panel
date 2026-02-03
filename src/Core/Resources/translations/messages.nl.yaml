@@ -970,9 +970,6 @@ pteroca:
       cancel: 'Annuleren'
       close: 'Sluiten'
     theme:
-      panel_themes: 'Paneelthema''s'
-      landing_themes: 'Landingsthema''s'
-      email_themes: 'E-mailthema''s'
       theme_management_description: 'Beheer en configureer thema''s voor verschillende contexten'
       appearance_settings: 'Weergave-instellingen'
       name: 'Themanaam'
@@ -993,6 +990,11 @@ pteroca:
       currently_active_in_contexts: 'Dit thema is momenteel actief in de volgende contexten'
       set_as_default: 'Als standaard instellen'
       set_as_default_in_context: 'Als standaard instellen in %s'
+      set_as_default_in: 'Als standaard instellen in %s'
+      context_panel: 'Paneel'
+      context_landing: 'Landingspagina'
+      context_email: 'E-mail'
+      active_in: 'Actief in'
       confirm_set_default: 'Thema als standaard instellen'
       confirm_set_default_message: 'Weet u zeker dat u wilt instellen'
       for_context: 'als het standaardthema voor'
@@ -1033,6 +1035,7 @@ pteroca:
         name_invalid_edges: 'Themanaam mag niet beginnen of eindigen met een koppelteken of underscore'
         name_reserved: 'Deze themanaam is gereserveerd en kan niet worden gebruikt'
         name_already_exists: 'Er bestaat al een thema met deze naam'
+      no_themes_found_unified: 'Geen thema''s gevonden'
     server:
       pterodactyl_server_id: 'Pterodactyl Server-ID'
       pterodactyl_server_identifier: 'Pterodactyl identificatie'
@@ -1406,9 +1409,7 @@ pteroca:
       roles: 'Rollen'
       permissions: 'Machtigingen'
       themes: 'Thema''s'
-      panel_themes: 'Paneelthema''s'
-      landing_themes: 'Landingsthema''s'
-      email_themes: 'E-mailthema''s'
+      manage_themes: 'Thema''s beheren'
 
   api:
     servers:

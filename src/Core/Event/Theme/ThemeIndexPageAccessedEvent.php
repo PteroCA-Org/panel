@@ -8,7 +8,7 @@ class ThemeIndexPageAccessedEvent extends AbstractDomainEvent
 {
     public function __construct(
         private readonly ?int $userId,
-        private readonly string $themeContext,
+        private readonly ?string $themeContext = null,
         private readonly array $context = [],
         ?string $eventId = null,
     ) {
@@ -20,7 +20,7 @@ class ThemeIndexPageAccessedEvent extends AbstractDomainEvent
         return $this->userId;
     }
 
-    public function getThemeContext(): string
+    public function getThemeContext(): ?string
     {
         return $this->themeContext;
     }

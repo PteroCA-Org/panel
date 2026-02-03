@@ -98,31 +98,30 @@ class ThemeCrudController extends AbstractPanelController
     public function index(AdminContext $context): Response
     {
         $request = $context->getRequest();
-        $themeContext = $request->query->get('context', 'panel');
 
-        if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
-            $themeContext = 'panel';
-        }
+        // Backward compatibility: Accept but ignore legacy context parameter
+        $legacyContext = $request->query->get('context');
 
         $this->dispatchDataEvent(
             ThemeIndexPageAccessedEvent::class,
             $request,
-            [$themeContext]
+            [null]
         );
 
-        $activeThemeSetting = match($themeContext) {
-            'panel' => SettingEnum::PANEL_THEME->value,
-            'landing' => SettingEnum::LANDING_THEME->value,
-            'email' => SettingEnum::EMAIL_THEME->value,
-        };
-        $activeThemeName = $this->settingService->getSetting($activeThemeSetting);
+        $panelTheme = $this->settingService->getSetting(SettingEnum::PANEL_THEME->value);
+        $landingTheme = $this->settingService->getSetting(SettingEnum::LANDING_THEME->value);
+        $emailTheme = $this->settingService->getSetting(SettingEnum::EMAIL_THEME->value);
 
-        $themes = $this->templateService->getThemesForContext($themeContext, $activeThemeName);
+        $themes = $this->templateService->getAllThemesWithActiveContexts(
+            $panelTheme,
+            $landingTheme,
+            $emailTheme
+        );
 
         $this->dispatchDataEvent(
             ThemeIndexDataLoadedEvent::class,
             $request,
-            [$themeContext, $themes, count($themes), $activeThemeName]
+            [$themes, count($themes), $panelTheme, $landingTheme, $emailTheme, null]
         );
 
         $themeActions = [];
@@ -130,20 +129,13 @@ class ThemeCrudController extends AbstractPanelController
             $themeActions[$theme->getName()] = $this->getThemeActions($theme);
         }
 
-        $pageTitle = match($themeContext) {
-            'panel' => $this->translator->trans('pteroca.crud.theme.panel_themes'),
-            'landing' => $this->translator->trans('pteroca.crud.theme.landing_themes'),
-            'email' => $this->translator->trans('pteroca.crud.theme.email_themes'),
-        };
-
         $this->appendCrudTemplateContext(CrudTemplateContextEnum::SETTING->value);
         $this->appendCrudTemplateContext('theme');
 
         $viewData = [
             'themes' => $themes,
             'theme_actions' => $themeActions,
-            'theme_context' => $themeContext,
-            'page_title' => $pageTitle,
+            'page_title' => $this->translator->trans('pteroca.crud.menu.manage_themes'),
         ];
 
         return $this->renderWithEvent(
@@ -311,7 +303,6 @@ class ThemeCrudController extends AbstractPanelController
         return $this->redirect($this->adminUrlGenerator
             ->setController(self::class)
             ->setAction('index')
-            ->set('context', $themeContext)
             ->generateUrl());
     }
 
@@ -441,7 +432,6 @@ class ThemeCrudController extends AbstractPanelController
         return $this->redirect($this->adminUrlGenerator
             ->setController(self::class)
             ->setAction('index')
-            ->set('context', $themeContext)
             ->generateUrl());
     }
 
@@ -535,7 +525,6 @@ class ThemeCrudController extends AbstractPanelController
         return $this->redirect($this->adminUrlGenerator
             ->setController(self::class)
             ->setAction('index')
-            ->set('context', $themeContext)
             ->generateUrl());
     }
 
@@ -629,7 +618,6 @@ class ThemeCrudController extends AbstractPanelController
         $backUrl = $this->adminUrlGenerator
             ->setController(self::class)
             ->setAction('index')
-            ->set('context', 'panel')
             ->generateUrl();
 
         return $this->renderWithEvent(
@@ -790,9 +778,8 @@ class ThemeCrudController extends AbstractPanelController
     private function getThemeActions(ThemeDTO $theme): array
     {
         $actions = [];
-        $themeContext = $theme->getContext();
 
-        // Show Details action
+        // View Details
         if ($this->getUser()?->hasPermission(PermissionEnum::VIEW_THEME)) {
             $actions[] = [
                 'name' => 'details',
@@ -802,32 +789,45 @@ class ThemeCrudController extends AbstractPanelController
                     ->setController(self::class)
                     ->setAction('viewDetails')
                     ->set('themeName', $theme->getName())
-                    ->set('context', $themeContext)
+                    ->set('context', 'panel')
                     ->generateUrl(),
                 'class' => 'info',
             ];
         }
 
-        if (!$theme->isActive() && $this->getUser()?->hasPermission(PermissionEnum::SET_DEFAULT_THEME)) {
-            $actions[] = [
-                'name' => 'set_default',
-                'label' => sprintf(
-                    $this->translator->trans('pteroca.crud.theme.set_as_default_in_context'),
-                    ucfirst($themeContext)
-                ),
-                'icon' => 'fa fa-check',
-                'url' => '#',
-                'class' => 'success',
-                'data_attrs' => [
-                    'bs-toggle' => 'modal',
-                    'bs-target' => '#setDefaultThemeModal',
-                    'theme-name' => $theme->getName(),
-                    'theme-display-name' => $theme->getDisplayName(),
-                    'theme-context' => $themeContext,
-                ],
-            ];
+        // Set as Default actions for each supported context
+        if ($this->getUser()?->hasPermission(PermissionEnum::SET_DEFAULT_THEME)) {
+            foreach ($theme->getContexts() as $context) {
+                if (!$theme->isActiveInContext($context)) {
+                    $contextLabel = match($context) {
+                        'panel' => $this->translator->trans('pteroca.crud.theme.context_panel'),
+                        'landing' => $this->translator->trans('pteroca.crud.theme.context_landing'),
+                        'email' => $this->translator->trans('pteroca.crud.theme.context_email'),
+                        default => ucfirst($context),
+                    };
+
+                    $actions[] = [
+                        'name' => 'set_default_' . $context,
+                        'label' => sprintf(
+                            $this->translator->trans('pteroca.crud.theme.set_as_default_in'),
+                            $contextLabel
+                        ),
+                        'icon' => 'fa fa-check',
+                        'url' => '#',
+                        'class' => 'success',
+                        'data_attrs' => [
+                            'bs-toggle' => 'modal',
+                            'bs-target' => '#setDefaultThemeModal',
+                            'theme-name' => $theme->getName(),
+                            'theme-display-name' => $theme->getDisplayName(),
+                            'theme-context' => $context,
+                        ],
+                    ];
+                }
+            }
         }
 
+        // Copy Theme
         if ($this->getUser()?->hasPermission(PermissionEnum::COPY_THEME)) {
             $actions[] = [
                 'name' => 'copy',
@@ -840,11 +840,12 @@ class ThemeCrudController extends AbstractPanelController
                     'bs-target' => '#copyThemeModal',
                     'theme-name' => $theme->getName(),
                     'theme-display-name' => $theme->getDisplayName(),
-                    'theme-context' => $themeContext,
+                    'theme-context' => 'panel',
                 ],
             ];
         }
 
+        // Export Theme
         if ($this->getUser()?->hasPermission(PermissionEnum::EXPORT_THEME)) {
             $actions[] = [
                 'name' => 'export',
@@ -854,13 +855,16 @@ class ThemeCrudController extends AbstractPanelController
                     ->setController(self::class)
                     ->setAction('exportTheme')
                     ->set('themeName', $theme->getName())
-                    ->set('context', $themeContext)
+                    ->set('context', 'panel')
                     ->generateUrl(),
                 'class' => 'secondary',
             ];
         }
 
-        if (!$theme->isActive() && $theme->getName() !== 'default' && $this->getUser()?->hasPermission(PermissionEnum::DELETE_THEME)) {
+        // Delete Theme (only if not active in ANY context)
+        if (!$theme->isActiveInAnyContext()
+            && $theme->getName() !== 'default'
+            && $this->getUser()?->hasPermission(PermissionEnum::DELETE_THEME)) {
             $actions[] = [
                 'name' => 'delete',
                 'label' => $this->translator->trans('pteroca.crud.theme.delete_theme'),
@@ -872,7 +876,7 @@ class ThemeCrudController extends AbstractPanelController
                     'bs-target' => '#deleteThemeModal',
                     'theme-name' => $theme->getName(),
                     'theme-display-name' => $theme->getDisplayName(),
-                    'theme-context' => $themeContext,
+                    'theme-context' => 'panel',
                 ],
             ];
         }

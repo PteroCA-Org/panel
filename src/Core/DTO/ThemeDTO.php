@@ -21,7 +21,8 @@ class ThemeDTO
         private readonly string $pterocaVersion,
         private readonly string $phpVersion,
         private readonly bool $isActive,
-        private readonly string $context,
+        private readonly ?string $context,
+        private readonly array $activeContexts = [],
     ) {}
 
     public function getName(): string
@@ -84,9 +85,24 @@ class ThemeDTO
         return $this->isActive;
     }
 
-    public function getContext(): string
+    public function getContext(): ?string
     {
         return $this->context;
+    }
+
+    public function getActiveContexts(): array
+    {
+        return $this->activeContexts;
+    }
+
+    public function isActiveInContext(string $context): bool
+    {
+        return in_array($context, $this->activeContexts, true);
+    }
+
+    public function isActiveInAnyContext(): bool
+    {
+        return !empty($this->activeContexts);
     }
 
     public function supportsDarkMode(): bool

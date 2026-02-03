@@ -984,9 +984,6 @@ pteroca:
       cancel: 'Abbrechen'
       close: 'Schließen'
     theme:
-      panel_themes: 'Panel-Themes'
-      landing_themes: 'Landingpage-Themes'
-      email_themes: 'E-Mail-Themes'
       theme_management_description: 'Themes für verschiedene Kontexte verwalten und konfigurieren'
       appearance_settings: 'Erscheinungsbild-Einstellungen'
       name: 'Theme-Name'
@@ -1007,6 +1004,11 @@ pteroca:
       currently_active_in_contexts: 'Dieses Theme ist derzeit in folgenden Kontexten aktiv'
       set_as_default: 'Als Standard festlegen'
       set_as_default_in_context: 'Als Standard in %s festlegen'
+      set_as_default_in: 'Als Standard in %s festlegen'
+      context_panel: 'Panel'
+      context_landing: 'Startseite'
+      context_email: 'E-Mail'
+      active_in: 'Aktiv in'
       confirm_set_default: 'Theme als Standard festlegen'
       confirm_set_default_message: 'Sind Sie sicher, dass Sie'
       for_context: 'als Standard-Theme für'
@@ -1047,6 +1049,7 @@ pteroca:
         name_invalid_edges: 'Theme-Name darf nicht mit einem Bindestrich oder Unterstrich beginnen oder enden'
         name_reserved: 'Dieser Theme-Name ist reserviert und kann nicht verwendet werden'
         name_already_exists: 'Ein Theme mit diesem Namen existiert bereits'
+      no_themes_found_unified: 'Keine Themes gefunden'
     server:
       pterodactyl_server_id: 'Pterodactyl-Server-ID'
       pterodactyl_server_identifier: 'Pterodactyl-Identifier'
@@ -1420,9 +1423,7 @@ pteroca:
       roles: 'Rollen'
       permissions: 'Berechtigungen'
       themes: 'Themes'
-      panel_themes: 'Panel-Themes'
-      landing_themes: 'Landingpage-Themes'
-      email_themes: 'E-Mail-Themes'
+      manage_themes: 'Themes verwalten'
 
   api:
     servers:

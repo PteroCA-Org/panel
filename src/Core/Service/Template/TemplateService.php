@@ -228,6 +228,53 @@ class TemplateService
     }
 
     /**
+     * Get all themes with multi-context active status
+     */
+    public function getAllThemesWithActiveContexts(
+        string $panelTheme,
+        string $landingTheme,
+        string $emailTheme
+    ): array {
+        $allThemes = $this->getAvailableTemplates();
+        $themes = [];
+
+        foreach ($allThemes as $themeName) {
+            $activeContexts = [];
+
+            if ($themeName === $panelTheme && $this->themeSupportsContext($themeName, 'panel')) {
+                $activeContexts[] = 'panel';
+            }
+            if ($themeName === $landingTheme && $this->themeSupportsContext($themeName, 'landing')) {
+                $activeContexts[] = 'landing';
+            }
+            if ($themeName === $emailTheme && $this->themeSupportsContext($themeName, 'email')) {
+                $activeContexts[] = 'email';
+            }
+
+            $metadata = $this->getRawTemplateInfo($themeName);
+
+            $themes[] = new ThemeDTO(
+                name: $themeName,
+                displayName: $metadata['name'] ?? $themeName,
+                version: $metadata['version'] ?? 'unknown',
+                author: $metadata['author'] ?? 'Unknown',
+                description: $metadata['description'] ?? '',
+                license: $metadata['license'] ?? 'Unknown',
+                contexts: $metadata['contexts'] ?? [],
+                translations: $metadata['translations'] ?? [],
+                options: $metadata['options'] ?? [],
+                pterocaVersion: $metadata['pterocaVersion'] ?? 'unknown',
+                phpVersion: $metadata['phpVersion'] ?? 'unknown',
+                isActive: !empty($activeContexts),
+                context: null,
+                activeContexts: $activeContexts,
+            );
+        }
+
+        return $themes;
+    }
+
+    /**
      * Get single theme as DTO
      */
     public function getThemeDTO(string $themeName, string $context, bool $isActive): ThemeDTO

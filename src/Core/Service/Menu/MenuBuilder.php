@@ -365,21 +365,12 @@ class MenuBuilder
         $themeItems = [];
 
         $themeItems[] = MenuItem::linkToUrl(
-            $this->translator->trans('pteroca.crud.menu.panel_themes'),
-            'fa fa-desktop',
-            $this->generateThemeUrl('panel')
-        );
-
-        $themeItems[] = MenuItem::linkToUrl(
-            $this->translator->trans('pteroca.crud.menu.landing_themes'),
-            'fa fa-home',
-            $this->generateThemeUrl('landing')
-        );
-
-        $themeItems[] = MenuItem::linkToUrl(
-            $this->translator->trans('pteroca.crud.menu.email_themes'),
-            'fa fa-envelope',
-            $this->generateThemeUrl('email')
+            $this->translator->trans('pteroca.crud.menu.manage_themes'),
+            'fa fa-brush',
+            $this->adminUrlGenerator
+                ->setController(ThemeCrudController::class)
+                ->setAction('index')
+                ->generateUrl()
         );
 
         if ($this->security->isGranted(PermissionEnum::UPLOAD_THEME->value)) {
@@ -396,15 +387,6 @@ class MenuBuilder
             $this->translator->trans('pteroca.crud.menu.themes'),
             'fa fa-brush'
         )->setSubItems($themeItems);
-    }
-
-    private function generateThemeUrl(string $context): string
-    {
-        return $this->adminUrlGenerator
-            ->setController(ThemeCrudController::class)
-            ->setAction('index')
-            ->set('context', $context)
-            ->generateUrl();
     }
 
     private function buildPluginsSubmenu(): ?SubMenuItem

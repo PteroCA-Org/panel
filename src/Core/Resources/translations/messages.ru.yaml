@@ -1001,9 +1001,6 @@ pteroca:
       cancel: 'Отмена'
       close: 'Закрыть'
     theme:
-      panel_themes: 'Темы панели'
-      landing_themes: 'Темы лендинга'
-      email_themes: 'Темы email'
       theme_management_description: 'Управляйте и настраивайте темы для различных контекстов'
       appearance_settings: 'Настройки внешнего вида'
       name: 'Название темы'
@@ -1024,6 +1021,11 @@ pteroca:
       currently_active_in_contexts: 'Эта тема в настоящее время активна в следующих контекстах'
       set_as_default: 'Установить по умолчанию'
       set_as_default_in_context: 'Установить по умолчанию для %s'
+      set_as_default_in: 'Установить по умолчанию для %s'
+      context_panel: 'Панель'
+      context_landing: 'Лендинг'
+      context_email: 'Email'
+      active_in: 'Активна в'
       confirm_set_default: 'Установить тему по умолчанию'
       confirm_set_default_message: 'Вы уверены, что хотите установить'
       for_context: 'в качестве темы по умолчанию для'
@@ -1064,6 +1066,7 @@ pteroca:
         name_invalid_edges: 'Название темы не может начинаться или заканчиваться дефисом или подчеркиванием'
         name_reserved: 'Это название темы зарезервировано и не может быть использовано'
         name_already_exists: 'Тема с таким названием уже существует'
+      no_themes_found_unified: 'Темы не найдены'
     server:
       pterodactyl_server_id: 'ID сервера Pterodactyl'
       pterodactyl_server_identifier: 'Идентификатор Pterodactyl'
@@ -1447,9 +1450,7 @@ pteroca:
       roles: 'Роли'
       permissions: 'Разрешения'
       themes: 'Темы'
-      panel_themes: 'Темы панели'
-      landing_themes: 'Темы лендинга'
-      email_themes: 'Темы email'
+      manage_themes: 'Управление темами'
   api:
     schedule:
       name_required: 'Требуется имя расписания.'

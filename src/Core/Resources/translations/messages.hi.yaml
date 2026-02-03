@@ -984,9 +984,6 @@ pteroca:
       cancel: 'रद्द करें'
       close: 'बंद करें'
     theme:
-      panel_themes: 'पैनल थीम'
-      landing_themes: 'लैंडिंग पेज थीम'
-      email_themes: 'ईमेल थीम'
       theme_management_description: 'विभिन्न संदर्भों के लिए थीम प्रबंधित और कॉन्फ़िगर करें'
       appearance_settings: 'रूप सेटिंग्स'
       name: 'थीम नाम'
@@ -1007,6 +1004,11 @@ pteroca:
       currently_active_in_contexts: 'यह थीम वर्तमान में निम्नलिखित संदर्भों में सक्रिय है'
       set_as_default: 'डिफ़ॉल्ट के रूप में सेट करें'
       set_as_default_in_context: '%s में डिफ़ॉल्ट के रूप में सेट करें'
+      set_as_default_in: '%s में डिफ़ॉल्ट के रूप में सेट करें'
+      context_panel: 'पैनल'
+      context_landing: 'लैंडिंग पेज'
+      context_email: 'ईमेल'
+      active_in: 'सक्रिय है'
       confirm_set_default: 'थीम को डिफ़ॉल्ट के रूप में सेट करें'
       confirm_set_default_message: 'क्या आप वाकई सेट करना चाहते हैं'
       for_context: 'के लिए डिफ़ॉल्ट थीम के रूप में'
@@ -1047,6 +1049,7 @@ pteroca:
         name_invalid_edges: 'थीम नाम हाइफ़न या अंडरस्कोर से शुरू या समाप्त नहीं हो सकता'
         name_reserved: 'यह थीम नाम आरक्षित है और इसका उपयोग नहीं किया जा सकता'
         name_already_exists: 'इस नाम की थीम पहले से मौजूद है'
+      no_themes_found_unified: 'कोई थीम नहीं मिली'
     server:
       pterodactyl_server_id: 'Pterodactyl सर्वर आईडी'
       pterodactyl_server_identifier: 'Pterodactyl पहचानकर्ता'
@@ -1420,9 +1423,7 @@ pteroca:
       roles: 'भूमिकाएँ'
       permissions: 'अनुमतियाँ'
       themes: 'थीम'
-      panel_themes: 'पैनल थीम'
-      landing_themes: 'लैंडिंग थीम'
-      email_themes: 'ईमेल थीम'
+      manage_themes: 'थीम प्रबंधित करें'
 
   api:
     servers:

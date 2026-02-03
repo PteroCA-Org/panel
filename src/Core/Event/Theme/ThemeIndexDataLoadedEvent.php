@@ -8,10 +8,12 @@ class ThemeIndexDataLoadedEvent extends AbstractDomainEvent
 {
     public function __construct(
         private readonly ?int $userId,
-        private readonly string $themeContext,
         private readonly array $themes,
         private readonly int $themeCount,
-        private readonly ?string $activeThemeName,
+        private readonly ?string $panelTheme = null,
+        private readonly ?string $landingTheme = null,
+        private readonly ?string $emailTheme = null,
+        private readonly ?string $themeContext = null,
         private readonly array $context = [],
         ?string $eventId = null,
     ) {
@@ -23,7 +25,7 @@ class ThemeIndexDataLoadedEvent extends AbstractDomainEvent
         return $this->userId;
     }
 
-    public function getThemeContext(): string
+    public function getThemeContext(): ?string
     {
         return $this->themeContext;
     }
@@ -38,9 +40,27 @@ class ThemeIndexDataLoadedEvent extends AbstractDomainEvent
         return $this->themeCount;
     }
 
+    public function getPanelTheme(): ?string
+    {
+        return $this->panelTheme;
+    }
+
+    public function getLandingTheme(): ?string
+    {
+        return $this->landingTheme;
+    }
+
+    public function getEmailTheme(): ?string
+    {
+        return $this->emailTheme;
+    }
+
+    /**
+     * @deprecated Use getPanelTheme(), getLandingTheme(), or getEmailTheme() instead
+     */
     public function getActiveThemeName(): ?string
     {
-        return $this->activeThemeName;
+        return $this->panelTheme;
     }
 
     public function getContext(): array

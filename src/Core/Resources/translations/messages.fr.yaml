@@ -983,9 +983,6 @@ pteroca:
       cancel: 'Annuler'
       close: 'Fermer'
     theme:
-      panel_themes: 'Thèmes du panneau'
-      landing_themes: 'Thèmes de la page d''accueil'
-      email_themes: 'Thèmes d''e-mail'
       theme_management_description: 'Gérer et configurer les thèmes pour différents contextes'
       appearance_settings: 'Paramètres d''apparence'
       name: 'Nom du thème'
@@ -1006,6 +1003,11 @@ pteroca:
       currently_active_in_contexts: 'Ce thème est actuellement actif dans les contextes suivants'
       set_as_default: 'Définir par défaut'
       set_as_default_in_context: 'Définir par défaut dans %s'
+      set_as_default_in: 'Définir par défaut dans %s'
+      context_panel: 'Panneau'
+      context_landing: 'Page d''accueil'
+      context_email: 'E-mail'
+      active_in: 'Actif dans'
       confirm_set_default: 'Définir le thème par défaut'
       confirm_set_default_message: 'Êtes-vous sûr de vouloir définir'
       for_context: 'comme thème par défaut pour'
@@ -1046,6 +1048,7 @@ pteroca:
         name_invalid_edges: 'Le nom du thème ne peut pas commencer ou se terminer par un tiret ou un underscore'
         name_reserved: 'Ce nom de thème est réservé et ne peut pas être utilisé'
         name_already_exists: 'Un thème avec ce nom existe déjà'
+      no_themes_found_unified: 'Aucun thème trouvé'
     server:
       pterodactyl_server_id: 'ID du serveur Pterodactyl'
       pterodactyl_server_identifier: 'Identifiant Pterodactyl'
@@ -1419,9 +1422,7 @@ pteroca:
       roles: 'Rôles'
       permissions: 'Autorisations'
       themes: 'Thèmes'
-      panel_themes: 'Thèmes du panneau'
-      landing_themes: 'Thèmes de la page d''accueil'
-      email_themes: 'Thèmes d''e-mail'
+      manage_themes: 'Gérer les thèmes'
 
   api:
     servers:

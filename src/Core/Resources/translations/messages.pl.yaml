@@ -984,9 +984,6 @@ pteroca:
       cancel: 'Anuluj'
       close: 'Zamknij'
     theme:
-      panel_themes: 'Motywy panelu'
-      landing_themes: 'Motywy strony głównej'
-      email_themes: 'Motywy e-mail'
       theme_management_description: 'Zarządzaj i konfiguruj motywy dla różnych kontekstów'
       appearance_settings: 'Ustawienia wyglądu'
       name: 'Nazwa motywu'
@@ -1007,6 +1004,11 @@ pteroca:
       currently_active_in_contexts: 'Ten motyw jest obecnie aktywny w następujących kontekstach'
       set_as_default: 'Ustaw jako domyślny'
       set_as_default_in_context: 'Ustaw jako domyślny w %s'
+      set_as_default_in: 'Ustaw jako domyślny w %s'
+      context_panel: 'Panel'
+      context_landing: 'Strona główna'
+      context_email: 'E-mail'
+      active_in: 'Aktywny w'
       confirm_set_default: 'Ustaw motyw jako domyślny'
       confirm_set_default_message: 'Czy na pewno chcesz ustawić'
       for_context: 'jako domyślny motyw dla'
@@ -1047,6 +1049,7 @@ pteroca:
         name_invalid_edges: 'Nazwa motywu nie może zaczynać się ani kończyć myślnikiem lub podkreśleniem'
         name_reserved: 'Ta nazwa motywu jest zarezerwowana i nie może być użyta'
         name_already_exists: 'Motyw o tej nazwie już istnieje'
+      no_themes_found_unified: 'Nie znaleziono motywów'
     server:
       pterodactyl_server_id: 'ID serwera Pterodactyl'
       pterodactyl_server_identifier: 'Identyfikator Pterodactyl'
@@ -1420,9 +1423,7 @@ pteroca:
       roles: 'Role'
       permissions: 'Uprawnienia'
       themes: 'Motywy'
-      panel_themes: 'Motywy panelu'
-      landing_themes: 'Motywy strony głównej'
-      email_themes: 'Motywy e-mail'
+      manage_themes: 'Zarządzaj motywami'
 
   api:
     servers:
