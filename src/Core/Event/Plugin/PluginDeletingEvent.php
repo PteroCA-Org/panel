@@ -2,7 +2,7 @@
 
 namespace App\Core\Event\Plugin;
 
-use App\Core\Entity\Plugin\Plugin;
+use App\Core\Entity\Plugin;
 use App\Core\Event\AbstractDomainEvent;
 use App\Core\Event\StoppableEventTrait;
 
