@@ -168,6 +168,15 @@ Extend PteroCA with custom functionality through the comprehensive v0.6 plugin s
 - **Event-Driven Hooks** - 245+ events to tap into every system action
 - **Professional Tools** - Security scanning, health monitoring, dependency management
 
+### Plugin Marketplace
+
+**Browse and install plugins directly from the [PteroCA Marketplace](https://marketplace.pteroca.com)** - A centralized hub where you can:
+- 🔍 **Discover** - Browse curated themes and plugins built by the community
+- ⬇️ **Download** - Install plugins and themes with a single click
+- 📤 **Publish** - Share your own creations with the PteroCA community
+
+[Visit the Marketplace →](https://marketplace.pteroca.com)
+
 ### Plugin Capabilities
 
 | Capability | Use Cases |
@@ -181,8 +190,8 @@ Extend PteroCA with custom functionality through the comprehensive v0.6 plugin s
 
 ### Official Plugin Examples
 
-- **[PayPal Payment Provider](https://github.com/PteroCA-Org/pteroca-plugin-paypal-provider)** - Payment gateway integration
-- **Hello World** - Comprehensive example demonstrating all capabilities (`/plugins/hello-world`)
+- **[Example Hello World Plugin](https://marketplace.pteroca.com/product/example-hello-world-plugin)** - Comprehensive example demonstrating all plugin capabilities
+- **[PayPal Payment Provider](https://marketplace.pteroca.com/product/paypal-payment-provider)** - Payment gateway integration
 
 [Plugin Development Guide →](https://docs.pteroca.com/for-developers/plugins/getting-started) | [Plugin API Reference →](https://docs.pteroca.com/for-developers/plugins)
 
@@ -238,6 +247,9 @@ Extend PteroCA with custom functionality through the comprehensive v0.6 plugin s
 
 <a href="https://github.com/lostchunks">
   <img src="https://images.weserv.nl/?url=github.com/lostchunks.png&h=60&w=60&fit=cover&mask=circle" alt="lostchunks" />
+</a>
+<a href="https://github.com/TheRose97">
+  <img src="https://images.weserv.nl/?url=github.com/TheRose97.png&h=60&w=60&fit=cover&mask=circle" alt="TheRose97" />
 </a>
 
 ---

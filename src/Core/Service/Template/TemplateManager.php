@@ -42,7 +42,7 @@ class TemplateManager
 
     private function loadCurrentTemplateInfo(): void
     {
-        if (!empty($this->currentTemplateInfo)) {
+        if (!empty($this->currentTemplateMetadata)) {
             return;
         }
 

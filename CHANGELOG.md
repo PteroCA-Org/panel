@@ -1,5 +1,58 @@
 # Changelog
 
+## [0.6.3] - 2026-02-03
+
+### Added
+- Added comprehensive theme management system with upload, copy, export, and delete functionality.
+- Added 8 new granular permissions for theme operations (access, view, set default, configure, upload, copy, export, delete).
+- Added template context system - separate theme configuration for panel, landing page, and email contexts.
+- Added new customizable landing page with featured categories, products, and widget system.
+- Added ability to choose specific Pterodactyl node during server purchase.
+- Added product variant system for linking products with different node configurations.
+- Added real-time node availability checking via new API endpoint.
+- Added admin server creation functionality - admins can create servers for users directly from admin panel.
+- Added `plugin:uninstall` console command with dependency checking and file removal options.
+- Added delete plugin action in plugin details view with dependency validation.
+- Added plugin reset functionality for recovery from faulted state.
+- Added user Pterodactyl Client API key regeneration feature.
+- Added soft delete functionality for categories.
+- Added option to delete servers immediately upon expiry instead of waiting for cleanup job.
+- Added localhost allocation support for server creation.
+- Added sponsors section to README with sponsor perks information.
+- Added `dev:upgrade-theme` command for theme system migrations.
+- Added `create_server` permission for admin server creation access control.
+
+### Changed
+- Improved voucher system with separated validation and redemption logic.
+- Enhanced voucher UI with context-aware error messages and type explanations.
+- Changed MB to MiB in product settings with correct binary unit value calculation.
+- Changed resource rounding from `round()` to `ceil()` for more accurate calculations.
+- Improved unit rounding unification across all resource calculations.
+- Replaced manual password validation with Symfony's `RepeatedType` form field.
+- Updated default logo and removed filter styles.
+- Improved icons on server renewal page.
+- Updated .gitignore with theme system directories.
+- Enhanced plugin CRUD controller with improved dependency management and state handling.
+- Improved node selection service with automatic best-fit allocation algorithm.
+- Updated landing page with modern dark theme styling and responsive design.
+
+### Fixed
+- Fixed cache bug in TemplateManager where template metadata was loaded from disk on every call.
+- Fixed voucher application issues where wrong voucher types could be applied on incorrect pages.
+- Fixed soft delete handling for vouchers.
+- Fixed voucher values to allow decimal/float amounts instead of integers only.
+- Fixed networking graph to show rate of bytes (bytes/second) instead of cumulative total.
+- Fixed cache clearing notification not appearing correctly after system updates.
+- Fixed first free allocation search by removing 100 allocation limit.
+- Fixed first egg installation issues during server creation.
+- Fixed password recovery functionality that was failing due to validation errors.
+- Fixed server reinstallation by correcting egg build preparation.
+- Fixed login page mobile scrolling issues.
+- Fixed plugin dependencies validation environment variable passing.
+- Fixed routing issue in theme-related pages.
+
+---
+
 ## [0.6.2] – 2025-12-28
 
 ### Added
