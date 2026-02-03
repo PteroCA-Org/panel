@@ -3,8 +3,7 @@
 namespace App\Core\Service\Crud;
 
 use App\Core\Enum\OverwriteableCrudTemplatesEnum;
-use App\Core\Enum\SettingEnum;
-use App\Core\Service\SettingService;
+use App\Core\Service\Template\CurrentThemeService;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -16,7 +15,7 @@ class CrudTemplateService
     private const DEFAULT_TEMPLATE = 'default';
 
     public function __construct(
-        private readonly SettingService $settingService,
+        private readonly CurrentThemeService $currentThemeService,
         private readonly CacheInterface $cache,
         private readonly Filesystem $fileSystem,
         private readonly string $projectDirectory,
@@ -31,7 +30,7 @@ class CrudTemplateService
     public function getTemplatesToOverride(array $templateContext): array
     {
         $templateContext = $this->prepareTemplateContext($templateContext);
-        $currentTemplate = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value);
+        $currentTemplate = $this->currentThemeService->getCurrentTheme();
 
         // In dev environment, skip cache to see template changes immediately
         if ($this->environment === 'dev') {
@@ -90,8 +89,8 @@ class CrudTemplateService
     /**
      * Find template using hierarchical fallback strategy.
      *
-     * For a template context like 'setting/current_theme', it will search:
-     * 1. themes/{theme}/panel/crud/setting/current_theme/{template}.html.twig
+     * For a template context like 'setting/panel_theme', it will search:
+     * 1. themes/{theme}/panel/crud/setting/panel_theme/{template}.html.twig
      * 2. themes/{theme}/panel/crud/setting/{template}.html.twig
      * 3. If theme != default, repeat 1-2 for 'default' theme
      * 4. Returns null if not found (EasyAdmin default will be used)
@@ -132,8 +131,8 @@ class CrudTemplateService
     /**
      * Build hierarchical context array.
      *
-     * Example: 'setting/current_theme' becomes:
-     * - ['setting/current_theme', 'setting']
+     * Example: 'setting/panel_theme' becomes:
+     * - ['setting/panel_theme', 'setting']
      *
      * Example: 'product' becomes:
      * - ['product']

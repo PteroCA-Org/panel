@@ -8,6 +8,9 @@ use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Enum\LogActionEnum;
 use App\Core\Enum\PluginStateEnum;
 use App\Core\Enum\ViewNameEnum;
+use App\Core\Event\Plugin\PluginDeletedEvent;
+use App\Core\Event\Plugin\PluginDeletingEvent;
+use App\Core\Event\Plugin\PluginDeletionFailedEvent;
 use App\Core\Event\Plugin\PluginDetailsDataLoadedEvent;
 use App\Core\Event\Plugin\PluginDetailsPageAccessedEvent;
 use App\Core\Event\Plugin\PluginDisablementFailedEvent;
@@ -16,6 +19,13 @@ use App\Core\Event\Plugin\PluginEnablementFailedEvent;
 use App\Core\Event\Plugin\PluginEnablementRequestedEvent;
 use App\Core\Event\Plugin\PluginIndexDataLoadedEvent;
 use App\Core\Event\Plugin\PluginIndexPageAccessedEvent;
+use App\Core\Event\Plugin\PluginResetEvent;
+use App\Core\Event\Plugin\PluginResetFailedEvent;
+use App\Core\Event\Plugin\PluginResetRequestedEvent;
+use App\Core\Event\Plugin\PluginUploadedEvent;
+use App\Core\Event\Plugin\PluginUploadFailedEvent;
+use App\Core\Event\Plugin\PluginUploadPageAccessedEvent;
+use App\Core\Event\Plugin\PluginUploadRequestedEvent;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Logs\LogService;
 use App\Core\Service\Plugin\PluginManager;
@@ -208,7 +218,8 @@ class PluginCrudController extends AbstractPanelController
             ->setDefaultSort(['name' => 'ASC'])
             ->setPageTitle(Crud::PAGE_INDEX, $this->translator->trans('pteroca.crud.plugin.plugin_management'))
             ->setPageTitle(Crud::PAGE_DETAIL, fn (Plugin $plugin) => sprintf('%s: %s', $this->translator->trans('pteroca.crud.plugin.plugin'), $plugin->getDisplayName()))
-            ->showEntityActionsInlined();
+            ->showEntityActionsInlined()
+            ->setSearchFields(null);
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -487,6 +498,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function resetPlugin(AdminContext $context): RedirectResponse
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to reset plugins.');
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->query->get('pluginName');
 
@@ -497,6 +512,14 @@ class PluginCrudController extends AbstractPanelController
                 throw new RuntimeException('Plugin not found in database');
             }
 
+            $oldFaultReason = $pluginEntity->getFaultReason();
+
+            $this->dispatchDataEvent(
+                PluginResetRequestedEvent::class,
+                $request,
+                [$pluginName, $oldFaultReason]
+            );
+
             // Check if plugin is faulted
             if (!$pluginEntity->getState()->isFaulted()) {
                 $this->addFlash('warning', sprintf(
@@ -504,8 +527,6 @@ class PluginCrudController extends AbstractPanelController
                     $pluginEntity->getDisplayName()
                 ));
             } else {
-                $oldFaultReason = $pluginEntity->getFaultReason();
-
                 $this->pluginManager->resetPlugin($pluginEntity);
 
                 $this->logService->logAction(
@@ -517,12 +538,24 @@ class PluginCrudController extends AbstractPanelController
                     ]
                 );
 
+                $this->dispatchDataEvent(
+                    PluginResetEvent::class,
+                    $request,
+                    [$pluginName, $oldFaultReason]
+                );
+
                 $this->addFlash('success', sprintf(
                     $this->translator->trans('pteroca.crud.plugin.plugin_reset_successfully'),
                     $pluginEntity->getDisplayName()
                 ));
             }
         } catch (Exception $e) {
+            $this->dispatchDataEvent(
+                PluginResetFailedEvent::class,
+                $request,
+                [$pluginName, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.plugin.failed_to_reset_plugin'),
                 $e->getMessage()
@@ -539,6 +572,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function deletePlugin(AdminContext $context): RedirectResponse
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UNINSTALL_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to delete plugins.');
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->request->get('pluginName');
 
@@ -551,6 +588,23 @@ class PluginCrudController extends AbstractPanelController
 
             $displayName = $pluginEntity->getDisplayName();
 
+            $event = $this->dispatchDataEvent(
+                PluginDeletingEvent::class,
+                $request,
+                [$pluginName, $pluginEntity]
+            );
+
+            if ($event->isPropagationStopped()) {
+                $this->addFlash('warning', $this->translator->trans('pteroca.crud.plugin.deletion_prevented'));
+
+                $url = $this->adminUrlGenerator
+                    ->setController(self::class)
+                    ->setAction(Action::INDEX)
+                    ->generateUrl();
+
+                return new RedirectResponse($url);
+            }
+
             $this->pluginManager->deletePlugin($pluginEntity);
 
             $this->logService->logAction(
@@ -559,16 +613,34 @@ class PluginCrudController extends AbstractPanelController
                 ['plugin' => $pluginName]
             );
 
+            $this->dispatchDataEvent(
+                PluginDeletedEvent::class,
+                $request,
+                [$pluginName, $displayName]
+            );
+
             $this->addFlash('success', sprintf(
                 $this->translator->trans('pteroca.crud.plugin.plugin_deleted_successfully'),
                 $displayName
             ));
         } catch (PluginDependencyException $e) {
+            $this->dispatchDataEvent(
+                PluginDeletionFailedEvent::class,
+                $request,
+                [$pluginName, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 '%s',
                 nl2br(htmlspecialchars($e->getMessage()))
             ));
         } catch (Exception $e) {
+            $this->dispatchDataEvent(
+                PluginDeletionFailedEvent::class,
+                $request,
+                [$pluginName, $e->getMessage()]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.plugin.failed_to_delete_plugin'),
                 $e->getMessage()
@@ -593,6 +665,13 @@ class PluginCrudController extends AbstractPanelController
 
     public function uploadPlugin(): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload plugins.');
+        }
+
+        $request = $this->requestStack->getCurrentRequest();
+        $this->dispatchSimpleEvent(PluginUploadPageAccessedEvent::class, $request);
+
         $form = $this->createForm(PluginUploadFormType::class);
 
         return $this->render('panel/crud/plugin/upload.html.twig', [
@@ -603,6 +682,10 @@ class PluginCrudController extends AbstractPanelController
 
     public function processUpload(AdminContext $context): Response
     {
+        if (!$this->getUser()?->hasPermission(PermissionEnum::UPLOAD_PLUGIN)) {
+            throw $this->createAccessDeniedException('You do not have permission to upload plugins.');
+        }
+
         $request = $context->getRequest();
         $form = $this->createForm(PluginUploadFormType::class);
         $form->handleRequest($request);
@@ -618,6 +701,12 @@ class PluginCrudController extends AbstractPanelController
             $file = $form->get('pluginFile')->getData();
             $enableAfterUpload = $form->get('enableAfterUpload')->getData();
 
+            $this->dispatchDataEvent(
+                PluginUploadRequestedEvent::class,
+                $request,
+                [$file->getClientOriginalName(), $enableAfterUpload]
+            );
+
             // Upload plugin
             $result = $this->pluginUploadService->uploadPlugin($file);
             $manifest = $result['manifest'];
@@ -631,6 +720,12 @@ class PluginCrudController extends AbstractPanelController
                 $this->getUser(),
                 LogActionEnum::PLUGIN_UPLOADED,
                 ['plugin' => $plugin->getName(), 'version' => $plugin->getVersion()]
+            );
+
+            $this->dispatchDataEvent(
+                PluginUploadedEvent::class,
+                $request,
+                [$plugin->getName(), $plugin->getVersion(), !empty($securityIssues)]
             );
 
             // Handle plugin state based on "enable immediately" checkbox
@@ -679,6 +774,12 @@ class PluginCrudController extends AbstractPanelController
             }
 
         } catch (Exception $e) {
+            $this->dispatchDataEvent(
+                PluginUploadFailedEvent::class,
+                $request,
+                [$e->getMessage(), get_class($e)]
+            );
+
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.plugin.upload.failed'),
                 $e->getMessage()

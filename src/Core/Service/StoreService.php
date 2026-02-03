@@ -224,9 +224,70 @@ readonly class StoreService
     public function validateUserBalanceByPrice(UserInterface $user, ProductPriceInterface $selectedPrice, ?int $slots = null): void
     {
         $finalPrice = $this->productPriceCalculatorService->calculateFinalPrice($selectedPrice, $slots);
-        
+
         if ($finalPrice > $user->getBalance()) {
             throw new Exception($this->translator->trans('pteroca.store.not_enough_funds'));
         }
+    }
+
+    public function getFeaturedProducts(int $limit = 6): array
+    {
+        $imagePath = $this->productsBasePath . '/';
+        return array_map(function ($product) use ($imagePath) {
+            if (!empty($product->getImagePath())) {
+                $product->setImagePath($imagePath . $product->getImagePath());
+            }
+            return $product;
+        }, $this->productRepository->findBy(
+            [
+                'featured' => true,
+                'isActive' => true,
+                'deletedAt' => null,
+            ],
+            ['priority' => 'ASC', 'id' => 'ASC'],
+            $limit
+        ));
+    }
+
+    public function getFeaturedCategories(int $limit = 6): array
+    {
+        $imagePath = $this->categoriesBasePath . '/';
+        return array_map(function ($category) use ($imagePath) {
+            if (!empty($category->getImagePath())) {
+                $category->setImagePath($imagePath . $category->getImagePath());
+            }
+            return $category;
+        }, $this->categoryRepository->findBy(
+            [
+                'featured' => true,
+                'deletedAt' => null,
+            ],
+            ['priority' => 'ASC', 'name' => 'ASC'],
+            $limit
+        ));
+    }
+
+    public function getPublicCategories(): array
+    {
+        return $this->getCategories();
+    }
+
+    public function getPublicCategoriesWithProducts(): array
+    {
+        $categories = $this->getCategories();
+        $result = [];
+
+        foreach ($categories as $category) {
+            $products = $this->getCategoryProducts($category);
+
+            if (!empty($products)) {
+                $result[] = [
+                    'category' => $category,
+                    'products' => $products,
+                ];
+            }
+        }
+
+        return $result;
     }
 }

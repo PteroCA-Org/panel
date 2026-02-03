@@ -1,0 +1,52 @@
+{# Delete Theme Confirmation Modal #}
+<div class="modal fade" id="deleteThemeModal" tabindex="-1" aria-labelledby="deleteThemeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="deleteThemeModalLabel">
+                    <i class="fa fa-trash"></i> {{ 'pteroca.crud.theme.confirm_delete'|trans }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'pteroca.crud.theme.cancel'|trans }}"></button>
+            </div>
+            <form method="post" action="{{ ea_url().setRoute('admin_theme_delete') }}" id="delete-theme-form">
+                <input type="hidden" name="themeName" id="deleteThemeName">
+                <input type="hidden" name="context" id="deleteThemeContext">
+                <div class="modal-body">
+                    <p>{{ 'pteroca.crud.theme.confirm_delete_message'|trans }} <strong id="modal-delete-theme-name"></strong>?</p>
+                    <div class="alert alert-warning">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        {{ 'pteroca.crud.theme.delete_warning'|trans }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn secondary" data-bs-dismiss="modal">
+                        {{ 'pteroca.crud.theme.cancel'|trans }}
+                    </button>
+                    <button type="submit" class="btn danger">
+                        <i class="fa fa-trash"></i> {{ 'pteroca.crud.theme.confirm'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('deleteThemeModal');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const themeName = button.getAttribute('data-theme-name');
+                const themeDisplayName = button.getAttribute('data-theme-display-name');
+                const themeContext = button.getAttribute('data-theme-context');
+
+                // Populate modal fields
+                document.getElementById('modal-delete-theme-name').textContent = themeDisplayName;
+                document.getElementById('deleteThemeName').value = themeName;
+                document.getElementById('deleteThemeContext').value = themeContext;
+            });
+        }
+    });
+</script>

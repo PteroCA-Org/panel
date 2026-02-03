@@ -29,23 +29,27 @@ class CoreExtension extends Extension implements PrependExtensionInterface
         // Prepend Core bundle configurations
         $this->prependSecurity($container);
         $this->prependTwig($container);
-        $this->prependTranslation($container);
         $this->prependMonolog($container);
         $this->prependVichUploader($container);
 
-        // Add plugin translation paths to framework translation configuration
-        $this->prependPluginTranslations($container);
+        // Build translation paths with correct priority
+        $this->prependAllTranslations($container);
     }
 
-    private function prependPluginTranslations(ContainerBuilder $container): void
+    private function prependAllTranslations(ContainerBuilder $container): void
     {
         $projectDir = $container->getParameter('kernel.project_dir');
+        $allTranslationPaths = [];
+
+        // 1. Core translations (from translation.yaml)
+        $corePath = $projectDir . '/src/Core/Resources/translations';
+        if (is_dir($corePath)) {
+            $allTranslationPaths[] = $corePath;
+        }
+
+        // 2. Plugin translations
         $pluginsDir = $projectDir . '/plugins';
-
-        // Scan for plugins with 'ui' capability
         $plugins = $this->scanPluginDirectory($pluginsDir);
-
-        $translationPaths = [];
 
         foreach ($plugins as $pluginData) {
             $capabilities = $pluginData['manifest']['capabilities'] ?? [];
@@ -55,14 +59,29 @@ class CoreExtension extends Extension implements PrependExtensionInterface
 
             $translationsPath = $pluginData['path'] . '/translations';
             if (is_dir($translationsPath)) {
-                $translationPaths[] = $translationsPath;
+                $allTranslationPaths[] = $translationsPath;
             }
         }
 
-        if (!empty($translationPaths)) {
+        // 3. Theme translations (LAST = HIGHEST PRIORITY in Symfony)
+        $themesDir = $projectDir . '/themes';
+        if (is_dir($themesDir)) {
+            $themes = array_filter(glob($themesDir . '/*'), 'is_dir');
+
+            foreach ($themes as $themePath) {
+                $translationsPath = $themePath . '/translations';
+
+                if (is_dir($translationsPath)) {
+                    $allTranslationPaths[] = $translationsPath;
+                }
+            }
+        }
+
+        // Register all paths in one call - last in array has highest priority
+        if (!empty($allTranslationPaths)) {
             $container->prependExtensionConfig('framework', [
                 'translator' => [
-                    'paths' => $translationPaths,
+                    'paths' => $allTranslationPaths,
                 ],
             ]);
         }

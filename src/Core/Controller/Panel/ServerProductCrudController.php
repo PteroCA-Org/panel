@@ -276,6 +276,17 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setRequired(false)
                 ->setColumns(6)
                 ->hideOnIndex(),
+            BooleanField::new('allowUserSelectLocation', $this->translator->trans('pteroca.crud.product.allow_user_select_location'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_user_select_location_hint'))
+                ->setDisabled()
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->hideWhenCreating(),
+            NumberField::new('selectedNodeId', $this->translator->trans('pteroca.crud.server_product.selected_node_id'))
+                ->setDisabled()
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->hideWhenCreating(),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
@@ -499,15 +510,15 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setIcon('fa fa-server')
                 ->setDisabled($this->isServerOffline),
             $panelField,
-            NumberField::new('diskSpace', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.disk_space')))
+            NumberField::new('diskSpace', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.disk_space')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.disk_space_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),
-            NumberField::new('memory', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.memory')))
+            NumberField::new('memory', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.memory')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.memory_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),
-            NumberField::new('swap', sprintf('%s (MB)', $this->translator->trans('pteroca.crud.product.swap')))
+            NumberField::new('swap', sprintf('%s (MiB)', $this->translator->trans('pteroca.crud.product.swap')))
                 ->setHelp($this->translator->trans('pteroca.crud.product.swap_hint'))
                 ->setColumns(4)
                 ->setDisabled($this->isServerOffline),

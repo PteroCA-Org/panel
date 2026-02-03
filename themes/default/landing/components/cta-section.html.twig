@@ -1,0 +1,27 @@
+{# Detailed CTA Section #}
+<section class="cta-section text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <span class="text-primary text-uppercase fw-bold letter-spacing-2 mb-2 d-block small">{{ 'pteroca.landing.cta.badge'|trans }}</span>
+                <h2 class="text-white mb-3 text-shadow">{{ 'pteroca.landing.cta.title'|trans }}</h2>
+                <p class="text-muted mb-4 fs-5">
+                    {{ 'pteroca.landing.cta.subtitle'|trans }}
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-5">
+                        {{ 'pteroca.landing.cta.create_account'|trans }}
+                    </a>
+                    <a href="{{ path('landing_store') }}" class="btn btn-outline-light btn-lg px-4">
+                        {{ 'pteroca.landing.cta.view_plans'|trans }}
+                    </a>
+                </div>
+                <p class="mt-4 text-muted small">
+                    <i class="fas fa-check-circle text-success me-1"></i> {{ 'pteroca.landing.cta.instant_deployment'|trans }}
+                    <span class="mx-2">•</span>
+                    <i class="fas fa-check-circle text-success me-1"></i> {{ 'pteroca.landing.cta.refund_guarantee'|trans }}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>

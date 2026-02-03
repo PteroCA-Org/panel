@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 readonly class DeleteInactiveServersHandler implements HandlerInterface
 {
-    private const DEFAULT_DELETE_INACTIVE_SERVERS_DAYS_AFTER = 30;
+    public const DEFAULT_DELETE_INACTIVE_SERVERS_DAYS_AFTER = 30;
 
     public function __construct(
         private ServerRepository $serverRepository,
@@ -81,8 +81,12 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
      */
     private function handleDeleteInactiveServers(array &$stats, int $daysAfter, array $context): void
     {
-        $dateObject = new DateTime(sprintf('now - %d days', $daysAfter));
-        $serversToDelete = $this->serverRepository->getServersExpiredBefore($dateObject);
+        if ($daysAfter === 0) {
+            $serversToDelete = $this->serverRepository->getAllSuspendedServers();
+        } else {
+            $dateObject = new DateTime(sprintf('now - %d days', $daysAfter));
+            $serversToDelete = $this->serverRepository->getServersExpiredBefore($dateObject);
+        }
 
         foreach ($serversToDelete as $server) {
             $stats['checked']++;
@@ -112,7 +116,8 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
                     ->servers()
                     ->deleteServer($server->getPterodactylServerId());
 
-                $this->serverRepository->delete($server);
+                $server->setDeletedAtValue();
+                $this->serverRepository->save($server);
 
                 $stats['deleted']++;
 
@@ -157,7 +162,7 @@ readonly class DeleteInactiveServersHandler implements HandlerInterface
         $settingValue = $this->settingRepository
             ->getSetting(SettingEnum::DELETE_SUSPENDED_SERVERS_DAYS_AFTER);
 
-        if (empty($settingValue) || !is_numeric($settingValue)) {
+        if ($settingValue === '' || !is_numeric($settingValue)) {
             return self::DEFAULT_DELETE_INACTIVE_SERVERS_DAYS_AFTER;
         }
 

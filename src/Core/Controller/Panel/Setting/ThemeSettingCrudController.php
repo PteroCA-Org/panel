@@ -70,11 +70,26 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
 
         if ($pageName === Crud::PAGE_EDIT) {
             switch ($this->currentEntity->getName()) {
-                case SettingEnum::CURRENT_THEME->value:
+                case SettingEnum::PANEL_THEME->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);
                     $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
-                        ->setChoices($this->templateService->getAvailableTemplates())
-                        ->setRequired(true);
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('panel'))
+                        ->setRequired(true)
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.panel_theme.help'));
+                    break;
+                case SettingEnum::LANDING_THEME->value:
+                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
+                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('landing'))
+                        ->setRequired(true)
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.landing_theme.help'));
+                    break;
+                case SettingEnum::EMAIL_THEME->value:
+                    $valueFieldIndex = $this->findValueFieldIndexByName($fields);
+                    $fields[$valueFieldIndex] = ChoiceField::new('value', $this->translator->trans('pteroca.crud.setting.value'))
+                        ->setChoices($this->templateService->getAvailableTemplatesForContext('email'))
+                        ->setRequired(true)
+                        ->setHelp($this->translator->trans('pteroca.crud.setting.email_theme.help'));
                     break;
                 case SettingEnum::THEME_DEFAULT_MODE->value:
                     $valueFieldIndex = $this->findValueFieldIndexByName($fields);

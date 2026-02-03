@@ -9,8 +9,7 @@ readonly class AllocationIpPrioritizationService implements AllocationIpPrioriti
     /**
      * Select the best allocation from a list based on IP prioritization
      *
-     * Priority: public > private > wildcard
-     * Localhost addresses are excluded
+     * Priority: public > private > wildcard > localhost
      *
      * @param array $allocations Array of allocations from Pterodactyl API
      * @return array|null The best allocation or null if none suitable
@@ -33,8 +32,8 @@ readonly class AllocationIpPrioritizationService implements AllocationIpPrioriti
             $categorizedAllocations[$category][] = $allocation;
         }
 
-        // Priority: public > private > wildcard (localhost excluded)
-        foreach (['public', 'private', 'wildcard'] as $category) {
+        // Priority: public > private > wildcard > localhost
+        foreach (['public', 'private', 'wildcard', 'localhost'] as $category) {
             if (!empty($categorizedAllocations[$category])) {
                 return $categorizedAllocations[$category][0];
             }
@@ -44,13 +43,51 @@ readonly class AllocationIpPrioritizationService implements AllocationIpPrioriti
     }
 
     /**
+     * Get summary of available allocations for debugging and error reporting
+     *
+     * @param array $allocations Array of allocations from Pterodactyl API
+     * @return array Summary with counts of assigned/unassigned by category
+     */
+    public function getAvailableAllocationsSummary(array $allocations): array
+    {
+        $summary = [
+            'total' => count($allocations),
+            'assigned' => 0,
+            'unassigned' => 0,
+            'by_category' => [
+                'public' => ['total' => 0, 'unassigned' => 0],
+                'private' => ['total' => 0, 'unassigned' => 0],
+                'wildcard' => ['total' => 0, 'unassigned' => 0],
+                'localhost' => ['total' => 0, 'unassigned' => 0],
+                'link_local' => ['total' => 0, 'unassigned' => 0],
+            ],
+        ];
+
+        foreach ($allocations as $allocation) {
+            $category = $this->classifyIpAddress($allocation['ip']);
+            $isAssigned = $allocation['assigned'];
+
+            $summary['by_category'][$category]['total']++;
+
+            if ($isAssigned) {
+                $summary['assigned']++;
+            } else {
+                $summary['unassigned']++;
+                $summary['by_category'][$category]['unassigned']++;
+            }
+        }
+
+        return $summary;
+    }
+
+    /**
      * Classify IP address type for allocation prioritization
      *
      * @return string One of: 'localhost', 'wildcard', 'private', 'public', 'link_local'
      */
     public function classifyIpAddress(string $ip): string
     {
-        // Localhost/loopback addresses - will be excluded
+        // Localhost/loopback addresses - lowest priority
         if (in_array($ip, ['127.0.0.1', '::1', 'localhost'], true)) {
             return 'localhost';
         }

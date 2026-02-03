@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ get_title() }}{% endblock %}</title>
+    <link rel="icon" href="{{ get_favicon() }}">
+
+    {# Google Fonts: Inter #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    {% block stylesheets %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="{{ asset('assets/theme/default/css/landing.css') }}">
+    {% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+    {% block navigation %}
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('homepage') }}">
+                    <img src="{{ get_logo() }}" alt="{{ get_title() }}" height="40" class="d-inline-block align-text-top me-2">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        {# Left positioned buttons #}
+                        {% if navigationButtons is defined %}
+                            {% for button in navigationButtons %}
+                                {% if button.position == 'left' %}
+                                    {{ include('components/nav-button.html.twig', {button: button}) }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {# Right positioned buttons #}
+                        {% if navigationButtons is defined %}
+                            {% for button in navigationButtons %}
+                                {% if button.position == 'right' %}
+                                    {{ include('components/nav-button.html.twig', {button: button}) }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {# Fallback to hardcoded buttons if navigationButtons not available #}
+                            {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="btn btn-primary btn-sm ms-3" href="{{ path('panel') }}">
+                                        <i class="fas fa-tachometer-alt me-2"></i>{{ 'pteroca.landing.nav.dashboard'|trans }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_login') }}">{{ 'pteroca.landing.nav.login'|trans }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endblock %}
+
+    <main class="flex-grow-1">
+        {% block body %}{% endblock %}
+    </main>
+
+    {% block footer %}
+        <footer>
+            <div class="container text-center">
+                <div class="mb-4">
+                    <img src="{{ get_logo() }}" alt="{{ get_title() }}" height="30" style="opacity: 0.7;">
+                </div>
+                <p class="text-muted mb-2">&copy; {{ 'now'|date('Y') }} {{ get_title() }}. {{ 'pteroca.landing.footer.copyright'|trans }}</p>
+                <p class="text-muted small">{{ 'pteroca.landing.footer.powered_by'|trans({'%version%': get_app_version()})|raw }}</p>
+            </div>
+        </footer>
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
+</body>
+</html>

@@ -17,10 +17,14 @@ use App\Core\Entity\ServerLog;
 use App\Core\Entity\User;
 use App\Core\Entity\Voucher;
 use App\Core\Entity\VoucherUsage;
+use App\Core\Controller\Panel\Setting\PluginCrudController;
+use App\Core\Controller\Panel\Setting\ThemeCrudController;
 use App\Core\Enum\PermissionEnum;
 use App\Core\Enum\SettingContextEnum;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\SubMenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -29,6 +33,7 @@ class MenuBuilder
     public function __construct(
         private readonly Security $security,
         private readonly TranslatorInterface $translator,
+        private readonly AdminUrlGenerator $adminUrlGenerator,
     ) {}
 
     /**
@@ -86,7 +91,7 @@ class MenuBuilder
             $mainItems[] = MenuItem::linkToRoute(
                 $this->translator->trans('pteroca.crud.menu.shop'),
                 'fa fa-shopping-cart',
-                'store'
+                'panel_store'
             );
         }
 
@@ -155,6 +160,18 @@ class MenuBuilder
         $settingsSubmenu = $this->buildSettingsSubmenu($settingsUrlGenerator);
         if ($settingsSubmenu !== null) {
             $adminItems[] = $settingsSubmenu;
+        }
+
+        // Themes submenu
+        $themesSubmenu = $this->buildThemesSubmenu();
+        if ($themesSubmenu !== null) {
+            $adminItems[] = $themesSubmenu;
+        }
+
+        // Plugins submenu
+        $pluginsSubmenu = $this->buildPluginsSubmenu();
+        if ($pluginsSubmenu !== null) {
+            $adminItems[] = $pluginsSubmenu;
         }
 
         // Users
@@ -273,7 +290,6 @@ class MenuBuilder
             PermissionEnum::ACCESS_SETTINGS_PAYMENT->value,
             PermissionEnum::ACCESS_SETTINGS_EMAIL->value,
             PermissionEnum::ACCESS_SETTINGS_THEME->value,
-            PermissionEnum::ACCESS_PLUGINS->value,
         ];
 
         if (!$this->hasAnyPermission($settingsPermissions)) {
@@ -330,14 +346,6 @@ class MenuBuilder
             );
         }
 
-        if ($this->security->isGranted(PermissionEnum::ACCESS_PLUGINS->value)) {
-            $settingsItems[] = MenuItem::linkToCrud(
-                $this->translator->trans('pteroca.crud.plugin.plugins'),
-                'fa fa-puzzle-piece',
-                Plugin::class
-            );
-        }
-
         if (empty($settingsItems)) {
             return null;
         }
@@ -346,6 +354,70 @@ class MenuBuilder
             $this->translator->trans('pteroca.crud.menu.settings'),
             'fa fa-cogs'
         )->setSubItems($settingsItems);
+    }
+
+    private function buildThemesSubmenu(): ?SubMenuItem
+    {
+        if (!$this->security->isGranted(PermissionEnum::ACCESS_THEMES->value)) {
+            return null;
+        }
+
+        $themeItems = [];
+
+        $themeItems[] = MenuItem::linkToUrl(
+            $this->translator->trans('pteroca.crud.menu.manage_themes'),
+            'fa fa-brush',
+            $this->adminUrlGenerator
+                ->setController(ThemeCrudController::class)
+                ->setAction('index')
+                ->generateUrl()
+        );
+
+        if ($this->security->isGranted(PermissionEnum::UPLOAD_THEME->value)) {
+            $themeItems[] = MenuItem::linkToUrl(
+                $this->translator->trans('pteroca.theme.upload.upload_theme'),
+                'fa fa-upload',
+                $this->adminUrlGenerator
+                    ->setRoute('admin_theme_upload')
+                    ->generateUrl()
+            );
+        }
+
+        return MenuItem::subMenu(
+            $this->translator->trans('pteroca.crud.menu.themes'),
+            'fa fa-brush'
+        )->setSubItems($themeItems);
+    }
+
+    private function buildPluginsSubmenu(): ?SubMenuItem
+    {
+        if (!$this->security->isGranted(PermissionEnum::ACCESS_PLUGINS->value)) {
+            return null;
+        }
+
+        $pluginItems = [];
+
+        $pluginItems[] = MenuItem::linkToCrud(
+            $this->translator->trans('pteroca.crud.plugin.manage_plugins'),
+            'fa fa-list',
+            Plugin::class
+        );
+
+        if ($this->security->isGranted(PermissionEnum::UPLOAD_PLUGIN->value)) {
+            $pluginItems[] = MenuItem::linkToUrl(
+                $this->translator->trans('pteroca.plugin.upload.upload_plugin'),
+                'fa fa-upload',
+                $this->adminUrlGenerator
+                    ->setController(PluginCrudController::class)
+                    ->setAction('uploadPlugin')
+                    ->generateUrl()
+            );
+        }
+
+        return MenuItem::subMenu(
+            $this->translator->trans('pteroca.crud.plugin.plugins'),
+            'fa fa-puzzle-piece'
+        )->setSubItems($pluginItems);
     }
 
     private function buildVouchersSubmenu(): ?SubMenuItem

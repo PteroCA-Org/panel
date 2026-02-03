@@ -33,9 +33,9 @@
             'method': 'POST',
             'attr': {'id': 'topup-form'}
         }) }}
-            {{ form_widget(form.amount, {'type': 'hidden', 'attr': {'id': 'topup-amount'}}) }}
+            {{ form_widget(form.amount, {'type': 'hidden'}) }}
             {{ form_widget(form.currency) }}
-            {{ form_widget(form.voucher, {'attr': {'id': 'voucher-code', 'data-voucher-type': 'payment_discount', 'value': ''}}) }}
+            {{ form_widget(form.voucher, {'attr': {'data-voucher-type': 'payment_discount', 'value': ''}}) }}
             
             <div class="row g-4">
                 <!-- Main Content -->
@@ -249,19 +249,31 @@
         });
 
         function calculatePrice() {
+            const topupAmountElement = document.querySelector('[name="top_up_balance[amount]"]');
+            if (!topupAmountElement) {
+                console.error('Element top_up_balance[amount] not found');
+                return;
+            }
+
             const appliedDiscountValue = document.querySelector('#applied-discount-value')
-            let summaryPrice = parseFloat(document.querySelector('#topup-amount').value);
+            let summaryPrice = parseFloat(topupAmountElement.value);
 
             if (appliedDiscountValue && appliedDiscountValue.innerText) {
                 const discountValue = parseFloat(appliedDiscountValue.innerText);
                 if (!isNaN(discountValue)) {
                     let discountPrice = summaryPrice * (discountValue / 100);
-                    document.querySelector('#applied-discount-amount').textContent = discountPrice.toFixed(2);
+                    const discountAmountElement = document.querySelector('#applied-discount-amount');
+                    if (discountAmountElement) {
+                        discountAmountElement.textContent = discountPrice.toFixed(2);
+                    }
                     summaryPrice -= discountPrice
                 }
             }
 
-            document.querySelector('#selected-summary').textContent = `${summaryPrice.toFixed(2)} {{ request.currency|upper }}`
+            const summaryElement = document.querySelector('#selected-summary');
+            if (summaryElement) {
+                summaryElement.textContent = `${summaryPrice.toFixed(2)} {{ request.currency|upper }}`
+            }
         }
 
         function updateSelectedPaymentMethod() {

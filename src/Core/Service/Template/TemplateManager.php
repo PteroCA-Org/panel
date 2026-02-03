@@ -3,21 +3,19 @@
 namespace App\Core\Service\Template;
 
 use App\Core\DTO\TemplateOptionsDTO;
-use App\Core\Enum\SettingEnum;
-use App\Core\Service\SettingService;
 
 class TemplateManager
 {
     private array $currentTemplateMetadata = [];
 
     public function __construct(
-        private readonly SettingService $settingService,
+        private readonly CurrentThemeService $currentThemeService,
         private readonly TemplateService $templateService,
     ) {}
 
     public function getCurrentTemplate(): string
     {
-        return $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value);
+        return $this->currentThemeService->getCurrentTheme();
     }
 
     public function getCurrentTemplateVersion(): string
@@ -44,7 +42,7 @@ class TemplateManager
 
     private function loadCurrentTemplateInfo(): void
     {
-        if (!empty($this->currentTemplateInfo)) {
+        if (!empty($this->currentTemplateMetadata)) {
             return;
         }
 

@@ -13,6 +13,7 @@ use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
 use App\Core\Enum\EmailVerificationValueEnum;
 use App\Core\Service\Template\TemplateManager;
+use App\Core\Service\Template\CurrentThemeService;
 use Symfony\Component\Routing\RouterInterface;
 use App\Core\Service\System\SystemVersionService;
 use App\Core\Service\Plugin\PluginAssetManager;
@@ -26,6 +27,7 @@ class AppExtension extends AbstractExtension
         private readonly SystemVersionService $systemVersionService,
         private readonly SettingService $settingService,
         private readonly TemplateManager $templateManager,
+        private readonly CurrentThemeService $currentThemeService,
         private readonly Packages $packages,
         private readonly RouterInterface $router,
         private readonly PterodactylRedirectService $pterodactylRedirectService,
@@ -157,7 +159,7 @@ class AppExtension extends AbstractExtension
 
     public function templateAsset(string $path): string
     {
-        $currentTheme = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value);
+        $currentTheme = $this->currentThemeService->getCurrentTheme();
         $path = sprintf('/assets/theme/%s/%s', $currentTheme, $path);
 
         return $this->packages->getUrl($path);

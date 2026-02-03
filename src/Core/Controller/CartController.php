@@ -40,6 +40,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Core\Event\Cart\CartConfigurePageAccessedEvent;
 use App\Core\Event\Payment\PaymentGatewaysCollectedEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Core\Service\Product\LocationService;
 
 class CartController extends AbstractController
 {
@@ -52,6 +53,7 @@ class CartController extends AbstractController
         private readonly PurchaseTokenService $purchaseTokenService,
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
+        private readonly LocationService $locationService,
     ) {}
 
     #[Route('/cart/topup', name: 'cart_topup', methods: ['GET', 'POST'])]
@@ -183,6 +185,11 @@ class CartController extends AbstractController
         $purchaseToken = $this->purchaseTokenService->generateToken($this->getUser(), 'buy');
         $preparedEggs = $this->storeService->getProductEggs($product);
 
+        $groupedLocations = null;
+        if ($product->getAllowUserSelectLocation()) {
+            $groupedLocations = $this->locationService->getGroupedNodesForProduct($product);
+        }
+
         if (empty($preparedEggs)) {
             $this->addFlash(
                 'danger',
@@ -190,7 +197,7 @@ class CartController extends AbstractController
             );
 
             return $this->redirectToRoute('panel', [
-                'routeName' => 'store_product',
+                'routeName' => 'panel_store_product',
                 'id' => $product->getId()
             ]);
         }
@@ -217,6 +224,9 @@ class CartController extends AbstractController
         if (isset($requestData['slots'])) {
             $initialData['slots'] = (int) $requestData['slots'];
         }
+        if (isset($requestData['node'])) {
+            $initialData['node'] = (int) $requestData['node'];
+        }
 
         $form = $this->createForm(ServerOrderType::class, $initialData, [
             'product_id' => $product->getId(),
@@ -225,6 +235,8 @@ class CartController extends AbstractController
             'has_slot_prices' => $hasSlotPrices,
             'initial_slots' => isset($requestData['slots']) ? (int) $requestData['slots'] : null,
             'allow_auto_renewal' => $product->getAllowAutoRenewal(),
+            'allow_location_selection' => $product->getAllowUserSelectLocation(),
+            'grouped_locations' => $groupedLocations,
         ]);
 
         $this->dispatchDataEvent(
@@ -240,11 +252,14 @@ class CartController extends AbstractController
             'request' => $requestData,
             'selectedDuration' => $requestData['duration'] ?? null,
             'selectedEgg' => $requestData['egg'] ?? null,
+            'selectedNode' => $requestData['node'] ?? null,
             'isProductAvailable' => $this->storeService->productHasNodeWithResources($product),
             'hasSlotPrices' => $hasSlotPrices,
             'initialSlots' => $requestData['slots'] ?? null,
             'purchase_token' => $purchaseToken,
             'allowAutoRenewal' => $product->getAllowAutoRenewal(),
+            'allowLocationSelection' => $product->getAllowUserSelectLocation(),
+            'groupedLocations' => $groupedLocations,
         ];
 
         return $this->renderWithEvent(ViewNameEnum::CART_CONFIGURE, 'panel/cart/configure.html.twig', $viewData, $request);
@@ -266,6 +281,11 @@ class CartController extends AbstractController
             $product = $this->getProductByRequest($request);
             $hasSlotPrices = $this->serverSlotPricingService->hasSlotPrices($product);
             $preparedEggs = $this->storeService->getProductEggs($product);
+
+            $groupedLocations = null;
+            if ($product->getAllowUserSelectLocation()) {
+                $groupedLocations = $this->locationService->getGroupedNodesForProduct($product);
+            }
 
             if (empty($preparedEggs)) {
                 throw new NotFoundHttpException(
@@ -290,6 +310,8 @@ class CartController extends AbstractController
                 'has_slot_prices' => $hasSlotPrices,
                 'initial_slots' => null,
                 'allow_auto_renewal' => $product->getAllowAutoRenewal(),
+                'allow_location_selection' => $product->getAllowUserSelectLocation(),
+                'grouped_locations' => $groupedLocations,
             ]);
 
             $form->handleRequest($request);
@@ -307,6 +329,20 @@ class CartController extends AbstractController
             $slots = $formData['slots'] ?? null;
             $voucher = $formData['voucher'] ?? '';
 
+            $selectedNodeId = null;
+            if ($product->getAllowUserSelectLocation() && isset($formData['node'])) {
+                $selectedNodeId = (int) $formData['node'];
+
+                if (!$this->locationService->validateNodeBelongsToProduct($selectedNodeId, $product)) {
+                    throw new \Exception($this->translator->trans('pteroca.store.invalid_node_selection'));
+                }
+
+                $nodeOwnerProduct = $this->locationService->findProductByNodeId($selectedNodeId, $product);
+                if ($nodeOwnerProduct && $nodeOwnerProduct->getId() !== $product->getId()) {
+                    $product = $nodeOwnerProduct;
+                }
+            }
+
             if ($autoRenewal && !$product->getAllowAutoRenewal()) {
                 throw new \Exception($this->translator->trans('pteroca.store.auto_renewal_not_allowed'));
             }
@@ -318,7 +354,7 @@ class CartController extends AbstractController
             );
             $result = null;
             $this->entityManager->wrapInTransaction(function() use (
-                $product, $eggId, $priceId, $serverName, $autoRenewal, $slots, $voucher, $createServerService, &$result
+                $product, $eggId, $priceId, $serverName, $autoRenewal, $slots, $voucher, $selectedNodeId, $createServerService, &$result
             ) {
                 $lockedUser = $this->userRepository->findOneByIdWithLock($this->getUser()->getId());
 
@@ -342,7 +378,8 @@ class CartController extends AbstractController
                     $autoRenewal,
                     $lockedUser,
                     $voucher,
-                    $slots
+                    $slots,
+                    $selectedNodeId
                 );
             });
 

@@ -1,0 +1,121 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block content_header_wrapper %}
+    <div class="dashboard-header rounded-3 p-4 mb-4 mt-4">
+        <div class="container-fluid">
+            <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-3">
+                <div class="d-flex align-items-center">
+                    <div class="bg-primary rounded-circle me-3">
+                        <i class="fas fa-brush p-3 text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-1 fw-bold">{{ theme.displayName }}</h4>
+                        <p class="text-muted mb-0">{{ 'pteroca.crud.theme.theme_details'|trans }}</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap gap-2 justify-content-start justify-content-lg-end">
+                    {# Back to list button #}
+                    <a href="{{ ea_url({ crudAction: 'index', crudControllerFqcn: 'App\\Core\\Controller\\Panel\\Setting\\ThemeCrudController', context: theme_context }) }}"
+                       class="btn secondary">
+                        <i class="fa fa-arrow-left"></i> {{ 'pteroca.crud.theme.back_to_list'|trans }}
+                    </a>
+
+                    {# Dynamic actions from controller (excluding 'details' action) #}
+                    {% if theme_actions is defined %}
+                        {% for action in theme_actions %}
+                            {% if action.name != 'details' %}
+                                <a href="{{ action.url }}"
+                                   class="btn {{ action.class }}"
+                                   {% if action.data_attrs is defined %}
+                                       {% for attr, value in action.data_attrs %}
+                                           data-{{ attr }}="{{ value }}"
+                                       {% endfor %}
+                                   {% endif %}>
+                                    <i class="{{ action.icon }}"></i> {{ action.label }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {# Show alert if theme is currently active in any context #}
+    {% if active_contexts is defined and active_contexts|length > 0 %}
+        <div class="alert alert-success d-flex align-items-center mb-4" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <div>
+                <strong>{{ 'pteroca.crud.theme.currently_active'|trans }}</strong>
+                <p class="mb-0">
+                    {{ 'pteroca.crud.theme.currently_active_in_contexts'|trans }}:
+                    {% for context in active_contexts %}
+                        <span class="badge bg-success ms-1">{{ context|capitalize }}</span>
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card border-0 shadow-sm rounded-3">
+        <div class="card-body p-4">
+            <h5 class="mb-3">{{ 'pteroca.crud.theme.theme_information'|trans }}</h5>
+            <table class="table table-borderless">
+                <tbody>
+                {% for label, value in theme_info %}
+                    <tr>
+                        <th style="width: 30%;">{{ label }}</th>
+                        <td>
+                            {% if value is iterable %}
+                                {# Handle array values (contexts, translations, etc.) #}
+                                {# Check if all keys look like translation keys (contain 'pteroca.crud') #}
+                                {% set first_key = value|keys|first %}
+                                {% set has_translation_keys = first_key starts with 'pteroca.crud' %}
+
+                                {% if has_translation_keys %}
+                                    {# Array with untranslated keys - show only values as badges #}
+                                    <div class="d-flex flex-wrap gap-2">
+                                        {% for item_key, item_value in value %}
+                                            <span class="badge bg-secondary">{{ item_value }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% elseif first_key is same as(0) %}
+                                    {# Indexed array - display as badges #}
+                                    <div class="d-flex flex-wrap gap-2">
+                                        {% for item in value %}
+                                            <span class="badge bg-secondary">{{ item }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {# Associative array - display as list #}
+                                    <ul class="mb-0">
+                                        {% for item_label, item_value in value %}
+                                            {% if item_value is same as(true) %}
+                                                <li><strong>{{ item_label }}:</strong> <i class="fa fa-check text-success"></i> Yes</li>
+                                            {% elseif item_value is same as(false) %}
+                                                <li><strong>{{ item_label }}:</strong> <i class="fa fa-times text-danger"></i> No</li>
+                                            {% else %}
+                                                <li><strong>{{ item_label }}:</strong> {{ item_value }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% else %}
+                                {# Simple value - render as is (may contain HTML) #}
+                                {{ value|raw }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {# Include modal components #}
+    {% include 'panel/crud/theme/components/set-default-modal.html.twig' %}
+    {% include 'panel/crud/theme/components/copy-theme-modal.html.twig' %}
+    {% include 'panel/crud/theme/components/delete-theme-modal.html.twig' %}
+{% endblock %}

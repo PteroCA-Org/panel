@@ -23,6 +23,9 @@ class Category extends AbstractEntity
     #[ORM\Column(type: "integer")]
     private int $priority = 0;
 
+    #[ORM\Column(type: "boolean", options: ["default" => false])]
+    private bool $featured = false;
+
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $description;
 
@@ -61,6 +64,17 @@ class Category extends AbstractEntity
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+        return $this;
+    }
+
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(bool $featured): self
+    {
+        $this->featured = $featured;
         return $this;
     }
 

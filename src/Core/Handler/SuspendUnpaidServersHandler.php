@@ -10,7 +10,9 @@ use App\Core\Event\Cli\SuspendUnpaidServers\ServerSuspensionFailedEvent;
 use App\Core\Event\Cli\SuspendUnpaidServers\SuspendUnpaidServersProcessCompletedEvent;
 use App\Core\Event\Cli\SuspendUnpaidServers\SuspendUnpaidServersProcessFailedEvent;
 use App\Core\Event\Cli\SuspendUnpaidServers\SuspendUnpaidServersProcessStartedEvent;
+use App\Core\Enum\SettingEnum;
 use App\Core\Repository\ServerRepository;
+use App\Core\Repository\SettingRepository;
 use App\Core\Service\Event\EventContextService;
 use App\Core\Service\Mailer\ServerSuspensionEmailService;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
@@ -34,6 +36,7 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
         private ServerSuspensionEmailService $serverSuspensionEmailService,
         private EventDispatcherInterface $eventDispatcher,
         private EventContextService $eventContextService,
+        private SettingRepository $settingRepository,
     ) {}
 
     /**
@@ -105,28 +108,57 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
                     continue;
                 }
 
-                $server->setIsSuspended(true);
-                $this->serverRepository->save($server);
+                $deleteAfterDays = $this->getDeleteInactiveServersDaysAfter();
 
-                $this->pterodactylApplicationService
-                    ->getApplicationApi()
-                    ->servers()
-                    ->suspendServer($server->getPterodactylServerId());
+                if ($deleteAfterDays === 0) {
+                    // Delete immediately without suspension
+                    $this->pterodactylApplicationService
+                        ->getApplicationApi()
+                        ->servers()
+                        ->deleteServer($server->getPterodactylServerId());
 
-                $this->serverSuspensionEmailService->sendServerSuspensionEmail($server);
+                    $server->setDeletedAtValue();
+                    $this->serverRepository->save($server);
 
-                $stats['suspended']++;
+                    $stats['suspended']++;
 
-                $this->eventDispatcher->dispatch(
-                    new ServerSuspendedForNonPaymentEvent(
-                        $server->getUser()->getId() ?? 0,
-                        $server->getId(),
-                        $server->getPterodactylServerIdentifier(),
-                        $server->getName() ?? 'Unknown Server',
-                        new DateTimeImmutable(),
-                        $context
-                    )
-                );
+                    $this->eventDispatcher->dispatch(
+                        new ServerSuspendedForNonPaymentEvent(
+                            $server->getUser()->getId() ?? 0,
+                            $server->getId(),
+                            $server->getPterodactylServerIdentifier(),
+                            $server->getName() ?? 'Unknown Server',
+                            new DateTimeImmutable(),
+                            $context
+                        )
+                    );
+
+                    // Note: No suspension email sent because server is deleted immediately
+                } else {
+                    // Normal suspension flow with grace period
+                    $server->setIsSuspended(true);
+                    $this->serverRepository->save($server);
+
+                    $this->pterodactylApplicationService
+                        ->getApplicationApi()
+                        ->servers()
+                        ->suspendServer($server->getPterodactylServerId());
+
+                    $this->serverSuspensionEmailService->sendServerSuspensionEmail($server);
+
+                    $stats['suspended']++;
+
+                    $this->eventDispatcher->dispatch(
+                        new ServerSuspendedForNonPaymentEvent(
+                            $server->getUser()->getId() ?? 0,
+                            $server->getId(),
+                            $server->getPterodactylServerIdentifier(),
+                            $server->getName() ?? 'Unknown Server',
+                            new DateTimeImmutable(),
+                            $context
+                        )
+                    );
+                }
 
             } catch (Exception $e) {
                 $stats['failed']++;
@@ -188,5 +220,17 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
         } catch (Exception) {
             return null;
         }
+    }
+
+    private function getDeleteInactiveServersDaysAfter(): int
+    {
+        $settingValue = $this->settingRepository
+            ->getSetting(SettingEnum::DELETE_SUSPENDED_SERVERS_DAYS_AFTER);
+
+        if ($settingValue === '' || !is_numeric($settingValue)) {
+            return DeleteInactiveServersHandler::DEFAULT_DELETE_INACTIVE_SERVERS_DAYS_AFTER;
+        }
+
+        return (int) $settingValue;
     }
 }
