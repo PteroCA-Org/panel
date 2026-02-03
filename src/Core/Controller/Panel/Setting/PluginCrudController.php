@@ -33,6 +33,7 @@ use App\Core\Service\Plugin\PluginDependencyResolver;
 use App\Core\Service\Plugin\PluginHealthCheckService;
 use App\Core\Service\Plugin\PluginSecurityValidator;
 use App\Core\Service\Plugin\PluginUploadService;
+use App\Core\Service\System\DemoModeService;
 use App\Core\Exception\Plugin\PluginDependencyException;
 use App\Core\Form\PluginUploadFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -69,6 +70,7 @@ class PluginCrudController extends AbstractPanelController
         private readonly PluginHealthCheckService $healthCheckService,
         private readonly PluginSecurityValidator $securityValidator,
         private readonly PluginUploadService $pluginUploadService,
+        private readonly DemoModeService $demoModeService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -375,6 +377,15 @@ class PluginCrudController extends AbstractPanelController
 
     public function enablePlugin(AdminContext $context): RedirectResponse
     {
+        // Check demo mode first
+        if ($this->demoModeService->isDemoModeEnabled()) {
+            $this->addFlash('danger', $this->translator->trans($this->demoModeService->getDemoModeMessage()));
+            return new RedirectResponse($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction(Action::INDEX)
+                ->generateUrl());
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->query->get('pluginName');
 
@@ -435,6 +446,15 @@ class PluginCrudController extends AbstractPanelController
 
     public function disablePlugin(AdminContext $context): RedirectResponse
     {
+        // Check demo mode first
+        if ($this->demoModeService->isDemoModeEnabled()) {
+            $this->addFlash('danger', $this->translator->trans($this->demoModeService->getDemoModeMessage()));
+            return new RedirectResponse($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction(Action::INDEX)
+                ->generateUrl());
+        }
+
         $request = $context->getRequest();
         $pluginName = $request->query->get('pluginName');
 
@@ -498,6 +518,15 @@ class PluginCrudController extends AbstractPanelController
 
     public function resetPlugin(AdminContext $context): RedirectResponse
     {
+        // Check demo mode first (before permission check)
+        if ($this->demoModeService->isDemoModeEnabled()) {
+            $this->addFlash('danger', $this->translator->trans($this->demoModeService->getDemoModeMessage()));
+            return new RedirectResponse($this->adminUrlGenerator
+                ->setController(self::class)
+                ->setAction(Action::INDEX)
+                ->generateUrl());
+        }
+
         if (!$this->getUser()?->hasPermission(PermissionEnum::ENABLE_PLUGIN)) {
             throw $this->createAccessDeniedException('You do not have permission to reset plugins.');
         }

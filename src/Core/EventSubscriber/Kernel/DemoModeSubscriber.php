@@ -24,6 +24,12 @@ readonly class DemoModeSubscriber implements EventSubscriberInterface
         'stripe_success',            // /wallet/recharge/success - adds money (deprecated but active)
     ];
 
+    private const BLOCKED_CRUD_ACTIONS = [
+        'enablePlugin',
+        'disablePlugin',
+        'resetPlugin',
+    ];
+
     public function __construct(
         private DemoModeService $demoModeService,
         private TranslatorInterface $translator,
@@ -77,6 +83,24 @@ readonly class DemoModeSubscriber implements EventSubscriberInterface
                 // Redirect to index page of the same controller
                 $indexUrl = $this->generateSettingsIndexUrl($crudController);
                 $event->setResponse(new RedirectResponse($indexUrl));
+                return;
+            }
+        }
+
+        // Block state-changing custom CRUD actions (even on GET requests)
+        if ($routeName === 'panel' && $method === 'GET') {
+            $crudAction = $request->query->get('crudAction');
+
+            if (in_array($crudAction, self::BLOCKED_CRUD_ACTIONS, true)) {
+                $session = $this->requestStack->getSession();
+                $session->getFlashBag()->add(
+                    'danger',
+                    $this->translator->trans($this->demoModeService->getDemoModeMessage())
+                );
+
+                $referer = $request->headers->get('referer');
+                $redirectUrl = $referer ?: '/panel?crudControllerFqcn=App\\Core\\Controller\\Panel\\Setting\\PluginCrudController&crudAction=index';
+                $event->setResponse(new RedirectResponse($redirectUrl));
                 return;
             }
         }
