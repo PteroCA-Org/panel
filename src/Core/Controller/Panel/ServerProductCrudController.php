@@ -276,6 +276,17 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setRequired(false)
                 ->setColumns(6)
                 ->hideOnIndex(),
+            BooleanField::new('allowUserSelectLocation', $this->translator->trans('pteroca.crud.product.allow_user_select_location'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_user_select_location_hint'))
+                ->setDisabled()
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->hideWhenCreating(),
+            NumberField::new('selectedNodeId', $this->translator->trans('pteroca.crud.server_product.selected_node_id'))
+                ->setDisabled()
+                ->setColumns(6)
+                ->hideOnIndex()
+                ->hideWhenCreating(),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))

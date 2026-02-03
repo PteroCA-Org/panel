@@ -1,0 +1,85 @@
+{# Copy Theme Modal #}
+<div class="modal fade" id="copyThemeModal" tabindex="-1" aria-labelledby="copyThemeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="copyThemeModalLabel">
+                    <i class="fa fa-copy"></i> {{ 'pteroca.crud.theme.confirm_copy'|trans }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'pteroca.crud.theme.cancel'|trans }}"></button>
+            </div>
+            <form method="post" action="{{ ea_url().setRoute('admin_theme_copy') }}" id="copy-theme-form">
+                <input type="hidden" name="sourceThemeName" id="copySourceThemeName">
+                <input type="hidden" name="context" id="copyThemeContext">
+                <div class="modal-body">
+                    <p>{{ 'pteroca.crud.theme.confirm_copy_message'|trans }} <strong id="modal-copy-theme-name"></strong></p>
+
+                    <div class="mb-3">
+                        <label for="newThemeName" class="form-label">
+                            {{ 'pteroca.crud.theme.new_theme_name'|trans }}
+                        </label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="newThemeName"
+                            name="newThemeName"
+                            required
+                            pattern="[a-z0-9\-_]{3,50}"
+                            placeholder="{{ 'pteroca.crud.theme.new_theme_name_placeholder'|trans }}"
+                            autocomplete="off"
+                        >
+                        <div class="form-text">
+                            {{ 'pteroca.crud.theme.theme_name_rules'|trans }}
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        {{ 'pteroca.crud.theme.copy_warning'|trans }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn secondary" data-bs-dismiss="modal">
+                        {{ 'pteroca.crud.theme.cancel'|trans }}
+                    </button>
+                    <button type="submit" class="btn primary">
+                        <i class="fa fa-copy"></i> {{ 'pteroca.crud.theme.copy_confirm'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('copyThemeModal');
+
+        if (modal) {
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+                const themeName = button.getAttribute('data-theme-name');
+                const themeDisplayName = button.getAttribute('data-theme-display-name');
+                const themeContext = button.getAttribute('data-theme-context');
+
+                document.getElementById('modal-copy-theme-name').textContent = themeDisplayName;
+                document.getElementById('copySourceThemeName').value = themeName;
+                document.getElementById('copyThemeContext').value = themeContext;
+
+                const defaultCopyName = themeName + '-copy';
+                document.getElementById('newThemeName').value = defaultCopyName;
+
+                setTimeout(() => {
+                    const input = document.getElementById('newThemeName');
+                    input.focus();
+                    input.select();
+                }, 100);
+            });
+
+            modal.addEventListener('hide.bs.modal', function() {
+                const form = document.getElementById('copy-theme-form');
+                form.classList.remove('was-validated');
+            });
+        }
+    });
+</script>

@@ -1,0 +1,23 @@
+{# Hero Section #}
+<section class="hero-section text-center">
+    <div class="container">
+        <span class="badge bg-secondary bg-opacity-10 text-primary border border-primary border-opacity-10 rounded-pill px-3 py-2 mb-4">
+            <i class="fas fa-bolt me-2"></i>{{ 'pteroca.landing.hero.badge'|trans }}
+        </span>
+        <h1 class="hero-title">
+            {{ 'pteroca.landing.hero.title_pre'|trans }}<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">{{ 'pteroca.landing.hero.title_highlight'|trans }}</span>
+        </h1>
+        <p class="hero-subtitle text-muted mx-auto">
+            {{ 'pteroca.landing.hero.subtitle'|trans }}
+        </p>
+        <div class="hero-actions d-flex justify-content-center gap-3">
+            <a href="{{ path('landing_store') }}" class="btn btn-outline-light btn-lg px-4">
+                <i class="fas fa-server me-2"></i>{{ 'pteroca.landing.hero.browse_servers'|trans }}
+            </a>
+            <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-4">
+                <i class="fas fa-rocket me-2"></i>{{ 'pteroca.landing.hero.get_started'|trans }}
+            </a>
+        </div>
+    </div>
+</section>

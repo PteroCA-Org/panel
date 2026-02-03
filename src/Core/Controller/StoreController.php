@@ -10,6 +10,7 @@ use App\Core\Event\Store\StoreCategoryAccessedEvent;
 use App\Core\Event\Store\StoreCategoryDataLoadedEvent;
 use App\Core\Event\Store\StoreProductViewedEvent;
 use App\Core\Event\Store\StoreProductDataLoadedEvent;
+use App\Core\Service\Product\LocationService;
 use App\Core\Service\StoreService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +22,10 @@ class StoreController extends AbstractController
     public function __construct(
         private readonly TranslatorInterface $translator,
         private readonly StoreService $storeService,
+        private readonly LocationService $locationService,
     ) {}
 
-    #[Route('/store', name: 'store')]
+    #[Route('/panel/store', name: 'panel_store')]
     public function store(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);
@@ -47,7 +49,7 @@ class StoreController extends AbstractController
         return $this->renderWithEvent(ViewNameEnum::STORE_INDEX, 'panel/store/index.html.twig', $viewData, $request);
     }
 
-    #[Route('/store/category', name: 'store_category')]
+    #[Route('/panel/store/category', name: 'panel_store_category')]
     public function category(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);
@@ -80,7 +82,7 @@ class StoreController extends AbstractController
         return $this->renderWithEvent(ViewNameEnum::STORE_CATEGORY, 'panel/store/list.html.twig', $viewData, $request);
     }
 
-    #[Route('/store/product', name: 'store_product')]
+    #[Route('/panel/store/product', name: 'panel_store_product')]
     public function product(Request $request): Response
     {
         $this->checkPermission(PermissionEnum::ACCESS_SHOP);
@@ -114,9 +116,15 @@ class StoreController extends AbstractController
             [$productId, $product, $preparedEggs, count($preparedEggs)]
         );
 
+        $groupedLocations = null;
+        if ($product->getAllowUserSelectLocation()) {
+            $groupedLocations = $this->locationService->getGroupedNodesForProduct($product);
+        }
+
         $viewData = [
             'product' => $product,
             'eggs' => $preparedEggs,
+            'groupedLocations' => $groupedLocations,
         ];
 
         return $this->renderWithEvent(ViewNameEnum::STORE_PRODUCT, 'panel/store/product.html.twig', $viewData, $request);

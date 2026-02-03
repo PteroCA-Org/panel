@@ -33,6 +33,9 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\Column(type: "integer")]
     private int $priority = 0;
 
+    #[ORM\Column(type: "boolean", options: ["default" => false])]
+    private bool $featured = false;
+
     #[ORM\Column(type: "string", length: 255, nullable: true)]
     private ?string $imagePath = null;
 
@@ -52,6 +55,12 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\OneToMany(targetEntity: ProductPrice::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: false)]
     private Collection $prices;
 
+    #[ORM\ManyToMany(targetEntity: Product::class)]
+    #[ORM\JoinTable(name: 'product_variant')]
+    #[ORM\JoinColumn(name: 'product_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'variant_product_id', referencedColumnName: 'id')]
+    private Collection $variantProducts;
+
     #[ORM\Column(type: "datetime")]
     private DateTime $createdAt;
 
@@ -64,6 +73,7 @@ class Product extends AbstractEntity implements ProductInterface
     public function __construct()
     {
         $this->prices = new ArrayCollection();
+        $this->variantProducts = new ArrayCollection();
     }
 
     public function getDescription(): ?string
@@ -96,6 +106,17 @@ class Product extends AbstractEntity implements ProductInterface
     public function setPriority(int $priority): self
     {
         $this->priority = $priority;
+        return $this;
+    }
+
+    public function isFeatured(): bool
+    {
+        return $this->featured;
+    }
+
+    public function setFeatured(bool $featured): self
+    {
+        $this->featured = $featured;
         return $this;
     }
 
@@ -304,6 +325,27 @@ class Product extends AbstractEntity implements ProductInterface
         return $this;
     }
 
+    public function getVariantProducts(): Collection
+    {
+        return $this->variantProducts;
+    }
+
+    public function addVariantProduct(Product $product): self
+    {
+        if (!$this->variantProducts->contains($product) && $product !== $this) {
+            $this->variantProducts[] = $product;
+        }
+
+        return $this;
+    }
+
+    public function removeVariantProduct(Product $product): self
+    {
+        $this->variantProducts->removeElement($product);
+
+        return $this;
+    }
+
     #[Assert\Callback]
     public function validatePrices(ExecutionContextInterface $context): void
     {
@@ -319,6 +361,24 @@ class Product extends AbstractEntity implements ProductInterface
             $this->getEggsConfiguration(),
             $context
         );
+    }
+
+    public function getLowestPriceObject(): ?ProductPrice
+    {
+        $prices = $this->getPrices();
+
+        if ($prices->isEmpty()) {
+            return null;
+        }
+
+        $lowestPriceObj = null;
+        foreach ($prices as $price) {
+            if ($lowestPriceObj === null || $price->getPrice() < $lowestPriceObj->getPrice()) {
+                $lowestPriceObj = $price;
+            }
+        }
+
+        return $lowestPriceObj;
     }
 
     public function __toString(): string

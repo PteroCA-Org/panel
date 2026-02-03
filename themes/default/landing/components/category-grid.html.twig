@@ -1,0 +1,29 @@
+{# Category Grid #}
+<div class="row g-4 justify-content-center">
+    {% for category in categories %}
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <a href="{{ path('landing_store', {'category': category.id}) }}" class="text-decoration-none">
+                <div class="custom-card {{ category.imagePath is defined and category.imagePath ? 'custom-card-bg' : '' }} text-center h-100" 
+                     style="{{ category.imagePath is defined and category.imagePath ? 'background-image: url(' ~ asset(category.imagePath) ~ ');' : '' }}">
+                    <div class="card-icon mx-auto">
+                        {% if category.image is defined and category.image %}
+                            <img src="{{ category.image }}" alt="{{ category.name }}" style="width: 32px; height: 32px;">
+                        {% else %}
+                            <i class="fas fa-gamepad"></i>
+                        {% endif %}
+                    </div>
+                    <h5 class="text-white mb-2">{{ category.name }}</h5>
+                    <p class="small text-muted mb-0">
+                        {% set desc = category.description|default('pteroca.landing.categories.default_description'|trans({'%name%': category.name})) %}
+                        {{ desc|length > 60 ? desc|slice(0, 60) ~ '...' : desc }}
+                    </p>
+                </div>
+            </a>
+        </div>
+    {% else %}
+        <div class="col-12 text-center text-muted py-5">
+            <i class="fas fa-folder-open fa-3x mb-3 opacity-50"></i>
+            <p>{{ 'pteroca.landing.categories.empty'|trans }}</p>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,15 @@
+{# Render widgets for a specific position and context #}
+{% if widgetRegistry is defined and position is defined %}
+    {% set widgets = widgetRegistry.getWidgetsByPosition(position, context) %}
+    {% if widgets is not empty %}
+        <div class="widget-slot widget-slot-{{ position.value }}">
+            {% for widget in widgets %}
+                {% if widget.isVisible(context, contextData) %}
+                    <div class="widget-container widget-{{ widget.name }} col-md-{{ widget.columnSize }}">
+                        {{ include(widget.template, widget.getData(context, contextData)) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}

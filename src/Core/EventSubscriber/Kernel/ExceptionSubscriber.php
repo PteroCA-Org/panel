@@ -2,9 +2,9 @@
 
 namespace App\Core\EventSubscriber\Kernel;
 
-use App\Core\Enum\SettingEnum;
-use App\Core\Service\SettingService;
 use App\Core\Service\Telemetry\TelemetryService;
+use App\Core\Service\Template\CurrentThemeService;
+use App\Core\Service\Template\TemplateContextManager;
 use Exception;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +17,14 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 #[AsEventListener(event: 'kernel.exception')]
-class ExceptionSubscriber
+readonly class ExceptionSubscriber
 {
     public function __construct(
-        private Environment     $twig,
-        private SettingService  $settingService,
-        private KernelInterface $kernel,
-        private TelemetryService $telemetryService,
+        private Environment            $twig,
+        private CurrentThemeService    $currentThemeService,
+        private KernelInterface        $kernel,
+        private TelemetryService       $telemetryService,
+        private TemplateContextManager $contextManager,
     ) {
     }
 
@@ -44,9 +45,10 @@ class ExceptionSubscriber
             $this->telemetryService->send500ErrorEvent($exception, $event->getRequest());
         }
 
-        $currentTheme = $this->settingService->getSetting(SettingEnum::CURRENT_THEME->value) ?? 'default';
+        $currentTheme = $this->currentThemeService->getCurrentTheme();
+        $context = $this->contextManager->getCurrentContext();
 
-        $template = $this->findTemplate($statusCode, $currentTheme);
+        $template = $this->findTemplate($statusCode, $currentTheme, $context);
 
         if (!$template) {
             return;
@@ -70,44 +72,81 @@ class ExceptionSubscriber
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    private function findTemplate(int $statusCode, string $currentTheme): ?string
+    private function findTemplate(int $statusCode, string $currentTheme, string $context): ?string
     {
-        if ($currentTheme === 'default') {
-            $specificTemplate = sprintf('@default_theme/bundles/TwigBundle/Exception/error%d.html.twig', $statusCode);
-            $generalTemplate = '@default_theme/bundles/TwigBundle/Exception/error.html.twig';
+        $contextPath = match($context) {
+            'landing' => 'landing',
+            'email' => 'panel',
+            default => 'panel',
+        };
 
-            if ($this->templateExists($specificTemplate)) {
-                return $specificTemplate;
-            }
+        $candidates = $this->getTemplateCandidates($statusCode, $currentTheme, $contextPath);
 
-            if ($this->templateExists($generalTemplate)) {
-                return $generalTemplate;
-            }
-        } else {
-            $specificTemplate = sprintf('themes/%s/bundles/TwigBundle/Exception/error%d.html.twig', $currentTheme, $statusCode);
-            $generalTemplate = sprintf('themes/%s/bundles/TwigBundle/Exception/error.html.twig', $currentTheme);
-
-            if ($this->templateExists($specificTemplate)) {
-                return $specificTemplate;
-            }
-
-            if ($this->templateExists($generalTemplate)) {
-                return $generalTemplate;
-            }
-
-            $defaultSpecificTemplate = sprintf('@default_theme/bundles/TwigBundle/Exception/error%d.html.twig', $statusCode);
-            $defaultGeneralTemplate = '@default_theme/bundles/TwigBundle/Exception/error.html.twig';
-
-            if ($this->templateExists($defaultSpecificTemplate)) {
-                return $defaultSpecificTemplate;
-            }
-
-            if ($this->templateExists($defaultGeneralTemplate)) {
-                return $defaultGeneralTemplate;
+        foreach ($candidates as $template) {
+            if ($this->templateExists($template)) {
+                return $template;
             }
         }
 
         return null;
+    }
+
+    /**
+     * Returns list of template candidates in priority order
+     *
+     * @return string[]
+     */
+    private function getTemplateCandidates(int $statusCode, string $theme, string $contextPath): array
+    {
+        $candidates = [];
+
+        if ($theme === 'default') {
+            // 1. Default theme with requested context
+            $candidates[] = $this->buildTemplatePath('@default_theme', $contextPath, $statusCode);
+            $candidates[] = $this->buildTemplatePath('@default_theme', $contextPath);
+
+            // 2. Fallback to panel if landing
+            if ($contextPath === 'landing') {
+                $candidates[] = $this->buildTemplatePath('@default_theme', 'panel', $statusCode);
+                $candidates[] = $this->buildTemplatePath('@default_theme', 'panel');
+            }
+        } else {
+            // 1. Custom theme with requested context
+            $candidates[] = $this->buildTemplatePath("themes/{$theme}", $contextPath, $statusCode);
+            $candidates[] = $this->buildTemplatePath("themes/{$theme}", $contextPath);
+
+            // 2. Custom theme with panel context (fallback for landing)
+            if ($contextPath === 'landing') {
+                $candidates[] = $this->buildTemplatePath("themes/{$theme}", 'panel', $statusCode);
+                $candidates[] = $this->buildTemplatePath("themes/{$theme}", 'panel');
+            }
+
+            // 3. Default theme with requested context
+            $candidates[] = $this->buildTemplatePath('@default_theme', $contextPath, $statusCode);
+            $candidates[] = $this->buildTemplatePath('@default_theme', $contextPath);
+
+            // 4. Default theme with panel context (final fallback for landing)
+            if ($contextPath === 'landing') {
+                $candidates[] = $this->buildTemplatePath('@default_theme', 'panel', $statusCode);
+                $candidates[] = $this->buildTemplatePath('@default_theme', 'panel');
+            }
+        }
+
+        return $candidates;
+    }
+
+    /**
+     * Builds template path
+     */
+    private function buildTemplatePath(string $themePrefix, string $contextPath, ?int $statusCode = null): string
+    {
+        if ($statusCode) {
+            return sprintf('%s/%s/bundles/TwigBundle/Exception/error%d.html.twig',
+                $themePrefix, $contextPath, $statusCode);
+        }
+
+        return sprintf('%s/%s/bundles/TwigBundle/Exception/error.html.twig',
+            $themePrefix, $contextPath);
     }
 
     /**

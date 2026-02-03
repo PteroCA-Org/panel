@@ -232,7 +232,28 @@
                                 </div>
                             {% endif %}
 
-                            
+                            {% if product.allowUserSelectLocation and groupedLocations is not empty %}
+                                <div class="mb-4">
+                                    <label for="location" class="form-label fw-semibold">
+                                        <i class="fas fa-map-marker-alt me-2 text-danger"></i>
+                                        {{ 'pteroca.product.location'|trans }}
+                                    </label>
+                                    <select id="location" name="node" class="form-select form-select-lg">
+                                        <option value="">{{ 'pteroca.store.please_select_location'|trans }}</option>
+                                        {% for locationName, locationData in groupedLocations %}
+                                            <optgroup label="{{ locationName }}">
+                                                {% for node in locationData.nodes %}
+                                                    <option value="{{ node.id }}" data-product-id="{{ node.productId }}">
+                                                        {{ node.name }}
+                                                    </option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        {% endfor %}
+                                    </select>
+                                    <div id="location-availability-message" class="form-text mt-2"></div>
+                                </div>
+                            {% endif %}
+
                             {% if hasSlotPrices %}
                             {% include 'components/slot_selector.html.twig' with {
                                 'initialValue': 1,
@@ -416,6 +437,73 @@
             // Initial check
             handleDurationChange();
             handleSlotsChange();
+        });
+    </script>
+    {% endif %}
+
+    {% if product.allowUserSelectLocation and groupedLocations is not empty %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationSelect = document.getElementById('location');
+            const messageDiv = document.getElementById('location-availability-message');
+            const currentProductId = {{ product.id }};
+
+            locationSelect.addEventListener('change', function() {
+                const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+                const nodeId = selectedOption.value;
+                const nodeProductId = parseInt(selectedOption.getAttribute('data-product-id'));
+
+                if (!nodeId) {
+                    messageDiv.innerHTML = '';
+                    return;
+                }
+
+                if (nodeProductId !== currentProductId) {
+                    const durationSelect = document.getElementById('duration');
+                    const eggSelect = document.getElementById('egg');
+
+                    const urlParams = new URLSearchParams();
+                    urlParams.append('id', nodeProductId);
+                    urlParams.append('node', nodeId);
+                    if (durationSelect && durationSelect.value) {
+                        urlParams.append('duration', durationSelect.value);
+                    }
+                    if (eggSelect && eggSelect.value) {
+                        urlParams.append('egg', eggSelect.value);
+                    }
+
+                    window.location.href = '{{ path('panel_store_product') }}?' + urlParams.toString();
+                    return;
+                }
+
+                messageDiv.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>{{ 'pteroca.store.checking_availability'|trans }}';
+                messageDiv.className = 'form-text mt-2 text-muted';
+
+                fetch('{{ path('api_check_node_resources') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        productId: currentProductId,
+                        nodeId: nodeId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        messageDiv.innerHTML = '<i class="fas fa-check-circle me-1"></i>{{ 'pteroca.store.location_available'|trans }}';
+                        messageDiv.className = 'form-text mt-2 text-success';
+                    } else {
+                        messageDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>' + data.message;
+                        messageDiv.className = 'form-text mt-2 text-warning';
+                    }
+                })
+                .catch(error => {
+                    messageDiv.innerHTML = '<i class="fas fa-times-circle me-1"></i>{{ 'pteroca.store.location_check_failed'|trans }}';
+                    messageDiv.className = 'form-text mt-2 text-danger';
+                });
+            });
         });
     </script>
     {% endif %}

@@ -2,6 +2,7 @@
 
 namespace App\Core\Controller\Panel;
 
+use App\Core\Entity\Category;
 use App\Core\Entity\Product;
 use App\Core\Enum\CrudTemplateContextEnum;
 use App\Core\Enum\PermissionEnum;
@@ -19,6 +20,7 @@ use App\Core\Trait\CrudFlashMessagesTrait;
 use App\Core\Trait\ExperimentalFeatureMessageTrait;
 use App\Core\Trait\ProductCrudControllerTrait;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -105,12 +107,27 @@ class ProductCrudController extends AbstractPanelController
         $internalCurrency = $this->settingService
             ->getSetting(SettingEnum::INTERNAL_CURRENCY_NAME->value);
 
+        $landingPageEnabled = (bool) $this->settingService->getSetting(SettingEnum::LANDING_PAGE_ENABLED->value);
+
+        $featuredField = BooleanField::new('featured', $this->translator->trans('pteroca.crud.product.featured'))
+            ->setHelp($this->translator->trans('pteroca.crud.product.featured_hint'))
+            ->setColumns(6);
+
+        if (!$landingPageEnabled) {
+            $featuredField->hideOnIndex()->hideOnForm();
+        }
+
         $fields = [
             FormField::addTab($this->translator->trans('pteroca.crud.product.details'))
                 ->setIcon('fa fa-info-circle'),
             TextField::new('name', $this->translator->trans('pteroca.crud.product.name'))
                 ->setColumns(6),
             AssociationField::new('category', $this->translator->trans('pteroca.crud.product.category'))
+                ->setQueryBuilder(function (QueryBuilder $qb) {
+                    return $qb->andWhere('entity.deletedAt IS NULL')
+                        ->orderBy('entity.priority', 'ASC')
+                        ->addOrderBy('entity.name', 'ASC');
+                })
                 ->setColumns(6),
             TextareaField::new('description', $this->translator->trans('pteroca.crud.product.description'))
                 ->setColumns(6)
@@ -120,6 +137,7 @@ class ProductCrudController extends AbstractPanelController
             NumberField::new('priority', $this->translator->trans('pteroca.crud.product.priority'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.priority_hint'))
                 ->setColumns(6),
+            $featuredField,
             FormField::addRow(),
             ImageField::new('imagePath', $this->translator->trans('pteroca.crud.product.image'))
                 ->setBasePath($this->getParameter('products_base_path'))
@@ -237,6 +255,20 @@ class ProductCrudController extends AbstractPanelController
                 ->setRequired(false)
                 ->hideOnIndex()
                 ->setColumns(6),
+            BooleanField::new('allowUserSelectLocation', $this->translator->trans('pteroca.crud.product.allow_user_select_location'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.allow_user_select_location_hint'))
+                ->setRequired(false)
+                ->hideOnIndex()
+                ->setColumns(6),
+            AssociationField::new('variantProducts', $this->translator->trans('pteroca.crud.product.variant_products'))
+                ->setHelp($this->translator->trans('pteroca.crud.product.variant_products_hint'))
+                ->setFormTypeOptions([
+                    'by_reference' => false,
+                    'choice_label' => 'name',
+                    'query_builder' => fn($repository) => $this->getVariantProductsQueryBuilder($repository, $pageName)
+                ])
+                ->onlyOnForms()
+                ->setColumns(12),
             ChoiceField::new('eggs', $this->translator->trans('pteroca.crud.product.eggs'))
                 ->setHelp($this->translator->trans('pteroca.crud.product.eggs_hint'))
                 ->setChoices(fn() => $this->getEggsChoices(array_values($nests)))
@@ -364,10 +396,14 @@ class ProductCrudController extends AbstractPanelController
     {
         try {
             if ($entityInstance instanceof Product) {
-                $entityInstance->setEggsConfiguration(json_encode($this->getEggsConfigurationFromRequest()));
-                $entityInstance->setUpdatedAtValue();
+                $eggsConfig = $this->getEggsConfigurationFromRequest();
 
-                $this->validateProductEggs($entityInstance);
+                if (!empty($eggsConfig)) {
+                    $entityInstance->setEggsConfiguration(json_encode($eggsConfig));
+                    $this->validateProductEggs($entityInstance);
+                }
+
+                $entityInstance->setUpdatedAtValue();
             }
 
             parent::updateEntity($entityManager, $entityInstance);
@@ -418,6 +454,28 @@ class ProductCrudController extends AbstractPanelController
             ->generateUrl();
 
         return new RedirectResponse($url);
+    }
+
+    private function getVariantProductsQueryBuilder($repository, string $pageName)
+    {
+        $qb = $repository->createQueryBuilder('p');
+        $qb->where('p.isActive = :active')
+           ->andWhere('p.deletedAt IS NULL')
+           ->setParameter('active', true);
+
+        // Exclude current product from variant selection
+        if ($pageName === Crud::PAGE_EDIT) {
+            $context = $this->getContext();
+            if ($context && $context->getEntity()->getInstance()) {
+                $currentProduct = $context->getEntity()->getInstance();
+                if ($currentProduct->getId()) {
+                    $qb->andWhere('p.id != :currentId')
+                       ->setParameter('currentId', $currentProduct->getId());
+                }
+            }
+        }
+
+        return $qb;
     }
 
     private function validateProductEggs(Product $product): void

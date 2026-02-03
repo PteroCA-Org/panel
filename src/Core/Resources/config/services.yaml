@@ -1,5 +1,5 @@
 parameters:
-  version: '0.6.2'
+  version: '0.6.3'
   categories_base_path: '/uploads/categories'
   categories_directory: 'public/uploads/categories'
   products_base_path: '/uploads/products'
@@ -61,12 +61,6 @@ services:
     arguments:
       $projectDirectory: '%kernel.project_dir%'
       $environment: '%kernel.environment%'
-
-  App\Core\Twig\DynamicTwigLoader:
-    arguments:
-      $templatesBaseDir: '%kernel.project_dir%/themes'
-    tags:
-      - { name: 'twig.loader', priority: 1 }
 
   App\Core\Contract\Pterodactyl\Application\PterodactylAdapterInterface:
     alias: App\Core\Adapter\Pterodactyl\Application\PterodactylAdapter
@@ -240,3 +234,28 @@ services:
   App\Core\Security\PluginPermissionVoter:
     tags:
       - { name: security.voter, priority: 50 }
+
+  # Twig context-aware template loading
+  App\Core\EventSubscriber\TwigContextSubscriber:
+    arguments:
+      $templatesBaseDir: '%kernel.project_dir%/themes'
+
+  # Theme Upload System Services
+  App\Core\Service\Theme\ThemeUploadService:
+    arguments:
+      $themesDirectory: '%kernel.project_dir%/themes'
+      $publicAssetsDirectory: '%kernel.project_dir%/public/assets/theme'
+      $tempDirectory: '%kernel.project_dir%/var/tmp'
+      $currentPterocaVersion: '%version%'
+
+  App\Core\Service\Theme\TemplateManifestValidator:
+    arguments:
+      $currentPterocaVersion: '%version%'
+
+  App\Core\Service\Template\ThemeCopyService:
+    arguments:
+      $projectDir: '%kernel.project_dir%'
+
+  App\Core\Service\Template\ThemeExportService:
+    arguments:
+      $projectDir: '%kernel.project_dir%'

@@ -32,7 +32,7 @@ class ManifestValidator
     private SettingTypeMapperService $typeMapper;
 
     public function __construct(
-        string $pterocaVersion = '0.6.2',
+        string $pterocaVersion = '0.6.3',
         ?SettingTypeMapperService $typeMapper = null
     ) {
         $this->versionParser = new VersionParser();

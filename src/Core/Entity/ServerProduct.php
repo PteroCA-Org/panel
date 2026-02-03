@@ -29,6 +29,9 @@ class ServerProduct extends AbstractEntity implements ProductInterface
     #[ORM\JoinColumn(nullable: true)]
     private ?Product $originalProduct;
 
+    #[ORM\Column(type: "integer", nullable: true)]
+    private ?int $selectedNodeId = null;
+
     #[ORM\OneToMany(targetEntity: ServerProductPrice::class, mappedBy: 'serverProduct', cascade: ['persist', 'remove'], orphanRemoval: false)]
     #[Groups(['server_product:read'])]
     private Collection $prices;
@@ -57,6 +60,17 @@ class ServerProduct extends AbstractEntity implements ProductInterface
     public function setOriginalProduct(?Product $originalProduct): self
     {
         $this->originalProduct = $originalProduct;
+        return $this;
+    }
+
+    public function getSelectedNodeId(): ?int
+    {
+        return $this->selectedNodeId;
+    }
+
+    public function setSelectedNodeId(?int $selectedNodeId): self
+    {
+        $this->selectedNodeId = $selectedNodeId;
         return $this;
     }
 

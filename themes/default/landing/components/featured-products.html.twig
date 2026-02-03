@@ -1,0 +1,47 @@
+{# Featured Products #}
+<div class="row g-4 justify-content-center">
+    {% for product in products %}
+        <div class="col-lg-4 col-md-6">
+            <div class="custom-card {{ product.imagePath is defined and product.imagePath ? 'custom-card-bg' : '' }} text-center position-relative overflow-hidden d-flex flex-column h-100" 
+                 style="{{ product.imagePath is defined and product.imagePath ? 'background-image: url(' ~ asset(product.imagePath) ~ ');' : '' }}">
+                <div class="position-absolute top-0 start-50 translate-middle-x mt-n1 w-50 h-1 bg-primary rounded-bottom" style="opacity: 0.5;"></div>
+                
+                <h4 class="text-white mb-1 mt-2">{{ product.name }}</h4>
+                <p class="text-muted small mb-3">{{ product.category ? product.category.name : 'pteroca.landing.products.default_game_server'|trans }}</p>
+                
+                <div class="product-price">
+                    {% set lowestPriceObj = product.lowestPriceObject %}
+                    {% if lowestPriceObj %}
+                        {% if lowestPriceObj.type.value == 'static' %}
+                            <small>{{ get_currency() }}</small>{{ lowestPriceObj.price|number_format(2, ',', ' ') }}<small>/{{ ('pteroca.product.' ~ lowestPriceObj.unit.value)|trans|lower }}</small>
+                        {% elseif lowestPriceObj.type.value == 'on_demand' %}
+                            <small>{{ get_currency() }}</small>{{ lowestPriceObj.price|number_format(2, ',', ' ') }}<small>/{{ 'pteroca.product.minute_short'|trans }}</small>
+                        {% elseif lowestPriceObj.type.value == 'slot' %}
+                            <small>{{ get_currency() }}</small>{{ lowestPriceObj.price|number_format(2, ',', ' ') }}<small>/{{ 'pteroca.product.slot'|trans }}</small>
+                        {% endif %}
+                    {% else %}
+                        <small>{{ 'pteroca.landing.products.contact_us'|trans }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="flex-grow-1">
+                    <div class="text-muted mb-4 text-start mx-auto" style="max-width: 280px;">
+                        {% if product.description %}
+                            <p class="small">{{ product.description|length > 200 ? product.description|slice(0, 200) ~ '...' : product.description }}</p>
+                        {% else %}
+                            <p class="small text-center fst-italic">{{ 'pteroca.landing.products.view_details'|trans }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <a href="{{ path('panel', { routeName: 'panel_store_product', id: product.id }) }}" class="btn btn-primary w-100 mt-auto">
+                    {{ 'pteroca.landing.products.configure_order'|trans }}
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="col-12 text-center text-muted py-5">
+            <p>{{ 'pteroca.landing.products.empty'|trans }}</p>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,42 @@
+{% extends 'layout/base.html.twig' %}
+
+{% block body %}
+    {# Hero section #}
+    {{ include('components/hero.html.twig') }}
+
+    {# Featured categories #}
+    {% if categories is not empty %}
+    <section class="py-5 my-4">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h2 class="display-6 fw-bold text-white">{{ 'pteroca.landing.categories.title'|trans }}</h2>
+                <div class="mx-auto mt-3 rounded-pill bg-gradient-to-r from-primary to-secondary" style="height: 4px; width: 60px; background: var(--primary-color);"></div>
+            </div>
+            
+            {{ include('components/category-grid.html.twig', {
+                categories: categories
+            }) }}
+        </div>
+    </section>
+    {% endif %}
+
+    {# Featured products #}
+    <section class="py-5 my-4 position-relative">
+        {# Add a subtle background distinction #}
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(180deg, transparent 0%, rgba(30, 41, 59, 0.5) 100%); z-index: -1;"></div>
+        
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h2 class="display-6 fw-bold text-white">{{ 'pteroca.landing.products.title'|trans }}</h2>
+                <div class="mx-auto mt-3 rounded-pill" style="height: 4px; width: 60px; background: var(--primary-color);"></div>
+            </div>
+
+            {{ include('components/featured-products.html.twig', {
+                products: featuredProducts
+            }) }}
+        </div>
+    </section>
+
+    {# Call to action #}
+    {{ include('components/cta-section.html.twig') }}
+{% endblock %}
