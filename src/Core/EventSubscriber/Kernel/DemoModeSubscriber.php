@@ -28,6 +28,7 @@ readonly class DemoModeSubscriber implements EventSubscriberInterface
         'enablePlugin',
         'disablePlugin',
         'resetPlugin',
+        'regenerateApiKey',
     ];
 
     public function __construct(

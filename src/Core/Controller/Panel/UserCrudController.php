@@ -11,6 +11,7 @@ use App\Core\Contract\UserInterface;
 use App\Core\Service\Logs\LogService;
 use App\Core\Service\User\UserService;
 use App\Core\Service\User\RegeneratePterodactylApiKeyService;
+use App\Core\Service\System\DemoModeService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Core\Enum\CrudTemplateContextEnum;
@@ -42,6 +43,7 @@ class UserCrudController extends AbstractPanelController
         private readonly TranslatorInterface $translator,
         private readonly LogService $logService,
         private readonly RegeneratePterodactylApiKeyService $regeneratePterodactylApiKeyService,
+        private readonly DemoModeService $demoModeService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -168,13 +170,29 @@ class UserCrudController extends AbstractPanelController
         }
 
         if ($pageName === Crud::PAGE_EDIT || $pageName === Crud::PAGE_DETAIL) {
-            $fields[] = TextField::new('pterodactylUserApiKey', $this->translator->trans('pteroca.crud.user.pterodactyl_api_key'))
+            $apiKeyField = TextField::new('pterodactylUserApiKey', $this->translator->trans('pteroca.crud.user.pterodactyl_api_key'))
                 ->setFormTypeOption('attr', [
                     'readonly' => true,
                 ])
                 ->setDisabled()
                 ->setColumns(12)
                 ->setHelp($this->translator->trans('pteroca.crud.user.pterodactyl_api_key_help'));
+
+            // In demo mode on EDIT page, make field unmapped and set placeholder value
+            if ($this->demoModeService->isDemoModeEnabled() && $pageName === Crud::PAGE_EDIT) {
+                $apiKeyField->setFormTypeOption('mapped', false);
+                $apiKeyField->setFormTypeOption('data', $this->translator->trans('pteroca.crud.user.api_key_hidden_demo_mode'));
+            }
+
+            // formatValue for DETAIL page
+            $apiKeyField->formatValue(function ($value) {
+                if ($this->demoModeService->isDemoModeEnabled()) {
+                    return $this->translator->trans('pteroca.crud.user.api_key_hidden_demo_mode');
+                }
+                return $value;
+            });
+
+            $fields[] = $apiKeyField;
         }
 
         return $fields;
@@ -328,6 +346,14 @@ class UserCrudController extends AbstractPanelController
 
     public function regenerateApiKey(AdminContext $context): JsonResponse
     {
+        // Demo mode protection - first line of defense
+        if ($this->demoModeService->isDemoModeEnabled()) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $this->translator->trans($this->demoModeService->getDemoModeMessage())
+            ], 403);
+        }
+
         if (!$this->getUser()?->hasPermission(PermissionEnum::EDIT_USER)) {
             return new JsonResponse([
                 'success' => false,

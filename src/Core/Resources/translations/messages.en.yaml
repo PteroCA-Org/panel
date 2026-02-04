@@ -1210,6 +1210,7 @@ pteroca:
       delete_error: 'An error occurred while deleting the user: %error%'
       pterodactyl_api_key: 'Pterodactyl API Key'
       pterodactyl_api_key_help: 'API key used to authenticate with Pterodactyl panel. Generated automatically during user creation. Can be regenerated if compromised.'
+      api_key_hidden_demo_mode: 'API Key Hidden (Demo Mode)'
       api_key_not_generated: 'API key not yet generated'
       show_api_key: 'Show API Key'
       hide_api_key: 'Hide API Key'

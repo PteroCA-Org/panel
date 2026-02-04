@@ -54,6 +54,12 @@
             return;
         }
 
+        // In demo mode, if the API key is the demo placeholder, don't show controls
+        if (fullApiKey.includes('demo') || fullApiKey.includes('hidden') ||
+            fullApiKey.includes('Demo') || fullApiKey.includes('Hidden')) {
+            return; // Don't create any buttons
+        }
+
         let isKeyVisible = false;
 
         const maskedKey = fullApiKey.substring(0, 5) + '*'.repeat(24);
@@ -97,20 +103,31 @@
 
         buttonsDiv.appendChild(showBtn);
 
+        // Only show regenerate button on edit page AND if NOT in demo mode
         if (!isDetailPage) {
-            const regenerateBtn = document.createElement('button');
-            regenerateBtn.type = 'button';
-            regenerateBtn.className = 'btn sm warning';
-            regenerateBtn.innerHTML = '<i class="fa fa-sync"></i> {{ 'pteroca.crud.user.regenerate_api_key'|trans }}';
-            regenerateBtn.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            // Detect if API key is a demo placeholder from server
+            const isDemoPlaceholder = fullApiKey.length < 20 ||
+                                      fullApiKey.includes('Demo') ||
+                                      fullApiKey.includes('demo') ||
+                                      fullApiKey.includes('Hidden') ||
+                                      fullApiKey.includes('hidden');
 
-                const modal = new bootstrap.Modal(document.getElementById('regenerateApiKeyModal'));
-                modal.show();
-            };
+            // Only create button if not a demo placeholder
+            if (!isDemoPlaceholder) {
+                const regenerateBtn = document.createElement('button');
+                regenerateBtn.type = 'button';
+                regenerateBtn.className = 'btn sm warning';
+                regenerateBtn.innerHTML = '<i class="fa fa-sync"></i> {{ 'pteroca.crud.user.regenerate_api_key'|trans }}';
+                regenerateBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
 
-            buttonsDiv.appendChild(regenerateBtn);
+                    const modal = new bootstrap.Modal(document.getElementById('regenerateApiKeyModal'));
+                    modal.show();
+                };
+
+                buttonsDiv.appendChild(regenerateBtn);
+            }
         }
 
         const insertAfter = apiKeyField.parentElement || apiKeyField.parentNode;
