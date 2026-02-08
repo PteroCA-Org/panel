@@ -331,7 +331,7 @@ class ThemeCrudController extends AbstractPanelController
                 ->generateUrl());
         }
 
-        if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
+        if (!$this->templateService->themeExists($themeName)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
                 $themeName
@@ -454,7 +454,7 @@ class ThemeCrudController extends AbstractPanelController
         $newThemeName = strtolower($newThemeName);
         $newThemeName = preg_replace('/[^a-z0-9\-_]/', '', $newThemeName);
 
-        if (!$this->templateService->themeSupportsContext($sourceThemeName, $themeContext)) {
+        if (!$this->templateService->themeExists($sourceThemeName)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
                 $sourceThemeName
@@ -543,7 +543,7 @@ class ThemeCrudController extends AbstractPanelController
             $themeContext = 'panel';
         }
 
-        if (!$this->templateService->themeSupportsContext($themeName, $themeContext)) {
+        if (!$this->templateService->themeExists($themeName)) {
             $this->addFlash('danger', sprintf(
                 $this->translator->trans('pteroca.crud.theme.theme_not_found'),
                 $themeName
@@ -789,7 +789,7 @@ class ThemeCrudController extends AbstractPanelController
                     ->setController(self::class)
                     ->setAction('viewDetails')
                     ->set('themeName', $theme->getName())
-                    ->set('context', 'panel')
+                    ->set('context', $theme->getContexts()[0] ?? 'panel')
                     ->generateUrl(),
                 'class' => 'info',
             ];
@@ -840,7 +840,7 @@ class ThemeCrudController extends AbstractPanelController
                     'bs-target' => '#copyThemeModal',
                     'theme-name' => $theme->getName(),
                     'theme-display-name' => $theme->getDisplayName(),
-                    'theme-context' => 'panel',
+                    'theme-context' => $theme->getContexts()[0] ?? 'panel',
                 ],
             ];
         }
@@ -855,7 +855,7 @@ class ThemeCrudController extends AbstractPanelController
                     ->setController(self::class)
                     ->setAction('exportTheme')
                     ->set('themeName', $theme->getName())
-                    ->set('context', 'panel')
+                    ->set('context', $theme->getContexts()[0] ?? 'panel')
                     ->generateUrl(),
                 'class' => 'secondary',
             ];
@@ -876,7 +876,7 @@ class ThemeCrudController extends AbstractPanelController
                     'bs-target' => '#deleteThemeModal',
                     'theme-name' => $theme->getName(),
                     'theme-display-name' => $theme->getDisplayName(),
-                    'theme-context' => 'panel',
+                    'theme-context' => $theme->getContexts()[0] ?? 'panel',
                 ],
             ];
         }
