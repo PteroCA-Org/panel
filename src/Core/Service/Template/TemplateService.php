@@ -123,6 +123,19 @@ class TemplateService
         return in_array($context, $metadata['contexts'], true);
     }
 
+    /**
+     * Check if a theme exists in the filesystem
+     * Used for validating whole-theme operations (export, copy, delete)
+     * that don't require context-specific validation
+     */
+    public function themeExists(string $themeName): bool
+    {
+        $themePath = $this->getTemplatePath($themeName);
+        $metadataPath = $themePath . DIRECTORY_SEPARATOR . self::METADATA_FILE;
+
+        return is_dir($themePath) && file_exists($metadataPath);
+    }
+
     public function getAvailableTemplatesForContext(string $context): array
     {
         $allTemplates = $this->getAvailableTemplates();
