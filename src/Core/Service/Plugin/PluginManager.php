@@ -21,6 +21,7 @@ use App\Core\Exception\Plugin\InvalidStateTransitionException;
 use App\Core\Exception\Plugin\PluginDependencyException;
 use App\Core\Event\Plugin\PluginEnablementFailedEvent;
 use App\Core\Event\Plugin\PluginDisablementFailedEvent;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 
@@ -42,6 +43,7 @@ readonly class PluginManager
         private PluginSecurityValidator  $securityValidator,
         private ComposerDependencyManager $composerManager,
         private EnabledPluginsCacheManager $cacheManager,
+        private EntityManagerInterface   $entityManager,
     ) {}
 
     /**
@@ -358,6 +360,11 @@ readonly class PluginManager
 
             if (!$migrationResult['skipped'] && $migrationResult['executed'] > 0) {
                 $this->logger->info("Executed {$migrationResult['executed']} migrations for plugin {$plugin->getName()}");
+            }
+
+            if (!$migrationResult['skipped']) {
+                $this->entityManager->flush();
+                $this->entityManager->getConnection()->close();
             }
 
             // Publish plugin assets
