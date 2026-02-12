@@ -11,6 +11,7 @@ readonly class EmailContextDTO
         private string $currency,
         private array $serverData,
         private array $panelData,
+        private string $siteUrl,
     ) {}
 
     public function getUser(): UserInterface
@@ -33,6 +34,11 @@ readonly class EmailContextDTO
         return $this->panelData;
     }
 
+    public function getSiteUrl(): string
+    {
+        return $this->siteUrl;
+    }
+
     public function toArray(): array
     {
         return [
@@ -40,6 +46,7 @@ readonly class EmailContextDTO
             'currency' => $this->currency,
             'server' => $this->serverData,
             'panel' => $this->panelData,
+            'siteUrl' => $this->siteUrl,
         ];
     }
 }

@@ -1520,7 +1520,7 @@ pteroca:
       subject: 'Pembelian Server'
       title: 'Server Berhasil Dibeli'
       subtitle: 'Server Anda siap digunakan'
-      access_panel: 'Akses ke panel server'
+      access_panel: 'Akses ke panel klien'
       server_purchased: 'Anda telah membeli server dari toko kami.'
       expiration_date: 'Tanggal kedaluwarsa'
       product_details: 'Detail produk'
@@ -1559,7 +1559,6 @@ pteroca:
       server_name: 'Server: %serverName%'
       suspension_date: 'Ditangguhkan pada: %suspensionDate%'
       auto_delete_warning: 'Penting: Server Anda akan dihapus secara otomatis setelah %days% hari (%deleteDate%) jika tidak diperpanjang.'
-      panel_access: 'Akses Panel'
 
   verification:
     title: 'Verifikasi Email Diperlukan'

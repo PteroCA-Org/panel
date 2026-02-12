@@ -12,10 +12,11 @@ readonly class RenewalEmailContextDTO extends EmailContextDTO
         string $currency,
         array $serverData,
         array $panelData,
+        string $siteUrl,
         private ProductInterface $product,
         private PriceCalculationDTO $priceCalculation,
     ) {
-        parent::__construct($user, $currency, $serverData, $panelData);
+        parent::__construct($user, $currency, $serverData, $panelData, $siteUrl);
     }
 
     public function getProduct(): ProductInterface

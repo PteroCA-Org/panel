@@ -1534,7 +1534,7 @@ pteroca:
       panel_password: '密码'
       panel_password_hint: '密码与您在客户面板的账户相同。'
       management_panel_hint: '要获取 FTP 访问信息，请登录管理面板。'
-      access_panel: '访问服务器面板'
+      access_panel: '访问客户端面板'
     renew:
       subject: '服务器续订'
       title: '服务器续费成功'
@@ -1561,7 +1561,6 @@ pteroca:
       suspension_date_label: '暂停日期'
       auto_delete_title: '自动删除警告'
       auto_delete_warning: '重要提示：如果未续费，您的服务器将在 %days% 天后（%deleteDate%）自动删除。'
-      panel_access: '访问面板'
 
   verification:
     title: '需要电子邮件验证'

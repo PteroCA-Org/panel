@@ -1507,7 +1507,7 @@ pteroca:
       panel_password: 'Panel Passwort'
       panel_password_hint: 'Das Passwort ist das gleiche wie das Passwort für das Client-Panel-Konto.'
       management_panel_hint: 'Um FTP-Zugangsdaten zu erhalten, loggen Sie sich in das Server-Management-Panel ein.'
-      access_panel: 'Server-Panel aufrufen'
+      access_panel: 'Client-Panel aufrufen'
     renew:
       subject: 'Servererneuerung'
       title: 'Server erfolgreich verlängert'
@@ -1534,7 +1534,6 @@ pteroca:
       suspension_date_label: 'Sperrdatum'
       auto_delete_title: 'Automatische Löschung Warnung'
       auto_delete_warning: 'Wichtig: Ihr Server wird automatisch nach %days% Tagen (%deleteDate%) gelöscht, falls nicht erneuert.'
-      panel_access: 'Zugang zum Panel'
   verification:
     title: 'E-Mail-Verifizierung erforderlich'
     subtitle: 'Bitte verifizieren Sie Ihre E-Mail-Adresse, um fortzufahren'

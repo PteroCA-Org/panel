@@ -1514,7 +1514,7 @@ pteroca:
       panel_password: 'Password'
       panel_password_hint: 'La password è la stessa del tuo account nel pannello clienti.'
       management_panel_hint: 'Per ottenere i dati FTP, accedi al pannello di gestione.'
-      access_panel: 'Accedi al pannello del server'
+      access_panel: 'Accedi al pannello client'
     renew:
       subject: 'Rinnovo server'
       title: 'Server rinnovato con successo'
@@ -1541,7 +1541,6 @@ pteroca:
       suspension_date_label: 'Data di sospensione'
       auto_delete_title: 'Avviso di eliminazione automatica'
       auto_delete_warning: 'Importante: Il tuo server verrà eliminato automaticamente dopo %days% giorni (%deleteDate%) se non rinnovato.'
-      panel_access: 'Accesso al pannello'
 
   verification:
     title: 'Verifica e-mail richiesta'

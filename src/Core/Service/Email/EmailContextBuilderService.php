@@ -49,6 +49,7 @@ readonly class EmailContextBuilderService
             currency: $baseContext->getCurrency(),
             serverData: $baseContext->getServerData(),
             panelData: $baseContext->getPanelData(),
+            siteUrl: $baseContext->getSiteUrl(),
             product: $product,
             priceCalculation: $priceCalculation,
         );
@@ -72,6 +73,7 @@ readonly class EmailContextBuilderService
             currency: $baseContext->getCurrency(),
             serverData: $baseContext->getServerData(),
             panelData: $baseContext->getPanelData(),
+            siteUrl: $baseContext->getSiteUrl(),
             product: $product,
             priceCalculation: $priceCalculation,
         );
@@ -95,6 +97,7 @@ readonly class EmailContextBuilderService
 
         $currency = $this->settingService->getSetting(SettingEnum::INTERNAL_CURRENCY_NAME->value);
         $panelUrl = $this->panelUrlResolver->resolve();
+        $siteUrl = (string) $this->settingService->getSetting(SettingEnum::SITE_URL->value);
 
         $serverData = [
             'ip' => $serverDetails->ip,
@@ -111,6 +114,7 @@ readonly class EmailContextBuilderService
             currency: $currency,
             serverData: $serverData,
             panelData: $panelData,
+            siteUrl: $siteUrl,
         );
     }
 

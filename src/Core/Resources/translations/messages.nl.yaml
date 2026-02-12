@@ -1499,7 +1499,7 @@ pteroca:
       panel_password: 'Paneel wachtwoord'
       panel_password_hint: 'Het wachtwoord is hetzelfde als het wachtwoord van uw client panel account.'
       management_panel_hint: 'Log in op het server beheerpaneel om FTP gegevens te verkrijgen.'
-      access_panel: 'Toegang tot serverpaneel'
+      access_panel: 'Toegang tot clientpaneel'
     renew:
       subject: 'Server verlenging'
       title: 'Server succesvol verlengd'
@@ -1526,7 +1526,6 @@ pteroca:
       suspension_date_label: 'Opschortingsdatum'
       auto_delete_title: 'Automatische verwijderingswaarschuwing'
       auto_delete_warning: 'Belangrijk: Uw server wordt automatisch verwijderd na %days% dagen (%deleteDate%) als deze niet wordt verlengd.'
-      panel_access: 'Toegang tot paneel'
   verification:
     title: 'E-mail verificatie vereist'
     subtitle: 'Verificeer uw e-mailadres om door te gaan'
