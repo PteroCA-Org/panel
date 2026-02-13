@@ -261,7 +261,7 @@ class ThemeCrudController extends AbstractPanelController
                 [$themeName, $themeContext, $settingName]
             );
 
-            $this->settingService->saveSettingInCache($settingName, $themeName);
+            $this->settingService->saveSetting($settingName, $themeName);
 
             $this->logService->logAction(
                 $this->getUser(),
