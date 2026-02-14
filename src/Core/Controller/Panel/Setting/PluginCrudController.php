@@ -138,9 +138,9 @@ class PluginCrudController extends AbstractPanelController
                 ->hideOnIndex(),
         ];
 
-        $fields = array_merge($fields, parent::configureFields($pageName));
+        $this->fields = $fields;
 
-        return $fields;
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

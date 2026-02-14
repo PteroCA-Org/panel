@@ -176,7 +176,9 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
                 ->hideOnIndex()
                 ->hideOnForm();
 
-        return $fields;
+        $this->fields = $fields;
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

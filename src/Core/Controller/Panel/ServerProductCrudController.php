@@ -115,7 +115,7 @@ class ServerProductCrudController extends AbstractPanelController
             }
         }
 
-        return [
+        $this->fields = [
             FormField::addTab($this->translator->trans('pteroca.crud.product.server_details'))
                 ->setIcon('fa fa-info-circle'),
 
@@ -296,6 +296,8 @@ class ServerProductCrudController extends AbstractPanelController
                 ->setFormTypeOption('attr', ['class' => 'egg-selector'])
                 ->setColumns(12),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

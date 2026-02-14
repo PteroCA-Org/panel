@@ -52,7 +52,7 @@ class ServerCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             IdField::new('id')
                 ->hideOnForm(),
             IntegerField::new('pterodactylServerId', $this->translator->trans('pteroca.crud.server.pterodactyl_server_id'))
@@ -110,6 +110,8 @@ class ServerCrudController extends AbstractPanelController
             DateTimeField::new('deletedAt', $this->translator->trans('pteroca.crud.server.deleted_at'))
                 ->onlyOnDetail(),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

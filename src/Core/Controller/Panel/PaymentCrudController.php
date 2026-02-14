@@ -33,7 +33,7 @@ class PaymentCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             IdField::new('id')->hideOnForm(),
             TextField::new('sessionId', $this->translator->trans('pteroca.crud.payment.session_id'))
                 ->formatValue(fn ($value) => $value ? substr($value, 0, 16) . '...' : ''),
@@ -57,6 +57,8 @@ class PaymentCrudController extends AbstractPanelController
             DateTimeField::new('updatedAt', $this->translator->trans('pteroca.crud.payment.updated_at'))
                 ->hideOnIndex(),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

@@ -86,7 +86,7 @@ class UserAccountCrudController extends AbstractPanelController
             $this->getParameter('avatar_directory'),
         );
 
-        return [
+        $this->fields = [
             FormField::addRow(),
             IdField::new('id')->hideOnForm(),
             EmailField::new('email', $this->translator->trans('pteroca.crud.user.email'))
@@ -131,6 +131,8 @@ class UserAccountCrudController extends AbstractPanelController
                 ->setColumns(6),
 
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureCrud(Crud $crud): Crud

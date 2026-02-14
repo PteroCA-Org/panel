@@ -123,14 +123,14 @@ class UserPaymentCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             TextField::new('sessionId', $this->translator->trans('pteroca.crud.payment.session_id'))
                 ->formatValue(fn ($value) => strlen($value) > 20 ? substr($value, 0, 20) . '...' : $value),
             TextField::new('status', $this->translator->trans('pteroca.crud.payment.status'))
                 ->formatValue(fn ($value) => sprintf(
                     "<span class='badge %s'>%s</span>",
                     $value === 'paid' ? 'badge-success' : 'badge-danger',
-                    $value === 'paid' 
+                    $value === 'paid'
                         ? $this->translator->trans('pteroca.recharge.transaction_paid')
                         : $this->translator->trans('pteroca.recharge.transaction_unpaid'),
                 )),
@@ -156,6 +156,8 @@ class UserPaymentCrudController extends AbstractPanelController
             DateTimeField::new('createdAt', $this->translator->trans('pteroca.crud.payment.created_at'))->onlyOnDetail(),
             DateTimeField::new('updatedAt', $this->translator->trans('pteroca.crud.payment.updated_at'))->onlyOnDetail(),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

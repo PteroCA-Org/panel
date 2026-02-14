@@ -60,7 +60,7 @@ class CategoryCrudController extends AbstractPanelController
             $featuredField->hideOnIndex()->hideOnForm();
         }
 
-        return [
+        $this->fields = [
             NumberField::new('id', 'ID')->onlyOnIndex(),
             TextField::new('name', $this->translator->trans('pteroca.crud.category.name'))
                 ->setColumns(6),
@@ -77,6 +77,8 @@ class CategoryCrudController extends AbstractPanelController
                 ->setColumns(6),
 
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

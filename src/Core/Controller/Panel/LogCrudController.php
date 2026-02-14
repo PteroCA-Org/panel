@@ -35,11 +35,11 @@ class LogCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             IdField::new('id')->hideOnForm(),
             TextField::new('actionId', $this->translator->trans('pteroca.crud.log.action'))
                 ->setDisabled()
-            ->formatValue(fn ($value) => $this->translator->trans('pteroca.actions.' . $value)),
+                ->formatValue(fn ($value) => $this->translator->trans('pteroca.actions.' . $value)),
             CodeEditorField::new('details', $this->translator->trans('pteroca.crud.log.details'))
                 ->setDisabled()
                 ->formatValue(fn ($value) => $value === '[]' ? '' : json_encode(json_decode($value), JSON_PRETTY_PRINT)),
@@ -49,6 +49,8 @@ class LogCrudController extends AbstractPanelController
             AssociationField::new('user', $this->translator->trans('pteroca.crud.log.user'))
                 ->setDisabled(),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions
