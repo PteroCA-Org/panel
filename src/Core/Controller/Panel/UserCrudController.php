@@ -177,7 +177,9 @@ class UserCrudController extends AbstractPanelController
                 ->setHelp($this->translator->trans('pteroca.crud.user.pterodactyl_api_key_help'));
         }
 
-        return $fields;
+        $this->fields = $fields;
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

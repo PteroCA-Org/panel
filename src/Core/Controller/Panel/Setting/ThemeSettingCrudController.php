@@ -103,7 +103,9 @@ class ThemeSettingCrudController extends AbstractSettingCrudController
             }
         }
 
-        return $fields;
+        $this->fields = (array)$fields;
+
+        return parent::configureFields($pageName);
     }
 
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder

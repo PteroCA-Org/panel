@@ -42,6 +42,7 @@ abstract class AbstractPanelController extends AbstractCrudController
 
     private array $crudTemplateContext = [];
     protected bool $useConventionBasedPermissions = true;
+    protected array $fields = [];
 
     public function __construct(
         private readonly PanelCrudService $panelCrudService,
@@ -127,7 +128,7 @@ abstract class AbstractPanelController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $fields = [];
+        $fields = $this->fields;
 
         $request = $this->requestStack->getCurrentRequest();
         $context = $request ? $this->buildMinimalEventContext($request) : [];

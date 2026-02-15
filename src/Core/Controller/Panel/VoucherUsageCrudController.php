@@ -33,7 +33,7 @@ class VoucherUsageCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             NumberField::new('id', 'ID')->onlyOnIndex(),
             AssociationField::new('voucher', $this->translator->trans('pteroca.crud.voucher_usage.voucher_code')),
             AssociationField::new('user', $this->translator->trans('pteroca.crud.voucher_usage.user')),
@@ -41,6 +41,8 @@ class VoucherUsageCrudController extends AbstractPanelController
                 ->setFormat('dd/MM/yyyy HH:mm:ss')
                 ->setColumns(4),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

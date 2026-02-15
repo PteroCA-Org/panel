@@ -295,7 +295,9 @@ class ProductCrudController extends AbstractPanelController
             $this->addFlash('danger', $flashMessages);
         }
 
-        return $fields;
+        $this->fields = $fields;
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

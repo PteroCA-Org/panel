@@ -65,8 +65,7 @@ class VoucherCrudController extends AbstractPanelController
     public function configureFields(string $pageName): iterable
     {
         $translator = $this->translator;
-
-        return [
+        $this->fields = [
             NumberField::new('id', 'ID')->onlyOnIndex(),
             ChoiceField::new('type', $translator->trans('pteroca.crud.voucher.type'))
                 ->setChoices(VoucherTypeEnum::getChoices())
@@ -117,6 +116,8 @@ class VoucherCrudController extends AbstractPanelController
                 ->setColumns(3)
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.one_use_per_user_help')),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions

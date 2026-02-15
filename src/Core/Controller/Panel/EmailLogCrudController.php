@@ -35,7 +35,7 @@ class EmailLogCrudController extends AbstractPanelController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
+        $this->fields = [
             IdField::new('id')->hideOnForm(),
             ChoiceField::new('emailType', $this->translator->trans('pteroca.crud.email_log.email_type'))
                 ->setChoices(array_combine(
@@ -54,6 +54,8 @@ class EmailLogCrudController extends AbstractPanelController
             DateTimeField::new('sentAt', $this->translator->trans('pteroca.crud.email_log.sent_at'))
                 ->setDisabled(),
         ];
+
+        return parent::configureFields($pageName);
     }
 
     public function configureActions(Actions $actions): Actions
