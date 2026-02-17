@@ -159,6 +159,11 @@ pteroca:
     view_transaction_history: 'View transaction history'
     view_all_payments_description: 'View all payments that have been made on your account.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: 'Please enter an amount to recharge.'
+    enter_amount: 'Enter amount'
+    payment_method_required: 'Please select a payment method.'
+    amount_minimum_not_reached: 'This value should be {{ limit }} or more.'
+    amount_below_minimum: 'The minimum top-up amount is %minimum%.'
 
   payment:
     no_gateways_available: 'No payment gateways are currently available. Please configure a payment gateway or contact the administrator.'
@@ -1103,6 +1108,8 @@ pteroca:
       created_successfully: 'Setting created successfully.'
       create_error: 'An error occurred while creating the setting: %error%'
       update_error: 'An error occurred while updating the setting: %error%'
+      minimum_topup_amount: 'Minimum Top-Up Amount'
+      minimum_topup_amount_help: 'The minimum amount users can add to their balance in a single transaction. Must be greater than 0.'
       panel_theme:
         help: 'Theme for user panel (dashboard, servers, store). Controls the look of all admin and user-facing pages.'
       landing_theme:
@@ -1121,6 +1128,7 @@ pteroca:
         stripe_payment_methods: 'Comma-separated payment methods (e.g., card,bank_transfer,klarna). Options shown at checkout.'
         internal_currency_name: 'Virtual currency name (e.g., coins, credits, tokens). Shown in balances, pricing, and emails.'
         currency_name: 'Real currency code (USD, EUR, GBP, PLN). Displayed in checkout and receipts. Match Stripe support.'
+        minimum_topup_amount: 'Minimum amount allowed for balance top-up. Users cannot add less than this value. Must be greater than 0.'
         theme_default_light_mode_color: 'Light mode accent color in hex (e.g., #635bff). Controls buttons, links, active items.'
         theme_default_dark_mode_color: 'Dark mode base color in hex (e.g., #1a1a2e). System auto-generates shades for UI elements.'
         theme_disable_dark_mode: 'Remove dark mode toggle. Panel shows only light mode. Useful if theme doesn''t support dark mode.'

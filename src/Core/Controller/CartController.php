@@ -68,6 +68,19 @@ class CartController extends AbstractController
         $this->denyAccessUnlessGranted(PermissionEnum::ACCESS_WALLET->value);
 
         $currency = $settingService->getSetting(SettingEnum::CURRENCY_NAME->value);
+        $minAmount = (float) ($settingService
+            ->getSetting(SettingEnum::MINIMUM_TOPUP_AMOUNT->value) ?? '1.00');
+
+        if ($request->query->has('amount')) {
+            $requestedAmount = (float) $request->query->get('amount');
+            if ($requestedAmount < $minAmount) {
+                $this->addFlash('danger', $this->translator->trans(
+                    'pteroca.recharge.amount_below_minimum',
+                    ['%minimum%' => sprintf('%.2f %s', $minAmount, $currency)]
+                ));
+                return $this->redirectToRoute('panel', ['routeName' => 'recharge_balance']);
+            }
+        }
 
         $context = $this->buildMinimalEventContext($request);
         $gatewaysEvent = new PaymentGatewaysCollectedEvent($gatewayManager, $context);

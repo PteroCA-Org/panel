@@ -15,7 +15,7 @@
                     {{ form.amount.vars.label }}
                 </label>
                 <div class="input-group input-group-lg">
-                    <input type="number" id="amount" name="amount" class="form-control" value="{{ field_value(form.amount) }}" required autofocus autocomplete="name" step="0.01" min="0.01" placeholder="0.00">
+                    <input type="number" id="amount" name="amount" class="form-control" value="{{ field_value(form.amount) }}" required autofocus autocomplete="name" step="0.01" min="{{ minAmount|default('1.00') }}" placeholder="0.00">
                     <span class="input-group-text h-100">{{ get_currency() }}</span>
                 </div>
                 <input type="hidden" name="currency" value="{{ field_value(form.currency) }}" />

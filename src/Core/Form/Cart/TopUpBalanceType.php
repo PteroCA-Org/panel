@@ -2,6 +2,8 @@
 
 namespace App\Core\Form\Cart;
 
+use App\Core\Enum\SettingEnum;
+use App\Core\Service\SettingService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -17,8 +19,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class TopUpBalanceType extends AbstractType
 {
+    public function __construct(
+        private readonly SettingService $settingService,
+    ) {}
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $minAmount = (float) ($this->settingService
+            ->getSetting(SettingEnum::MINIMUM_TOPUP_AMOUNT->value) ?? '1.00');
+
         $builder
             ->add('amount', NumberType::class, [
                 'label' => 'pteroca.recharge.amount',
@@ -28,14 +37,14 @@ class TopUpBalanceType extends AbstractType
                     new Assert\NotBlank(message: 'pteroca.recharge.amount_required'),
                     new Assert\Positive(message: 'pteroca.recharge.amount_must_be_positive'),
                     new Assert\Range(
-                        minMessage: 'pteroca.recharge.amount_must_be_positive',
-                        min: 0.01
+                        minMessage: 'pteroca.recharge.amount_minimum_not_reached',
+                        min: $minAmount
                     ),
                 ],
                 'attr' => [
                     'class' => 'form-control form-control-lg',
                     'placeholder' => 'pteroca.recharge.enter_amount',
-                    'min' => '0.01',
+                    'min' => (string) $minAmount,
                     'step' => '0.01',
                 ],
             ])

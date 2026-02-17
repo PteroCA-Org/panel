@@ -24,6 +24,7 @@ enum SettingEnum: string
     case STRIPE_PAYMENT_METHODS = 'stripe_payment_methods';
     case INTERNAL_CURRENCY_NAME = 'internal_currency_name';
     case CURRENCY_NAME = 'currency_name';
+    case MINIMUM_TOPUP_AMOUNT = 'minimum_topup_amount';
     case DEFAULT_THEME_LIGHT_MODE_COLOR = 'theme_default_light_mode_color';
     case DEFAULT_THEME_DARK_MODE_COLOR = 'theme_default_dark_mode_color';
     case THEME_DISABLE_DARK_MODE = 'theme_disable_dark_mode';
