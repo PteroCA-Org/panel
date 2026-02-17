@@ -122,6 +122,10 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
                 SettingTypeEnum::TWIG->value => CodeEditorField::new('value', $valueLabel)
                     ->setLanguage('twig')
                     ->setNumOfRows(20),
+                SettingTypeEnum::CODE->value => CodeEditorField::new('value', $valueLabel)
+                    ->setLanguage('javascript')
+                    ->setNumOfRows(20)
+                    ->setTabSize(2),
                 SettingTypeEnum::LOCALE->value => ChoiceField::new('value', $valueLabel)
                     ->setChoices(array_flip($this->localeService->getAvailableLocales(false))),
                 SettingTypeEnum::URL->value => UrlField::new('value', $valueLabel),

@@ -6,6 +6,7 @@ enum SettingTypeEnum: string
 {
     case TEXT = 'text';
     case TEXTAREA = 'textarea';
+    case CODE = 'code';
     case SECRET = 'secret';
     case COLOR = 'color';
     case NUMBER = 'number';

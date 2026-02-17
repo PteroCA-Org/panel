@@ -22,7 +22,7 @@ final class Version20260217120000 extends AbstractMigration
             [
                 SettingEnum::CUSTOM_HEAD_SCRIPTS_LANDING->value,
                 null,
-                'textarea',
+                'code',
                 'general_settings',
                 120,
                 1
@@ -34,7 +34,7 @@ final class Version20260217120000 extends AbstractMigration
             [
                 SettingEnum::CUSTOM_HEAD_SCRIPTS_PANEL->value,
                 null,
-                'textarea',
+                'code',
                 'general_settings',
                 121,
                 1
