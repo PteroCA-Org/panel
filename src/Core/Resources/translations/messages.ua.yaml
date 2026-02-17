@@ -217,6 +217,11 @@ pteroca:
     view_transaction_history: 'Переглянути історію транзакцій'
     view_all_payments_description: 'Показує всі платежі, здійснені на вашому обліковому записі.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: Будь ласка, введіть суму для поповнення.
+    enter_amount: Введіть суму
+    payment_method_required: Будь ласка, виберіть спосіб оплати.
+    amount_minimum_not_reached: Це значення повинно бути {{ limit }} або більше.
+    amount_below_minimum: Мінімальна сума поповнення становить %minimum%.
     payment_is_not_configured: "Платіжна система не налаштована. Зв'яжіться з адміністратором."
   payment:
     no_gateways_available: 'Наразі немає доступних платіжних шлюзів. Налаштуйте платіжний шлюз або зверніться до адміністратора.'
@@ -1119,6 +1124,8 @@ pteroca:
       hint: Опис
       set_as_empty: 'Встановити як порожнє'
       set_as_empty_help: 'Позначте це, щоб встановити значення як порожнє (null).'
+      minimum_topup_amount: Мінімальна Сума Поповнення
+      minimum_topup_amount_help: Мінімальна сума, яку користувачі можуть додати до
       panel_theme:
         help: 'Тема для панелі користувача (дашборд, сервери, магазин). Контролює зовнішній вигляд всіх сторінок адмін та користувацьких.'
       landing_theme:

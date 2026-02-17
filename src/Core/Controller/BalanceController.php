@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class BalanceController extends AbstractController
@@ -45,6 +46,8 @@ class BalanceController extends AbstractController
 
         $currency = $this->settingService
             ->getSetting(SettingEnum::CURRENCY_NAME->value);
+        $minAmount = (float) ($this->settingService
+            ->getSetting(SettingEnum::MINIMUM_TOPUP_AMOUNT->value) ?? '1.00');
 
         $formBuilder = $this->createFormBuilder()
             ->add('amount', MoneyType::class, [
@@ -54,6 +57,18 @@ class BalanceController extends AbstractController
                     $this->translator->trans('pteroca.recharge.recharge_amount'),
                     $currency
                 ),
+                'constraints' => [
+                    new Assert\NotBlank(message: 'pteroca.recharge.amount_required'),
+                    new Assert\Positive(message: 'pteroca.recharge.amount_must_be_positive'),
+                    new Assert\Range(
+                        minMessage: 'pteroca.recharge.amount_minimum_not_reached',
+                        min: $minAmount
+                    ),
+                ],
+                'attr' => [
+                    'min' => $minAmount,
+                    'step' => '0.01',
+                ],
             ])
             ->add('currency', HiddenType::class, [
                 'data' => $currency,
@@ -81,6 +96,7 @@ class BalanceController extends AbstractController
             'balance' => $this->getUser()->getBalance(),
             'availableGateways' => $availableGateways,
             'currency' => $currency,
+            'minAmount' => $minAmount,
         ];
 
         return $this->renderWithEvent(ViewNameEnum::BALANCE_RECHARGE, 'panel/wallet/recharge.html.twig', $viewData, $request);

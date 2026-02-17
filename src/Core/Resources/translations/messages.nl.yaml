@@ -194,6 +194,11 @@ pteroca:
     view_transaction_history: 'Bekijk transactiegeschiedenis'
     view_all_payments_description: 'Toont alle betalingen die op uw account zijn gedaan.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: Voer alstublieft een bedrag in om op te laden.
+    enter_amount: Bedrag invoeren
+    payment_method_required: Selecteer alstublieft een betaalmethode.
+    amount_minimum_not_reached: Deze waarde moet {{ limit }} of meer zijn.
+    amount_below_minimum: Het minimale opladbedrag is %minimum%.
   payment:
     no_gateways_available: 'Er zijn momenteel geen betalingsgateways beschikbaar. Configureer een betalingsgateway of neem contact op met de beheerder.'
     gateway_not_found: 'De geselecteerde betalingsgateway is niet gevonden.'
@@ -1091,6 +1096,8 @@ pteroca:
       hint: Omschrijving
       set_as_empty: 'Instellen als leeg'
       set_as_empty_help: 'Vink dit aan om de waarde als leeg (null) in te stellen.'
+      minimum_topup_amount: Minimumopladbedrag
+      minimum_topup_amount_help: Het minimale bedrag dat gebruikers in één transactie
       panel_theme:
         help: "Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina's."
       landing_theme:

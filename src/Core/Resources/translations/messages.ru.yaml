@@ -218,6 +218,11 @@ pteroca:
     view_transaction_history: 'Посмотреть историю транзакций'
     view_all_payments_description: 'Показывает все платежи, совершенные на вашем аккаунте.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: Пожалуйста, введите сумму для пополнения.
+    enter_amount: Введите сумму
+    payment_method_required: Пожалуйста, выберите способ оплаты.
+    amount_minimum_not_reached: Это значение должно быть {{ limit }} или больше.
+    amount_below_minimum: Минимальная сумма пополнения составляет %minimum%.
   payment:
     no_gateways_available: 'В настоящее время нет доступных платежных шлюзов. Настройте платежный шлюз или обратитесь к администратору.'
     gateway_not_found: 'Выбранный платежный шлюз не найден.'
@@ -1119,6 +1124,8 @@ pteroca:
       hint: Описание
       set_as_empty: 'Установить как пустое'
       set_as_empty_help: 'Отметьте это, чтобы установить значение как пустое (null).'
+      minimum_topup_amount: Минимальная Сумма Пополнения
+      minimum_topup_amount_help: Минимальная сумма, которую пользователи могут добавить
       panel_theme:
         help: 'Тема для панели пользователя (дашборд, серверы, магазин). Контролирует внешний вид всех страниц админ и пользовательских.'
       landing_theme:

@@ -193,6 +193,11 @@ pteroca:
     amount_hint: 'Wprowadź kwotę, którą chcesz doładować.'
     view_transaction_history: 'Zobacz historię transakcji'
     view_all_payments_description: 'Zobacz wszystkie płatności, które zostały dokonane na Twoim koncie.'
+    amount_required: 'Proszę podaj kwotę do doładowania.'
+    enter_amount: 'Podaj kwotę'
+    payment_method_required: 'Proszę wybrać metodę płatności.'
+    amount_minimum_not_reached: 'Ta wartość powinna być {{ limit }} lub więcej.'
+    amount_below_minimum: 'Minimalna kwota doładowania to %minimum%.'
     amount_must_be_positive: 'The amount must be positive.'
   payment:
     no_gateways_available: 'Obecnie nie są dostępne żadne bramki płatności. Skonfiguruj bramkę płatności lub skontaktuj się z administratorem.'
@@ -1091,6 +1096,8 @@ pteroca:
       hint: Opis
       set_as_empty: 'Ustaw jako puste'
       set_as_empty_help: 'Zaznacz to, aby ustawić wartość jako pustą (null).'
+      minimum_topup_amount: 'Minimalna Kwota Doładowania'
+      minimum_topup_amount_help: 'Minimalna kwota, którą użytkownicy mogą dodać do swojego salda w jednej transakcji. Musi być większa niż 0.'
       panel_theme:
         help: 'Motyw dla panelu użytkownika (panel, serwery, sklep). Kontroluje wygląd wszystkich stron admin i user-facing.'
       landing_theme:
@@ -1109,6 +1116,7 @@ pteroca:
         stripe_payment_methods: 'Metody płatności oddzielone przecinkami (np. card,bank_transfer,klarna). Opcje widoczne przy zakupie.'
         internal_currency_name: 'Nazwa wirtualnej waluty (np. monety, kredyty, tokeny). Widoczna w saldach, cenach i emailach.'
         currency_name: 'Kod waluty rzeczywistej (USD, EUR, GBP, PLN). Wyświetlany przy zakupie i na paragonach. Dopasuj do Stripe.'
+        minimum_topup_amount: 'Minimalna kwota dozwolona do doładowania salda. Użytkownicy nie mogą dodać mniej niż ta wartość. Musi być większa niż 0.'
         theme_default_light_mode_color: 'Kolor akcentu w trybie jasnym w hex (np. #635bff). Steruje przyciskami, linkami, aktywnymi elementami.'
         theme_default_dark_mode_color: 'Bazowy kolor trybu ciemnego w hex (np. #1a1a2e). System automatycznie generuje odcienie dla elementów UI.'
         theme_default_primary_color: 'Domyślny kolor główny motywu'

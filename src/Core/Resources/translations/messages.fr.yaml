@@ -193,6 +193,11 @@ pteroca:
     view_transaction_history: "Voir l'historique des transactions"
     view_all_payments_description: 'Affiche tous les paiements effectués sur votre compte.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: Veuillez saisir un montant à recharger.
+    enter_amount: Entrer le montant
+    payment_method_required: Veuillez sélectionner un mode de paiement.
+    amount_minimum_not_reached: Cette valeur doit être {{ limit }} ou plus.
+    amount_below_minimum: Le montant minimum de recharge est %minimum%.
     payment_is_not_configured: 'Le système de paiement n’est pas configuré. Contactez l’administrateur.'
   payment:
     no_gateways_available: "Aucune passerelle de paiement n'est actuellement disponible. Veuillez configurer une passerelle de paiement ou contacter l'administrateur."
@@ -1091,6 +1096,8 @@ pteroca:
       hint: Description
       set_as_empty: 'Définir comme vide'
       set_as_empty_help: 'Cochez ceci pour définir la valeur comme vide (null).'
+      minimum_topup_amount: Montant Minimum de Recharge
+      minimum_topup_amount_help: Le montant minimum que les utilisateurs peuvent ajouter
       panel_theme:
         help: "Thème pour le panneau utilisateur (tableau de bord, serveurs, boutique). Contrôle l'apparence de toutes les pages admin et utilisateur."
       landing_theme:

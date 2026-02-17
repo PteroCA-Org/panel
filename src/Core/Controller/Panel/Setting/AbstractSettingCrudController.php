@@ -275,6 +275,7 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
     {
         try {
             $this->handleSetAsEmpty($entityInstance);
+            $this->validateSettingValue($entityInstance);
             $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
             parent::persistEntity($entityManager, $entityInstance);
 
@@ -289,6 +290,7 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
     {
         try {
             $this->handleSetAsEmpty($entityInstance);
+            $this->validateSettingValue($entityInstance);
             $this->settingService->saveSettingInCache($entityInstance->getName(), $entityInstance->getValue());
             parent::updateEntity($entityManager, $entityInstance);
 
@@ -366,5 +368,15 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
         }
 
         return $this->settingOptionRepository->getOptionsForSetting($settingName);
+    }
+
+    private function validateSettingValue(Setting $setting): void
+    {
+        if ($setting->getName() === 'minimum_topup_amount') {
+            $value = (float) $setting->getValue();
+            if ($value <= 0) {
+                throw new \InvalidArgumentException('Minimum top-up amount must be greater than 0');
+            }
+        }
     }
 }

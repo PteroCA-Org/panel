@@ -218,6 +218,11 @@ pteroca:
     view_transaction_history: 'Lihat riwayat transaksi'
     view_all_payments_description: 'Lihat semua pembayaran yang telah dilakukan pada akun Anda.'
     amount_must_be_positive: 'Jumlah harus positif.'
+    amount_required: Masukkan jumlah untuk diisi ulang.
+    enter_amount: Masukkan jumlah
+    payment_method_required: Pilih metode pembayaran.
+    amount_minimum_not_reached: Nilai ini harus {{ limit }} atau lebih.
+    amount_below_minimum: Jumlah pengisian ulang minimum adalah %minimum%.
   payment:
     no_gateways_available: 'Tidak ada gateway pembayaran yang tersedia saat ini. Silakan konfigurasikan gateway pembayaran atau hubungi administrator.'
     gateway_not_found: 'Gateway pembayaran yang dipilih tidak ditemukan.'
@@ -1155,6 +1160,8 @@ pteroca:
       hint: Deskripsi
       set_as_empty: 'Setel sebagai kosong'
       set_as_empty_help: 'Centang ini untuk menyetel nilai sebagai kosong (null).'
+      minimum_topup_amount: Jumlah Pengisian Ulang Minimum
+      minimum_topup_amount_help: Jumlah minimum yang dapat ditambahkan pengguna ke
       panel_theme:
         help: 'Tema untuk panel pengguna (dasbor, server, toko). Mengontrol tampilan semua halaman admin dan user-facing.'
       landing_theme:

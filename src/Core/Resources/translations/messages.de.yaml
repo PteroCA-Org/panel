@@ -194,6 +194,11 @@ pteroca:
     view_transaction_history: 'Transaktionsverlauf anzeigen'
     view_all_payments_description: 'Zeigen Sie alle Zahlungen an, die auf Ihrem Konto getätigt wurden.'
     amount_must_be_positive: 'Der Betrag muss positiv sein.'
+    amount_required: Bitte geben Sie einen Betrag zum Aufladen ein.
+    enter_amount: Betrag eingeben
+    payment_method_required: Bitte wählen Sie eine Zahlungsmethode.
+    amount_minimum_not_reached: Dieser Wert sollte {{ limit }} oder mehr sein.
+    amount_below_minimum: Der Mindestaufladebetrag ist %minimum%.
   payment:
     no_gateways_available: 'Derzeit sind keine Zahlungs-Gateways verfügbar. Bitte konfigurieren Sie ein Zahlungs-Gateway oder kontaktieren Sie den Administrator.'
     gateway_not_found: 'Das ausgewählte Zahlungs-Gateway wurde nicht gefunden.'
@@ -1091,6 +1096,8 @@ pteroca:
       hint: Beschreibung
       set_as_empty: 'Als leer setzen'
       set_as_empty_help: 'Aktivieren Sie dies, um den Wert als leer (null) zu setzen.'
+      minimum_topup_amount: Mindestaufladebetrag
+      minimum_topup_amount_help: Der Mindestbetrag, den Benutzer in einer einzigen
       panel_theme:
         help: 'Theme für das Benutzerpanel (Dashboard, Server, Shop). Steuert das Aussehen aller Admin- und benutzerseitigen Seiten.'
       landing_theme:

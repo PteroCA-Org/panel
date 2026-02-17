@@ -60,7 +60,8 @@ readonly class PaymentService
     {
         $this->userVerificationService->validateUserVerification($user);
 
-        // Get the payment provider from the manager
+        $this->validateMinimumTopupAmount($amount);
+
         $paymentProvider = $this->gatewayManager->getProvider($gateway);
         if ($paymentProvider === null) {
             throw new Exception($this->translator->trans('pteroca.payment.gateway_not_found'));
@@ -70,7 +71,6 @@ readonly class PaymentService
             throw new Exception($this->translator->trans('pteroca.payment.gateway_not_configured'));
         }
 
-        // Validate currency support
         if (!in_array($currency, $paymentProvider->getSupportedCurrencies(), true)) {
             throw new Exception($this->translator->trans('pteroca.payment.currency_not_supported'));
         }
@@ -290,5 +290,16 @@ readonly class PaymentService
         }
 
         $this->paymentRepository->save($payment);
+    }
+
+    private function validateMinimumTopupAmount(float $amount): void
+    {
+        $minAmount = (float) ($this->settingService->getSetting(SettingEnum::MINIMUM_TOPUP_AMOUNT->value) ?? '1.00');
+
+        if ($amount < $minAmount) {
+            throw new \InvalidArgumentException(
+                sprintf('Amount %.2f is below minimum topup amount of %.2f', $amount, $minAmount)
+            );
+        }
     }
 }

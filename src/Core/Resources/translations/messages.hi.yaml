@@ -194,6 +194,11 @@ pteroca:
     view_transaction_history: 'लेन-देन इतिहास देखें'
     view_all_payments_description: 'आपके खाते पर किए गए सभी भुगतान दिखाता है।'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: कृपया रीचार्ज करने के लिए एक राशि दर्ज करें।
+    enter_amount: राशि दर्ज करें
+    payment_method_required: कृपया एक भुगतान विधि चुनें।
+    amount_minimum_not_reached: यह मान {{ limit }} या अधिक होना चाहिए।
+    amount_below_minimum: न्यूनतम टॉप-अप राशि %minimum% है।
   payment:
     no_gateways_available: 'वर्तमान में कोई भुगतान गेटवे उपलब्ध नहीं हैं। कृपया एक भुगतान गेटवे कॉन्फ़िगर करें या व्यवस्थापक से संपर्क करें।'
     gateway_not_found: 'चयनित भुगतान गेटवे नहीं मिला।'
@@ -1091,6 +1096,8 @@ pteroca:
       hint: विवरण
       set_as_empty: 'खाली के रूप में सेट करें'
       set_as_empty_help: 'मान को खाली (null) के रूप में सेट करने के लिए इसे चेक करें।'
+      minimum_topup_amount: न्यूनतम टॉप-अप राशि
+      minimum_topup_amount_help: वह न्यूनतम राशि जो उपयोगकर्ता एक लेनदेन में अपने
       panel_theme:
         help: 'उपयोगकर्ता पैनल के लिए थीम (डैशबोर्ड, सर्वर, स्टोर)। सभी एडमिन और यूजर-फेसिंग पेज की लुक को नियंत्रित करता है।'
       landing_theme:

@@ -193,6 +193,11 @@ pteroca:
     amount_hint: 'Geben Sie den Betrag ein, den Sie aufladen möchten.'
     view_transaction_history: 'Transaktionshistorie anzeigen'
     view_all_payments_description: 'Zeigen Sie alle Zahlungen an, die auf Ihrem Konto getätigt wurden.'
+    amount_required: 'Bitte geben Sie einen Betrag zum Aufladen ein.'
+    enter_amount: 'Betrag eingeben'
+    payment_method_required: 'Bitte wählen Sie eine Zahlungsmethode.'
+    amount_minimum_not_reached: 'Dieser Wert sollte {{ limit }} oder mehr sein.'
+    amount_below_minimum: 'Der Mindestaufladebetrag ist %minimum%.'
     amount_must_be_positive: 'The amount must be positive.'
   payment:
     no_gateways_available: 'Derzeit sind keine Zahlungs-Gateways verfügbar. Bitte konfigurieren Sie ein Zahlungs-Gateway oder kontaktieren Sie den Administrator.'
@@ -1091,6 +1096,8 @@ pteroca:
       hint: Beschreibung
       set_as_empty: 'Als leer setzen'
       set_as_empty_help: 'Aktivieren Sie dies, um den Wert als leer (null) zu setzen.'
+      minimum_topup_amount: 'Mindestaufladebetrag'
+      minimum_topup_amount_help: 'Der Mindestbetrag, den Benutzer in einer einzigen Transaktion zu ihrem Saldo hinzufügen können. Muss größer als 0 sein.'
       panel_theme:
         help: 'Theme für das Benutzerpanel (Dashboard, Server, Shop). Steuert das Aussehen aller Admin- und benutzerseitigen Seiten.'
       landing_theme:
@@ -1109,6 +1116,7 @@ pteroca:
         stripe_payment_methods: 'Kommagetrennte Zahlungsmethoden (z.B. card,bank_transfer,klarna). Optionen beim Checkout angezeigt.'
         internal_currency_name: 'Name der virtuellen Währung (z.B. Münzen, Credits, Token). In Guthaben, Preisen und E-Mails angezeigt.'
         currency_name: 'Echter Währungscode (USD, EUR, GBP, PLN). Beim Checkout und auf Quittungen angezeigt. Mit Stripe abstimmen.'
+        minimum_topup_amount: 'Der für die Saldoaufladung zulässige Mindestbetrag. Benutzer können weniger als diesen Wert nicht hinzufügen. Muss größer als 0 sein.'
         theme_default_light_mode_color: 'Akzentfarbe für hellen Modus in Hex (z.B. #635bff). Steuert Buttons, Links, aktive Elemente.'
         theme_default_dark_mode_color: 'Basisfarbe für dunklen Modus in Hex (z.B. #1a1a2e). System generiert automatisch Schattierungen für UI-Elemente.'
         theme_default_primary_color: 'Standardfarbe des primären Themes'

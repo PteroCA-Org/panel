@@ -194,6 +194,11 @@ pteroca:
     view_transaction_history: 'Ver histórico de transações'
     view_all_payments_description: 'Mostra todos os pagamentos feitos em sua conta.'
     amount_must_be_positive: 'The amount must be positive.'
+    amount_required: Por favor, digite um valor para recarregar.
+    enter_amount: Inserir valor
+    payment_method_required: Por favor, selecione um método de pagamento.
+    amount_minimum_not_reached: Este valor deve ser {{ limit }} ou mais.
+    amount_below_minimum: O valor mínimo de recarga é %minimum%.
   payment:
     no_gateways_available: 'Atualmente, não há gateways de pagamento disponíveis. Configure um gateway de pagamento ou entre em contato com o administrador.'
     gateway_not_found: 'O gateway de pagamento selecionado não foi encontrado.'
@@ -1093,6 +1098,8 @@ pteroca:
       hint: Descrição
       set_as_empty: 'Definir como vazio'
       set_as_empty_help: 'Marque isso para definir o valor como vazio (null).'
+      minimum_topup_amount: Valor Mínimo de Recarga
+      minimum_topup_amount_help: O valor mínimo que os usuários podem adicionar ao
       panel_theme:
         help: 'Tema para o painel do usuário (dashboard, servidores, loja). Controla a aparência de todas as páginas admin e user-facing.'
       landing_theme:
