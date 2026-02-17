@@ -1146,6 +1146,8 @@ pteroca:
         renewal_notification_min_period_hours: 'Minimale uren tussen verlengings-e-mails per server. Voorkomt spam. Bijv. 24 = max eenmaal daags.'
         renewal_notification_on_demand_min_hours: 'Min uren voor on-demand serververlengingen om e-mail te activeren. Bijv. 24 = alleen melden bij 24u+.'
         telemetry_consent: 'Sta het verzenden van anonieme gebruiksgegevens toe om PteroCA te helpen verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
+        custom_head_scripts_landing: 'Aangepaste HTML/JavaScript-code geïnjecteerd in de <head>-sectie van de landingspagina. Gebruik dit voor analytics (Google Analytics, Meta Pixel), aangepaste lettertypen of trackingscripts. WAARSCHUWING: Voeg alleen scripts van vertrouwde bronnen toe om XSS-aanvallen te voorkomen.'
+        custom_head_scripts_panel: 'Aangepaste HTML/JavaScript-code geïnjecteerd in de <head>-sectie van het paneel (dashboard, admin). Gebruik dit voor interne analytics, monitoringtools of aangepaste integraties. WAARSCHUWING: Voeg alleen scripts van vertrouwde bronnen toe om XSS-aanvallen te voorkomen.'
         panel_theme: 'Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina''s.'
         landing_theme: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
         email_theme: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'

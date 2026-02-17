@@ -1163,6 +1163,8 @@ pteroca:
         renewal_notification_min_period_hours: '每个服务器续订邮件之间的最小小时数。防止垃圾邮件。如24 = 每天最多一次。'
         renewal_notification_on_demand_min_hours: '按需服务器续订触发邮件的最小小时数。如24 = 仅在24小时以上时通知。'
         telemetry_consent: '允许发送匿名使用数据以帮助改进 PteroCA。仅跟踪安装事件和错误。不收集个人数据、API 密钥或 URL。'
+        custom_head_scripts_landing: '注入到登录页面 <head> 部分的自定义 HTML/JavaScript 代码。用于分析（Google Analytics、Meta Pixel）、自定义字体或跟踪脚本。警告：仅添加来自可信源的脚本以防止 XSS 攻击。'
+        custom_head_scripts_panel: '注入到面板（仪表盘、管理）<head> 部分的自定义 HTML/JavaScript 代码。用于内部分析、监控工具或自定义集成。警告：仅添加来自可信源的脚本以防止 XSS 攻击。'
         panel_theme: '用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。'
         landing_theme: '登录页面的主题（访客的主页）。显示给未登录用户在公共站点上。'
         email_theme: '电子邮件模板的主题。控制通知、注册和购买电子邮件的样式。'
