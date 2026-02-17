@@ -90,7 +90,7 @@ trait ProductCrudControllerTrait
     {
         $helpText = sprintf(
             '<small class="text-muted"><a href="%s" target="_blank">%s</a></small>',
-            'https://docs.pteroca.com/guidebook/product-configuration',
+            'https://docs.pteroca.com/business-configuration/business-configuration/products-and-categories',
             $this->translator->trans('pteroca.crud.product.see_product_configuration_guide'),
         );
 
