@@ -740,12 +740,17 @@ pteroca:
       update_error: 'Beim Aktualisieren der Kategorie ist ein Fehler aufgetreten: %error%'
       delete_error: 'Beim Löschen der Kategorie ist ein Fehler aufgetreten: %error%'
     product:
-      details: Produktdetails
-      name: Produktname
-      description: Produktbeschreibung
-      price: Preis
-      is_active: Aktiv
-      priority: Priorität
+      details: 'Produktdetails'
+      name: 'Produktname'
+      description: 'Produktbeschreibung'
+      description_hint: 'Produktbeschreibung mit HTML-Formatierung. Sie können Tags wie &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;a&gt;, &lt;h1&gt;-&lt;h6&gt; verwenden. JavaScript und gefährliche Tags werden automatisch für Sicherheit entfernt.'
+      short_description: 'Kurzbeschreibung'
+      short_description_hint: 'Kurze Produktzusammenfassung für Auflistungen und SEO (max. 255 Zeichen). Unterstützt HTML-Formatierung zur Betonung, aber halten Sie es prägnant.'
+      short_description_max_length: 'Kurzbeschreibung kann nicht länger als 255 Zeichen sein.'
+      price: 'Preis'
+      is_active: 'Aktiv'
+      is_active_hint: 'Nur aktive Produkte sind im Shop sichtbar und können von Kunden gekauft werden'
+      priority: 'Priorität'
       priority_hint: 'Niedrigere Zahlen erscheinen zuerst (z. B. 1 erscheint vor 2). Verwenden Sie dies, um die Anzeigereihenfolge zu steuern.'
       featured: 'Auf der Landingpage hervorheben'
       featured_hint: 'Dieses Produkt auf der Landingpage als hervorgehobenes Element anzeigen'
@@ -796,6 +801,7 @@ pteroca:
       egg_variable_user_viewable: Benutzeransicht
       egg_variable_user_editable: 'Benutzer editierbar'
       egg_allow_change: 'Ändern von Egg durch Neuinstallation erlauben'
+      egg_allow_change_hint: 'Wenn aktiviert, können Kunden das Server-Betriebssystem (Egg) durch Neuinstallation ändern. Der Server wird gestoppt und mit der neuen Softwarekonfiguration neu installiert.'
       allow_auto_renewal: 'Automatische Verlängerung erlauben'
       allow_auto_renewal_hint: 'Wenn aktiviert, können Kunden die automatische Verlängerung für Server einrichten, die aus diesem Produkt erstellt wurden. Wenn deaktiviert, ist die Option für automatische Verlängerung ausgeblendet und nicht verfügbar.'
       disk_space_hint: 'Die Gesamtmenge an Speicherplatz für diesen Server (in MiB). Zum Beispiel entspricht 9500 MiB ≈ 10 GB.'

@@ -27,6 +27,10 @@ class Product extends AbstractEntity implements ProductInterface
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: 'pteroca.crud.product.short_description_max_length')]
+    private ?string $shortDescription = null;
+
     #[ORM\Column(type: "boolean")]
     private bool $isActive = false;
 
@@ -84,6 +88,17 @@ class Product extends AbstractEntity implements ProductInterface
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(?string $shortDescription): self
+    {
+        $this->shortDescription = $shortDescription;
         return $this;
     }
 

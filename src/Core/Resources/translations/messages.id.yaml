@@ -767,9 +767,14 @@ pteroca:
       details: 'Detail produk'
       name: 'Nama produk'
       description: 'Deskripsi produk'
-      price: Harga
-      is_active: Aktif
-      priority: Prioritas
+      description_hint: 'Deskripsi produk dengan format HTML. Anda dapat menggunakan tag seperti &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;a&gt;, &lt;h1&gt;-&lt;h6&gt;, dll. JavaScript dan tag berbahaya akan dihapus secara otomatis untuk keamanan.'
+      short_description: 'Deskripsi singkat'
+      short_description_hint: 'Ringkasan produk singkat untuk daftar dan SEO (maks. 255 karakter). Mendukung format HTML untuk penekanan, tetapi tetap singkat.'
+      short_description_max_length: 'Deskripsi singkat tidak boleh lebih dari 255 karakter.'
+      price: 'Harga'
+      is_active: 'Aktif'
+      is_active_hint: 'Hanya produk aktif yang terlihat di toko dan dapat dibeli oleh pelanggan'
+      priority: 'Prioritas'
       priority_hint: 'Angka yang lebih rendah muncul terlebih dahulu (misalnya, 1 muncul sebelum 2). Gunakan ini untuk mengontrol urutan tampilan.'
       featured: Unggulan
       featured_hint: 'Tampilkan produk ini di bagian unggulan pada halaman utama.'
@@ -817,6 +822,7 @@ pteroca:
       slot_variables_unconfigured_eggs: 'Beberapa egg memiliki variabel slot yang tidak dikonfigurasi'
       see_product_configuration_guide: 'Klik di sini untuk membuka panduan terperinci tentang cara mengatur produk.'
       egg_allow_change: 'Izinkan perubahan egg dengan penginstalan ulang'
+      egg_allow_change_hint: 'Ketika diaktifkan, pelanggan dapat mengubah perangkat lunak server (egg) dengan memasang ulang server mereka. Server akan dihentikan dan dipasang ulang dengan konfigurasi perangkat lunak baru.'
       allow_auto_renewal: 'Izinkan pembaruan otomatis'
       allow_auto_renewal_hint: 'Jika diaktifkan, pelanggan dapat mengatur pembaruan otomatis untuk server yang dibuat dari produk ini. Jika dinonaktifkan, opsi pembaruan otomatis akan tersembunyi dan tidak tersedia.'
       disk_space_hint: 'Jumlah total ruang disk yang dialokasikan untuk server ini (dalam MiB). Contoh, 9500 MiB ≈ 10 GB.'

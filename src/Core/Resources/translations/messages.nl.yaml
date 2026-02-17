@@ -743,9 +743,14 @@ pteroca:
       details: Productinformatie
       name: Productnaam
       description: 'Product omschrijving'
-      price: Prijs
-      is_active: Actief
-      priority: Prioriteit
+      description_hint: 'Productbeschrijving met HTML-opmaak. Je kunt tags als &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;a&gt;, &lt;h1&gt;-&lt;h6&gt; gebruiken. JavaScript en gevaarlijke tags worden automatisch verwijderd voor veiligheid.'
+      short_description: 'Korte beschrijving'
+      short_description_hint: 'Beknopt productoverzicht voor aanbiedingen en SEO (max 255 tekens). Ondersteunt HTML-opmaak voor nadruk, maar houd het beknopt.'
+      short_description_max_length: 'Korte beschrijving mag niet langer zijn dan 255 tekens.'
+      price: 'Prijs'
+      is_active: 'Actief'
+      is_active_hint: 'Alleen actieve producten zijn zichtbaar in de winkel en kunnen door klanten worden aangeschaft'
+      priority: 'Prioriteit'
       priority_hint: 'Lagere nummers verschijnen eerst (bijvoorbeeld, 1 verschijnt voor 2). Gebruik dit om de weergavevolgorde te controleren.'
       featured: 'Uitgelicht op landingspagina'
       featured_hint: 'Toon dit product op de landingspagina als uitgelicht item'
@@ -795,6 +800,7 @@ pteroca:
       egg_variable_user_viewable: 'Gebruiker zichtbaar'
       egg_variable_user_editable: 'Gebruiker aanpasbaar'
       egg_allow_change: 'Sta het veranderen van egg toe bij herinstallatie'
+      egg_allow_change_hint: 'Wanneer ingeschakeld, kunnen klanten de serversoftware (egg) wijzigen door hun server opnieuw te installeren. De server wordt gestopt en opnieuw geïnstalleerd met de nieuwe softwareconfiguratie.'
       allow_auto_renewal: 'Automatische verlenging toestaan'
       allow_auto_renewal_hint: 'Indien ingeschakeld, kunnen klanten automatische verlenging instellen voor servers die zijn gemaakt op basis van dit product. Indien uitgeschakeld, is de optie voor automatische verlenging verborgen en niet beschikbaar.'
       disk_space_hint: 'De totale hoeveelheid schijfopslag toegewezen aan deze server (in MiB). Bijvoorbeeld, 9500 MiB ≈ 10 GB.'

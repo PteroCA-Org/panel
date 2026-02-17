@@ -740,12 +740,17 @@ pteroca:
       update_error: 更新类别时发生错误：%error%
       delete_error: 删除类别时发生错误：%error%
     product:
-      details: 产品详情
-      name: 产品名称
-      description: 产品描述
-      price: 价格
-      is_active: 活跃
-      priority: 优先级
+      details: '产品详情'
+      name: '产品名称'
+      description: '产品描述'
+      description_hint: '产品描述，支持 HTML 格式。您可以使用标签如 &lt;strong&gt;、&lt;em&gt;、&lt;ul&gt;、&lt;ol&gt;、&lt;a&gt;、&lt;h1&gt;-&lt;h6&gt; 等。JavaScript 和危险标签将被自动删除以确保安全。'
+      short_description: '简短描述'
+      short_description_hint: '用于列表和SEO的简短产品摘要（最多255个字符）。支持HTML格式以便强调，但要保持简洁。'
+      short_description_max_length: '简短描述不能超过255个字符。'
+      price: '价格'
+      is_active: '活跃'
+      is_active_hint: '只有活跃产品在商店中可见，且可被客户购买'
+      priority: '优先级'
       priority_hint: '较低的数字先出现（例如，1 在 2 之前出现）。使用此选项控制显示顺序。'
       featured: 在登录页面上展示
       featured_hint: 将此产品在登录页面上作为特色项目显示
@@ -787,17 +792,18 @@ pteroca:
       products: 产品
       egg_information: 'Egg 信息'
       egg_options_you_can_edit: '您可以在 Pterodactyl 面板中编辑以下选项。'
-      egg_variables: 变量
-      egg_configuration: 配置
-      egg_default_configuration: 默认配置
-      egg_variable_name: 名称
-      egg_variable_description: 描述
-      egg_variable_value: 值
-      egg_variable_user_viewable: 用户可见
-      egg_variable_user_editable: 用户可编辑
-      egg_allow_change: 允许在重新安装时更改egg
-      allow_auto_renewal: 允许自动续费
-      allow_auto_renewal_hint: 如果启用，客户可以为此产品创建的服务器设置自动续费。如果禁用，自动续费选项将被隐藏且不可用。
+      egg_variables: '变量'
+      egg_configuration: '配置'
+      egg_default_configuration: '默认配置'
+      egg_variable_name: '名称'
+      egg_variable_description: '描述'
+      egg_variable_value: '值'
+      egg_variable_user_viewable: '用户可见'
+      egg_variable_user_editable: '用户可编辑'
+      egg_allow_change: '允许在重新安装时更改egg'
+      egg_allow_change_hint: '启用后，客户可以通过重新安装其服务器来更改服务器软件（egg）。服务器将被停止并使用新的软件配置重新安装。'
+      allow_auto_renewal: '允许自动续费'
+      allow_auto_renewal_hint: '如果启用，客户可以为此产品创建的服务器设置自动续费。如果禁用，自动续费选项将被隐藏且不可用。'
       disk_space_hint: '为此服务器分配的总磁盘存储量（以MiB为单位）。例如，9500 MiB等于10 GB。'
       memory_hint: 为此服务器分配的总RAM限制（以MiB为单位）。服务器不能超过此内存限制。
       io_hint: 服务器容器的相对I/O优先级。值越高，优先级越高（默认值为500）。

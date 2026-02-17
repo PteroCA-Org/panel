@@ -33,8 +33,11 @@
                                     <div class="position-absolute top-0 start-50 translate-middle-x mt-n1 w-50 h-1 bg-primary rounded-bottom" style="opacity: 0.5;"></div>
 
                                     <h4 class="text-white mb-1 mt-2">{{ product.name }}</h4>
-                                    {% if product.description %}
-                                        <p class="text-muted small mb-3">{{ product.description|slice(0, 100) }}...</p>
+                                    {% if product.shortDescription %}
+                                        <p class="text-muted small mb-3">{{ product.shortDescription|nl2br|safe_html }}</p>
+                                    {% elseif product.description %}
+                                        {% set plainDescription = product.description|striptags %}
+                                        <p class="text-muted small mb-3">{{ plainDescription|length > 150 ? plainDescription|slice(0, 150) ~ '...' : plainDescription }}</p>
                                     {% endif %}
                                     <div class="pricing mb-3 mt-auto">
                                         {% set lowestPriceObj = product.lowestPriceObject %}
