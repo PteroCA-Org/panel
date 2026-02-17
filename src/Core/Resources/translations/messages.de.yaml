@@ -1,15 +1,15 @@
 pteroca:
   enum:
     plugin_state:
-      discovered: 'Entdeckt'
-      registered: 'Registriert'
-      enabled: 'Aktiviert'
-      disabled: 'Deaktiviert'
+      discovered: Entdeckt
+      registered: Registriert
+      enabled: Aktiviert
+      disabled: Deaktiviert
       update_pending: 'Update ausstehend'
-      faulted: 'Fehlerhaft'
+      faulted: Fehlerhaft
   role:
-    admin: 'Administrator'
-    user: 'Benutzer'
+    admin: Administrator
+    user: Benutzer
   system:
     back: 'Zurück zum Panel'
     email_not_verified: 'Ihre E-Mail-Adresse wurde noch nicht verifiziert. Überprüfen Sie Ihren Posteingang.'
@@ -17,21 +17,19 @@ pteroca:
     dont_have_permission: 'Sie haben keine Berechtigung, diese Aktion auszuführen.'
     experimental_feature: 'Diese Funktion ist experimentell und könnte nicht korrekt funktionieren.'
     or_resend_verification_email: 'oder klicken Sie hier, um die Bestätigungs-E-Mail erneut zu senden.'
-
   page:
-    terms_of_service: 'Nutzungsbedingungen'
+    terms_of_service: Nutzungsbedingungen
     terms_of_service_description: 'Bitte lesen Sie unsere Allgemeinen Geschäftsbedingungen sorgfältig durch'
-    back: 'Zurück'
-
+    back: Zurück
   login:
-    title: 'Einloggen'
-    email_address: 'E-Mail-Adresse'
-    email_placeholder: 'ihre@email.com'
-    password: 'Passwort'
+    title: Einloggen
+    email_address: E-Mail-Adresse
+    email_placeholder: ihre@email.com
+    password: Passwort
     password_placeholder: 'Passwort eingeben'
     forgot_password: 'Passwort vergessen?'
     remember_me: 'Erinnere dich an mich'
-    sign_in: 'Einloggen'
+    sign_in: Einloggen
     invalid_captcha: 'Ungültige CAPTCHA-Verifizierung.'
     user_blocked: 'Ihr Konto wurde gesperrt.'
     account_deleted: 'Ihr Konto wurde gelöscht.'
@@ -40,26 +38,25 @@ pteroca:
     welcome_back: 'Willkommen zurück'
     brand_description: 'Verwalten Sie Ihre Spieleserver mühelos. Leistungsstarke, sichere und zuverlässige Hosting-Plattform.'
     feature_secure: 'Sicher & Geschützt'
-    feature_fast: 'Blitzschnell'
+    feature_fast: Blitzschnell
     feature_reliable: 'Immer Zuverlässig'
     invalid_credentials: 'Ungültige E-Mail oder Passwort.'
-
   register:
-    title: 'Registrieren'
+    title: Registrieren
     subtitle: 'Erstellen Sie Ihr neues Konto'
     welcome_title: 'Treten Sie uns heute bei'
     welcome_description: 'Beginnen Sie Ihre Reise mit unserer leistungsstarken Hosting-Plattform. Starten Sie in Minuten und stellen Sie Ihren ersten Server bereit.'
     feature_quick_setup: 'Schnelle Einrichtung'
     feature_join_community: 'Treten Sie unserer Community bei'
     feature_easy_start: 'Einfach zu beginnen'
-    name: 'Vorname'
+    name: Vorname
     name_placeholder: 'Geben Sie Ihren Vornamen ein'
-    surname: 'Nachname'
+    surname: Nachname
     surname_placeholder: 'Geben Sie Ihren Nachnamen ein'
-    email_address: 'E-Mail-Adresse'
-    password: 'Passwort'
+    email_address: E-Mail-Adresse
+    password: Passwort
     accept_terms: 'Ich akzeptiere <a href="{{ link }}" target="_blank">die Nutzungsbedingungen</a>'
-    submit: 'Registrieren'
+    submit: Registrieren
     verification_token_invalid: 'Der Verifizierungstoken ist ungültig oder abgelaufen.'
     verification_success: 'Ihr Konto wurde erfolgreich verifiziert.'
     should_accept_terms: 'Sie müssen die Nutzungsbedingungen akzeptieren, um fortzufahren.'
@@ -73,17 +70,16 @@ pteroca:
     invalid_email: 'Ungültige E-Mail-Adresse.'
     email_already_exists: 'Ein Konto mit dieser E-Mail-Adresse existiert bereits.'
     already_have_account: 'Bereits registriert? Jetzt einloggen!'
-    email_placeholder: 'ihre@email.com'
+    email_placeholder: ihre@email.com
     password_placeholder: 'Passwort eingeben'
-
   landing:
     nav:
       get_started: 'Erste Schritte'
-      login: 'Anmelden'
-      dashboard: 'Dashboard'
+      login: Anmelden
+      dashboard: Dashboard
     hero:
-      badge: 'Hochleistungs-Hosting'
-      title_pre: 'Game-Server-Hosting'
+      badge: Hochleistungs-Hosting
+      title_pre: Game-Server-Hosting
       title_highlight: 'Einfach gemacht'
       subtitle: 'Starten Sie Ihren Gaming-Server in Minuten mit unserem leistungsstarken, benutzerfreundlichen Panel. Erleben Sie geringe Latenz, hohe Verfügbarkeit und erstklassigen Support.'
       browse_servers: 'Pläne ansehen'
@@ -94,8 +90,8 @@ pteroca:
       empty: 'Derzeit sind keine Kategorien verfügbar.'
     products:
       title: 'Ausgewählte Produkte'
-      default_game_server: 'Game-Server'
-      per_month: '/Monat'
+      default_game_server: Game-Server
+      per_month: /Monat
       configure_order: 'Konfigurieren & Bestellen'
       order: 'Jetzt bestellen'
       empty: 'Keine ausgewählten Produkte gefunden. Schauen Sie bald wieder vorbei!'
@@ -108,21 +104,20 @@ pteroca:
       create_account: 'Kostenloses Konto erstellen'
       view_plans: 'Alle Pläne ansehen'
       instant_deployment: 'Sofortige Bereitstellung'
-      refund_guarantee: 'Rückerstattungsgarantie'
+      refund_guarantee: Rückerstattungsgarantie
     footer:
       copyright: 'Alle Rechte vorbehalten.'
       powered_by: 'Unterstützt von <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
     store:
-      title: 'Shop'
+      title: Shop
       subtitle: 'Entdecken Sie unsere leistungsstarken Game-Server'
       show_all_categories: 'Alle Kategorien anzeigen'
-
   recovery:
     title: 'Passwort zurücksetzen'
     request_title: 'Passwort vergessen?'
     request_description: 'Keine Sorge! Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.'
     request_subtitle: 'Geben Sie Ihre E-Mail-Adresse ein, um einen Link zum Zurücksetzen des Passworts zu erhalten'
-    feature_email_link: 'E-Mail-Zurücksetzungslink'
+    feature_email_link: E-Mail-Zurücksetzungslink
     feature_quick_process: 'Schnell & Einfach'
     feature_secure: 'Sicher & Sicher'
     reset_title: 'Setzen Sie Ihr Passwort zurück'
@@ -130,7 +125,7 @@ pteroca:
     feature_secure_reset: 'Sicherer Prozess'
     feature_new_password: 'Starkes Passwort'
     feature_instant_access: 'Sofortiger Zugriff'
-    email_address: 'E-Mail-Adresse'
+    email_address: E-Mail-Adresse
     submit: 'Link zum Zurücksetzen des Passworts senden'
     sent_if_exists: 'Wenn ein Konto mit dieser E-Mail-Adresse in unserem System existiert, erhalten Sie eine E-Mail mit einem Link zum Zurücksetzen des Passworts.'
     new_password: 'Neues Passwort'
@@ -145,43 +140,42 @@ pteroca:
     success_password_changed: 'Das Passwort wurde erfolgreich geändert.'
     plugin_validation_failed: 'Das Zurücksetzen des Passworts wurde durch ein Sicherheits-Plugin blockiert. Bitte wenden Sie sich an den Support.'
     back_to_login: 'Zurück zur Anmeldung'
-
   dashboard:
-    account_balance: 'Kontostand'
+    account_balance: Kontostand
     account_balance_description: 'Ihr aktuelles Kontoguthaben.'
     account_recharge: 'Konto aufladen'
-    account_settings: 'Kontoeinstellungen'
+    account_settings: Kontoeinstellungen
     my_servers: 'Meine Server'
     no_servers: 'Sie haben noch keine Server.'
     no_servers_description: 'Sie haben noch keine Server.'
     order_first_server: 'Ersten Server bestellen'
     last_activity: 'Letzte Aktivität'
     custom_section: 'Zusätzliche Informationen'
-    action: 'Aktion'
-    date: 'Datum'
-    ip_address: 'IP-Adresse'
+    action: Aktion
+    date: Datum
+    ip_address: IP-Adresse
     view_all_servers: 'Zu den Servern gehen'
-    title: 'Instrumententafel'
+    title: Instrumententafel
     welcome_message: 'Ihr Server-Kommandozentrum'
     quick_actions: 'Schnelle Aktionen'
     quick_action_order_server: 'Server bestellen'
     quick_action_add_funds: 'Guthaben hinzufügen'
     quick_action_my_servers: 'Meine Server'
-    quick_action_settings: 'Kontoeinstellungen'
+    quick_action_settings: Kontoeinstellungen
     browse_store: 'Shop durchsuchen'
   recharge:
     recharge_balance: 'Guthaben aufladen'
-    recharge: 'Aufladen'
-    recharge_amount: 'Aufladebetrag'
-    transaction_history: 'Transaktionsverlauf'
+    recharge: Aufladen
+    recharge_amount: Aufladebetrag
+    transaction_history: Transaktionsverlauf
     additional_information: 'Zusätzliche Informationen'
     no_transaction: 'Keine Transaktionen'
-    transaction_paid: 'Bezahlt'
-    transaction_unpaid: 'Unbezahlt'
-    id: 'ID'
-    date: 'Datum'
-    amount: 'Betrag'
-    status: 'Status'
+    transaction_paid: Bezahlt
+    transaction_unpaid: Unbezahlt
+    id: ID
+    date: Datum
+    amount: Betrag
+    status: Status
     invalid_session_id: 'Ungültige Sitzungs-ID.'
     payment_success: 'Die Zahlung war erfolgreich.'
     payment_canceled: 'Die Zahlung wurde storniert.'
@@ -200,7 +194,6 @@ pteroca:
     view_transaction_history: 'Transaktionsverlauf anzeigen'
     view_all_payments_description: 'Zeigen Sie alle Zahlungen an, die auf Ihrem Konto getätigt wurden.'
     amount_must_be_positive: 'Der Betrag muss positiv sein.'
-
   payment:
     no_gateways_available: 'Derzeit sind keine Zahlungs-Gateways verfügbar. Bitte konfigurieren Sie ein Zahlungs-Gateway oder kontaktieren Sie den Administrator.'
     gateway_not_found: 'Das ausgewählte Zahlungs-Gateway wurde nicht gefunden.'
@@ -209,53 +202,51 @@ pteroca:
     gateway:
       stripe:
         description: 'Schnelle und sichere Zahlungen mit Kredit- oder Debitkarte'
-
   product:
-    information: 'Informationen'
-    ram: 'RAM'
-    cpu: 'CPU'
-    disk: 'Speicherplatz'
-    backups: 'Backups'
-    swap: 'SWAP'
-    databases: 'Datenbanken'
-    order: 'Bestellen'
-    period: 'Zeitraum'
-    days: 'Tage'
-    egg: 'Software'
+    information: Informationen
+    ram: RAM
+    cpu: CPU
+    disk: Speicherplatz
+    backups: Backups
+    swap: SWAP
+    databases: Datenbanken
+    order: Bestellen
+    period: Zeitraum
+    days: Tage
+    egg: Software
     egg_hint: 'Die Software kann jederzeit nach dem Kauf geändert werden.'
-    location: 'Serverstandort'
-    price: 'Preis'
+    location: Serverstandort
+    price: Preis
     order_now: 'Jetzt bestellen'
     not_available: 'Das Produkt ist derzeit nicht verfügbar.'
     not_enough_balance: 'Sie haben nicht genügend Guthaben auf Ihrem Konto.'
-    product_information: 'Produktinformationen'
-    name: 'Produktname'
-    description: 'Produktbeschreibung'
-    hours: 'Stunde(n)'
-    minutes: 'Minute(n)'
-    minute_short: 'Min.'
+    product_information: Produktinformationen
+    name: Produktname
+    description: Produktbeschreibung
+    hours: Stunde(n)
+    minutes: Minute(n)
+    minute_short: Min.
     on_demand: 'Auf Abruf'
-    price_calculation: 'Preiskalkulation'
+    price_calculation: Preiskalkulation
     per_minute: 'Pro Minute'
-    per_hour: 'Stündlich'
-    per_day: 'Täglich'
-    per_week: 'Wöchentlich'
-    per_month: 'Monatlich'
-    summary: 'Zusammenfassung'
-    billing_period: 'Abrechnungszeitraum'
-    total_price: 'Gesamtpreis'
-    ports: 'Ports'
-    discount: 'Rabatt'
+    per_hour: Stündlich
+    per_day: Täglich
+    per_week: Wöchentlich
+    per_month: Monatlich
+    summary: Zusammenfassung
+    billing_period: Abrechnungszeitraum
+    total_price: Gesamtpreis
+    ports: Ports
+    discount: Rabatt
     discount_hint: 'Der Rabatt wird nur für den ersten Abrechnungszeitraum angewendet.'
     product_order_details: 'Produktdetails und Bestelloptionen'
-    total: 'Gesamt'
-    slot: 'Slot'
-    slots: 'Slots'
-    processing: 'Verarbeitung...'
-
+    total: Gesamt
+    slot: Slot
+    slots: Slots
+    processing: Verarbeitung...
   store:
-    title: 'Shop'
-    order: 'Bestellen'
+    title: Shop
+    order: Bestellen
     show_offer: 'Angebot anzeigen'
     category_not_found: 'Kategorie nicht gefunden.'
     product_not_found: 'Produkt nicht gefunden.'
@@ -270,7 +261,7 @@ pteroca:
     invalid_form_data: 'Ungültige Formulardaten. Bitte überprüfen Sie alle Felder und versuchen Sie es erneut.'
     description: 'Wählen Sie die Kategorie oder das Produkt, das Sie interessiert'
     products_with_no_category: 'Produkte ohne Kategorie'
-    categories: 'Kategorien'
+    categories: Kategorien
     category_description: 'Produkte in dieser Kategorie'
     available_products: 'Verfügbare Produkte'
     no_products_title: 'Keine Produkte'
@@ -294,21 +285,21 @@ pteroca:
     invalid_node_selection: 'Ungültige Knotenauswahl'
   cart_configuration:
     title: 'Server konfigurieren'
-    configuration: 'Konfiguration'
-    server_name: 'Servername'
-    period: 'Zeitraum'
-    order_summary: 'Bestellübersicht'
+    configuration: Konfiguration
+    server_name: Servername
+    period: Zeitraum
+    order_summary: Bestellübersicht
     auto_renewal: 'Automatische Verlängerung'
     enable: 'Automatische Verlängerung aktivieren'
     disable: 'Automatische Verlängerung deaktivieren'
-    location: 'Serverstandort'
+    location: Serverstandort
     owner_only: 'nur Besitzer'
     description: 'Konfigurieren Sie Ihren Server und fahren Sie mit der Zahlung fort'
   cart_topup:
     title: 'Konto aufladen'
-    order: 'Bestellen'
+    order: Bestellen
     order_description: 'Guthaben aufladen'
-    payment_method: 'Zahlungsmethode'
+    payment_method: Zahlungsmethode
     select_payment_method: 'Bitte wählen Sie eine Zahlungsmethode'
     description: 'Laden Sie Ihr Kontoguthaben auf'
   cart_renew:
@@ -316,85 +307,82 @@ pteroca:
     description: 'Verlängern Sie Ihren Server, um eine Sperrung oder Löschung zu vermeiden.'
   cart:
     use_voucher: 'Gutschein verwenden'
-    voucher_code: 'Gutscheincode'
-
+    voucher_code: Gutscheincode
   renew:
     title: 'Server verlängern'
     renew: 'Server verlängern'
-    period: 'Verlängerungszeitraum'
-    price: 'Verlängerungspreis'
+    period: Verlängerungszeitraum
+    price: Verlängerungspreis
     current_expiration: 'Aktuelles Ablaufdatum'
     renew_now: 'Jetzt verlängern'
-    ip_address: 'Server-IP-Adresse'
-    server_information: 'Serverinformationen'
-    server_name: 'Servername'
-    server_description: 'Serverbeschreibung'
+    ip_address: Server-IP-Adresse
+    server_information: Serverinformationen
+    server_name: Servername
+    server_description: Serverbeschreibung
     server_current_software: 'Aktuelle Software'
-
   servers:
     title: 'Meine Server'
-    active: 'Aktiv'
-    suspended: 'Gesperrt'
-    ip_address: 'IP-Adresse'
-    ram_memory: 'RAM-Speicher'
-    disk: 'Speicherplatz'
-    cpu: 'CPU'
-    databases: 'Datenbanken'
-    backups: 'Backups'
+    active: Aktiv
+    suspended: Gesperrt
+    ip_address: IP-Adresse
+    ram_memory: RAM-Speicher
+    disk: Speicherplatz
+    cpu: CPU
+    databases: Datenbanken
+    backups: Backups
     valid_until: 'Gültig bis'
     manage_server: 'Server verwalten'
-    extend: 'Verlängern'
+    extend: Verlängern
     no_servers: 'Sie haben noch keine Server.'
     click_to_buy: 'Klicken Sie hier, um einen Server zu kaufen.'
-    name: 'Name'
-    status: 'Status'
-    actions: 'Aktionen'
+    name: Name
+    status: Status
+    actions: Aktionen
     description: 'Verwalten Sie Ihre Server, zeigen Sie deren Details an und führen Sie verschiedene Aktionen wie Verlängerung, Verwaltung und Konfiguration durch.'
     state:
-      running: 'Online'
-      stopped: 'Gestoppt'
-      starting: 'Startet'
-      stopping: 'Stoppt'
-      offline: 'Offline'
-
+      running: Online
+      stopped: Gestoppt
+      starting: Startet
+      stopping: Stoppt
+      offline: Offline
   server:
-    title: 'Serververwaltung'
-    console: 'Konsole'
-    startup: 'Start'
-    backups: 'Backups'
-    network: 'Netzwerk'
-    settings: 'Konfiguration'
-    activity: 'Aktivität'
-    start: 'Starten'
-    stop: 'Stoppen'
-    restart: 'Neustarten'
-    kill: 'Beenden'
-    send: 'Senden'
-    address: 'Adresse'
+    title: Serververwaltung
+    console: Konsole
+    startup: Start
+    backups: Backups
+    network: Netzwerk
+    settings: Konfiguration
+    activity: Aktivität
+    start: Starten
+    stop: Stoppen
+    restart: Neustarten
+    kill: Beenden
+    send: Senden
+    address: Adresse
     copy_ip: 'IP-Adresse kopieren'
     ip_copied: 'IP-Adresse in die Zwischenablage kopiert!'
-    uptime: 'Betriebszeit'
-    cpu_load: 'CPU-Auslastung'
-    memory: 'Speicher'
-    disk: 'Festplatte'
+    uptime: Betriebszeit
+    cpu_load: CPU-Auslastung
+    memory: Speicher
+    disk: Festplatte
     network_inbound: 'Netzwerk eingehend'
     network_outbound: 'Netzwerk ausgehend'
-    software: 'Software'
-    command: 'Befehl'
-    startup_command: 'Startbefehl'
-    docker_image: 'Docker-Image'
-    read_only: 'Schreibgeschützt'
-    admin_view: 'Admin-Ansicht'
-    default_options: 'Standardoptionen'
-    variables: 'Variablen'
-    sftp_details: 'SFTP-Details'
-    sftp_server_address: 'Serveradresse'
-    sftp_username: 'Benutzername'
+    software: Software
+    command: Befehl
+    startup_command: Startbefehl
+    docker_image: Docker-Image
+    read_only: Schreibgeschützt
+    admin_view: Admin-Ansicht
+    default_options: Standardoptionen
+    variables: Variablen
+    sftp_details: SFTP-Details
+    sftp_server_address: Serveradresse
+    sftp_username: Benutzername
     sftp_password_hint: 'Das Passwort ist dasselbe wie das Passwort, das Sie für den Zugriff auf dieses Panel verwenden.'
     sftp_launch: 'SFTP starten'
     change_server_details: 'Serverdetails ändern'
-    server_name: 'Servername'
-    server_description: 'Serverbeschreibung'
+    server_name: Servername
+    server_description: Serverbeschreibung
     reinstall_server: 'Server neu installieren'
     reinstall_server_hint: 'Das Neuinstallieren Ihres Servers wird ihn stoppen und dann das Installationsskript erneut ausführen, das ihn ursprünglich eingerichtet hat. Einige Dateien können während dieses Vorgangs gelöscht oder geändert werden, bitte sichern Sie Ihre Daten, bevor Sie fortfahren.'
     select_software: 'Software auswählen'
@@ -404,11 +392,11 @@ pteroca:
     extend_server_hint: 'Sie können den Server verlängern, indem Sie auf die Schaltfläche unten klicken.'
     extend_server_hint_2: 'Der Server wird für den ausgewählten Zeitraum verlängert.'
     no_activity_logs: 'Es gibt noch keine Aktivitätsprotokolle für diesen Server.'
-    admin: 'Admin'
-    action: 'Aktion'
-    details: 'Details'
-    user: 'Benutzer'
-    date: 'Datum'
+    admin: Admin
+    action: Aktion
+    details: Details
+    user: Benutzer
+    date: Datum
     show_details: 'Details anzeigen'
     hide_details: 'Details verbergen'
     data_updated_successfully: 'Daten wurden erfolgreich aktualisiert.'
@@ -429,48 +417,48 @@ pteroca:
     server_suspended_message: 'Ihr Server ist derzeit suspendiert und kann nicht zugegriffen werden.'
     server_suspended_description: 'Dieser Server wurde aufgrund einer administrativen Massnahme oder eines Verstosses gegen die Richtlinien suspendiert. Bitte kontaktieren Sie den Support für Hilfe.'
     suspended_expired_description: 'Dieser Server wurde suspendiert, weil er am %expireDate% abgelaufen ist und nicht verlängert wurde. Um den Server wiederherzustellen, verlängern Sie ihn bitte.'
-    rules: 'Regeln'
+    rules: Regeln
     data_validation_error: 'Fehler bei der Validierung. Bitte überprüfen Sie, ob alle Regeln erfüllt sind.'
     enable_auto_renewal: 'Automatische Verlängerung für diesen Server aktivieren'
     auto_renewal_tooltip: 'Wenn aktiviert, wird der Server automatisch für den ausgewählten Zeitraum verlängert. Die Zahlung erfolgt aus Ihrem Kontoguthaben.'
     no_backups: 'Es gibt noch keine Backups für diesen Server.'
     create_backup: 'Backup erstellen'
-    backup_name: 'Backup-Name'
+    backup_name: Backup-Name
     backup_ignored_files: 'Ignorierte Dateien und Verzeichnisse'
-    close: 'Schließen'
+    close: Schließen
     error_during_backup: 'Beim Erstellen des Backups ist ein Fehler aufgetreten.'
     backup_time_limit: 'Es können nur 2 Backups innerhalb von 600 Sekunden erstellt werden.'
-    name: 'Name'
-    status: 'Status'
+    name: Name
+    status: Status
     created_at: 'Erstellt am'
-    successful: 'Erfolgreich'
+    successful: Erfolgreich
     in_progress: 'In Bearbeitung'
-    checksum: 'Prüfsumme'
-    size: 'Größe'
-    download: 'Herunterladen'
-    delete: 'Löschen'
+    checksum: Prüfsumme
+    size: Größe
+    download: Herunterladen
+    delete: Löschen
     delete_backup: 'Backup löschen'
     delete_backup_confirmation: 'Sind Sie sicher, dass Sie dieses Backup löschen möchten?'
     error_during_deleting_backup: 'Beim Löschen des Backups ist ein Fehler aufgetreten.'
-    databases: 'Datenbanken'
+    databases: Datenbanken
     no_databases: 'Es gibt noch keine Datenbanken für diesen Server.'
     create_database: 'Datenbank erstellen'
-    database_name: 'Datenbankname'
+    database_name: Datenbankname
     connections_from: 'Verbindungen von'
     error_during_creating_database: 'Beim Erstellen der Datenbank ist ein Fehler aufgetreten.'
-    endpoint: 'Endpunkt'
-    username: 'Benutzername'
-    show: 'Anzeigen'
+    endpoint: Endpunkt
+    username: Benutzername
+    show: Anzeigen
     delete_database: 'Datenbank löschen'
     delete_database_confirmation: 'Sind Sie sicher, dass Sie diese Datenbank löschen möchten?'
     show_database: 'Datenbank anzeigen'
-    database_endpoint: 'Datenbank-Endpunkt'
-    password: 'Passwort'
-    jdbc_connection_string: 'JDBC-Verbindungszeichenfolge'
+    database_endpoint: Datenbank-Endpunkt
+    password: Passwort
+    jdbc_connection_string: JDBC-Verbindungszeichenfolge
     rotate_password: 'Passwort ändern'
-    ip_address: 'IP-Adresse'
-    port: 'Port'
-    notes: 'Notizen'
+    ip_address: IP-Adresse
+    port: Port
+    notes: Notizen
     create_allocation: 'Zuweisung erstellen'
     delete_allocation: 'Zuweisung löschen'
     delete_allocation_confirmation: 'Diese Zuweisung wird sofort von Ihrem Server entfernt. Sind Sie sicher, dass Sie fortfahren möchten?'
@@ -479,10 +467,10 @@ pteroca:
     cannot_modify_yourself: 'Sie können sich nicht selbst modifizieren.'
     extend_server_expires_on_demand: 'Ihr <strong>{{ productName }}</strong>-Server läuft derzeit <strong>auf Abruf</strong>.'
     on_demand_billing_cycle: 'Der Abrechnungszyklus ({{ productPrice }} {{ internalCurrency }} / Minute) wird unterbrochen, wenn der Server offline ist, und Ressourcen sind kostenlos.'
-    type: 'Typ'
-    primary: 'Primär'
-    secondary: 'Sekundär'
-    edit: 'Bearbeiten'
+    type: Typ
+    primary: Primär
+    secondary: Sekundär
+    edit: Bearbeiten
     edit_allocation: 'Zuweisung bearbeiten'
     error_during_editing_allocation: 'Beim Bearbeiten der Zuweisung ist ein Fehler aufgetreten.'
     make_primary: 'Zuweisung als primär festlegen'
@@ -490,44 +478,44 @@ pteroca:
     create_allocation_confirmation: 'Möchten Sie wirklich eine zusätzliche Zuweisung erstellen?'
     error_during_creating_allocation: 'Beim Erstellen der Zuweisung ist ein Fehler aufgetreten.'
     auto_allocation_disabled_for_this_instance: 'Die automatische Zuweisung ist für diese Instanz deaktiviert.'
-    source: 'Quelle'
-    restore: 'Wiederherstellen'
+    source: Quelle
+    restore: Wiederherstellen
     restore_backup: 'Backup wiederherstellen'
     restore_backup_confirmation: 'Sind Sie sicher, dass Sie dieses Backup wiederherstellen möchten? Dies wird alle aktuellen Serverdateien überschreiben.'
     delete_all_files_before_restore: 'Alle Dateien vor der Wiederherstellung des Backups löschen.'
     error_during_restoring_backup: 'Beim Wiederherstellen des Backups ist ein Fehler aufgetreten.'
-    users: 'Benutzer'
-    schedules: 'Zeitpläne'
+    users: Benutzer
+    schedules: Zeitpläne
     schedules_usage: 'Nutzung: {{ current }}/{{ limit }}'
     schedule_limit_reached: 'Maximale Anzahl von Zeitplänen erreicht ({{ limit }}). Löschen Sie bestehende Zeitpläne, um neue zu erstellen.'
     usage: 'Nutzung: {{ current }}/{{ limit }}'
     no_subusers: 'Es gibt noch keine Subbenutzer für diesen Server.'
     no_schedules: 'Es gibt noch keine Zeitpläne für diesen Server.'
-    schedule_name: 'Zeitplanname'
-    schedule_cron: 'Cron-Ausdruck'
-    schedule_status: 'Status'
+    schedule_name: Zeitplanname
+    schedule_cron: Cron-Ausdruck
+    schedule_status: Status
     schedule_last_run: 'Letzte Ausführung'
     schedule_next_run: 'Nächste Ausführung'
     add_schedule: 'Zeitplan hinzufügen'
     create_new_schedule: 'Neuen Zeitplan erstellen'
     create_schedule: 'Zeitplan erstellen'
     schedule_name_description: 'Ein menschenlesbarer Bezeichner für diesen Zeitplan.'
-    schedule_cron_expression: 'Cron-Ausdruck'
+    schedule_cron_expression: Cron-Ausdruck
     cron_expression_description: 'Das Zeitplansystem unterstützt die Verwendung der Cronjob-Syntax bei der Definition, wann Aufgaben ausgeführt werden sollen. Verwenden Sie die obigen Felder, um anzugeben, wann diese Aufgaben ausgeführt werden sollen.'
-    minute: 'Minute'
-    hour: 'Stunde'
+    minute: Minute
+    hour: Stunde
     day_of_month: 'Tag des Monats'
-    month: 'Monat'
-    day_of_week: 'Wochentag'
-    schedule_options: 'Zeitplanoptionen'
+    month: Monat
+    day_of_week: Wochentag
+    schedule_options: Zeitplanoptionen
     show_cheatsheet: 'Spickzettel anzeigen'
     show_cheatsheet_description: 'Zeigen Sie den Cron-Spickzettel für Beispiele an.'
     only_when_server_online: 'Nur wenn Server online'
     only_when_server_online_description: 'Führen Sie diesen Zeitplan nur aus, wenn sich der Server im laufenden Zustand befindet.'
     schedule_enabled: 'Zeitplan aktiviert'
     schedule_enabled_description: 'Dieser Zeitplan wird automatisch ausgeführt, wenn er aktiviert ist.'
-    cron_cheatsheet: 'Cron-Spickzettel'
-    examples: 'Beispiele'
+    cron_cheatsheet: Cron-Spickzettel
+    examples: Beispiele
     every_5_minutes: 'alle 5 Minuten'
     every_2_hours: 'alle 2 Stunden'
     every_sunday: 'jeden Sonntag'
@@ -535,9 +523,9 @@ pteroca:
     any_value: 'beliebiger Wert'
     every_n_units: 'alle n Einheiten'
     range_n_to_m: 'Bereich n bis m'
-    active: 'Aktiv'
-    inactive: 'Inaktiv'
-    never: 'Niemals'
+    active: Aktiv
+    inactive: Inaktiv
+    never: Niemals
     schedule_created_successfully: 'Zeitplan erfolgreich erstellt'
     schedule_deleted_successfully: 'Zeitplan erfolgreich gelöscht'
     confirm_delete_schedule: 'Sind Sie sicher, dass Sie diesen Zeitplan löschen möchten?'
@@ -545,18 +533,18 @@ pteroca:
     delete_task: 'Aufgabe löschen'
     confirm_delete_task: 'Sind Sie sicher, dass Sie diese Aufgabe löschen möchten?'
     task_deleted_successfully: 'Aufgabe erfolgreich gelöscht'
-    schedule_info: 'Zeitplaninformationen'
-    schedule_tasks: 'Zeitplanaufgaben'
+    schedule_info: Zeitplaninformationen
+    schedule_tasks: Zeitplanaufgaben
     new_task: 'Neue Aufgabe'
     no_tasks_in_schedule: 'Keine Aufgaben in diesem Zeitplan'
-    time_offset: 'Zeitversatz'
+    time_offset: Zeitversatz
     send_command: 'Befehl senden'
-    power_action: 'Stromversorgungsaktion'
+    power_action: Stromversorgungsaktion
     feature_coming_soon: 'Funktion kommt bald'
     edit_task: 'Aufgabe bearbeiten'
     time_offset_seconds: 'Zeitversatz (Sekunden)'
     time_offset_description: 'Die Zeit, die nach Abschluss der vorherigen Aufgabe in der Sequenz gewartet werden soll, bevor diese ausgeführt wird. Wenn dies die erste Aufgabe in einem Zeitplan ist, wird dies nicht angewendet.'
-    payload: 'Nutzlast'
+    payload: Nutzlast
     payload_command_description: 'Der auf dem Server auszuführende Befehl'
     payload_power_description: 'Die auszuführende Stromversorgungsaktion (start, stop, restart, kill)'
     payload_backup_description: 'Der Name des zu erstellenden Backups'
@@ -574,7 +562,7 @@ pteroca:
     error_no_schedule_selected: 'Kein Zeitplan ausgewählt'
     at_least_one_permission_required: 'Mindestens eine Berechtigung ist erforderlich'
     email_required: 'E-Mail ist erforderlich'
-    error: 'Fehler'
+    error: Fehler
     error_occurred: 'Ein Fehler ist aufgetreten'
     user_created_successfully: 'Benutzer wurde erfolgreich hinzugefügt'
     user_removed_successfully: 'Benutzer wurde erfolgreich entfernt'
@@ -583,33 +571,33 @@ pteroca:
     user_does_not_exist: 'Ein Benutzer mit dieser E-Mail-Adresse existiert nicht im System. Der Benutzer muss sich zuerst registrieren.'
     user_already_added: 'Ein Benutzer mit dieser E-Mail-Adresse wurde bereits zu diesem Server hinzugefügt.'
     user_must_register_first: 'Der Benutzer muss sich zuerst im System registrieren, bevor er zum Server hinzugefügt werden kann.'
-    user_email: 'E-Mail'
-    user_permissions: 'Berechtigungen'
+    user_email: E-Mail
+    user_permissions: Berechtigungen
     user_created: 'Erstellt am'
-    actions: 'Aktionen'
-    users_management: 'Benutzerverwaltung'
+    actions: Aktionen
+    users_management: Benutzerverwaltung
     add_user: 'Benutzer hinzufügen'
-    remove: 'Entfernen'
+    remove: Entfernen
     modify_permissions_for: 'Berechtigungen ändern für'
-    cancel: 'Abbrechen'
-    save: 'Speichern'
+    cancel: Abbrechen
+    save: Speichern
     create_new_subuser: 'Neuen Subbenutzer erstellen'
     enter_email_description: 'Geben Sie die E-Mail-Adresse des Benutzers ein, den Sie als Subbenutzer für diesen Server einladen möchten.'
     invite_user: 'Benutzer einladen'
     permissions:
-      control: 'Kontrolle'
+      control: Kontrolle
       control_description: 'Berechtigungen, die die Fähigkeit eines Benutzers kontrollieren, den Stromzustand eines Servers zu steuern oder Befehle zu senden.'
       control_console_desc: 'Ermöglicht einem Benutzer, Befehle über die Konsole an die Serverinstanz zu senden.'
       control_start_desc: 'Ermöglicht einem Benutzer, den Server zu starten, wenn er gestoppt ist.'
       control_stop_desc: 'Ermöglicht einem Benutzer, einen Server zu stoppen, wenn er läuft.'
       control_restart_desc: 'Ermöglicht einem Benutzer, einen Server-Neustart durchzuführen.'
-      user: 'Benutzer'
+      user: Benutzer
       user_description: 'Berechtigungen, die einem Benutzer erlauben, andere Subbenutzer auf einem Server zu verwalten. Sie können niemals ihr eigenes Konto bearbeiten oder Berechtigungen zuweisen, die sie selbst nicht haben.'
       user_create_desc: 'Ermöglicht einem Benutzer, neue Subbenutzer für den Server zu erstellen.'
       user_read_desc: 'Ermöglicht dem Benutzer, Subbenutzer und ihre Berechtigungen für den Server anzuzeigen.'
       user_update_desc: 'Ermöglicht einem Benutzer, andere Subbenutzer zu ändern.'
       user_delete_desc: 'Ermöglicht einem Benutzer, einen Subbenutzer vom Server zu löschen.'
-      file: 'Datei'
+      file: Datei
       file_description: 'Berechtigungen, die die Fähigkeit eines Benutzers kontrollieren, das Dateisystem für diesen Server zu ändern.'
       file_create_desc: 'Ermöglicht einem Benutzer, zusätzliche Dateien und Ordner über das Panel oder direkten Upload zu erstellen.'
       file_read_desc: 'Ermöglicht einem Benutzer, den Inhalt eines Verzeichnisses anzuzeigen, aber nicht den Inhalt von Dateien anzuzeigen oder Dateien herunterzuladen.'
@@ -618,42 +606,42 @@ pteroca:
       file_delete_desc: 'Ermöglicht einem Benutzer, Dateien oder Verzeichnisse zu löschen.'
       file_archive_desc: 'Ermöglicht einem Benutzer, den Inhalt eines Verzeichnisses zu archivieren sowie vorhandene Archive im System zu dekomprimieren.'
       file_sftp_desc: 'Ermöglicht einem Benutzer, sich über SFTP zu verbinden und Serverdateien mit den anderen zugewiesenen Dateiberechtigungen zu verwalten.'
-      backup: 'Backup'
+      backup: Backup
       backup_description: 'Berechtigungen, die die Fähigkeit eines Benutzers kontrollieren, Server-Backups zu erstellen und zu verwalten.'
       backup_create_desc: 'Ermöglicht einem Benutzer, neue Backups für diesen Server zu erstellen.'
       backup_read_desc: 'Ermöglicht einem Benutzer, alle Backups anzuzeigen, die für diesen Server existieren.'
       backup_delete_desc: 'Ermöglicht einem Benutzer, Backups aus dem System zu entfernen.'
       backup_download_desc: 'Ermöglicht einem Benutzer, ein Backup für den Server herunterzuladen. Gefahr: Dies ermöglicht einem Benutzer den Zugriff auf alle Dateien des Servers im Backup.'
       backup_restore_desc: 'Ermöglicht einem Benutzer, ein Backup für den Server wiederherzustellen. Gefahr: Dies ermöglicht dem Benutzer, alle Serverdateien im Prozess zu löschen.'
-      allocation: 'Zuweisung'
+      allocation: Zuweisung
       allocation_description: 'Berechtigungen, die die Fähigkeit eines Benutzers kontrollieren, die Port-Zuweisungen für diesen Server zu ändern.'
       allocation_read_desc: 'Ermöglicht einem Benutzer, alle Zuweisungen anzuzeigen, die derzeit diesem Server zugeordnet sind.'
       allocation_create_desc: 'Ermöglicht einem Benutzer, zusätzliche Zuweisungen zum Server hinzuzufügen.'
       allocation_update_desc: 'Ermöglicht einem Benutzer, die primäre Server-Zuweisung zu ändern und Notizen zu jeder Zuweisung hinzuzufügen.'
       allocation_delete_desc: 'Ermöglicht einem Benutzer, eine Zuweisung vom Server zu löschen.'
-      startup: 'Start'
+      startup: Start
       startup_description: 'Berechtigungen, die die Fähigkeit eines Benutzers kontrollieren, die Startparameter dieses Servers anzuzeigen.'
       startup_read_desc: 'Ermöglicht einem Benutzer, die Startvariablen für einen Server anzuzeigen.'
       startup_update_desc: 'Ermöglicht einem Benutzer, die Startvariablen für den Server zu ändern.'
       startup_docker_image_desc: 'Ermöglicht einem Benutzer, das Docker-Image zu ändern, das beim Ausführen des Servers verwendet wird.'
-      database: 'Datenbank'
+      database: Datenbank
       database_description: 'Berechtigungen, die den Zugriff eines Benutzers auf die Datenbankverwaltung für diesen Server kontrollieren.'
       database_create_desc: 'Ermöglicht einem Benutzer, eine neue Datenbank für diesen Server zu erstellen.'
       database_read_desc: 'Ermöglicht einem Benutzer, die mit diesem Server verbundene Datenbank anzuzeigen.'
       database_update_desc: 'Ermöglicht einem Benutzer, das Passwort einer Datenbankinstanz zu rotieren.'
       database_delete_desc: 'Ermöglicht einem Benutzer, eine Datenbankinstanz von diesem Server zu entfernen.'
       database_view_password_desc: 'Ermöglicht einem Benutzer, das mit einer Datenbankinstanz für diesen Server verbundene Passwort anzuzeigen.'
-      schedule: 'Zeitplan'
+      schedule: Zeitplan
       schedule_description: 'Berechtigungen, die den Zugriff eines Benutzers auf die Zeitplanverwaltung für diesen Server kontrollieren.'
       schedule_create_desc: 'Ermöglicht einem Benutzer, neue Zeitpläne für diesen Server zu erstellen.'
       schedule_read_desc: 'Ermöglicht einem Benutzer, Zeitpläne und die damit verbundenen Aufgaben für diesen Server anzuzeigen.'
       schedule_update_desc: 'Ermöglicht einem Benutzer, Zeitpläne und Zeitplanaufgaben für diesen Server zu aktualisieren.'
       schedule_delete_desc: 'Ermöglicht einem Benutzer, Zeitpläne für diesen Server zu löschen.'
-      settings: 'Einstellungen'
+      settings: Einstellungen
       settings_description: 'Berechtigungen, die den Zugriff eines Benutzers auf die Einstellungen für diesen Server kontrollieren.'
       settings_rename_desc: 'Ermöglicht einem Benutzer, diesen Server umzubenennen und seine Beschreibung zu ändern.'
       settings_reinstall_desc: 'Ermöglicht einem Benutzer, eine Neuinstallation dieses Servers auszulösen.'
-      activity: 'Aktivität'
+      activity: Aktivität
       activity_description: 'Berechtigungen, die den Zugriff eines Benutzers auf die Server-Aktivitätsprotokolle kontrollieren.'
       activity_read_desc: 'Ermöglicht einem Benutzer, die Aktivitätsprotokolle für den Server anzuzeigen.'
     eula:
@@ -661,25 +649,24 @@ pteroca:
         description: 'Ihr Minecraft-Server erfordert die Zustimmung zur Endbenutzer-Lizenzvereinbarung (EULA), bevor er gestartet werden kann.'
         content: |
           Mit der Zustimmung zur EULA erklären Sie sich mit den von Mojang Studios festgelegten Bedingungen einverstanden.
-        
+
           Wichtige Punkte:
           • Sie dürfen nichts von uns weitergeben
           • Sie dürfen nichts von uns kommerziell nutzen
           • Sie dürfen Mods erstellen und weitergeben, solange sie keinen unserer Codes enthalten
-        
+
           Die vollständigen Bedingungen finden Sie unter: https://aka.ms/MinecraftEULA
         accept: 'EULA akzeptieren & Server starten'
-        cancel: 'Abbrechen'
-        processing: 'Verarbeitung...'
+        cancel: Abbrechen
+        processing: Verarbeitung...
         required: 'Sie müssen die EULA akzeptieren, um den Server zu starten.'
         read_full: 'Vollständige EULA lesen'
       alert:
         success: 'EULA wurde erfolgreich akzeptiert. Der Server wird neu gestartet.'
         error: 'EULA konnte nicht akzeptiert werden.'
-
   actions:
-    login: 'Login'
-    logout: 'Logout'
+    login: Login
+    logout: Logout
     create_payment: 'Zahlung erstellen'
     bought_balance: 'Guthaben gekauft'
     bought_server: 'Server gekauft'
@@ -699,7 +686,6 @@ pteroca:
     admin_create_server: 'Server erstellt (Admin)'
     admin_create_free_server: 'Kostenloser Server erstellt (Admin)'
     user_api_key_regenerated: 'API-Schlüssel neu generiert'
-
   server_actions:
     change_details: 'Serverdetails geändert'
     reinstall: 'Server neu installiert'
@@ -721,35 +707,32 @@ pteroca:
     update_subuser: 'Subbenutzer aktualisiert'
     delete_subuser: 'Subbenutzer gelöscht'
     accept_eula: 'Minecraft EULA akzeptiert'
-
   voucher:
     expired: 'Dieser Gutschein ist abgelaufen.'
     discount_value_invalid: 'Der Rabattwert ist ungültig. Das Maximum beträgt 100(%).'
     voucher_type_invalid: 'Dieser Gutschein kann für diese Zahlungsart nicht verwendet werden.'
     invalid_voucher_type: 'Ungültiger Gutschein-Typ.'
-
   email_types:
-    email_verification: 'E-Mail-Verifizierung'
-    payment_success: 'Zahlungsbestätigung'
-    purchased_product: 'Produktkauf'
-    registration: 'Registrierungsbestätigung'
-    renew_product: 'Produktverlängerung'
+    email_verification: E-Mail-Verifizierung
+    payment_success: Zahlungsbestätigung
+    purchased_product: Produktkauf
+    registration: Registrierungsbestätigung
+    renew_product: Produktverlängerung
     reset_password: 'Passwort zurücksetzen'
-    server_suspended: 'Server-Suspension'
-
+    server_suspended: Server-Suspension
   crud:
     category:
-      name: 'Kategoriename'
-      description: 'Kategoriebeschreibung'
-      image: 'Bild'
-      priority: 'Priorität'
+      name: Kategoriename
+      description: Kategoriebeschreibung
+      image: Bild
+      priority: Priorität
       priority_hint: 'Niedrigere Zahlen erscheinen zuerst (z. B. 1 erscheint vor 2). Verwenden Sie dies, um die Anzeigereihenfolge zu steuern.'
       featured: 'Auf der Landingpage hervorheben'
       featured_hint: 'Diese Kategorie auf der Landingpage als hervorgehobenes Element anzeigen'
       add: 'Kategorie hinzufügen'
       save: 'Kategorie speichern'
-      category: 'Kategorie'
-      categories: 'Kategorien'
+      category: Kategorie
+      categories: Kategorien
       created_successfully: 'Kategorie erfolgreich erstellt.'
       updated_successfully: 'Kategorie erfolgreich aktualisiert.'
       deleted_successfully: 'Kategorie erfolgreich gelöscht.'
@@ -757,59 +740,59 @@ pteroca:
       update_error: 'Beim Aktualisieren der Kategorie ist ein Fehler aufgetreten: %error%'
       delete_error: 'Beim Löschen der Kategorie ist ein Fehler aufgetreten: %error%'
     product:
-      details: 'Produktdetails'
-      name: 'Produktname'
-      description: 'Produktbeschreibung'
-      price: 'Preis'
-      is_active: 'Aktiv'
-      priority: 'Priorität'
+      details: Produktdetails
+      name: Produktname
+      description: Produktbeschreibung
+      price: Preis
+      is_active: Aktiv
+      priority: Priorität
       priority_hint: 'Niedrigere Zahlen erscheinen zuerst (z. B. 1 erscheint vor 2). Verwenden Sie dies, um die Anzeigereihenfolge zu steuern.'
       featured: 'Auf der Landingpage hervorheben'
       featured_hint: 'Dieses Produkt auf der Landingpage als hervorgehobenes Element anzeigen'
-      category: 'Kategorie'
-      image: 'Bild'
+      category: Kategorie
+      image: Bild
       image_help: 'Das Bild wird im Shop angezeigt.'
-      banner: 'Banner'
+      banner: Banner
       banner_help: 'Das Banner wird auf der Produktseite angezeigt.'
-      server_resources: 'Server-Ressourcen'
-      disk_space: 'Speicherplatz'
-      memory: 'RAM'
-      io: 'IO'
-      cpu: 'CPU'
-      threads: 'CPU-Threads'
+      server_resources: Server-Ressourcen
+      disk_space: Speicherplatz
+      memory: RAM
+      io: IO
+      cpu: CPU
+      threads: CPU-Threads
       threads_hint: 'Bestimmte CPU-Threads, auf denen dieser Prozess laufen kann, oder leer lassen, um alle Threads zu erlauben. Kann eine einzelne Zahl oder eine kommagetrennte Liste sein. Beispiel: 0, 0-1,3 oder 0,1,3,4.'
-      db_count: 'Datenbanken'
-      swap: 'SWAP'
-      backups: 'Backups'
-      ports: 'Ports'
-      schedules: 'Zeitpläne'
+      db_count: Datenbanken
+      swap: SWAP
+      backups: Backups
+      ports: Ports
+      schedules: Zeitpläne
       schedules_hint: 'Maximale Anzahl von Zeitplänen, die für diesen Server erstellt werden können. 0 bedeutet keine Möglichkeit, Zeitpläne zu verwenden.'
-      product_connections: 'Produktverbindungen'
-      nodes: 'Knoten'
-      nest: 'Nest'
-      eggs: 'Eier'
-      copy: 'Kopieren'
+      product_connections: Produktverbindungen
+      nodes: Knoten
+      nest: Nest
+      eggs: Eier
+      copy: Kopieren
       copy_success: 'Produkt erfolgreich kopiert'
       copy_modal:
         title: 'Produkt kopieren'
         description: 'Sind Sie sicher, dass Sie dieses Produkt kopieren möchten?'
         details: 'Ein neues Produkt wird mit derselben Konfiguration erstellt. Sie können es anschließend bearbeiten.'
-        cancel: 'Abbrechen'
+        cancel: Abbrechen
         confirm: 'Produkt kopieren'
       created_at: 'Erstellt am'
       updated_at: 'Aktualisiert am'
       add: 'Produkt hinzufügen'
       save: 'Produkt speichern'
-      product: 'Produkt'
-      products: 'Produkte'
+      product: Produkt
+      products: Produkte
       egg_information: 'Informationen über das Egg'
       egg_options_you_can_edit: 'Sie können die folgenden Optionen in Ihrem Pterodactyl-Panel bearbeiten.'
-      egg_variables: 'Variablen'
-      egg_configuration: 'Konfiguration'
-      egg_default_configuration: 'Standardkonfiguration'
-      egg_variable_name: 'Name'
-      egg_variable_description: 'Beschreibung'
-      egg_variable_value: 'Wert'
+      egg_variables: Variablen
+      egg_configuration: Konfiguration
+      egg_default_configuration: Standardkonfiguration
+      egg_variable_name: Name
+      egg_variable_description: Beschreibung
+      egg_variable_value: Wert
       egg_variable_user_viewable: 'Für Benutzer sichtbar'
       egg_variable_user_editable: 'Vom Benutzer bearbeitbar'
       egg_allow_change: 'Änderung des Eggs bei Neuinstallation zulassen'
@@ -826,7 +809,7 @@ pteroca:
       nodes_hint: 'Wählen Sie eine oder mehrere physische oder virtuelle Maschinen (Knoten) aus Ihrer Pterodactyl-Konfiguration aus.'
       nest_hint: 'Ein Nest ist eine Kategorie, die verwandte Eggs gruppiert. Wählen Sie ein Nest, um dessen Eggs zu laden.'
       eggs_hint: 'Eggs definieren spezifische Serverkonfigurationen (Spiele oder Anwendungen). Wählen Sie die Eggs aus, die dieses Produkt unterstützen soll.'
-      pricing: 'Preisgestaltung'
+      pricing: Preisgestaltung
       price_static_plan: 'Fixe Preisoption'
       price_static_plan_hint: 'Der Produktpreis für einen festen Zeitraum, den Benutzer als Abrechnungszyklus auswählen können.'
       price_dynamic_plan: 'Dynamischer Preis \- auf Abruf'
@@ -834,30 +817,30 @@ pteroca:
       price_dynamic_only_one_plan: 'Es kann nur ein dynamischer Plan festgelegt werden.'
       price_slot_plan: 'Slot-Plan Preis'
       price_slot_plan_hint: 'Preis pro Slot. Nach dem Setzen verknüpfen Sie die Variable für maximale Spieler in Produktverbindungen für jedes Egg.'
-      period: 'Zeitraum'
-      unit: 'Einheit'
-      days: 'Tage'
-      hours: 'Stunden'
-      minutes: 'Minuten'
-      server_product: 'Serverprodukt'
-      server_products: 'Serverprodukte'
+      period: Zeitraum
+      unit: Einheit
+      days: Tage
+      hours: Stunden
+      minutes: Minuten
+      server_product: Serverprodukt
+      server_products: Serverprodukte
       original_product: 'Ursprüngliches Produkt'
-      build_name: 'Build-Name'
-      server_build: 'Server'
-      server_builds: 'Server'
-      server: 'Server'
-      build_details: 'Build-Details'
-      is_selected: 'Ausgewählt'
-      yes: 'Ja'
-      no: 'Nein'
-      server_details: 'Serverdetails'
+      build_name: Build-Name
+      server_build: Server
+      server_builds: Server
+      server: Server
+      build_details: Build-Details
+      is_selected: Ausgewählt
+      'yes': Ja
+      'no': Nein
+      server_details: Serverdetails
       server_build_offline_alert: 'Der Server ist derzeit offline. Die Build\-Eigenschaften können nur bearbeitet werden, wenn der Server online ist.'
       at_least_one_price_required: 'Mindestens ein Preis ist erforderlich.'
       at_least_one_selected_price_required: 'Mindestens ein auszuwählender Preis ist erforderlich.'
       only_one_selected_price_allowed: 'Es ist nur ein auszuwählender Preis zulässig.'
       product_connections_note: 'Die folgenden Einstellungen werden erst nach der Neuinstallation des Servers oder der Änderung der Software übernommen.'
       deleted_at: 'Gelöscht am'
-      egg_variable_slot_variable: 'Slot-Variable'
+      egg_variable_slot_variable: Slot-Variable
       egg_variable_slot_variable_hint: 'Wählen Sie die Variable, die die maximalen Slots (Spieler) für die slot-basierte Preisgestaltung festlegt'
       slot_variable_not_configured_egg: 'Slot-Variable für dieses Egg nicht konfiguriert'
       slot_variables_unconfigured_eggs: 'Einige Eggs haben nicht konfigurierte Slot-Variablen'
@@ -868,14 +851,14 @@ pteroca:
       invalid_eggs_selected: 'Ausgewähltes Ei (ID: %id%) existiert nicht in Pterodactyl. Bitte wählen Sie nur gültige Eier aus.'
       egg_validation_error: 'Eier können nicht mit Pterodactyl validiert werden. Bitte überprüfen Sie Ihre API-Verbindung.'
       eggs_auto_removed_warning: '%count% Ei(er) wurden automatisch aus diesem Produkt entfernt, da sie in Pterodactyl nicht mehr existieren. Die Änderungen werden gespeichert, wenn Sie das Formular absenden.'
-      health_status: 'Gesundheitsstatus'
-      health_status.healthy: 'OK'
-      health_status.some_eggs_invalid: 'Warnung'
-      health_status.all_eggs_invalid: 'Kritisch'
+      health_status: Gesundheitsstatus
+      health_status.healthy: OK
+      health_status.some_eggs_invalid: Warnung
+      health_status.all_eggs_invalid: Kritisch
       health_status.no_eggs: 'Keine Eier'
       health_status.no_prices: 'Keine Preise'
-      health_status.nest_unavailable: 'Nest-Fehler'
-      health_status.unknown: 'Unbekannt'
+      health_status.nest_unavailable: Nest-Fehler
+      health_status.unknown: Unbekannt
       created_successfully: 'Produkt erfolgreich erstellt.'
       updated_successfully: 'Produkt erfolgreich aktualisiert.'
       deleted_successfully: 'Produkt erfolgreich gelöscht.'
@@ -887,41 +870,41 @@ pteroca:
       variant_products: 'Verknüpfte Produkte (Varianten)'
       variant_products_hint: 'Verknüpfen Sie andere Produkte als Varianten. Wenn die Standortauswahl aktiviert ist, stehen auch Knoten von verknüpften Produkten zur Auswahl'
     server_product:
-      server_product: 'Serverprodukt'
-      server_products: 'Serverprodukte'
+      server_product: Serverprodukt
+      server_products: Serverprodukte
       selected_node_id: 'Ausgewählte Knoten-ID'
-      original_product: 'Originalprodukt'
+      original_product: Originalprodukt
     plugin:
-      plugins: 'Plugins'
+      plugins: Plugins
       manage_plugins: 'Plugins verwalten'
-      name: 'Name'
-      display_name: 'Anzeigename'
-      version: 'Version'
-      author: 'Autor'
-      description: 'Beschreibung'
-      state: 'Status'
-      capabilities: 'Funktionen'
+      name: Name
+      display_name: Anzeigename
+      version: Version
+      author: Autor
+      description: Beschreibung
+      state: Status
+      capabilities: Funktionen
       min_pteroca: 'Min. PteroCA'
       max_pteroca: 'Max. PteroCA'
       enabled_at: 'Aktiviert am'
       disabled_at: 'Deaktiviert am'
-      fault_reason: 'Fehlergrund'
+      fault_reason: Fehlergrund
       created_at: 'Erstellt am'
-      actions: 'Aktionen'
-      settings: 'Einstellungen'
-      enable: 'Aktivieren'
-      disable: 'Deaktivieren'
-      reset: 'Zurücksetzen'
-      details: 'Details'
-      plugin: 'Plugin'
-      plugin_management: 'Plugin-Verwaltung'
+      actions: Aktionen
+      settings: Einstellungen
+      enable: Aktivieren
+      disable: Deaktivieren
+      reset: Zurücksetzen
+      details: Details
+      plugin: Plugin
+      plugin_management: Plugin-Verwaltung
       plugin_management_description: 'Plugins für Ihre PteroCA-Installation verwalten und konfigurieren'
-      plugin_details: 'Plugin-Details'
-      plugin_setting: 'Plugin-Einstellung'
-      plugin_settings: 'Plugin-Einstellungen'
+      plugin_details: Plugin-Details
+      plugin_setting: Plugin-Einstellung
+      plugin_settings: Plugin-Einstellungen
       plugin_setting_with_name: '%s Einstellung'
       plugin_settings_with_name: '%s Einstellungen'
-      basic_information: 'Grundinformationen'
+      basic_information: Grundinformationen
       technical_details: 'Technische Details'
       name_label: 'Name:'
       display_name_label: 'Anzeigename:'
@@ -938,25 +921,25 @@ pteroca:
       created_at_label: 'Erstellt am:'
       no_description_provided: 'Keine Beschreibung bereitgestellt'
       not_specified: 'Nicht angegeben'
-      none: 'Keine'
+      none: Keine
       back_to_list: 'Zurück zur Liste'
-      plugin_error: 'Plugin-Fehler'
+      plugin_error: Plugin-Fehler
       update_available: 'Update verfügbar'
       update_available_message: 'Eine neue Version dieses Plugins ist im Dateisystem verfügbar. Deaktivieren und reaktivieren Sie das Plugin, um das Update anzuwenden.'
       no_plugins_found: 'Keine Plugins im /plugins/ Verzeichnis gefunden'
-      dependencies: 'Abhängigkeiten'
+      dependencies: Abhängigkeiten
       circular_dependency_detected: 'Zirkuläre Abhängigkeit erkannt'
       required_plugin: 'Erforderliches Plugin'
-      version_constraint: 'Versionsbeschränkung'
+      version_constraint: Versionsbeschränkung
       installed_version: 'Installierte Version'
       not_installed: 'Nicht installiert'
-      missing: 'Fehlend'
+      missing: Fehlend
       not_enabled: 'Nicht aktiviert'
       incompatible_version: 'Inkompatible Version'
-      satisfied: 'Erfüllt'
+      satisfied: Erfüllt
       dependent_plugins: 'Abhängige Plugins'
       dependents_warning: 'Die folgenden Plugins hängen von diesem Plugin ab. Das Deaktivieren kann ihre Funktionalität beeinträchtigen.'
-      plugin_name: 'Plugin-Name'
+      plugin_name: Plugin-Name
       current_state: 'Aktueller Status'
       dependency_error: 'Plugin kann aufgrund von Abhängigkeitsproblemen nicht aktiviert werden'
       dependents_exist_error: 'Plugin kann nicht deaktiviert werden, da andere Plugins davon abhängen'
@@ -968,7 +951,7 @@ pteroca:
       plugin_reset_successfully: 'Plugin "%s" wurde erfolgreich zurückgesetzt. Sie können es nun erneut versuchen zu aktivieren.'
       failed_to_reset_plugin: 'Fehler beim Zurücksetzen des Plugins: %s'
       plugin_not_faulted: 'Plugin "%s" ist nicht im Fehlerzustand. Kein Zurücksetzen erforderlich.'
-      delete: 'Löschen'
+      delete: Löschen
       delete_plugin: 'Plugin löschen'
       delete_plugin_title: 'Plugin löschen'
       delete_confirmation_message: 'Sind Sie sicher, dass Sie dieses Plugin dauerhaft löschen möchten?'
@@ -980,23 +963,23 @@ pteroca:
       plugin_deleted_successfully: 'Plugin "%s" wurde erfolgreich gelöscht.'
       failed_to_delete_plugin: 'Fehler beim Löschen des Plugins: %s'
       deletion_prevented: 'Plugin-Löschung wurde vom System verhindert.'
-      warning: 'Warnung'
-      cancel: 'Abbrechen'
-      close: 'Schließen'
+      warning: Warnung
+      cancel: Abbrechen
+      close: Schließen
     theme:
       theme_management_description: 'Themes für verschiedene Kontexte verwalten und konfigurieren'
-      appearance_settings: 'Erscheinungsbild-Einstellungen'
-      name: 'Theme-Name'
-      version: 'Version'
-      author: 'Autor'
-      contexts: 'Kontexte'
-      status: 'Status'
-      actions: 'Aktionen'
-      active: 'Aktiv'
-      inactive: 'Inaktiv'
+      appearance_settings: Erscheinungsbild-Einstellungen
+      name: Theme-Name
+      version: Version
+      author: Autor
+      contexts: Kontexte
+      status: Status
+      actions: Aktionen
+      active: Aktiv
+      inactive: Inaktiv
       no_themes_found: 'Keine Themes für diesen Kontext gefunden'
-      theme_details: 'Theme-Details'
-      theme_information: 'Theme-Informationen'
+      theme_details: Theme-Details
+      theme_information: Theme-Informationen
       back_to_list: 'Zurück zur Liste'
       show_details: 'Details anzeigen'
       currently_active: 'Aktuell aktives Theme'
@@ -1005,16 +988,16 @@ pteroca:
       set_as_default: 'Als Standard festlegen'
       set_as_default_in_context: 'Als Standard in %s festlegen'
       set_as_default_in: 'Als Standard in %s festlegen'
-      context_panel: 'Panel'
-      context_landing: 'Startseite'
-      context_email: 'E-Mail'
+      context_panel: Panel
+      context_landing: Startseite
+      context_email: E-Mail
       active_in: 'Aktiv in'
       confirm_set_default: 'Theme als Standard festlegen'
       confirm_set_default_message: 'Sind Sie sicher, dass Sie'
       for_context: 'als Standard-Theme für'
       set_default_warning: 'Dies ändert das Erscheinungsbild sofort für alle Benutzer'
-      cancel: 'Abbrechen'
-      confirm: 'Bestätigen'
+      cancel: Abbrechen
+      confirm: Bestätigen
       set_as_default_success: 'Theme "%s" wurde als Standard für %s-Kontext festgelegt'
       set_as_default_error: 'Theme konnte nicht als Standard festgelegt werden: %s'
       theme_not_found: 'Theme "%s" nicht gefunden'
@@ -1051,22 +1034,22 @@ pteroca:
         name_already_exists: 'Ein Theme mit diesem Namen existiert bereits'
       no_themes_found_unified: 'Keine Themes gefunden'
     server:
-      pterodactyl_server_id: 'Pterodactyl-Server-ID'
-      pterodactyl_server_identifier: 'Pterodactyl-Identifier'
-      name: 'Servername'
-      product: 'Produkt'
-      user: 'Besitzer'
+      pterodactyl_server_id: Pterodactyl-Server-ID
+      pterodactyl_server_identifier: Pterodactyl-Identifier
+      name: Servername
+      product: Produkt
+      user: Besitzer
       created_at: 'Erstellt am'
       expires_at: 'Läuft ab am'
-      is_suspended: 'Gesperrt'
+      is_suspended: Gesperrt
       save: 'Server speichern'
-      server: 'Server'
-      servers: 'Server'
+      server: Server
+      servers: Server
       manage_server: 'Server verwalten'
       show_server_dashboard: 'Server-Dashboard anzeigen'
       auto_renewal: 'Automatische Verlängerung'
       server_product_edit: 'Build-Konfiguration bearbeiten'
-      product_server_build: 'Build-Konfiguration'
+      product_server_build: Build-Konfiguration
       server_edit: 'Besitzer ändern'
       server_product_detail: 'Serverdetails anzeigen'
       show_server_logs: 'Serverprotokolle anzeigen'
@@ -1084,22 +1067,22 @@ pteroca:
       deleted_at: 'Gelöscht am'
       create_server: 'Server erstellen'
       pterodactyl_creation_failed: 'Servererstellung auf Pterodactyl fehlgeschlagen'
-      base_product: 'Basisprodukt'
+      base_product: Basisprodukt
       deleted_successfully: 'Server erfolgreich gelöscht.'
       delete_error: 'Beim Löschen des Servers ist ein Fehler aufgetreten: %error%'
     setting:
-      name: 'Einstellungsname'
-      value: 'Wert'
+      name: Einstellungsname
+      value: Wert
       add: 'Einstellung hinzufügen'
       save: 'Einstellung speichern'
-      setting: 'Einstellung'
-      settings: 'Einstellungen'
-      type: 'Typ'
-      context: 'Kontext'
-      hierarchy: 'Hierarchie'
-      yes: 'Ja'
-      no: 'Nein'
-      hint: 'Beschreibung'
+      setting: Einstellung
+      settings: Einstellungen
+      type: Typ
+      context: Kontext
+      hierarchy: Hierarchie
+      'yes': Ja
+      'no': Nein
+      hint: Beschreibung
       set_as_empty: 'Als leer setzen'
       set_as_empty_help: 'Aktivieren Sie dies, um den Wert als leer (null) zu setzen.'
       panel_theme:
@@ -1126,21 +1109,21 @@ pteroca:
         theme_default_dark_primary_color: 'Standard-Farbton der Hauptfarbe im Dunkelmodus'
         theme_disable_dark_mode: 'Dunkelmodus-Umschalter entfernen. Panel nur im hellen Modus. Nützlich wenn Theme keinen Dunkelmodus unterstützt.'
         theme_default_mode: 'Standard-Farbschema: Hell, Dunkel oder Auto (folgt Browser/System). Benutzer können manuell wechseln.'
-        theme_default_background_color: 'Standard-Hintergrundfarbe'
-        theme_default_link_color: 'Standard-Linkfarbe'
-        theme_default_link_hover_color: 'Standard-Link-Hover-Farbe'
+        theme_default_background_color: Standard-Hintergrundfarbe
+        theme_default_link_color: Standard-Linkfarbe
+        theme_default_link_hover_color: Standard-Link-Hover-Farbe
         theme_default_dark_background_color: 'Standard-Hintergrundfarbe im Dunkelmodus'
         theme_default_dark_link_color: 'Standard-Linkfarbe im Dunkelmodus'
         theme_default_dark_link_hover_color: 'Standard-Link-Hover-Farbe im Dunkelmodus'
         theme_default_secondary_color: 'Standard-Farbton der Sekundärfarbe'
         theme_default_dark_secondary_color: 'Standard-Farbton der Sekundärfarbe im Dunkelmodus'
         show_phpmyadmin_url: 'PHPMyAdmin-Link anzeigen'
-        phpmyadmin_url: 'PHPMyAdmin-URL'
+        phpmyadmin_url: PHPMyAdmin-URL
         smtp_server: 'SMTP-Hostname (z.B. smtp.gmail.com). Erforderlich zum Senden von Verifizierungs-, Kauf- und Verlängerungs-E-Mails.'
         smtp_port: 'SMTP-Port: 587 (TLS, empfohlen), 465 (SSL) oder 25 (unverschlüsselt). Muss zur Serverkonfiguration passen.'
         smtp_username: 'SMTP-Authentifizierung Benutzername. Normalerweise vollständige E-Mail-Adresse (z.B. noreply@example.com).'
         smtp_password: 'SMTP-Authentifizierung Passwort oder Token. Für Gmail App-Passwort verwenden. Sicher gespeichert.'
-        smtp_from: 'Absender-E-Mail im ''From''-Feld (z.B. noreply@example.com). Sollte zu erlaubten SMTP-Absendern passen.'
+        smtp_from: "Absender-E-Mail im 'From'-Feld (z.B. noreply@example.com). Sollte zu erlaubten SMTP-Absendern passen."
         customer_motd_message: 'MOTD-Widget-Inhalt. Unterstützt HTML- und Twig-Syntax für Formatierung, Links, dynamische Inhalte.'
         customer_motd_enabled: 'Nachricht des Tages-Widget im Dashboard anzeigen. Nützlich für Ankündigungen und Hinweise.'
         customer_motd_title: 'MOTD-Widget-Überschrift (z.B. Wichtige Mitteilung, Willkommen). Fett oben auf der Karte angezeigt.'
@@ -1164,22 +1147,25 @@ pteroca:
         email_theme: 'Theme für E-Mail-Vorlagen. Steuert die Gestaltung von Benachrichtigungs-, Registrierungs- und Kaufe-Mails.'
         landing_page_enabled: 'Öffentliche Landingpage aktivieren. Wenn deaktiviert, werden Besucher zur Anmeldeseite weitergeleitet.'
         current_theme: 'Aktuelles Thema des Panels'
+        date_format: 'Wählen Sie, wie Daten und Zeiten im gesamten Panel angezeigt werden. Beeinflusst alle Datumsanzeigen für alle Benutzer.'
+        date_timezone: 'Wählen Sie die Zeitzone für die Anzeige von Daten. Alle Daten werden von UTC in die ausgewählte Zeitzone konvertiert.'
+        date_show_timezone: 'Wenn aktiviert, wird die Zeitzonenabkürzung (z. B. "UTC", "EST") neben allen angezeigten Daten angezeigt.'
       template:
-        name: 'Vorlagenname'
-        description: 'Vorlagenbeschreibung'
-        author: 'Autor'
-        version: 'Version'
-        license: 'Lizenz'
-        pterocaVersion: 'PteroCA-Version'
+        name: Vorlagenname
+        description: Vorlagenbeschreibung
+        author: Autor
+        version: Version
+        license: Lizenz
+        pterocaVersion: PteroCA-Version
         outdated: 'Die Vorlagenversion liegt hinter der aktuellen Version von PteroCA zurück. Einige Funktionen funktionieren möglicherweise nicht richtig'
-        phpVersion: 'PHP-Version'
-        options: 'Optionen'
+        phpVersion: PHP-Version
+        options: Optionen
         supportDarkMode: 'Dunklen Modus unterstützen'
         supportCustomColors: 'Konfiguration benutzerdefinierter Farben erlauben'
         contexts: 'Unterstützte Kontexte'
-        translations: 'Theme-Übersetzungen'
-        translation_validation_errors: 'Übersetzungskonfigurationsfehler'
-      smtp_from: 'Absender-E-Mail-Adresse'
+        translations: Theme-Übersetzungen
+        translation_validation_errors: Übersetzungskonfigurationsfehler
+      smtp_from: Absender-E-Mail-Adresse
       test_smtp_connection: 'SMTP-Verbindung testen'
       smtp_connection_success: 'SMTP-Verbindung erfolgreich!'
       smtp_connection_failed: 'SMTP-Verbindung fehlgeschlagen!'
@@ -1191,32 +1177,32 @@ pteroca:
       create_error: 'Beim Erstellen der Einstellung ist ein Fehler aufgetreten: %error%'
       update_error: 'Beim Aktualisieren der Einstellung ist ein Fehler aufgetreten: %error%'
     user:
-      email: 'E-Mail'
-      roles: 'Rollen'
+      email: E-Mail
+      roles: Rollen
       roles_help: 'Weisen Sie diesem Benutzer Rollen zu. Jede Rolle gewährt eine Reihe von Berechtigungen, die steuern, worauf der Benutzer zugreifen und was er im System tun kann.'
-      balance: 'Kontostand'
-      password: 'Passwort'
+      balance: Kontostand
+      password: Passwort
       password_hint: 'Leer lassen, wenn Sie das Passwort nicht ändern möchten.'
-      name: 'Vorname'
-      surname: 'Nachname'
+      name: Vorname
+      surname: Nachname
       add: 'Benutzer hinzufügen'
       save: 'Benutzer speichern'
-      user: 'Benutzer'
-      users: 'Benutzer'
-      verified: 'Verifiziert'
-      blocked: 'Gesperrt'
-      pterodactyl_user_id: 'Pterodactyl-Benutzer-ID'
+      user: Benutzer
+      users: Benutzer
+      verified: Verifiziert
+      blocked: Gesperrt
+      pterodactyl_user_id: Pterodactyl-Benutzer-ID
       created_at: 'Erstellt am'
       updated_at: 'Aktualisiert am'
       deleted_at: 'Gelöscht am'
-      avatar: 'Avatar'
+      avatar: Avatar
       repeat_password: 'Passwort wiederholen'
       repeat_password_hint: 'Geben Sie das Passwort erneut ein, um es zu bestätigen.'
       passwords_must_match: 'Die Passwörter müssen übereinstimmen.'
       deleted_successfully: 'Benutzer erfolgreich gelöscht.'
       restored_successfully: 'Benutzer erfolgreich wiederhergestellt.'
       restore_error: 'Fehler beim Wiederherstellen des Benutzers.'
-      restore: 'Wiederherstellen'
+      restore: Wiederherstellen
       pterodactyl_user_not_found: 'Benutzer nicht in Pterodactyl gefunden, aber erfolgreich aus PteroCA gelöscht.'
       cannot_delete_user_with_active_servers: 'Benutzer mit {{ count }} aktiven Server(n) kann nicht gelöscht werden. Bitte löschen oder suspendieren Sie die Server zuerst.'
       account_restored: 'Das Benutzerkonto wurde aus einem zuvor gelöschten Konto wiederhergestellt.'
@@ -1231,7 +1217,7 @@ pteroca:
       show_api_key: 'API-Schlüssel anzeigen'
       hide_api_key: 'API-Schlüssel ausblenden'
       regenerate_api_key: 'API-Schlüssel neu generieren'
-      loading: 'Lädt...'
+      loading: Lädt...
       api_key_visibility_not_available: 'Der vollständige API-Schlüssel ist nicht zur Anzeige verfügbar. Neu generieren, um den neuen Schlüssel zu sehen.'
       api_key_regenerated_successfully: 'API-Schlüssel erfolgreich neu generiert.'
       api_key_generation_failed: 'Fehler beim Generieren des neuen API-Schlüssels. Bitte überprüfen Sie die Pterodactyl-Verbindung.'
@@ -1244,26 +1230,26 @@ pteroca:
         consequence_1: 'Der aktuelle API-Schlüssel wird sofort aufhören zu funktionieren'
         consequence_2: 'Ein neuer API-Schlüssel wird automatisch generiert und gespeichert'
         consequence_3: 'Der alte API-Schlüssel wird aus Pterodactyl gelöscht'
-        cancel: 'Abbrechen'
+        cancel: Abbrechen
         confirm: 'API-Schlüssel neu generieren'
     role:
-      name: 'Name'
+      name: Name
       name_help: 'Interner Rollenbezeichner (Kleinbuchstaben, alphanumerisch, Unterstriche nur). Kann nach der Erstellung nicht geändert werden.'
-      display_name: 'Anzeigename'
-      description: 'Beschreibung'
-      is_system: 'Systemrolle'
+      display_name: Anzeigename
+      description: Beschreibung
+      is_system: Systemrolle
       is_system_help: 'Systemrollen sind geschützt und können nicht modifiziert oder gelöscht werden.'
-      permissions: 'Berechtigungen'
+      permissions: Berechtigungen
       permissions_help: 'Wählen Sie die Berechtigungen aus, die dieser Rolle zugewiesen werden sollen. Benutzer mit dieser Rolle haben Zugriff auf alle ausgewählten Berechtigungen.'
-      permissions_count: 'Berechtigungen'
-      users: 'Benutzer'
-      users_count: 'Benutzer'
+      permissions_count: Berechtigungen
+      users: Benutzer
+      users_count: Benutzer
       created_at: 'Erstellt am'
       updated_at: 'Aktualisiert am'
       add: 'Rolle hinzufügen'
       save: 'Rolle speichern'
-      role: 'Rolle'
-      roles: 'Rollen'
+      role: Rolle
+      roles: Rollen
       created_successfully: 'Rolle erfolgreich erstellt.'
       updated_successfully: 'Rolle erfolgreich aktualisiert.'
       deleted_successfully: 'Rolle erfolgreich gelöscht.'
@@ -1273,108 +1259,108 @@ pteroca:
       field:
         no_permissions: 'Keine Berechtigungen dieser Rolle zugewiesen'
         permissions_across: 'Berechtigungen über'
-        sections: 'Abschnitte'
+        sections: Abschnitte
         no_active_users: 'Keine aktiven Benutzer dieser Rolle zugewiesen'
         deleted_blocked_hidden: 'gelöschte/gesperrte Benutzer ausgeblendet'
-        id: 'ID'
-        email: 'E-Mail'
-        name: 'Name'
-        status: 'Status'
-        created: 'Erstellt'
-        verified: 'Verifiziert'
+        id: ID
+        email: E-Mail
+        name: Name
+        status: Status
+        created: Erstellt
+        verified: Verifiziert
         not_verified: 'Nicht verifiziert'
         active_users: 'Aktive Benutzer:'
     permission:
-      code: 'Berechtigungscode'
-      name: 'Name'
-      description: 'Beschreibung'
-      section: 'Abschnitt'
-      plugin_name: 'Plugin-Name'
-      is_system: 'Systemberechtigung'
+      code: Berechtigungscode
+      name: Name
+      description: Beschreibung
+      section: Abschnitt
+      plugin_name: Plugin-Name
+      is_system: Systemberechtigung
       is_system_help: 'Systemberechtigungen werden automatisch verwaltet und können nicht manuell modifiziert werden.'
       roles: 'Zugewiesene Rollen'
-      roles_count: 'Rollen'
+      roles_count: Rollen
       created_at: 'Erstellt am'
       updated_at: 'Aktualisiert am'
-      permission: 'Berechtigung'
-      permissions: 'Berechtigungen'
+      permission: Berechtigung
+      permissions: Berechtigungen
       cannot_create: 'Berechtigungen werden vom System verwaltet und können nicht manuell erstellt werden.'
       cannot_update: 'Berechtigungen werden vom System verwaltet und können nicht manuell aktualisiert werden.'
       cannot_delete: 'Berechtigungen werden vom System verwaltet und können nicht manuell gelöscht werden.'
       field:
         no_roles: 'Keine Rollen haben diese Berechtigung'
         role_name: 'Name:'
-        users_count: 'Benutzer'
-        permissions_count: 'Berechtigung(en)'
+        users_count: Benutzer
+        permissions_count: Berechtigung(en)
         total_roles: 'Gesamt Rollen mit dieser Berechtigung:'
     payment:
-      session_id: 'Sitzungs-ID'
-      status: 'Status'
-      amount: 'Betrag'
-      currency: 'Währung'
-      user: 'Benutzer'
+      session_id: Sitzungs-ID
+      status: Status
+      amount: Betrag
+      currency: Währung
+      user: Benutzer
       created_at: 'Erstellt am'
       updated_at: 'Aktualisiert am'
-      payment: 'Zahlung'
-      payments: 'Zahlungen'
-      balance_amount: 'Guthabenbetrag'
+      payment: Zahlung
+      payments: Zahlungen
+      balance_amount: Guthabenbetrag
       used_voucher: 'Verwendeter Gutschein'
       last_update: 'Letzte Aktualisierung'
       description: 'Verwalten Sie Ihre Zahlungen und sehen Sie die Transaktionshistorie ein'
       continue_payment: 'Zahlung fortsetzen'
-      detail: 'Details'
-      gateway: 'Zahlungs-Gateway'
+      detail: Details
+      gateway: Zahlungs-Gateway
     user_account:
       description: 'Bearbeiten Sie Ihre persönlichen Daten, ändern Sie das Passwort und verwalten Sie Kontoeinstellungen'
       updated_successfully: 'Konto erfolgreich aktualisiert.'
       update_error: 'Beim Aktualisieren des Kontos ist ein Fehler aufgetreten: %error%'
     log:
-      log: 'Log'
-      logs: 'Logs'
-      server_log: 'Server-Log'
-      server_logs: 'Server-Logs'
-      action: 'Aktion'
-      details: 'Details'
+      log: Log
+      logs: Logs
+      server_log: Server-Log
+      server_logs: Server-Logs
+      action: Aktion
+      details: Details
       created_at: 'Erstellt am'
-      user: 'Benutzer'
-      ip_address: 'IP-Adresse'
-      server: 'Server'
+      user: Benutzer
+      ip_address: IP-Adresse
+      server: Server
     email_log:
-      email_log: 'E-Mail-Protokoll'
-      email_logs: 'E-Mail-Protokolle'
-      email_type: 'E-Mail-Typ'
-      metadata: 'E-Mail-Metadaten'
+      email_log: E-Mail-Protokoll
+      email_logs: E-Mail-Protokolle
+      email_type: E-Mail-Typ
+      metadata: E-Mail-Metadaten
       sent_at: 'Gesendet am'
-      user: 'Benutzer'
-      server: 'Server'
+      user: Benutzer
+      server: Server
     voucher:
-      voucher: 'Gutschein'
-      vouchers: 'Gutscheine'
-      code: 'Code'
+      voucher: Gutschein
+      vouchers: Gutscheine
+      code: Code
       code_help: 'Gib den Gutscheincode ein.'
-      value: 'Wert'
+      value: Wert
       value_help: 'Gib den Gutscheinwert ein. Dezimalwerte (z.B. 1,5) werden unterstützt.'
       new_accounts_only: 'Nur für neue Konten'
       new_accounts_only_help: 'Der Gutschein kann nur von neuen Konten verwendet werden.'
-      minimum_top_up_amount: 'Mindestaufladebetrag'
+      minimum_top_up_amount: Mindestaufladebetrag
       minimum_top_up_amount_help: 'Der Gutschein kann nur verwendet werden, wenn der Nutzer mindestens diesen Betrag auflädt. Dieses Feld kann leer gelassen werden, wenn keine Aufladung erforderlich ist.'
-      minimum_order_amount: 'Mindestbestellwert'
+      minimum_order_amount: Mindestbestellwert
       minimum_order_amount_help: 'Der Gutschein kann nur verwendet werden, wenn der Bestellwert mindestens diesen Betrag erreicht. Nur verfügbar für Server- und Zahlungsrabatte.'
-      expiration_date: 'Ablaufdatum'
+      expiration_date: Ablaufdatum
       expiration_date_help: 'Der Gutschein läuft nach diesem Datum ab.'
       max_global_uses: 'Maximale globale Verwendung'
       max_global_uses_help: 'Maximale Anzahl, wie oft dieser Gutschein global verwendet werden kann.'
-      used_count: 'Verwendungsanzahl'
+      used_count: Verwendungsanzahl
       used_count_help: 'Anzahl der bisherigen Verwendungen dieses Gutscheins.'
       one_use_per_user: 'Nur eine Verwendung pro Benutzer'
       one_use_per_user_help: 'Der Gutschein kann nur einmal pro Benutzer verwendet werden.'
-      description: 'Beschreibung'
+      description: Beschreibung
       description_help: 'Gib eine Beschreibung für den Gutschein ein. Nur zur internen Information.'
-      type: 'Typ'
+      type: Typ
       type_help: 'Wähle den Gutschein-Typ aus.'
       balance_topup: 'Guthaben aufladen'
-      payment_discount: 'Zahlungsrabatt'
-      server_discount: 'Serverrabatt'
+      payment_discount: Zahlungsrabatt
+      server_discount: Serverrabatt
       show_voucher_usages: 'Eingelöste Gutscheine anzeigen'
       created_successfully: 'Gutschein erfolgreich erstellt.'
       updated_successfully: 'Gutschein erfolgreich aktualisiert.'
@@ -1385,46 +1371,45 @@ pteroca:
     voucher_usage:
       voucher_usage: 'Eingelöster Gutschein'
       voucher_usages: 'Eingelöste Gutscheine'
-      voucher_code: 'Gutscheincode'
-      user: 'Benutzer'
+      voucher_code: Gutscheincode
+      user: Benutzer
       used_at: 'Verwendet am'
     menu:
-      menu: 'Menü'
-      login: 'Anmelden'
-      dashboard: 'Dashboard'
-      servers: 'Server'
+      menu: Menü
+      login: Anmelden
+      dashboard: Dashboard
+      servers: Server
       my_servers: 'Meine Server'
-      shop: 'Shop'
-      wallet: 'Wallet'
-      administration: 'Administration'
-      categories: 'Kategorien'
-      products: 'Produkte'
-      settings: 'Einstellungen'
-      general: 'Allgemein'
-      pterodactyl: 'Pterodactyl'
-      appearance: 'Aussehen'
-      security: 'Sicherheit'
-      payment_gateways: 'Zahlungsgateways'
-      email: 'E-Mail'
-      users: 'Benutzer'
-      logout: 'Abmelden'
-      phpmyadmin: 'PHPMyAdmin'
-      payments: 'Zahlungen'
-      logs: 'Logs'
-      email_logs: 'E-Mail-Protokolle'
-      server_logs: 'Server-Logs'
-      overview: 'Übersicht'
-      server_builds: 'Server'
-      vouchers: 'Gutscheine'
+      shop: Shop
+      wallet: Wallet
+      administration: Administration
+      categories: Kategorien
+      products: Produkte
+      settings: Einstellungen
+      general: Allgemein
+      pterodactyl: Pterodactyl
+      appearance: Aussehen
+      security: Sicherheit
+      payment_gateways: Zahlungsgateways
+      email: E-Mail
+      users: Benutzer
+      logout: Abmelden
+      phpmyadmin: PHPMyAdmin
+      payments: Zahlungen
+      logs: Logs
+      email_logs: E-Mail-Protokolle
+      server_logs: Server-Logs
+      overview: Übersicht
+      server_builds: Server
+      vouchers: Gutscheine
       voucher_usages: 'Eingelöste Gutscheine'
       my_account: 'Mein Konto'
-      account_settings: 'Kontoeinstellungen'
+      account_settings: Kontoeinstellungen
       roles_and_permissions: 'Rollen & Berechtigungen'
-      roles: 'Rollen'
-      permissions: 'Berechtigungen'
-      themes: 'Themes'
+      roles: Rollen
+      permissions: Berechtigungen
+      themes: Themes
       manage_themes: 'Themes verwalten'
-
   api:
     servers:
       not_found: 'Server nicht gefunden.'
@@ -1453,34 +1438,33 @@ pteroca:
       only_during_order: 'Gutschein kann nur während der Bestellung verwendet werden.'
       server_discount_only_on_purchase: 'Dieser Gutschein kann nur beim Kauf oder der Verlängerung eines Servers verwendet werden. Bitte gehen Sie zum Shop, um diesen Gutschein zu verwenden.'
       payment_discount_only_on_payment: 'Dieser Gutschein kann nur auf der Zahlungsseite verwendet werden. Bitte fahren Sie mit der Kasse fort, um diesen Gutschein anzuwenden.'
-
   email:
     creation_not_sent_misconfigured: 'Server wurde erfolgreich erstellt, aber die Bestätigungs-E-Mail konnte aufgrund von E-Mail-Konfigurationsproblemen nicht gesendet werden. Bitte überprüfen Sie Ihre E-Mail-Einstellungen.'
     renewal_not_sent_misconfigured: 'Server wurde erfolgreich verlängert, aber die Bestätigungs-E-Mail konnte aufgrund von E-Mail-Konfigurationsproblemen nicht gesendet werden. Bitte überprüfen Sie Ihre E-Mail-Einstellungen.'
     general:
-      hello: 'Hallo'
+      hello: Hallo
       best_regards: 'Mit freundlichen Grüßen'
       visit_website: 'Besuchen Sie unsere Website:'
       copyright: 'Alle Rechte vorbehalten.'
     verification:
-      subject: "E-Mail-Verifizierung - %siteName%"
-      title: "E-Mail-Verifizierung"
-      subtitle: "Bitte verifizieren Sie Ihre E-Mail-Adresse, um fortzufahren"
-      hello: "Hallo %name%!"
-      message: "Vielen Dank für Ihre Registrierung bei %siteName%. Bitte verifizieren Sie Ihre E-Mail-Adresse, indem Sie auf die Schaltfläche unten klicken."
-      verify_button: "E-Mail-Adresse verifizieren"
-      alternative_text: "Falls die Schaltfläche nicht funktioniert, können Sie auch den folgenden Link kopieren und in Ihren Browser einfügen:"
-      footer_text: "Falls Sie kein Konto bei %siteName% erstellt haben, können Sie diese E-Mail bedenkenlos ignorieren."
-      resend_too_soon: "Sie können die Verifizierungs-E-Mail nur alle %minutes% Minuten erneut senden. Bitte versuchen Sie es später noch einmal."
-      resend_success: "Die Verifizierungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet."
-      not_logged_in: "Sie müssen eingeloggt sein, um die Verifizierungs-E-Mail erneut zu senden."
-      already_verified: "Ihre E-Mail-Adresse ist bereits verifiziert."
+      subject: 'E-Mail-Verifizierung - %siteName%'
+      title: E-Mail-Verifizierung
+      subtitle: 'Bitte verifizieren Sie Ihre E-Mail-Adresse, um fortzufahren'
+      hello: 'Hallo %name%!'
+      message: 'Vielen Dank für Ihre Registrierung bei %siteName%. Bitte verifizieren Sie Ihre E-Mail-Adresse, indem Sie auf die Schaltfläche unten klicken.'
+      verify_button: 'E-Mail-Adresse verifizieren'
+      alternative_text: 'Falls die Schaltfläche nicht funktioniert, können Sie auch den folgenden Link kopieren und in Ihren Browser einfügen:'
+      footer_text: 'Falls Sie kein Konto bei %siteName% erstellt haben, können Sie diese E-Mail bedenkenlos ignorieren.'
+      resend_too_soon: 'Sie können die Verifizierungs-E-Mail nur alle %minutes% Minuten erneut senden. Bitte versuchen Sie es später noch einmal.'
+      resend_success: 'Die Verifizierungs-E-Mail wurde an Ihre E-Mail-Adresse gesendet.'
+      not_logged_in: 'Sie müssen eingeloggt sein, um die Verifizierungs-E-Mail erneut zu senden.'
+      already_verified: 'Ihre E-Mail-Adresse ist bereits verifiziert.'
     pricing:
       slot_format: '{{ slots }} Slots × {{ price }} {{ currency }} = {{ total }} {{ currency }}'
       static_format: '{{ price }} {{ currency }}'
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
-      subject: 'Registrierung'
+      subject: Registrierung
       subtitle: 'Ihr Konto wurde erfolgreich erstellt'
       welcome: 'Willkommen auf unserer Seite! Vielen Dank für Ihre Registrierung.'
       account_ready: 'Ihr Konto ist bereit zur Nutzung. Sie können sich jetzt in Ihr Konto einloggen und unsere Dienste nutzen.'
@@ -1491,7 +1475,7 @@ pteroca:
       if_not_registered: 'Wenn Sie sich nicht auf unserer Website registriert haben, ignorieren Sie diese Nachricht.'
     recovery:
       subject: 'Passwort zurücksetzen'
-      title: 'Passwort-Reset-Anfrage'
+      title: Passwort-Reset-Anfrage
       subtitle: 'Wir haben Ihre Passwort-Reset-Anfrage erhalten'
       we_received_request: 'Wir haben eine Anfrage zum Zurücksetzen des Passworts für Ihr Konto erhalten.'
       click_link_to_reset: 'Klicken Sie auf den folgenden Link, um Ihr Passwort zurückzusetzen:'
@@ -1499,30 +1483,30 @@ pteroca:
       link_valid: 'Dieser Link ist 60 Minuten gültig.'
       if_not_requested: 'Wenn Sie kein Zurücksetzen des Passworts angefordert haben, ignorieren Sie diese Nachricht.'
     store:
-      subject: 'Serverkauf'
+      subject: Serverkauf
       title: 'Server erfolgreich gekauft'
       subtitle: 'Ihr Server ist bereit zur Nutzung'
       server_purchased: 'Sie haben einen Server in unserem Shop gekauft.'
-      expiration_date: 'Ablaufdatum'
-      product_details: 'Produktdetails'
-      product_name: 'Produktname'
-      product_price: 'Produktpreis'
-      server_details: 'Serverdetails'
-      ip_address: 'IP-Adresse'
-      management_panel: 'Verwaltungspanel'
-      panel_username: 'Benutzername'
-      panel_password: 'Passwort'
+      expiration_date: Ablaufdatum
+      product_details: Produktdetails
+      product_name: Produktname
+      product_price: Produktpreis
+      server_details: Serverdetails
+      ip_address: IP-Adresse
+      management_panel: Verwaltungspanel
+      panel_username: Benutzername
+      panel_password: Passwort
       panel_password_hint: 'Das Passwort ist dasselbe wie für Ihr Konto im Kundenbereich.'
       management_panel_hint: 'Um FTP-Daten zu erhalten, melden Sie sich im Verwaltungspanel an.'
       access_panel: 'Server-Panel aufrufen'
     renew:
-      subject: 'Serververlängerung'
+      subject: Serververlängerung
       title: 'Server erfolgreich verlängert'
       subtitle: 'Ihr Server wurde verlängert'
       server_renewed: 'Sie haben einen Server aus unserem Angebot verlängert.'
       new_expiration: 'Neues Ablaufdatum:'
     payment:
-      subject: 'Zahlung'
+      subject: Zahlung
       title: 'Zahlung erhalten'
       subtitle: 'Vielen Dank für Ihre Zahlung'
       payment_received: 'Wir bestätigen, dass wir eine Zahlung von Ihnen erhalten haben.'
@@ -1531,18 +1515,17 @@ pteroca:
       new_balance: 'Neuer Kontostand'
       thank_you: 'Vielen Dank, dass Sie sich für uns entschieden haben!'
     suspended:
-      subject: 'Serversperrung'
+      subject: Serversperrung
       subtitle: 'Maßnahmen erforderlich, um Ihren Server wiederherzustellen'
       server_suspended: 'Wir informieren Sie, dass einer Ihrer Server gesperrt wurde, da er nicht verlängert wurde.'
       extend_server: 'Um den Server wiederherzustellen, verlängern Sie ihn im Kundenbereich.'
-      server_details: 'Serverdetails'
+      server_details: Serverdetails
       server_name: 'Server: %serverName%'
       suspension_date: 'Suspendiert am: %suspensionDate%'
-      suspension_date_label: 'Sperrdatum'
+      suspension_date_label: Sperrdatum
       auto_delete_title: 'Automatische Löschung Warnung'
       auto_delete_warning: 'Wichtig: Ihr Server wird automatisch nach %days% Tagen (%deleteDate%) gelöscht, falls nicht verlängert.'
       panel_access: 'Zugang zum Panel'
-
   verification:
     title: 'E-Mail-Verifizierung erforderlich'
     subtitle: 'Bitte verifizieren Sie Ihre E-Mail-Adresse, um fortzufahren'
@@ -1558,34 +1541,33 @@ pteroca:
     back_to_panel: 'Zurück zum Panel'
     help_title: 'Brauchen Sie Hilfe?'
     help_text: 'Überprüfen Sie Ihren E-Mail-Posteingang und Spam-Ordner auf den Verifizierungslink.'
-
   admin:
     overview:
       title: 'Admin Übersicht'
       useful_resources: 'Nützliche Ressourcen'
       servers: 'Aktive Server'
       users: 'Registrierte Benutzer'
-      payments: 'Zahlungen'
+      payments: Zahlungen
       last_30_days: 'Letzte 30 Tage'
-      now: 'Jetzt'
+      now: Jetzt
       links: 'Wichtige Links'
-      system: 'Systeminformationen'
-      payment_overview: 'Zahlungsübersicht'
+      system: Systeminformationen
+      payment_overview: Zahlungsübersicht
       view_all: 'Alle anzeigen'
       last_registered_users: 'Zuletzt registrierte Benutzer'
-      user: 'Benutzer'
-      amount: 'Betrag'
-      currency: 'Währung'
-      status: 'Status'
-      date: 'Datum'
+      user: Benutzer
+      amount: Betrag
+      currency: Währung
+      status: Status
+      date: Datum
       no_payments: 'Ihr System hat bisher keine Zahlungen erhalten.'
-      balance: 'Kontostand'
-      verified: 'Verifiziert'
+      balance: Kontostand
+      verified: Verifiziert
       unverified: 'Nicht verifiziert'
-      project_site: 'Projektseite'
-      documentation: 'Dokumentation'
-      support: 'Support'
-      up_to_date: 'Aktuell'
+      project_site: Projektseite
+      documentation: Dokumentation
+      support: Support
+      up_to_date: Aktuell
       update_available: 'Update verfügbar'
       pteroca_plugin_not_detected: 'Nicht erkannt'
     server_create:
@@ -1597,18 +1579,17 @@ pteroca:
       eggs_required: 'Mindestens ein Ei muss ausgewählt werden'
       use_as_starting_egg: 'Als Start-Ei verwenden'
       starting_egg_help: 'Dieses Ei wird bei der Servererstellung verwendet'
-
   first_configuration:
     title: 'Erste Konfiguration'
     description: 'Diese Seite ist nur einmal nach der Installation verfügbar. Bitte füllen Sie die erforderlichen Felder aus, um das Panel zu konfigurieren.'
-    step: 'Schritt'
-    step_welcome: 'Willkommen'
-    step_site: 'Seite'
-    step_pterodactyl: 'Pterodactyl'
-    step_email: 'E-Mail'
-    step_payment: 'Zahlung'
-    step_admin: 'Admin'
-    next: 'Weiter'
+    step: Schritt
+    step_welcome: Willkommen
+    step_site: Seite
+    step_pterodactyl: Pterodactyl
+    step_email: E-Mail
+    step_payment: Zahlung
+    step_admin: Admin
+    next: Weiter
     site_settings_description: 'Konfigurieren Sie die Grundeinstellungen Ihres Panels, einschließlich der Website-URL, des Titels und der Standardsprache.'
     email_settings_description: 'Richten Sie SMTP-Einstellungen ein, um Ihrem Panel zu ermöglichen, E-Mails an Benutzer für Benachrichtigungen und Kontoverwaltung zu senden.'
     payment_settings_description: 'Konfigurieren Sie Ihre Zahlungsgateway- und Währungseinstellungen, um Benutzern Käufe auf Ihrem Panel zu ermöglichen.'
@@ -1616,46 +1597,46 @@ pteroca:
     configurator_welcome: 'Willkommen beim PteroCA-Konfigurator.'
     configurator_welcome_description: 'Dieser Assistent hilft Ihnen, die Grundeinstellungen Ihres Panels zu konfigurieren.'
     configurator_welcome_description_2: 'Bitte wählen Sie die Sprache des Konfigurators und klicken Sie auf "Start", um zu beginnen.'
-    configurator_language: 'Konfiguratorsprache'
+    configurator_language: Konfiguratorsprache
     start_configuration: 'Konfiguration starten'
-    site_settings: 'Website-Einstellungen'
-    site_url: 'Website-URL'
+    site_settings: Website-Einstellungen
+    site_url: Website-URL
     site_url_help: 'Geben Sie die URL Ihrer Website mit Protokoll (http:// oder https://) ein.'
-    site_title: 'Seitentitel'
+    site_title: Seitentitel
     site_title_help: 'Geben Sie den Titel Ihrer Website ein.'
-    site_locale: 'Oberflächensprache'
+    site_locale: Oberflächensprache
     site_locale_help: 'Wählen Sie die Sprache der Benutzeroberfläche aus.'
-    email_settings: 'E-Mail-Einstellungen'
-    email_smtp_server: 'SMTP-Server'
+    email_settings: E-Mail-Einstellungen
+    email_smtp_server: SMTP-Server
     email_smtp_server_help: 'Geben Sie die Adresse des SMTP-Servers ein.'
-    email_smtp_port: 'SMTP-Port'
+    email_smtp_port: SMTP-Port
     email_smtp_port_help: 'Geben Sie den Port des SMTP-Servers ein. Häufige Ports: 587 (TLS), 465 (SSL).'
-    email_smtp_username: 'SMTP-Benutzername'
+    email_smtp_username: SMTP-Benutzername
     email_smtp_username_help: 'Geben Sie den SMTP-Benutzernamen ein.'
-    email_smtp_password: 'SMTP-Passwort'
+    email_smtp_password: SMTP-Passwort
     email_smtp_password_help: 'Geben Sie das SMTP-Passwort ein.'
-    email_smtp_from: 'Absender-E-Mail-Adresse'
+    email_smtp_from: Absender-E-Mail-Adresse
     email_smtp_from_help: 'Geben Sie die E-Mail-Adresse ein, von der E-Mails gesendet werden.'
-    pterodactyl_settings: 'Pterodactyl-Einstellungen'
-    pterodactyl_panel_url: 'Pterodactyl-Panel-URL'
+    pterodactyl_settings: Pterodactyl-Einstellungen
+    pterodactyl_panel_url: Pterodactyl-Panel-URL
     pterodactyl_panel_url_help: 'Geben Sie die URL Ihres Pterodactyl-Panels mit Protokoll (http:// oder https://) ein.'
     pterodactyl_panel_api_key: 'Pterodactyl Application API-Schlüssel'
     pterodactyl_panel_api_key_help: 'Geben Sie den Application API-Schlüssel Ihres Pterodactyl-Panels ein.'
-    payment_settings: 'Zahlungseinstellungen'
+    payment_settings: Zahlungseinstellungen
     stripe_secret_key: 'Stripe Secret Key'
     stripe_secret_key_help: 'Geben Sie den geheimen Schlüssel Ihres Stripe-Kontos ein (optional, kann später festgelegt werden).'
-    currency: 'Währung'
+    currency: Währung
     currency_help: 'Geben Sie den Namen der Währung ein, in der Zahlungen durchgeführt werden.'
     internal_currency_name: 'Interner Währungsname'
     internal_currency_name_help: 'Geben Sie den Namen der internen Währung ein (z. B. Coins).'
     create_admin_account: 'Administrator-Konto erstellen'
     admin_account_alert: 'Bitte geben Sie Details für ein neues Administrator-Konto an, das sowohl in PteroCA als auch in Pterodactyl erstellt wird. Sie können kein bestehendes Konto verwenden.'
-    admin_email: 'Administrator-E-Mail'
+    admin_email: Administrator-E-Mail
     admin_email_help: 'Geben Sie die E-Mail-Adresse des Administrators ein.'
-    admin_password: 'Administrator-Passwort'
+    admin_password: Administrator-Passwort
     admin_password_help: 'Geben Sie das Passwort für das Administrator-Konto ein.'
-    skip: 'Überspringen'
-    back: 'Zurück'
+    skip: Überspringen
+    back: Zurück
     documentation_hint: 'Haben Sie Probleme mit dem Konfigurator? Sehen Sie sich die Dokumentation an!'
     discord_hint: 'Brauchen Sie Hilfe? Treten Sie unserem Discord-Server bei!'
     pterodactyl_plugin_hint: 'Es wird empfohlen, das PteroCA-Plugin auf Ihrem Pterodactyl zu installieren, um alle Funktionen zu nutzen.'
@@ -1680,55 +1661,54 @@ pteroca:
       user_already_exists_in_local_database: 'Ein Benutzer mit dieser E-Mail-Adresse existiert bereits in der lokalen Datenbank.'
     telemetry_consent: 'Hilf dabei, PteroCA durch das Senden anonymer Nutzungsdaten zu verbessern'
     telemetry_consent_help: 'Wir sammeln anonyme Telemetrie, um PteroCA zu verbessern. Es werden nur Installationsereignisse und Fehler verfolgt. Keine persönlichen Daten, API-Schlüssel oder URLs werden gesammelt.'
-
   error:
     invalid_csrf_token: 'Ungültiges CSRF-Token. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.'
     user_not_found: 'Benutzer nicht gefunden.'
     404:
       title: 'Seite nicht gefunden'
       message: 'Entschuldigung, aber die Seite, die Sie suchen, existiert nicht oder wurde verschoben. Überprüfen Sie die URL oder kehren Sie zur Startseite zurück.'
-      go_home: 'Startseite'
-      go_back: 'Zurück'
+      go_home: Startseite
+      go_back: Zurück
     500:
-      title: 'Serverfehler'
+      title: Serverfehler
       message: 'Entschuldigung, es ist ein interner Serverfehler aufgetreten. Unser Team wurde über das Problem benachrichtigt. Versuchen Sie, die Seite in ein paar Minuten zu aktualisieren oder kontaktieren Sie den Administrator.'
-      go_home: 'Startseite'
+      go_home: Startseite
       refresh: 'Seite aktualisieren'
-      go_back: 'Zurück'
+      go_back: Zurück
     general:
       title: 'Ein Fehler ist aufgetreten'
       message: 'Entschuldigung, es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es in einem Moment erneut.'
-      go_home: 'Startseite'
-      go_back: 'Zurück'
+      go_home: Startseite
+      go_back: Zurück
   plugin:
-    plugins: 'Plugins'
-    name: 'Name'
-    display_name: 'Anzeigename'
-    version: 'Version'
-    author: 'Autor'
-    description: 'Beschreibung'
-    state: 'Status'
-    capabilities: 'Fähigkeiten'
+    plugins: Plugins
+    name: Name
+    display_name: Anzeigename
+    version: Version
+    author: Autor
+    description: Beschreibung
+    state: Status
+    capabilities: Fähigkeiten
     min_pteroca: 'Min PteroCA'
     max_pteroca: 'Max PteroCA'
     enabled_at: 'Aktiviert am'
     disabled_at: 'Deaktiviert am'
-    fault_reason: 'Fehlergrund'
+    fault_reason: Fehlergrund
     created_at: 'Erstellt am'
-    actions: 'Aktionen'
-    settings: 'Einstellungen'
-    enable: 'Aktivieren'
-    disable: 'Deaktivieren'
-    details: 'Details'
-    plugin: 'Plugin'
-    plugin_management: 'Plugin-Verwaltung'
+    actions: Aktionen
+    settings: Einstellungen
+    enable: Aktivieren
+    disable: Deaktivieren
+    details: Details
+    plugin: Plugin
+    plugin_management: Plugin-Verwaltung
     plugin_management_description: 'Plugins für Ihre PteroCA-Installation verwalten und konfigurieren'
-    plugin_details: 'Plugin-Details'
-    plugin_setting: 'Plugin-Einstellung'
-    plugin_settings: 'Plugin-Einstellungen'
+    plugin_details: Plugin-Details
+    plugin_setting: Plugin-Einstellung
+    plugin_settings: Plugin-Einstellungen
     plugin_setting_with_name: '%s Einstellung'
     plugin_settings_with_name: '%s Einstellungen'
-    basic_information: 'Grundinformationen'
+    basic_information: Grundinformationen
     technical_details: 'Technische Details'
     name_label: 'Name:'
     display_name_label: 'Anzeigename:'
@@ -1745,25 +1725,25 @@ pteroca:
     created_at_label: 'Erstellt am:'
     no_description_provided: 'Keine Beschreibung angegeben'
     not_specified: 'Nicht angegeben'
-    none: 'Keine'
+    none: Keine
     back_to_list: 'Zurück zur Liste'
-    plugin_error: 'Plugin-Fehler'
+    plugin_error: Plugin-Fehler
     update_available: 'Update verfügbar'
     update_available_message: 'Eine neue Version dieses Plugins ist im Dateisystem verfügbar. Deaktivieren und reaktivieren Sie das Plugin, um das Update anzuwenden.'
     no_plugins_found: 'Keine Plugins im /plugins/-Verzeichnis gefunden'
-    dependencies: 'Abhängigkeiten'
+    dependencies: Abhängigkeiten
     circular_dependency_detected: 'Zirkuläre Abhängigkeit erkannt'
     required_plugin: 'Erforderliches Plugin'
-    version_constraint: 'Versionsbeschränkung'
+    version_constraint: Versionsbeschränkung
     installed_version: 'Installierte Version'
     not_installed: 'Nicht installiert'
-    missing: 'Fehlt'
+    missing: Fehlt
     not_enabled: 'Nicht aktiviert'
     incompatible_version: 'Inkompatible Version'
-    satisfied: 'Erfüllt'
+    satisfied: Erfüllt
     dependent_plugins: 'Abhängige Plugins'
     dependents_warning: 'Die folgenden Plugins hängen von diesem Plugin ab. Das Deaktivieren kann ihre Funktionalität beeinträchtigen.'
-    plugin_name: 'Plugin-Name'
+    plugin_name: Plugin-Name
     current_state: 'Aktueller Status'
     dependency_error: 'Plugin kann aufgrund von Abhängigkeitsproblemen nicht aktiviert werden'
     dependents_exist_error: 'Plugin kann nicht deaktiviert werden, da andere Plugins davon abhängen'
@@ -1778,13 +1758,13 @@ pteroca:
       page_description: 'Laden Sie ein neues Plugin-Paket hoch, um Ihre PteroCA-Installation zu erweitern'
       back_to_list: 'Zurück zur Plugin-Liste'
       upload_plugin_package: 'Plugin-Paket hochladen'
-      file_label: 'Plugin-ZIP-Datei'
+      file_label: Plugin-ZIP-Datei
       file_help_text: 'Wählen Sie eine ZIP-Datei mit dem Plugin (max. 50 MB)'
       enable_after_upload: 'Plugin automatisch nach dem Hochladen aktivieren'
       enable_help_text: 'Wenn aktiviert, wird das Plugin sofort nach erfolgreichem Hochladen und Validierung aktiviert'
       submit: 'Plugin hochladen'
-      cancel: 'Abbrechen'
-      requirements_title: 'Anforderungen'
+      cancel: Abbrechen
+      requirements_title: Anforderungen
       requirement_zip: 'Datei muss ein gültiges ZIP-Archiv sein'
       requirement_size: 'Maximale Dateigröße: 50 MB'
       requirement_manifest: 'Muss plugin.json im Stammverzeichnis enthalten'
@@ -1797,66 +1777,66 @@ pteroca:
       security_warnings_detected: 'Warnung: Sicherheitsprobleme erkannt. Überprüfen Sie vor der Aktivierung.'
       invalid_mime_type: 'Bitte laden Sie eine gültige ZIP-Datei hoch'
     security:
-      title: 'Plugin-Sicherheit'
-      scan: 'Sicherheits-Scan'
-      issues: 'Sicherheitsprobleme'
-      critical: 'Kritisch'
-      high: 'Hoch'
-      medium: 'Mittel'
-      low: 'Niedrig'
+      title: Plugin-Sicherheit
+      scan: Sicherheits-Scan
+      issues: Sicherheitsprobleme
+      critical: Kritisch
+      high: Hoch
+      medium: Mittel
+      low: Niedrig
       no_issues: 'Keine Sicherheitsprobleme gefunden'
       all_clear: 'Alle Sicherheitsprüfungen bestanden'
       affected_plugins: 'Betroffene Plugins'
-      severity: 'Schweregrad'
-      type: 'Typ'
-      file: 'Datei'
-      line: 'Zeile'
-      message: 'Nachricht'
-      suggestion: 'Vorschlag'
-      code_snippet: 'Code'
+      severity: Schweregrad
+      type: Typ
+      file: Datei
+      line: Zeile
+      message: Nachricht
+      suggestion: Vorschlag
+      code_snippet: Code
       dangerous_function: 'Gefährliche Funktion'
-      path_traversal: 'Pfad-Traversal'
-      sql_injection: 'SQL-Injection'
-      xss: 'XSS-Schwachstelle'
-      file_permissions: 'Dateiberechtigungen'
-      security_status: 'Sicherheitsstatus'
+      path_traversal: Pfad-Traversal
+      sql_injection: SQL-Injection
+      xss: XSS-Schwachstelle
+      file_permissions: Dateiberechtigungen
+      security_status: Sicherheitsstatus
       total_issues_found: 'Insgesamt gefundene Probleme'
       check:
         dangerous_functions: 'Gefährliche Funktionen'
-        path_traversal: 'Pfad-Traversal'
-        sql_injection: 'SQL-Injection'
-        xss_patterns: 'XSS-Muster'
-        file_permissions: 'Dateiberechtigungen'
-        composer_dependencies: 'Composer-Abhängigkeiten'
+        path_traversal: Pfad-Traversal
+        sql_injection: SQL-Injection
+        xss_patterns: XSS-Muster
+        file_permissions: Dateiberechtigungen
+        composer_dependencies: Composer-Abhängigkeiten
       issue_type:
         composer_scripts_forbidden: 'Verbotener Scripts-Bereich'
         composer_allow_plugins_forbidden: 'Verbotene Allow-Plugins-Konfiguration'
         composer_lock_missing: 'Fehlende composer.lock'
         composer_validate_failed: 'Composer-Validierung fehlgeschlagen'
-        composer_manifest_mismatch: 'Manifest-Mismatch'
+        composer_manifest_mismatch: Manifest-Mismatch
         composer_php_version_incompatible: 'PHP-Version inkompatibel'
-        composer_audit_failed: 'Sicherheitslücken'
+        composer_audit_failed: Sicherheitslücken
         composer_forbidden_licenses: 'Verbotene Lizenzen'
     health:
-      title: 'Plugin-Gesundheit'
-      check: 'Gesundheitsprüfung'
-      healthy: 'Gesund'
-      unhealthy: 'Ungesund'
-      status: 'Status'
+      title: Plugin-Gesundheit
+      check: Gesundheitsprüfung
+      healthy: Gesund
+      unhealthy: Ungesund
+      status: Status
       last_check: 'Letzte Prüfung'
-      checks: 'Prüfungen'
-      passed: 'Bestanden'
-      failed: 'Fehlgeschlagen'
-      errors: 'Fehler'
-      files_integrity: 'Dateiintegrität'
-      dependencies: 'Abhängigkeiten'
-      configuration: 'Konfiguration'
-      service_registration: 'Service-Registrierung'
-      health_percentage: 'Gesundheit'
-      health_status: 'Gesundheitsstatus'
+      checks: Prüfungen
+      passed: Bestanden
+      failed: Fehlgeschlagen
+      errors: Fehler
+      files_integrity: Dateiintegrität
+      dependencies: Abhängigkeiten
+      configuration: Konfiguration
+      service_registration: Service-Registrierung
+      health_percentage: Gesundheit
+      health_status: Gesundheitsstatus
       all_checks_passed: 'Alle Gesundheitsprüfungen bestanden'
       checks_passed: 'Prüfungen bestanden'
-      error_details: 'Fehlerdetails'
+      error_details: Fehlerdetails
       not_available: 'Gesundheitsprüfung für dieses Plugin nicht verfügbar'
     audit:
       enabled: 'Plugin aktiviert'
@@ -1870,25 +1850,25 @@ pteroca:
       setting_changed: 'Einstellung geändert'
   widget:
     plugin_status:
-      title: 'Plugin-Status'
-      total: 'Gesamt'
-      enabled: 'Aktiviert'
-      disabled: 'Deaktiviert'
-      faulted: 'Fehlerhaft'
+      title: Plugin-Status
+      total: Gesamt
+      enabled: Aktiviert
+      disabled: Deaktiviert
+      faulted: Fehlerhaft
     plugin_security:
-      title: 'Plugin-Sicherheit'
-      total_issues: 'Gesamtprobleme'
-      critical_issues: 'Kritisch'
-      high_issues: 'Hoch'
+      title: Plugin-Sicherheit
+      total_issues: Gesamtprobleme
+      critical_issues: Kritisch
+      high_issues: Hoch
       affected_plugins: 'Betroffene Plugins'
       no_issues: 'Keine Sicherheitsprobleme erkannt'
     plugin_health:
-      title: 'Plugin-Gesundheit'
-      healthy: 'Gesund'
-      unhealthy: 'Ungesund'
+      title: Plugin-Gesundheit
+      healthy: Gesund
+      unhealthy: Ungesund
       unhealthy_plugins: 'Ungesunde Plugins'
       last_checked: 'Zuletzt überprüft'
-      failed_checks: 'fehlgeschlagen'
+      failed_checks: fehlgeschlagen
       no_plugins: 'Keine aktivierten Plugins'
   command:
     plugin_security_scan:
@@ -1901,45 +1881,43 @@ pteroca:
       checking: 'Plugin überprüfen: %name%'
       healthy: 'Plugin ist gesund'
       unhealthy: 'Plugin hat Gesundheitsprobleme'
-
   permission:
     section:
-      dashboard: 'Dashboard'
-      user_management: 'Benutzerverwaltung'
+      dashboard: Dashboard
+      user_management: Benutzerverwaltung
       'user_management (admin)': 'Benutzerverwaltung (Admin)'
-      server_management: 'Serververwaltung'
+      server_management: Serververwaltung
       'server_management (admin)': 'Serververwaltung (Admin)'
-      shop: 'Shop'
+      shop: Shop
       'shop (admin)': 'Shop (Admin)'
-      payment: 'Zahlungen'
-      voucher: 'Gutscheine'
+      payment: Zahlungen
+      voucher: Gutscheine
       'voucher (admin)': 'Gutscheine (Admin)'
-      logs: 'Logs'
+      logs: Logs
       'logs (admin)': 'Logs (Admin)'
-      settings: 'Einstellungen'
+      settings: Einstellungen
       'settings (admin)': 'Einstellungen (Admin)'
-      plugins: 'Plugins'
+      plugins: Plugins
       'plugins (admin)': 'Plugins (Admin)'
       role_management: 'Rollen & Berechtigungen'
       'role_management (admin)': 'Rollen & Berechtigungen (Admin)'
-      themes: 'Themes'
+      themes: Themes
       'themes (admin)': 'Themes (Admin)'
-      user_features: 'Benutzerfunktionen'
-      pterodactyl_integration: 'Pterodactyl-Integration'
+      user_features: Benutzerfunktionen
+      pterodactyl_integration: Pterodactyl-Integration
       'pterodactyl_integration (admin)': 'Pterodactyl-Integration (Admin)'
-
   theme:
     upload:
       upload_theme: 'Theme hochladen'
       title: 'Theme-Paket hochladen'
       description: 'Laden Sie ein neues Theme-Paket als ZIP-Datei hoch'
       back_to_list: 'Zurück zu Themes'
-      file_label: 'Theme-ZIP-Datei'
+      file_label: Theme-ZIP-Datei
       file_help: 'Wählen Sie eine ZIP-Datei mit Ihrem Theme (max. 50 MB)'
       submit: 'Theme hochladen'
       success: 'Theme "%s" Version %s erfolgreich hochgeladen!'
-      requirements: 'Upload-Anforderungen'
-      occurrences: 'Vorkommen'
+      requirements: Upload-Anforderungen
+      occurrences: Vorkommen
       req_zip_format: 'Datei muss ein gültiges ZIP-Archiv sein'
       req_max_size: 'Maximale Dateigröße: 50 MB (entpackt: 100 MB)'
       req_structure: 'ZIP muss themes/{name}/ enthalten und optional public/assets/theme/{name}/'

@@ -1,15 +1,15 @@
 pteroca:
   enum:
     plugin_state:
-      discovered: 'Ditemukan'
-      registered: 'Terdaftar'
-      enabled: 'Diaktifkan'
-      disabled: 'Dinonaktifkan'
+      discovered: Ditemukan
+      registered: Terdaftar
+      enabled: Diaktifkan
+      disabled: Dinonaktifkan
       update_pending: 'Pembaruan Tertunda'
-      faulted: 'Rusak'
+      faulted: Rusak
   role:
-    admin: 'Administrator'
-    user: 'Pengguna'
+    admin: Administrator
+    user: Pengguna
   system:
     back: 'Kembali ke panel'
     email_not_verified: 'Alamat email Anda belum diverifikasi. Silakan periksa kotak masuk Anda'
@@ -17,35 +17,32 @@ pteroca:
     pterodactyl_error: 'Kesalahan saat menghubungkan ke API Pterodactyl.'
     dont_have_permission: 'Anda tidak memiliki izin untuk melakukan tindakan ini.'
     experimental_feature: 'Fitur ini eksperimental dan mungkin tidak berfungsi dengan benar.'
-
   page:
     terms_of_service: 'Syarat Layanan'
     terms_of_service_description: 'Harap baca syarat dan ketentuan kami dengan hati-hati'
-    back: 'Kembali'
-
+    back: Kembali
   login:
-    title: 'Masuk'
+    title: Masuk
     email_address: 'Alamat email'
-    email_placeholder: 'email@anda.com'
+    email_placeholder: email@anda.com
     password: 'Kata sandi'
     password_placeholder: 'Masukkan kata sandi'
     forgot_password: 'Lupa kata sandi?'
     remember_me: 'Ingat saya'
-    sign_in: 'Masuk'
+    sign_in: Masuk
     invalid_captcha: 'Verifikasi CAPTCHA tidak valid.'
     user_blocked: 'Akun Anda telah diblokir.'
     account_deleted: 'Akun Anda telah dihapus.'
     invalid_credentials: 'Email atau kata sandi tidak valid.'
-    dont_have_account_yet: "Belum memiliki akun? Daftar sekarang!"
+    dont_have_account_yet: 'Belum memiliki akun? Daftar sekarang!'
     subtitle: 'Masuk ke akun Anda'
     welcome_back: 'Selamat Datang Kembali'
     brand_description: 'Kelola server game Anda dengan mudah. Platform hosting yang kuat, aman, dan andal.'
     feature_secure: 'Aman & Terlindungi'
     feature_fast: 'Sangat Cepat'
     feature_reliable: 'Selalu Andal'
-
   register:
-    title: 'Daftar'
+    title: Daftar
     subtitle: 'Buat akun baru Anda'
     welcome_title: 'Bergabunglah Dengan Kami Hari Ini'
     welcome_description: 'Mulai perjalanan Anda dengan platform hosting kami yang kuat. Mulai dalam hitungan menit dan terapkan server pertama Anda.'
@@ -59,7 +56,7 @@ pteroca:
     email_address: 'Alamat email'
     password: 'Kata sandi'
     accept_terms: 'Saya menerima <a href="{{ link }}" target="_blank">syarat layanan</a>'
-    submit: 'Daftar'
+    submit: Daftar
     verification_token_invalid: 'Token verifikasi tidak valid atau telah kedaluwarsa.'
     verification_success: 'Akun Anda telah berhasil diverifikasi.'
     should_accept_terms: 'Anda harus menerima syarat layanan untuk melanjutkan.'
@@ -73,20 +70,19 @@ pteroca:
     invalid_email: 'Alamat email tidak valid.'
     email_already_exists: 'Akun dengan alamat email tersebut sudah ada.'
     already_have_account: 'Sudah memiliki akun? Masuk sekarang!'
-    email_placeholder: 'email@anda.com'
+    email_placeholder: email@anda.com
     password_placeholder: 'Masukkan kata sandi'
-
   landing:
     nav:
-      home: 'Beranda'
-      features: 'Fitur'
-      pricing: 'Harga'
+      home: Beranda
+      features: Fitur
+      pricing: Harga
       about: 'Tentang Kami'
-      contact: 'Kontak'
-      login: 'Masuk'
-      register: 'Daftar'
-      get_started: 'Mulai'
-      dashboard: 'Dasbor'
+      contact: Kontak
+      login: Masuk
+      register: Daftar
+      get_started: Mulai
+      dashboard: Dasbor
     hero:
       title: 'Kelola server game Anda dengan mudah'
       subtitle: 'Platform hosting server game yang kuat, aman, dan andal. Deploy server pertama Anda dalam hitungan menit.'
@@ -97,17 +93,17 @@ pteroca:
       title_pre: 'Hosting Server Game'
       title_highlight: 'Dibuat Mudah'
       browse_servers: 'Lihat Paket'
-      get_started: 'Mulai'
+      get_started: Mulai
     categories:
       title: 'Pilih Game Anda'
       subtitle: 'Kami mendukung berbagai server game. Temukan konfigurasi ideal untuk game Anda.'
-      featured: 'Unggulan'
+      featured: Unggulan
       default_description: 'Hosting premium untuk %name%'
       empty: 'Kategori tidak tersedia saat ini.'
     products:
       title: 'Solusi Siap Pakai'
       subtitle: 'Pilih dari server yang telah dikonfigurasi sebelumnya atau buat yang Anda inginkan.'
-      featured: 'Populer'
+      featured: Populer
       starting_from: 'Mulai dari'
       per_month: 'per bulan'
       view_details: 'Lihat Detail'
@@ -130,20 +126,20 @@ pteroca:
     footer:
       description: 'Platform hosting server game terbaik dengan fitur kuat dan dukungan luar biasa.'
       quick_links: 'Tautan Cepat'
-      support: 'Dukungan'
+      support: Dukungan
       legal: 'Informasi Hukum'
       privacy_policy: 'Kebijakan Privasi'
       terms_of_service: 'Syarat Layanan'
       copyright: '© 2024 PteroCA. Semua hak dilindungi.'
       powered_by: 'Didukung oleh <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
     store:
-      title: 'Toko'
+      title: Toko
       subtitle: 'Jelajahi produk dan layanan kami'
       show_all_categories: 'Tampilkan semua kategori'
   recovery:
     title: 'Pemulihan Kata Sandi'
     request_title: 'Lupa Kata Sandi Anda?'
-    request_description: "Tidak masalah! Masukkan alamat email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda."
+    request_description: 'Tidak masalah! Masukkan alamat email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda.'
     request_subtitle: 'Masukkan alamat email Anda untuk menerima tautan pengaturan ulang kata sandi'
     feature_email_link: 'Tautan Email Pengaturan Ulang'
     feature_quick_process: 'Cepat & Mudah'
@@ -168,7 +164,6 @@ pteroca:
     success_password_changed: 'Kata sandi Anda telah berhasil diubah.'
     plugin_validation_failed: 'Reset kata sandi diblokir oleh plugin keamanan. Silakan hubungi dukungan.'
     back_to_login: 'Kembali ke masuk'
-
   dashboard:
     account_balance: 'Saldo akun'
     account_balance_description: 'Saldo akun Anda saat ini.'
@@ -180,11 +175,11 @@ pteroca:
     order_first_server: 'Pesan server pertama'
     last_activity: 'Aktivitas terakhir'
     custom_section: 'Informasi tambahan'
-    action: 'Tindakan'
-    date: 'Tanggal'
+    action: Tindakan
+    date: Tanggal
     ip_address: 'Alamat IP'
     view_all_servers: 'Lihat semua server'
-    title: 'Dasbor'
+    title: Dasbor
     welcome_message: 'Pusat komando server Anda'
     quick_actions: 'Tindakan cepat'
     quick_action_order_server: 'Pesan server'
@@ -199,12 +194,12 @@ pteroca:
     transaction_history: 'Riwayat transaksi'
     additional_information: 'Informasi tambahan'
     no_transaction: 'Tidak ada transaksi'
-    transaction_paid: 'Dibayar'
+    transaction_paid: Dibayar
     transaction_unpaid: 'Belum dibayar'
-    id: 'ID'
-    date: 'Tanggal'
-    amount: 'Jumlah'
-    status: 'Status'
+    id: ID
+    date: Tanggal
+    amount: Jumlah
+    status: Status
     invalid_session_id: 'ID sesi tidak valid.'
     payment_success: 'Pembayaran berhasil diselesaikan.'
     payment_canceled: 'Pembayaran dibatalkan.'
@@ -223,7 +218,6 @@ pteroca:
     view_transaction_history: 'Lihat riwayat transaksi'
     view_all_payments_description: 'Lihat semua pembayaran yang telah dilakukan pada akun Anda.'
     amount_must_be_positive: 'Jumlah harus positif.'
-
   payment:
     no_gateways_available: 'Tidak ada gateway pembayaran yang tersedia saat ini. Silakan konfigurasikan gateway pembayaran atau hubungi administrator.'
     gateway_not_found: 'Gateway pembayaran yang dipilih tidak ditemukan.'
@@ -232,31 +226,30 @@ pteroca:
     gateway:
       stripe:
         description: 'Pembayaran cepat dan aman dengan kartu kredit atau debit'
-
   product:
-    information: 'Informasi'
-    ram: 'RAM'
-    cpu: 'CPU'
+    information: Informasi
+    ram: RAM
+    cpu: CPU
     disk: 'Ruang disk'
-    backups: 'Cadangan'
-    swap: 'SWAP'
+    backups: Cadangan
+    swap: SWAP
     databases: 'Basis data'
-    order: 'Pesan'
-    period: 'Periode'
-    days: 'hari'
+    order: Pesan
+    period: Periode
+    days: hari
     egg: 'Perangkat lunak'
     egg_hint: 'Anda dapat mengubah perangkat lunak kapan saja setelah pembelian.'
     location: 'Lokasi Server'
-    price: 'Harga'
+    price: Harga
     order_now: 'Pesan sekarang'
     not_available: 'Produk saat ini tidak tersedia.'
     not_enough_balance: 'Anda tidak memiliki cukup dana di akun Anda.'
     product_information: 'Informasi produk'
     name: 'Nama produk'
     description: 'Deskripsi produk'
-    hours: 'jam'
-    minutes: 'menit'
-    minute_short: 'mnt.'
+    hours: jam
+    minutes: menit
+    minute_short: mnt.
     on_demand: 'Sesuai permintaan'
     price_calculation: 'Perhitungan harga'
     per_minute: 'Per menit'
@@ -264,21 +257,20 @@ pteroca:
     per_day: 'Per hari'
     per_week: 'Per minggu'
     per_month: 'Per bulan'
-    summary: 'Ringkasan'
+    summary: Ringkasan
     billing_period: 'Periode penagihan'
     total_price: 'Total harga'
-    ports: 'Port'
-    discount: 'Diskon'
+    ports: Port
+    discount: Diskon
     discount_hint: 'Diskon hanya akan diterapkan pada siklus penagihan pertama.'
     product_order_details: 'Detail produk dan opsi pemesanan'
-    total: 'Total'
-    slot: 'slot'
-    slots: 'Slot'
-    processing: 'Memproses...'
-
+    total: Total
+    slot: slot
+    slots: Slot
+    processing: Memproses...
   store:
-    title: 'Toko'
-    order: 'Pesan'
+    title: Toko
+    order: Pesan
     show_offer: 'Tampilkan penawaran'
     category_not_found: 'Kategori tidak ditemukan.'
     product_not_found: 'Produk tidak ditemukan.'
@@ -293,7 +285,7 @@ pteroca:
     invalid_form_data: 'Data formulir tidak valid. Silakan periksa semua bidang dan coba lagi.'
     description: 'Pilih kategori atau produk yang Anda minati'
     products_with_no_category: 'Produk tanpa kategori'
-    categories: 'Kategori'
+    categories: Kategori
     category_description: 'Produk tersedia di kategori ini'
     available_products: 'Produk tersedia'
     no_products_title: 'Tidak ada produk'
@@ -317,9 +309,9 @@ pteroca:
     invalid_node_selection: 'Pemilihan node tidak valid'
   cart_configuration:
     title: 'Konfigurasi server Anda'
-    configuration: 'Konfigurasi'
+    configuration: Konfigurasi
     server_name: 'Nama server'
-    period: 'Periode'
+    period: Periode
     order_summary: 'Ringkasan pesanan'
     auto_renewal: 'Perpanjangan otomatis'
     enable: 'Aktifkan perpanjangan otomatis'
@@ -329,7 +321,7 @@ pteroca:
     description: 'Konfigurasi server Anda dan lanjutkan ke pembayaran'
   cart_topup:
     title: 'Isi ulang akun Anda'
-    order: 'Pesan'
+    order: Pesan
     order_description: 'Isi ulang dana'
     payment_method: 'Metode pembayaran'
     select_payment_method: 'Silakan pilih metode pembayaran'
@@ -340,7 +332,6 @@ pteroca:
   cart:
     use_voucher: 'Gunakan voucher'
     voucher_code: 'Kode voucher'
-
   renew:
     title: 'Perpanjang server'
     renew: 'Perpanjang server'
@@ -353,66 +344,64 @@ pteroca:
     server_name: 'Nama server'
     server_description: 'Deskripsi server'
     server_current_software: 'Perangkat lunak saat ini'
-
   servers:
     title: 'Server saya'
-    active: 'Aktif'
-    suspended: 'Ditangguhkan'
+    active: Aktif
+    suspended: Ditangguhkan
     ip_address: 'Alamat IP'
     ram_memory: 'Memori RAM'
-    disk: 'Disk'
-    cpu: 'CPU'
+    disk: Disk
+    cpu: CPU
     databases: 'Basis data'
-    backups: 'Cadangan'
+    backups: Cadangan
     valid_until: 'Berlaku hingga'
     manage_server: 'Kelola server'
-    extend: 'Perpanjang'
+    extend: Perpanjang
     no_servers: 'Anda belum memiliki server.'
     click_to_buy: 'Klik di sini untuk membeli server.'
-    name: 'Nama'
-    status: 'Status'
-    actions: 'Tindakan'
+    name: Nama
+    status: Status
+    actions: Tindakan
     description: 'Kelola server Anda, lihat detailnya dan lakukan berbagai tindakan seperti memperpanjang, mengelola dan konfigurasi.'
     state:
-      running: 'Online'
-      stopped: 'Berhenti'
-      starting: 'Memulai'
-      stopping: 'Menghentikan'
-      offline: 'Offline'
-
+      running: Online
+      stopped: Berhenti
+      starting: Memulai
+      stopping: Menghentikan
+      offline: Offline
   server:
     title: 'Manajemen server'
-    console: 'Konsol'
-    startup: 'Startup'
+    console: Konsol
+    startup: Startup
     databases: 'Basis data'
-    backups: 'Cadangan'
-    network: 'Jaringan'
-    users: 'Pengguna'
-    schedules: 'Jadwal'
-    settings: 'Konfigurasi'
-    activity: 'Aktivitas'
-    start: 'Mulai'
-    stop: 'Berhenti'
+    backups: Cadangan
+    network: Jaringan
+    users: Pengguna
+    schedules: Jadwal
+    settings: Konfigurasi
+    activity: Aktivitas
+    start: Mulai
+    stop: Berhenti
     restart: 'Mulai ulang'
-    kill: 'Matikan'
-    send: 'Kirim'
-    address: 'Alamat'
+    kill: Matikan
+    send: Kirim
+    address: Alamat
     copy_ip: 'Salin alamat IP'
     ip_copied: 'Alamat IP disalin ke clipboard!'
     uptime: 'Waktu aktif'
     cpu_load: 'Beban CPU'
-    memory: 'Memori'
-    disk: 'Disk'
+    memory: Memori
+    disk: Disk
     network_inbound: 'Jaringan masuk'
     network_outbound: 'Jaringan keluar'
     software: 'Perangkat lunak'
-    command: 'Perintah'
+    command: Perintah
     startup_command: 'Perintah startup'
     docker_image: 'Gambar Docker'
     read_only: 'Hanya baca'
     admin_view: 'Tampilan admin'
     default_options: 'Opsi default'
-    variables: 'Variabel'
+    variables: Variabel
     sftp_details: 'Detail SFTP'
     sftp_server_address: 'Alamat server'
     sftp_username: 'Nama pengguna'
@@ -430,12 +419,12 @@ pteroca:
     extend_server_hint: 'Anda dapat memperpanjang server dengan mengklik tombol di bawah.'
     extend_server_hint_2: 'Server akan diperpanjang untuk periode yang dipilih.'
     no_activity_logs: 'Belum ada log aktivitas untuk server ini.'
-    admin: 'Admin'
-    action: 'Tindakan'
-    details: 'Detail'
-    user: 'Pengguna'
-    source: 'Sumber'
-    date: 'Tanggal'
+    admin: Admin
+    action: Tindakan
+    details: Detail
+    user: Pengguna
+    source: Sumber
+    date: Tanggal
     show_details: 'Tampilkan detail'
     hide_details: 'Sembunyikan detail'
     data_updated_successfully: 'Data telah berhasil diperbarui.'
@@ -456,7 +445,7 @@ pteroca:
     server_suspended_message: 'Server Anda saat ini ditangguhkan dan tidak dapat diakses.'
     server_suspended_description: 'Server ini telah ditangguhkan karena tindakan administratif atau pelanggaran kebijakan. Silakan hubungi dukungan untuk bantuan.'
     suspended_expired_description: 'Server ini telah ditangguhkan karena kedaluwarsa pada %expireDate% dan belum diperpanjang. Untuk memulihkan server, silakan perpanjang.'
-    rules: 'Aturan'
+    rules: Aturan
     data_validation_error: 'Kesalahan selama validasi. Silakan periksa apakah semua aturan terpenuhi.'
     enable_auto_renewal: 'Aktifkan perpanjangan otomatis untuk server ini'
     auto_renewal_tooltip: 'Jika diaktifkan, server akan diperpanjang secara otomatis untuk periode yang dipilih. Pembayaran akan dilakukan dari saldo akun Anda.'
@@ -464,19 +453,19 @@ pteroca:
     create_backup: 'Buat cadangan'
     backup_name: 'Nama cadangan'
     backup_ignored_files: 'File & Direktori yang Diabaikan'
-    close: 'Tutup'
+    close: Tutup
     error_during_backup: 'Terjadi kesalahan saat membuat cadangan.'
     backup_time_limit: 'Hanya 2 cadangan yang dapat dibuat dalam rentang waktu 600 detik.'
-    name: 'Nama'
-    status: 'Status'
+    name: Nama
+    status: Status
     created_at: 'Dibuat pada'
-    successful: 'Berhasil'
+    successful: Berhasil
     in_progress: 'Sedang berlangsung'
-    checksum: 'Checksum'
-    size: 'Ukuran'
-    download: 'Unduh'
-    delete: 'Hapus'
-    restore: 'Pulihkan'
+    checksum: Checksum
+    size: Ukuran
+    download: Unduh
+    delete: Hapus
+    restore: Pulihkan
     delete_backup: 'Hapus cadangan'
     delete_backup_confirmation: 'Apakah Anda yakin ingin menghapus cadangan ini?'
     restore_backup: 'Pulihkan cadangan'
@@ -491,7 +480,7 @@ pteroca:
     error_during_creating_database: 'Terjadi kesalahan saat membuat basis data.'
     endpoint: 'Titik akhir'
     username: 'Nama pengguna'
-    show: 'Tampilkan'
+    show: Tampilkan
     delete_database: 'Hapus basis data'
     delete_database_confirmation: 'Apakah Anda yakin ingin menghapus basis data ini?'
     show_database: 'Tampilkan basis data'
@@ -500,8 +489,8 @@ pteroca:
     jdbc_connection_string: 'String koneksi JDBC'
     rotate_password: 'Putar kata sandi'
     ip_address: 'Alamat IP'
-    port: 'Port'
-    notes: 'Catatan'
+    port: Port
+    notes: Catatan
     create_allocation: 'Buat alokasi'
     delete_allocation: 'Hapus alokasi'
     delete_allocation_confirmation: 'Alokasi ini akan segera dihapus dari server Anda. Apakah Anda yakin ingin melanjutkan?'
@@ -510,10 +499,10 @@ pteroca:
     cannot_modify_yourself: 'Anda tidak dapat memodifikasi diri sendiri.'
     extend_server_expires_on_demand: 'Server <strong>{{ productName }}</strong> Anda saat ini disetel untuk kedaluwarsa pada <strong>sesuai permintaan</strong>.'
     on_demand_billing_cycle: 'Siklus penagihan ({{ productPrice }} {{ internalCurrency }} / menit) akan dijeda saat server offline, dan sumber daya akan gratis.'
-    type: 'Jenis'
-    primary: 'Utama'
-    secondary: 'Sekunder'
-    edit: 'Edit'
+    type: Jenis
+    primary: Utama
+    secondary: Sekunder
+    edit: Edit
     edit_allocation: 'Edit alokasi'
     error_during_editing_allocation: 'Terjadi kesalahan saat mengedit alokasi.'
     make_primary: 'Jadikan alokasi utama'
@@ -528,7 +517,7 @@ pteroca:
     no_schedules: 'Belum ada jadwal untuk server ini.'
     schedule_name: 'Nama jadwal'
     schedule_cron: 'Ekspresi Cron'
-    schedule_status: 'Status'
+    schedule_status: Status
     schedule_last_run: 'Jalankan terakhir'
     schedule_next_run: 'Jalankan berikutnya'
     add_schedule: 'Tambah jadwal'
@@ -537,10 +526,10 @@ pteroca:
     schedule_name_description: 'Pengidentifikasi yang dapat dibaca manusia untuk jadwal ini.'
     schedule_cron_expression: 'Ekspresi Cron'
     cron_expression_description: 'Sistem jadwal mendukung penggunaan sintaks Cronjob saat menentukan kapan tugas harus dijalankan. Gunakan bidang di atas untuk menentukan kapan tugas ini harus dijalankan.'
-    minute: 'Menit'
-    hour: 'Jam'
+    minute: Menit
+    hour: Jam
     day_of_month: 'Hari dalam bulan'
-    month: 'Bulan'
+    month: Bulan
     day_of_week: 'Hari dalam minggu'
     schedule_options: 'Opsi jadwal'
     show_cheatsheet: 'Tampilkan lembar contekan'
@@ -550,7 +539,7 @@ pteroca:
     schedule_enabled: 'Jadwal diaktifkan'
     schedule_enabled_description: 'Jadwal ini akan dijalankan secara otomatis jika diaktifkan.'
     cron_cheatsheet: 'Lembar Contekan Cron'
-    examples: 'Contoh'
+    examples: Contoh
     every_5_minutes: 'setiap 5 menit'
     every_2_hours: 'setiap 2 jam'
     every_sunday: 'setiap Minggu'
@@ -558,7 +547,7 @@ pteroca:
     any_value: 'nilai apa saja'
     every_n_units: 'setiap n unit'
     range_n_to_m: 'rentang n sampai m'
-    active: 'Aktif'
+    active: Aktif
     inactive: 'Tidak aktif'
     never: 'Tidak pernah'
     schedule_created_successfully: 'Jadwal berhasil dibuat'
@@ -579,7 +568,7 @@ pteroca:
     edit_task: 'Edit tugas'
     time_offset_seconds: 'Offset waktu (detik)'
     time_offset_description: 'Jumlah waktu untuk menunggu setelah tugas sebelumnya dalam urutan telah selesai sebelum menjalankan yang ini. Jika ini adalah tugas pertama pada jadwal ini tidak akan diterapkan.'
-    payload: 'Payload'
+    payload: Payload
     payload_command_description: 'Perintah untuk dieksekusi pada server'
     payload_power_description: 'Tindakan daya untuk dieksekusi (mulai, berhenti, mulai ulang, matikan)'
     payload_backup_description: 'Nama cadangan untuk dibuat'
@@ -597,7 +586,7 @@ pteroca:
     error_no_schedule_selected: 'Tidak ada jadwal yang dipilih'
     at_least_one_permission_required: 'Setidaknya satu izin diperlukan'
     email_required: 'Email diperlukan'
-    error: 'Kesalahan'
+    error: Kesalahan
     error_occurred: 'Terjadi kesalahan'
     user_created_successfully: 'Pengguna berhasil ditambahkan'
     user_removed_successfully: 'Pengguna berhasil dihapus'
@@ -606,33 +595,33 @@ pteroca:
     user_does_not_exist: 'Pengguna dengan email ini tidak ada di sistem. Pengguna harus mendaftar terlebih dahulu.'
     user_already_added: 'Pengguna dengan email ini sudah ditambahkan ke server ini.'
     user_must_register_first: 'Pengguna harus mendaftar di sistem terlebih dahulu sebelum ditambahkan ke server.'
-    user_email: 'Email'
-    user_permissions: 'Izin'
+    user_email: Email
+    user_permissions: Izin
     user_created: 'Dibuat pada'
-    actions: 'Tindakan'
+    actions: Tindakan
     users_management: 'Manajemen pengguna'
     add_user: 'Tambah pengguna'
-    remove: 'Hapus'
+    remove: Hapus
     modify_permissions_for: 'Modifikasi izin untuk'
-    cancel: 'Batal'
-    save: 'Simpan'
+    cancel: Batal
+    save: Simpan
     create_new_subuser: 'Buat subpengguna baru'
     enter_email_description: 'Masukkan alamat email pengguna yang ingin Anda undang sebagai subpengguna untuk server ini.'
     invite_user: 'Undang pengguna'
     permissions:
-      control: 'Kontrol'
+      control: Kontrol
       control_description: 'Izin yang mengontrol kemampuan pengguna untuk mengontrol status daya server, atau mengirim perintah.'
       control_console_desc: 'Memungkinkan pengguna mengirim perintah ke instance server melalui konsol.'
       control_start_desc: 'Memungkinkan pengguna memulai server jika berhenti.'
       control_stop_desc: 'Memungkinkan pengguna menghentikan server jika berjalan.'
       control_restart_desc: 'Memungkinkan pengguna melakukan mulai ulang server.'
-      user: 'Pengguna'
+      user: Pengguna
       user_description: 'Izin yang memungkinkan pengguna mengelola subpengguna lain di server. Mereka tidak akan pernah dapat mengedit akun mereka sendiri, atau menetapkan izin yang tidak mereka miliki sendiri.'
       user_create_desc: 'Memungkinkan pengguna membuat subpengguna baru untuk server.'
       user_read_desc: 'Memungkinkan pengguna melihat subpengguna dan izin mereka untuk server.'
       user_update_desc: 'Memungkinkan pengguna memodifikasi subpengguna lain.'
       user_delete_desc: 'Memungkinkan pengguna menghapus subpengguna dari server.'
-      file: 'File'
+      file: File
       file_description: 'Izin yang mengontrol kemampuan pengguna untuk memodifikasi filesystem untuk server ini.'
       file_create_desc: 'Memungkinkan pengguna membuat file dan folder tambahan melalui Panel atau unggahan langsung.'
       file_read_desc: 'Memungkinkan pengguna melihat isi direktori, tetapi tidak melihat isi atau mengunduh file.'
@@ -641,20 +630,20 @@ pteroca:
       file_delete_desc: 'Memungkinkan pengguna menghapus file atau direktori.'
       file_archive_desc: 'Memungkinkan pengguna mengarsipkan isi direktori serta mendekompresi arsip yang ada di sistem.'
       file_sftp_desc: 'Memungkinkan pengguna terhubung ke SFTP dan mengelola file server menggunakan izin file yang diberikan lainnya.'
-      backup: 'Cadangan'
+      backup: Cadangan
       backup_description: 'Izin yang mengontrol kemampuan pengguna untuk menghasilkan dan mengelola cadangan server.'
       backup_create_desc: 'Memungkinkan pengguna membuat cadangan baru untuk server ini.'
       backup_read_desc: 'Memungkinkan pengguna melihat semua cadangan yang ada untuk server ini.'
       backup_delete_desc: 'Memungkinkan pengguna menghapus cadangan dari sistem.'
       backup_download_desc: 'Memungkinkan pengguna mengunduh cadangan untuk server. Bahaya: ini memungkinkan pengguna mengakses semua file untuk server di cadangan.'
       backup_restore_desc: 'Memungkinkan pengguna memulihkan cadangan untuk server. Bahaya: ini memungkinkan pengguna menghapus semua file server dalam prosesnya.'
-      allocation: 'Alokasi'
+      allocation: Alokasi
       allocation_description: 'Izin yang mengontrol kemampuan pengguna untuk memodifikasi alokasi port untuk server ini.'
       allocation_read_desc: 'Memungkinkan pengguna melihat semua alokasi yang saat ini ditetapkan ke server ini.'
       allocation_create_desc: 'Memungkinkan pengguna menetapkan alokasi tambahan ke server.'
       allocation_update_desc: 'Memungkinkan pengguna mengubah alokasi server utama dan melampirkan catatan ke setiap alokasi.'
       allocation_delete_desc: 'Memungkinkan pengguna menghapus alokasi dari server.'
-      startup: 'Startup'
+      startup: Startup
       startup_description: 'Izin yang mengontrol kemampuan pengguna untuk melihat parameter startup server ini.'
       startup_read_desc: 'Memungkinkan pengguna melihat variabel startup untuk server.'
       startup_update_desc: 'Memungkinkan pengguna memodifikasi variabel startup untuk server.'
@@ -666,17 +655,17 @@ pteroca:
       database_update_desc: 'Memungkinkan pengguna memutar kata sandi pada instance basis data.'
       database_delete_desc: 'Memungkinkan pengguna menghapus instance basis data dari server ini.'
       database_view_password_desc: 'Memungkinkan pengguna melihat kata sandi yang terkait dengan instance basis data untuk server ini.'
-      schedule: 'Jadwal'
+      schedule: Jadwal
       schedule_description: 'Izin yang mengontrol akses pengguna ke manajemen jadwal untuk server ini.'
       schedule_create_desc: 'Memungkinkan pengguna membuat jadwal baru untuk server ini.'
       schedule_read_desc: 'Memungkinkan pengguna melihat jadwal dan tugas yang terkait dengannya untuk server ini.'
       schedule_update_desc: 'Memungkinkan pengguna memperbarui jadwal dan tugas jadwal untuk server ini.'
       schedule_delete_desc: 'Memungkinkan pengguna menghapus jadwal untuk server ini.'
-      settings: 'Pengaturan'
+      settings: Pengaturan
       settings_description: 'Izin yang mengontrol akses pengguna ke pengaturan untuk server ini.'
       settings_rename_desc: 'Memungkinkan pengguna mengganti nama server ini dan mengubah deskripsinya.'
       settings_reinstall_desc: 'Memungkinkan pengguna memicu penginstalan ulang server ini.'
-      activity: 'Aktivitas'
+      activity: Aktivitas
       activity_description: 'Izin yang mengontrol akses pengguna ke log aktivitas server.'
       activity_read_desc: 'Memungkinkan pengguna melihat log aktivitas untuk server.'
     eula:
@@ -684,25 +673,24 @@ pteroca:
         description: 'Server Minecraft Anda memerlukan penerimaan Perjanjian Lisensi Pengguna Akhir (EULA) sebelum dapat dimulai.'
         content: |
           Dengan menerima EULA, Anda setuju untuk mematuhi syarat dan ketentuan yang ditetapkan oleh Mojang Studios.
-          
+
           Poin utama:
           • Anda tidak boleh mendistribusikan apa pun yang telah kami buat
           • Anda tidak boleh menggunakan komersial apa pun yang telah kami buat
           • Anda dapat membuat dan mendistribusikan mod, tetapi hanya jika tidak mengandung kode kami
-          
+
           Untuk syarat lengkap, silakan kunjungi: https://aka.ms/MinecraftEULA
         accept: 'Terima EULA & Mulai Server'
-        cancel: 'Batal'
-        processing: 'Memproses...'
+        cancel: Batal
+        processing: Memproses...
         required: 'Anda harus menerima EULA untuk memulai server.'
         read_full: 'Baca EULA lengkap'
       alert:
         success: 'EULA telah diterima dengan sukses. Server sedang dimulai ulang.'
         error: 'Gagal menerima EULA.'
-
   actions:
-    login: 'Masuk'
-    logout: 'Keluar'
+    login: Masuk
+    logout: Keluar
     create_payment: 'Buat pembayaran'
     bought_balance: 'Saldo dibeli'
     bought_server: 'Server dibeli'
@@ -722,7 +710,6 @@ pteroca:
     admin_create_server: 'Server dibuat (admin)'
     admin_create_free_server: 'Server gratis dibuat (admin)'
     user_api_key_regenerated: 'Kunci API diregenerasi'
-
   server_actions:
     change_details: 'Ubah detail server'
     reinstall: 'Instal ulang server'
@@ -744,13 +731,11 @@ pteroca:
     update_subuser: 'Perbarui subpengguna'
     delete_subuser: 'Hapus subpengguna'
     accept_eula: 'Terima EULA Minecraft'
-
   voucher:
     expired: 'Voucher telah kedaluwarsa.'
     discount_value_invalid: 'Nilai diskon tidak valid. Maksimum adalah 100 (%).'
     voucher_type_invalid: 'Voucher ini tidak dapat digunakan untuk jenis pembayaran ini.'
     invalid_voucher_type: 'Jenis voucher tidak valid.'
-
   email_types:
     email_verification: 'Verifikasi email'
     payment_success: 'Konfirmasi pembayaran'
@@ -759,20 +744,19 @@ pteroca:
     renew_product: 'Perpanjangan produk'
     reset_password: 'Pengaturan ulang kata sandi'
     server_suspended: 'Penangguhan server'
-
   crud:
     category:
       name: 'Nama kategori'
       description: 'Deskripsi kategori'
-      image: 'Gambar'
-      priority: 'Prioritas'
+      image: Gambar
+      priority: Prioritas
       priority_hint: 'Angka yang lebih rendah muncul terlebih dahulu (misalnya, 1 muncul sebelum 2). Gunakan ini untuk mengontrol urutan tampilan.'
-      featured: 'Unggulan'
+      featured: Unggulan
       featured_hint: 'Tampilkan kategori ini di bagian unggulan pada halaman utama.'
       add: 'Tambah kategori'
       save: 'Simpan kategori'
-      category: 'Kategori'
-      categories: 'Kategori'
+      category: Kategori
+      categories: Kategori
       created_successfully: 'Kategori berhasil dibuat.'
       updated_successfully: 'Kategori berhasil diperbarui.'
       deleted_successfully: 'Kategori berhasil dihapus.'
@@ -783,48 +767,48 @@ pteroca:
       details: 'Detail produk'
       name: 'Nama produk'
       description: 'Deskripsi produk'
-      price: 'Harga'
-      is_active: 'Aktif'
-      priority: 'Prioritas'
+      price: Harga
+      is_active: Aktif
+      priority: Prioritas
       priority_hint: 'Angka yang lebih rendah muncul terlebih dahulu (misalnya, 1 muncul sebelum 2). Gunakan ini untuk mengontrol urutan tampilan.'
-      featured: 'Unggulan'
+      featured: Unggulan
       featured_hint: 'Tampilkan produk ini di bagian unggulan pada halaman utama.'
-      category: 'Kategori'
-      image: 'Gambar'
+      category: Kategori
+      image: Gambar
       image_help: 'Gambar akan ditampilkan di toko.'
-      banner: 'Spanduk'
+      banner: Spanduk
       banner_help: 'Spanduk akan ditampilkan di halaman produk.'
       server_resources: 'Sumber daya server'
       disk_space: 'Ruang disk'
-      memory: 'RAM'
-      io: 'IO'
-      cpu: 'CPU'
+      memory: RAM
+      io: IO
+      cpu: CPU
       threads: 'Thread CPU'
       threads_hint: 'Thread CPU spesifik yang dapat dijalankan proses ini, atau biarkan kosong untuk mengizinkan semua thread. Dapat berupa angka tunggal atau daftar dipisahkan koma. Contoh: 0, 0-1,3 atau 0,1,3,4.'
       db_count: 'Basis data'
-      swap: 'SWAP'
-      backups: 'Cadangan'
-      ports: 'Port'
-      schedules: 'Jadwal'
+      swap: SWAP
+      backups: Cadangan
+      ports: Port
+      schedules: Jadwal
       schedules_hint: 'Jumlah maksimum jadwal yang dapat dibuat untuk server ini. 0 berarti tidak ada kemampuan untuk menggunakan jadwal.'
       product_connections: 'Koneksi produk'
-      nodes: 'Node'
-      nest: 'Nest'
-      eggs: 'Egg'
+      nodes: Node
+      nest: Nest
+      eggs: Egg
       created_at: 'Dibuat pada'
       updated_at: 'Diperbarui pada'
       add: 'Tambah produk'
       save: 'Simpan produk'
-      product: 'Produk'
-      products: 'Produk'
+      product: Produk
+      products: Produk
       egg_information: 'Informasi egg'
       egg_options_you_can_edit: 'Anda dapat mengedit opsi berikut di panel Pterodactyl Anda.'
-      egg_variables: 'Variabel'
-      egg_configuration: 'Konfigurasi'
+      egg_variables: Variabel
+      egg_configuration: Konfigurasi
       egg_default_configuration: 'Konfigurasi default'
-      egg_variable_name: 'Nama'
-      egg_variable_description: 'Deskripsi'
-      egg_variable_value: 'Nilai'
+      egg_variable_name: Nama
+      egg_variable_description: Deskripsi
+      egg_variable_value: Nilai
       egg_variable_user_viewable: 'Dapat dilihat pengguna'
       egg_variable_user_editable: 'Dapat diedit pengguna'
       egg_variable_slot_variable: 'Variabel slot'
@@ -846,7 +830,7 @@ pteroca:
       nodes_hint: 'Pilih satu atau lebih mesin fisik atau virtual (node) dari pengaturan Pterodactyl Anda.'
       nest_hint: 'Nest adalah kategori yang mengelompokkan Egg terkait. Pilih Nest untuk memuat Egg-nya.'
       eggs_hint: 'Egg menentukan konfigurasi server spesifik (game atau aplikasi). Pilih Egg yang ingin didukung produk ini.'
-      pricing: 'Harga'
+      pricing: Harga
       price_static_plan: 'Harga rencana statis'
       price_static_plan_hint: 'Harga produk untuk periode tetap yang dapat dipilih pengguna sebagai siklus penagihan.'
       price_dynamic_plan: 'Harga rencana dinamis - sesuai permintaan'
@@ -854,22 +838,22 @@ pteroca:
       price_slot_plan: 'Harga rencana slot'
       price_slot_plan_hint: 'Harga per slot. Setelah mengatur, tautkan variabel untuk pemain maks di Koneksi Produk untuk setiap egg.'
       price_dynamic_only_one_plan: 'Anda hanya dapat mengatur harga untuk satu rencana dinamis.'
-      period: 'Periode'
-      unit: 'Unit'
-      days: 'Hari'
-      hours: 'Jam'
-      minutes: 'Menit'
+      period: Periode
+      unit: Unit
+      days: Hari
+      hours: Jam
+      minutes: Menit
       server_product: 'Produk server'
       server_products: 'Produk server'
       original_product: 'Produk asli'
       build_name: 'Nama build'
-      server_build: 'Server'
-      server_builds: 'Server'
-      server: 'Server'
+      server_build: Server
+      server_builds: Server
+      server: Server
       build_details: 'Detail build'
-      is_selected: 'Dipilih'
-      yes: 'Ya'
-      no: 'Tidak'
+      is_selected: Dipilih
+      'yes': Ya
+      'no': Tidak
       server_details: 'Detail server'
       server_build_offline_alert: 'Server saat ini offline. Anda hanya dapat mengedit properti build server saat server online.'
       at_least_one_price_required: 'Setidaknya satu harga diperlukan.'
@@ -884,20 +868,20 @@ pteroca:
       egg_validation_error: 'Tidak dapat memvalidasi telur dengan Pterodactyl. Silakan periksa koneksi API Anda.'
       eggs_auto_removed_warning: '%count% telur telah secara otomatis dihapus dari produk ini karena tidak lagi ada di Pterodactyl. Perubahan akan disimpan saat Anda mengirimkan formulir.'
       health_status: 'Status Kesehatan'
-      health_status.healthy: 'OK'
-      health_status.some_eggs_invalid: 'Peringatan'
-      health_status.all_eggs_invalid: 'Kritis'
+      health_status.healthy: OK
+      health_status.some_eggs_invalid: Peringatan
+      health_status.all_eggs_invalid: Kritis
       health_status.no_eggs: 'Tidak Ada Telur'
       health_status.no_prices: 'Tidak Ada Harga'
       health_status.nest_unavailable: 'Kesalahan Sarang'
       health_status.unknown: 'Tidak Diketahui'
-      copy: 'Salin'
+      copy: Salin
       copy_success: 'Produk berhasil disalin'
       copy_modal:
         title: 'Salin Produk'
         description: 'Apakah Anda yakin ingin menyalin produk ini?'
         details: 'Produk baru akan dibuat dengan konfigurasi yang sama. Anda dapat mengeditnya nanti.'
-        cancel: 'Batal'
+        cancel: Batal
         confirm: 'Salin Produk'
       created_successfully: 'Produk berhasil dibuat.'
       updated_successfully: 'Produk berhasil diperbarui.'
@@ -915,28 +899,28 @@ pteroca:
       selected_node_id: 'ID Node Terpilih'
       original_product: 'Produk Asli'
     plugin:
-      plugins: 'Plugin'
+      plugins: Plugin
       manage_plugins: 'Kelola Plugin'
-      name: 'Nama'
+      name: Nama
       display_name: 'Nama Tampilan'
-      version: 'Versi'
-      author: 'Penulis'
-      description: 'Deskripsi'
-      state: 'Status'
-      capabilities: 'Kemampuan'
+      version: Versi
+      author: Penulis
+      description: Deskripsi
+      state: Status
+      capabilities: Kemampuan
       min_pteroca: 'Min PteroCA'
       max_pteroca: 'Max PteroCA'
       enabled_at: 'Diaktifkan Pada'
       disabled_at: 'Dinonaktifkan Pada'
       fault_reason: 'Alasan Kesalahan'
       created_at: 'Dibuat Pada'
-      actions: 'Tindakan'
-      settings: 'Pengaturan'
-      enable: 'Aktifkan'
-      disable: 'Nonaktifkan'
+      actions: Tindakan
+      settings: Pengaturan
+      enable: Aktifkan
+      disable: Nonaktifkan
       reset: 'Atur Ulang'
-      details: 'Detail'
-      plugin: 'Plugin'
+      details: Detail
+      plugin: Plugin
       plugin_management: 'Manajemen Plugin'
       plugin_management_description: 'Kelola dan konfigurasikan plugin untuk instalasi PteroCA Anda'
       plugin_details: 'Detail Plugin'
@@ -967,16 +951,16 @@ pteroca:
       update_available: 'Pembaruan Tersedia'
       update_available_message: 'Versi baru plugin ini tersedia di filesystem. Nonaktifkan dan aktifkan kembali plugin untuk menerapkan pembaruan.'
       no_plugins_found: 'Tidak ada plugin yang ditemukan di direktori /plugins/'
-      dependencies: 'Dependensi'
+      dependencies: Dependensi
       circular_dependency_detected: 'Dependensi Sirkular Terdeteksi'
       required_plugin: 'Plugin Diperlukan'
       version_constraint: 'Kendala Versi'
       installed_version: 'Versi Terinstal'
       not_installed: 'Tidak Terinstal'
-      missing: 'Hilang'
+      missing: Hilang
       not_enabled: 'Tidak Diaktifkan'
       incompatible_version: 'Versi Tidak Kompatibel'
-      satisfied: 'Terpenuhi'
+      satisfied: Terpenuhi
       dependent_plugins: 'Plugin Dependensi'
       dependents_warning: 'Plugin berikut bergantung pada plugin ini. Menonaktifkannya dapat mempengaruhi fungsionalitas mereka.'
       plugin_name: 'Nama Plugin'
@@ -991,7 +975,7 @@ pteroca:
       plugin_reset_successfully: 'Plugin "%s" telah berhasil diatur ulang. Sekarang Anda dapat mencoba mengaktifkannya lagi.'
       failed_to_reset_plugin: 'Gagal mengatur ulang plugin: %s'
       plugin_not_faulted: 'Plugin "%s" tidak dalam keadaan kesalahan. Tidak perlu mengatur ulang.'
-      delete: 'Hapus'
+      delete: Hapus
       delete_plugin: 'Hapus Plugin'
       delete_plugin_title: 'Hapus Plugin'
       delete_confirmation_message: 'Apakah Anda yakin ingin menghapus plugin ini secara permanen?'
@@ -1003,19 +987,19 @@ pteroca:
       plugin_deleted_successfully: 'Plugin "%s" berhasil dihapus.'
       failed_to_delete_plugin: 'Gagal menghapus plugin: %s'
       deletion_prevented: 'Penghapusan plugin dicegah oleh sistem.'
-      warning: 'Peringatan'
-      cancel: 'Batal'
-      close: 'Tutup'
+      warning: Peringatan
+      cancel: Batal
+      close: Tutup
     theme:
       theme_management_description: 'Kelola dan konfigurasikan tema untuk konteks yang berbeda'
       appearance_settings: 'Pengaturan Penampilan'
       name: 'Nama Tema'
-      version: 'Versi'
-      author: 'Penulis'
-      contexts: 'Konteks'
-      status: 'Status'
-      actions: 'Tindakan'
-      active: 'Aktif'
+      version: Versi
+      author: Penulis
+      contexts: Konteks
+      status: Status
+      actions: Tindakan
+      active: Aktif
       inactive: 'Tidak Aktif'
       no_themes_found: 'Tidak ada tema yang ditemukan untuk konteks ini'
       theme_details: 'Detail Tema'
@@ -1028,16 +1012,16 @@ pteroca:
       set_as_default: 'Atur sebagai Default'
       set_as_default_in_context: 'Atur sebagai Default di %s'
       set_as_default_in: 'Atur sebagai Default di %s'
-      context_panel: 'Panel'
+      context_panel: Panel
       context_landing: 'Halaman Arahan'
-      context_email: 'Email'
+      context_email: Email
       active_in: 'Aktif di'
       confirm_set_default: 'Atur Tema sebagai Default'
       confirm_set_default_message: 'Apakah Anda yakin ingin mengatur'
       for_context: 'sebagai tema default untuk'
       set_default_warning: 'Ini akan mengubah tampilan segera untuk semua pengguna'
-      cancel: 'Batal'
-      confirm: 'Konfirmasi'
+      cancel: Batal
+      confirm: Konfirmasi
       set_as_default_success: 'Tema "%s" telah diatur sebagai default untuk konteks %s'
       set_as_default_error: 'Gagal mengatur tema sebagai default: %s'
       theme_not_found: 'Tema "%s" tidak ditemukan'
@@ -1074,50 +1058,50 @@ pteroca:
         name_already_exists: 'Tema dengan nama ini sudah ada'
       no_themes_found_unified: 'Tidak ada tema yang ditemukan'
     menu:
-      menu: 'Menu'
-      dashboard: 'Dasbor'
-      servers: 'Server'
+      menu: Menu
+      dashboard: Dasbor
+      servers: Server
       my_servers: 'Server Saya'
-      shop: 'Toko'
-      wallet: 'Dompet'
-      administration: 'Administrasi'
-      categories: 'Kategori'
-      products: 'Produk'
-      settings: 'Pengaturan'
-      general: 'Umum'
-      pterodactyl: 'Pterodactyl'
-      appearance: 'Penampilan'
-      security: 'Keamanan'
+      shop: Toko
+      wallet: Dompet
+      administration: Administrasi
+      categories: Kategori
+      products: Produk
+      settings: Pengaturan
+      general: Umum
+      pterodactyl: Pterodactyl
+      appearance: Penampilan
+      security: Keamanan
       payment_gateways: 'Gateway Pembayaran'
-      email: 'Email'
-      users: 'Pengguna'
-      logout: 'Keluar'
-      login: 'Masuk'
-      phpmyadmin: 'PHPMyAdmin'
-      payments: 'Pembayaran'
-      logs: 'Log'
+      email: Email
+      users: Pengguna
+      logout: Keluar
+      login: Masuk
+      phpmyadmin: PHPMyAdmin
+      payments: Pembayaran
+      logs: Log
       email_logs: 'Log Email'
       server_logs: 'Log Server'
-      overview: 'Ikhtisar'
-      server_builds: 'Server'
-      vouchers: 'Voucher'
+      overview: Ikhtisar
+      server_builds: Server
+      vouchers: Voucher
       voucher_usages: 'Voucher yang Ditukarkan'
       my_account: 'Akun Saya'
       account_settings: 'Pengaturan Akun'
       roles_and_permissions: 'Peran & Izin'
-      roles: 'Peran'
-      permissions: 'Izin'
-      themes: 'Tema'
+      roles: Peran
+      permissions: Izin
+      themes: Tema
       manage_themes: 'Kelola Tema'
     server:
       pterodactyl_server_id: 'ID Server Pterodactyl'
       pterodactyl_server_identifier: 'Pengidentifikasi Pterodactyl'
       name: 'Nama Server'
-      product: 'Produk'
-      user: 'Pemilik'
+      product: Produk
+      user: Pemilik
       created_at: 'Dibuat pada'
       expires_at: 'Kedaluwarsa pada'
-      is_suspended: 'Ditangguhkan'
+      is_suspended: Ditangguhkan
       save: 'Simpan server'
       server: 'Detail server'
       servers: 'Detail server'
@@ -1152,17 +1136,17 @@ pteroca:
       delete_error: 'Terjadi kesalahan saat menghapus server: %error%'
     setting:
       name: 'Nama pengaturan'
-      value: 'Nilai'
+      value: Nilai
       add: 'Tambah pengaturan'
       save: 'Simpan pengaturan'
-      setting: 'Pengaturan'
-      settings: 'Pengaturan'
-      type: 'Jenis'
-      context: 'Konteks'
-      hierarchy: 'Hierarki'
-      yes: 'Ya'
-      no: 'Tidak'
-      hint: 'Deskripsi'
+      setting: Pengaturan
+      settings: Pengaturan
+      type: Jenis
+      context: Konteks
+      hierarchy: Hierarki
+      'yes': Ya
+      'no': Tidak
+      hint: Deskripsi
       set_as_empty: 'Setel sebagai kosong'
       set_as_empty_help: 'Centang ini untuk menyetel nilai sebagai kosong (null).'
       panel_theme:
@@ -1217,16 +1201,19 @@ pteroca:
         landing_theme: 'Tema untuk halaman landing (halaman utama untuk pengunjung). Ditampilkan kepada pengguna yang belum login di situs publik.'
         email_theme: 'Tema untuk template email. Mengontrol gaya pemberitahuan, pendaftaran, dan email pembelian.'
         landing_page_enabled: 'Aktifkan halaman landing publik. Jika dinonaktifkan, pengunjung diarahkan ke halaman login.'
+        date_format: 'Pilih bagaimana tanggal dan waktu ditampilkan di seluruh panel. Mempengaruhi semua tampilan tanggal untuk semua pengguna.'
+        date_timezone: 'Pilih zona waktu untuk menampilkan tanggal. Semua tanggal akan dikonversi dari UTC ke zona waktu yang dipilih.'
+        date_show_timezone: 'Ketika diaktifkan, singkatan zona waktu (misalnya, "UTC", "EST") akan ditampilkan di samping semua tanggal yang ditampilkan.'
       template:
         name: 'Nama template'
         description: 'Deskripsi template'
-        author: 'Penulis'
-        version: 'Versi'
-        license: 'Lisensi'
+        author: Penulis
+        version: Versi
+        license: Lisensi
         pterocaVersion: 'Versi PteroCA'
         outdated: 'Versi template di belakang versi saat ini PteroCA. Beberapa fitur mungkin tidak berfungsi dengan benar'
         phpVersion: 'Versi PHP'
-        options: 'Opsi'
+        options: Opsi
         supportDarkMode: 'Dukung mode gelap'
         supportCustomColors: 'Izinkan mengonfigurasi warna kustom'
         contexts: 'Konteks yang didukung untuk template ini. Menentukan di mana template dapat digunakan (mis. email, halaman landing).'
@@ -1245,25 +1232,25 @@ pteroca:
       update_error: 'Terjadi kesalahan saat memperbarui pengaturan: %error%'
       delete_error: 'Terjadi kesalahan saat menghapus pengaturan: %error%'
     user:
-      email: 'Email'
-      roles: 'Peran'
+      email: Email
+      roles: Peran
       roles_help: 'Tetapkan peran untuk pengguna ini. Setiap peran memberikan seperangkat izin yang mengontrol apa yang dapat diakses dan dilakukan pengguna di sistem.'
-      balance: 'Saldo'
+      balance: Saldo
       password: 'Kata sandi'
       password_hint: 'Biarkan kosong jika Anda tidak ingin mengubah kata sandi.'
       name: 'Nama depan'
       surname: 'Nama belakang'
       add: 'Tambah pengguna'
       save: 'Simpan pengguna'
-      user: 'Pengguna'
-      users: 'Pengguna'
-      verified: 'Diverifikasi'
-      blocked: 'Diblokir'
+      user: Pengguna
+      users: Pengguna
+      verified: Diverifikasi
+      blocked: Diblokir
       pterodactyl_user_id: 'ID Pengguna Pterodactyl'
       created_at: 'Dibuat pada'
       updated_at: 'Aktivitas terakhir'
       deleted_at: 'Dihapus pada'
-      avatar: 'Avatar'
+      avatar: Avatar
       repeat_password: 'Ulangi kata sandi'
       repeat_password_hint: 'Masukkan kata sandi lagi untuk mengonfirmasi.'
       passwords_must_match: 'Kata sandi harus cocok.'
@@ -1282,7 +1269,7 @@ pteroca:
       show_api_key: 'Tampilkan Kunci API'
       hide_api_key: 'Sembunyikan Kunci API'
       regenerate_api_key: 'Regenerasi Kunci API'
-      loading: 'Memuat...'
+      loading: Memuat...
       api_key_visibility_not_available: 'Kunci API lengkap tidak tersedia untuk ditampilkan. Regenerasi untuk melihat kunci baru.'
       api_key_regenerated_successfully: 'Kunci API berhasil diregenerasi.'
       api_key_generation_failed: 'Gagal menghasilkan kunci API baru. Silakan periksa koneksi Pterodactyl.'
@@ -1295,26 +1282,26 @@ pteroca:
         consequence_1: 'Kunci API saat ini akan berhenti berfungsi segera'
         consequence_2: 'Kunci API baru akan dihasilkan dan disimpan secara otomatis'
         consequence_3: 'Kunci API lama akan dihapus dari Pterodactyl'
-        cancel: 'Batal'
+        cancel: Batal
         confirm: 'Regenerasi Kunci API'
     role:
-      name: 'Nama'
+      name: Nama
       name_help: 'Pengidentifikasi peran internal (huruf kecil, alfanumerik, garis bawah saja). Tidak dapat diubah setelah pembuatan.'
       display_name: 'Nama Tampilan'
-      description: 'Deskripsi'
+      description: Deskripsi
       is_system: 'Peran Sistem'
       is_system_help: 'Peran sistem dilindungi dan tidak dapat dimodifikasi atau dihapus.'
-      permissions: 'Izin'
+      permissions: Izin
       permissions_help: 'Pilih izin untuk ditetapkan ke peran ini. Pengguna dengan peran ini akan memiliki akses ke semua izin yang dipilih.'
-      permissions_count: 'Izin'
-      users: 'Pengguna'
-      users_count: 'Pengguna'
+      permissions_count: Izin
+      users: Pengguna
+      users_count: Pengguna
       created_at: 'Dibuat pada'
       updated_at: 'Diperbarui pada'
       add: 'Tambah peran'
       save: 'Simpan peran'
-      role: 'Peran'
-      roles: 'Peran'
+      role: Peran
+      roles: Peran
       created_successfully: 'Peran berhasil dibuat.'
       updated_successfully: 'Peran berhasil diperbarui.'
       deleted_successfully: 'Peran berhasil dihapus.'
@@ -1324,57 +1311,57 @@ pteroca:
       field:
         no_permissions: 'Tidak ada izin yang ditetapkan ke peran ini'
         permissions_across: 'izin di seluruh'
-        sections: 'bagian'
+        sections: bagian
         no_active_users: 'Tidak ada pengguna aktif yang ditetapkan ke peran ini'
         deleted_blocked_hidden: 'pengguna yang dihapus/diblokir disembunyikan'
-        id: 'ID'
-        email: 'Email'
-        name: 'Nama'
-        status: 'Status'
-        created: 'Dibuat'
-        verified: 'Diverifikasi'
+        id: ID
+        email: Email
+        name: Nama
+        status: Status
+        created: Dibuat
+        verified: Diverifikasi
         not_verified: 'Tidak diverifikasi'
         active_users: 'Pengguna aktif:'
     permission:
       code: 'Kode Izin'
-      name: 'Nama'
-      description: 'Deskripsi'
-      section: 'Bagian'
+      name: Nama
+      description: Deskripsi
+      section: Bagian
       plugin_name: 'Nama Plugin'
       is_system: 'Izin Sistem'
       is_system_help: 'Izin sistem dikelola secara otomatis dan tidak dapat dimodifikasi secara manual.'
       roles: 'Peran yang Ditugaskan'
-      roles_count: 'Peran'
+      roles_count: Peran
       created_at: 'Dibuat pada'
       updated_at: 'Diperbarui pada'
-      permission: 'Izin'
-      permissions: 'Izin'
+      permission: Izin
+      permissions: Izin
       cannot_create: 'Izin dikelola oleh sistem dan tidak dapat dibuat secara manual.'
       cannot_update: 'Izin dikelola oleh sistem dan tidak dapat diperbarui secara manual.'
       cannot_delete: 'Izin dikelola oleh sistem dan tidak dapat dihapus secara manual.'
       field:
         no_roles: 'Tidak ada peran yang memiliki izin ini'
         role_name: 'Nama:'
-        users_count: 'pengguna'
-        permissions_count: 'izin'
+        users_count: pengguna
+        permissions_count: izin
         total_roles: 'Total peran dengan izin ini:'
     payment:
       session_id: 'ID Sesi'
-      status: 'Status'
-      amount: 'Jumlah'
+      status: Status
+      amount: Jumlah
       currency: 'Mata uang'
       gateway: 'Gateway pembayaran'
-      user: 'Pengguna'
+      user: Pengguna
       created_at: 'Dibuat pada'
       updated_at: 'Diperbarui pada'
-      payment: 'Pembayaran'
-      payments: 'Pembayaran'
+      payment: Pembayaran
+      payments: Pembayaran
       balance_amount: 'Jumlah saldo'
       used_voucher: 'Voucher yang digunakan'
       last_update: 'Pembaruan terakhir'
       description: 'Kelola pembayaran Anda dan lihat riwayat transaksi'
       continue_payment: 'Lanjutkan pembayaran'
-      detail: 'Detail'
+      detail: Detail
     user_account:
       description: 'Edit data pribadi Anda, ubah kata sandi dan kelola pengaturan akun'
       created_successfully: 'Akun pengguna berhasil dibuat.'
@@ -1384,30 +1371,30 @@ pteroca:
       update_error: 'Terjadi kesalahan saat memperbarui akun pengguna: %error%'
       delete_error: 'Terjadi kesalahan saat menghapus akun pengguna: %error%'
     log:
-      log: 'Log'
-      logs: 'Log'
+      log: Log
+      logs: Log
       server_log: 'Log server'
       server_logs: 'Log server'
-      action: 'Tindakan'
-      details: 'Detail'
+      action: Tindakan
+      details: Detail
       created_at: 'Dibuat pada'
-      user: 'Pengguna'
+      user: Pengguna
       ip_address: 'Alamat IP'
-      server: 'Server'
+      server: Server
     email_log:
       email_log: 'Log email'
       email_logs: 'Log email'
       email_type: 'Jenis email'
       metadata: 'Metadata email'
       sent_at: 'Dikirim pada'
-      user: 'Pengguna'
-      server: 'Server'
+      user: Pengguna
+      server: Server
     voucher:
-      voucher: 'Voucher'
-      vouchers: 'Voucher'
-      code: 'Kode'
+      voucher: Voucher
+      vouchers: Voucher
+      code: Kode
       code_help: 'Masukkan kode voucher.'
-      value: 'Nilai'
+      value: Nilai
       value_help: 'Masukkan nilai voucher. Nilai desimal (mis. 1.5) didukung.'
       new_accounts_only: 'Hanya untuk akun baru'
       new_accounts_only_help: 'Voucher hanya dapat digunakan oleh akun baru.'
@@ -1423,9 +1410,9 @@ pteroca:
       used_count_help: 'Jumlah kali voucher ini telah digunakan.'
       one_use_per_user: 'Satu penggunaan per pengguna'
       one_use_per_user_help: 'Voucher hanya dapat digunakan sekali per pengguna.'
-      description: 'Deskripsi'
+      description: Deskripsi
       description_help: 'Masukkan deskripsi untuk voucher. Ini hanya untuk informasi Anda.'
-      type: 'Jenis'
+      type: Jenis
       type_help: 'Pilih jenis voucher.'
       balance_topup: 'Isi ulang saldo'
       payment_discount: 'Diskon pembayaran'
@@ -1441,7 +1428,7 @@ pteroca:
       voucher_usage: 'Voucher yang ditebus'
       voucher_usages: 'Voucher yang ditebus'
       voucher_code: 'Kode voucher'
-      user: 'Pengguna'
+      user: Pengguna
       used_at: 'Digunakan pada'
   api:
     servers:
@@ -1471,34 +1458,33 @@ pteroca:
       only_during_order: 'Voucher hanya dapat digunakan selama pemesanan.'
       server_discount_only_on_purchase: 'Voucher ini hanya dapat digunakan saat membeli atau memperpanjang server. Silakan pergi ke toko untuk menggunakan voucher ini.'
       payment_discount_only_on_payment: 'Voucher ini hanya dapat digunakan di halaman pembayaran. Silakan lanjutkan ke checkout untuk menerapkan voucher ini.'
-
   email:
     creation_not_sent_misconfigured: 'Server dibuat dengan sukses, tetapi email konfirmasi tidak dapat dikirim karena masalah konfigurasi email. Silakan periksa pengaturan email Anda.'
     renewal_not_sent_misconfigured: 'Server diperpanjang dengan sukses, tetapi email konfirmasi tidak dapat dikirim karena masalah konfigurasi email. Silakan periksa pengaturan email Anda.'
     general:
-      hello: 'Halo'
+      hello: Halo
       best_regards: 'Salam terbaik'
       visit_website: 'Kunjungi situs web kami:'
       copyright: 'Semua hak dilindungi undang-undang.'
     verification:
-      subject: "Verifikasi Email - %siteName%"
-      title: "Verifikasi Email"
-      subtitle: "Silakan verifikasi alamat email Anda untuk melanjutkan"
-      hello: "Halo %name%!"
-      message: "Terima kasih telah mendaftar di %siteName%. Silakan verifikasi alamat email Anda dengan mengklik tombol di bawah."
-      verify_button: "Verifikasi Alamat Email"
-      alternative_text: "Jika tombol tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ke browser Anda:"
-      footer_text: "Jika Anda tidak membuat akun di %siteName%, Anda dapat mengabaikan email ini dengan aman."
-      resend_too_soon: "Anda hanya dapat mengirim ulang email verifikasi sekali setiap %minutes% menit. Silakan coba lagi nanti."
-      resend_success: "Email verifikasi telah dikirim ke alamat email Anda."
-      not_logged_in: "Anda harus masuk untuk mengirim ulang email verifikasi."
-      already_verified: "Alamat email Anda sudah diverifikasi."
+      subject: 'Verifikasi Email - %siteName%'
+      title: 'Verifikasi Email'
+      subtitle: 'Silakan verifikasi alamat email Anda untuk melanjutkan'
+      hello: 'Halo %name%!'
+      message: 'Terima kasih telah mendaftar di %siteName%. Silakan verifikasi alamat email Anda dengan mengklik tombol di bawah.'
+      verify_button: 'Verifikasi Alamat Email'
+      alternative_text: 'Jika tombol tidak berfungsi, Anda juga dapat menyalin dan menempelkan tautan berikut ke browser Anda:'
+      footer_text: 'Jika Anda tidak membuat akun di %siteName%, Anda dapat mengabaikan email ini dengan aman.'
+      resend_too_soon: 'Anda hanya dapat mengirim ulang email verifikasi sekali setiap %minutes% menit. Silakan coba lagi nanti.'
+      resend_success: 'Email verifikasi telah dikirim ke alamat email Anda.'
+      not_logged_in: 'Anda harus masuk untuk mengirim ulang email verifikasi.'
+      already_verified: 'Alamat email Anda sudah diverifikasi.'
     pricing:
       slot_format: '{{ slots }} slot × {{ price }} {{ currency }} = {{ total }} {{ currency }}'
       static_format: '{{ price }} {{ currency }}'
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
-      subject: 'Pendaftaran'
+      subject: Pendaftaran
       subtitle: 'Akun Anda telah berhasil dibuat'
       welcome: 'Selamat datang di layanan kami! Terima kasih telah mendaftar.'
       account_ready: 'Akun Anda siap digunakan. Anda sekarang dapat masuk ke akun Anda dan mulai menggunakan layanan kami.'
@@ -1540,7 +1526,7 @@ pteroca:
       server_renewed: 'Anda telah memperpanjang server yang dibeli di penawaran kami.'
       new_expiration: 'Tanggal kedaluwarsa baru:'
     payment:
-      subject: 'Pembayaran'
+      subject: Pembayaran
       title: 'Pembayaran Diterima'
       subtitle: 'Terima kasih atas pembayaran Anda'
       amount_paid: 'Jumlah yang Dibayar'
@@ -1560,7 +1546,6 @@ pteroca:
       suspension_date: 'Ditangguhkan pada: %suspensionDate%'
       auto_delete_warning: 'Penting: Server Anda akan dihapus secara otomatis setelah %days% hari (%deleteDate%) jika tidak diperpanjang.'
       panel_access: 'Akses Panel'
-
   verification:
     title: 'Verifikasi Email Diperlukan'
     subtitle: 'Silakan verifikasi alamat email Anda untuk melanjutkan'
@@ -1576,34 +1561,33 @@ pteroca:
     back_to_panel: 'Kembali ke Panel'
     help_title: 'Butuh bantuan?'
     help_text: 'Periksa kotak masuk email dan folder spam Anda untuk tautan verifikasi.'
-
   admin:
     overview:
       title: 'Ikhtisar Admin'
       useful_resources: 'Sumber Daya Berguna'
       servers: 'Server Aktif'
       users: 'Pengguna Terdaftar'
-      payments: 'Pembayaran'
+      payments: Pembayaran
       last_30_days: '30 hari terakhir'
-      now: 'Sekarang'
+      now: Sekarang
       links: 'Tautan penting'
       system: 'Informasi Sistem'
       payment_overview: 'Ikhtisar Pembayaran'
       view_all: 'Lihat semua'
       last_registered_users: 'Pengguna terdaftar terakhir'
-      user: 'Pengguna'
-      amount: 'Jumlah'
+      user: Pengguna
+      amount: Jumlah
       currency: 'Mata uang'
-      status: 'Status'
-      date: 'Tanggal'
+      status: Status
+      date: Tanggal
       no_payments: 'Sistem Anda belum menerima pembayaran apa pun.'
-      balance: 'Saldo'
-      verified: 'Diverifikasi'
+      balance: Saldo
+      verified: Diverifikasi
       unverified: 'Tidak diverifikasi'
       project_site: 'Situs proyek'
-      documentation: 'Dokumentasi'
-      support: 'Dukungan'
-      up_to_date: 'Terkini'
+      documentation: Dokumentasi
+      support: Dukungan
+      up_to_date: Terkini
       update_available: 'Pembaruan tersedia'
       pteroca_plugin_not_detected: 'Tidak Terdeteksi'
     server_create:
@@ -1615,18 +1599,17 @@ pteroca:
       eggs_required: 'Setidaknya satu telur harus dipilih'
       use_as_starting_egg: 'Gunakan sebagai telur awal'
       starting_egg_help: 'Telur ini akan digunakan saat membuat server'
-
   first_configuration:
     title: 'Konfigurasi Pertama'
     description: 'Halaman ini tersedia hanya sekali setelah instalasi. Silakan isi bidang yang diperlukan untuk mengkonfigurasi panel.'
-    step: 'Langkah'
+    step: Langkah
     step_welcome: 'Selamat Datang'
-    step_site: 'Situs'
-    step_pterodactyl: 'Pterodactyl'
-    step_email: 'Email'
-    step_payment: 'Pembayaran'
-    step_admin: 'Admin'
-    next: 'Berikutnya'
+    step_site: Situs
+    step_pterodactyl: Pterodactyl
+    step_email: Email
+    step_payment: Pembayaran
+    step_admin: Admin
+    next: Berikutnya
     site_settings_description: 'Konfigurasi pengaturan dasar panel Anda termasuk URL situs, judul, dan bahasa default.'
     email_settings_description: 'Setel pengaturan SMTP untuk memungkinkan panel Anda mengirim email ke pengguna untuk notifikasi dan manajemen akun.'
     payment_settings_description: 'Konfigurasi gateway pembayaran dan pengaturan mata uang Anda untuk memungkinkan pengguna membuat pembelian di panel Anda.'
@@ -1672,8 +1655,8 @@ pteroca:
     admin_email_help: 'Masukkan alamat email administrator.'
     admin_password: 'Kata Sandi Admin'
     admin_password_help: 'Masukkan kata sandi untuk akun administrator.'
-    skip: 'Lewati'
-    back: 'Kembali'
+    skip: Lewati
+    back: Kembali
     documentation_hint: 'Ada masalah dengan konfigurator? Periksa dokumentasi!'
     discord_hint: 'Atau mungkin Anda butuh bantuan? Bergabunglah dengan server Discord kami!'
     pterodactyl_plugin_hint: 'Disarankan untuk menginstal plugin PteroCA di Pterodactyl Anda untuk mengakses semua fitur.'
@@ -1698,7 +1681,6 @@ pteroca:
       validation_error: 'Terjadi kesalahan saat memvalidasi langkah. Silakan coba lagi.'
     telemetry_consent: 'Bantu tingkatkan PteroCA dengan mengirim data penggunaan anonim'
     telemetry_consent_help: 'Kami mengumpulkan telemetri anonim untuk meningkatkan PteroCA. Hanya peristiwa instalasi dan kesalahan yang dilacak. Tidak ada data pribadi, kunci API, atau URL yang dikumpulkan.'
-
   error:
     invalid_csrf_token: 'Token CSRF tidak valid. Silakan refresh halaman dan coba lagi.'
     user_not_found: 'Pengguna tidak ditemukan.'
@@ -1706,39 +1688,38 @@ pteroca:
       title: 'Halaman tidak ditemukan'
       message: 'Maaf, tetapi halaman yang Anda cari tidak ada atau telah dipindahkan. Periksa URL atau kembali ke halaman utama.'
       go_home: 'Halaman utama'
-      go_back: 'Kembali'
+      go_back: Kembali
       refresh: 'Refresh halaman'
     500:
       title: 'Kesalahan server'
       message: 'Maaf, kesalahan internal server terjadi. Tim kami telah diberitahu tentang masalah tersebut. Coba refresh halaman dalam beberapa menit atau hubungi administrator.'
       go_home: 'Halaman utama'
       refresh: 'Refresh halaman'
-      go_back: 'Kembali'
+      go_back: Kembali
     general:
       title: 'Terjadi kesalahan'
       message: 'Maaf, kesalahan tak terduga terjadi. Silakan coba lagi sebentar lagi.'
       go_home: 'Halaman utama'
-      go_back: 'Kembali'
-
+      go_back: Kembali
   plugin:
     security:
       title: 'Keamanan Plugin'
       scan: 'Pemindaian Keamanan'
       issues: 'Masalah Keamanan'
-      critical: 'Kritis'
-      high: 'Tinggi'
-      medium: 'Sedang'
-      low: 'Rendah'
+      critical: Kritis
+      high: Tinggi
+      medium: Sedang
+      low: Rendah
       no_issues: 'Tidak ada masalah keamanan yang ditemukan'
       all_clear: 'Semua pemeriksaan keamanan lulus'
       affected_plugins: 'Plugin yang Terpengaruh'
-      severity: 'Keparahan'
-      type: 'Jenis'
-      file: 'File'
-      line: 'Baris'
-      message: 'Pesan'
-      suggestion: 'Saran'
-      code_snippet: 'Kode'
+      severity: Keparahan
+      type: Jenis
+      file: File
+      line: Baris
+      message: Pesan
+      suggestion: Saran
+      code_snippet: Kode
       dangerous_function: 'Fungsi Berbahaya'
       path_traversal: 'Path Traversal'
       sql_injection: 'SQL Injection'
@@ -1765,19 +1746,19 @@ pteroca:
     health:
       title: 'Kesehatan Plugin'
       check: 'Pemeriksaan Kesehatan'
-      healthy: 'Sehat'
+      healthy: Sehat
       unhealthy: 'Tidak Sehat'
-      status: 'Status'
+      status: Status
       last_check: 'Pemeriksaan Terakhir'
-      checks: 'Pemeriksaan'
-      passed: 'Lulus'
-      failed: 'Gagal'
-      errors: 'Kesalahan'
+      checks: Pemeriksaan
+      passed: Lulus
+      failed: Gagal
+      errors: Kesalahan
       files_integrity: 'Integritas File'
-      dependencies: 'Dependensi'
-      configuration: 'Konfigurasi'
+      dependencies: Dependensi
+      configuration: Konfigurasi
       service_registration: 'Pendaftaran Layanan'
-      health_percentage: 'Kesehatan'
+      health_percentage: Kesehatan
       health_status: 'Status Kesehatan'
       all_checks_passed: 'Semua pemeriksaan kesehatan lulus'
       checks_passed: 'pemeriksaan lulus'
@@ -1803,9 +1784,9 @@ pteroca:
       file_help_text: 'Pilih file ZIP yang berisi plugin (maks 50 MB)'
       enable_after_upload: 'Aktifkan plugin secara otomatis setelah unggah'
       enable_help_text: 'Jika dicentang, plugin akan diaktifkan segera setelah unggah dan validasi berhasil'
-      submit: 'Unggah'
-      cancel: 'Batal'
-      requirements_title: 'Persyaratan'
+      submit: Unggah
+      cancel: Batal
+      requirements_title: Persyaratan
       requirement_zip: 'File harus arsip ZIP yang valid'
       requirement_size: 'Ukuran file maksimum: 50 MB'
       requirement_manifest: 'Harus berisi plugin.json di direktori root'
@@ -1817,30 +1798,28 @@ pteroca:
       failed: 'Unggah gagal: %s'
       security_warnings_detected: 'Peringatan: Masalah keamanan terdeteksi. Tinjau sebelum mengaktifkan.'
       invalid_mime_type: 'Silakan unggah file ZIP yang valid'
-
   widget:
     plugin_status:
       title: 'Status Plugin'
-      total: 'Total'
-      enabled: 'Diaktifkan'
-      disabled: 'Dinonaktifkan'
-      faulted: 'Rusak'
+      total: Total
+      enabled: Diaktifkan
+      disabled: Dinonaktifkan
+      faulted: Rusak
     plugin_security:
       title: 'Keamanan Plugin'
       total_issues: 'Total Masalah'
-      critical_issues: 'Kritis'
-      high_issues: 'Tinggi'
+      critical_issues: Kritis
+      high_issues: Tinggi
       affected_plugins: 'Plugin Terpengaruh'
       no_issues: 'Tidak ada masalah keamanan yang terdeteksi'
     plugin_health:
       title: 'Kesehatan Plugin'
-      healthy: 'Sehat'
+      healthy: Sehat
       unhealthy: 'Tidak Sehat'
       unhealthy_plugins: 'Plugin Tidak Sehat'
       last_checked: 'Terakhir Diperiksa'
-      failed_checks: 'gagal'
+      failed_checks: gagal
       no_plugins: 'Tidak ada plugin'
-
   command:
     plugin_security_scan:
       description: 'Pindai plugin untuk masalah keamanan'
@@ -1852,33 +1831,31 @@ pteroca:
       checking: 'Memeriksa plugin: %name%'
       healthy: 'Plugin sehat'
       unhealthy: 'Plugin memiliki masalah kesehatan'
-
   permission:
     section:
-      dashboard: 'Dasbor'
+      dashboard: Dasbor
       user_management: 'Manajemen Pengguna'
       'user_management (admin)': 'Manajemen Pengguna (Admin)'
       server_management: 'Manajemen Server'
       'server_management (admin)': 'Manajemen Server (Admin)'
-      shop: 'Toko'
+      shop: Toko
       'shop (admin)': 'Toko (Admin)'
-      payment: 'Pembayaran'
-      voucher: 'Voucher'
+      payment: Pembayaran
+      voucher: Voucher
       'voucher (admin)': 'Voucher (Admin)'
-      logs: 'Log'
+      logs: Log
       'logs (admin)': 'Log (Admin)'
-      settings: 'Pengaturan'
+      settings: Pengaturan
       'settings (admin)': 'Pengaturan (Admin)'
-      plugins: 'Plugin'
+      plugins: Plugin
       'plugins (admin)': 'Plugin (Admin)'
       role_management: 'Peran & Izin'
       'role_management (admin)': 'Peran & Izin (Admin)'
-      themes: 'Tema'
+      themes: Tema
       'themes (admin)': 'Tema (Admin)'
       user_features: 'Fitur Pengguna'
       pterodactyl_integration: 'Integrasi Pterodactyl'
       'pterodactyl_integration (admin)': 'Integrasi Pterodactyl (Admin)'
-
   theme:
     upload:
       upload_theme: 'Unggah Tema'
@@ -1890,7 +1867,7 @@ pteroca:
       submit: 'Unggah Tema'
       success: 'Tema "%s" versi %s berhasil diunggah!'
       requirements: 'Persyaratan Unggah'
-      occurrences: 'kejadian'
+      occurrences: kejadian
       req_zip_format: 'File harus arsip ZIP yang valid'
       req_max_size: 'Ukuran file maksimum: 50 MB (diekstrak: 100 MB)'
       req_structure: 'ZIP harus berisi themes/{name}/ dan opsional public/assets/theme/{name}/'

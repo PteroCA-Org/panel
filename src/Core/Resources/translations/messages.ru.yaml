@@ -1,15 +1,15 @@
 pteroca:
   enum:
     plugin_state:
-      discovered: 'Обнаружен'
-      registered: 'Зарегистрирован'
-      enabled: 'Включен'
-      disabled: 'Отключен'
+      discovered: Обнаружен
+      registered: Зарегистрирован
+      enabled: Включен
+      disabled: Отключен
       update_pending: 'Ожидание обновления'
-      faulted: 'Неисправен'
+      faulted: Неисправен
   role:
-    admin: 'Администратор'
-    user: 'Пользователь'
+    admin: Администратор
+    user: Пользователь
   system:
     back: 'Вернуться в панель'
     email_not_verified: 'Ваш адрес электронной почты еще не подтвержден. Пожалуйста, проверьте свою электронную почту.'
@@ -17,40 +17,38 @@ pteroca:
     dont_have_permission: 'У вас нет прав для выполнения этого действия.'
     experimental_feature: 'Эта функция является экспериментальной и может работать некорректно.'
     or_resend_verification_email: 'или нажмите здесь, чтобы повторно отправить письмо с подтверждением.'
-
   page:
     terms_of_service: 'Условия обслуживания'
     terms_of_service_description: 'Пожалуйста, внимательно прочитайте наши условия и положения'
-    back: 'Назад'
-
+    back: Назад
   login:
-    title: 'Войти'
+    title: Войти
     email_address: 'Email адрес'
-    password: 'Пароль'
+    password: Пароль
     forgot_password: 'Забыл пароль?'
     remember_me: 'Запомнить меня'
-    sign_in: 'Войти'
+    sign_in: Войти
     invalid_captcha: 'Неверная CAPTCHA.'
     user_blocked: 'Ваша учётная запись заблокирована.'
     account_deleted: 'Ваша учётная запись была удалена.'
     invalid_credentials: 'Неверный адрес электронной почты или пароль.'
-    dont_have_account_yet: "Еще нет аккаунта? Зарегистрируйтесь сейчас!"
+    dont_have_account_yet: 'Еще нет аккаунта? Зарегистрируйтесь сейчас!'
     subtitle: 'Войдите в свой аккаунт'
     welcome_back: 'Добро пожаловать обратно'
     brand_description: 'Легко управляйте своими игровыми серверами. Мощная, безопасная и надежная платформа хостинга.'
     feature_secure: 'Безопасный и Защищенный'
     feature_fast: 'Молниеносно быстрый'
     feature_reliable: 'Всегда надежный'
-    email_placeholder: 'ваш@email.com'
+    email_placeholder: ваш@email.com
     password_placeholder: 'Введите пароль'
   register:
-    title: 'Регистрация'
-    name: 'Имя'
-    surname: 'Фамилия'
+    title: Регистрация
+    name: Имя
+    surname: Фамилия
     email_address: 'Email адрес'
-    password: 'Пароль'
+    password: Пароль
     accept_terms: 'Я принимаю <a href="{{ link }}" target="_blank">условия обслуживания</a>'
-    submit: 'Зарегестрироватся'
+    submit: Зарегестрироватся
     verification_token_invalid: 'Токен верификации либо недействителен, либо истек.'
     verification_success: 'Ваша учетная запись успешно подтверждена.'
     should_accept_terms: 'Чтобы продолжить, необходимо принять условия обслуживания.'
@@ -72,40 +70,40 @@ pteroca:
     feature_easy_start: 'Легко начать'
     name_placeholder: 'Введите ваше имя'
     surname_placeholder: 'Введите вашу фамилию'
-    email_placeholder: 'ваш@email.com'
+    email_placeholder: ваш@email.com
     password_placeholder: 'Введите пароль'
   landing:
     nav:
-      home: 'Главная'
-      features: 'Функции'
-      pricing: 'Цены'
+      home: Главная
+      features: Функции
+      pricing: Цены
       about: 'О нас'
-      contact: 'Контакты'
-      login: 'Войти'
-      register: 'Регистрация'
-      get_started: 'Начать'
-      dashboard: 'Панель'
+      contact: Контакты
+      login: Войти
+      register: Регистрация
+      get_started: Начать
+      dashboard: Панель
     hero:
       title: 'Управляйте своими игровыми серверами с легкостью'
       subtitle: 'Мощная, безопасная и надежная платформа для хостинга игровых серверов. Разверните свой первый сервер за минуты.'
       cta_primary: 'Начать сейчас'
       cta_secondary: 'Посмотреть демо'
-      trusted_by: 'Доверяют'
+      trusted_by: Доверяют
       badge: 'Высокопроизводительный хостинг'
       title_pre: 'Хостинг игровых серверов'
       title_highlight: 'Сделано просто'
       browse_servers: 'Посмотреть планы'
-      get_started: 'Начать'
+      get_started: Начать
     categories:
       title: 'Выберите свою игру'
       subtitle: 'Мы поддерживаем широкий спектр игровых серверов. Найдите идеальную настройку для вашей игры.'
-      featured: 'Рекомендуемые'
+      featured: Рекомендуемые
       default_description: 'Премиум хостинг для %name%'
       empty: 'Категории недоступны в данный момент.'
     products:
       title: 'Готовые решения'
       subtitle: 'Выберите из наших предварительно настроенных серверов или создайте свой собственный.'
-      featured: 'Популярные'
+      featured: Популярные
       starting_from: 'Начиная с'
       per_month: 'в месяц'
       view_details: 'Посмотреть детали'
@@ -128,14 +126,14 @@ pteroca:
     footer:
       description: 'Лучшая платформа для хостинга игровых серверов с мощными функциями и отличной поддержкой.'
       quick_links: 'Быстрые ссылки'
-      support: 'Поддержка'
+      support: Поддержка
       legal: 'Юридическая информация'
       privacy_policy: 'Политика конфиденциальности'
       terms_of_service: 'Условия обслуживания'
       copyright: '© 2024 PteroCA. Все права защищены.'
       powered_by: 'Работает на <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
     store:
-      title: 'Магазин'
+      title: Магазин
       subtitle: 'Просмотрите наши продукты и услуги'
       show_all_categories: 'Показать все категории'
   recovery:
@@ -177,9 +175,9 @@ pteroca:
     order_first_server: 'Заказать первый сервер'
     last_activity: 'Последняя активность'
     custom_section: 'Дополнительная информация'
-    action: 'Действия'
-    date: 'Дата'
-    ip_address: 'IP-адрес'
+    action: Действия
+    date: Дата
+    ip_address: IP-адрес
     view_all_servers: 'Посмотреть все сервера'
     title: 'Панель управления'
     welcome_message: 'Центр управления вашим сервером'
@@ -191,17 +189,17 @@ pteroca:
     browse_store: 'Просмотр магазина'
   recharge:
     recharge_balance: 'Пополнить баланс'
-    recharge: 'Пополнить'
+    recharge: Пополнить
     recharge_amount: 'Сумма пополнения'
     transaction_history: 'История транзакций'
     additional_information: 'Дополнительная информация'
     no_transaction: 'Нет транзакций'
-    transaction_paid: 'Оплачено'
+    transaction_paid: Оплачено
     transaction_unpaid: 'Не оплачено'
-    id: 'ID'
-    date: 'Дата'
-    amount: 'Сумма'
-    status: 'Статус'
+    id: ID
+    date: Дата
+    amount: Сумма
+    status: Статус
     invalid_session_id: 'Неверный ID сессии.'
     payment_success: 'Платёж был успешно завершен.'
     payment_canceled: 'Оплата была отменена.'
@@ -229,51 +227,50 @@ pteroca:
       stripe:
         description: 'Быстрые и безопасные платежи кредитной или дебетовой картой'
   product:
-    information: 'Информация'
-    ram: 'ОЗУ'
-    cpu: 'ЦПУ'
+    information: Информация
+    ram: ОЗУ
+    cpu: ЦПУ
     disk: 'Место на диске'
     backups: 'Резервные копии'
-    swap: 'SWAP'
+    swap: SWAP
     databases: 'Базы данных'
-    order: 'Заказать'
-    period: 'Период'
-    days: 'дней'
+    order: Заказать
+    period: Период
+    days: дней
     egg: 'Серверное ПО'
     egg_hint: 'Вы можете изменить серверное ПО в любой момент после покупки.'
     location: 'Расположение сервера'
-    price: 'Цена'
-    order_now: 'Заказать'
+    price: Цена
+    order_now: Заказать
     not_available: 'Товар в настоящее время недоступен.'
     not_enough_balance: 'На вашем счете недостаточно средств.'
     product_information: 'Информация о товаре'
     name: 'Название товара'
-    description: 'Описание'
-    hours: 'час(ы)'
-    minutes: 'минута(ы)'
-    minute_short: 'мин.'
+    description: Описание
+    hours: час(ы)
+    minutes: минута(ы)
+    minute_short: мин.
     on_demand: 'По требованию'
     price_calculation: 'Расчет цены'
     per_minute: 'За минуту'
-    per_hour: 'Ежечасно'
-    per_day: 'Ежедневно'
-    per_week: 'Еженедельно'
-    per_month: 'Ежемесячно'
-    summary: 'Итог'
+    per_hour: Ежечасно
+    per_day: Ежедневно
+    per_week: Еженедельно
+    per_month: Ежемесячно
+    summary: Итог
     billing_period: 'Платежный период'
     total_price: 'Итоговая цена'
-    ports: 'Порты'
-    discount: 'Скидка'
+    ports: Порты
+    discount: Скидка
     discount_hint: 'Скидка будет применена только к первому платежному периоду.'
     product_order_details: 'Детали продукта и варианты заказа'
-    total: 'Итого'
-    slot: 'слот'
-    slots: 'Слоты'
-    processing: 'Обработка...'
-
+    total: Итого
+    slot: слот
+    slots: Слоты
+    processing: Обработка...
   store:
-    title: 'Магазин'
-    order: 'Заказать'
+    title: Магазин
+    order: Заказать
     show_offer: 'Показать предложение'
     category_not_found: 'Категория не найдена.'
     product_not_found: 'Товар не найден.'
@@ -288,7 +285,7 @@ pteroca:
     invalid_form_data: 'Недействительные данные формы. Пожалуйста, проверьте все поля и попробуйте снова.'
     description: 'Выберите категорию или продукт, который вас интересует'
     products_with_no_category: 'Товары без категории'
-    categories: 'Категории'
+    categories: Категории
     category_description: 'Товары, доступные в этой категории'
     available_products: 'Доступные товары'
     no_products_title: 'Нет товаров'
@@ -312,11 +309,11 @@ pteroca:
     invalid_node_selection: 'Неверный выбор узла'
   cart_configuration:
     title: 'Настроить сервер'
-    configuration: 'Конфигурация'
+    configuration: Конфигурация
     server_name: 'Имя сервера'
-    period: 'Период'
+    period: Период
     order_summary: 'Сводка заказа'
-    auto_renewal: 'Автопродление'
+    auto_renewal: Автопродление
     enable: 'Включить автопродление'
     disable: 'Отключить автопродление'
     location: 'Расположение сервера'
@@ -324,7 +321,7 @@ pteroca:
     description: 'Настройте ваш сервер и произведите оплату'
   cart_topup:
     title: 'Пополнить аккаунт'
-    order: 'Заказать'
+    order: Заказать
     order_description: 'Пополнить средства'
     payment_method: 'Способ оплаты'
     select_payment_method: 'Пожалуйста, выберите способ оплаты'
@@ -335,7 +332,6 @@ pteroca:
   cart:
     use_voucher: 'Использовать ваучер'
     voucher_code: 'Код ваучера'
-
   renew:
     title: 'Продление сервера'
     renew: 'Продлить сервер'
@@ -350,60 +346,59 @@ pteroca:
     server_current_software: 'Текущее серверное ПО'
   servers:
     title: 'Мои серверы'
-    active: 'Активный'
-    suspended: 'Приостановлен'
-    ip_address: 'IP-адрес'
-    ram_memory: 'ОЗУ'
-    disk: 'Диск'
+    active: Активный
+    suspended: Приостановлен
+    ip_address: IP-адрес
+    ram_memory: ОЗУ
+    disk: Диск
     state:
-      running: 'Онлайн'
-      stopped: 'Остановлен'
-      starting: 'Запуск'
-      stopping: 'Остановка'
-      offline: 'Оффлайн'
-    cpu: 'ЦПУ'
+      running: Онлайн
+      stopped: Остановлен
+      starting: Запуск
+      stopping: Остановка
+      offline: Оффлайн
+    cpu: ЦПУ
     databases: 'Базы данных'
     backups: 'Резервные копии'
     valid_until: 'Действует до'
     manage_server: 'Управлять сервером'
-    extend: 'Продлить'
+    extend: Продлить
     no_servers: 'У вас еще нет серверов.'
     click_to_buy: 'Нажмите здесь для покупки сервера.'
-    name: 'Имя'
-    status: 'Статус'
-    actions: 'Действия'
+    name: Имя
+    status: Статус
+    actions: Действия
     description: 'Управляйте всеми вашими серверами с этой страницы'
-    
   server:
     title: 'Управление сервером'
-    console: 'Консоль'
-    startup: 'Запуск'
+    console: Консоль
+    startup: Запуск
     backups: 'Резервные копии'
-    network: 'Сеть'
-    settings: 'Конфигурация'
-    activity: 'Действия'
-    start: 'Запустить'
-    stop: 'Остановить'
-    restart: 'Перезапустить'
-    kill: 'Прервать'
-    send: 'Отправить'
-    address: 'Адрес'
+    network: Сеть
+    settings: Конфигурация
+    activity: Действия
+    start: Запустить
+    stop: Остановить
+    restart: Перезапустить
+    kill: Прервать
+    send: Отправить
+    address: Адрес
     copy_ip: 'Копировать IP-адрес'
     ip_copied: 'IP-адрес скопирован в буфер обмена!'
     uptime: 'Время работы'
     cpu_load: 'Нагрузка ЦПУ'
-    memory: 'ОЗУ'
-    disk: 'Диск'
+    memory: ОЗУ
+    disk: Диск
     network_inbound: 'Входящий поток'
     network_outbound: 'Выходящий поток'
     software: 'Программное обеспечение'
-    command: 'Команда'
+    command: Команда
     startup_command: 'Команда запуска'
     docker_image: 'Docker Образ'
     read_only: 'Только чтение'
-    admin_view: 'Админка'
+    admin_view: Админка
     default_options: 'Настройки по умолчанию'
-    variables: 'Переменные'
+    variables: Переменные
     sftp_details: 'Детали SFTP'
     sftp_server_address: 'Адрес сервера'
     sftp_username: 'Имя пользователя'
@@ -421,11 +416,11 @@ pteroca:
     extend_server_hint: 'Вы можете продлить срок действия сервера, нажав кнопку ниже.'
     extend_server_hint_2: 'Сервер будет продлен на выбранный период.'
     no_activity_logs: 'Для этого сервера пока нет журнала действий.'
-    admin: 'Администратор'
-    action: 'Действие'
-    details: 'Подробности'
-    user: 'Пользователь'
-    date: 'Дата'
+    admin: Администратор
+    action: Действие
+    details: Подробности
+    user: Пользователь
+    date: Дата
     show_details: 'Показать подробности'
     hide_details: 'Скрыть подробности'
     data_updated_successfully: 'Данные были успешно обновлены.'
@@ -446,7 +441,7 @@ pteroca:
     server_suspended_message: 'Ваш сервер в настоящее время приостановлен и недоступен.'
     server_suspended_description: 'Этот сервер был приостановлен из-за административного действия или нарушения политики. Пожалуйста, обратитесь в поддержку за помощью.'
     suspended_expired_description: 'Этот сервер был приостановлен, потому что он истек %expireDate% и не был продлен. Чтобы восстановить сервер, пожалуйста, продлите его.'
-    rules: 'Правила'
+    rules: Правила
     data_validation_error: 'Ошибка при проверке. Пожалуйста, убедитесь, что все правила соблюдены.'
     enable_auto_renewal: 'Включить автоматическое продление для этого сервера'
     auto_renewal_tooltip: 'Если включено, сервер будет автоматически продлен на выбранный период. Платеж будет списан с вашего баланса.'
@@ -454,18 +449,18 @@ pteroca:
     create_backup: 'Создать резервную копию'
     backup_name: 'Имя резервной копии'
     backup_ignored_files: 'Игнорируемые файлы и каталоги'
-    close: 'Закрыть'
+    close: Закрыть
     error_during_backup: 'Произошла ошибка при создании резервной копии.'
     backup_time_limit: 'Можно создать только 2 резервные копии в течение 600 секунд.'
-    name: 'Имя'
-    status: 'Статус'
-    created_at: 'Создано'
-    successful: 'Успешно'
+    name: Имя
+    status: Статус
+    created_at: Создано
+    successful: Успешно
     in_progress: 'В процессе'
     checksum: 'Контрольная сумма'
-    size: 'Размер'
-    download: 'Скачать'
-    delete: 'Удалить'
+    size: Размер
+    download: Скачать
+    delete: Удалить
     delete_backup: 'Удалить резервную копию'
     delete_backup_confirmation: 'Вы уверены, что хотите удалить эту резервную копию?'
     error_during_deleting_backup: 'Произошла ошибка при удалении резервной копии.'
@@ -477,17 +472,17 @@ pteroca:
     error_during_creating_database: 'Произошла ошибка при создании базы данных.'
     endpoint: 'Конечная точка'
     username: 'Имя пользователя'
-    show: 'Показать'
+    show: Показать
     delete_database: 'Удалить базу данных'
     delete_database_confirmation: 'Вы уверены, что хотите удалить эту базу данных?'
     show_database: 'Показать базу данных'
     database_endpoint: 'Конечная точка базы данных'
-    password: 'Пароль'
+    password: Пароль
     jdbc_connection_string: 'Строка подключения JDBC'
     rotate_password: 'Сменить пароль'
-    ip_address: 'IP-адрес'
-    port: 'Порт'
-    notes: 'Заметки'
+    ip_address: IP-адрес
+    port: Порт
+    notes: Заметки
     create_allocation: 'Создать адрес'
     delete_allocation: 'Удалить адрес'
     delete_allocation_confirmation: 'Этот адрес будет немедленно удалён с вашего сервера. Вы уверены, что хотите продолжить?'
@@ -496,11 +491,11 @@ pteroca:
     cannot_modify_yourself: 'Вы не можете изменить себя.'
     extend_server_expires_on_demand: 'Ваш сервер <strong>{{ productName }}</strong> в настоящее время настроен на истечение срока <strong>по требованию</strong>.'
     on_demand_billing_cycle: 'Цикл выставления счетов ({{ productPrice }} {{ internalCurrency }} / минута) будет приостановлен, когда сервер выключен, и ресурсы будут бесплатны.'
-    usage: 'Использование'
-    type: 'Тип'
-    primary: 'Основной'
-    secondary: 'Второстепенный'
-    edit: 'Изменить'
+    usage: Использование
+    type: Тип
+    primary: Основной
+    secondary: Второстепенный
+    edit: Изменить
     edit_allocation: 'Изменить аллокацию'
     error_during_editing_allocation: 'Произошла ошибка при редактировании аллокации.'
     make_primary: 'Сделать аллокацию основной'
@@ -508,21 +503,21 @@ pteroca:
     create_allocation_confirmation: 'Вы уверены, что хотите создать дополнительную аллокацию?'
     error_during_creating_allocation: 'Произошла ошибка при создании аллокации.'
     auto_allocation_disabled_for_this_instance: 'Автоматическая аллокация отключена для этого инстанса.'
-    source: 'Источник'
-    restore: 'Восстановить'
+    source: Источник
+    restore: Восстановить
     restore_backup: 'Восстановить резервную копию'
     restore_backup_confirmation: 'Вы уверены, что хотите восстановить эту резервную копию? Это перезапишет все текущие файлы сервера.'
     delete_all_files_before_restore: 'Удалить все файлы перед восстановлением резервной копии.'
     error_during_restoring_backup: 'Произошла ошибка при восстановлении резервной копии.'
-    users: 'Пользователи'
-    schedules: 'Расписания'
+    users: Пользователи
+    schedules: Расписания
     schedules_usage: 'Использование: {{ current }}/{{ limit }}'
     schedule_limit_reached: 'Достигнуто максимальное количество расписаний ({{ limit }}). Удалите существующие расписания, чтобы создать новые.'
     no_subusers: 'Для этого сервера еще нет подпользователей.'
     no_schedules: 'Для этого сервера еще нет расписаний.'
     schedule_name: 'Название расписания'
     schedule_cron: 'Cron выражение'
-    schedule_status: 'Статус'
+    schedule_status: Статус
     schedule_last_run: 'Последний запуск'
     schedule_next_run: 'Следующий запуск'
     add_schedule: 'Добавить расписание'
@@ -531,10 +526,10 @@ pteroca:
     schedule_name_description: 'Читаемый идентификатор для этого расписания.'
     schedule_cron_expression: 'Cron выражение'
     cron_expression_description: 'Система планирования поддерживает использование синтаксиса cronjob при определении времени выполнения задач. Используйте поля выше, чтобы указать, когда эти задачи должны выполняться.'
-    minute: 'Минута'
-    hour: 'Час'
+    minute: Минута
+    hour: Час
     day_of_month: 'День месяца'
-    month: 'Месяц'
+    month: Месяц
     day_of_week: 'День недели'
     schedule_options: 'Параметры расписания'
     show_cheatsheet: 'Показать шпаргалку'
@@ -544,7 +539,7 @@ pteroca:
     schedule_enabled: 'Расписание включено'
     schedule_enabled_description: 'Это расписание будет выполняться автоматически, если включено.'
     cron_cheatsheet: 'Шпаргалка cron'
-    examples: 'Примеры'
+    examples: Примеры
     every_5_minutes: 'каждые 5 минут'
     every_2_hours: 'каждые 2 часа'
     every_sunday: 'каждое воскресенье'
@@ -552,9 +547,9 @@ pteroca:
     any_value: 'любое значение'
     every_n_units: 'каждые n единиц'
     range_n_to_m: 'диапазон от n до m'
-    active: 'Активно'
-    inactive: 'Неактивно'
-    never: 'Никогда'
+    active: Активно
+    inactive: Неактивно
+    never: Никогда
     schedule_created_successfully: 'Расписание успешно создано'
     schedule_deleted_successfully: 'Расписание успешно удалено'
     confirm_delete_schedule: 'Вы уверены, что хотите удалить это расписание?'
@@ -591,7 +586,7 @@ pteroca:
     error_no_schedule_selected: 'Расписание не выбрано'
     at_least_one_permission_required: 'Требуется хотя бы одно разрешение'
     email_required: 'Требуется электронная почта'
-    error: 'Ошибка'
+    error: Ошибка
     error_occurred: 'Произошла ошибка'
     user_created_successfully: 'Пользователь успешно создан'
     user_removed_successfully: 'Пользователь успешно удален'
@@ -601,32 +596,32 @@ pteroca:
     user_already_added: 'Пользователь с таким адресом электронной почты уже добавлен на этот сервер.'
     user_must_register_first: 'Пользователь должен сначала зарегистрироваться в системе, прежде чем быть добавленным на сервер.'
     user_email: 'Электронная почта'
-    user_permissions: 'Разрешения'
-    user_created: 'Создан'
-    actions: 'Действия'
+    user_permissions: Разрешения
+    user_created: Создан
+    actions: Действия
     users_management: 'Управление пользователями'
     add_user: 'Добавить пользователя'
-    remove: 'Удалить'
+    remove: Удалить
     modify_permissions_for: 'Изменить разрешения для'
-    cancel: 'Отмена'
-    save: 'Сохранить'
+    cancel: Отмена
+    save: Сохранить
     create_new_subuser: 'Создать нового подпользователя'
     enter_email_description: 'Введите адрес электронной почты пользователя, которого вы хотите пригласить в качестве подпользователя для этого сервера.'
     invite_user: 'Пригласить пользователя'
     permissions:
-      control: 'Управление'
+      control: Управление
       control_description: 'Разрешения, которые контролируют способность пользователя управлять состоянием питания сервера или отправлять команды.'
       control_console_desc: 'Позволяет пользователю отправлять команды экземпляру сервера через консоль.'
       control_start_desc: 'Позволяет пользователю запускать сервер, если он остановлен.'
       control_stop_desc: 'Позволяет пользователю останавливать сервер, если он работает.'
       control_restart_desc: 'Позволяет пользователю перезапускать сервер.'
-      user: 'Пользователь'
+      user: Пользователь
       user_description: 'Разрешения, которые позволяют пользователю управлять другими подпользователями на сервере. Они никогда не могут изменить свою собственную учетную запись или назначить разрешения, которых у них нет.'
       user_create_desc: 'Позволяет пользователю создавать новых подпользователей для сервера.'
       user_read_desc: 'Позволяет пользователю просматривать подпользователей и их разрешения для сервера.'
       user_update_desc: 'Позволяет пользователю изменять других подпользователей.'
       user_delete_desc: 'Позволяет пользователю удалять подпользователей с сервера.'
-      file: 'Файл'
+      file: Файл
       file_description: 'Разрешения, которые контролируют способность пользователя изменять файловую систему для этого сервера.'
       file_create_desc: 'Позволяет пользователю создавать дополнительные файлы и папки через панель или прямую загрузку.'
       file_read_desc: 'Позволяет пользователю просматривать содержимое каталога, но не просматривать содержимое файлов или загружать файлы.'
@@ -642,13 +637,13 @@ pteroca:
       backup_delete_desc: 'Позволяет пользователю удалять резервные копии из системы.'
       backup_download_desc: 'Позволяет пользователю загружать резервные копии для сервера. Опасность: это дает пользователю доступ ко всем файлам сервера в резервной копии.'
       backup_restore_desc: 'Позволяет пользователю восстанавливать резервные копии для сервера. Опасность: это позволяет пользователю удалить все файлы сервера в процессе.'
-      allocation: 'Распределение'
+      allocation: Распределение
       allocation_description: 'Разрешения, которые контролируют способность пользователя изменять распределения портов для этого сервера.'
       allocation_read_desc: 'Позволяет пользователю просматривать все распределения, назначенные в настоящее время этому серверу.'
       allocation_create_desc: 'Позволяет пользователю назначать дополнительные распределения серверу.'
       allocation_update_desc: 'Позволяет пользователю изменять основное распределение сервера и добавлять заметки к каждому распределению.'
       allocation_delete_desc: 'Позволяет пользователю удалять распределения с сервера.'
-      startup: 'Запуск'
+      startup: Запуск
       startup_description: 'Разрешения, которые контролируют способность пользователя просматривать параметры запуска этого сервера.'
       startup_read_desc: 'Позволяет пользователю просматривать переменные запуска для сервера.'
       startup_update_desc: 'Позволяет пользователю изменять переменные запуска для сервера.'
@@ -660,17 +655,17 @@ pteroca:
       database_update_desc: 'Позволяет пользователю изменять пароли в экземпляре базы данных.'
       database_delete_desc: 'Позволяет пользователю удалять экземпляр базы данных с этого сервера.'
       database_view_password_desc: 'Позволяет пользователю просматривать пароли, связанные с экземплярами баз данных для этого сервера.'
-      schedule: 'Расписание'
+      schedule: Расписание
       schedule_description: 'Разрешения, которые контролируют доступ пользователя к управлению расписанием для этого сервера.'
       schedule_create_desc: 'Позволяет пользователю создавать новые расписания для этого сервера.'
       schedule_read_desc: 'Позволяет пользователю просматривать расписания и связанные с ними задачи для этого сервера.'
       schedule_update_desc: 'Позволяет пользователю обновлять расписания и задачи расписания для этого сервера.'
       schedule_delete_desc: 'Позволяет пользователю удалять расписания для этого сервера.'
-      settings: 'Настройки'
+      settings: Настройки
       settings_description: 'Разрешения, которые контролируют доступ пользователя к настройкам этого сервера.'
       settings_rename_desc: 'Позволяет пользователю переименовывать этот сервер и изменять описание.'
       settings_reinstall_desc: 'Позволяет пользователю запускать переустановку этого сервера.'
-      activity: 'Активность'
+      activity: Активность
       activity_description: 'Разрешения, которые контролируют доступ пользователя к журналам активности сервера.'
       activity_read_desc: 'Позволяет пользователю просматривать журналы активности для сервера.'
     eula:
@@ -678,25 +673,24 @@ pteroca:
         description: 'Ваш сервер Minecraft требует принятия Лицензионного соглашения конечного пользователя (EULA) перед запуском.'
         content: |
           Принимая EULA, вы соглашаетесь соблюдать условия, установленные Mojang Studios.
-        
+
           Основные положения:
           • Вы не можете распространять ничего из того, что мы создали
           • Вы не можете использовать ничего из того, что мы создали, в коммерческих целях
           • Вы можете создавать и распространять моды, но только если они не содержат наш код
-        
+
           Полные условия доступны по адресу: https://aka.ms/MinecraftEULA
         accept: 'Принять EULA и запустить сервер'
-        cancel: 'Отмена'
-        processing: 'Обработка...'
+        cancel: Отмена
+        processing: Обработка...
         required: 'Вы должны принять EULA, чтобы запустить сервер.'
         read_full: 'Прочитать полную EULA'
       alert:
         success: 'EULA успешно принята. Сервер перезапускается.'
         error: 'Не удалось принять EULA.'
-
   actions:
-    login: 'Войти'
-    logout: 'Выйти'
+    login: Войти
+    logout: Выйти
     create_payment: 'Создать платеж'
     bought_balance: 'Баланс приобретен'
     bought_server: 'Сервер приобретен'
@@ -716,7 +710,6 @@ pteroca:
     admin_create_server: 'Сервер создан (админ)'
     admin_create_free_server: 'Бесплатный сервер создан (админ)'
     user_api_key_regenerated: 'API-ключ перегенерирован'
-
   server_actions:
     change_details: 'Данные сервера изменены'
     reinstall: 'Сервер переустановлен'
@@ -738,13 +731,11 @@ pteroca:
     update_subuser: 'Подпользователь обновлен'
     delete_subuser: 'Подпользователь удален'
     accept_eula: 'Принята EULA Minecraft'
-
   voucher:
     expired: 'Срок действия ваучера истек.'
     discount_value_invalid: 'Неверное значение скидки. Максимум 100(%).'
     voucher_type_invalid: 'Этот ваучер нельзя использовать для данного типа платежа.'
     invalid_voucher_type: 'Неверный тип ваучера.'
-
   email_types:
     email_verification: 'Проверка электронной почты'
     payment_success: 'Подтверждение оплаты'
@@ -753,20 +744,19 @@ pteroca:
     renew_product: 'Продление продукта'
     reset_password: 'Сброс пароля'
     server_suspended: 'Приостановка сервера'
-
   crud:
     category:
       name: 'Название категории'
       description: 'Описание категории'
-      image: 'Изображение'
-      priority: 'Приоритет'
+      image: Изображение
+      priority: Приоритет
       priority_hint: 'Более низкие числа появляются первыми (например, 1 появляется перед 2). Используйте это для управления порядком отображения.'
-      featured: 'Рекомендуемый'
+      featured: Рекомендуемый
       featured_hint: 'Показывать эту категорию в разделе рекомендуемых на главной странице.'
       add: 'Добавить категорию'
       save: 'Сохранить категорию'
-      category: 'Категория'
-      categories: 'Категории'
+      category: Категория
+      categories: Категории
       created_successfully: 'Категория успешно создана.'
       updated_successfully: 'Категория успешно обновлена.'
       deleted_successfully: 'Категория успешно удалена.'
@@ -774,59 +764,59 @@ pteroca:
       update_error: 'Произошла ошибка при обновлении категории: %error%'
       delete_error: 'Произошла ошибка при удалении категории: %error%'
     product:
-      threads: 'Потоки'
+      threads: Потоки
       threads_hint: 'Количество выделенных потоков CPU для этого сервера.'
       details: 'Подробности о товаре'
       name: 'Название товара'
       description: 'Описание товара'
-      price: 'Цена'
-      is_active: 'Активный'
-      priority: 'Приоритет'
+      price: Цена
+      is_active: Активный
+      priority: Приоритет
       priority_hint: 'Более низкие числа появляются первыми (например, 1 появляется перед 2). Используйте это для управления порядком отображения.'
-      featured: 'Рекомендуемый'
+      featured: Рекомендуемый
       featured_hint: 'Показывать этот продукт в разделе рекомендуемых на главной странице.'
-      category: 'Категория'
-      image: 'Изображение'
+      category: Категория
+      image: Изображение
       image_help: 'Изображение будет отображаться в магазине.'
-      banner: 'Баннер'
+      banner: Баннер
       banner_help: 'Баннер будет отображаться на странице товара.'
       server_resources: 'Ресурсы сервера'
       disk_space: 'Место на диске'
       memory: 'Оперативная память'
       io: 'Настройка IO'
-      cpu: 'ЦПУ'
+      cpu: ЦПУ
       db_count: 'Базы данных'
-      swap: 'SWAP'
+      swap: SWAP
       backups: 'Резервные копии'
-      ports: 'Порты'
-      schedules: 'Расписания'
+      ports: Порты
+      schedules: Расписания
       schedules_hint: 'Максимальное количество расписаний, которые могут быть созданы для этого сервера. 0 означает, что использование функции расписаний невозможно.'
       product_connections: 'Связи товара'
-      nodes: 'Узлы'
-      nest: 'Nest'
-      eggs: 'Яйца'
+      nodes: Узлы
+      nest: Nest
+      eggs: Яйца
       created_at: 'Дата создания'
       updated_at: 'Дата изменения'
       add: 'Добавить продукт'
       save: 'Сохранить продукт'
-      copy: 'Копировать'
+      copy: Копировать
       copy_success: 'Продукт успешно скопирован'
       copy_modal:
         title: 'Копировать продукт'
         description: 'Вы уверены, что хотите скопировать этот продукт?'
         details: 'Будет создан новый продукт с той же конфигурацией. Вы сможете отредактировать его позже.'
-        cancel: 'Отмена'
+        cancel: Отмена
         confirm: 'Копировать продукт'
-      product: 'Товар'
-      products: 'Товары'
+      product: Товар
+      products: Товары
       egg_information: 'Информация о яйце'
       egg_options_you_can_edit: 'Вы можете изменить следующие параметры в вашей панели Pterodactyl.'
-      egg_variables: 'Переменные'
-      egg_configuration: 'Конфигурация'
+      egg_variables: Переменные
+      egg_configuration: Конфигурация
       egg_default_configuration: 'Конфигурация по умолчанию'
-      egg_variable_name: 'Название'
-      egg_variable_description: 'Описание'
-      egg_variable_value: 'Значение'
+      egg_variable_name: Название
+      egg_variable_description: Описание
+      egg_variable_value: Значение
       egg_variable_user_viewable: 'Доступно пользователю'
       egg_variable_user_editable: 'Редактируемо пользователем'
       egg_allow_change: 'Разрешить замену яиц с переустановкой'
@@ -843,7 +833,7 @@ pteroca:
       nodes_hint: 'Выберите одну или несколько физических или виртуальных машин (узлов) из вашей конфигурации Pterodactyl.'
       nest_hint: 'Nest - это категория, которая группирует связанные Eggs. Выберите Nest, чтобы загрузить его Eggs.'
       eggs_hint: 'Eggs определяют конкретные конфигурации сервера (игры или приложения). Выберите Eggs, которые вы хотите, чтобы этот продукт поддерживал.'
-      pricing: 'Ценообразование'
+      pricing: Ценообразование
       price_static_plan: 'Статический тариф'
       price_static_plan_hint: 'Цена продукта на фиксированный период, который пользователи могут выбрать как период оплаты.'
       price_dynamic_plan: 'Динамический тариф \- по требованию'
@@ -851,29 +841,29 @@ pteroca:
       price_dynamic_only_one_plan: 'Можно задать только один динамический тариф.'
       price_slot_plan: 'Цена плана за слот'
       price_slot_plan_hint: 'Цена за слот. После установки свяжите переменную для максимального числа игроков в подключениях продукта для каждого egg.'
-      period: 'Период'
-      unit: 'Единица'
-      days: 'Дни'
-      hours: 'Часы'
-      minutes: 'Минуты'
+      period: Период
+      unit: Единица
+      days: Дни
+      hours: Часы
+      minutes: Минуты
       server_product: 'Серверный продукт'
       server_products: 'Серверные продукты'
       original_product: 'Исходный продукт'
-      build_name: 'Сборка'
-      server_build: 'Сервер'
-      server_builds: 'Серверы'
-      server: 'Сервер'
+      build_name: Сборка
+      server_build: Сервер
+      server_builds: Серверы
+      server: Сервер
       build_details: 'Детали сборки'
-      is_selected: 'Выбрано'
-      yes: 'Да'
-      no: 'Нет'
+      is_selected: Выбрано
+      'yes': Да
+      'no': Нет
       server_details: 'Детали сервера'
       server_build_offline_alert: 'Сервер в данный момент выключен. Изменять свойства сборки можно только, когда сервер включен.'
       at_least_one_price_required: 'Требуется хотя бы одна цена.'
       at_least_one_selected_price_required: 'Требуется хотя бы одна выбираемая цена.'
       only_one_selected_price_allowed: 'Разрешена только одна выбираемая цена.'
       product_connections_note: 'Следующие настройки будут применены только после переустановки сервера или смены программного обеспечения.'
-      deleted_at: 'Удалён'
+      deleted_at: Удалён
       egg_variable_slot_variable: 'Переменная слота'
       egg_variable_slot_variable_hint: 'Выберите переменную, которая задает максимальные слоты (игроков) для ценообразования по слотам'
       slot_variable_not_configured_egg: 'Переменная слота не настроена для этого egg'
@@ -886,13 +876,13 @@ pteroca:
       egg_validation_error: 'Невозможно проверить яйца с Pterodactyl. Пожалуйста, проверьте ваше API-соединение.'
       eggs_auto_removed_warning: '%count% яйцо(а) были автоматически удалены из этого продукта, поскольку они больше не существуют в Pterodactyl. Изменения будут сохранены при отправке формы.'
       health_status: 'Состояние Здоровья'
-      health_status.healthy: 'OK'
-      health_status.some_eggs_invalid: 'Предупреждение'
-      health_status.all_eggs_invalid: 'Критично'
+      health_status.healthy: OK
+      health_status.some_eggs_invalid: Предупреждение
+      health_status.all_eggs_invalid: Критично
       health_status.no_eggs: 'Нет Яиц'
       health_status.no_prices: 'Нет Цен'
       health_status.nest_unavailable: 'Ошибка Гнезда'
-      health_status.unknown: 'Неизвестно'
+      health_status.unknown: Неизвестно
       created_successfully: 'Продукт успешно создан.'
       updated_successfully: 'Продукт успешно обновлен.'
       deleted_successfully: 'Продукт успешно удален.'
@@ -909,28 +899,28 @@ pteroca:
       selected_node_id: 'Выбранный ID узла'
       original_product: 'Оригинальный продукт'
     plugin:
-      plugins: 'Плагины'
+      plugins: Плагины
       manage_plugins: 'Управление плагинами'
-      name: 'Имя'
+      name: Имя
       display_name: 'Отображаемое имя'
-      version: 'Версия'
-      author: 'Автор'
-      description: 'Описание'
-      state: 'Состояние'
-      capabilities: 'Возможности'
+      version: Версия
+      author: Автор
+      description: Описание
+      state: Состояние
+      capabilities: Возможности
       min_pteroca: 'Мин. PteroCA'
       max_pteroca: 'Макс. PteroCA'
-      enabled_at: 'Включен'
-      disabled_at: 'Отключен'
+      enabled_at: Включен
+      disabled_at: Отключен
       fault_reason: 'Причина неисправности'
-      created_at: 'Создан'
-      actions: 'Действия'
-      settings: 'Настройки'
-      enable: 'Включить'
-      disable: 'Отключить'
-      reset: 'Сбросить'
-      details: 'Подробности'
-      plugin: 'Плагин'
+      created_at: Создан
+      actions: Действия
+      settings: Настройки
+      enable: Включить
+      disable: Отключить
+      reset: Сбросить
+      details: Подробности
+      plugin: Плагин
       plugin_management: 'Управление плагинами'
       plugin_management_description: 'Управляйте и настраивайте плагины для вашей установки PteroCA'
       plugin_details: 'Подробности плагина'
@@ -955,22 +945,22 @@ pteroca:
       created_at_label: 'Создан:'
       no_description_provided: 'Описание не предоставлено'
       not_specified: 'Не указано'
-      none: 'Нет'
+      none: Нет
       back_to_list: 'Вернуться к списку'
       plugin_error: 'Ошибка плагина'
       update_available: 'Обновление доступно'
       update_available_message: 'Новая версия этого плагина доступна в файловой системе. Отключите и снова включите плагин, чтобы применить обновление.'
       no_plugins_found: 'Плагины не найдены в каталоге /plugins/'
-      dependencies: 'Зависимости'
+      dependencies: Зависимости
       circular_dependency_detected: 'Обнаружена циклическая зависимость'
       required_plugin: 'Обязательный плагин'
       version_constraint: 'Ограничение версии'
       installed_version: 'Установленная версия'
       not_installed: 'Не установлен'
-      missing: 'Отсутствует'
+      missing: Отсутствует
       not_enabled: 'Не включен'
       incompatible_version: 'Несовместимая версия'
-      satisfied: 'Удовлетворен'
+      satisfied: Удовлетворен
       dependent_plugins: 'Зависимые плагины'
       dependents_warning: 'Следующие плагины зависят от этого плагина. Отключение его может повлиять на их функциональность.'
       plugin_name: 'Имя плагина'
@@ -985,7 +975,7 @@ pteroca:
       plugin_reset_successfully: 'Плагин "%s" успешно сброшен. Теперь вы можете попробовать включить его снова.'
       failed_to_reset_plugin: 'Не удалось сбросить плагин: %s'
       plugin_not_faulted: 'Плагин "%s" не в состоянии неисправности. Сброс не требуется.'
-      delete: 'Удалить'
+      delete: Удалить
       delete_plugin: 'Удалить Плагин'
       delete_plugin_title: 'Удалить Плагин'
       delete_confirmation_message: 'Вы уверены, что хотите навсегда удалить этот плагин?'
@@ -997,20 +987,20 @@ pteroca:
       plugin_deleted_successfully: 'Плагин "%s" успешно удален.'
       failed_to_delete_plugin: 'Не удалось удалить плагин: %s'
       deletion_prevented: 'Удаление плагина было заблокировано системой.'
-      warning: 'Предупреждение'
-      cancel: 'Отмена'
-      close: 'Закрыть'
+      warning: Предупреждение
+      cancel: Отмена
+      close: Закрыть
     theme:
       theme_management_description: 'Управляйте и настраивайте темы для различных контекстов'
       appearance_settings: 'Настройки внешнего вида'
       name: 'Название темы'
-      version: 'Версия'
-      author: 'Автор'
-      contexts: 'Контексты'
-      status: 'Статус'
-      actions: 'Действия'
-      active: 'Активно'
-      inactive: 'Неактивно'
+      version: Версия
+      author: Автор
+      contexts: Контексты
+      status: Статус
+      actions: Действия
+      active: Активно
+      inactive: Неактивно
       no_themes_found: 'Темы не найдены для этого контекста'
       theme_details: 'Детали темы'
       theme_information: 'Информация о теме'
@@ -1022,16 +1012,16 @@ pteroca:
       set_as_default: 'Установить по умолчанию'
       set_as_default_in_context: 'Установить по умолчанию для %s'
       set_as_default_in: 'Установить по умолчанию для %s'
-      context_panel: 'Панель'
-      context_landing: 'Лендинг'
-      context_email: 'Email'
+      context_panel: Панель
+      context_landing: Лендинг
+      context_email: Email
       active_in: 'Активна в'
       confirm_set_default: 'Установить тему по умолчанию'
       confirm_set_default_message: 'Вы уверены, что хотите установить'
       for_context: 'в качестве темы по умолчанию для'
       set_default_warning: 'Это немедленно изменит внешний вид для всех пользователей'
-      cancel: 'Отмена'
-      confirm: 'Подтвердить'
+      cancel: Отмена
+      confirm: Подтвердить
       set_as_default_success: 'Тема "%s" установлена по умолчанию для контекста %s'
       set_as_default_error: 'Не удалось установить тему по умолчанию: %s'
       theme_not_found: 'Тема "%s" не найдена'
@@ -1071,14 +1061,14 @@ pteroca:
       pterodactyl_server_id: 'ID сервера Pterodactyl'
       pterodactyl_server_identifier: 'Идентификатор Pterodactyl'
       name: 'Имя сервера'
-      product: 'Товар'
-      user: 'Владелец'
+      product: Товар
+      user: Владелец
       created_at: 'Дата создания'
       expires_at: 'Истекает в'
-      is_suspended: 'Приостановлен'
-      save: 'Сохранить'
-      server: 'Сервер'
-      servers: 'Сервера'
+      is_suspended: Приостановлен
+      save: Сохранить
+      server: Сервер
+      servers: Сервера
       manage_server: 'Управлять сервером'
       show_server_dashboard: 'Показать панель сервера'
       auto_renewal: 'Автоматическое продление'
@@ -1098,7 +1088,7 @@ pteroca:
       unsuspended_error: 'Произошла ошибка при возобновлении работы сервера.'
       details_updated_successfully: 'Данные сервера успешно обновлены.'
       details_update_error: 'Произошла ошибка при обновлении данных сервера.'
-      deleted_at: 'Удалено'
+      deleted_at: Удалено
       create_server: 'Создать Сервер'
       pterodactyl_creation_failed: 'Не удалось создать сервер на Pterodactyl'
       base_product: 'Базовый Продукт'
@@ -1113,14 +1103,14 @@ pteroca:
       value: 'Значение настройки'
       add: 'Добавить параметр'
       save: 'Сохранить настройку'
-      setting: 'Параметр'
-      settings: 'Настройки'
-      type: 'Тип'
-      context: 'Контекст'
-      hierarchy: 'Иерархия'
-      yes: 'Да'
-      no: 'Нет'
-      hint: 'Описание'
+      setting: Параметр
+      settings: Настройки
+      type: Тип
+      context: Контекст
+      hierarchy: Иерархия
+      'yes': Да
+      'no': Нет
+      hint: Описание
       set_as_empty: 'Установить как пустое'
       set_as_empty_help: 'Отметьте это, чтобы установить значение как пустое (null).'
       panel_theme:
@@ -1161,7 +1151,7 @@ pteroca:
         smtp_port: 'Порт SMTP: 587 (TLS, рекомендуется), 465 (SSL) или 25 (незашифрованный). Должен соответствовать конфигурации сервера.'
         smtp_username: 'Имя пользователя для аутентификации SMTP. Обычно полный адрес электронной почты (напр. noreply@example.com).'
         smtp_password: 'Пароль или токен для аутентификации SMTP. Для Gmail используйте пароль приложения. Безопасно хранится.'
-        smtp_from: 'Email отправителя в поле ''From'' (напр. noreply@example.com). Должен соответствовать разрешенным отправителям SMTP.'
+        smtp_from: "Email отправителя в поле 'From' (напр. noreply@example.com). Должен соответствовать разрешенным отправителям SMTP."
         customer_motd_message: 'Содержимое виджета MOTD. Поддерживает синтаксис HTML и Twig для форматирования, ссылок, динамического содержимого.'
         customer_motd_enabled: 'Показать виджет Сообщение Дня на панели. Полезно для объявлений и уведомлений.'
         customer_motd_title: 'Заголовок виджета MOTD (напр. Важное Объявление, Добро пожаловать). Появляется жирным сверху карточки.'
@@ -1185,16 +1175,19 @@ pteroca:
         email_theme: 'Тема для шаблонов email. Контролирует стиль уведомлений, регистрации и писем о покупке.'
         landing_page_enabled: 'Включить публичную посадочную страницу. Если отключено, посетители перенаправляются на страницу входа.'
         show_pterodactyl_logs_in_server_activity: 'Показывать логи Pterodactyl в активности сервера'
+        date_format: 'Выберите, как даты и время отображаются по всему панели. Влияет на все отображения дат для всех пользователей.'
+        date_timezone: 'Выберите часовой пояс для отображения дат. Все даты будут конвертированы из UTC в выбранный часовой пояс.'
+        date_show_timezone: 'При включении аббревиатура часового пояса (например, "UTC", "EST") будет показана рядом со всеми отображаемыми датами.'
       template:
         name: 'Название шаблона'
         description: 'Описание шаблона'
-        author: 'Автор'
-        version: 'Версия'
-        license: 'Лицензия'
+        author: Автор
+        version: Версия
+        license: Лицензия
         pterocaVersion: 'Версия PteroCA'
         outdated: 'Версия шаблона устарела по сравнению с текущей версией PteroCA. Некоторые функции могут работать некорректно'
         phpVersion: 'Версия PHP'
-        options: 'Опции'
+        options: Опции
         supportDarkMode: 'Поддержка темного режима'
         supportCustomColors: 'Разрешить настраивать пользовательские цвета'
         contexts: 'Поддерживаемые контексты для этого шаблона. Определяет где шаблон может быть использован (напр. email, посадочная страница).'
@@ -1215,24 +1208,24 @@ pteroca:
       delete_error: 'Произошла ошибка при удалении настройки: %error%'
     user:
       email: 'Электронная почта'
-      roles: 'Роли'
+      roles: Роли
       roles_help: 'Назначьте роли этому пользователю. Каждая роль предоставляет набор разрешений, которые контролируют, к чему пользователь имеет доступ и что может делать в системе.'
-      balance: 'Баланс'
-      password: 'Пароль'
+      balance: Баланс
+      password: Пароль
       password_hint: 'Оставьте пустым, если не хотите менять пароль.'
-      name: 'Имя'
-      surname: 'Фамилия'
+      name: Имя
+      surname: Фамилия
       add: 'Добавить пользователя'
       save: 'Сохранить пользователя'
-      user: 'Пользователь'
-      users: 'Пользователи'
-      verified: 'Подтверждён'
-      blocked: 'Заблокирован'
+      user: Пользователь
+      users: Пользователи
+      verified: Подтверждён
+      blocked: Заблокирован
       pterodactyl_user_id: 'ID пользователя Pterodactyl'
       created_at: 'Дата создания'
       updated_at: 'Последняя активность'
-      deleted_at: 'Удалено'
-      avatar: 'Аватар'
+      deleted_at: Удалено
+      avatar: Аватар
       repeat_password: 'Повторите пароль'
       repeat_password_hint: 'Введите пароль еще раз для подтверждения.'
       passwords_must_match: 'Пароли должны совпадать.'
@@ -1241,7 +1234,7 @@ pteroca:
       account_restored: 'Учетная запись пользователя была восстановлена из ранее удаленной учетной записи.'
       created_successfully: 'Пользователь успешно создан.'
       restore_error: 'Ошибка при восстановлении пользователя.'
-      restore: 'Восстановить'
+      restore: Восстановить
       pterodactyl_user_not_found: 'Пользователь не найден в Pterodactyl, но успешно удален из PteroCA.'
       cannot_delete_user_with_active_servers: 'Невозможно удалить пользователя с {{ count }} активным(и) сервером(ами). Сначала удалите или приостановите серверы.'
       updated_successfully: 'Пользователь успешно обновлен.'
@@ -1254,7 +1247,7 @@ pteroca:
       show_api_key: 'Показать ключ API'
       hide_api_key: 'Скрыть ключ API'
       regenerate_api_key: 'Регенерировать ключ API'
-      loading: 'Загрузка...'
+      loading: Загрузка...
       api_key_visibility_not_available: 'Полный ключ API недоступен для отображения. Регенерируйте, чтобы увидеть новый ключ.'
       api_key_regenerated_successfully: 'Ключ API успешно регенерирован.'
       api_key_generation_failed: 'Не удалось сгенерировать новый ключ API. Пожалуйста, проверьте подключение к Pterodactyl.'
@@ -1267,26 +1260,26 @@ pteroca:
         consequence_1: 'Текущий ключ API перестанет работать немедленно'
         consequence_2: 'Новый ключ API будет сгенерирован и сохранен автоматически'
         consequence_3: 'Старый ключ API будет удален из Pterodactyl'
-        cancel: 'Отмена'
+        cancel: Отмена
         confirm: 'Регенерировать ключ API'
     role:
-      name: 'Имя'
+      name: Имя
       name_help: 'Внутренний идентификатор роли (строчные буквы, буквенно-цифровые, только подчеркивания). Не может быть изменен после создания.'
       display_name: 'Отображаемое имя'
-      description: 'Описание'
+      description: Описание
       is_system: 'Системная роль'
       is_system_help: 'Системные роли защищены и не могут быть изменены или удалены.'
-      permissions: 'Разрешения'
+      permissions: Разрешения
       permissions_help: 'Выберите разрешения для назначения этой роли. Пользователи с этой ролью будут иметь доступ ко всем выбранным разрешениям.'
-      permissions_count: 'Разрешения'
-      users: 'Пользователи'
-      users_count: 'Пользователи'
-      created_at: 'Создано'
-      updated_at: 'Обновлено'
+      permissions_count: Разрешения
+      users: Пользователи
+      users_count: Пользователи
+      created_at: Создано
+      updated_at: Обновлено
       add: 'Добавить роль'
       save: 'Сохранить роль'
-      role: 'Роль'
-      roles: 'Роли'
+      role: Роль
+      roles: Роли
       created_successfully: 'Роль успешно создана.'
       updated_successfully: 'Роль успешно обновлена.'
       deleted_successfully: 'Роль успешно удалена.'
@@ -1296,56 +1289,56 @@ pteroca:
       field:
         no_permissions: 'Нет разрешений, назначенных этой роли'
         permissions_across: 'разрешения через'
-        sections: 'разделы'
+        sections: разделы
         no_active_users: 'Нет активных пользователей, назначенных этой роли'
         deleted_blocked_hidden: 'удаленные/заблокированные пользователи скрыты'
-        id: 'ID'
+        id: ID
         email: 'Электронная почта'
-        name: 'Имя'
-        status: 'Статус'
-        created: 'Создано'
-        verified: 'Проверено'
+        name: Имя
+        status: Статус
+        created: Создано
+        verified: Проверено
         not_verified: 'Не проверено'
         active_users: 'Активные пользователи:'
     permission:
       code: 'Код разрешения'
-      name: 'Имя'
-      description: 'Описание'
-      section: 'Раздел'
+      name: Имя
+      description: Описание
+      section: Раздел
       plugin_name: 'Имя плагина'
       is_system: 'Системное разрешение'
       is_system_help: 'Системные разрешения управляются автоматически и не могут быть изменены вручную.'
       roles: 'Назначенные роли'
-      roles_count: 'Роли'
-      created_at: 'Создано'
-      updated_at: 'Обновлено'
-      permission: 'Разрешение'
-      permissions: 'Разрешения'
+      roles_count: Роли
+      created_at: Создано
+      updated_at: Обновлено
+      permission: Разрешение
+      permissions: Разрешения
       cannot_create: 'Разрешения управляются системой и не могут быть созданы вручную.'
       cannot_update: 'Разрешения управляются системой и не могут быть обновлены вручную.'
       cannot_delete: 'Разрешения управляются системой и не могут быть удалены вручную.'
       field:
         no_roles: 'Ни одна роль не имеет этого разрешения'
         role_name: 'Имя:'
-        users_count: 'пользователь(ей)'
-        permissions_count: 'разрешение(ий)'
+        users_count: пользователь(ей)
+        permissions_count: разрешение(ий)
         total_roles: 'Всего ролей с этим разрешением:'
     payment:
       session_id: 'ID сеанса'
-      status: 'Статус'
-      amount: 'Сумма'
-      currency: 'Валюта'
-      user: 'Пользователь'
+      status: Статус
+      amount: Сумма
+      currency: Валюта
+      user: Пользователь
       created_at: 'Дата создания'
       updated_at: 'Дата изменения'
-      payment: 'Платеж'
-      payments: 'Платежи'
+      payment: Платеж
+      payments: Платежи
       balance_amount: 'Сумма баланса'
       used_voucher: 'Использованный купон'
       last_update: 'Последнее обновление'
       description: 'Управляйте платежами и просматривайте историю транзакций'
       continue_payment: 'Продолжить платеж'
-      detail: 'Подробности'
+      detail: Подробности
       gateway: 'Платежный шлюз'
     user_account:
       description: 'Редактируйте свои персональные данные, изменяйте пароль и управляйте настройками аккаунта'
@@ -1356,30 +1349,30 @@ pteroca:
       update_error: 'Произошла ошибка при обновлении аккаунта пользователя: %error%'
       delete_error: 'Произошла ошибка при удалении аккаунта пользователя: %error%'
     log:
-      log: 'Лог'
-      logs: 'Логи'
+      log: Лог
+      logs: Логи
       server_log: 'Лог сервера'
       server_logs: 'Логи сервера'
-      action: 'Действие'
-      details: 'Подробности'
+      action: Действие
+      details: Подробности
       created_at: 'Дата создания'
-      user: 'Пользователь'
-      ip_address: 'IP-адрес'
-      server: 'Сервер'
+      user: Пользователь
+      ip_address: IP-адрес
+      server: Сервер
     email_log:
       email_log: 'Журнал электронной почты'
       email_logs: 'Журналы электронной почты'
       email_type: 'Тип электронной почты'
       metadata: 'Метаданные электронной почты'
-      sent_at: 'Отправлено'
-      user: 'Пользователь'
-      server: 'Сервер'
+      sent_at: Отправлено
+      user: Пользователь
+      server: Сервер
     voucher:
-      voucher: 'Ваучер'
-      vouchers: 'Ваучеры'
-      code: 'Код'
+      voucher: Ваучер
+      vouchers: Ваучеры
+      code: Код
       code_help: 'Введите код купона.'
-      value: 'Значение'
+      value: Значение
       value_help: 'Введите значение купона. Поддерживаются десятичные значения (например, 1.5).'
       new_accounts_only: 'Только для новых аккаунтов'
       new_accounts_only_help: 'Купон может использоваться только новыми аккаунтами.'
@@ -1395,9 +1388,9 @@ pteroca:
       used_count_help: 'Количество раз использования этого купона.'
       one_use_per_user: 'Один раз на пользователя'
       one_use_per_user_help: 'Купон можно использовать только один раз на пользователя.'
-      description: 'Описание'
+      description: Описание
       description_help: 'Введите описание купона. Только для внутреннего использования.'
-      type: 'Тип'
+      type: Тип
       type_help: 'Выберите тип купона.'
       balance_topup: 'Пополнение баланса'
       payment_discount: 'Скидка на оплату'
@@ -1413,43 +1406,43 @@ pteroca:
       voucher_usage: 'Использованный купон'
       voucher_usages: 'Использованные купоны'
       voucher_code: 'Код купона'
-      user: 'Пользователь'
-      used_at: 'Использовано'
+      user: Пользователь
+      used_at: Использовано
     menu:
-      menu: 'Меню'
-      dashboard: 'Панель'
-      servers: 'Сервера'
+      menu: Меню
+      dashboard: Панель
+      servers: Сервера
       my_servers: 'Мои серверы'
-      shop: 'Магазин'
-      wallet: 'Кошелек'
-      administration: 'Администрирование'
-      categories: 'Категории'
-      products: 'Товары'
-      settings: 'Настройки'
-      general: 'Общее'
-      pterodactyl: 'Птеродактиль'
+      shop: Магазин
+      wallet: Кошелек
+      administration: Администрирование
+      categories: Категории
+      products: Товары
+      settings: Настройки
+      general: Общее
+      pterodactyl: Птеродактиль
       appearance: 'Внешний вид'
-      security: 'Безопасность'
+      security: Безопасность
       payment_gateways: 'Платежные шлюзы'
       email: 'Электронная почта'
-      users: 'Пользователи'
-      logout: 'Выйти'
-      login: 'Войти'
-      phpmyadmin: 'PHPMyAdmin'
-      payments: 'Платежи'
-      logs: 'Логи'
+      users: Пользователи
+      logout: Выйти
+      login: Войти
+      phpmyadmin: PHPMyAdmin
+      payments: Платежи
+      logs: Логи
       email_logs: 'Журналы электронной почты'
       server_logs: 'Логи сервера'
-      overview: 'Обзор'
-      server_builds: 'Серверы'
-      vouchers: 'Ваучеры'
+      overview: Обзор
+      server_builds: Серверы
+      vouchers: Ваучеры
       voucher_usages: 'Использованные купоны'
       my_account: 'Мой аккаунт'
       account_settings: 'Настройки аккаунта'
       roles_and_permissions: 'Роли и разрешения'
-      roles: 'Роли'
-      permissions: 'Разрешения'
-      themes: 'Темы'
+      roles: Роли
+      permissions: Разрешения
+      themes: Темы
       manage_themes: 'Управление темами'
   api:
     schedule:
@@ -1479,7 +1472,6 @@ pteroca:
       only_during_order: 'Купон можно использовать только во время оформления заказа.'
       server_discount_only_on_purchase: 'Этот ваучер можно использовать только при покупке или продлении сервера. Пожалуйста, перейдите в магазин, чтобы использовать этот ваучер.'
       payment_discount_only_on_payment: 'Этот ваучер можно использовать только на странице оплаты. Пожалуйста, перейдите к оформлению заказа, чтобы применить этот ваучер.'
-
   email:
     creation_not_sent_misconfigured: 'Сервер был успешно создан, но письмо с подтверждением не удалось отправить из-за проблем с конфигурацией электронной почты. Пожалуйста, проверьте настройки электронной почты.'
     renewal_not_sent_misconfigured: 'Сервер был успешно продлен, но письмо с подтверждением не удалось отправить из-за проблем с конфигурацией электронной почты. Пожалуйста, проверьте настройки электронной почты.'
@@ -1489,24 +1481,24 @@ pteroca:
       visit_website: 'Посетите наш сайт:'
       copyright: 'Все права защищены.'
     verification:
-      subject: "Подтверждение электронной почты - %siteName%"
-      title: "Подтверждение электронной почты"
-      subtitle: "Пожалуйста, подтвердите свой адрес электронной почты, чтобы продолжить"
-      hello: "Привет, %name%!"
-      message: "Спасибо за регистрацию в %siteName%. Подтвердите свой адрес электронной почты, нажав кнопку ниже."
-      verify_button: "Подтвердить адрес электронной почты"
-      alternative_text: "Если кнопка не работает, вы также можете скопировать и вставить следующую ссылку в свой браузер:"
-      footer_text: "Если вы не создавали аккаунт в %siteName%, вы можете безопасно игнорировать это письмо."
-      resend_too_soon: "Вы можете повторно отправить письмо с подтверждением только один раз в %minutes% минут. Попробуйте позже."
-      resend_success: "Письмо с подтверждением было отправлено на ваш адрес электронной почты."
-      not_logged_in: "Вы должны быть авторизованы, чтобы повторно отправить письмо с подтверждением."
-      already_verified: "Ваш адрес электронной почты уже подтверждён."
+      subject: 'Подтверждение электронной почты - %siteName%'
+      title: 'Подтверждение электронной почты'
+      subtitle: 'Пожалуйста, подтвердите свой адрес электронной почты, чтобы продолжить'
+      hello: 'Привет, %name%!'
+      message: 'Спасибо за регистрацию в %siteName%. Подтвердите свой адрес электронной почты, нажав кнопку ниже.'
+      verify_button: 'Подтвердить адрес электронной почты'
+      alternative_text: 'Если кнопка не работает, вы также можете скопировать и вставить следующую ссылку в свой браузер:'
+      footer_text: 'Если вы не создавали аккаунт в %siteName%, вы можете безопасно игнорировать это письмо.'
+      resend_too_soon: 'Вы можете повторно отправить письмо с подтверждением только один раз в %minutes% минут. Попробуйте позже.'
+      resend_success: 'Письмо с подтверждением было отправлено на ваш адрес электронной почты.'
+      not_logged_in: 'Вы должны быть авторизованы, чтобы повторно отправить письмо с подтверждением.'
+      already_verified: 'Ваш адрес электронной почты уже подтверждён.'
     pricing:
       slot_format: '{{ slots }} слотов × {{ price }} {{ currency }} = {{ total }} {{ currency }}'
       static_format: '{{ price }} {{ currency }}'
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
-      subject: 'Регистрация'
+      subject: Регистрация
       subtitle: 'Ваша учетная запись была успешно создана'
       welcome: 'Добро пожаловать на наш сервис! Спасибо за регистрацию.'
       account_ready: 'Ваша учётная запись готова к использованию. Теперь вы можете войти в свою учётную запись и начать пользоваться нашими услугами.'
@@ -1535,7 +1527,7 @@ pteroca:
       product_name: 'Название товара'
       product_price: 'Цена товара'
       server_details: 'Детали сервера'
-      ip_address: 'IP-адрес'
+      ip_address: IP-адрес
       management_panel: 'Панель управления'
       panel_username: 'Имя пользователя панели'
       panel_password: 'Пароль панели управления'
@@ -1548,7 +1540,7 @@ pteroca:
       server_renewed: 'Вы продлили сервер, приобретенный в нашем предложении.'
       new_expiration: 'Новая дата истечения:'
     payment:
-      subject: 'Оплата'
+      subject: Оплата
       title: 'Платеж получен'
       subtitle: 'Спасибо за ваш платеж'
       amount_paid: 'Оплаченная сумма'
@@ -1589,26 +1581,26 @@ pteroca:
       useful_resources: 'Полезные ресурсы'
       servers: 'Активные серверы'
       users: 'Зарегистрированные пользователи'
-      payments: 'Платежи'
+      payments: Платежи
       last_30_days: 'Последние 30 дней'
-      now: 'Сейчас'
+      now: Сейчас
       links: 'Полезные ссылки'
       system: 'Сведения о системе'
       payment_overview: 'Обзор платежей'
       view_all: 'Просмотреть все'
       last_registered_users: 'Последние зарегистрированные пользователи'
-      user: 'Пользователь'
-      amount: 'Сумма'
-      currency: 'Валюта'
-      status: 'Статус'
-      date: 'Дата'
+      user: Пользователь
+      amount: Сумма
+      currency: Валюта
+      status: Статус
+      date: Дата
       no_payments: 'Ваша система еще не получила никаких платежей.'
-      balance: 'Баланс'
-      verified: 'Подтверждён'
+      balance: Баланс
+      verified: Подтверждён
       unverified: 'Не подтвержден'
       project_site: 'Сайт проекта'
-      documentation: 'Документация'
-      support: 'Поддержка'
+      documentation: Документация
+      support: Поддержка
       up_to_date: 'Последняя версия'
       update_available: 'Имеется обновление'
       pteroca_plugin_not_detected: 'Не обнаружен'
@@ -1621,79 +1613,78 @@ pteroca:
       eggs_required: 'Должно быть выбрано хотя бы одно яйцо'
       use_as_starting_egg: 'Использовать как начальное яйцо'
       starting_egg_help: 'Это яйцо будет использоваться при создании сервера'
-
   first_configuration:
-    title: "Первая настройка"
-    description: "Эта страница доступна только один раз после установки. Пожалуйста, заполните обязательные поля для настройки панели."
-    step: "Шаг"
-    step_welcome: "Добро пожаловать"
-    step_site: "Сайт"
-    step_pterodactyl: "Pterodactyl"
-    step_email: "Email"
-    step_payment: "Платеж"
-    step_admin: "Админ"
-    next: "Далее"
-    site_settings_description: "Настройте основные параметры вашей панели, включая URL сайта, заголовок и язык по умолчанию."
-    email_settings_description: "Настройте параметры SMTP, чтобы ваша панель могла отправлять электронные письма пользователям для уведомлений и управления учетными записями."
-    payment_settings_description: "Настройте шлюз оплаты и параметры валюты, чтобы пользователи могли совершать покупки на вашей панели."
-    admin_account_description: "Создайте первую учетную запись администратора, которая будет иметь полный доступ как к PteroCA, так и к Pterodactyl."
-    configurator_welcome: "Добро пожаловать в конфигуратор PteroCA."
-    configurator_welcome_description: "Этот мастер поможет вам настроить основные параметры панели."
+    title: 'Первая настройка'
+    description: 'Эта страница доступна только один раз после установки. Пожалуйста, заполните обязательные поля для настройки панели.'
+    step: Шаг
+    step_welcome: 'Добро пожаловать'
+    step_site: Сайт
+    step_pterodactyl: Pterodactyl
+    step_email: Email
+    step_payment: Платеж
+    step_admin: Админ
+    next: Далее
+    site_settings_description: 'Настройте основные параметры вашей панели, включая URL сайта, заголовок и язык по умолчанию.'
+    email_settings_description: 'Настройте параметры SMTP, чтобы ваша панель могла отправлять электронные письма пользователям для уведомлений и управления учетными записями.'
+    payment_settings_description: 'Настройте шлюз оплаты и параметры валюты, чтобы пользователи могли совершать покупки на вашей панели.'
+    admin_account_description: 'Создайте первую учетную запись администратора, которая будет иметь полный доступ как к PteroCA, так и к Pterodactyl.'
+    configurator_welcome: 'Добро пожаловать в конфигуратор PteroCA.'
+    configurator_welcome_description: 'Этот мастер поможет вам настроить основные параметры панели.'
     configurator_welcome_description_2: "Пожалуйста, выберите язык конфигуратора и нажмите 'Начать', чтобы начать."
-    configurator_language: "Язык конфигуратора"
-    start_configuration: "Начать настройку"
-    site_settings: "Настройки сайта"
-    site_url: "URL сайта"
-    site_url_help: "Введите URL вашего сайта с протоколом (http:// или https://)."
-    site_title: "Название сайта"
-    site_title_help: "Введите название вашего сайта."
-    site_locale: "Язык интерфейса"
-    site_locale_help: "Выберите язык пользовательского интерфейса."
-    email_settings: "Настройки электронной почты"
-    email_smtp_server: "SMTP сервер"
-    email_smtp_server_help: "Введите адрес SMTP сервера."
-    email_smtp_port: "SMTP порт"
-    email_smtp_port_help: "Введите порт SMTP сервера."
-    email_smtp_username: "SMTP имя пользователя"
-    email_smtp_username_help: "Введите имя пользователя SMTP."
-    email_smtp_password: "SMTP пароль"
-    email_smtp_password_help: "Введите SMTP пароль."
-    email_smtp_from: "Email отправителя"
-    email_smtp_from_help: "Введите адрес электронной почты, с которого будут отправляться письма."
-    pterodactyl_settings: "Настройки Pterodactyl"
-    pterodactyl_panel_url: "URL панели Pterodactyl"
-    pterodactyl_panel_url_help: "Введите URL вашей панели Pterodactyl с протоколом (http:// или https://)."
-    pterodactyl_panel_api_key: "API ключ панели Pterodactyl"
-    pterodactyl_panel_api_key_help: "Введите API ключ вашей панели Pterodactyl."
-    payment_settings: "Настройки платежей"
-    stripe_secret_key: "Секретный ключ Stripe"
-    stripe_secret_key_help: "Введите секретный ключ вашей учетной записи Stripe (необязательно, может быть установлен позже)."
-    currency: "Валюта"
-    currency_help: "Введите название валюты, в которой будут производиться платежи."
-    internal_currency_name: "Название внутренней валюты"
-    internal_currency_name_help: "Введите название внутренней валюты (например, монеты)."
-    create_admin_account: "Создать учетную запись администратора"
+    configurator_language: 'Язык конфигуратора'
+    start_configuration: 'Начать настройку'
+    site_settings: 'Настройки сайта'
+    site_url: 'URL сайта'
+    site_url_help: 'Введите URL вашего сайта с протоколом (http:// или https://).'
+    site_title: 'Название сайта'
+    site_title_help: 'Введите название вашего сайта.'
+    site_locale: 'Язык интерфейса'
+    site_locale_help: 'Выберите язык пользовательского интерфейса.'
+    email_settings: 'Настройки электронной почты'
+    email_smtp_server: 'SMTP сервер'
+    email_smtp_server_help: 'Введите адрес SMTP сервера.'
+    email_smtp_port: 'SMTP порт'
+    email_smtp_port_help: 'Введите порт SMTP сервера.'
+    email_smtp_username: 'SMTP имя пользователя'
+    email_smtp_username_help: 'Введите имя пользователя SMTP.'
+    email_smtp_password: 'SMTP пароль'
+    email_smtp_password_help: 'Введите SMTP пароль.'
+    email_smtp_from: 'Email отправителя'
+    email_smtp_from_help: 'Введите адрес электронной почты, с которого будут отправляться письма.'
+    pterodactyl_settings: 'Настройки Pterodactyl'
+    pterodactyl_panel_url: 'URL панели Pterodactyl'
+    pterodactyl_panel_url_help: 'Введите URL вашей панели Pterodactyl с протоколом (http:// или https://).'
+    pterodactyl_panel_api_key: 'API ключ панели Pterodactyl'
+    pterodactyl_panel_api_key_help: 'Введите API ключ вашей панели Pterodactyl.'
+    payment_settings: 'Настройки платежей'
+    stripe_secret_key: 'Секретный ключ Stripe'
+    stripe_secret_key_help: 'Введите секретный ключ вашей учетной записи Stripe (необязательно, может быть установлен позже).'
+    currency: Валюта
+    currency_help: 'Введите название валюты, в которой будут производиться платежи.'
+    internal_currency_name: 'Название внутренней валюты'
+    internal_currency_name_help: 'Введите название внутренней валюты (например, монеты).'
+    create_admin_account: 'Создать учетную запись администратора'
     admin_account_alert: 'Пожалуйста, укажите данные для новой учетной записи администратора, которая будет создана как в PteroCA, так и в Pterodactyl. Вы не можете использовать существующую учетную запись.'
-    admin_email: "Email администратора"
-    admin_email_help: "Введите адрес электронной почты администратора."
-    admin_password: "Пароль администратора"
-    admin_password_help: "Введите пароль для учетной записи администратора."
-    skip: "Пропустить"
-    back: "Назад"
-    documentation_hint: "Возникли проблемы с конфигуратором? Ознакомьтесь с документацией!"
-    discord_hint: "Или, может быть, вам нужна помощь? Присоединяйтесь к нашему серверу Discord!"
-    pterodactyl_plugin_hint: "Рекомендуется установить плагин PteroCA на ваш Pterodactyl для доступа ко всем функциям."
-    pterodactyl_plugin_hint_link: "Подробнее в документации."
+    admin_email: 'Email администратора'
+    admin_email_help: 'Введите адрес электронной почты администратора.'
+    admin_password: 'Пароль администратора'
+    admin_password_help: 'Введите пароль для учетной записи администратора.'
+    skip: Пропустить
+    back: Назад
+    documentation_hint: 'Возникли проблемы с конфигуратором? Ознакомьтесь с документацией!'
+    discord_hint: 'Или, может быть, вам нужна помощь? Присоединяйтесь к нашему серверу Discord!'
+    pterodactyl_plugin_hint: 'Рекомендуется установить плагин PteroCA на ваш Pterodactyl для доступа ко всем функциям.'
+    pterodactyl_plugin_hint_link: 'Подробнее в документации.'
     messages:
-      invalid_step: "Неверный шаг."
-      pterodactyl_api_error: "Не удалось подключиться к API Pterodactyl. Проверьте API ключ и URL панели."
-      smtp_error: "Не удалось подключиться к SMTP серверу. Проверьте настройки SMTP."
-      missing_fields: "Пожалуйста, заполните все обязательные поля."
-      pterodactyl_checking_api_connection: "Проверка подключения к API Pterodactyl..."
-      pterodactyl_api_connection_success: "Успешно подключено к API Pterodactyl."
+      invalid_step: 'Неверный шаг.'
+      pterodactyl_api_error: 'Не удалось подключиться к API Pterodactyl. Проверьте API ключ и URL панели.'
+      smtp_error: 'Не удалось подключиться к SMTP серверу. Проверьте настройки SMTP.'
+      missing_fields: 'Пожалуйста, заполните все обязательные поля.'
+      pterodactyl_checking_api_connection: 'Проверка подключения к API Pterodactyl...'
+      pterodactyl_api_connection_success: 'Успешно подключено к API Pterodactyl.'
       pterodactyl_addon_not_detected: 'Соединение с API установлено, но дополнение PteroCA Pterodactyl не установлено на вашей панели Pterodactyl. Пожалуйста, установите его перед продолжением.'
-      email_checking_smtp_connection: "Проверка подключения к SMTP серверу..."
-      email_smtp_connection_success: "Успешно подключено к SMTP серверу."
+      email_checking_smtp_connection: 'Проверка подключения к SMTP серверу...'
+      email_smtp_connection_success: 'Успешно подключено к SMTP серверу.'
       user_already_exists_in_pterodactyl: 'Пользователь с таким адресом электронной почты уже существует в Pterodactyl. Используйте другой адрес электронной почты.'
       user_validation_success: 'Проверка пользователя прошла успешно.'
       user_checking_account_creation: 'Проверка возможности создания аккаунта...'
@@ -1704,7 +1695,6 @@ pteroca:
       user_already_exists_in_local_database: 'Пользователь с таким адресом электронной почты уже существует в локальной базе данных.'
     telemetry_consent: 'Помогите улучшить PteroCA, отправив анонимные данные об использовании'
     telemetry_consent_help: 'Мы собираем анонимную телеметрию для улучшения PteroCA. Отслеживаются только события установки и ошибки. Личные данные, ключи API или URL не собираются.'
-
   error:
     invalid_csrf_token: 'Недействительный токен CSRF. Пожалуйста, обновите страницу и попробуйте снова.'
     user_not_found: 'Пользователь не найден.'
@@ -1712,39 +1702,39 @@ pteroca:
       title: 'Страница не найдена'
       message: 'Извините, но страница, которую вы ищете, не существует или была перемещена. Проверьте URL или вернитесь на главную страницу.'
       go_home: 'Главная страница'
-      go_back: 'Назад'
+      go_back: Назад
     500:
       title: 'Ошибка сервера'
       message: 'Извините, произошла внутренняя ошибка сервера. Наша команда была уведомлена о проблеме. Попробуйте обновить страницу через несколько минут или обратитесь к администратору.'
       go_home: 'Главная страница'
       refresh: 'Обновить страницу'
-      go_back: 'Назад'
+      go_back: Назад
     general:
       title: 'Произошла ошибка'
       message: 'Извините, произошла неожиданная ошибка. Попробуйте еще раз через некоторое время.'
       go_home: 'Главная страница'
-      go_back: 'Назад'
+      go_back: Назад
   plugin:
-    plugins: 'Плагины'
-    name: 'Имя'
+    plugins: Плагины
+    name: Имя
     display_name: 'Отображаемое имя'
-    version: 'Версия'
-    author: 'Автор'
-    description: 'Описание'
-    state: 'Состояние'
-    capabilities: 'Возможности'
+    version: Версия
+    author: Автор
+    description: Описание
+    state: Состояние
+    capabilities: Возможности
     min_pteroca: 'Мин PteroCA'
     max_pteroca: 'Макс PteroCA'
-    enabled_at: 'Включен'
-    disabled_at: 'Отключен'
+    enabled_at: Включен
+    disabled_at: Отключен
     fault_reason: 'Причина ошибки'
-    created_at: 'Создан'
-    actions: 'Действия'
-    settings: 'Настройки'
-    enable: 'Включить'
-    disable: 'Отключить'
-    details: 'Детали'
-    plugin: 'Плагин'
+    created_at: Создан
+    actions: Действия
+    settings: Настройки
+    enable: Включить
+    disable: Отключить
+    details: Детали
+    plugin: Плагин
     plugin_management: 'Управление Плагинами'
     plugin_management_description: 'Управляйте и настраивайте плагины для вашей установки PteroCA'
     plugin_details: 'Детали Плагина'
@@ -1769,22 +1759,22 @@ pteroca:
     created_at_label: 'Создан:'
     no_description_provided: 'Описание не предоставлено'
     not_specified: 'Не указано'
-    none: 'Нет'
+    none: Нет
     back_to_list: 'Вернуться к списку'
     plugin_error: 'Ошибка Плагина'
     update_available: 'Доступно Обновление'
     update_available_message: 'Новая версия этого плагина доступна в файловой системе. Отключите и включите плагин снова, чтобы применить обновление.'
     no_plugins_found: 'Плагины не найдены в директории /plugins/'
-    dependencies: 'Зависимости'
+    dependencies: Зависимости
     circular_dependency_detected: 'Обнаружена Циклическая Зависимость'
     required_plugin: 'Требуемый Плагин'
     version_constraint: 'Ограничение Версии'
     installed_version: 'Установленная Версия'
     not_installed: 'Не Установлено'
-    missing: 'Отсутствует'
+    missing: Отсутствует
     not_enabled: 'Не Включено'
     incompatible_version: 'Несовместимая Версия'
-    satisfied: 'Удовлетворено'
+    satisfied: Удовлетворено
     dependent_plugins: 'Зависимые Плагины'
     dependents_warning: 'Следующие плагины зависят от этого плагина. Отключение его может повлиять на их функциональность.'
     plugin_name: 'Имя Плагина'
@@ -1807,8 +1797,8 @@ pteroca:
       enable_after_upload: 'Включить плагин автоматически после загрузки'
       enable_help_text: 'Если отмечено, плагин будет включен немедленно после успешной загрузки и проверки'
       submit: 'Загрузить Плагин'
-      cancel: 'Отмена'
-      requirements_title: 'Требования'
+      cancel: Отмена
+      requirements_title: Требования
       requirement_zip: 'Файл должен быть допустимым ZIP-архивом'
       requirement_size: 'Максимальный размер файла: 50 МБ'
       requirement_manifest: 'Должен содержать plugin.json в корневом каталоге'
@@ -1824,23 +1814,23 @@ pteroca:
       title: 'Безопасность Плагина'
       scan: 'Сканирование Безопасности'
       issues: 'Проблемы Безопасности'
-      critical: 'Критические'
-      high: 'Высокие'
-      medium: 'Средние'
-      low: 'Низкие'
+      critical: Критические
+      high: Высокие
+      medium: Средние
+      low: Низкие
       no_issues: 'Проблем безопасности не найдено'
       all_clear: 'Все проверки безопасности пройдены'
       affected_plugins: 'Затронутые Плагины'
-      severity: 'Серьезность'
-      type: 'Тип'
-      file: 'Файл'
-      line: 'Строка'
-      message: 'Сообщение'
-      suggestion: 'Предложение'
-      code_snippet: 'Код'
+      severity: Серьезность
+      type: Тип
+      file: Файл
+      line: Строка
+      message: Сообщение
+      suggestion: Предложение
+      code_snippet: Код
       dangerous_function: 'Опасная Функция'
       path_traversal: 'Обход Пути'
-      sql_injection: 'SQL-инъекция'
+      sql_injection: SQL-инъекция
       xss: 'Уязвимость XSS'
       file_permissions: 'Разрешения Файла'
       security_status: 'Статус Безопасности'
@@ -1864,19 +1854,19 @@ pteroca:
     health:
       title: 'Здоровье Плагина'
       check: 'Проверка Здоровья'
-      healthy: 'Здоровый'
-      unhealthy: 'Нездоровый'
-      status: 'Статус'
+      healthy: Здоровый
+      unhealthy: Нездоровый
+      status: Статус
       last_check: 'Последняя Проверка'
-      checks: 'Проверки'
-      passed: 'Пройдены'
-      failed: 'Провалены'
-      errors: 'Ошибки'
+      checks: Проверки
+      passed: Пройдены
+      failed: Провалены
+      errors: Ошибки
       files_integrity: 'Целостность Файлов'
-      dependencies: 'Зависимости'
-      configuration: 'Конфигурация'
+      dependencies: Зависимости
+      configuration: Конфигурация
       service_registration: 'Регистрация Сервиса'
-      health_percentage: 'Здоровье'
+      health_percentage: Здоровье
       health_status: 'Статус Здоровья'
       all_checks_passed: 'Все проверки здоровья пройдены'
       checks_passed: 'проверки пройдены'
@@ -1895,21 +1885,21 @@ pteroca:
   widget:
     plugin_status:
       title: 'Статус Плагина'
-      total: 'Всего'
-      enabled: 'Включено'
-      disabled: 'Отключено'
+      total: Всего
+      enabled: Включено
+      disabled: Отключено
       faulted: 'С ошибкой'
     plugin_security:
       title: 'Безопасность Плагина'
       total_issues: 'Всего Проблем'
-      critical_issues: 'Критические'
-      high_issues: 'Высокие'
+      critical_issues: Критические
+      high_issues: Высокие
       affected_plugins: 'Затронутые Плагины'
       no_issues: 'Проблем безопасности не обнаружено'
     plugin_health:
       title: 'Здоровье Плагина'
-      healthy: 'Здоровый'
-      unhealthy: 'Нездоровый'
+      healthy: Здоровый
+      unhealthy: Нездоровый
       unhealthy_plugins: 'Нездоровые Плагины'
       last_checked: 'Последняя проверка'
       failed_checks: 'не удалось'
@@ -1925,7 +1915,6 @@ pteroca:
       checking: 'Проверка плагина: %name%'
       healthy: 'Плагин здоров'
       unhealthy: 'У плагина проблемы со здоровьем'
-
   permission:
     section:
       dashboard: 'Панель управления'
@@ -1933,25 +1922,24 @@ pteroca:
       'user_management (admin)': 'Управление пользователями (Admin)'
       server_management: 'Управление серверами'
       'server_management (admin)': 'Управление серверами (Admin)'
-      shop: 'Магазин'
+      shop: Магазин
       'shop (admin)': 'Магазин (Admin)'
-      payment: 'Платежи'
-      voucher: 'Ваучеры'
+      payment: Платежи
+      voucher: Ваучеры
       'voucher (admin)': 'Ваучеры (Admin)'
-      logs: 'Журналы'
+      logs: Журналы
       'logs (admin)': 'Журналы (Admin)'
-      settings: 'Настройки'
+      settings: Настройки
       'settings (admin)': 'Настройки (Admin)'
-      plugins: 'Плагины'
+      plugins: Плагины
       'plugins (admin)': 'Плагины (Admin)'
       role_management: 'Роли и разрешения'
-      themes: 'Темы'
+      themes: Темы
       'themes (admin)': 'Темы (Admin)'
       'role_management (admin)': 'Роли и разрешения (Admin)'
       user_features: 'Функции пользователя'
       pterodactyl_integration: 'Интеграция Pterodactyl'
       'pterodactyl_integration (admin)': 'Интеграция Pterodactyl (Admin)'
-
   theme:
     upload:
       upload_theme: 'Загрузить тему'
@@ -1963,7 +1951,7 @@ pteroca:
       submit: 'Загрузить тему'
       success: 'Тема "%s" версии %s успешно загружена!'
       requirements: 'Требования к загрузке'
-      occurrences: 'вхождений'
+      occurrences: вхождений
       req_zip_format: 'Файл должен быть допустимым ZIP-архивом'
       req_max_size: 'Максимальный размер файла: 50 МБ (распакованный: 100 МБ)'
       req_structure: 'ZIP должен содержать themes/{name}/ и опционально public/assets/theme/{name}/'

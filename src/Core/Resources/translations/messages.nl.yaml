@@ -1,15 +1,15 @@
 pteroca:
   enum:
     plugin_state:
-      discovered: 'Ontdekt'
-      registered: 'Geregistreerd'
-      enabled: 'Ingeschakeld'
-      disabled: 'Uitgeschakeld'
+      discovered: Ontdekt
+      registered: Geregistreerd
+      enabled: Ingeschakeld
+      disabled: Uitgeschakeld
       update_pending: 'Update in behandeling'
-      faulted: 'Defect'
+      faulted: Defect
   role:
-    admin: 'Beheerder'
-    user: 'Gebruiker'
+    admin: Beheerder
+    user: Gebruiker
   system:
     back: 'Terug naar paneel'
     email_not_verified: 'Uw e-mailadres is nog niet geverifieerd. Controleer uw postvak in.'
@@ -18,45 +18,45 @@ pteroca:
     experimental_feature: 'Deze functie is experimenteel en werkt mogelijk niet correct.'
     or_resend_verification_email: 'of klik hier om de verificatie-e-mail opnieuw te verzenden.'
   page:
-    terms_of_service: 'Servicevoorwaarden'
+    terms_of_service: Servicevoorwaarden
     terms_of_service_description: 'Lees onze voorwaarden en condities zorgvuldig door'
-    back: 'Terug'
+    back: Terug
   login:
-    title: 'Aanmelden'
+    title: Aanmelden
     email_address: 'Email adres'
-    email_placeholder: 'uw@email.com'
-    password: 'Wachtwoord'
+    email_placeholder: uw@email.com
+    password: Wachtwoord
     password_placeholder: 'Voer uw wachtwoord in'
     forgot_password: 'Wachtwoord vergeten?'
     remember_me: 'Onthoud mijn gegevens'
-    sign_in: 'Inloggen'
+    sign_in: Inloggen
     invalid_captcha: 'Ongeldige CAPTCHA-verificatie.'
     user_blocked: 'Uw account is geblokkeerd.'
     account_deleted: 'Uw account is verwijderd.'
     invalid_credentials: 'Ongeldig e-mailadres of wachtwoord.'
-    dont_have_account_yet: "Heeft u nog geen account? Registreer nu!"
+    dont_have_account_yet: 'Heeft u nog geen account? Registreer nu!'
     subtitle: 'Log in op uw account'
     welcome_back: 'Welkom terug'
     brand_description: 'Beheer je gameservers eenvoudig. Krachtige, veilige en betrouwbare hostingplatform.'
     feature_secure: 'Veilig & Beschermd'
-    feature_fast: 'Bliksemsnel'
+    feature_fast: Bliksemsnel
     feature_reliable: 'Altijd Betrouwbaar'
   register:
-    title: 'Registreren'
+    title: Registreren
     subtitle: 'Maak uw nieuwe account aan'
     welcome_title: 'Sluit je vandaag bij ons aan'
     welcome_description: 'Begin je reis met ons krachtige hostingplatform. Start in minuten en implementeer je eerste server.'
     feature_quick_setup: 'Snelle installatie'
     feature_join_community: 'Sluit je aan bij onze gemeenschap'
     feature_easy_start: 'Gemakkelijk te beginnen'
-    name: 'Voornaam'
+    name: Voornaam
     name_placeholder: 'Voer uw voornaam in'
-    surname: 'Achternaam'
+    surname: Achternaam
     surname_placeholder: 'Voer uw achternaam in'
     email_address: 'Email adres'
-    password: 'Wachtwoord'
+    password: Wachtwoord
     accept_terms: 'Ik accepteer de <a href="{{ link }}" target="_blank">Algemene Voorwaarden</a>'
-    submit: 'Registreren'
+    submit: Registreren
     verification_token_invalid: 'Het verificatie token is ongeldig of is verlopen.'
     verification_success: 'Uw account is succesvol geverifieerd.'
     should_accept_terms: 'U moet de servicevoorwaarden accepteren om verder te kunnen gaan.'
@@ -70,13 +70,13 @@ pteroca:
     invalid_email: 'E-mail adres is ongeldig.'
     email_already_exists: 'Er bestaat al een account met dit e-mailadres.'
     already_have_account: 'Heeft u al een account? Meld u aan!'
-    email_placeholder: 'uw@email.com'
+    email_placeholder: uw@email.com
     password_placeholder: 'Voer uw wachtwoord in'
   landing:
     nav:
       get_started: 'Aan de slag'
-      login: 'Inloggen'
-      dashboard: 'Dashboard'
+      login: Inloggen
+      dashboard: Dashboard
     hero:
       badge: 'Hoge Prestatie Hosting'
       title_pre: 'Game Server Hosting'
@@ -91,7 +91,7 @@ pteroca:
     products:
       title: 'Uitgelichte Producten'
       default_game_server: 'Game Server'
-      per_month: '/maand'
+      per_month: /maand
       configure_order: 'Configureer & Bestel'
       order: 'Nu Bestellen'
       empty: 'Geen uitgelichte producten gevonden. Kom snel terug!'
@@ -104,12 +104,12 @@ pteroca:
       create_account: 'Gratis Account Aanmaken'
       view_plans: 'Bekijk Alle Plannen'
       instant_deployment: 'Directe Implementatie'
-      refund_guarantee: 'Terugbetalingsgarantie'
+      refund_guarantee: Terugbetalingsgarantie
     footer:
       copyright: 'Alle rechten voorbehouden.'
       powered_by: 'Aangedreven door <a href="https://pteroca.com" target="_blank" rel="noopener">PteroCA</a> v%version%'
     store:
-      title: 'Winkel'
+      title: Winkel
       subtitle: 'Ontdek onze hoogwaardige game servers'
       show_all_categories: 'Toon alle categorieën'
   recovery:
@@ -151,31 +151,31 @@ pteroca:
     order_first_server: 'Bestel uw eerste server'
     last_activity: 'Laatste activiteit'
     custom_section: 'Extra informatie'
-    action: 'Acties'
-    date: 'Datum'
-    ip_address: 'IP-adres'
+    action: Acties
+    date: Datum
+    ip_address: IP-adres
     view_all_servers: 'Bekijk alle servers'
-    title: 'Dashboard'
+    title: Dashboard
     welcome_message: 'Uw server commandocentrum'
     quick_actions: 'Snelle acties'
     quick_action_order_server: 'Server bestellen'
     quick_action_add_funds: 'Geld toevoegen'
     quick_action_my_servers: 'Mijn servers'
-    quick_action_settings: 'Accountinstellingen'
+    quick_action_settings: Accountinstellingen
     browse_store: 'Winkel bekijken'
   recharge:
     recharge_balance: 'Opladen saldo'
-    recharge: 'Opladen'
+    recharge: Opladen
     recharge_amount: 'Bedrag opladen'
     transaction_history: 'Transactie geschiedenis'
     additional_information: 'Aanvullende informatie'
     no_transaction: 'Geen transacties'
-    transaction_paid: 'Betaald'
-    transaction_unpaid: 'Openstaand'
-    id: 'ID'
-    date: 'Datum'
-    amount: 'Hoeveelheid'
-    status: 'Status'
+    transaction_paid: Betaald
+    transaction_unpaid: Openstaand
+    id: ID
+    date: Datum
+    amount: Hoeveelheid
+    status: Status
     invalid_session_id: 'Ongeldige sessie ID.'
     payment_success: 'Betaling is succesvol voltooid.'
     payment_canceled: 'Betaling is geannuleerd.'
@@ -187,7 +187,7 @@ pteroca:
     payment_expired: 'Deze betaling is verlopen en kan niet meer worden voortgezet. Maak alstublieft een nieuwe betaling aan.'
     current_balance: 'Huidig saldo'
     payment_provider_information: 'Betalingsprovider informatie'
-    payment_provider_details: 'Betalingen worden veilig verwerkt door Stripe. Voer het bedrag in dat u wilt opwaarderen en klik vervolgens op ''Opwaarderen''.'
+    payment_provider_details: "Betalingen worden veilig verwerkt door Stripe. Voer het bedrag in dat u wilt opwaarderen en klik vervolgens op 'Opwaarderen'."
     payment_is_not_configured: 'Betaling is niet geconfigureerd. Neem contact op met de beheerder.'
     recharge_description: 'Laad het saldo van uw account op'
     amount_hint: 'Voer het bedrag in dat u wilt opladen.'
@@ -203,51 +203,50 @@ pteroca:
       stripe:
         description: 'Snelle en veilige betalingen met creditcard of debitcard'
   product:
-    information: 'Informatie'
-    ram: 'Geheugen'
-    cpu: 'Processor'
-    disk: 'Schijfruimte'
-    backups: 'Back-ups'
-    swap: 'SWAP'
-    databases: 'Databases'
-    order: 'Bestelling'
-    period: 'Periode'
-    days: 'dagen'
-    egg: 'Software'
+    information: Informatie
+    ram: Geheugen
+    cpu: Processor
+    disk: Schijfruimte
+    backups: Back-ups
+    swap: SWAP
+    databases: Databases
+    order: Bestelling
+    period: Periode
+    days: dagen
+    egg: Software
     egg_hint: 'U kunt de software op elk moment na aankoop wijzigen.'
-    location: 'Serverlocatie'
-    price: 'Prijs'
-    order_now: 'Bestellen'
+    location: Serverlocatie
+    price: Prijs
+    order_now: Bestellen
     not_available: 'Het product is momenteel niet beschikbaar.'
     not_enough_balance: 'U hebt niet genoeg saldo op u account.'
     product_information: 'Product informatie'
-    name: 'Productnaam'
+    name: Productnaam
     description: 'Product omschrijving'
-    hours: 'Uren'
-    minutes: 'Minuten'
-    minute_short: 'Min'
+    hours: Uren
+    minutes: Minuten
+    minute_short: Min
     on_demand: 'Op aanvraag'
-    price_calculation: 'Prijsberekening'
+    price_calculation: Prijsberekening
     per_minute: 'Per minuut'
     per_hour: 'Per uur'
     per_day: 'Per dag'
     per_week: 'Per week'
     per_month: 'Per maand'
-    summary: 'Samenvatting'
-    billing_period: 'Factureringsperiode'
+    summary: Samenvatting
+    billing_period: Factureringsperiode
     total_price: 'Totale prijs'
-    ports: 'Poorten'
-    discount: 'Korting'
+    ports: Poorten
+    discount: Korting
     discount_hint: 'Korting toegepast op de totale prijs'
     product_order_details: 'Productdetails en besteloptie'
-    total: 'Totaal'
-    slot: 'slot'
-    slots: 'Slots'
-    processing: 'Verwerken...'
-
+    total: Totaal
+    slot: slot
+    slots: Slots
+    processing: Verwerken...
   store:
-    title: 'Winkel'
-    order: 'Bestel'
+    title: Winkel
+    order: Bestel
     show_offer: 'Toon aanbod'
     category_not_found: 'Categorie niet gevonden.'
     product_not_found: 'Product niet gevonden.'
@@ -262,7 +261,7 @@ pteroca:
     invalid_form_data: 'Ongeldige formuliergegevens. Controleer alle velden en probeer het opnieuw.'
     description: 'Selecteer de categorie of het product waarin u geïnteresseerd bent'
     products_with_no_category: 'Producten zonder categorie'
-    categories: 'Categorieën'
+    categories: Categorieën
     category_description: 'Producten beschikbaar in deze categorie'
     available_products: 'Beschikbare producten'
     no_products_title: 'Geen producten'
@@ -298,65 +297,64 @@ pteroca:
     server_current_software: 'Huidige software'
   servers:
     title: 'Mijn servers'
-    active: 'Actief'
-    suspended: 'Opgeschort'
-    ip_address: 'IP-adres'
-    ram_memory: 'RAM-geheugen'
-    disk: 'Schijfruimte'
-    cpu: 'Processor'
-    databases: 'Databases'
-    backups: 'Back-ups'
+    active: Actief
+    suspended: Opgeschort
+    ip_address: IP-adres
+    ram_memory: RAM-geheugen
+    disk: Schijfruimte
+    cpu: Processor
+    databases: Databases
+    backups: Back-ups
     valid_until: 'Geldig tot'
     manage_server: 'Beheer server'
-    extend: 'Uitbreiden'
+    extend: Uitbreiden
     no_servers: 'U heeft nog geen servers.'
     click_to_buy: 'Klik hier om een server te kopen.'
-    name: 'Naam'
-    status: 'Status'
-    actions: 'Acties'
+    name: Naam
+    status: Status
+    actions: Acties
     description: 'Beheer uw servers, bekijk hun details en voer verschillende acties uit zoals verlenging, beheer en configuratie.'
     state:
-      running: 'Online'
-      stopped: 'Gestopt'
-      starting: 'Opstarten'
-      stopping: 'Stoppen'
-      offline: 'Offline'
-    
+      running: Online
+      stopped: Gestopt
+      starting: Opstarten
+      stopping: Stoppen
+      offline: Offline
   server:
     title: 'Server beheer'
-    console: 'Console'
-    startup: 'Opstarten'
-    settings: 'Configuratie'
-    activity: 'Activiteit'
-    start: 'Start'
-    stop: 'Stop'
-    restart: 'Herstarten'
-    kill: 'Beëindigen'
-    send: 'Verzend'
-    address: 'Adres'
+    console: Console
+    startup: Opstarten
+    settings: Configuratie
+    activity: Activiteit
+    start: Start
+    stop: Stop
+    restart: Herstarten
+    kill: Beëindigen
+    send: Verzend
+    address: Adres
     copy_ip: 'IP-adres kopiëren'
     ip_copied: 'IP-adres gekopieerd naar klembord!'
-    uptime: 'Up-time'
+    uptime: Up-time
     cpu_load: 'Processor belasting'
-    memory: 'Geheugen'
-    disk: 'Schijfruimte'
+    memory: Geheugen
+    disk: Schijfruimte
     network_inbound: 'Netwerk inkomende'
     network_outbound: 'Netwerk uitgaande'
-    software: 'Software'
-    command: 'Opdracht'
+    software: Software
+    command: Opdracht
     startup_command: 'Opstart opdracht'
     docker_image: 'Docker Image'
     read_only: 'Alleen lezen'
-    admin_view: 'Beheerderweergave'
+    admin_view: Beheerderweergave
     default_options: 'Standaard instellingen'
-    variables: 'Variabelen'
+    variables: Variabelen
     sftp_details: 'SFTP Informatie'
     sftp_server_address: 'Server Adres'
-    sftp_username: 'Gebruikersnaam'
+    sftp_username: Gebruikersnaam
     sftp_password_hint: 'Het wachtwoord is hetzelfde als het wachtwoord dat u gebruikt om toegang te krijgen tot dit paneel.'
     sftp_launch: 'SFTP starten'
     change_server_details: 'Servergegevens wijzigen'
-    server_name: 'Servernaam'
+    server_name: Servernaam
     server_description: 'Server omschrijving'
     reinstall_server: 'Server herinstalleren'
     reinstall_server_hint: 'Het opnieuw installeren van uw server zal het stoppen, en voer het installatiescript dat het oorspronkelijk heeft ingesteld dan opnieuw uit. Sommige bestanden kunnen verwijderd of gewijzigd worden tijdens dit proces, maak een back-up van uw gegevens voordat u doorgaat.'
@@ -367,11 +365,11 @@ pteroca:
     extend_server_hint: 'Je kunt de server verlengen door op de knop hieronder te klikken.'
     extend_server_hint_2: 'De server wordt verlengd voor de geselecteerde periode.'
     no_activity_logs: 'Er zijn nog geen activiteitenlogs voor deze server.'
-    admin: 'Beheerder'
-    action: 'Acties'
-    details: 'Gegevens'
-    user: 'Gebruiker'
-    date: 'Datum'
+    admin: Beheerder
+    action: Acties
+    details: Gegevens
+    user: Gebruiker
+    date: Datum
     show_details: 'Toon details'
     hide_details: 'Verberg details'
     data_updated_successfully: 'Gegevens zijn succesvol bijgewerkt.'
@@ -392,50 +390,50 @@ pteroca:
     server_suspended_message: 'Uw server is momenteel opgeschort en kan niet worden geopend.'
     server_suspended_description: 'Deze server is opgeschort vanwege een administratieve actie of beleidsschending. Neem contact op met de ondersteuning voor hulp.'
     suspended_expired_description: 'Deze server is opgeschort omdat hij is verlopen op %expireDate% en niet is verlengd. Om de server te herstellen, verleng hem alstublieft.'
-    rules: 'Regels'
+    rules: Regels
     data_validation_error: 'Fout tijdens validatie. Controleer of aan alle regels is voldaan.'
     enable_auto_renewal: 'Schakel automatische verlenging in voor deze server'
     auto_renewal_tooltip: 'Indien ingeschakeld, wordt de server automatisch verlengd voor de geselecteerde periode. De betaling wordt gedaan vanaf uw rekening.'
-    backups: 'Back-ups'
-    network: 'Netwerk'
+    backups: Back-ups
+    network: Netwerk
     no_backups: 'Er zijn nog geen back-ups voor deze server.'
     create_backup: 'Maak back-up'
     backup_name: 'Back-up naam'
     backup_ignored_files: 'Genegeerde bestanden en mappen'
-    close: 'Sluiten'
+    close: Sluiten
     error_during_backup: 'Er is een fout opgetreden tijdens het maken van de backup.'
     backup_time_limit: 'Er mogen slechts 2 back-ups worden gegenereerd binnen een tijdsbestek van 600 seconden.'
-    name: 'Naam'
-    status: 'Status'
+    name: Naam
+    status: Status
     created_at: 'Aangemaakt op'
-    successful: 'Succesvol'
+    successful: Succesvol
     in_progress: 'In uitvoering'
-    checksum: 'Controlesom'
-    size: 'Grootte'
-    download: 'Downloaden'
-    delete: 'Verwijderen'
+    checksum: Controlesom
+    size: Grootte
+    download: Downloaden
+    delete: Verwijderen
     delete_backup: 'Backup verwijderen'
     delete_backup_confirmation: 'Weet u zeker dat u deze backup wilt verwijderen?'
     error_during_deleting_backup: 'Er is een fout opgetreden tijdens het verwijderen van de backup.'
-    databases: 'Databases'
+    databases: Databases
     no_databases: 'Er zijn nog geen databases voor deze server.'
     create_database: 'Database aanmaken'
     database_name: 'Database naam'
     connections_from: 'Verbindingen van'
     error_during_creating_database: 'Er is een fout opgetreden tijdens het aanmaken van de database.'
-    endpoint: 'Eindpunt'
-    username: 'Gebruikersnaam'
-    show: 'Tonen'
+    endpoint: Eindpunt
+    username: Gebruikersnaam
+    show: Tonen
     delete_database: 'Database verwijderen'
     delete_database_confirmation: 'Weet u zeker dat u deze database wilt verwijderen?'
     show_database: 'Database weergeven'
     database_endpoint: 'Database eindpunt'
-    password: 'Wachtwoord'
+    password: Wachtwoord
     jdbc_connection_string: 'JDBC verbindingsreeks'
     rotate_password: 'Wachtwoord wijzigen'
-    ip_address: 'IP-adres'
-    port: 'Poort'
-    notes: 'Notities'
+    ip_address: IP-adres
+    port: Poort
+    notes: Notities
     create_allocation: 'Allocatie aanmaken'
     delete_allocation: 'Allocatie verwijderen'
     delete_allocation_confirmation: 'Deze allocatie wordt onmiddellijk van uw server verwijderd. Weet u zeker dat u wilt doorgaan?'
@@ -444,10 +442,10 @@ pteroca:
     cannot_modify_yourself: 'U kunt uzelf niet wijzigen.'
     extend_server_expires_on_demand: 'Uw <strong>{{ productName }}</strong> server is momenteel ingesteld om te vervallen <strong>op aanvraag</strong>.'
     on_demand_billing_cycle: 'De facturatiecyclus ({{ productPrice }} {{ internalCurrency }} / minuut) wordt gepauzeerd wanneer de server offline is, en de bronnen zijn dan gratis.'
-    type: 'Type'
-    primary: 'Primair'
-    secondary: 'Secundair'
-    edit: 'Bewerken'
+    type: Type
+    primary: Primair
+    secondary: Secundair
+    edit: Bewerken
     edit_allocation: 'Allocatie bewerken'
     error_during_editing_allocation: 'Er is een fout opgetreden tijdens het bewerken van de allocatie.'
     make_primary: 'Als primair instellen'
@@ -455,44 +453,44 @@ pteroca:
     create_allocation_confirmation: 'Weet u zeker dat u een extra allocatie wilt aanmaken?'
     error_during_creating_allocation: 'Er is een fout opgetreden tijdens het aanmaken van de allocatie.'
     auto_allocation_disabled_for_this_instance: 'Automatische allocatie is uitgeschakeld voor deze instantie.'
-    source: 'Bron'
-    restore: 'Herstellen'
+    source: Bron
+    restore: Herstellen
     restore_backup: 'Backup herstellen'
     restore_backup_confirmation: 'Weet u zeker dat u deze backup wilt herstellen? Dit overschrijft alle huidige serverbestanden.'
     delete_all_files_before_restore: 'Verwijder alle bestanden voordat u de backup herstelt.'
     error_during_restoring_backup: 'Er is een fout opgetreden tijdens het herstellen van de backup.'
-    users: 'Gebruikers'
-    schedules: 'Planningen'
+    users: Gebruikers
+    schedules: Planningen
     schedules_usage: 'Gebruik: {{ current }}/{{ limit }}'
     usage: 'Gebruik: {{ current }}/{{ limit }}'
     schedule_limit_reached: 'Maximumlimiet van planningen ({{ limit }}) bereikt. Verwijder bestaande planningen om nieuwe aan te maken.'
     no_subusers: 'Er zijn nog geen subgebruikers voor deze server.'
     no_schedules: 'Er zijn nog geen planningen voor deze server.'
-    schedule_name: 'Planningnaam'
-    schedule_cron: 'Cron-expressie'
-    schedule_status: 'Status'
+    schedule_name: Planningnaam
+    schedule_cron: Cron-expressie
+    schedule_status: Status
     schedule_last_run: 'Laatste uitvoering'
     schedule_next_run: 'Volgende uitvoering'
     add_schedule: 'Planning toevoegen'
     create_new_schedule: 'Nieuwe planning aanmaken'
     create_schedule: 'Planning aanmaken'
     schedule_name_description: 'Een door mensen leesbare identificatie voor deze planning.'
-    schedule_cron_expression: 'Cron-expressie'
+    schedule_cron_expression: Cron-expressie
     cron_expression_description: 'Het planningssysteem ondersteunt het gebruik van cronjob-syntaxis bij het definiëren van wanneer taken moeten worden uitgevoerd. Gebruik de bovenstaande velden om te specificeren wanneer deze taken moeten worden uitgevoerd.'
-    minute: 'Minuut'
-    hour: 'Uur'
+    minute: Minuut
+    hour: Uur
     day_of_month: 'Dag van de maand'
-    month: 'Maand'
+    month: Maand
     day_of_week: 'Dag van de week'
-    schedule_options: 'Planningsopties'
+    schedule_options: Planningsopties
     show_cheatsheet: 'Spiekbriefje tonen'
     show_cheatsheet_description: 'Toon het cron-spiekbriefje voor voorbeelden.'
     only_when_server_online: 'Alleen wanneer server online is'
     only_when_server_online_description: 'Voer deze planning alleen uit wanneer de server in een actieve staat is.'
     schedule_enabled: 'Planning ingeschakeld'
     schedule_enabled_description: 'Deze planning wordt automatisch uitgevoerd als deze is ingeschakeld.'
-    cron_cheatsheet: 'Cron-spiekbriefje'
-    examples: 'Voorbeelden'
+    cron_cheatsheet: Cron-spiekbriefje
+    examples: Voorbeelden
     every_5_minutes: 'elke 5 minuten'
     every_2_hours: 'elke 2 uur'
     every_sunday: 'elke zondag'
@@ -500,9 +498,9 @@ pteroca:
     any_value: 'elke waarde'
     every_n_units: 'elke n eenheden'
     range_n_to_m: 'bereik n tot m'
-    active: 'Actief'
-    inactive: 'Inactief'
-    never: 'Nooit'
+    active: Actief
+    inactive: Inactief
+    never: Nooit
     schedule_created_successfully: 'Planning succesvol aangemaakt'
     schedule_deleted_successfully: 'Planning succesvol verwijderd'
     confirm_delete_schedule: 'Weet u zeker dat u deze planning wilt verwijderen?'
@@ -510,18 +508,18 @@ pteroca:
     delete_task: 'Taak verwijderen'
     confirm_delete_task: 'Weet u zeker dat u deze taak wilt verwijderen?'
     task_deleted_successfully: 'Taak succesvol verwijderd'
-    schedule_info: 'Planninginformatie'
-    schedule_tasks: 'Planningstaken'
+    schedule_info: Planninginformatie
+    schedule_tasks: Planningstaken
     new_task: 'Nieuwe taak'
     no_tasks_in_schedule: 'Geen taken in deze planning'
-    time_offset: 'Tijdverschuiving'
+    time_offset: Tijdverschuiving
     send_command: 'Commando verzenden'
-    power_action: 'Energieactie'
+    power_action: Energieactie
     feature_coming_soon: 'Functie komt binnenkort'
     edit_task: 'Taak bewerken'
     time_offset_seconds: 'Tijdverschuiving (seconden)'
     time_offset_description: 'De tijd om te wachten na voltooiing van de vorige taak in de reeks voordat deze wordt uitgevoerd. Als dit de eerste taak van een planning is, is dit niet van toepassing.'
-    payload: 'Payload'
+    payload: Payload
     payload_command_description: 'Het commando om uit te voeren op de server'
     payload_power_description: 'De energieactie om uit te voeren (start, stop, restart, kill)'
     payload_backup_description: 'De naam van de backup om aan te maken'
@@ -539,7 +537,7 @@ pteroca:
     error_no_schedule_selected: 'Geen planning geselecteerd'
     at_least_one_permission_required: 'Minimaal één toestemming is vereist'
     email_required: 'E-mail vereist'
-    error: 'Fout'
+    error: Fout
     error_occurred: 'Er is een fout opgetreden'
     user_created_successfully: 'Gebruiker succesvol toegevoegd'
     user_removed_successfully: 'Gebruiker succesvol verwijderd'
@@ -548,33 +546,33 @@ pteroca:
     user_does_not_exist: 'De gebruiker met dit e-mailadres bestaat niet in het systeem. De gebruiker moet zich eerst registreren.'
     user_already_added: 'De gebruiker met dit e-mailadres is al toegevoegd aan deze server.'
     user_must_register_first: 'De gebruiker moet zich eerst registreren in het systeem voordat hij aan de server wordt toegevoegd.'
-    user_email: 'E-mail'
-    user_permissions: 'Machtigingen'
-    user_created: 'Aangemaakt'
-    actions: 'Acties'
-    users_management: 'Gebruikersbeheer'
+    user_email: E-mail
+    user_permissions: Machtigingen
+    user_created: Aangemaakt
+    actions: Acties
+    users_management: Gebruikersbeheer
     add_user: 'Gebruiker toevoegen'
-    remove: 'Verwijderen'
+    remove: Verwijderen
     modify_permissions_for: 'Machtigingen wijzigen voor'
-    cancel: 'Annuleren'
-    save: 'Opslaan'
+    cancel: Annuleren
+    save: Opslaan
     create_new_subuser: 'Nieuwe subgebruiker aanmaken'
     enter_email_description: 'Voer het e-mailadres in van de gebruiker die u wilt uitnodigen als subgebruiker voor deze server.'
     invite_user: 'Gebruiker uitnodigen'
     permissions:
-      control: 'Controle'
-      control_description: 'Machtigingen die de mogelijkheid van de gebruiker controleren om de energiestatus van de server te controleren of commando''s te verzenden.'
-      control_console_desc: 'Staat de gebruiker toe om commando''s naar de serverinstantie te sturen via de console.'
+      control: Controle
+      control_description: "Machtigingen die de mogelijkheid van de gebruiker controleren om de energiestatus van de server te controleren of commando's te verzenden."
+      control_console_desc: "Staat de gebruiker toe om commando's naar de serverinstantie te sturen via de console."
       control_start_desc: 'Staat de gebruiker toe om de server te starten als deze is uitgeschakeld.'
       control_stop_desc: 'Staat de gebruiker toe om de server te stoppen als deze draait.'
       control_restart_desc: 'Staat de gebruiker toe om de server opnieuw te starten.'
-      user: 'Gebruiker'
+      user: Gebruiker
       user_description: 'Machtigingen die de gebruiker toestaan om andere subgebruikers op de server te beheren. Ze kunnen nooit hun eigen account wijzigen of machtigingen toewijzen die ze niet hebben.'
       user_create_desc: 'Staat de gebruiker toe om nieuwe subgebruikers voor de server aan te maken.'
       user_read_desc: 'Staat de gebruiker toe om subgebruikers en hun machtigingen voor de server te bekijken.'
       user_update_desc: 'Staat de gebruiker toe om andere subgebruikers te wijzigen.'
       user_delete_desc: 'Staat de gebruiker toe om subgebruikers van de server te verwijderen.'
-      file: 'Bestand'
+      file: Bestand
       file_description: 'Machtigingen die de mogelijkheid van de gebruiker controleren om het bestandssysteem voor deze server te wijzigen.'
       file_create_desc: 'Staat de gebruiker toe om extra bestanden en mappen aan te maken via het paneel of directe upload.'
       file_read_desc: 'Staat de gebruiker toe om de inhoud van een directory te bekijken, maar niet om de inhoud van bestanden te bekijken of te downloaden.'
@@ -583,42 +581,42 @@ pteroca:
       file_delete_desc: 'Staat de gebruiker toe om bestanden of directories te verwijderen.'
       file_archive_desc: 'Staat de gebruiker toe om de inhoud van een directory te archiveren en bestaande archieven op het systeem uit te pakken.'
       file_sftp_desc: 'Staat de gebruiker toe om verbinding te maken via SFTP en serverbestanden te beheren met andere toegewezen bestandsmachtigingen.'
-      backup: 'Backup'
+      backup: Backup
       backup_description: 'Machtigingen die de mogelijkheid van de gebruiker controleren om server backups te genereren en te beheren.'
       backup_create_desc: 'Staat de gebruiker toe om nieuwe backups voor deze server aan te maken.'
       backup_read_desc: 'Staat de gebruiker toe om alle bestaande backups voor deze server te bekijken.'
       backup_delete_desc: 'Staat de gebruiker toe om backups uit het systeem te verwijderen.'
       backup_download_desc: 'Staat de gebruiker toe om backups voor de server te downloaden. Gevaar: dit geeft de gebruiker toegang tot alle serverbestanden in de backup.'
       backup_restore_desc: 'Staat de gebruiker toe om backups voor de server te herstellen. Gevaar: dit stelt de gebruiker in staat om alle serverbestanden in het proces te verwijderen.'
-      allocation: 'Toewijzing'
+      allocation: Toewijzing
       allocation_description: 'Machtigingen die de mogelijkheid van de gebruiker controleren om poorttoewijzingen voor deze server te wijzigen.'
       allocation_read_desc: 'Staat de gebruiker toe om alle toewijzingen te bekijken die momenteel aan deze server zijn toegewezen.'
       allocation_create_desc: 'Staat de gebruiker toe om extra toewijzingen aan de server toe te wijzen.'
       allocation_update_desc: 'Staat de gebruiker toe om de primaire toewijzing van de server te wijzigen en notities aan elke toewijzing toe te voegen.'
       allocation_delete_desc: 'Staat de gebruiker toe om toewijzingen van de server te verwijderen.'
-      startup: 'Opstarten'
+      startup: Opstarten
       startup_description: 'Machtigingen die de mogelijkheid van de gebruiker controleren om de opstartparameters van deze server te bekijken.'
       startup_read_desc: 'Staat de gebruiker toe om de opstartvariabelen voor de server te bekijken.'
       startup_update_desc: 'Staat de gebruiker toe om de opstartvariabelen voor de server te wijzigen.'
       startup_docker_image_desc: 'Staat de gebruiker toe om de Docker-image te wijzigen die wordt gebruikt bij het uitvoeren van de server.'
-      database: 'Database'
+      database: Database
       database_description: 'Machtigingen die de toegang van de gebruiker tot databasebeheer voor deze server controleren.'
       database_create_desc: 'Staat de gebruiker toe om een nieuwe database voor deze server aan te maken.'
       database_read_desc: 'Staat de gebruiker toe om databases te bekijken die aan deze server zijn gekoppeld.'
       database_update_desc: 'Staat de gebruiker toe om wachtwoorden te roteren op een database-instantie.'
       database_delete_desc: 'Staat de gebruiker toe om een database-instantie van deze server te verwijderen.'
       database_view_password_desc: 'Staat de gebruiker toe om wachtwoorden te bekijken die zijn gekoppeld aan database-instanties voor deze server.'
-      schedule: 'Planning'
+      schedule: Planning
       schedule_description: 'Machtigingen die de toegang van de gebruiker tot planningsbeheer voor deze server controleren.'
       schedule_create_desc: 'Staat de gebruiker toe om nieuwe planningen voor deze server aan te maken.'
       schedule_read_desc: 'Staat de gebruiker toe om planningen en hun bijbehorende taken voor deze server te bekijken.'
       schedule_update_desc: 'Staat de gebruiker toe om planningen en planningstaken voor deze server bij te werken.'
       schedule_delete_desc: 'Staat de gebruiker toe om planningen voor deze server te verwijderen.'
-      settings: 'Instellingen'
+      settings: Instellingen
       settings_description: 'Machtigingen die de toegang van de gebruiker tot de instellingen van deze server controleren.'
       settings_rename_desc: 'Staat de gebruiker toe om deze server te hernoemen en de beschrijving te wijzigen.'
       settings_reinstall_desc: 'Staat de gebruiker toe om een herinstallatie van deze server te activeren.'
-      activity: 'Activiteit'
+      activity: Activiteit
       activity_description: 'Machtigingen die de toegang van de gebruiker tot de activiteitenlogs van de server controleren.'
       activity_read_desc: 'Staat de gebruiker toe om de activiteitenlogs voor de server te bekijken.'
     eula:
@@ -626,25 +624,24 @@ pteroca:
         description: 'Je Minecraft-server vereist het accepteren van de Eindgebruikerslicentieovereenkomst (EULA) voordat deze kan worden gestart.'
         content: |
           Door de EULA te accepteren, ga je akkoord met de voorwaarden die zijn vastgesteld door Mojang Studios.
-        
+
           Belangrijke punten:
           • Je mag niets van ons verspreiden
           • Je mag niets van ons commercieel gebruiken
           • Je mag mods maken en verspreiden, zolang ze geen van onze code bevatten
-        
+
           Voor de volledige voorwaarden, ga naar: https://aka.ms/MinecraftEULA
         accept: 'EULA accepteren & Server starten'
-        cancel: 'Annuleren'
-        processing: 'Bezig...'
+        cancel: Annuleren
+        processing: Bezig...
         required: 'Je moet de EULA accepteren om de server te starten.'
         read_full: 'Lees volledige EULA'
       alert:
         success: 'EULA is succesvol geaccepteerd. De server wordt opnieuw gestart.'
         error: 'EULA kon niet worden geaccepteerd.'
-
   actions:
-    login: 'Inloggen'
-    logout: 'Uitloggen'
+    login: Inloggen
+    logout: Uitloggen
     create_payment: 'Nieuwe betaling'
     bought_balance: 'Saldo gekocht'
     bought_server: 'Server aangekocht'
@@ -687,21 +684,21 @@ pteroca:
     accept_eula: 'Minecraft EULA geaccepteerd'
   cart_configuration:
     title: 'Configureer je server'
-    configuration: 'Configuratie'
-    server_name: 'Servernaam'
-    period: 'Periode'
+    configuration: Configuratie
+    server_name: Servernaam
+    period: Periode
     order_summary: 'Bestelling overzicht'
     auto_renewal: 'Automatische verlenging'
-    enable: 'Activeren'
-    disable: 'Deactiveren'
-    location: 'Serverlocatie'
+    enable: Activeren
+    disable: Deactiveren
+    location: Serverlocatie
     owner_only: 'alleen eigenaar'
     description: 'Configureer uw server en ga door naar betaling'
   cart_topup:
     title: 'Vul je account aan'
-    order: 'Bestellen'
+    order: Bestellen
     order_description: 'Saldo opwaarderen'
-    payment_method: 'Betalingsmethode'
+    payment_method: Betalingsmethode
     select_payment_method: 'Selecteer een betalingsmethode'
     description: 'Laad het saldo van uw account op'
   cart_renew:
@@ -717,7 +714,7 @@ pteroca:
     invalid_voucher_type: 'Ongeldig voucher type.'
   email_types:
     email_verification: 'E-mail verificatie'
-    payment_success: 'Betalingsbevestiging'
+    payment_success: Betalingsbevestiging
     purchased_product: 'Product aankoop'
     registration: 'Registratie bevestiging'
     renew_product: 'Product verlenging'
@@ -725,17 +722,17 @@ pteroca:
     server_suspended: 'Server opschorting'
   crud:
     category:
-      name: 'Categorienaam'
+      name: Categorienaam
       description: 'Categorie omschrijving'
-      image: 'Afbeelding'
-      priority: 'Prioriteit'
+      image: Afbeelding
+      priority: Prioriteit
       priority_hint: 'Lagere nummers verschijnen eerst (bijvoorbeeld, 1 verschijnt voor 2). Gebruik dit om de weergavevolgorde te controleren.'
       featured: 'Uitgelicht op landingspagina'
       featured_hint: 'Toon deze categorie op de landingspagina als uitgelicht item'
       add: 'Voeg categorie toe'
       save: 'Categorie opslaan'
-      category: 'Categorie'
-      categories: 'Categorieën'
+      category: Categorie
+      categories: Categorieën
       created_successfully: 'Categorie succesvol aangemaakt.'
       updated_successfully: 'Categorie succesvol bijgewerkt.'
       deleted_successfully: 'Categorie succesvol verwijderd.'
@@ -743,58 +740,58 @@ pteroca:
       update_error: 'Er is een fout opgetreden bij het bijwerken van de categorie: %error%'
       delete_error: 'Er is een fout opgetreden bij het verwijderen van de categorie: %error%'
     product:
-      details: 'Productinformatie'
-      name: 'Productnaam'
+      details: Productinformatie
+      name: Productnaam
       description: 'Product omschrijving'
-      price: 'Prijs'
-      is_active: 'Actief'
-      priority: 'Prioriteit'
+      price: Prijs
+      is_active: Actief
+      priority: Prioriteit
       priority_hint: 'Lagere nummers verschijnen eerst (bijvoorbeeld, 1 verschijnt voor 2). Gebruik dit om de weergavevolgorde te controleren.'
       featured: 'Uitgelicht op landingspagina'
       featured_hint: 'Toon dit product op de landingspagina als uitgelicht item'
-      category: 'Categorie'
-      image: 'Afbeelding'
+      category: Categorie
+      image: Afbeelding
       image_help: 'De afbeelding zal in de winkel worden weergegeven.'
-      banner: 'Banner'
+      banner: Banner
       banner_help: 'De banner zal worden weergegeven op de productpagina.'
       server_resources: 'Server bronnen'
-      disk_space: 'Schijfruimte'
-      memory: 'Geheugen'
-      io: 'IO'
-      cpu: 'Processor'
-      db_count: 'Databases'
-      threads: 'CPU-threads'
-      swap: 'SWAP'
-      backups: 'Back-ups'
-      ports: 'Poorten'
-      schedules: 'Planningen'
+      disk_space: Schijfruimte
+      memory: Geheugen
+      io: IO
+      cpu: Processor
+      db_count: Databases
+      threads: CPU-threads
+      swap: SWAP
+      backups: Back-ups
+      ports: Poorten
+      schedules: Planningen
       schedules_hint: 'Het maximale aantal planningen dat kan worden aangemaakt voor deze server. 0 betekent dat de planningsfunctie niet beschikbaar is.'
       product_connections: 'Product verbindingen'
-      nodes: 'Nodes'
-      nest: 'Nest'
-      eggs: 'Eggs'
+      nodes: Nodes
+      nest: Nest
+      eggs: Eggs
       created_at: 'Aangemaakt op'
       updated_at: 'Bijgewerkt op'
       add: 'Artikel toevoegen'
       save: 'Artikel opslaan'
-      product: 'Artikel'
-      copy: 'Kopiëren'
+      product: Artikel
+      copy: Kopiëren
       copy_success: 'Product succesvol gekopieerd'
       copy_modal:
         title: 'Product kopiëren'
         description: 'Weet u zeker dat u dit product wilt kopiëren?'
         details: 'Er wordt een nieuw product aangemaakt met dezelfde configuratie. U kunt het daarna bewerken.'
-        cancel: 'Annuleren'
+        cancel: Annuleren
         confirm: 'Product kopiëren'
-      products: 'Artikelen'
+      products: Artikelen
       egg_information: 'Egg informatie'
       egg_options_you_can_edit: 'U kunt de volgende opties bewerken in uw Pterodactyl paneel.'
-      egg_variables: 'Variabelen'
-      egg_configuration: 'Configuratie'
+      egg_variables: Variabelen
+      egg_configuration: Configuratie
       egg_default_configuration: 'Standaard configuratie'
-      egg_variable_name: 'Naam'
-      egg_variable_description: 'Omschrijving'
-      egg_variable_value: 'Waarde'
+      egg_variable_name: Naam
+      egg_variable_description: Omschrijving
+      egg_variable_value: Waarde
       egg_variable_user_viewable: 'Gebruiker zichtbaar'
       egg_variable_user_editable: 'Gebruiker aanpasbaar'
       egg_allow_change: 'Sta het veranderen van egg toe bij herinstallatie'
@@ -804,7 +801,7 @@ pteroca:
       memory_hint: 'De totale RAM limiet toegewezen aan deze server (in MiB). De server kan deze geheugenlimiet niet overschrijden.'
       io_hint: 'Relatieve I/O-prioriteit voor de servercontainer. Hogere waarden betekent hogere prioriteit (standaard is 500).'
       cpu_hint: 'CPU limiet als percentage, waar 100% gelijk is aan een volledige CPU kern. Bijvoorbeeld, 200% is gelijk aan twee volledige CPU kern.'
-      threads_hint: 'Specifieke CPU-threads waarop dit proces kan draaien, of leeg laten om alle threads toe te staan. Dit kan een enkel getal zijn of een door komma''s gescheiden lijst. Bijvoorbeeld: 0, 0-1,3 of 0,1,3,4.'
+      threads_hint: "Specifieke CPU-threads waarop dit proces kan draaien, of leeg laten om alle threads toe te staan. Dit kan een enkel getal zijn of een door komma's gescheiden lijst. Bijvoorbeeld: 0, 0-1,3 of 0,1,3,4."
       db_count_hint: 'Het maximale aantal databases dat deze server kan maken of gebruiken.'
       swap_hint: 'Hoeveelheid swap geheugen (in MiB) toegewezen aan deze server. Zet op 0 om swap uit te schakelen.'
       backups_hint: 'Het maximale aantal back-ups dat kan worden opgeslagen voor deze server.'
@@ -812,7 +809,7 @@ pteroca:
       nodes_hint: 'Selecteer een of meer fysieke of virtuele machines (nodes) uit uw Pterodactyl installatie.'
       nest_hint: 'Een Nest is een categorie die Eggs gerelateerd is. Kies een Nest om de Eggs te laden.'
       eggs_hint: 'Egg(s) definiëren specifieke serverconfiguraties (games of applicaties). Selecteer de egg(s) waarvan u wilt dat dit product deze ondersteunt.'
-      pricing: 'Prijsstelling'
+      pricing: Prijsstelling
       price_static_plan: 'Prijsstelling voor vast plan'
       price_static_plan_hint: 'De prijs van het product voor een vaste periode die gebruikers kunnen selecteren als factureringsperiode.'
       price_dynamic_plan: 'Dynamische plan prijs - op aanvraag'
@@ -820,22 +817,22 @@ pteroca:
       price_dynamic_only_one_plan: 'U kunt slechts één prijs instellen voor een dynamisch plan.'
       price_slot_plan: 'Slotplan prijs'
       price_slot_plan_hint: 'Prijs per slot. Koppel na het instellen de variabele voor maximale spelers in Productverbindingen voor elk egg.'
-      period: 'Periode'
-      unit: 'Eenheid'
-      days: 'Dagen'
-      hours: 'Uren'
-      minutes: 'Minuten'
+      period: Periode
+      unit: Eenheid
+      days: Dagen
+      hours: Uren
+      minutes: Minuten
       server_product: 'Server product'
       server_products: 'Server producten'
       original_product: 'Oorspronkelijk product'
       build_name: 'Build naam'
-      server_build: 'Server'
-      server_builds: 'Servers'
-      server: 'Server'
+      server_build: Server
+      server_builds: Servers
+      server: Server
       build_details: 'Build details'
-      is_selected: 'Geselecteerd'
-      yes: 'Ja'
-      no: 'Nee'
+      is_selected: Geselecteerd
+      'yes': Ja
+      'no': Nee
       server_details: 'Server details'
       server_build_offline_alert: 'De server is momenteel offline. U kunt de servereigenschappen alleen bewerken wanneer de server online is.'
       at_least_one_price_required: 'Minimaal één prijs is vereist.'
@@ -843,7 +840,7 @@ pteroca:
       only_one_selected_price_allowed: 'Er is slechts één geselecteerde prijs toegestaan.'
       product_connections_note: 'De volgende instellingen worden alleen toegepast na het opnieuw installeren van de server of het wijzigen van de software.'
       deleted_at: 'Verwijderd op'
-      egg_variable_slot_variable: 'Slotvariabele'
+      egg_variable_slot_variable: Slotvariabele
       egg_variable_slot_variable_hint: 'Selecteer de variabele die de maximale slots (spelers) instelt voor slot-gebaseerde prijsstelling'
       slot_variable_not_configured_egg: 'Slotvariabele niet geconfigureerd voor dit egg'
       slot_variables_unconfigured_eggs: 'Sommige eggs hebben niet-geconfigureerde slotvariabelen'
@@ -854,14 +851,14 @@ pteroca:
       invalid_eggs_selected: 'Geselecteerd ei (ID: %id%) bestaat niet in Pterodactyl. Selecteer alleen geldige eieren.'
       egg_validation_error: 'Kan eieren niet valideren met Pterodactyl. Controleer uw API-verbinding.'
       eggs_auto_removed_warning: '%count% ei(en) zijn automatisch verwijderd uit dit product omdat ze niet meer bestaan in Pterodactyl. De wijzigingen worden opgeslagen wanneer u het formulier indient.'
-      health_status: 'Gezondheidsstatus'
-      health_status.healthy: 'OK'
-      health_status.some_eggs_invalid: 'Waarschuwing'
-      health_status.all_eggs_invalid: 'Kritiek'
+      health_status: Gezondheidsstatus
+      health_status.healthy: OK
+      health_status.some_eggs_invalid: Waarschuwing
+      health_status.all_eggs_invalid: Kritiek
       health_status.no_eggs: 'Geen Eieren'
       health_status.no_prices: 'Geen Prijzen'
       health_status.nest_unavailable: 'Nest Fout'
-      health_status.unknown: 'Onbekend'
+      health_status.unknown: Onbekend
       created_successfully: 'Product succesvol aangemaakt.'
       updated_successfully: 'Product succesvol bijgewerkt.'
       deleted_successfully: 'Product succesvol verwijderd.'
@@ -873,41 +870,41 @@ pteroca:
       variant_products: 'Gekoppelde producten (Varianten)'
       variant_products_hint: 'Koppel andere producten als varianten. Wanneer locatieselectie is ingeschakeld, zijn nodes van gekoppelde producten ook beschikbaar'
     server_product:
-      server_product: 'Serverproduct'
-      server_products: 'Serverproducten'
+      server_product: Serverproduct
+      server_products: Serverproducten
       selected_node_id: 'Geselecteerde node ID'
       original_product: 'Origineel product'
     plugin:
-      plugins: 'Plugins'
+      plugins: Plugins
       manage_plugins: 'Plugins beheren'
-      name: 'Naam'
-      display_name: 'Weergavenaam'
-      version: 'Versie'
-      author: 'Auteur'
-      description: 'Beschrijving'
-      state: 'Status'
-      capabilities: 'Mogelijkheden'
+      name: Naam
+      display_name: Weergavenaam
+      version: Versie
+      author: Auteur
+      description: Beschrijving
+      state: Status
+      capabilities: Mogelijkheden
       min_pteroca: 'Min. PteroCA'
       max_pteroca: 'Max. PteroCA'
       enabled_at: 'Ingeschakeld op'
       disabled_at: 'Uitgeschakeld op'
-      fault_reason: 'Foutreden'
+      fault_reason: Foutreden
       created_at: 'Gemaakt op'
-      actions: 'Acties'
-      settings: 'Instellingen'
-      enable: 'Inschakelen'
-      disable: 'Uitschakelen'
-      reset: 'Resetten'
-      details: 'Details'
-      plugin: 'Plugin'
-      plugin_management: 'Pluginbeheer'
+      actions: Acties
+      settings: Instellingen
+      enable: Inschakelen
+      disable: Uitschakelen
+      reset: Resetten
+      details: Details
+      plugin: Plugin
+      plugin_management: Pluginbeheer
       plugin_management_description: 'Beheer en configureer plugins voor uw PteroCA-installatie'
-      plugin_details: 'Plugin-details'
-      plugin_setting: 'Plugin-instelling'
-      plugin_settings: 'Plugin-instellingen'
+      plugin_details: Plugin-details
+      plugin_setting: Plugin-instelling
+      plugin_settings: Plugin-instellingen
       plugin_setting_with_name: '%s instelling'
       plugin_settings_with_name: '%s instellingen'
-      basic_information: 'Basisinformatie'
+      basic_information: Basisinformatie
       technical_details: 'Technische details'
       name_label: 'Naam:'
       display_name_label: 'Weergavenaam:'
@@ -924,25 +921,25 @@ pteroca:
       created_at_label: 'Gemaakt op:'
       no_description_provided: 'Geen beschrijving opgegeven'
       not_specified: 'Niet gespecificeerd'
-      none: 'Geen'
+      none: Geen
       back_to_list: 'Terug naar lijst'
-      plugin_error: 'Plugin-fout'
+      plugin_error: Plugin-fout
       update_available: 'Update beschikbaar'
       update_available_message: 'Een nieuwe versie van deze plugin is beschikbaar in het bestandssysteem. Schakel de plugin uit en weer in om de update toe te passen.'
       no_plugins_found: 'Geen plugins gevonden in de /plugins/ map'
-      dependencies: 'Afhankelijkheden'
+      dependencies: Afhankelijkheden
       circular_dependency_detected: 'Circulaire afhankelijkheid gedetecteerd'
       required_plugin: 'Vereiste plugin'
-      version_constraint: 'Versiebeperking'
+      version_constraint: Versiebeperking
       installed_version: 'Geïnstalleerde versie'
       not_installed: 'Niet geïnstalleerd'
-      missing: 'Ontbrekend'
+      missing: Ontbrekend
       not_enabled: 'Niet ingeschakeld'
       incompatible_version: 'Incompatibele versie'
-      satisfied: 'Voldaan'
+      satisfied: Voldaan
       dependent_plugins: 'Afhankelijke plugins'
       dependents_warning: 'De volgende plugins zijn afhankelijk van deze plugin. Het uitschakelen kan hun functionaliteit beïnvloeden.'
-      plugin_name: 'Pluginnaam'
+      plugin_name: Pluginnaam
       current_state: 'Huidige status'
       dependency_error: 'Kan plugin niet inschakelen vanwege afhankelijkheidsproblemen'
       dependents_exist_error: 'Kan plugin niet uitschakelen omdat andere plugins ervan afhankelijk zijn'
@@ -954,7 +951,7 @@ pteroca:
       plugin_reset_successfully: 'Plugin "%s" is succesvol gereset. U kunt het nu opnieuw proberen in te schakelen.'
       failed_to_reset_plugin: 'Mislukt om plugin te resetten: %s'
       plugin_not_faulted: 'Plugin "%s" is niet in foutstatus. Geen reset nodig.'
-      delete: 'Verwijderen'
+      delete: Verwijderen
       delete_plugin: 'Plugin Verwijderen'
       delete_plugin_title: 'Plugin Verwijderen'
       delete_confirmation_message: 'Weet u zeker dat u deze plugin permanent wilt verwijderen?'
@@ -966,23 +963,23 @@ pteroca:
       plugin_deleted_successfully: 'Plugin "%s" is succesvol verwijderd.'
       failed_to_delete_plugin: 'Verwijderen van plugin mislukt: %s'
       deletion_prevented: 'Plugin verwijdering werd door het systeem voorkomen.'
-      warning: 'Waarschuwing'
-      cancel: 'Annuleren'
-      close: 'Sluiten'
+      warning: Waarschuwing
+      cancel: Annuleren
+      close: Sluiten
     theme:
-      theme_management_description: 'Beheer en configureer thema''s voor verschillende contexten'
-      appearance_settings: 'Weergave-instellingen'
-      name: 'Themanaam'
-      version: 'Versie'
-      author: 'Auteur'
-      contexts: 'Contexten'
-      status: 'Status'
-      actions: 'Acties'
-      active: 'Actief'
-      inactive: 'Inactief'
-      no_themes_found: 'Geen thema''s gevonden voor deze context'
-      theme_details: 'Themadetails'
-      theme_information: 'Thema-informatie'
+      theme_management_description: "Beheer en configureer thema's voor verschillende contexten"
+      appearance_settings: Weergave-instellingen
+      name: Themanaam
+      version: Versie
+      author: Auteur
+      contexts: Contexten
+      status: Status
+      actions: Acties
+      active: Actief
+      inactive: Inactief
+      no_themes_found: "Geen thema's gevonden voor deze context"
+      theme_details: Themadetails
+      theme_information: Thema-informatie
       back_to_list: 'Terug naar lijst'
       show_details: 'Details tonen'
       currently_active: 'Momenteel actief thema'
@@ -991,16 +988,16 @@ pteroca:
       set_as_default: 'Als standaard instellen'
       set_as_default_in_context: 'Als standaard instellen in %s'
       set_as_default_in: 'Als standaard instellen in %s'
-      context_panel: 'Paneel'
-      context_landing: 'Landingspagina'
-      context_email: 'E-mail'
+      context_panel: Paneel
+      context_landing: Landingspagina
+      context_email: E-mail
       active_in: 'Actief in'
       confirm_set_default: 'Thema als standaard instellen'
       confirm_set_default_message: 'Weet u zeker dat u wilt instellen'
       for_context: 'als het standaardthema voor'
       set_default_warning: 'Dit zal de weergave onmiddellijk wijzigen voor alle gebruikers'
-      cancel: 'Annuleren'
-      confirm: 'Bevestigen'
+      cancel: Annuleren
+      confirm: Bevestigen
       set_as_default_success: 'Thema "%s" is ingesteld als standaard voor %s context'
       set_as_default_error: 'Kon thema niet als standaard instellen: %s'
       theme_not_found: 'Thema "%s" niet gevonden'
@@ -1035,19 +1032,19 @@ pteroca:
         name_invalid_edges: 'Themanaam mag niet beginnen of eindigen met een koppelteken of underscore'
         name_reserved: 'Deze themanaam is gereserveerd en kan niet worden gebruikt'
         name_already_exists: 'Er bestaat al een thema met deze naam'
-      no_themes_found_unified: 'Geen thema''s gevonden'
+      no_themes_found_unified: "Geen thema's gevonden"
     server:
       pterodactyl_server_id: 'Pterodactyl Server-ID'
       pterodactyl_server_identifier: 'Pterodactyl identificatie'
-      name: 'Servernaam'
-      product: 'Artikel'
-      user: 'Eigenaar'
+      name: Servernaam
+      product: Artikel
+      user: Eigenaar
       created_at: 'Aangemaakt op'
       expires_at: 'Vervalt op'
-      is_suspended: 'Opgeschort'
+      is_suspended: Opgeschort
       save: 'Server opslaan'
-      server: 'Server'
-      servers: 'Servers'
+      server: Server
+      servers: Servers
       manage_server: 'Beheer server'
       auto_renewal: 'Automatische verlenging'
       show_server_dashboard: 'Toon server dashboard'
@@ -1070,32 +1067,32 @@ pteroca:
       deleted_at: 'Verwijderd op'
       create_server: 'Server Aanmaken'
       pterodactyl_creation_failed: 'Server aanmaken op Pterodactyl mislukt'
-      base_product: 'Basisproduct'
+      base_product: Basisproduct
       deleted_successfully: 'Server succesvol verwijderd.'
       delete_error: 'Er is een fout opgetreden bij het verwijderen van de server: %error%'
     setting:
-      name: 'Instellingsnaam'
-      value: 'Instellingswaarde'
+      name: Instellingsnaam
+      value: Instellingswaarde
       add: 'Instelling toevoegen'
       save: 'Instellingen opslaan'
-      setting: 'Instellingen'
-      settings: 'Instellingen'
-      type: 'Soort'
-      context: 'Inhoud'
-      hierarchy: 'Rangorde'
-      yes: 'Ja'
-      no: 'Nee'
-      hint: 'Omschrijving'
+      setting: Instellingen
+      settings: Instellingen
+      type: Soort
+      context: Inhoud
+      hierarchy: Rangorde
+      'yes': Ja
+      'no': Nee
+      hint: Omschrijving
       set_as_empty: 'Instellen als leeg'
       set_as_empty_help: 'Vink dit aan om de waarde als leeg (null) in te stellen.'
       panel_theme:
-        help: 'Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina''s.'
+        help: "Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina's."
       landing_theme:
         help: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
       email_theme:
         help: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'
       hints:
-        site_logo: 'Aangepast logo voor dashboard en loginpagina''s. Upload PNG, JPG of SVG. Standaard indien leeg.'
+        site_logo: "Aangepast logo voor dashboard en loginpagina's. Upload PNG, JPG of SVG. Standaard indien leeg."
         site_url: 'Basis-URL van paneel (bijv. https://panel.example.com). Gebruikt in e-mails, SSO en redirects.'
         site_title: 'Paneelnaam weergegeven in browsertabs, koppen en e-mails. Uw merk zichtbaar voor iedereen.'
         site_locale: 'Standaardtaal voor interface. Beïnvloedt alle menu-items, labels en systeemberichten.'
@@ -1103,7 +1100,7 @@ pteroca:
         pterodactyl_url: 'URL van Pterodactyl-paneel (bijv. https://ptero.example.com). Vereist voor alle serverbewerkingen.'
         pterodactyl_api_key: 'Application API-sleutel van Pterodactyl-paneel. Vereist voor gebruikers- & serveraanmaak, opschorting en verwijdering.'
         stripe_secret_key: 'Geheime Stripe API-sleutel (begint met sk_). Vereist voor betalingen. Vertrouwelijk houden.'
-        stripe_payment_methods: 'Door komma''s gescheiden betalingsmethoden (bijv. card,bank_transfer,klarna). Opties bij checkout weergegeven.'
+        stripe_payment_methods: "Door komma's gescheiden betalingsmethoden (bijv. card,bank_transfer,klarna). Opties bij checkout weergegeven."
         internal_currency_name: 'Naam virtuele valuta (bijv. munten, credits, tokens). Weergegeven in saldi, prijzen en e-mails.'
         currency_name: 'Echte valutacode (USD, EUR, GBP, PLN). Weergegeven bij checkout en op bonnen. Afstemmen op Stripe.'
         theme_default_light_mode_color: 'Accentkleur lichte modus in hex (bijv. #635bff). Bedient knoppen, links, actieve elementen.'
@@ -1126,7 +1123,7 @@ pteroca:
         smtp_port: 'SMTP-poort: 587 (TLS, aanbevolen), 465 (SSL) of 25 (onversleuteld). Moet overeenkomen met serverconfiguratie.'
         smtp_username: 'SMTP-authenticatie gebruikersnaam. Meestal volledig e-mailadres (bijv. noreply@example.com).'
         smtp_password: 'SMTP-authenticatie wachtwoord of token. Voor Gmail, gebruik app-wachtwoord. Veilig opgeslagen.'
-        smtp_from: 'Afzender-e-mail in ''From''-veld (bijv. noreply@example.com). Moet overeenkomen met toegestane SMTP-afzenders.'
+        smtp_from: "Afzender-e-mail in 'From'-veld (bijv. noreply@example.com). Moet overeenkomen met toegestane SMTP-afzenders."
         customer_motd_message: 'MOTD-widget inhoud. Ondersteunt HTML- en Twig-syntaxis voor opmaak, links, dynamische inhoud.'
         customer_motd_enabled: 'Bericht van de Dag-widget weergeven op dashboard. Handig voor aankondigingen en mededelingen.'
         customer_motd_title: 'MOTD-widget kop (bijv. Belangrijke Mededeling, Welkom). Vet weergegeven bovenaan kaart.'
@@ -1145,26 +1142,29 @@ pteroca:
         renewal_notification_enabled: 'E-mailbevestigingen verzenden bij verlenging servers. Hoofdschakelaar voor alle verlengingsmeldingen.'
         renewal_notification_min_period_hours: 'Minimale uren tussen verlengings-e-mails per server. Voorkomt spam. Bijv. 24 = max eenmaal daags.'
         renewal_notification_on_demand_min_hours: 'Min uren voor on-demand serververlengingen om e-mail te activeren. Bijv. 24 = alleen melden bij 24u+.'
-        telemetry_consent: 'Sta het verzenden van anonieme gebruiksgegevens toe om PteroCA te helpen verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
-        panel_theme: 'Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina''s.'
+        telemetry_consent: "Sta het verzenden van anonieme gebruiksgegevens toe om PteroCA te helpen verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL's verzameld."
+        panel_theme: "Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina's."
         landing_theme: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
         email_theme: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'
         landing_page_enabled: 'Publieke landingspagina inschakelen. Indien uitgeschakeld, worden bezoekers doorgestuurd naar de inlogpagina.'
+        date_format: "Kies hoe datums en tijden in het hele paneel worden weergegeven. Beïnvloedt alle datumweergaven voor alle gebruikers."
+        date_timezone: "Selecteer de tijdzone voor het weergeven van datums. Alle datums worden geconverteerd van UTC naar de geselecteerde tijdzone."
+        date_show_timezone: "Indien ingeschakeld, wordt de tijdzone-afkorting (bijv. \"UTC\", \"EST\") weergegeven naast alle weergegeven datums."
       template:
-        name: 'Sjabloonnaam'
-        description: 'Sjabloonbeschrijving'
-        author: 'Auteur'
-        version: 'Versie'
-        license: 'Licentie'
+        name: Sjabloonnaam
+        description: Sjabloonbeschrijving
+        author: Auteur
+        version: Versie
+        license: Licentie
         pterocaVersion: 'Pteroca versie'
         outdated: 'De sjabloonversie loopt achter op de huidige versie van PteroCA. Sommige functies werken mogelijk niet correct'
         phpVersion: 'PHP versie'
-        options: 'Opties'
+        options: Opties
         supportDarkMode: 'Donkere modus ondersteuning'
         supportCustomColors: 'Aangepaste kleuren configureren toestaan'
         contexts: 'Ondersteunde contexten'
         translations: 'Thema vertalingen'
-        translation_validation_errors: 'Vertalingsconfiguratiefouten'
+        translation_validation_errors: Vertalingsconfiguratiefouten
       smtp_from: 'Afzender e-mailadres'
       test_smtp_connection: 'SMTP-verbinding testen'
       smtp_connection_success: 'SMTP-verbinding succesvol!'
@@ -1177,25 +1177,25 @@ pteroca:
       create_error: 'Er is een fout opgetreden bij het aanmaken van de instelling: %error%'
       update_error: 'Er is een fout opgetreden bij het bijwerken van de instelling: %error%'
     user:
-      email: 'E-mail'
-      roles: 'Rollen'
+      email: E-mail
+      roles: Rollen
       roles_help: 'Wijs rollen toe aan deze gebruiker. Elke rol verleent een reeks machtigingen die bepalen waartoe de gebruiker toegang heeft en wat hij in het systeem kan doen.'
-      balance: 'Saldo'
-      password: 'Wachtwoord'
+      balance: Saldo
+      password: Wachtwoord
       password_hint: 'Laat leeg indien u het wachtwoord niet wilt wijzigen.'
-      name: 'Voornaam'
-      surname: 'Achternaam'
+      name: Voornaam
+      surname: Achternaam
       add: 'Gebruiker toevoegen'
       save: 'Gebruiker opslaan'
-      user: 'Gebruiker'
-      users: 'Gebruikers'
-      verified: 'Geverifiëerd'
-      blocked: 'Geblokkeerd'
+      user: Gebruiker
+      users: Gebruikers
+      verified: Geverifiëerd
+      blocked: Geblokkeerd
       pterodactyl_user_id: 'Pterodactyl gebruiker ID'
       created_at: 'Aangemaakt op'
       updated_at: 'Laatste activiteit'
       deleted_at: 'Verwijderd op'
-      avatar: 'Profielafbeelding'
+      avatar: Profielafbeelding
       repeat_password: 'Herhaal wachtwoord'
       repeat_password_hint: 'Voer het wachtwoord opnieuw in ter bevestiging.'
       passwords_must_match: 'Wachtwoorden moeten overeenkomen.'
@@ -1204,7 +1204,7 @@ pteroca:
       account_restored: 'Het gebruikersaccount is hersteld van een eerder verwijderd account.'
       created_successfully: 'De gebruiker is succesvol aangemaakt.'
       restore_error: 'Fout bij het herstellen van de gebruiker.'
-      restore: 'Herstellen'
+      restore: Herstellen
       pterodactyl_user_not_found: 'Gebruiker niet gevonden in Pterodactyl, maar succesvol verwijderd uit PteroCA.'
       cannot_delete_user_with_active_servers: 'Kan gebruiker met {{ count }} actieve server(s) niet verwijderen. Verwijder of schort de servers eerst op.'
       updated_successfully: 'Gebruiker succesvol bijgewerkt.'
@@ -1217,7 +1217,7 @@ pteroca:
       show_api_key: 'API-sleutel tonen'
       hide_api_key: 'API-sleutel verbergen'
       regenerate_api_key: 'API-sleutel regenereren'
-      loading: 'Laden...'
+      loading: Laden...
       api_key_visibility_not_available: 'Volledige API-sleutel is niet beschikbaar voor weergave. Regenereer om de nieuwe sleutel te zien.'
       api_key_regenerated_successfully: 'API-sleutel succesvol geregenereerd.'
       api_key_generation_failed: 'Nieuwe API-sleutel genereren mislukt. Controleer de Pterodactyl-verbinding.'
@@ -1230,26 +1230,26 @@ pteroca:
         consequence_1: 'De huidige API-sleutel zal onmiddellijk stoppen met werken'
         consequence_2: 'Een nieuwe API-sleutel zal automatisch worden gegenereerd en opgeslagen'
         consequence_3: 'De oude API-sleutel zal worden verwijderd uit Pterodactyl'
-        cancel: 'Annuleren'
+        cancel: Annuleren
         confirm: 'API-sleutel regenereren'
     role:
-      name: 'Naam'
+      name: Naam
       name_help: 'Interne rol identificatie (kleine letters, alfanumeriek, underscores alleen). Kan niet worden gewijzigd na aanmaak.'
-      display_name: 'Weergavenaam'
-      description: 'Beschrijving'
-      is_system: 'Systeemrol'
+      display_name: Weergavenaam
+      description: Beschrijving
+      is_system: Systeemrol
       is_system_help: 'Systeemrollen zijn beschermd en kunnen niet worden gewijzigd of verwijderd.'
-      permissions: 'Machtigingen'
+      permissions: Machtigingen
       permissions_help: 'Selecteer de machtigingen om toe te wijzen aan deze rol. Gebruikers met deze rol hebben toegang tot alle geselecteerde machtigingen.'
-      permissions_count: 'Machtigingen'
-      users: 'Gebruikers'
-      users_count: 'Gebruikers'
+      permissions_count: Machtigingen
+      users: Gebruikers
+      users_count: Gebruikers
       created_at: 'Aangemaakt op'
       updated_at: 'Bijgewerkt op'
       add: 'Rol toevoegen'
       save: 'Rol opslaan'
-      role: 'Rol'
-      roles: 'Rollen'
+      role: Rol
+      roles: Rollen
       created_successfully: 'Rol succesvol aangemaakt.'
       updated_successfully: 'Rol succesvol bijgewerkt.'
       deleted_successfully: 'Rol succesvol verwijderd.'
@@ -1259,67 +1259,67 @@ pteroca:
       field:
         no_permissions: 'Geen machtigingen toegewezen aan deze rol'
         permissions_across: 'machtigingen over'
-        sections: 'secties'
+        sections: secties
         no_active_users: 'Geen actieve gebruikers toegewezen aan deze rol'
         deleted_blocked_hidden: 'verwijderde/geblokkeerde gebruikers verborgen'
-        id: 'ID'
-        email: 'E-mail'
-        name: 'Naam'
-        status: 'Status'
-        created: 'Aangemaakt'
-        verified: 'Geverifieerd'
+        id: ID
+        email: E-mail
+        name: Naam
+        status: Status
+        created: Aangemaakt
+        verified: Geverifieerd
         not_verified: 'Niet geverifieerd'
         active_users: 'Actieve gebruikers:'
     permission:
-      code: 'Machtigingscode'
-      name: 'Naam'
-      description: 'Beschrijving'
-      section: 'Sectie'
+      code: Machtigingscode
+      name: Naam
+      description: Beschrijving
+      section: Sectie
       plugin_name: 'Plugin naam'
-      is_system: 'Systeemmachtiging'
+      is_system: Systeemmachtiging
       is_system_help: 'Systeemmachtigingen worden automatisch beheerd en kunnen niet handmatig worden gewijzigd.'
       roles: 'Toegewezen rollen'
-      roles_count: 'Rollen'
+      roles_count: Rollen
       created_at: 'Aangemaakt op'
       updated_at: 'Bijgewerkt op'
-      permission: 'Machtiging'
-      permissions: 'Machtigingen'
+      permission: Machtiging
+      permissions: Machtigingen
       cannot_create: 'Machtigingen worden beheerd door het systeem en kunnen niet handmatig worden aangemaakt.'
       cannot_update: 'Machtigingen worden beheerd door het systeem en kunnen niet handmatig worden bijgewerkt.'
       cannot_delete: 'Machtigingen worden beheerd door het systeem en kunnen niet handmatig worden verwijderd.'
       field:
         no_roles: 'Geen rollen hebben deze machtiging'
         role_name: 'Naam:'
-        users_count: 'gebruiker(s)'
-        permissions_count: 'machtiging(en)'
+        users_count: gebruiker(s)
+        permissions_count: machtiging(en)
         total_roles: 'Totaal rollen met deze machtiging:'
     payment:
-      session_id: 'Sessie-ID'
-      status: 'Status'
-      amount: 'Bedrag'
-      currency: 'Munteenheid'
-      user: 'Gebruiker'
+      session_id: Sessie-ID
+      status: Status
+      amount: Bedrag
+      currency: Munteenheid
+      user: Gebruiker
       created_at: 'Aangemaakt op'
       updated_at: 'Bijgewerkt op'
-      payment: 'Betaling'
-      payments: 'Betalingen'
+      payment: Betaling
+      payments: Betalingen
       balance_amount: 'Saldo bedrag'
       used_voucher: 'Gebruikte voucher'
       last_update: 'Laatste update'
       description: 'Beheer je betalingen en bekijk de transactiegeschiedenis'
       continue_payment: 'Betaling voortzetten'
-      detail: 'Details'
-      gateway: 'Betalingsgateway'
+      detail: Details
+      gateway: Betalingsgateway
     user_account:
       description: 'Bewerk je persoonlijke gegevens, wijzig je wachtwoord en beheer je accountinstellingen'
       updated_successfully: 'Account succesvol bijgewerkt.'
       update_error: 'Er is een fout opgetreden bij het bijwerken van het account: %error%'
     voucher:
-      voucher: 'Voucher'
-      vouchers: 'Vouchers'
-      code: 'Code'
+      voucher: Voucher
+      vouchers: Vouchers
+      code: Code
       code_help: 'Voer de voucher code in.'
-      value: 'Waarde'
+      value: Waarde
       value_help: 'Voer de voucher waarde in. Decimale waarden (bijv. 1.5) worden ondersteund.'
       new_accounts_only: 'Alleen voor nieuwe accounts'
       new_accounts_only_help: 'De voucher kan alleen gebruikt worden door nieuwe accounts.'
@@ -1327,7 +1327,7 @@ pteroca:
       minimum_top_up_amount_help: 'De voucher kan alleen gebruikt worden als de gebruiker zijn account met minstens dit bedrag opwaardeert. U kunt dit veld leeg laten als u wilt dat de voucher gebruikt kan worden zonder opwaardering.'
       minimum_order_amount: 'Minimaal bestelbedrag'
       minimum_order_amount_help: 'De voucher kan alleen gebruikt worden als het bestelbedrag groter is dan of gelijk is aan deze waarde. Alleen beschikbaar voor server- en betalingskortingen.'
-      expiration_date: 'Vervaldatum'
+      expiration_date: Vervaldatum
       expiration_date_help: 'De voucher vervalt na deze datum.'
       max_global_uses: 'Maximaal aantal globale gebruiken'
       max_global_uses_help: 'Het maximale aantal keren dat deze voucher wereldwijd kan worden gebruikt.'
@@ -1335,12 +1335,12 @@ pteroca:
       used_count_help: 'Het aantal keren dat deze voucher is gebruikt.'
       one_use_per_user: 'Eén gebruik per gebruiker'
       one_use_per_user_help: 'De voucher kan slechts één keer per gebruiker worden gebruikt.'
-      description: 'Beschrijving'
+      description: Beschrijving
       description_help: 'Voer een beschrijving in voor de voucher. Het is alleen voor uw informatie.'
-      type: 'Type'
+      type: Type
       type_help: 'Selecteer het type voucher.'
       balance_topup: 'Saldo opwaardering'
-      payment_discount: 'Betalingskorting'
+      payment_discount: Betalingskorting
       server_discount: 'Server korting'
       show_voucher_usages: 'Bekijk inwisselingen'
       created_successfully: 'Voucher succesvol aangemaakt.'
@@ -1353,64 +1353,63 @@ pteroca:
       voucher_usage: 'Ingewisselde voucher'
       voucher_usages: 'Ingewisselde vouchers'
       voucher_code: 'Voucher code'
-      user: 'Gebruiker'
+      user: Gebruiker
       used_at: 'Gebruikt op'
     log:
-      log: 'Logboek'
-      logs: 'Logboeken'
+      log: Logboek
+      logs: Logboeken
       server_log: 'Server logboek'
       server_logs: 'Server logboeken'
-      action: 'Acties'
-      details: 'Gegevens'
+      action: Acties
+      details: Gegevens
       created_at: 'Aangemaakt op'
-      user: 'Gebruiker'
-      ip_address: 'IP-adres'
-      server: 'Server'
+      user: Gebruiker
+      ip_address: IP-adres
+      server: Server
     email_log:
       email_log: 'E-mail log'
       email_logs: 'E-mail logs'
       email_type: 'E-mail type'
       metadata: 'E-mail metadata'
       sent_at: 'Verzonden op'
-      user: 'Gebruiker'
-      server: 'Server'
+      user: Gebruiker
+      server: Server
     menu:
-      menu: 'Menu'
-      login: 'Inloggen'
-      dashboard: 'Dashboard'
-      servers: 'Servers'
+      menu: Menu
+      login: Inloggen
+      dashboard: Dashboard
+      servers: Servers
       my_servers: 'Mijn servers'
-      shop: 'Winkel'
-      wallet: 'Saldo'
-      administration: 'Beheer'
-      categories: 'Categorieën'
-      products: 'Producten'
-      settings: 'Instellingen'
-      general: 'Algemeen'
-      pterodactyl: 'Pterodactyl'
-      appearance: 'Weergave'
-      security: 'Beveiliging'
-      payment_gateways: 'Betaalmethoden'
-      email: 'E-mail'
-      users: 'Gebruikers'
-      logout: 'Uitloggen'
-      phpmyadmin: 'PHPMyAdmin'
-      payments: 'Betalingen'
-      logs: 'Logboeken'
+      shop: Winkel
+      wallet: Saldo
+      administration: Beheer
+      categories: Categorieën
+      products: Producten
+      settings: Instellingen
+      general: Algemeen
+      pterodactyl: Pterodactyl
+      appearance: Weergave
+      security: Beveiliging
+      payment_gateways: Betaalmethoden
+      email: E-mail
+      users: Gebruikers
+      logout: Uitloggen
+      phpmyadmin: PHPMyAdmin
+      payments: Betalingen
+      logs: Logboeken
       email_logs: 'E-mail logs'
       server_logs: 'Server logboeken'
-      overview: 'Overzicht'
-      server_builds: 'Servers'
-      vouchers: 'Vouchers'
+      overview: Overzicht
+      server_builds: Servers
+      vouchers: Vouchers
       voucher_usages: 'Ingewisselde vouchers'
       my_account: 'Mijn account'
-      account_settings: 'Accountinstellingen'
+      account_settings: Accountinstellingen
       roles_and_permissions: 'Rollen en machtigingen'
-      roles: 'Rollen'
-      permissions: 'Machtigingen'
-      themes: 'Thema''s'
-      manage_themes: 'Thema''s beheren'
-
+      roles: Rollen
+      permissions: Machtigingen
+      themes: "Thema's"
+      manage_themes: "Thema's beheren"
   api:
     servers:
       not_found: 'Server niet gevonden.'
@@ -1443,29 +1442,29 @@ pteroca:
     creation_not_sent_misconfigured: 'Server is succesvol aangemaakt, maar de bevestigingsmail kon niet worden verzonden vanwege e-mailconfiguratieproblemen. Controleer uw e-mailinstellingen.'
     renewal_not_sent_misconfigured: 'Server is succesvol verlengd, maar de bevestigingsmail kon niet worden verzonden vanwege e-mailconfiguratieproblemen. Controleer uw e-mailinstellingen.'
     general:
-      hello: 'Hallo'
+      hello: Hallo
       best_regards: 'Met vriendelijke groet'
       visit_website: 'Bezoek onze website:'
       copyright: 'Alle rechten voorbehouden.'
     verification:
-      subject: "E-mail verificatie - %siteName%"
-      title: "E-mail verificatie"
-      subtitle: "Gelieve uw e-mailadres te verifiëren om door te gaan"
-      hello: "Hallo %name%!"
-      message: "Bedankt voor het registreren bij %siteName%. Verificeer je e-mailadres door op de onderstaande knop te klikken."
-      verify_button: "Verificeer e-mailadres"
-      alternative_text: "Als de knop niet werkt, kunt u ook de volgende link kopiëren en plakken in uw browser:"
-      footer_text: "Als u geen account heeft aangemaakt bij %siteName%, kunt u deze e-mail veilig negeren."
-      resend_too_soon: "U kunt de verificatie-e-mail slechts één keer per %minutes% minuten opnieuw verzenden. Probeer het later opnieuw."
-      resend_success: "De verificatie-e-mail is naar uw e-mailadres verzonden."
-      not_logged_in: "U moet ingelogd zijn om de verificatie-e-mail opnieuw te verzenden."
-      already_verified: "Uw e-mailadres is al geverifieerd."
+      subject: 'E-mail verificatie - %siteName%'
+      title: 'E-mail verificatie'
+      subtitle: 'Gelieve uw e-mailadres te verifiëren om door te gaan'
+      hello: 'Hallo %name%!'
+      message: 'Bedankt voor het registreren bij %siteName%. Verificeer je e-mailadres door op de onderstaande knop te klikken.'
+      verify_button: 'Verificeer e-mailadres'
+      alternative_text: 'Als de knop niet werkt, kunt u ook de volgende link kopiëren en plakken in uw browser:'
+      footer_text: 'Als u geen account heeft aangemaakt bij %siteName%, kunt u deze e-mail veilig negeren.'
+      resend_too_soon: 'U kunt de verificatie-e-mail slechts één keer per %minutes% minuten opnieuw verzenden. Probeer het later opnieuw.'
+      resend_success: 'De verificatie-e-mail is naar uw e-mailadres verzonden.'
+      not_logged_in: 'U moet ingelogd zijn om de verificatie-e-mail opnieuw te verzenden.'
+      already_verified: 'Uw e-mailadres is al geverifieerd.'
     pricing:
       slot_format: '{{ slots }} slots × {{ price }} {{ currency }} = {{ total }} {{ currency }}'
       static_format: '{{ price }} {{ currency }}'
       on_demand_format: '{{ price }} {{ currency }}'
     registration:
-      subject: 'Registratie'
+      subject: Registratie
       subtitle: 'Uw account is succesvol aangemaakt'
       welcome: 'Welkom bij onze dienst! Bedankt voor het registreren.'
       account_ready: 'Uw account is klaar voor gebruik. U kunt nu inloggen op uw account en beginnen met het gebruik van onze diensten.'
@@ -1488,12 +1487,12 @@ pteroca:
       title: 'Server succesvol gekocht'
       subtitle: 'Uw server is klaar voor gebruik'
       server_purchased: 'U heeft een server in onze winkel gekocht.'
-      expiration_date: 'Vervaldatum'
-      product_details: 'Productinformatie'
-      product_name: 'Productnaam'
+      expiration_date: Vervaldatum
+      product_details: Productinformatie
+      product_name: Productnaam
       product_price: 'Product prijs'
       server_details: 'Server gegevens'
-      ip_address: 'IP-adres'
+      ip_address: IP-adres
       management_panel: 'Beheer paneel'
       panel_username: 'Paneel gebruikersnaam'
       panel_password: 'Paneel wachtwoord'
@@ -1507,7 +1506,7 @@ pteroca:
       server_renewed: 'U heeft de server die u in onze winkel hebt aangeschaft, verlengd.'
       new_expiration: 'Nieuwe vervaldatum:'
     payment:
-      subject: 'Betaling'
+      subject: Betaling
       title: 'Betaling ontvangen'
       subtitle: 'Bedankt voor uw betaling'
       payment_received: 'Wij hebben uw betaling ontvangen.'
@@ -1523,7 +1522,7 @@ pteroca:
       server_details: 'Server gegevens'
       server_name: 'Server: %serverName%'
       suspension_date: 'Opgeschort op: %suspensionDate%'
-      suspension_date_label: 'Opschortingsdatum'
+      suspension_date_label: Opschortingsdatum
       auto_delete_title: 'Automatische verwijderingswaarschuwing'
       auto_delete_warning: 'Belangrijk: Uw server wordt automatisch verwijderd na %days% dagen (%deleteDate%) als deze niet wordt verlengd.'
       panel_access: 'Toegang tot paneel'
@@ -1548,27 +1547,27 @@ pteroca:
       useful_resources: 'Nuttige Bronnen'
       servers: 'Actieve servers'
       users: 'Geregistreerde gebruikers'
-      payments: 'Betalingen'
+      payments: Betalingen
       last_30_days: 'Laatste 30 dagen'
-      now: 'Nu'
+      now: Nu
       links: 'Belangrijke koppelingen'
-      system: 'Systeeminformatie'
+      system: Systeeminformatie
       payment_overview: 'Betaling Overzicht'
       view_all: 'Alles weergeven'
       last_registered_users: 'Laatst geregistreerde gebruikers'
-      user: 'Gebruiker'
-      amount: 'Hoeveelheid'
-      currency: 'Valuta'
-      status: 'Status'
-      date: 'Datum'
+      user: Gebruiker
+      amount: Hoeveelheid
+      currency: Valuta
+      status: Status
+      date: Datum
       no_payments: 'Uw systeem heeft nog geen betalingen ontvangen.'
-      balance: 'Saldo'
-      verified: 'Geverifieerd'
+      balance: Saldo
+      verified: Geverifieerd
       unverified: 'Niet geverifieerd'
       project_site: 'Project website'
-      documentation: 'Documentatie'
-      support: 'Ondersteuning'
-      up_to_date: 'Up-to-date'
+      documentation: Documentatie
+      support: Ondersteuning
+      up_to_date: Up-to-date
       update_available: 'Update beschikbaar'
       pteroca_plugin_not_detected: 'Niet gedetecteerd'
     server_create:
@@ -1583,14 +1582,14 @@ pteroca:
   first_configuration:
     title: 'Eerste configuratie'
     description: 'Deze pagina is slechts één keer na installatie beschikbaar. Vul de vereiste velden in om het paneel te configureren.'
-    step: 'Stap'
-    step_welcome: 'Welkom'
-    step_site: 'Site'
-    step_pterodactyl: 'Pterodactyl'
-    step_email: 'Email'
-    step_payment: 'Betaling'
-    step_admin: 'Admin'
-    next: 'Volgende'
+    step: Stap
+    step_welcome: Welkom
+    step_site: Site
+    step_pterodactyl: Pterodactyl
+    step_email: Email
+    step_payment: Betaling
+    step_admin: Admin
+    next: Volgende
     site_settings_description: 'Configureer de basisinstellingen van uw paneel, inclusief de site-URL, titel en standaardtaal.'
     email_settings_description: 'Stel SMTP-instellingen in om uw paneel in staat te stellen e-mails te verzenden naar gebruikers voor meldingen en accountbeheer.'
     payment_settings_description: 'Configureer uw betalingsgateway en valutainstellingen om gebruikers aankopen op uw paneel te laten doen.'
@@ -1600,7 +1599,7 @@ pteroca:
     configurator_welcome_description_2: 'Selecteer de taal van de configurator en klik op "Start" om te beginnen.'
     configurator_language: 'Configurator taal'
     start_configuration: 'Begin configuratie'
-    site_settings: 'Site-instellingen'
+    site_settings: Site-instellingen
     site_url: 'Website URL'
     site_url_help: 'Vul de URL van uw website in met het protocol (http:// of https://).'
     admin_account_alert: 'Geef de gegevens op voor een nieuw beheerdersaccount dat zowel in PteroCA als in Pterodactyl wordt aangemaakt. U kunt geen bestaand account gebruiken.'
@@ -1609,7 +1608,7 @@ pteroca:
     site_locale: 'Taal interface'
     site_locale_help: 'Selecteer de taal voor de gebruikersinterface.'
     email_settings: 'Email instellingen'
-    email_smtp_server: 'SMTP-server'
+    email_smtp_server: SMTP-server
     email_smtp_server_help: 'Voer het SMTP-serveradres in.'
     email_smtp_port: 'SMTP poort'
     email_smtp_port_help: 'Voer de SMTP-serverpoort in. Veelgebruikte poorten: 587 (TLS), 465 (SSL).'
@@ -1624,10 +1623,10 @@ pteroca:
     pterodactyl_panel_url_help: 'Vul de URL van uw Pterodactyl paneel in met het protocol (http:// of https://).'
     pterodactyl_panel_api_key: 'Pterodactyl Application API sleutel'
     pterodactyl_panel_api_key_help: 'Voer de Application API sleutel in van uw Pterodactyl paneel.'
-    payment_settings: 'Betalingsinstellingen'
+    payment_settings: Betalingsinstellingen
     stripe_secret_key: 'Stripe Geheime Sleutel'
     stripe_secret_key_help: 'Voer de geheime sleutel van uw Stripe account in (optioneel, kan later ingesteld worden).'
-    currency: 'Valuta'
+    currency: Valuta
     currency_help: 'Voer de valutanaam in waarin de betalingen worden gedaan.'
     internal_currency_name: 'Interne Valuta Naam'
     internal_currency_name_help: 'Voer de naam van de interne valuta in (bijv. munten).'
@@ -1636,8 +1635,8 @@ pteroca:
     admin_email_help: 'Voer het e-mailadres in van de beheerder.'
     admin_password: 'Beheerders Wachtwoord'
     admin_password_help: 'Vul het wachtwoord in voor het beheerdersaccount.'
-    skip: 'Overslaan'
-    back: 'Terug'
+    skip: Overslaan
+    back: Terug
     documentation_hint: 'Problemen met de configurator? Bekijk de documentatie!'
     discord_hint: 'Of heb je hulp nodig? Word lid van onze Discord server!'
     pterodactyl_plugin_hint: 'Het wordt aanbevolen om de PteroCA plugin op uw Pterodactyl te installeren voor toegang tot alle functies.'
@@ -1661,56 +1660,55 @@ pteroca:
       override_settings: 'Instellingen overschrijven'
       user_already_exists_in_local_database: 'Een gebruiker met dit e-mailadres bestaat al in de lokale database.'
     telemetry_consent: 'Help PteroCA te verbeteren door anonieme gebruiksgegevens te verzenden'
-    telemetry_consent_help: 'We verzamelen anonieme telemetrie om PteroCA te verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL''s verzameld.'
-
+    telemetry_consent_help: "We verzamelen anonieme telemetrie om PteroCA te verbeteren. Alleen installatiegebeurtenissen en fouten worden bijgehouden. Er worden geen persoonlijke gegevens, API-sleutels of URL's verzameld."
   error:
     invalid_csrf_token: 'Ongeldig CSRF-token. Vernieuw de pagina en probeer het opnieuw.'
     user_not_found: 'Gebruiker niet gevonden.'
     404:
       title: 'Pagina niet gevonden'
       message: 'Sorry, maar de pagina die u zoekt bestaat niet of is verplaatst. Controleer de URL of ga terug naar de hoofdpagina.'
-      go_home: 'Hoofdpagina'
-      go_back: 'Terug'
+      go_home: Hoofdpagina
+      go_back: Terug
     500:
-      title: 'Serverfout'
+      title: Serverfout
       message: 'Sorry, er is een interne serverfout opgetreden. Ons team is op de hoogte gesteld van het probleem. Probeer de pagina over een paar minuten te vernieuwen of neem contact op met de beheerder.'
-      go_home: 'Hoofdpagina'
+      go_home: Hoofdpagina
       refresh: 'Pagina vernieuwen'
-      go_back: 'Terug'
+      go_back: Terug
     general:
       title: 'Er is een fout opgetreden'
       message: 'Sorry, er is een onverwachte fout opgetreden. Probeer het over een moment opnieuw.'
-      go_home: 'Hoofdpagina'
-      go_back: 'Terug'
+      go_home: Hoofdpagina
+      go_back: Terug
   plugin:
-    plugins: 'Plugins'
-    name: 'Naam'
-    display_name: 'Weergavenaam'
-    version: 'Versie'
-    author: 'Auteur'
-    description: 'Beschrijving'
-    state: 'Status'
-    capabilities: 'Mogelijkheden'
+    plugins: Plugins
+    name: Naam
+    display_name: Weergavenaam
+    version: Versie
+    author: Auteur
+    description: Beschrijving
+    state: Status
+    capabilities: Mogelijkheden
     min_pteroca: 'Min PteroCA'
     max_pteroca: 'Max PteroCA'
     enabled_at: 'Ingeschakeld op'
     disabled_at: 'Uitgeschakeld op'
-    fault_reason: 'Foutreden'
+    fault_reason: Foutreden
     created_at: 'Gemaakt op'
-    actions: 'Acties'
-    settings: 'Instellingen'
-    enable: 'Inschakelen'
-    disable: 'Uitschakelen'
-    details: 'Details'
-    plugin: 'Plugin'
-    plugin_management: 'Pluginbeheer'
+    actions: Acties
+    settings: Instellingen
+    enable: Inschakelen
+    disable: Uitschakelen
+    details: Details
+    plugin: Plugin
+    plugin_management: Pluginbeheer
     plugin_management_description: 'Beheer en configureer plugins voor uw PteroCA-installatie'
     plugin_details: 'Plugin Details'
     plugin_setting: 'Plugin Instelling'
     plugin_settings: 'Plugin Instellingen'
     plugin_setting_with_name: '%s Instelling'
     plugin_settings_with_name: '%s Instellingen'
-    basic_information: 'Basisinformatie'
+    basic_information: Basisinformatie
     technical_details: 'Technische Details'
     name_label: 'Naam:'
     display_name_label: 'Weergavenaam:'
@@ -1727,22 +1725,22 @@ pteroca:
     created_at_label: 'Gemaakt op:'
     no_description_provided: 'Geen beschrijving opgegeven'
     not_specified: 'Niet gespecificeerd'
-    none: 'Geen'
+    none: Geen
     back_to_list: 'Terug naar lijst'
     plugin_error: 'Plugin Fout'
     update_available: 'Update Beschikbaar'
     update_available_message: 'Een nieuwe versie van deze plugin is beschikbaar in het bestandssysteem. Schakel de plugin uit en weer in om de update toe te passen.'
     no_plugins_found: 'Geen plugins gevonden in /plugins/ directory'
-    dependencies: 'Afhankelijkheden'
+    dependencies: Afhankelijkheden
     circular_dependency_detected: 'Circulaire Afhankelijkheid Gedetecteerd'
     required_plugin: 'Vereiste Plugin'
-    version_constraint: 'Versiebeperking'
+    version_constraint: Versiebeperking
     installed_version: 'Geïnstalleerde Versie'
     not_installed: 'Niet Geïnstalleerd'
-    missing: 'Ontbrekend'
+    missing: Ontbrekend
     not_enabled: 'Niet Ingeschakeld'
     incompatible_version: 'Incompatibele Versie'
-    satisfied: 'Voldaan'
+    satisfied: Voldaan
     dependent_plugins: 'Afhankelijke Plugins'
     dependents_warning: 'De volgende plugins zijn afhankelijk van deze plugin. Het uitschakelen kan hun functionaliteit beïnvloeden.'
     plugin_name: 'Plugin Naam'
@@ -1765,8 +1763,8 @@ pteroca:
       enable_after_upload: 'Plugin automatisch inschakelen na upload'
       enable_help_text: 'Indien aangevinkt, wordt de plugin onmiddellijk ingeschakeld na succesvolle upload en validatie'
       submit: 'Plugin Uploaden'
-      cancel: 'Annuleren'
-      requirements_title: 'Vereisten'
+      cancel: Annuleren
+      requirements_title: Vereisten
       requirement_zip: 'Bestand moet een geldig ZIP-archief zijn'
       requirement_size: 'Maximale bestandsgrootte: 50 MB'
       requirement_manifest: 'Moet plugin.json bevatten in de hoofdmap'
@@ -1780,35 +1778,35 @@ pteroca:
       invalid_mime_type: 'Upload een geldig ZIP-bestand'
     security:
       title: 'Plugin Beveiliging'
-      scan: 'Beveiligingsscan'
-      issues: 'Beveiligingsproblemen'
-      critical: 'Kritiek'
-      high: 'Hoog'
-      medium: 'Gemiddeld'
-      low: 'Laag'
+      scan: Beveiligingsscan
+      issues: Beveiligingsproblemen
+      critical: Kritiek
+      high: Hoog
+      medium: Gemiddeld
+      low: Laag
       no_issues: 'Geen beveiligingsproblemen gevonden'
       all_clear: 'Alle beveiligingscontroles geslaagd'
       affected_plugins: 'Betrokken Plugins'
-      severity: 'Ernst'
-      type: 'Type'
-      file: 'Bestand'
-      line: 'Regel'
-      message: 'Bericht'
-      suggestion: 'Suggestie'
-      code_snippet: 'Code'
+      severity: Ernst
+      type: Type
+      file: Bestand
+      line: Regel
+      message: Bericht
+      suggestion: Suggestie
+      code_snippet: Code
       dangerous_function: 'Gevaarlijke Functie'
-      path_traversal: 'Padtraversal'
-      sql_injection: 'SQL-injectie'
-      xss: 'XSS-kwetsbaarheid'
-      file_permissions: 'Bestandsrechten'
-      security_status: 'Beveiligingsstatus'
+      path_traversal: Padtraversal
+      sql_injection: SQL-injectie
+      xss: XSS-kwetsbaarheid
+      file_permissions: Bestandsrechten
+      security_status: Beveiligingsstatus
       total_issues_found: 'Totaal Gevonden Problemen'
       check:
         dangerous_functions: 'Gevaarlijke Functies'
         path_traversal: 'Pad Traversie'
         sql_injection: 'SQL Injectie'
         xss_patterns: 'XSS Patronen'
-        file_permissions: 'Bestandsrechten'
+        file_permissions: Bestandsrechten
         composer_dependencies: 'Composer Afhankelijkheden'
       issue_type:
         composer_scripts_forbidden: 'Verboden Scripts Sectie'
@@ -1817,28 +1815,28 @@ pteroca:
         composer_validate_failed: 'Composer Validatie Mislukt'
         composer_manifest_mismatch: 'Manifest Mismatch'
         composer_php_version_incompatible: 'PHP Versie Incompatibel'
-        composer_audit_failed: 'Beveiligingskwetsbaarheden'
+        composer_audit_failed: Beveiligingskwetsbaarheden
         composer_forbidden_licenses: 'Verboden Licenties'
     health:
       title: 'Plugin Gezondheid'
-      check: 'Gezondheidscontrole'
-      healthy: 'Gezond'
-      unhealthy: 'Ongezond'
-      status: 'Status'
+      check: Gezondheidscontrole
+      healthy: Gezond
+      unhealthy: Ongezond
+      status: Status
       last_check: 'Laatste Controle'
-      checks: 'Controles'
-      passed: 'Geslaagd'
-      failed: 'Mislukt'
-      errors: 'Fouten'
-      files_integrity: 'Bestandsintegriteit'
-      dependencies: 'Afhankelijkheden'
-      configuration: 'Configuratie'
-      service_registration: 'Serviceregistratie'
-      health_percentage: 'Gezondheid'
-      health_status: 'Gezondheidsstatus'
+      checks: Controles
+      passed: Geslaagd
+      failed: Mislukt
+      errors: Fouten
+      files_integrity: Bestandsintegriteit
+      dependencies: Afhankelijkheden
+      configuration: Configuratie
+      service_registration: Serviceregistratie
+      health_percentage: Gezondheid
+      health_status: Gezondheidsstatus
       all_checks_passed: 'Alle gezondheidscontroles geslaagd'
       checks_passed: 'controles geslaagd'
-      error_details: 'Foutdetails'
+      error_details: Foutdetails
       not_available: 'Gezondheidscontrole niet beschikbaar voor deze plugin'
     audit:
       enabled: 'Plugin ingeschakeld'
@@ -1853,24 +1851,24 @@ pteroca:
   widget:
     plugin_status:
       title: 'Plugin Status'
-      total: 'Totaal'
-      enabled: 'Ingeschakeld'
-      disabled: 'Uitgeschakeld'
-      faulted: 'Foutief'
+      total: Totaal
+      enabled: Ingeschakeld
+      disabled: Uitgeschakeld
+      faulted: Foutief
     plugin_security:
       title: 'Plugin Beveiliging'
       total_issues: 'Totaal Problemen'
-      critical_issues: 'Kritiek'
-      high_issues: 'Hoog'
+      critical_issues: Kritiek
+      high_issues: Hoog
       affected_plugins: 'Betrokken Plugins'
       no_issues: 'Geen beveiligingsproblemen gedetecteerd'
     plugin_health:
       title: 'Plugin Gezondheid'
-      healthy: 'Gezond'
-      unhealthy: 'Ongezond'
+      healthy: Gezond
+      unhealthy: Ongezond
       unhealthy_plugins: 'Ongezond Plugins'
       last_checked: 'Laatst gecontroleerd'
-      failed_checks: 'mislukt'
+      failed_checks: mislukt
       no_plugins: 'Geen ingeschakelde plugins'
   command:
     plugin_security_scan:
@@ -1883,45 +1881,43 @@ pteroca:
       checking: 'Plugin controleren: %name%'
       healthy: 'Plugin is gezond'
       unhealthy: 'Plugin heeft gezondheidsproblemen'
-
   permission:
     section:
-      dashboard: 'Dashboard'
-      user_management: 'Gebruikersbeheer'
+      dashboard: Dashboard
+      user_management: Gebruikersbeheer
       'user_management (admin)': 'Gebruikersbeheer (Admin)'
-      server_management: 'Serverbeheer'
+      server_management: Serverbeheer
       'server_management (admin)': 'Serverbeheer (Admin)'
-      shop: 'Winkel'
+      shop: Winkel
       'shop (admin)': 'Winkel (Admin)'
-      payment: 'Betalingen'
-      voucher: 'Vouchers'
+      payment: Betalingen
+      voucher: Vouchers
       'voucher (admin)': 'Vouchers (Admin)'
-      logs: 'Logs'
+      logs: Logs
       'logs (admin)': 'Logs (Admin)'
-      settings: 'Instellingen'
+      settings: Instellingen
       'settings (admin)': 'Instellingen (Admin)'
-      plugins: 'Plugins'
+      plugins: Plugins
       'plugins (admin)': 'Plugins (Admin)'
       role_management: 'Rollen en machtigingen'
-      themes: 'Thema''s'
-      'themes (admin)': 'Thema''s (Admin)'
+      themes: "Thema's"
+      'themes (admin)': "Thema's (Admin)"
       'role_management (admin)': 'Rollen en machtigingen (Admin)'
-      user_features: 'Gebruikersfuncties'
-      pterodactyl_integration: 'Pterodactyl-integratie'
+      user_features: Gebruikersfuncties
+      pterodactyl_integration: Pterodactyl-integratie
       'pterodactyl_integration (admin)': 'Pterodactyl-integratie (Admin)'
-
   theme:
     upload:
       upload_theme: 'Thema uploaden'
       title: 'Themapakket uploaden'
       description: 'Upload een nieuw themapakket als ZIP-bestand'
-      back_to_list: 'Terug naar thema''s'
+      back_to_list: "Terug naar thema's"
       file_label: 'Thema ZIP-bestand'
       file_help: 'Selecteer een ZIP-bestand met uw thema (max 50 MB)'
       submit: 'Thema uploaden'
       success: 'Thema "%s" versie %s succesvol geüpload!'
-      requirements: 'Uploadvereisten'
-      occurrences: 'voorkomens'
+      requirements: Uploadvereisten
+      occurrences: voorkomens
       req_zip_format: 'Bestand moet een geldig ZIP-archief zijn'
       req_max_size: 'Maximale bestandsgrootte: 50 MB (uitgepakt: 100 MB)'
       req_structure: 'ZIP moet themes/{naam}/ bevatten en optioneel public/assets/theme/{naam}/'
