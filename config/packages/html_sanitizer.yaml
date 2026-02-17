@@ -1,0 +1,49 @@
+framework:
+    html_sanitizer:
+        sanitizers:
+            default:
+                # Allow common formatting elements for product descriptions
+                allow_elements:
+                    a: ['href', 'title', 'target', 'rel']
+                    abbr: ['title']
+                    b: []
+                    blockquote: ['cite']
+                    br: []
+                    code: []
+                    div: ['class']
+                    em: []
+                    h1: []
+                    h2: []
+                    h3: []
+                    h4: []
+                    h5: []
+                    h6: []
+                    hr: []
+                    i: []
+                    li: []
+                    ol: []
+                    p: []
+                    pre: []
+                    s: []
+                    small: []
+                    span: ['class']
+                    strong: []
+                    sub: []
+                    sup: []
+                    table: ['class']
+                    tbody: []
+                    td: ['colspan', 'rowspan']
+                    th: ['colspan', 'rowspan', 'scope']
+                    thead: []
+                    tr: []
+                    u: []
+                    ul: []
+
+                # Block dangerous URL schemes
+                allowed_link_schemes:
+                    - http
+                    - https
+                    - mailto
+
+                # Additional security
+                allowed_media_schemes: []

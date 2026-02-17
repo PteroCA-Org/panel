@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="card-body p-4">
-                        <p class="mb-0">{{ product.description }}</p>
+                        <div class="mb-0">{{ product.description|nl2br|safe_html }}</div>
                     </div>
                 </div>
             </div>

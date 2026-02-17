@@ -651,7 +651,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         time_based_uuid_node?: scalar|null,
  *     },
  *     html_sanitizer?: bool|array{ // HtmlSanitizer configuration
- *         enabled?: bool, // Default: false
+ *         enabled?: bool, // Default: true
  *         sanitizers?: array<string, array{ // Default: []
  *             allow_safe_elements?: bool, // Allows "safe" elements and attributes. // Default: false
  *             allow_static_elements?: bool, // Allows all static elements and attributes from the W3C Sanitizer API standard. // Default: false
