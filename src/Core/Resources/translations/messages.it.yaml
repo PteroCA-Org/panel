@@ -1116,7 +1116,7 @@ pteroca:
         stripe_payment_methods: 'Metodi di pagamento separati da virgole (es. card,bank_transfer,klarna). Opzioni mostrate al checkout.'
         internal_currency_name: 'Nome valuta virtuale (es. monete, crediti, gettoni). Mostrato in saldi, prezzi ed email.'
         currency_name: 'Codice valuta reale (USD, EUR, GBP, PLN). Mostrato al checkout e sulle ricevute. Corrispondere a Stripe.'
-        minimum_topup_amount: 'L'''importo minimo consentito per la ricarica del saldo. Gli utenti non possono aggiungere meno di questo valore. Deve essere maggiore di 0.'
+        minimum_topup_amount: 'L''importo minimo consentito per la ricarica del saldo. Gli utenti non possono aggiungere meno di questo valore. Deve essere maggiore di 0.'
         theme_default_light_mode_color: 'Colore accento modalità chiara in hex (es. #635bff). Controlla pulsanti, link, elementi attivi.'
         theme_default_dark_mode_color: 'Colore base modalità scura in hex (es. #1a1a2e). Il sistema genera automaticamente sfumature per elementi UI.'
         theme_default_primary_color: 'Colore primario predefinito'
