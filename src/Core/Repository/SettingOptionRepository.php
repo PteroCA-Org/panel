@@ -50,7 +50,7 @@ class SettingOptionRepository extends ServiceEntityRepository
 
         $options = [];
         foreach ($results as $result) {
-            $options[$result['optionValue']] = $result['optionKey'];
+            $options[$result['optionKey']] = $result['optionValue'];
         }
 
         return $options;

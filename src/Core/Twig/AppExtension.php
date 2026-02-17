@@ -8,6 +8,7 @@ use Twig\TwigFunction;
 use App\Core\Enum\SettingEnum;
 use App\Core\DTO\TemplateOptionsDTO;
 use App\Core\Service\SettingService;
+use App\Core\Service\DateFormatterService;
 use App\Core\Trait\FormatBytesTrait;
 use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
@@ -32,6 +33,7 @@ class AppExtension extends AbstractExtension
         private readonly RouterInterface $router,
         private readonly PterodactylRedirectService $pterodactylRedirectService,
         private readonly PluginAssetManager $pluginAssetManager,
+        private readonly DateFormatterService $dateFormatterService,
     ) {}
 
     public function getFunctions(): array
@@ -59,6 +61,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('format_bytes', [$this, 'formatBytes']),
+            new TwigFilter('app_date', [$this, 'formatDate']),
         ];
     }
 
@@ -173,5 +176,10 @@ class AppExtension extends AbstractExtension
     public function pluginAsset(string $pluginName, string $path): string
     {
         return $this->pluginAssetManager->getAssetUrl($pluginName, $path);
+    }
+
+    public function formatDate(\DateTimeInterface $date): string
+    {
+        return $this->dateFormatterService->formatDateTime($date);
     }
 }

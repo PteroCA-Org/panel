@@ -47,7 +47,7 @@
                                     </span>
                                 {% endif %}
                             </td>
-                            <td class="text-muted">{{ payment.createdAt|date('Y-m-d H:i') }}</td>
+                            <td class="text-muted">{{ payment.createdAt|app_date }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

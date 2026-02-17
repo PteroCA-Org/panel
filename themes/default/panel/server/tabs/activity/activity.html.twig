@@ -37,7 +37,7 @@
                                     {% set isAdminLog = log.user.email is defined and log.user.email != server.user.email and 'ROLE_ADMIN' in log.user.roles %}
                                     {{ isAdminLog ? '<span class="badge bg-primary text-white">' ~ ('pteroca.server.admin'|trans) ~'</span>' : (log.user.email ?? '') }}
                                 </td>
-                                <td>{{ log.createdAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ log.createdAt|app_date }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

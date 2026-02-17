@@ -19,7 +19,7 @@
     {% include 'email/components/table.html.twig' with {
         rows: [
             {label: 'pteroca.email.suspended.server_details'|trans, value: '<strong>' ~ serverName ~ '</strong>'},
-            {label: 'pteroca.email.suspended.suspension_date_label'|trans, value: suspensionDate|date('Y-m-d H:i')}
+            {label: 'pteroca.email.suspended.suspension_date_label'|trans, value: suspensionDate|app_date}
         ]
     } %}
 
@@ -29,7 +29,7 @@
             title: 'pteroca.email.suspended.auto_delete_title'|trans,
             message: 'pteroca.email.suspended.auto_delete_warning'|trans({
                 '%days%': deleteAfterDays,
-                '%deleteDate%': deleteDate|date('Y-m-d H:i')
+                '%deleteDate%': deleteDate|app_date
             })
         } %}
     {% endif %}

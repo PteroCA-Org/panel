@@ -32,7 +32,7 @@
                                 <td>{{ backup.name }}</td>
                                 <td>{{ backup.bytes|format_bytes }}</td>
                                 <td class="pt-4"><pre>{% if backup.checksum is defined %}{{ backup.checksum }}{% else %}-{% endif %}</pre></td>
-                                <td>{{ backup.created_at|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ backup.created_at|app_date }}</td>
                                 <td class="actions actions-as-dropdown">
                                     {% if hasAnyServerPermission(serverData.serverPermissions, ['backup.download', 'backup.restore', 'backup.delete']) %}
                                     <div class="dropdown dropdown-actions">

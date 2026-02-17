@@ -37,14 +37,14 @@
                                 </td>
                                 <td>
                                     {% if schedule.last_run_at %}
-                                        {{ schedule.last_run_at|date('Y-m-d H:i:s') }}
+                                        {{ schedule.last_run_at|app_date }}
                                     {% else %}
                                         <span class="text-muted">{{ 'pteroca.server.never'|trans }}</span>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if schedule.next_run_at %}
-                                        {{ schedule.next_run_at|date('Y-m-d H:i:s') }}
+                                        {{ schedule.next_run_at|app_date }}
                                     {% else %}
                                         <span class="text-muted">-</span>
                                     {% endif %}

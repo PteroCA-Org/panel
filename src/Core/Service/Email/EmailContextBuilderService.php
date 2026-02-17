@@ -98,7 +98,7 @@ readonly class EmailContextBuilderService
 
         $serverData = [
             'ip' => $serverDetails->ip,
-            'expiresAt' => $server->getExpiresAt()->format('Y-m-d H:i'),
+            'expiresAt' => $server->getExpiresAt(),
         ];
 
         $panelData = [

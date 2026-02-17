@@ -51,4 +51,7 @@ enum SettingEnum: string
     case LOG_CLEANUP_ENABLED = 'log_cleanup_enabled';
     case LOG_CLEANUP_DAYS_AFTER = 'log_cleanup_days_after';
     case TELEMETRY_CONSENT = 'telemetry_consent';
+    case DATE_FORMAT = 'date_format';
+    case DATE_TIMEZONE = 'date_timezone';
+    case DATE_SHOW_TIMEZONE = 'date_show_timezone';
 }

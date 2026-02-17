@@ -39,7 +39,7 @@
                                 </span>
                             {% endif %}
                         </td>
-                        <td class="text-muted">{{ user.createdAt|date('Y-m-d H:i') }}</td>
+                        <td class="text-muted">{{ user.createdAt|app_date }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

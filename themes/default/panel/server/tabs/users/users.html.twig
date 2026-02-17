@@ -39,7 +39,7 @@
                                 </td>
                                 <td>
                                     {% if subuser.created_at is defined %}
-                                        {{ subuser.created_at|date('Y-m-d H:i:s') }}
+                                        {{ subuser.created_at|app_date }}
                                     {% else %}
                                         -
                                     {% endif %}

@@ -13,7 +13,7 @@
 
     {% include 'email/components/alert.html.twig' with {
         type: 'success',
-        message: 'pteroca.email.renew.server_renewed'|trans ~ ' ' ~ 'pteroca.email.renew.new_expiration'|trans ~ ' ' ~ server.expiresAt|date('Y-m-d H:i')
+        message: 'pteroca.email.renew.server_renewed'|trans ~ ' ' ~ 'pteroca.email.renew.new_expiration'|trans ~ ' ' ~ server.expiresAt|app_date
     } %}
 
     {% include 'email/components/divider.html.twig' %}

@@ -121,13 +121,13 @@
                         {% if plugin.enabledAt %}
                             <tr>
                                 <th>{{ 'pteroca.crud.plugin.enabled_at_label'|trans }}</th>
-                                <td>{{ plugin.enabledAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ plugin.enabledAt|app_date }}</td>
                             </tr>
                         {% endif %}
                         {% if plugin.disabledAt %}
                             <tr>
                                 <th>{{ 'pteroca.crud.plugin.disabled_at_label'|trans }}</th>
-                                <td>{{ plugin.disabledAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ plugin.disabledAt|app_date }}</td>
                             </tr>
                         {% endif %}
                         {% if plugin.faultReason %}
@@ -139,7 +139,7 @@
                         {% if plugin.createdAt %}
                             <tr>
                                 <th>{{ 'pteroca.crud.plugin.created_at_label'|trans }}</th>
-                                <td>{{ plugin.createdAt|date('Y-m-d H:i:s') }}</td>
+                                <td>{{ plugin.createdAt|app_date }}</td>
                             </tr>
                         {% endif %}
                         </tbody>

@@ -51,7 +51,7 @@
             <div class="alert alert-danger" role="alert">
                 <i class="fas fa-exclamation-triangle"></i>
                 {% if server.expiresAt|date("Y-m-d H:i:s") < "now"|date("Y-m-d H:i:s") %}
-                    {{ 'pteroca.server.suspended_expired_hint'|trans({ '{{ expireDate }}': server.expiresAt|date("Y-m-d H:i") }) }}
+                    {{ 'pteroca.server.suspended_expired_hint'|trans({ '{{ expireDate }}': server.expiresAt|app_date }) }}
                 {% else %}
                     {{ 'pteroca.server.suspended_hint'|trans }}
                 {% endif %}

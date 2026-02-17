@@ -13,7 +13,7 @@
 
     {% include 'email/components/alert.html.twig' with {
         type: 'success',
-        message: 'pteroca.email.store.server_purchased'|trans ~ ' ' ~ 'pteroca.email.store.expiration_date'|trans ~ ': ' ~ server.expiresAt|date('Y-m-d H:i')
+        message: 'pteroca.email.store.server_purchased'|trans ~ ' ' ~ 'pteroca.email.store.expiration_date'|trans ~ ': ' ~ server.expiresAt|app_date
     } %}
 
     {% include 'email/components/divider.html.twig' %}
