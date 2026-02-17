@@ -199,6 +199,11 @@ pteroca:
     amount_hint: '输入您想要充值的金额。'
     view_transaction_history: '查看交易记录'
     view_all_payments_description: '显示您账户上进行的所有支付。'
+    amount_required: '请输入要充值的金额。'
+    enter_amount: '输入金额'
+    payment_method_required: '请选择支付方式。'
+    amount_minimum_not_reached: '此值应为 {{ limit }} 或更高。'
+    amount_below_minimum: '最低充值金额为 %minimum%。'
     amount_must_be_positive: 'The amount must be positive.'
 
   payment:
@@ -1105,6 +1110,8 @@ pteroca:
       hint: '说明'
       set_as_empty: '设为空'
       set_as_empty_help: '选中此项以将值设为空（null）。'
+      minimum_topup_amount: '最低充值金额'
+      minimum_topup_amount_help: '用户在一次交易中可以添加到其账户余额的最低金额。必须大于0。'
       panel_theme:
         help: '用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。'
       landing_theme:
@@ -1123,6 +1130,7 @@ pteroca:
         stripe_payment_methods: '逗号分隔的支付方式（如card,bank_transfer,klarna）。结账时显示的选项。'
         internal_currency_name: '虚拟货币名称（如硬币、积分、代币）。显示在余额、定价和邮件中。'
         currency_name: '真实货币代码（USD、EUR、GBP、PLN）。显示在结账和收据中。需匹配Stripe支持。'
+        minimum_topup_amount: '余额充值的最低金额。用户不能添加少于该值。必须大于0。'
         theme_default_light_mode_color: '浅色模式强调色（十六进制，如#635bff）。控制按钮、链接、活动项。'
         theme_default_dark_mode_color: '深色模式基础色（十六进制，如#1a1a2e）。系统自动为UI元素生成色调。'
         theme_default_primary_color: '默认主主题颜色'

@@ -199,6 +199,11 @@ pteroca:
     amount_hint: 'Inserisci l''importo che desideri ricaricare.'
     view_transaction_history: 'Visualizza storico transazioni'
     view_all_payments_description: 'Mostra tutti i pagamenti effettuati sul tuo account.'
+    amount_required: 'Inserisci un importo da ricaricare.'
+    enter_amount: 'Inserisci importo'
+    payment_method_required: 'Seleziona un metodo di pagamento.'
+    amount_minimum_not_reached: 'Questo valore deve essere {{ limit }} o superiore.'
+    amount_below_minimum: 'L''importo minimo di ricarica è %minimum%.'
     amount_must_be_positive: 'The amount must be positive.'
 
   payment:
@@ -1102,6 +1107,8 @@ pteroca:
       hint: 'Descrizione'
       set_as_empty: 'Imposta come vuoto'
       set_as_empty_help: 'Seleziona questo per impostare il valore come vuoto (null).'
+      minimum_topup_amount: 'Importo Minimo di Ricarica'
+      minimum_topup_amount_help: 'L''importo minimo che gli utenti possono aggiungere al loro saldo in una singola transazione. Deve essere maggiore di 0.'
       panel_theme:
         help: 'Tema per il pannello utente (dashboard, server, negozio). Controlla l''aspetto di tutte le pagine admin e user-facing.'
       landing_theme:
@@ -1120,6 +1127,7 @@ pteroca:
         stripe_payment_methods: 'Metodi di pagamento separati da virgole (es. card,bank_transfer,klarna). Opzioni mostrate al checkout.'
         internal_currency_name: 'Nome valuta virtuale (es. monete, crediti, gettoni). Mostrato in saldi, prezzi ed email.'
         currency_name: 'Codice valuta reale (USD, EUR, GBP, PLN). Mostrato al checkout e sulle ricevute. Corrispondere a Stripe.'
+        minimum_topup_amount: 'L'''importo minimo consentito per la ricarica del saldo. Gli utenti non possono aggiungere meno di questo valore. Deve essere maggiore di 0.'
         theme_default_light_mode_color: 'Colore accento modalità chiara in hex (es. #635bff). Controlla pulsanti, link, elementi attivi.'
         theme_default_dark_mode_color: 'Colore base modalità scura in hex (es. #1a1a2e). Il sistema genera automaticamente sfumature per elementi UI.'
         theme_default_primary_color: 'Colore primario predefinito'
