@@ -27,6 +27,10 @@
         {% endif %}
     {% endblock %}
 
+    {% block head_custom_scripts %}
+        {% include 'components/custom_head_scripts.html.twig' %}
+    {% endblock %}
+
     {% block configured_stylesheets %}
         {{ include('@EasyAdmin/includes/_css_assets.html.twig', { assets: ea.assets.cssAssets ?? [] }, with_context = false) }}
         {{ include('@EasyAdmin/includes/_encore_link_tags.html.twig', { assets: ea.assets.webpackEncoreAssets ?? [] }, with_context = false) }}

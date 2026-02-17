@@ -51,4 +51,6 @@ enum SettingEnum: string
     case LOG_CLEANUP_ENABLED = 'log_cleanup_enabled';
     case LOG_CLEANUP_DAYS_AFTER = 'log_cleanup_days_after';
     case TELEMETRY_CONSENT = 'telemetry_consent';
+    case CUSTOM_HEAD_SCRIPTS_LANDING = 'custom_head_scripts_landing';
+    case CUSTOM_HEAD_SCRIPTS_PANEL = 'custom_head_scripts_panel';
 }

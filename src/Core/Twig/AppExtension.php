@@ -52,6 +52,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('template_asset', [$this, 'templateAsset']),
             new TwigFunction('get_current_template_options', [$this, 'getCurrentTemplateOptions']),
             new TwigFunction('plugin_asset', [$this, 'pluginAsset']),
+            new TwigFunction('get_custom_head_scripts', [$this, 'getCustomHeadScripts']),
         ];
     }
 
@@ -173,5 +174,16 @@ class AppExtension extends AbstractExtension
     public function pluginAsset(string $pluginName, string $path): string
     {
         return $this->pluginAssetManager->getAssetUrl($pluginName, $path);
+    }
+
+    public function getCustomHeadScripts(string $context = 'panel'): ?string
+    {
+        $settingName = match($context) {
+            'landing' => SettingEnum::CUSTOM_HEAD_SCRIPTS_LANDING->value,
+            'panel' => SettingEnum::CUSTOM_HEAD_SCRIPTS_PANEL->value,
+            default => SettingEnum::CUSTOM_HEAD_SCRIPTS_PANEL->value,
+        };
+
+        return $this->settingService->getSetting($settingName);
     }
 }

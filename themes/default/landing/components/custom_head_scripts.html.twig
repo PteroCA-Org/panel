@@ -1,0 +1,5 @@
+{% set customScripts = get_custom_head_scripts('landing') %}
+{% if customScripts %}
+    {# Custom head scripts from settings #}
+    {{ customScripts|raw }}
+{% endif %}

@@ -1155,6 +1155,8 @@ pteroca:
         renewal_notification_min_period_hours: 'Minimum hours between renewal emails per server. Prevents spam. E.g., 24 = max once daily.'
         renewal_notification_on_demand_min_hours: 'Min hours for on-demand server renewals to trigger email. E.g., 24 = notify only if 24+ hours.'
         telemetry_consent: 'Allow sending anonymous usage data to help improve PteroCA. Only installation events and errors are tracked. No personal data, API keys, or URLs are collected.'
+        custom_head_scripts_landing: 'Custom HTML/JavaScript code injected into the <head> section of the landing page. Use for analytics (Google Analytics, Meta Pixel), custom fonts, or tracking scripts. WARNING: Only add scripts from trusted sources to prevent XSS attacks.'
+        custom_head_scripts_panel: 'Custom HTML/JavaScript code injected into the <head> section of the panel (dashboard, admin). Use for internal analytics, monitoring tools, or custom integrations. WARNING: Only add scripts from trusted sources to prevent XSS attacks.'
       template:
         name: 'Template name'
         description: 'Template description'
