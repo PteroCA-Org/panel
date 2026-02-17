@@ -201,7 +201,7 @@ class ServerProductCrudController extends AbstractPanelController
             TextField::new('name', $this->translator->trans('pteroca.crud.product.build_name'))
                 ->setColumns(7),
             FormField::addRow(),
-            AssociationField::new('originalProduct', $this->translator->trans('pteroca.crud.product.original_product'))
+            AssociationField::new('originalProduct', $this->translator->trans('pteroca.crud.server_product.original_product'))
                 ->setColumns(7)
                 ->setDisabled()
                 ->hideWhenCreating(),
