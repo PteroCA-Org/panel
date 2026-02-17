@@ -1143,6 +1143,8 @@ pteroca:
         renewal_notification_min_period_hours: 'Heures minimales entre emails renouvellement par serveur. Évite spam. Ex. 24 = max une fois/jour.'
         renewal_notification_on_demand_min_hours: 'Heures min pour renouvellements serveurs à la demande pour déclencher email. Ex. 24 = notifier si 24h+.'
         telemetry_consent: "Autoriser l'envoi de données d'utilisation anonymes pour aider à améliorer PteroCA. Seuls les événements d'installation et les erreurs sont suivis. Aucune donnée personnelle, clé API ou URL n'est collectée."
+        custom_head_scripts_landing: 'Code HTML/JavaScript personnalisé injecté dans la section <head> de la page d''accueil. Utilisez-le pour l''analyse (Google Analytics, Meta Pixel), les polices personnalisées ou les scripts de suivi. AVERTISSEMENT : n''ajoutez que des scripts provenant de sources de confiance pour éviter les attaques XSS.'
+        custom_head_scripts_panel: 'Code HTML/JavaScript personnalisé injecté dans la section <head> du panneau (tableau de bord, admin). Utilisez-le pour l''analyse interne, les outils de surveillance ou les intégrations personnalisées. AVERTISSEMENT : n''ajoutez que des scripts provenant de sources de confiance pour éviter les attaques XSS.'
         panel_theme: "Thème pour le panneau utilisateur (tableau de bord, serveurs, boutique). Contrôle l'apparence de toutes les pages admin et utilisateur."
         landing_theme: "Thème pour la page d'accueil (page d'accueil pour visiteurs). Affichée aux utilisateurs non connectés sur le site public."
         email_theme: "Thème pour les modèles d'email. Contrôle le style des notifications, enregistrement et emails d'achat."
