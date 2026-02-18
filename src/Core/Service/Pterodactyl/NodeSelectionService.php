@@ -34,6 +34,15 @@ readonly class NodeSelectionService
                 ->nodes()
                 ->getNode($nodeId);
 
+            // Skip nodes in maintenance mode
+            if ($node['maintenance_mode'] === true) {
+                $this->logger->info('Skipping node in maintenance mode', [
+                    'node_id' => $node['id'],
+                    'node_name' => $node['name'] ?? 'unknown',
+                ]);
+                continue;
+            }
+            
             $freeMemory = $node['memory'] - $node['allocated_resources']['memory'];
             $freeDisk = $node['disk'] - $node['allocated_resources']['disk'];
 
@@ -113,6 +122,11 @@ readonly class NodeSelectionService
             ->nodes()
             ->getNode($nodeId);
 
+        // Throw error if node in maintenance mode wasn't skipped
+        if ($node['maintenance_mode'] === true) {
+            throw new Exception('Selected node is currently in maintenance mode');
+        }
+        
         $freeMemory = $node['memory'] - $node['allocated_resources']['memory'];
         $freeDisk = $node['disk'] - $node['allocated_resources']['disk'];
 
