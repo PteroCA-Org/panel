@@ -57,6 +57,14 @@ class ServerControllerTest extends BaseTestCase
         $this->assertSelectorTextContains('.alert.alert-info', 'You do not have any servers yet.');
     }
 
+    public function testServerDetailBackLinksUsePanelRoute(): void
+    {
+        $template = file_get_contents(dirname(__DIR__, 5) . '/themes/default/panel/server/server.html.twig');
+
+        $this->assertStringContainsString("path('panel', { routeName: 'servers' })", $template);
+        $this->assertStringNotContainsString("path('servers')", $template);
+    }
+
     private function createTestUser(string $email = 'testuser@example.com'): User
     {
         $user = new User();
