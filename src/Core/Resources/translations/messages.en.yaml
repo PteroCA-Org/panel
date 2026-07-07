@@ -1220,6 +1220,8 @@ pteroca:
         custom_head_scripts_panel: 'Custom HTML/JavaScript code injected into the <head> section of the panel (dashboard, admin). Use for internal analytics, monitoring tools, or custom integrations. WARNING: Only add scripts from trusted sources to prevent XSS attacks.'
         avatar_max_size: 'Maximum file size for user avatar uploads (e.g., 2M, 500K, 5M). Uses Symfony size format.'
         avatar_allowed_extensions: 'Allowed MIME types for avatar uploads, separated by commas (e.g., image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Number of featured categories to display on the landing page homepage'
+        landing_featured_products_count: 'Number of featured products to display on the landing page homepage'
       template:
         name: 'Template name'
         description: 'Template description'

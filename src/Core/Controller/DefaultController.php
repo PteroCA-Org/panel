@@ -61,11 +61,18 @@ class DefaultController extends AbstractController
         $this->dispatchEvent($widgetEvent);
 
         // 3. Load data
+        $categoryLimit = (int) ($this->settingService->getSetting(
+            SettingEnum::LANDING_FEATURED_CATEGORIES_COUNT->value
+        ) ?? 6);
+        $productLimit = (int) ($this->settingService->getSetting(
+            SettingEnum::LANDING_FEATURED_PRODUCTS_COUNT->value
+        ) ?? 6);
+
         $categories = method_exists($this->storeService, 'getFeaturedCategories')
-            ? $this->storeService->getFeaturedCategories(6)
+            ? $this->storeService->getFeaturedCategories($categoryLimit)
             : [];
         $featuredProducts = method_exists($this->storeService, 'getFeaturedProducts')
-            ? $this->storeService->getFeaturedProducts(6)
+            ? $this->storeService->getFeaturedProducts($productLimit)
             : [];
 
         // 4. Dispatch data loaded event

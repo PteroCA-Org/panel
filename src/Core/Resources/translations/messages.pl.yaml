@@ -1204,6 +1204,8 @@ pteroca:
         custom_head_scripts_panel: 'Niestandardowy kod HTML/JavaScript wstrzykiwany do sekcji <head> panelu (panel kontrolny, admin). Użyj dla analizy wewnętrznej, narzędzi monitorowania lub niestandardowych integracji. OSTRZEŻENIE: Dodawaj tylko skrypty z zaufanych źródeł, aby zapobiec atakom XSS.'
         avatar_max_size: 'Maksymalny rozmiar pliku dla przesyłania avatarów użytkowników (np. 2M, 500K, 5M). Używa formatu rozmiaru Symfony.'
         avatar_allowed_extensions: 'Dozwolone typy MIME dla przesyłania avatarów, oddzielone przecinkami (np. image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Liczba wyróżnionych kategorii wyświetlanych na stronie głównej (landing page)'
+        landing_featured_products_count: 'Liczba wyróżnionych produktów wyświetlanych na stronie głównej (landing page)'
         panel_theme: 'Motyw dla panelu użytkownika (panel, serwery, sklep). Kontroluje wygląd wszystkich stron admin i user-facing.'
         landing_theme: 'Motyw dla strony docelowej (strona główna dla odwiedzających). Wyświetlana użytkownikom niezalogowanym na publicznej stronie.'
         email_theme: 'Motyw dla szablonów email. Kontroluje stylizację powiadomień, rejestracji i emaili zakupu.'

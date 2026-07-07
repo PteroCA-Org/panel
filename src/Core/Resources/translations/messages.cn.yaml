@@ -1207,6 +1207,8 @@ pteroca:
         custom_head_scripts_panel: '注入到面板（仪表盘、管理）<head> 部分的自定义 HTML/JavaScript 代码。用于内部分析、监控工具或自定义集成。警告：仅添加来自可信源的脚本以防止 XSS 攻击。'
         avatar_max_size: '用户头像上传的最大文件大小（例如 2M、500K、5M）。使用 Symfony 大小格式。'
         avatar_allowed_extensions: '头像上传允许的 MIME 类型，以逗号分隔（例如 image/jpeg、image/png、image/webp）。'
+        landing_featured_categories_count: '登录页首页上显示的精选分类数量'
+        landing_featured_products_count: '登录页首页上显示的精选产品数量'
         panel_theme: 用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。
         landing_theme: 登录页面的主题（访客的主页）。显示给未登录用户在公共站点上。
         email_theme: 电子邮件模板的主题。控制通知、注册和购买电子邮件的样式。

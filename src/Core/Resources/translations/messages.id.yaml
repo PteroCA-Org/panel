@@ -1258,6 +1258,8 @@ pteroca:
         custom_head_scripts_panel: 'Kode HTML/JavaScript khusus yang disuntikkan ke bagian <head> panel (dashboard, admin). Gunakan untuk analytics internal, tools pemantauan, atau integrasi khusus. PERINGATAN: Hanya tambahkan skrip dari sumber yang terpercaya untuk mencegah serangan XSS.'
         avatar_max_size: 'Ukuran file maksimum untuk pengunggahan avatar pengguna (mis., 2M, 500K, 5M). Menggunakan format ukuran Symfony.'
         avatar_allowed_extensions: 'Jenis MIME yang diizinkan untuk pengunggahan avatar, dipisahkan dengan koma (mis., image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Jumlah kategori unggulan yang ditampilkan di halaman landing (beranda)'
+        landing_featured_products_count: 'Jumlah produk unggulan yang ditampilkan di halaman landing (beranda)'
         panel_theme: 'Tema untuk panel pengguna (dasbor, server, toko). Mengontrol tampilan semua halaman admin dan user-facing.'
         landing_theme: 'Tema untuk halaman landing (halaman utama untuk pengunjung). Ditampilkan kepada pengguna yang belum login di situs publik.'
         email_theme: 'Tema untuk template email. Mengontrol gaya pemberitahuan, pendaftaran, dan email pembelian.'
