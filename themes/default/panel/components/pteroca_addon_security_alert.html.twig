@@ -1,0 +1,21 @@
+<div class="alert alert-warning border-0 shadow-sm mb-0" role="alert">
+    <div class="d-flex align-items-start">
+        <i class="fas fa-exclamation-triangle fa-lg me-3 mt-1" aria-hidden="true"></i>
+        <div class="flex-grow-1">
+            <h5 class="alert-heading fw-semibold mb-2">{{ 'pteroca.admin.addon_security.title'|trans }}</h5>
+            <p class="mb-2">
+                {{ 'pteroca.admin.addon_security.message'|trans({
+                    '%version%': version,
+                    '%minimum%': minimumVersion
+                }) }}
+            </p>
+            <p class="mb-2">
+                <a href="{{ advisoryUrl }}" target="_blank" rel="noopener noreferrer" class="alert-link">
+                    {{ 'pteroca.admin.addon_security.advisory_link'|trans }}
+                </a>
+            </p>
+            <p class="mb-1 fw-semibold">{{ 'pteroca.admin.addon_security.upgrade_label'|trans }}</p>
+            <code class="user-select-all">{{ upgradeCommand }}</code>
+        </div>
+    </div>
+</div>

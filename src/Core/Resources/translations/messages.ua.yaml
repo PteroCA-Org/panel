@@ -1680,6 +1680,13 @@ pteroca:
       up_to_date: Актуальне
       update_available: 'Доступне оновлення'
       pteroca_plugin_not_detected: 'Не виявлено'
+    addon_security:
+      title: 'Потрібне оновлення безпеки доповнення Pterodactyl'
+      message: 'Встановлене доповнення PteroCA Pterodactyl (v%version%) старіше за мінімальну безпечну версію %minimum%. Оновіть доповнення на панелі Pterodactyl.'
+      advisory_link: 'Переглянути повідомлення безпеки'
+      upgrade_label: 'Команда оновлення'
+      update_required: 'Потрібне оновлення безпеки'
+      plain: 'Доповнення PteroCA Pterodactyl (v%version%) старіше за мінімальну безпечну версію %minimum%. Можна продовжити, але оновіть доповнення якнайшвидше. Повідомлення: %advisory_url% Команда: %command%'
     server_create:
       select_user_help: 'Виберіть користувача, який стане власником цього сервера'
       base_product_help: 'За бажанням виберіть шаблон продукту для попереднього заповнення значень конфігурації'

@@ -43,6 +43,7 @@ class FirstConfigurationController extends AbstractController
         return new JsonResponse(
             data: [
                 'message' => $isStepValidated->message,
+                'warning' => $isStepValidated->warning,
             ],
             status: $responseStatus,
         );

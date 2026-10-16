@@ -1646,6 +1646,13 @@ pteroca:
       up_to_date: Aktualne
       update_available: 'Dostępna aktualizacja'
       pteroca_plugin_not_detected: 'Nie wykryto'
+    addon_security:
+      title: 'Wymagana aktualizacja zabezpieczeń dodatku Pterodactyl'
+      message: 'Zainstalowany dodatek PteroCA Pterodactyl (v%version%) jest starszy niż minimalna bezpieczna wersja %minimum%. Zaktualizuj dodatek na panelu Pterodactyl.'
+      advisory_link: 'Otwórz ostrzeżenie bezpieczeństwa'
+      upgrade_label: 'Polecenie aktualizacji'
+      update_required: 'Wymagana aktualizacja zabezpieczeń'
+      plain: 'Dodatek PteroCA Pterodactyl (v%version%) jest starszy niż minimalna bezpieczna wersja %minimum%. Możesz kontynuować, ale zaktualizuj dodatek jak najszybciej. Ostrzeżenie: %advisory_url% Polecenie: %command%'
     server_create:
       select_user_help: 'Wybierz użytkownika, który będzie właścicielem tego serwera'
       base_product_help: 'Opcjonalnie wybierz produkt szablonu, aby wstępnie wypełnić wartości konfiguracji'

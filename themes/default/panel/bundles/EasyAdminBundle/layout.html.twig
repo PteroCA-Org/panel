@@ -375,6 +375,15 @@
                         </div>
                     {% endif %}
 
+                    {% if is_granted('access_admin_overview') %}
+                        {% set addon_security_warning = pteroca_addon_security_warning() %}
+                        {% if addon_security_warning %}
+                            <div class="content-wrapper alerts-wrapper d-block pb-0 pt-3">
+                                {% include 'panel/components/pteroca_addon_security_alert.html.twig' with addon_security_warning only %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
                     <div class="content-wrapper">
                         {% block content %}
                             <article class="content">
