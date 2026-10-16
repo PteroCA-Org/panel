@@ -2,6 +2,8 @@
 
 namespace App\Core\Service\System;
 
+use App\Core\Service\Pterodactyl\PterocaAddonSecurity;
+use App\Core\Service\Pterodactyl\PterocaAddonVersionChecker;
 use App\Core\Service\Pterodactyl\PterodactylApplicationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -11,6 +13,7 @@ readonly class SystemInformationService
     public function __construct(
         private EntityManagerInterface $entityManager,
         private PterodactylApplicationService $pterodactylApplicationService,
+        private PterocaAddonVersionChecker $pterocaAddonVersionChecker,
     )
     {
     }
@@ -38,9 +41,7 @@ readonly class SystemInformationService
             'pterodactyl' => [
                 'status' => $this->isPterodactylApiOnline(),
             ],
-            'pteroca_plugin' => [
-                'version' => $this->getPterocaPluginVersion(),
-            ],
+            'pteroca_plugin' => $this->getPterocaPluginInformation(),
         ];
     }
 
@@ -71,17 +72,16 @@ readonly class SystemInformationService
         }
     }
 
-    private function getPterocaPluginVersion(): ?string
+    /**
+     * @return array{version: ?string, outdated: bool}
+     */
+    private function getPterocaPluginInformation(): array
     {
-        try {
-            $data = $this->pterodactylApplicationService
-                ->getApplicationApi()
-                ->pteroca()
-                ->getVersion();
-            
-            return $data['version'] ?? null;
-        } catch (Exception) {
-            return null;
-        }
+        $version = $this->pterocaAddonVersionChecker->getInstalledVersion();
+
+        return [
+            'version' => $version,
+            'outdated' => PterocaAddonSecurity::isOutdated($version),
+        ];
     }
 }

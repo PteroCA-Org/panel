@@ -1650,6 +1650,13 @@ pteroca:
       up_to_date: 'Up to date'
       update_available: 'Update available'
       pteroca_plugin_not_detected: 'Not Detected'
+    addon_security:
+      title: 'Pterodactyl addon security update required'
+      message: 'The installed PteroCA Pterodactyl addon (v%version%) is older than the minimum safe version %minimum%. Update the addon on your Pterodactyl panel.'
+      advisory_link: 'Read the security advisory'
+      upgrade_label: 'Upgrade command'
+      update_required: 'Security update required'
+      plain: 'The PteroCA Pterodactyl addon (v%version%) is older than the minimum safe version %minimum%. You can continue, but update the addon as soon as possible. Advisory: %advisory_url% Upgrade command: %command%'
     server_create:
       select_user_help: 'Select the user who will own this server'
       base_product_help: 'Optionally select a product template to pre-fill configuration values'

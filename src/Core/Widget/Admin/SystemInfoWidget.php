@@ -60,6 +60,7 @@ class SystemInfoWidget implements WidgetInterface
 
         return [
             'pterocaPluginVersion' => $systemInformation['pteroca_plugin']['version'] ?? null,
+            'pterocaPluginOutdated' => (bool) ($systemInformation['pteroca_plugin']['outdated'] ?? false),
             'pterodactylStatus' => $systemInformation['pterodactyl']['status'] ?? false,
             'phpVersion' => $systemInformation['php']['version'] ?? 'unknown',
             'databaseVersion' => $systemInformation['database']['version'] ?? 'unknown',

@@ -20,9 +20,14 @@
             <div class="d-flex justify-content-between align-items-center">
                 <span class="fw-semibold text-muted">PteroCA Pterodactyl Addon:</span>
                 <div>
-                    <span class="fw-bold" style="word-break: break-word; font-size: 0.9em; text-align: right;">
+                    <span class="fw-bold {{ pterocaPluginOutdated|default(false) ? 'text-danger' : '' }}" style="word-break: break-word; font-size: 0.9em; text-align: right;">
                         {% if pterocaPluginVersion %}
                             v{{ pterocaPluginVersion }}
+                            {% if pterocaPluginOutdated|default(false) %}
+                                <span class="d-block small">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>{{ 'pteroca.admin.addon_security.update_required'|trans }}
+                                </span>
+                            {% endif %}
                         {% else %}
                             <span class="text-muted">
                                 <i class="fa-solid fa-question me-1"></i>{{ 'pteroca.admin.overview.pteroca_plugin_not_detected'|trans }}

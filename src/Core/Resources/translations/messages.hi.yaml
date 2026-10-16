@@ -1646,6 +1646,13 @@ pteroca:
       up_to_date: 'अप टू डेट'
       update_available: 'अपडेट उपलब्ध'
       pteroca_plugin_not_detected: 'पता नहीं चला'
+    addon_security:
+      title: 'Pterodactyl ऐडऑन का सुरक्षा अपडेट आवश्यक है'
+      message: 'स्थापित PteroCA Pterodactyl ऐडऑन (v%version%) न्यूनतम सुरक्षित संस्करण %minimum% से पुराना है। अपने Pterodactyl पैनल पर ऐडऑन अपडेट करें।'
+      advisory_link: 'सुरक्षा सलाह पढ़ें'
+      upgrade_label: 'अपग्रेड कमांड'
+      update_required: 'सुरक्षा अपडेट आवश्यक'
+      plain: 'PteroCA Pterodactyl ऐडऑन (v%version%) न्यूनतम सुरक्षित संस्करण %minimum% से पुराना है। आप जारी रख सकते हैं, लेकिन ऐडऑन जल्द से जल्द अपडेट करें। सलाह: %advisory_url% कमांड: %command%'
     server_create:
       select_user_help: 'उस उपयोगकर्ता का चयन करें जो इस सर्वर का मालिक होगा'
       base_product_help: 'वैकल्पिक रूप से कॉन्फ़िगरेशन मानों को पूर्व-भरने के लिए एक उत्पाद टेम्प्लेट चुनें'

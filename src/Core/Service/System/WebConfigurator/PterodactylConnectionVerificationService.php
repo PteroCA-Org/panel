@@ -6,6 +6,7 @@ use App\Core\Adapter\Pterodactyl\Application\PterodactylAdapter;
 use App\Core\DTO\Action\Result\ConfiguratorVerificationResult;
 use App\Core\DTO\Pterodactyl\Credentials;
 use App\Core\Enum\SettingEnum;
+use App\Core\Service\Pterodactyl\PterocaAddonSecurity;
 use App\Core\Service\SettingService;
 use Exception;
 use Psr\Cache\InvalidArgumentException;
@@ -51,16 +52,28 @@ readonly class PterodactylConnectionVerificationService
             // Test connection by listing servers
             $adapter->servers()->paginate();
 
-            if (!$this->checkPterocaAddon($adapter)) {
+            $addonVersion = $this->checkPterocaAddon($adapter);
+            if ($addonVersion === null) {
                 return new ConfiguratorVerificationResult(
                     false,
                     $this->translator->trans('pteroca.first_configuration.messages.pterodactyl_addon_not_detected'),
                 );
             }
 
+            $warning = null;
+            if (PterocaAddonSecurity::isOutdated($addonVersion)) {
+                $warning = $this->translator->trans('pteroca.admin.addon_security.plain', [
+                    '%version%' => $addonVersion,
+                    '%minimum%' => PterocaAddonSecurity::MINIMUM_SAFE_VERSION,
+                    '%advisory_url%' => PterocaAddonSecurity::ADVISORY_URL,
+                    '%command%' => PterocaAddonSecurity::upgradeCommand(),
+                ]);
+            }
+
             return new ConfiguratorVerificationResult(
                 true,
                 $this->translator->trans('pteroca.first_configuration.messages.pterodactyl_api_connection_success'),
+                $warning,
             );
         } catch (Exception) {
             return new ConfiguratorVerificationResult(
@@ -74,7 +87,14 @@ readonly class PterodactylConnectionVerificationService
     {
         try {
             $data = $adapter->pteroca()->getVersion();
-            return $data['version'] ?? null;
+            $version = $data['version'] ?? null;
+            if (!is_scalar($version)) {
+                return null;
+            }
+
+            $version = trim((string) $version);
+
+            return $version === '' ? null : $version;
         } catch (Exception) {
             return null;
         }

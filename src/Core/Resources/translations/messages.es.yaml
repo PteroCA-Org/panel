@@ -1646,6 +1646,13 @@ pteroca:
       up_to_date: Actualizado
       update_available: 'Actualización disponible'
       pteroca_plugin_not_detected: 'No detectado'
+    addon_security:
+      title: 'Actualización de seguridad del complemento Pterodactyl requerida'
+      message: 'El complemento PteroCA Pterodactyl instalado (v%version%) es anterior a la versión mínima segura %minimum%. Actualice el complemento en su panel de Pterodactyl.'
+      advisory_link: 'Ver el aviso de seguridad'
+      upgrade_label: 'Comando de actualización'
+      update_required: 'Actualización de seguridad requerida'
+      plain: 'El complemento PteroCA Pterodactyl (v%version%) es anterior a la versión mínima segura %minimum%. Puede continuar, pero actualice el complemento lo antes posible. Aviso: %advisory_url% Comando: %command%'
     server_create:
       select_user_help: 'Seleccione el usuario que será propietario de este servidor'
       base_product_help: 'Opcionalmente seleccione una plantilla de producto para prellenar los valores de configuración'

@@ -64,6 +64,9 @@ class PterodactylSettingCrudController extends AbstractSettingCrudController
 
             if ($result->isVerificationSuccessful) {
                 $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.pterodactyl_connection_success'));
+                if ($result->warning !== null && $result->warning !== '') {
+                    $this->addFlash('warning', $result->warning);
+                }
             } else {
                 $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.pterodactyl_connection_failed'));
             }

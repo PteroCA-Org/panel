@@ -1,5 +1,15 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Warn administrators when the installed PteroCA Pterodactyl addon is older than 0.1.4. The warning links to the security advisory and shows the upgrade command. See https://github.com/PteroCA-Org/pterodactyl-addon/security/advisories/GHSA-77vh-c4jh-rv29.
+
+### Fixed
+- Empty HTTP 204 responses from the Pterodactyl Application API are treated as success, so deleting an API key no longer fails while decoding an empty body.
+
+---
+
 ## [0.6.5] - 2026-03-19
 
 ### Added
