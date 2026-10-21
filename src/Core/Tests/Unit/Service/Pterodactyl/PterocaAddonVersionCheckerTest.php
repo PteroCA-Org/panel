@@ -59,6 +59,20 @@ class PterocaAddonVersionCheckerTest extends TestCase
         $this->assertNull($this->createChecker($pteroca)->getInstalledVersion());
     }
 
+    public function testClearCacheFetchesVersionAgain(): void
+    {
+        $pteroca = $this->createMock(PterodactylPterocaInterface::class);
+        $pteroca->expects($this->exactly(2))
+            ->method('getVersion')
+            ->willReturnOnConsecutiveCalls(['version' => '0.1.3'], ['version' => '0.1.4']);
+
+        $checker = $this->createChecker($pteroca);
+
+        $this->assertSame('0.1.3', $checker->getInstalledVersion());
+        $checker->clearCache();
+        $this->assertSame('0.1.4', $checker->getInstalledVersion());
+    }
+
     private function createChecker(PterodactylPterocaInterface $pteroca): PterocaAddonVersionChecker
     {
         $api = $this->createMock(PterodactylAdapterInterface::class);

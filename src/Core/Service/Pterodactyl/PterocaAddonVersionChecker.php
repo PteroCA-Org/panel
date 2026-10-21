@@ -17,7 +17,8 @@ readonly class PterocaAddonVersionChecker
 
     private const CACHE_TTL = 300;
 
-    private const UNKNOWN_VERSION_TTL = 60;
+    // An unknown version raises no warning, so retrying rarely avoids blocking admin pages when Pterodactyl is down
+    private const UNKNOWN_VERSION_TTL = 600;
 
     public function __construct(
         private PterodactylApplicationService $pterodactylApplicationService,
@@ -38,6 +39,14 @@ readonly class PterocaAddonVersionChecker
         }
 
         return is_string($version) && $version !== '' ? $version : null;
+    }
+
+    public function clearCache(): void
+    {
+        try {
+            $this->cache->delete(self::CACHE_KEY);
+        } catch (Throwable) {
+        }
     }
 
     private function fetchInstalledVersion(): ?string
