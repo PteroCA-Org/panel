@@ -80,6 +80,13 @@ abstract class AbstractPterodactylApplicationAdapter extends AbstractPterodactyl
         $statusCode = $response->getStatusCode();
 
         if ($statusCode === $expectedStatusCode) {
+            // 204 No Content has an empty body. Decoding it with toArray() throws
+            // JsonException even though the request succeeded (for example when
+            // deleting an API key). Other success codes still require a JSON body.
+            if ($statusCode === 204) {
+                return [];
+            }
+
             return $response->toArray();
         }
 

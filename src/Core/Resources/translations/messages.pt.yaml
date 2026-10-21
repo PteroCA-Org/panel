@@ -1205,6 +1205,8 @@ pteroca:
         custom_head_scripts_panel: 'Código HTML/JavaScript personalizado injetado na seção <head> do painel (dashboard, admin). Use para análise interna, ferramentas de monitoramento ou integrações personalizadas. AVISO: Adicione apenas scripts de fontes confiáveis para evitar ataques XSS.'
         avatar_max_size: 'Tamanho máximo de arquivo para uploads de avatares de usuários (ex. 2M, 500K, 5M). Usa o formato de tamanho do Symfony.'
         avatar_allowed_extensions: 'Tipos MIME permitidos para uploads de avatares, separados por vírgulas (ex. image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Número de categorias em destaque exibidas na página inicial (landing page)'
+        landing_featured_products_count: 'Número de produtos em destaque exibidos na página inicial (landing page)'
         panel_theme: 'Tema para o painel do usuário (dashboard, servidores, loja). Controla a aparência de todas as páginas admin e user-facing.'
         landing_theme: 'Tema para a página de destino (página inicial para visitantes). Exibida a usuários não logados no site público.'
         email_theme: 'Tema para modelos de email. Controla o estilo de notificações, registro e emails de compra.'
@@ -1416,6 +1418,10 @@ pteroca:
       max_global_uses_help: 'Número máximo de vezes que este voucher pode ser usado globalmente.'
       used_count: 'Contagem de usos'
       used_count_help: 'Número de vezes que o voucher foi usado.'
+      status: 'Estado'
+      status_active: 'Ativo'
+      status_used_up: 'Esgotado'
+      status_expired: 'Expirado'
       one_use_per_user: 'Um uso por usuário'
       one_use_per_user_help: 'O voucher só pode ser usado uma vez por usuário.'
       description: Descrição
@@ -1497,7 +1503,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher aplicado! Um desconto de %value%% será aplicado à compra do seu servidor.'
       successfully_applied_payment_discount: 'Voucher aplicado! Um desconto de %value%% será aplicado ao seu pagamento.'
       max_global_uses_reached: 'Número máximo de usos globais alcançado.'
-      already_used: 'O voucher já foi usado.'
+      already_used: 'Você já usou este voucher.'
       only_for_new_accounts: 'O voucher é apenas para novas contas.'
       minimum_top_up_amount_required: 'Você deve recarregar sua conta com pelo menos {{ amount }} {{ currency }} para usar este voucher.'
       minimum_order_amount_required: 'Você deve fazer um pedido de pelo menos {{ amount }} para usar este voucher.'
@@ -1648,6 +1654,13 @@ pteroca:
       up_to_date: Atualizado
       update_available: 'Atualização disponível'
       pteroca_plugin_not_detected: 'Não detectado'
+    addon_security:
+      title: 'Atualização de segurança do addon Pterodactyl necessária'
+      message: 'O addon PteroCA Pterodactyl instalado (v%version%) é anterior à versão mínima segura %minimum%. Atualize o addon no seu painel Pterodactyl.'
+      advisory_link: 'Ler o aviso de segurança'
+      upgrade_label: 'Comando de atualização'
+      update_required: 'Atualização de segurança necessária'
+      plain: 'O addon PteroCA Pterodactyl (v%version%) é anterior à versão mínima segura %minimum%. Pode continuar, mas atualize o addon o quanto antes. Aviso: %advisory_url% Comando: %command%'
     server_create:
       select_user_help: 'Selecione o usuário que será proprietário deste servidor'
       base_product_help: 'Selecione opcionalmente um modelo de produto para pré-preencher os valores de configuração'

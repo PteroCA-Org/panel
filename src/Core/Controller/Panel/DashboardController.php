@@ -175,6 +175,8 @@ class DashboardController extends AbstractDashboardController
             ->setTitle($logo)
             ->setDefaultColorScheme($defaultMode)
             ->disableDarkMode($disableDarkMode)
+            // Relative URLs keep the page scheme when TLS is terminated by a reverse proxy
+            ->generateRelativeUrls()
             ;
     }
 

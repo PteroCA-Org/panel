@@ -21,6 +21,7 @@ use Psr\Log\LoggerInterface;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Symfony\Component\Filesystem\Filesystem;
+use App\Core\Service\System\CacheService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ZipArchive;
 
@@ -47,6 +48,7 @@ class ThemeUploadService
         private readonly Filesystem $filesystem,
         private readonly LoggerInterface $logger,
         private readonly ThemeRecordManager $themeRecordManager,
+        private readonly CacheService $cacheService,
     ) {}
 
     public function uploadTheme(UploadedFile $file, bool $ignoreWarnings = false): ThemeUploadResultDTO
@@ -157,6 +159,9 @@ class ThemeUploadService
             if ($assetsPath !== null) {
                 $this->setPermissions($assetsPath);
             }
+
+            // 10. Clear cache to register new theme translations
+            $this->cacheService->clearCacheOnShutdown();
 
             $this->logger->info('Theme uploaded successfully', [
                 'theme' => $manifest->name,
@@ -476,4 +481,5 @@ class ThemeUploadService
 
         return false;
     }
+
 }

@@ -2,5 +2,7 @@ pteroca:
   crud:
     user:
       passwords_must_match: '密码必须匹配。'
+    voucher:
+      code_already_exists: '已存在使用此代码的优惠券。'
   register:
     email_already_exists: '该电子邮件地址的账户已存在。'

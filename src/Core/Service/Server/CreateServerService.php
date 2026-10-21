@@ -207,11 +207,17 @@ class CreateServerService extends AbstractActionServerService
             $user,
             LogActionEnum::BOUGHT_SERVER,
             [
-                'product' => $product,
+                'product_id' => $product->getId(),
+                'product_name' => $product->getName(),
+                'server_id' => $createdEntityServer->getId(),
+                'server_name' => $createdEntityServer->getName() ?? $serverName,
+                'pterodactyl_server_id' => $createdEntityServer->getPterodactylServerId(),
                 'egg' => $eggId,
                 'price' => $priceId,
                 'voucher' => $voucherCode,
-                'server' => $createdEntityServer,
+                'charged_amount' => round($finalPrice, 2),
+                'currency' => $currency,
+                'expires_at' => $createdEntityServer->getExpiresAt()->format('Y-m-d H:i:s'),
             ],
         );
 

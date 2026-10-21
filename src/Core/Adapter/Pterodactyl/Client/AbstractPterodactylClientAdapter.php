@@ -83,11 +83,11 @@ abstract class AbstractPterodactylClientAdapter extends AbstractPterodactylAdapt
      * @throws ServerExceptionInterface
      * @throws PterodactylClientApiException
      */
-    protected function validateClientResponse(ResponseInterface $response, int $expectedStatusCode): array
+    protected function validateClientResponse(ResponseInterface $response, int|array $expectedStatusCode): array
     {
         $statusCode = $response->getStatusCode();
 
-        if ($statusCode !== $expectedStatusCode) {
+        if (!in_array($statusCode, (array) $expectedStatusCode, true)) {
             $this->throwClientApiException($response, $statusCode);
         }
 

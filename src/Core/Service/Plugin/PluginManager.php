@@ -4,6 +4,7 @@ namespace App\Core\Service\Plugin;
 
 use App\Core\Entity\Plugin;
 use Exception;
+use App\Core\Service\System\CacheService;
 use FilesystemIterator;
 use Psr\Log\LoggerInterface;
 use App\Core\Enum\PluginStateEnum;
@@ -28,7 +29,6 @@ use App\Core\Event\Plugin\PluginEnablementFailedEvent;
 use App\Core\Event\Plugin\PluginDisablementFailedEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Throwable;
 
 readonly class PluginManager
 {
@@ -41,6 +41,7 @@ readonly class PluginManager
         private LoggerInterface          $logger,
         private PluginLoader             $pluginLoader,
         private PluginMigrationService   $migrationService,
+        private CacheService             $cacheService,
         private KernelInterface          $kernel,
         private PluginDependencyResolver $dependencyResolver,
         private PluginAssetManager       $assetManager,
@@ -531,7 +532,7 @@ readonly class PluginManager
         $this->logger->info("Plugin enabled: {$plugin->getName()}");
 
         // Clear cache to reload routes, entities, etc.
-        $this->clearCache();
+        $this->cacheService->clearCacheOnShutdown();
 
         // Rebuild enabled plugins cache for container compilation
         $this->cacheManager->rebuildCache();
@@ -611,7 +612,7 @@ readonly class PluginManager
         $this->logger->info("Plugin disabled: {$plugin->getName()}");
 
         // Clear cache to reload routes, entities, etc.
-        $this->clearCache();
+        $this->cacheService->clearCacheOnShutdown();
 
         // Rebuild enabled plugins cache for container compilation
         $this->cacheManager->rebuildCache();
@@ -756,7 +757,7 @@ readonly class PluginManager
         }
 
         // 6. Clear cache and rebuild
-        $this->clearCache();
+        $this->cacheService->clearCacheOnShutdown();
         $this->cacheManager->rebuildCache();
     }
 
@@ -1010,43 +1011,6 @@ readonly class PluginManager
         return $plugin;
     }
 
-    private function clearCache(): void
-    {
-        $cacheDir = $this->kernel->getCacheDir();
-
-        // Register shutdown function to clear cache after script completes
-        // This is the safest way to avoid errors when deleting files that are currently in use
-        register_shutdown_function(function () use ($cacheDir) {
-            // Recursive function to remove directory contents
-            $removeDir = function (string $dir) use (&$removeDir) {
-                if (!is_dir($dir)) {
-                    return;
-                }
-
-                $items = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS);
-
-                foreach ($items as $item) {
-                    if ($item->isDir()) {
-                        $removeDir($item->getPathname());
-                        @rmdir($item->getPathname());
-                    } else {
-                        // Don't remove .gitkeep files
-                        if ($item->getFilename() !== '.gitkeep') {
-                            @unlink($item->getPathname());
-                        }
-                    }
-                }
-            };
-
-            try {
-                $removeDir($cacheDir);
-            } catch (Throwable) {
-                // Silently fail - cache will be rebuilt on next request
-            }
-        });
-
-        $this->logger->info("Scheduled cache clearing for after process completion");
-    }
 
     /**
      * Scans the plugin's src/ directory for a class implementing PluginLicensableInterface.

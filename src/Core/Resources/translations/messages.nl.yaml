@@ -1204,6 +1204,8 @@ pteroca:
         custom_head_scripts_panel: 'Aangepaste HTML/JavaScript-code geïnjecteerd in de <head>-sectie van het paneel (dashboard, admin). Gebruik dit voor interne analytics, monitoringtools of aangepaste integraties. WAARSCHUWING: Voeg alleen scripts van vertrouwde bronnen toe om XSS-aanvallen te voorkomen.'
         avatar_max_size: 'Maximale bestandsgrootte voor het uploaden van gebruikersavatars (bijv. 2M, 500K, 5M). Gebruikt het Symfony-grootteformaat.'
         avatar_allowed_extensions: 'Toegestane MIME-typen voor avatar-uploads, gescheiden door komma''s (bijv. image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Aantal uitgelichte categorieën dat op de landingspagina wordt weergegeven'
+        landing_featured_products_count: 'Aantal uitgelichte producten dat op de landingspagina wordt weergegeven'
         panel_theme: "Thema voor gebruikerspaneel (dashboard, servers, winkel). Beheert de look van alle admin- en user-facing pagina's."
         landing_theme: 'Thema voor landingspagina (homepage voor bezoekers). Weergegeven aan niet-ingelogde gebruikers op de publieke site.'
         email_theme: 'Thema voor e-mail sjablonen. Beheert de styling van meldingen, registratie en aankoop e-mails.'
@@ -1395,6 +1397,10 @@ pteroca:
       max_global_uses_help: 'Het maximale aantal keren dat deze voucher wereldwijd kan worden gebruikt.'
       used_count: 'Aantal keer gebruikt'
       used_count_help: 'Het aantal keren dat deze voucher is gebruikt.'
+      status: 'Status'
+      status_active: 'Actief'
+      status_used_up: 'Opgebruikt'
+      status_expired: 'Verlopen'
       one_use_per_user: 'Eén gebruik per gebruiker'
       one_use_per_user_help: 'De voucher kan slechts één keer per gebruiker worden gebruikt.'
       description: Beschrijving
@@ -1495,7 +1501,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher toegepast! %value%% korting wordt toegepast op uw serveraankoop.'
       successfully_applied_payment_discount: 'Voucher toegepast! %value%% korting wordt toegepast op uw betaling.'
       max_global_uses_reached: 'Maximaal aantal globale gebruiken bereikt.'
-      already_used: 'Voucher is al gebruikt.'
+      already_used: 'Je hebt deze voucher al gebruikt.'
       only_for_new_accounts: 'Voucher is alleen voor nieuwe accounts.'
       minimum_top_up_amount_required: 'U moet uw account met minimaal {{ amount }} {{ currency }} opwaarderen om deze voucher te gebruiken.'
       minimum_order_amount_required: 'U moet minimaal {{ amount }} bestellen om deze voucher te gebruiken.'
@@ -1646,6 +1652,13 @@ pteroca:
       up_to_date: Up-to-date
       update_available: 'Update beschikbaar'
       pteroca_plugin_not_detected: 'Niet gedetecteerd'
+    addon_security:
+      title: 'Beveiligingsupdate voor de Pterodactyl-addon vereist'
+      message: 'De geïnstalleerde PteroCA Pterodactyl-addon (v%version%) is ouder dan de minimale veilige versie %minimum%. Werk de addon bij op uw Pterodactyl-paneel.'
+      advisory_link: 'Beveiligingsadvies lezen'
+      upgrade_label: 'Upgrade-opdracht'
+      update_required: 'Beveiligingsupdate vereist'
+      plain: 'De PteroCA Pterodactyl-addon (v%version%) is ouder dan de minimale veilige versie %minimum%. U kunt doorgaan, maar werk de addon zo snel mogelijk bij. Advies: %advisory_url% Opdracht: %command%'
     server_create:
       select_user_help: 'Selecteer de gebruiker die eigenaar wordt van deze server'
       base_product_help: 'Selecteer optioneel een productsjabloon om configuratiewaarden voor te vullen'

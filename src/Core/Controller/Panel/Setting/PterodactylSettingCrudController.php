@@ -7,10 +7,12 @@ use App\Core\Enum\SettingContextEnum;
 use App\Core\Repository\SettingRepository;
 use App\Core\Repository\SettingOptionRepository;
 use App\Core\Service\Crud\PanelCrudService;
+use App\Core\Service\Pterodactyl\PterocaAddonVersionChecker;
 use App\Core\Service\LocaleService;
 use App\Core\Service\SettingService;
 use App\Core\Service\SettingTypeMapperService;
 use App\Core\Service\System\WebConfigurator\PterodactylConnectionVerificationService;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -32,6 +34,7 @@ class PterodactylSettingCrudController extends AbstractSettingCrudController
         LocaleService $localeService,
         SettingTypeMapperService $typeMapper,
         private readonly PterodactylConnectionVerificationService $pterodactylConnectionVerificationService,
+        private readonly PterocaAddonVersionChecker $pterocaAddonVersionChecker,
     ) {
         parent::__construct($panelCrudService, $requestStack, $translator, $settingRepository, $settingOptionRepository, $settingService, $localeService, $typeMapper);
     }
@@ -56,14 +59,26 @@ class PterodactylSettingCrudController extends AbstractSettingCrudController
         return $actions;
     }
 
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        parent::updateEntity($entityManager, $entityInstance);
+        $this->pterocaAddonVersionChecker->clearCache();
+    }
+
     #[Route('/panel/pterodactyl-settings/test-connection', name: 'admin_pterodactyl_test_connection')]
     public function testPterodactylConnection(): RedirectResponse
     {
+        // Refresh the cached addon version so the admin banner reflects an upgrade right away
+        $this->pterocaAddonVersionChecker->clearCache();
+
         try {
             $result = $this->pterodactylConnectionVerificationService->validateExistingConnection();
 
             if ($result->isVerificationSuccessful) {
                 $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.pterodactyl_connection_success'));
+                if ($result->warning !== null && $result->warning !== '') {
+                    $this->addFlash('warning', $result->warning);
+                }
             } else {
                 $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.pterodactyl_connection_failed'));
             }

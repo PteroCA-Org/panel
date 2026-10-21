@@ -1,0 +1,21 @@
+{#
+    Override of EasyAdmin's page/content.html.twig.
+
+    EasyAdmin 4.29+ ships a backward-compatibility shim where the "page_title" and
+    "content_title" blocks delegate to each other:
+
+        {% block page_title %}{{ block('content_title') }}{% endblock %}
+        {% block content_title %}{{ block('page_title') }}{% endblock %}
+
+    That shim is only safe when the concrete page overrides one of those blocks.
+    PteroCA panel pages render their own headers inside the "content" block and do
+    not define "content_title", which leaves the two blocks delegating to each
+    other indefinitely, causing infinite recursion while rendering the page <title>
+    (memory exhaustion in Twig's ProfilerExtension / a hung request in production).
+
+    Defining an empty "content_title" here terminates the cycle for every panel page
+    while still allowing individual pages to override it when they need a heading.
+#}
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}{% endblock %}

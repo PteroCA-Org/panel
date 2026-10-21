@@ -247,7 +247,12 @@ services:
     arguments:
       $templatesBaseDir: '%kernel.project_dir%/themes'
 
-  # Theme Upload System Services
+  # Theme System Services
+  App\Core\Service\Theme\ThemeDeleteService:
+    arguments:
+      $themesDirectory: '%kernel.project_dir%/themes'
+      $publicAssetsDirectory: '%kernel.project_dir%/public/assets/theme'
+
   App\Core\Service\Theme\ThemeUploadService:
     arguments:
       $themesDirectory: '%kernel.project_dir%/themes'

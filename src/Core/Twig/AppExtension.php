@@ -3,6 +3,7 @@
 namespace App\Core\Twig;
 
 use Exception;
+use Throwable;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use App\Core\Enum\SettingEnum;
@@ -17,6 +18,8 @@ use App\Core\Enum\EmailVerificationValueEnum;
 use App\Core\Service\Template\TemplateManager;
 use App\Core\Service\Template\CurrentThemeService;
 use Symfony\Component\Routing\RouterInterface;
+use App\Core\Service\Pterodactyl\PterocaAddonSecurity;
+use App\Core\Service\Pterodactyl\PterocaAddonVersionChecker;
 use App\Core\Service\System\SystemVersionService;
 use App\Core\Service\Plugin\PluginAssetManager;
 use App\Core\Service\Pterodactyl\PterodactylRedirectService;
@@ -36,6 +39,7 @@ class AppExtension extends AbstractExtension
         private readonly PluginAssetManager $pluginAssetManager,
         private readonly DateFormatterService $dateFormatterService,
         private readonly PriceFormatterService $priceFormatterService,
+        private readonly PterocaAddonVersionChecker $pterocaAddonVersionChecker,
     ) {}
 
     public function getFunctions(): array
@@ -59,6 +63,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('plugin_asset', [$this, 'pluginAsset']),
             new TwigFunction('get_custom_head_scripts', [$this, 'getCustomHeadScripts']),
             new TwigFunction('get_price_separators', [$this, 'getPriceSeparators']),
+            new TwigFunction('pteroca_addon_security_warning', [$this, 'getPterocaAddonSecurityWarning']),
         ];
     }
 
@@ -202,8 +207,23 @@ class AppExtension extends AbstractExtension
         return $this->pluginAssetManager->getAssetUrl($pluginName, $path);
     }
 
-    public function formatDate(\DateTimeInterface $date): string
+    /**
+     * Pterodactyl API responses provide dates as ISO 8601 strings, so strings are accepted too.
+     */
+    public function formatDate(\DateTimeInterface|string|null $date): string
     {
+        if ($date === null || $date === '') {
+            return '-';
+        }
+
+        if (is_string($date)) {
+            try {
+                $date = new \DateTimeImmutable($date);
+            } catch (Exception) {
+                return $date;
+            }
+        }
+
         return $this->dateFormatterService->formatDateTime($date);
     }
 
@@ -228,5 +248,30 @@ class AppExtension extends AbstractExtension
         };
 
         return $this->settingService->getSetting($settingName);
+    }
+
+    /**
+     * Admin-only banner data for an outdated PteroCA Pterodactyl addon.
+     * Missing or unknown versions return null so the panel stays usable.
+     *
+     * @return array{version: string, minimumVersion: string, upgradeCommand: string, advisoryUrl: string}|null
+     */
+    public function getPterocaAddonSecurityWarning(): ?array
+    {
+        try {
+            $version = $this->pterocaAddonVersionChecker->getInstalledVersion();
+            if (!PterocaAddonSecurity::isOutdated($version)) {
+                return null;
+            }
+
+            return [
+                'version' => (string) $version,
+                'minimumVersion' => PterocaAddonSecurity::MINIMUM_SAFE_VERSION,
+                'upgradeCommand' => PterocaAddonSecurity::upgradeCommand(),
+                'advisoryUrl' => PterocaAddonSecurity::ADVISORY_URL,
+            ];
+        } catch (Throwable) {
+            return null;
+        }
     }
 }

@@ -51,7 +51,8 @@ class PterodactylNetwork extends AbstractPterodactylClientAdapter implements Pte
         }
 
         $response = $this->makeRequest('POST', "servers/$serverId/network/allocations", ['json' => $payload]);
-        $data = $this->validateClientResponse($response, 201);
+        // Pterodactyl returns 200 for created resources; 201 is accepted for compatible panels
+        $data = $this->validateClientResponse($response, [200, 201]);
         
         return new PterodactylAllocation($this->getDataFromResponse($data));
     }

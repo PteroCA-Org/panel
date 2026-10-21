@@ -1203,6 +1203,8 @@ pteroca:
         custom_head_scripts_panel: 'Benutzerdefinierter HTML/JavaScript-Code, der in den <head>-Bereich des Panels (Dashboard, Admin) eingefügt wird. Verwenden Sie diesen für interne Analytics, Monitoring-Tools oder benutzerdefinierte Integrationen. WARNUNG: Fügen Sie nur Skripte aus vertrauenswürdigen Quellen hinzu, um XSS-Angriffe zu verhindern.'
         avatar_max_size: 'Maximale Dateigröße für Benutzer-Avatar-Uploads (z.B. 2M, 500K, 5M). Verwendet das Symfony-Größenformat.'
         avatar_allowed_extensions: 'Erlaubte MIME-Typen für Avatar-Uploads, durch Kommas getrennt (z.B. image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Anzahl der auf der Landingpage angezeigten hervorgehobenen Kategorien'
+        landing_featured_products_count: 'Anzahl der auf der Landingpage angezeigten hervorgehobenen Produkte'
         panel_theme: 'Theme für das Benutzerpanel (Dashboard, Server, Shop). Steuert das Aussehen aller Admin- und benutzerseitigen Seiten.'
         landing_theme: 'Theme für die Landingpage (Homepage für Besucher). Wird nicht angemeldeten Benutzern auf der öffentlichen Website angezeigt.'
         email_theme: 'Theme für E-Mail-Vorlagen. Steuert die Gestaltung von Benachrichtigungs-, Registrierungs- und Kaufe-Mails.'
@@ -1414,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Maximale Anzahl, wie oft dieser Gutschein global verwendet werden kann.'
       used_count: Verwendungsanzahl
       used_count_help: 'Anzahl der bisherigen Verwendungen dieses Gutscheins.'
+      status: 'Status'
+      status_active: 'Aktiv'
+      status_used_up: 'Aufgebraucht'
+      status_expired: 'Abgelaufen'
       one_use_per_user: 'Nur eine Verwendung pro Benutzer'
       one_use_per_user_help: 'Der Gutschein kann nur einmal pro Benutzer verwendet werden.'
       description: Beschreibung
@@ -1495,7 +1501,7 @@ pteroca:
       successfully_applied_server_discount: 'Gutschein angewendet! %value%% Rabatt wird auf Ihren Serverkauf angewendet.'
       successfully_applied_payment_discount: 'Gutschein angewendet! %value%% Rabatt wird auf Ihre Zahlung angewendet.'
       max_global_uses_reached: 'Maximale globale Nutzung erreicht.'
-      already_used: 'Gutschein wurde bereits verwendet.'
+      already_used: 'Du hast diesen Gutschein bereits verwendet.'
       only_for_new_accounts: 'Gutschein ist nur für neue Konten.'
       minimum_top_up_amount_required: 'Sie müssen Ihr Konto mit mindestens {{ amount }} {{ currency }} aufladen, um diesen Gutschein zu verwenden.'
       minimum_order_amount_required: 'Sie müssen mindestens {{ amount }} bestellen, um diesen Gutschein zu verwenden.'
@@ -1646,6 +1652,13 @@ pteroca:
       up_to_date: Aktuell
       update_available: 'Update verfügbar'
       pteroca_plugin_not_detected: 'Nicht erkannt'
+    addon_security:
+      title: 'Sicherheitsupdate für das Pterodactyl-Addon erforderlich'
+      message: 'Das installierte PteroCA-Pterodactyl-Addon (v%version%) ist älter als die minimale sichere Version %minimum%. Aktualisieren Sie das Addon auf Ihrem Pterodactyl-Panel.'
+      advisory_link: 'Sicherheitshinweis lesen'
+      upgrade_label: 'Update-Befehl'
+      update_required: 'Sicherheitsupdate erforderlich'
+      plain: 'Das PteroCA-Pterodactyl-Addon (v%version%) ist älter als die minimale sichere Version %minimum%. Sie können fortfahren, sollten das Addon aber so bald wie möglich aktualisieren. Hinweis: %advisory_url% Befehl: %command%'
     server_create:
       select_user_help: 'Wählen Sie den Benutzer aus, der Eigentümer dieses Servers sein wird'
       base_product_help: 'Wählen Sie optional eine Produktvorlage, um Konfigurationswerte vorab auszufüllen'

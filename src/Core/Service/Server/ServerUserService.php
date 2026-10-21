@@ -90,18 +90,18 @@ readonly class ServerUserService
             $existingPterocaUser = $this->userRepository->findOneBy(['email' => $email]);
 
             if (count($existingPterodactylUsers->toArray()) === 0 || !$existingPterocaUser) {
-                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['email' => $email]));
+                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['{{ email }}' => $email]));
             }
 
             $verificationSetting = $this->settingService->getSetting(SettingEnum::REQUIRE_EMAIL_VERIFICATION->value);
             if ($verificationSetting === EmailVerificationValueEnum::REQUIRED->value && !$existingPterocaUser->isVerified()) {
-                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_verified', ['email' => $email]));
+                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_verified', ['{{ email }}' => $email]));
             }
 
             $currentSubusers = $this->getAllSubusers($server, $user);
-            foreach ($currentSubusers['data'] ?? [] as $subuser) {
-                if (isset($subuser['attributes']['email']) && $subuser['attributes']['email'] === $email) {
-                    throw new Exception($this->translator->trans('pteroca.api.server_user.user_already_added', ['email' => $email]));
+            foreach ($currentSubusers as $subuser) {
+                if (isset($subuser['email']) && strcasecmp($subuser['email'], $email) === 0) {
+                    throw new Exception($this->translator->trans('pteroca.api.server_user.user_already_added', ['{{ email }}' => $email]));
                 }
             }
 
@@ -150,12 +150,12 @@ readonly class ServerUserService
 
             if (str_contains($e->getMessage(), 'No user found') ||
                 str_contains($e->getMessage(), 'does not exist')) {
-                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['email' => $email]));
+                throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['{{ email }}' => $email]));
             }
 
             if (str_contains($e->getMessage(), 'already assigned') ||
                 str_contains($e->getMessage(), 'already exists')) {
-                throw new Exception($this->translator->trans('pteroca.api.server_user.user_already_added', ['email' => $email]));
+                throw new Exception($this->translator->trans('pteroca.api.server_user.user_already_added', ['{{ email }}' => $email]));
             }
 
             throw $e;
@@ -179,7 +179,7 @@ readonly class ServerUserService
         $existingPterocaUser = $this->userRepository->findOneBy(['email' => $email]);
 
         if (!$existingPterocaUser) {
-            throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['email' => $email]));
+            throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['{{ email }}' => $email]));
         }
 
         $this->validateSubuserModification($server, $user, $email, $this->translator->trans('pteroca.api.server_user.modify_permissions'));
@@ -253,7 +253,7 @@ readonly class ServerUserService
         $existingPterocaUser = $this->userRepository->findOneBy(['email' => $email]);
 
         if (!$existingPterocaUser) {
-            throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['email' => $email]));
+            throw new Exception($this->translator->trans('pteroca.api.server_user.user_not_exist', ['{{ email }}' => $email]));
         }
 
         $this->validateSubuserModification($server, $user, $email, $this->translator->trans('pteroca.api.server_user.delete_yourself_from_server'));

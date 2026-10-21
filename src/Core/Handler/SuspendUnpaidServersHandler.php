@@ -22,6 +22,7 @@ use App\Core\Service\StoreService;
 use DateTime;
 use DateTimeImmutable;
 use Exception;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 readonly class SuspendUnpaidServersHandler implements HandlerInterface
@@ -37,6 +38,7 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
         private EventDispatcherInterface $eventDispatcher,
         private EventContextService $eventContextService,
         private SettingRepository $settingRepository,
+        private LoggerInterface $logger,
     ) {}
 
     /**
@@ -217,7 +219,14 @@ readonly class SuspendUnpaidServersHandler implements HandlerInterface
             return [
                 'cost' => $cost,
             ];
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            // Insufficient balance is an expected outcome, so this is not logged as an error
+            $this->logger->info('Automatic server renewal failed', [
+                'server_id' => $server->getId(),
+                'user_id' => $server->getUser()->getId(),
+                'reason' => $exception->getMessage(),
+            ]);
+
             return null;
         }
     }

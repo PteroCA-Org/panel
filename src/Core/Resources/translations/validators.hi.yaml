@@ -2,5 +2,7 @@ pteroca:
   crud:
     user:
       passwords_must_match: 'पासवर्ड मेल खाना चाहिए।'
+    voucher:
+      code_already_exists: 'इस कोड वाला वाउचर पहले से मौजूद है।'
   register:
     email_already_exists: 'इस ईमेल पते के साथ पहले से ही एक खाता मौजूद है।'

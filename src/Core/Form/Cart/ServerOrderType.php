@@ -91,6 +91,7 @@ class ServerOrderType extends AbstractType
             $builder->add('node', ChoiceType::class, [
                 'label' => 'pteroca.cart_configuration.location',
                 'choices' => $this->buildLocationChoices($options['grouped_locations']),
+                'choice_attr' => $this->buildLocationChoiceAttributes($options['grouped_locations']),
                 'required' => true,
                 'mapped' => false,
                 'constraints' => [
@@ -144,6 +145,23 @@ class ServerOrderType extends AbstractType
         }
 
         return $choices;
+    }
+
+    /**
+     * Exposes the product owning each node, used by the cart script to switch to a product variant.
+     */
+    private function buildLocationChoiceAttributes(?array $groupedLocations): callable
+    {
+        $productIdsByNode = [];
+        foreach ($groupedLocations ?? [] as $locationData) {
+            foreach ($locationData['nodes'] as $node) {
+                $productIdsByNode[$node['id']] = $node['productId'];
+            }
+        }
+
+        return static fn ($nodeId) => isset($productIdsByNode[$nodeId])
+            ? ['data-product-id' => $productIdsByNode[$nodeId]]
+            : [];
     }
 
     public function configureOptions(OptionsResolver $resolver): void

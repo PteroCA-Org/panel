@@ -2,6 +2,7 @@
 
 namespace App\Core\Service\Template;
 
+use App\Core\Service\System\CacheService;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -10,8 +11,15 @@ class ThemeCopyService
     public function __construct(
         private readonly Filesystem $filesystem,
         private readonly TranslatorInterface $translator,
+        private readonly CacheService $cacheService,
         private readonly string $projectDir,
     ) {}
+
+    public static function sanitizeThemeName(string $name): string
+    {
+        $name = strtolower(trim($name));
+        return preg_replace('/[^a-z0-9\-_]/', '', $name);
+    }
 
     public function validateThemeName(string $themeName): array
     {
@@ -54,6 +62,16 @@ class ThemeCopyService
     public function copyTheme(string $sourceThemeName, string $newThemeName): void
     {
         $sourceThemePath = $this->projectDir . '/themes/' . $sourceThemeName;
+
+        if (!$this->filesystem->exists($sourceThemePath)) {
+            throw new \InvalidArgumentException(sprintf('Source theme "%s" not found.', $sourceThemeName));
+        }
+
+        $validationErrors = $this->validateThemeName($newThemeName);
+        if (!empty($validationErrors)) {
+            throw new \InvalidArgumentException(implode(' ', $validationErrors));
+        }
+
         $targetThemePath = $this->projectDir . '/themes/' . $newThemeName;
         $sourceAssetsPath = $this->projectDir . '/public/assets/theme/' . $sourceThemeName;
         $targetAssetsPath = $this->projectDir . '/public/assets/theme/' . $newThemeName;
@@ -71,6 +89,10 @@ class ThemeCopyService
                 $templateJson['template']['name'] = $newThemeName;
                 file_put_contents($templateJsonPath, json_encode($templateJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
             }
+
+            $this->cacheService->clearCacheOnShutdown();
+        } catch (\InvalidArgumentException $e) {
+            throw $e;
         } catch (\Exception $e) {
             if ($this->filesystem->exists($targetThemePath)) {
                 $this->filesystem->remove($targetThemePath);

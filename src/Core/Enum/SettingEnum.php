@@ -63,4 +63,6 @@ enum SettingEnum: string
     case CUSTOM_HEAD_SCRIPTS_PANEL = 'custom_head_scripts_panel';
     case AVATAR_MAX_SIZE = 'avatar_max_size';
     case AVATAR_ALLOWED_EXTENSIONS = 'avatar_allowed_extensions';
+    case LANDING_FEATURED_CATEGORIES_COUNT = 'landing_featured_categories_count';
+    case LANDING_FEATURED_PRODUCTS_COUNT = 'landing_featured_products_count';
 }

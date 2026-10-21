@@ -194,7 +194,8 @@ class PterodactylAccount extends AbstractPterodactylClientAdapter implements Pte
         }
 
         $response = $this->makeRequest('POST', 'account/api-keys', ['json' => $payload]);
-        $data = $this->validateClientResponse($response, 201);
+        // Pterodactyl returns 200 for created resources; 201 is accepted for compatible panels
+        $data = $this->validateClientResponse($response, [200, 201]);
         
         // Dla nowo utworzonego klucza API, dodajemy secret_token z meta
         $attributes = $data['attributes'];

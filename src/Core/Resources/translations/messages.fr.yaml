@@ -1204,6 +1204,8 @@ pteroca:
         custom_head_scripts_panel: 'Code HTML/JavaScript personnalisé injecté dans la section <head> du panneau (tableau de bord, admin). Utilisez-le pour l''analyse interne, les outils de surveillance ou les intégrations personnalisées. AVERTISSEMENT : n''ajoutez que des scripts provenant de sources de confiance pour éviter les attaques XSS.'
         avatar_max_size: 'Taille maximale du fichier pour les téléchargements d''avatars d''utilisateurs (ex. 2M, 500K, 5M). Utilise le format de taille Symfony.'
         avatar_allowed_extensions: 'Types MIME autorisés pour les téléchargements d''avatars, séparés par des virgules (ex. image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Nombre de catégories mises en avant à afficher sur la page d''accueil (landing page)'
+        landing_featured_products_count: 'Nombre de produits mis en avant à afficher sur la page d''accueil (landing page)'
         panel_theme: "Thème pour le panneau utilisateur (tableau de bord, serveurs, boutique). Contrôle l'apparence de toutes les pages admin et utilisateur."
         landing_theme: "Thème pour la page d'accueil (page d'accueil pour visiteurs). Affichée aux utilisateurs non connectés sur le site public."
         email_theme: "Thème pour les modèles d'email. Contrôle le style des notifications, enregistrement et emails d'achat."
@@ -1414,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Nombre maximal de fois que ce bon peut être utilisé globalement.'
       used_count: "Nombre d'utilisations"
       used_count_help: 'Nombre de fois où ce bon a été utilisé.'
+      status: 'Statut'
+      status_active: 'Actif'
+      status_used_up: 'Épuisé'
+      status_expired: 'Expiré'
       one_use_per_user: 'Une utilisation par utilisateur'
       one_use_per_user_help: "Le bon ne peut être utilisé qu'une seule fois par utilisateur."
       description: Description
@@ -1495,7 +1501,7 @@ pteroca:
       successfully_applied_server_discount: 'Bon appliqué ! Une réduction de %value%% sera appliquée à votre achat de serveur.'
       successfully_applied_payment_discount: 'Bon appliqué ! Une réduction de %value%% sera appliquée à votre paiement.'
       max_global_uses_reached: "Nombre maximal d'utilisations atteint."
-      already_used: 'Le bon a déjà été utilisé.'
+      already_used: 'Vous avez déjà utilisé ce bon.'
       only_for_new_accounts: 'Le bon est réservé aux nouveaux comptes.'
       minimum_top_up_amount_required: 'Vous devez recharger votre compte avec au moins {{ amount }} {{ currency }} pour utiliser ce bon.'
       minimum_order_amount_required: 'Vous devez commander pour au moins {{ amount }} pour utiliser ce bon.'
@@ -1646,6 +1652,13 @@ pteroca:
       up_to_date: 'À jour'
       update_available: 'Mise à jour disponible'
       pteroca_plugin_not_detected: 'Non détecté'
+    addon_security:
+      title: "Mise à jour de sécurité de l'addon Pterodactyl requise"
+      message: "L'addon PteroCA Pterodactyl installé (v%version%) est antérieur à la version minimale sûre %minimum%. Mettez à jour l'addon sur votre panneau Pterodactyl."
+      advisory_link: "Lire l'avis de sécurité"
+      upgrade_label: 'Commande de mise à jour'
+      update_required: 'Mise à jour de sécurité requise'
+      plain: "L'addon PteroCA Pterodactyl (v%version%) est antérieur à la version minimale sûre %minimum%. Vous pouvez continuer, mais mettez à jour l'addon dès que possible. Avis : %advisory_url% Commande : %command%"
     server_create:
       select_user_help: "Sélectionnez l'utilisateur qui sera propriétaire de ce serveur"
       base_product_help: 'Sélectionnez optionnellement un modèle de produit pour pré-remplir les valeurs de configuration'

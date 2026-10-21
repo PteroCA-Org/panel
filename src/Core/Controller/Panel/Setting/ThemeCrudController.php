@@ -37,6 +37,7 @@ use App\Core\Exception\Theme\ThemeSecurityException;
 use App\Core\Form\ThemeUploadFormType;
 use App\Core\Service\Crud\PanelCrudService;
 use App\Core\Service\Logs\LogService;
+use App\Core\Service\Theme\ThemeDeleteService;
 use App\Core\Service\SettingService;
 use App\Core\Service\Template\TemplateService;
 use App\Core\Service\Template\ThemeCopyService;
@@ -71,6 +72,7 @@ class ThemeCrudController extends AbstractPanelController
         private readonly ThemeFilesystemCheckService $themeFilesystemCheckService,
         private readonly ThemeLicenseService $themeLicenseService,
         private readonly ThemeRecordManager $themeRecordManager,
+        private readonly ThemeDeleteService $themeDeleteService,
     ) {
         parent::__construct($panelCrudService, $requestStack);
     }
@@ -365,92 +367,34 @@ class ThemeCrudController extends AbstractPanelController
             $themeContext = 'panel';
         }
 
-        if ($themeName === TemplateService::DEFAULT_THEME) {
-            $this->addFlash('danger', $this->translator->trans('pteroca.crud.theme.cannot_delete_system_default'));
+        $contextRedirectUrl = $this->adminUrlGenerator
+            ->setController(self::class)
+            ->setAction('index')
+            ->set('context', $themeContext)
+            ->generateUrl();
 
-            return $this->redirect($this->adminUrlGenerator
-                ->setController(self::class)
-                ->setAction('index')
-                ->set('context', $themeContext)
-                ->generateUrl());
-        }
-
-        if (!$this->templateService->themeExists($themeName)) {
-            $this->addFlash('danger', sprintf(
-                $this->translator->trans('pteroca.crud.theme.theme_not_found'),
-                $themeName
-            ));
-
-            return $this->redirect($this->adminUrlGenerator
-                ->setController(self::class)
-                ->setAction('index')
-                ->set('context', $themeContext)
-                ->generateUrl());
-        }
-
-        $contexts = [
-            'panel' => SettingEnum::PANEL_THEME->value,
-            'landing' => SettingEnum::LANDING_THEME->value,
-            'email' => SettingEnum::EMAIL_THEME->value,
-        ];
-
-        foreach ($contexts as $contextName => $settingName) {
-            $defaultTheme = $this->settingService->getSetting($settingName);
-            if ($defaultTheme === $themeName) {
-                $this->addFlash('danger', sprintf(
-                    $this->translator->trans('pteroca.crud.theme.cannot_delete_active_theme'),
-                    $contextName
-                ));
-
-                return $this->redirect($this->adminUrlGenerator
-                    ->setController(self::class)
-                    ->setAction('index')
-                    ->set('context', $themeContext)
-                    ->generateUrl());
-            }
-        }
+        $successMessage = $this->translator->trans('pteroca.crud.theme.delete_success');
+        $errorMessage = $this->translator->trans('pteroca.crud.theme.delete_error');
+        $preventedMessage = $this->translator->trans('pteroca.crud.theme.deletion_prevented');
 
         try {
-            $themeMetadata = $this->templateService->getRawTemplateInfo($themeName);
-            $displayName = $themeMetadata['name'] ?? $themeName;
-
             $event = $this->dispatchDataEvent(
                 ThemeDeletingEvent::class,
                 $request,
-                [$themeName, $displayName, $themeContext]
+                [$themeName, $themeName, $themeContext]
             );
 
             if ($event->isPropagationStopped()) {
-                $this->addFlash('warning', $this->translator->trans('pteroca.crud.theme.deletion_prevented'));
-
-                return $this->redirect($this->adminUrlGenerator
-                    ->setController(self::class)
-                    ->setAction('index')
-                    ->set('context', $themeContext)
-                    ->generateUrl());
+                $this->addFlash('warning', $preventedMessage);
+                return $this->redirect($contextRedirectUrl);
             }
 
-            $themePath = $this->getParameter('kernel.project_dir') . '/themes/' . $themeName;
-            $assetsPath = $this->getParameter('kernel.project_dir') . '/public/assets/theme/' . $themeName;
-
-            if (is_dir($themePath)) {
-                $this->deleteDirectory($themePath);
-            }
-
-            if (is_dir($assetsPath)) {
-                $this->deleteDirectory($assetsPath);
-            }
-
-            // Cleanup ThemeRecord and license settings
-            $this->themeRecordManager->remove($themeName);
+            $displayName = $this->themeDeleteService->deleteTheme($themeName);
 
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_DELETED,
-                [
-                    'theme' => $themeName,
-                    'context' => $themeContext,
-                ]
+                ['theme' => $themeName, 'context' => $themeContext]
             );
 
             $this->dispatchDataEvent(
@@ -459,10 +403,10 @@ class ThemeCrudController extends AbstractPanelController
                 [$themeName, $displayName, $themeContext]
             );
 
-            $this->addFlash('success', sprintf(
-                $this->translator->trans('pteroca.crud.theme.delete_success'),
-                $displayName
-            ));
+            $this->addFlash('success', sprintf($successMessage, $displayName));
+        } catch (\InvalidArgumentException $e) {
+            $this->addFlash('danger', $e->getMessage());
+            return $this->redirect($contextRedirectUrl);
         } catch (\Exception $e) {
             $this->dispatchDataEvent(
                 ThemeDeletionFailedEvent::class,
@@ -470,10 +414,7 @@ class ThemeCrudController extends AbstractPanelController
                 [$themeName, $themeContext, $e->getMessage()]
             );
 
-            $this->addFlash('danger', sprintf(
-                $this->translator->trans('pteroca.crud.theme.delete_error'),
-                $e->getMessage()
-            ));
+            $this->addFlash('danger', sprintf($errorMessage, $e->getMessage()));
         }
 
         return $this->redirect($this->adminUrlGenerator
@@ -496,42 +437,14 @@ class ThemeCrudController extends AbstractPanelController
 
         $request = $context->getRequest();
         $sourceThemeName = $request->request->get('sourceThemeName');
-        $newThemeName = trim($request->request->get('newThemeName'));
+        $newThemeName = ThemeCopyService::sanitizeThemeName($request->request->get('newThemeName'));
         $themeContext = $request->request->get('context', 'panel');
 
         if (!in_array($themeContext, ['panel', 'landing', 'email'], true)) {
             $themeContext = 'panel';
         }
 
-        $newThemeName = strtolower($newThemeName);
-        $newThemeName = preg_replace('/[^a-z0-9\-_]/', '', $newThemeName);
-
-        if (!$this->templateService->themeExists($sourceThemeName)) {
-            $this->addFlash('danger', sprintf(
-                $this->translator->trans('pteroca.crud.theme.theme_not_found'),
-                $sourceThemeName
-            ));
-            return $this->redirect($this->adminUrlGenerator
-                ->setController(self::class)
-                ->setAction('index')
-                ->set('context', $themeContext)
-                ->generateUrl());
-        }
-
         try {
-            $validationErrors = $this->themeCopyService->validateThemeName($newThemeName);
-            if (!empty($validationErrors)) {
-                $this->addFlash('danger', implode(' ', $validationErrors));
-                return $this->redirect($this->adminUrlGenerator
-                    ->setController(self::class)
-                    ->setAction('index')
-                    ->set('context', $themeContext)
-                    ->generateUrl());
-            }
-
-            $sourceMetadata = $this->templateService->getRawTemplateInfo($sourceThemeName);
-            $sourceDisplayName = $sourceMetadata['name'] ?? $sourceThemeName;
-
             $this->dispatchDataEvent(
                 ThemeCopyRequestedEvent::class,
                 $request,
@@ -553,14 +466,16 @@ class ThemeCrudController extends AbstractPanelController
             $this->dispatchDataEvent(
                 ThemeCopiedEvent::class,
                 $request,
-                [$sourceThemeName, $sourceDisplayName, $newThemeName, $themeContext]
+                [$sourceThemeName, $sourceThemeName, $newThemeName, $themeContext]
             );
 
             $this->addFlash('success', sprintf(
                 $this->translator->trans('pteroca.crud.theme.copy_success'),
-                $sourceDisplayName,
+                $sourceThemeName,
                 $newThemeName
             ));
+        } catch (\InvalidArgumentException $e) {
+            $this->addFlash('danger', $e->getMessage());
         } catch (\Exception $e) {
             $this->dispatchDataEvent(
                 ThemeCopyFailedEvent::class,
@@ -595,17 +510,11 @@ class ThemeCrudController extends AbstractPanelController
             $themeContext = 'panel';
         }
 
-        if (!$this->templateService->themeExists($themeName)) {
-            $this->addFlash('danger', sprintf(
-                $this->translator->trans('pteroca.crud.theme.theme_not_found'),
-                $themeName
-            ));
-            return $this->redirect($this->adminUrlGenerator
-                ->setController(self::class)
-                ->setAction('index')
-                ->set('context', $themeContext)
-                ->generateUrl());
-        }
+        $contextRedirectUrl = $this->adminUrlGenerator
+            ->setController(self::class)
+            ->setAction('index')
+            ->set('context', $themeContext)
+            ->generateUrl();
 
         try {
             $this->dispatchDataEvent(
@@ -619,10 +528,7 @@ class ThemeCrudController extends AbstractPanelController
             $this->logService->logAction(
                 $this->getUser(),
                 LogActionEnum::THEME_EXPORTED,
-                [
-                    'theme' => $themeName,
-                    'context' => $themeContext,
-                ]
+                ['theme' => $themeName, 'context' => $themeContext]
             );
 
             $this->dispatchDataEvent(
@@ -643,11 +549,7 @@ class ThemeCrudController extends AbstractPanelController
                 $this->translator->trans('pteroca.crud.theme.export_error'),
                 $e->getMessage()
             ));
-            return $this->redirect($this->adminUrlGenerator
-                ->setController(self::class)
-                ->setAction('index')
-                ->set('context', $themeContext)
-                ->generateUrl());
+            return $this->redirect($contextRedirectUrl);
         }
     }
 
@@ -957,18 +859,4 @@ class ThemeCrudController extends AbstractPanelController
         return null;
     }
 
-    private function deleteDirectory(string $dir): bool
-    {
-        if (!is_dir($dir)) {
-            return false;
-        }
-
-        $files = array_diff(scandir($dir), ['.', '..']);
-        foreach ($files as $file) {
-            $path = $dir . '/' . $file;
-            is_dir($path) ? $this->deleteDirectory($path) : unlink($path);
-        }
-
-        return rmdir($dir);
-    }
 }

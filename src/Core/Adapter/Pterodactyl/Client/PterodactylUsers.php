@@ -49,7 +49,8 @@ class PterodactylUsers extends AbstractPterodactylClientAdapter implements Ptero
             ]
         ]);
         
-        $data = $this->validateClientResponse($response, 201);
+        // Pterodactyl returns 200 for created resources; 201 is accepted for compatible panels
+        $data = $this->validateClientResponse($response, [200, 201]);
         return new PterodactylSubuser($this->getDataFromResponse($data), $this->getMetaFromResponse($data));
     }
 

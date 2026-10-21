@@ -1204,6 +1204,8 @@ pteroca:
         custom_head_scripts_panel: 'Código HTML/JavaScript personalizado inyectado en la sección <head> del panel (dashboard, admin). Utilícelo para análisis internos, herramientas de monitoreo o integraciones personalizadas. ADVERTENCIA: Solo agregue scripts de fuentes confiables para evitar ataques XSS.'
         avatar_max_size: 'Tamaño máximo de archivo para la carga de avatares de usuario (p.ej., 2M, 500K, 5M). Utiliza el formato de tamaño de Symfony.'
         avatar_allowed_extensions: 'Tipos MIME permitidos para la carga de avatares, separados por comas (p.ej., image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Número de categorías destacadas que se muestran en la página de inicio (landing page)'
+        landing_featured_products_count: 'Número de productos destacados que se muestran en la página de inicio (landing page)'
         panel_theme: 'Tema para el panel de usuario (dashboard, servidores, tienda). Controla la apariencia de todas las páginas de admin y usuario.'
         landing_theme: 'Tema para la página de destino (página de inicio para visitantes). Mostrada a usuarios no registrados en el sitio público.'
         email_theme: 'Tema para plantillas de email. Controla el estilo de notificaciones, registro y emails de compra.'
@@ -1414,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Número máximo de veces que este cupón puede ser usado globalmente.'
       used_count: 'Cantidad de usos'
       used_count_help: 'Cantidad de veces que se ha utilizado este cupón.'
+      status: 'Estado'
+      status_active: 'Activo'
+      status_used_up: 'Agotado'
+      status_expired: 'Caducado'
       one_use_per_user: 'Un uso por usuario'
       one_use_per_user_help: 'El cupón solo puede ser utilizado una vez por cada usuario.'
       description: Descripción
@@ -1495,7 +1501,7 @@ pteroca:
       successfully_applied_server_discount: 'Cupón aplicado! Se aplicará un descuento del %value%% a la compra de su servidor.'
       successfully_applied_payment_discount: 'Cupón aplicado! Se aplicará un descuento del %value%% a su pago.'
       max_global_uses_reached: 'Se ha alcanzado el número máximo de usos globales.'
-      already_used: 'El cupón ya ha sido utilizado.'
+      already_used: 'Ya has utilizado este cupón.'
       only_for_new_accounts: 'El cupón es solo para cuentas nuevas.'
       minimum_top_up_amount_required: 'Debes recargar tu cuenta con al menos {{ amount }} {{ currency }} para usar este cupón.'
       minimum_order_amount_required: 'Debes hacer un pedido de al menos {{ amount }} para usar este cupón.'
@@ -1646,6 +1652,13 @@ pteroca:
       up_to_date: Actualizado
       update_available: 'Actualización disponible'
       pteroca_plugin_not_detected: 'No detectado'
+    addon_security:
+      title: 'Actualización de seguridad del complemento Pterodactyl requerida'
+      message: 'El complemento PteroCA Pterodactyl instalado (v%version%) es anterior a la versión mínima segura %minimum%. Actualice el complemento en su panel de Pterodactyl.'
+      advisory_link: 'Ver el aviso de seguridad'
+      upgrade_label: 'Comando de actualización'
+      update_required: 'Actualización de seguridad requerida'
+      plain: 'El complemento PteroCA Pterodactyl (v%version%) es anterior a la versión mínima segura %minimum%. Puede continuar, pero actualice el complemento lo antes posible. Aviso: %advisory_url% Comando: %command%'
     server_create:
       select_user_help: 'Seleccione el usuario que será propietario de este servidor'
       base_product_help: 'Opcionalmente seleccione una plantilla de producto para prellenar los valores de configuración'

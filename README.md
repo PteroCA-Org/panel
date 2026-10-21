@@ -251,6 +251,9 @@ Extend PteroCA with custom functionality through the comprehensive v0.6 plugin s
 <a href="https://github.com/TheRose97">
   <img src="https://images.weserv.nl/?url=github.com/TheRose97.png&h=60&w=60&fit=cover&mask=circle" alt="TheRose97" />
 </a>
+<a href="https://github.com/krcvianoce">
+  <img src="https://images.weserv.nl/?url=github.com/krcvianoce.png&h=60&w=60&fit=cover&mask=circle" alt="krcvianoce" />
+</a>
 
 ---
 
