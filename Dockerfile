@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.2.35-fpm
 
 # Install required PHP extensions
 RUN apt-get update && apt-get install -y \
