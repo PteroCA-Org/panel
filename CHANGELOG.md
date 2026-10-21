@@ -29,7 +29,9 @@
 - Fixed choosing a location in the cart redirecting to an invalid product.
 - Fixed a raw translation key being shown when a location is unavailable.
 - Fixed deleting a Pterodactyl API key failing on empty HTTP 204 responses.
-- Fixed the duplicate subuser check never matching.
+- Fixed adding a subuser, creating a database, adding an allocation and creating a client API key being reported as failed although Pterodactyl created them (#195).
+- Fixed the duplicate subuser check never matching and the email placeholder in subuser error messages.
+- Fixed the server page returning error 500 for accounts without a Pterodactyl client API key; a connection error message is shown instead.
 - Fixed infinite recursion on panel pages with EasyAdmin 4.29.
 - Fixed missing browser tab titles on theme and plugin management pages.
 - Fixed `eggs_configuration` mapping length so it matches the database column.

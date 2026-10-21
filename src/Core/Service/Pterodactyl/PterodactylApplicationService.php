@@ -8,6 +8,7 @@ use App\Core\Contract\UserInterface;
 use App\Core\DTO\Pterodactyl\Credentials;
 use App\Core\Enum\SettingEnum;
 use App\Core\Service\SettingService;
+use RuntimeException;
 
 class PterodactylApplicationService
 {
@@ -44,9 +45,15 @@ class PterodactylApplicationService
             return $this->clientCachedAdapters[$user->getId()];
         }
 
+        $apiKey = $user->getPterodactylUserApiKey();
+        if (empty($apiKey)) {
+            // Accounts can be created without a Client API key (e.g. via CLI when the addon is missing)
+            throw new RuntimeException('The user account has no Pterodactyl Client API key.');
+        }
+
         $userCredentials = new Credentials(
             $this->getApiUrl(),
-            $user->getPterodactylUserApiKey(),
+            $apiKey,
         );
         $this->pterodactylClientAdapter->setCredentials($userCredentials);
         $this->clientCachedAdapters[$user->getId()] = $this->pterodactylClientAdapter;

@@ -210,7 +210,7 @@ class CreateServerService extends AbstractActionServerService
                 'product_id' => $product->getId(),
                 'product_name' => $product->getName(),
                 'server_id' => $createdEntityServer->getId(),
-                'server_name' => $createdEntityServer->getName(),
+                'server_name' => $createdEntityServer->getName() ?? $serverName,
                 'pterodactyl_server_id' => $createdEntityServer->getPterodactylServerId(),
                 'egg' => $eggId,
                 'price' => $priceId,
