@@ -523,7 +523,8 @@
                         messageDiv.innerHTML = '<i class="fas fa-check-circle me-1"></i>{{ 'pteroca.store.location_available'|trans }}';
                         messageDiv.className = 'form-text mt-2 text-success';
                     } else {
-                        messageDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>' + data.message;
+                        messageDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-1"></i>';
+                        messageDiv.append(data.message || '{{ 'pteroca.store.location_check_failed'|trans|e('js') }}');
                         messageDiv.className = 'form-text mt-2 text-warning';
                     }
                 })
