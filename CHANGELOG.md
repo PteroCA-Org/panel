@@ -1,12 +1,38 @@
 # Changelog
 
-## [Unreleased]
+## [0.6.6] - 2026-10-21
+
+### Security
+- Updated PHP to 8.2.35 (CVE-2026-109618, CVE-2026-109619).
+- Updated dependencies to clear security advisories in EasyAdmin, Symfony (HttpFoundation, Yaml), Twig, firebase/php-jwt and sodium_compat.
+- Added an admin warning when the installed PteroCA Pterodactyl addon is older than 0.1.4. The warning links to the security advisory (GHSA-77vh-c4jh-rv29) and shows the upgrade command.
+- The node availability check endpoint now requires a logged-in user, only accepts nodes assigned to the product and caches results, so it can no longer be used to enumerate nodes or flood the Pterodactyl API.
 
 ### Added
-- Warn administrators when the installed PteroCA Pterodactyl addon is older than 0.1.4. The warning links to the security advisory and shows the upgrade command. See https://github.com/PteroCA-Org/pterodactyl-addon/security/advisories/GHSA-77vh-c4jh-rv29.
+- Added settings for the number of featured categories and products shown on the landing page (#192).
+- Added a status column (active, used up, expired) to the voucher list.
+
+### Changed
+- Admin CRUD audit logs now record the entity identifier and fields for created and deleted entities, and the changed fields for edits. Passwords, tokens, API keys and secret settings are masked.
+- Server purchase and renewal logs now record the server, product, charged amount and expiration dates.
+- Invalid setting values are now reported as an error message instead of an error page.
+- Clarified the voucher message shown when the same user tries to redeem a voucher again.
+- Failed automatic server renewals are now logged.
 
 ### Fixed
-- Empty HTTP 204 responses from the Pterodactyl Application API are treated as success, so deleting an API key no longer fails while decoding an empty body.
+- Fixed the server management page returning error 500 when the server had a backup, a subuser or a schedule (#193, #195).
+- Fixed admin actions such as delete redirecting to `http://` when PteroCA runs behind an HTTPS reverse proxy (#189). `TRUSTED_PROXIES` is now also read from the server environment.
+- Fixed admin CRUD audit logs and server purchase/renewal logs containing empty details (#194).
+- Fixed deleted vouchers blocking their code from being reused, and creating a voucher with a duplicate code causing error 500 (#190).
+- Fixed emails sent from console commands and cron jobs (e.g. server suspension) failing because email templates were not found.
+- Fixed "Back to Servers" links on the server page (#191).
+- Fixed choosing a location in the cart redirecting to an invalid product.
+- Fixed a raw translation key being shown when a location is unavailable.
+- Fixed deleting a Pterodactyl API key failing on empty HTTP 204 responses.
+- Fixed the duplicate subuser check never matching.
+- Fixed infinite recursion on panel pages with EasyAdmin 4.29.
+- Fixed missing browser tab titles on theme and plugin management pages.
+- Fixed `eggs_configuration` mapping length so it matches the database column.
 
 ---
 
