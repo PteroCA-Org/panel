@@ -1279,6 +1279,7 @@ pteroca:
       delete_error: 'Ocorreu um erro ao excluir o usuário: %error%'
       pterodactyl_api_key: 'Chave da API do Pterodactyl'
       pterodactyl_api_key_help: 'Chave da API usada para autenticar com o painel Pterodactyl. Gerada automaticamente durante a criação do usuário. Pode ser regenerada se comprometida.'
+      api_key_hidden_demo_mode: 'Chave de API oculta (modo demo)'
       api_key_not_generated: 'Chave da API ainda não gerada'
       show_api_key: 'Mostrar Chave da API'
       hide_api_key: 'Ocultar Chave da API'

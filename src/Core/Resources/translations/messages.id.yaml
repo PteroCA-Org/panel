@@ -1329,6 +1329,7 @@ pteroca:
       delete_error: 'Terjadi kesalahan saat menghapus pengguna: %error%'
       pterodactyl_api_key: 'Kunci API Pterodactyl'
       pterodactyl_api_key_help: 'Kunci API digunakan untuk mengautentikasi dengan panel Pterodactyl. Dihasilkan secara otomatis selama pembuatan pengguna. Dapat diregenerasi jika dikompromikan.'
+      api_key_hidden_demo_mode: 'Kunci API disembunyikan (mode demo)'
       api_key_not_generated: 'Kunci API belum dihasilkan'
       show_api_key: 'Tampilkan Kunci API'
       hide_api_key: 'Sembunyikan Kunci API'

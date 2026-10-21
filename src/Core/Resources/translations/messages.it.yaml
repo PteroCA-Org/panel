@@ -1277,6 +1277,7 @@ pteroca:
       delete_error: "Si è verificato un errore durante l'eliminazione dell'utente: %error%"
       pterodactyl_api_key: 'Chiave API Pterodactyl'
       pterodactyl_api_key_help: "Chiave API utilizzata per autenticare con il pannello Pterodactyl. Generata automaticamente durante la creazione dell'utente. Può essere rigenerata se compromessa."
+      api_key_hidden_demo_mode: 'Chiave API nascosta (modalità demo)'
       api_key_not_generated: 'Chiave API non ancora generata'
       show_api_key: 'Mostra Chiave API'
       hide_api_key: 'Nascondi Chiave API'

@@ -1307,6 +1307,7 @@ pteroca:
       delete_error: 'Сталася помилка під час видалення користувача: %error%'
       pterodactyl_api_key: 'Ключ API Pterodactyl'
       pterodactyl_api_key_help: 'Ключ API, що використовується для автентифікації з панеллю Pterodactyl. Генерується автоматично під час створення користувача. Може бути регенерований, якщо скомпрометований.'
+      api_key_hidden_demo_mode: 'API-ключ приховано (демо-режим)'
       api_key_not_generated: 'Ключ API ще не згенеровано'
       show_api_key: 'Показати ключ API'
       hide_api_key: 'Приховати ключ API'

@@ -1280,6 +1280,7 @@ pteroca:
       delete_error: 删除用户时发生错误：%error%
       pterodactyl_api_key: 'Pterodactyl API 密钥'
       pterodactyl_api_key_help: '用于与 Pterodactyl 面板进行身份验证的 API 密钥。在用户创建期间自动生成。如果泄露，可以重新生成。'
+      api_key_hidden_demo_mode: 'API 密钥已隐藏（演示模式）'
       api_key_not_generated: 'API 密钥尚未生成'
       show_api_key: '显示 API 密钥'
       hide_api_key: '隐藏 API 密钥'

@@ -1277,6 +1277,7 @@ pteroca:
       delete_error: 'Beim Löschen des Benutzers ist ein Fehler aufgetreten: %error%'
       pterodactyl_api_key: 'Pterodactyl API-Schlüssel'
       pterodactyl_api_key_help: 'API-Schlüssel zur Authentifizierung mit dem Pterodactyl-Panel. Wird automatisch bei der Benutzererstellung generiert. Kann bei Kompromittierung neu generiert werden.'
+      api_key_hidden_demo_mode: 'API-Schlüssel verborgen (Demo-Modus)'
       api_key_not_generated: 'API-Schlüssel noch nicht generiert'
       show_api_key: 'API-Schlüssel anzeigen'
       hide_api_key: 'API-Schlüssel ausblenden'

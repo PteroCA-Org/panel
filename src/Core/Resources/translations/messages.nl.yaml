@@ -1277,6 +1277,7 @@ pteroca:
       delete_error: 'Er is een fout opgetreden bij het verwijderen van de gebruiker: %error%'
       pterodactyl_api_key: 'Pterodactyl API-sleutel'
       pterodactyl_api_key_help: 'API-sleutel gebruikt om te authenticeren met het Pterodactyl-paneel. Automatisch gegenereerd tijdens het aanmaken van de gebruiker. Kan worden geregenereerd indien gecompromitteerd.'
+      api_key_hidden_demo_mode: 'API-sleutel verborgen (demomodus)'
       api_key_not_generated: 'API-sleutel nog niet gegenereerd'
       show_api_key: 'API-sleutel tonen'
       hide_api_key: 'API-sleutel verbergen'
