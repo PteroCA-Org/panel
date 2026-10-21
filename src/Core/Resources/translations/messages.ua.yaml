@@ -1531,7 +1531,7 @@ pteroca:
       successfully_applied_server_discount: 'Ваучер застосовано! Знижка %value%% буде застосована до вашої покупки сервера.'
       successfully_applied_payment_discount: 'Ваучер застосовано! Знижка %value%% буде застосована до вашого платежу.'
       max_global_uses_reached: 'Досягнуто максимальної кількості використань.'
-      already_used: 'Ваучер вже використано.'
+      already_used: 'Ви вже використали цей ваучер.'
       only_for_new_accounts: 'Ваучер доступний лише для нових акаунтів.'
       minimum_top_up_amount_required: 'Ви повинні поповнити рахунок щонайменше на {{ amount }} {{ currency }}, щоб використати цей ваучер.'
       minimum_order_amount_required: 'Ви повинні зробити замовлення щонайменше на {{ amount }}, щоб використати цей ваучер.'

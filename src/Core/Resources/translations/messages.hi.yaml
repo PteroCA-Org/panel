@@ -1497,7 +1497,7 @@ pteroca:
       successfully_applied_server_discount: 'वाउचर लागू! आपके सर्वर खरीद पर %value%% छूट लागू होगी।'
       successfully_applied_payment_discount: 'वाउचर लागू! आपके भुगतान पर %value%% छूट लागू होगी।'
       max_global_uses_reached: 'अधिकतम वैश्विक उपयोग सीमा पहुँच गई है।'
-      already_used: 'वाउचर पहले ही उपयोग किया जा चुका है।'
+      already_used: 'आप इस वाउचर का पहले ही उपयोग कर चुके हैं।'
       only_for_new_accounts: 'वाउचर केवल नए खातों के लिए है।'
       minimum_top_up_amount_required: 'इस वाउचर का उपयोग करने के लिए आपको कम से कम {{ amount }} {{ currency }} का टॉप-अप करना होगा।'
       minimum_order_amount_required: 'इस वाउचर का उपयोग करने के लिए आपको कम से कम {{ amount }} का ऑर्डर करना होगा।'

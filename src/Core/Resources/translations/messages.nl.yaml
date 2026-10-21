@@ -1497,7 +1497,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher toegepast! %value%% korting wordt toegepast op uw serveraankoop.'
       successfully_applied_payment_discount: 'Voucher toegepast! %value%% korting wordt toegepast op uw betaling.'
       max_global_uses_reached: 'Maximaal aantal globale gebruiken bereikt.'
-      already_used: 'Voucher is al gebruikt.'
+      already_used: 'Je hebt deze voucher al gebruikt.'
       only_for_new_accounts: 'Voucher is alleen voor nieuwe accounts.'
       minimum_top_up_amount_required: 'U moet uw account met minimaal {{ amount }} {{ currency }} opwaarderen om deze voucher te gebruiken.'
       minimum_order_amount_required: 'U moet minimaal {{ amount }} bestellen om deze voucher te gebruiken.'

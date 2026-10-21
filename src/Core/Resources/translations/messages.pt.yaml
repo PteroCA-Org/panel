@@ -1499,7 +1499,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher aplicado! Um desconto de %value%% será aplicado à compra do seu servidor.'
       successfully_applied_payment_discount: 'Voucher aplicado! Um desconto de %value%% será aplicado ao seu pagamento.'
       max_global_uses_reached: 'Número máximo de usos globais alcançado.'
-      already_used: 'O voucher já foi usado.'
+      already_used: 'Você já usou este voucher.'
       only_for_new_accounts: 'O voucher é apenas para novas contas.'
       minimum_top_up_amount_required: 'Você deve recarregar sua conta com pelo menos {{ amount }} {{ currency }} para usar este voucher.'
       minimum_order_amount_required: 'Você deve fazer um pedido de pelo menos {{ amount }} para usar este voucher.'

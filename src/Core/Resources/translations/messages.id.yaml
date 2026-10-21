@@ -1517,7 +1517,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher diterapkan! Diskon %value%% akan diterapkan pada pembelian server Anda.'
       successfully_applied_payment_discount: 'Voucher diterapkan! Diskon %value%% akan diterapkan pada pembayaran Anda.'
       max_global_uses_reached: 'Penggunaan global maksimum tercapai.'
-      already_used: 'Voucher sudah digunakan.'
+      already_used: 'Anda sudah menggunakan voucher ini.'
       only_for_new_accounts: 'Voucher hanya untuk akun baru.'
       minimum_top_up_amount_required: 'Anda harus mengisi ulang akun Anda dengan setidaknya {{ amount }} {{ currency }} untuk menggunakan voucher ini.'
       minimum_order_amount_required: 'Anda harus memesan setidaknya {{ amount }} untuk menggunakan voucher ini.'

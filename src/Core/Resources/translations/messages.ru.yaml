@@ -1531,7 +1531,7 @@ pteroca:
       successfully_applied_server_discount: 'Купон применён! Скидка %value%% будет применена к покупке сервера.'
       successfully_applied_payment_discount: 'Купон применён! Скидка %value%% будет применена к вашему платежу.'
       max_global_uses_reached: 'Достигнуто максимальное количество глобальных использований.'
-      already_used: 'Купон уже был использован.'
+      already_used: 'Вы уже использовали этот купон.'
       only_for_new_accounts: 'Купон предназначен только для новых аккаунтов.'
       minimum_top_up_amount_required: 'Вы должны пополнить счёт как минимум на {{ amount }} {{ currency }}, чтобы использовать этот купон.'
       minimum_order_amount_required: 'Вы должны оформить заказ на сумму не менее {{ amount }}, чтобы использовать этот купон.'

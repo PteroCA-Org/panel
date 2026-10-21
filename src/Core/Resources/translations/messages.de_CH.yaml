@@ -1497,7 +1497,7 @@ pteroca:
       successfully_applied_server_discount: 'Gutschein eingelöst! %value%% Rabatt wird auf Ihren Serverkauf angewendet.'
       successfully_applied_payment_discount: 'Gutschein eingelöst! %value%% Rabatt wird auf Ihre Zahlung angewendet.'
       max_global_uses_reached: 'Maximale Anzahl globaler Verwendungen erreicht.'
-      already_used: 'Der Gutschein wurde bereits verwendet.'
+      already_used: 'Du hast diesen Gutschein bereits verwendet.'
       only_for_new_accounts: 'Der Gutschein ist nur für neue Konten gültig.'
       minimum_top_up_amount_required: 'Sie müssen Ihr Konto mit mindestens {{ amount }} {{ currency }} aufladen, um diesen Gutschein zu verwenden.'
       minimum_order_amount_required: 'Sie müssen für mindestens {{ amount }} bestellen, um diesen Gutschein zu verwenden.'

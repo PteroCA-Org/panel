@@ -106,6 +106,19 @@ class VoucherCrudController extends AbstractPanelController
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setHelp($this->translator->trans('pteroca.crud.voucher.used_count_help')),
+            ChoiceField::new('status', $this->translator->trans('pteroca.crud.voucher.status'))
+                ->setChoices([
+                    $this->translator->trans('pteroca.crud.voucher.status_active') => Voucher::STATUS_ACTIVE,
+                    $this->translator->trans('pteroca.crud.voucher.status_used_up') => Voucher::STATUS_USED_UP,
+                    $this->translator->trans('pteroca.crud.voucher.status_expired') => Voucher::STATUS_EXPIRED,
+                ])
+                ->renderAsBadges([
+                    Voucher::STATUS_ACTIVE => 'success',
+                    Voucher::STATUS_USED_UP => 'warning',
+                    Voucher::STATUS_EXPIRED => 'danger',
+                ])
+                ->setSortable(false)
+                ->onlyOnIndex(),
             FormField::addRow(),
             BooleanField::new('newAccountsOnly', $this->translator->trans('pteroca.crud.voucher.new_accounts_only'))
                 ->hideOnIndex()

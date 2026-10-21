@@ -1497,7 +1497,7 @@ pteroca:
       successfully_applied_server_discount: 'Cupón aplicado! Se aplicará un descuento del %value%% a la compra de su servidor.'
       successfully_applied_payment_discount: 'Cupón aplicado! Se aplicará un descuento del %value%% a su pago.'
       max_global_uses_reached: 'Se ha alcanzado el número máximo de usos globales.'
-      already_used: 'El cupón ya ha sido utilizado.'
+      already_used: 'Ya has utilizado este cupón.'
       only_for_new_accounts: 'El cupón es solo para cuentas nuevas.'
       minimum_top_up_amount_required: 'Debes recargar tu cuenta con al menos {{ amount }} {{ currency }} para usar este cupón.'
       minimum_order_amount_required: 'Debes hacer un pedido de al menos {{ amount }} para usar este cupón.'

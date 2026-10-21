@@ -1517,7 +1517,7 @@ pteroca:
       successfully_applied_server_discount: 代金券已应用！%value%%折扣将应用于您的服务器购买。
       successfully_applied_payment_discount: 代金券已应用！%value%%折扣将应用于您的付款。
       max_global_uses_reached: 已达到代金券最大使用次数。
-      already_used: 代金券已被使用。
+      already_used: '您已使用过此代金券。'
       only_for_new_accounts: 代金券仅限新账户使用。
       minimum_top_up_amount_required: '您必须至少充值 {{ amount }} {{ currency }} 才能使用此代金券。'
       minimum_order_amount_required: '您必须至少订购 {{ amount }} 才能使用此代金券。'

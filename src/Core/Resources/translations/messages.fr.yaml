@@ -1497,7 +1497,7 @@ pteroca:
       successfully_applied_server_discount: 'Bon appliqué ! Une réduction de %value%% sera appliquée à votre achat de serveur.'
       successfully_applied_payment_discount: 'Bon appliqué ! Une réduction de %value%% sera appliquée à votre paiement.'
       max_global_uses_reached: "Nombre maximal d'utilisations atteint."
-      already_used: 'Le bon a déjà été utilisé.'
+      already_used: 'Vous avez déjà utilisé ce bon.'
       only_for_new_accounts: 'Le bon est réservé aux nouveaux comptes.'
       minimum_top_up_amount_required: 'Vous devez recharger votre compte avec au moins {{ amount }} {{ currency }} pour utiliser ce bon.'
       minimum_order_amount_required: 'Vous devez commander pour au moins {{ amount }} pour utiliser ce bon.'

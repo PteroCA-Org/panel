@@ -2,5 +2,7 @@ pteroca:
   crud:
     user:
       passwords_must_match: 'Kata sandi harus cocok.'
+    voucher:
+      code_already_exists: 'Voucher dengan kode ini sudah ada.'
   register:
     email_already_exists: 'Akun dengan alamat email tersebut sudah ada.'
