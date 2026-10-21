@@ -23,6 +23,10 @@ class DefaultController extends AbstractController
 {
     use EventContextTrait;
 
+    private const DEFAULT_FEATURED_ITEMS_LIMIT = 6;
+
+    private const MAX_FEATURED_ITEMS_LIMIT = 50;
+
     public function __construct(
         private readonly SettingService $settingService,
         private readonly StoreService $storeService,
@@ -61,12 +65,8 @@ class DefaultController extends AbstractController
         $this->dispatchEvent($widgetEvent);
 
         // 3. Load data
-        $categoryLimit = (int) ($this->settingService->getSetting(
-            SettingEnum::LANDING_FEATURED_CATEGORIES_COUNT->value
-        ) ?? 6);
-        $productLimit = (int) ($this->settingService->getSetting(
-            SettingEnum::LANDING_FEATURED_PRODUCTS_COUNT->value
-        ) ?? 6);
+        $categoryLimit = $this->getFeaturedItemsLimit(SettingEnum::LANDING_FEATURED_CATEGORIES_COUNT);
+        $productLimit = $this->getFeaturedItemsLimit(SettingEnum::LANDING_FEATURED_PRODUCTS_COUNT);
 
         $categories = method_exists($this->storeService, 'getFeaturedCategories')
             ? $this->storeService->getFeaturedCategories($categoryLimit)
@@ -296,5 +296,15 @@ class DefaultController extends AbstractController
         });
 
         return $buttons;
+    }
+
+    private function getFeaturedItemsLimit(SettingEnum $setting): int
+    {
+        $value = $this->settingService->getSetting($setting->value);
+        if (!is_numeric($value) || (int) $value < 1) {
+            return self::DEFAULT_FEATURED_ITEMS_LIMIT;
+        }
+
+        return min((int) $value, self::MAX_FEATURED_ITEMS_LIMIT);
     }
 }

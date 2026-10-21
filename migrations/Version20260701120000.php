@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use App\Core\Enum\SettingEnum;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -17,41 +16,22 @@ final class Version20260701120000 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql(
-            'INSERT INTO setting (name, value, type, context, hierarchy, nullable) VALUES (?, ?, ?, ?, ?, ?)',
-            [
-                SettingEnum::LANDING_FEATURED_CATEGORIES_COUNT->value,
-                '6',
-                'number',
-                'general_settings',
-                130,
-                0
-            ]
-        );
+        $this->addSql("
+            INSERT INTO setting (name, value, type, context, hierarchy, nullable)
+            SELECT 'landing_featured_categories_count', '6', 'number', 'general_settings', 130, 0
+            WHERE NOT EXISTS (SELECT 1 FROM setting WHERE name = 'landing_featured_categories_count')
+        ");
 
-        $this->addSql(
-            'INSERT INTO setting (name, value, type, context, hierarchy, nullable) VALUES (?, ?, ?, ?, ?, ?)',
-            [
-                SettingEnum::LANDING_FEATURED_PRODUCTS_COUNT->value,
-                '6',
-                'number',
-                'general_settings',
-                131,
-                0
-            ]
-        );
+        $this->addSql("
+            INSERT INTO setting (name, value, type, context, hierarchy, nullable)
+            SELECT 'landing_featured_products_count', '6', 'number', 'general_settings', 131, 0
+            WHERE NOT EXISTS (SELECT 1 FROM setting WHERE name = 'landing_featured_products_count')
+        ");
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql(
-            'DELETE FROM setting WHERE name = ?',
-            [SettingEnum::LANDING_FEATURED_CATEGORIES_COUNT->value]
-        );
-
-        $this->addSql(
-            'DELETE FROM setting WHERE name = ?',
-            [SettingEnum::LANDING_FEATURED_PRODUCTS_COUNT->value]
-        );
+        $this->addSql("DELETE FROM setting WHERE name = 'landing_featured_categories_count'");
+        $this->addSql("DELETE FROM setting WHERE name = 'landing_featured_products_count'");
     }
 }
