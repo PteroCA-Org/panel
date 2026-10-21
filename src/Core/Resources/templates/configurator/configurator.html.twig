@@ -66,6 +66,7 @@
         <!-- Configuration Card -->
         <div class="configuration-card">
             <div class="configuration-card-body">
+                <div id="configurator-addon-warning" class="alert alert-warning d-none mb-4" role="alert"></div>
                 <div class="row">
                     {% include '@core_templates/configurator/steps/configurator_welcome.html.twig' %}
                     {% include '@core_templates/configurator/steps/site_settings.html.twig' %}
@@ -132,6 +133,9 @@
 
                             response.json().then(response => {
                                 handleStepSuccess(currentStep, response.message)
+                                if (response.warning) {
+                                    showConfiguratorWarning(response.warning)
+                                }
                                 setTimeout(() => {
                                     hideButtonLoader(submitButton)
                                     setCurrentStep(currentStep + 1)
@@ -282,12 +286,27 @@
             }).then(response => {
                 if (response.ok) {
                     showPterodactylAlreadyConfigured()
+                    return response.json().then(data => {
+                        if (data.warning) {
+                            showConfiguratorWarning(data.warning)
+                        }
+                    })
                 } else {
                     showPterodactylForm(2)
                 }
             }).catch(() => {
                 showPterodactylForm(2)
             })
+        }
+
+        function showConfiguratorWarning(warning) {
+            const alertBox = document.getElementById('configurator-addon-warning')
+            if (!alertBox || !warning) {
+                return
+            }
+
+            alertBox.textContent = warning
+            alertBox.classList.remove('d-none')
         }
 
         function showPterodactylAlreadyConfigured() {

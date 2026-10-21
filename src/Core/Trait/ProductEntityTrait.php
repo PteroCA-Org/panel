@@ -55,7 +55,7 @@ trait ProductEntityTrait
     #[ORM\Column(type: "json", nullable: true)]
     private array $eggs = [];
 
-    #[ORM\Column(type: "string", length: 255, nullable: true)]
+    #[ORM\Column(type: "text", nullable: true)]
     private ?string $eggsConfiguration = null;
 
     #[ORM\Column(type: "boolean")]

@@ -285,6 +285,9 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
             parent::persistEntity($entityManager, $entityInstance);
 
             $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.created_successfully'));
+        } catch (\InvalidArgumentException $e) {
+            // Invalid values are reported to the admin without saving instead of ending in an error page
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.create_error', ['%error%' => $e->getMessage()]));
         } catch (Exception $e) {
             $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.create_error', ['%error%' => $e->getMessage()]));
             throw $e;
@@ -300,6 +303,9 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
             parent::updateEntity($entityManager, $entityInstance);
 
             $this->addFlash('success', $this->translator->trans('pteroca.crud.setting.updated_successfully'));
+        } catch (\InvalidArgumentException $e) {
+            // Invalid values are reported to the admin without saving instead of ending in an error page
+            $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.update_error', ['%error%' => $e->getMessage()]));
         } catch (Exception $e) {
             $this->addFlash('danger', $this->translator->trans('pteroca.crud.setting.update_error', ['%error%' => $e->getMessage()]));
             throw $e;
@@ -381,6 +387,13 @@ abstract class AbstractSettingCrudController extends AbstractPanelController
             $value = (float) $setting->getValue();
             if ($value <= 0) {
                 throw new \InvalidArgumentException('Minimum top-up amount must be greater than 0');
+            }
+        }
+
+        if (in_array($setting->getName(), ['landing_featured_categories_count', 'landing_featured_products_count'], true)) {
+            $value = filter_var($setting->getValue(), FILTER_VALIDATE_INT);
+            if ($value === false || $value < 1 || $value > 50) {
+                throw new \InvalidArgumentException('Number of featured items must be a whole number between 1 and 50');
             }
         }
     }

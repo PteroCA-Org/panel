@@ -8,7 +8,7 @@ require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
 (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
 
-$trustedProxies = $_ENV['TRUSTED_PROXIES'] ?? null;
+$trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? null;
 if (!empty($trustedProxies)) {
     $proxiesArray = array_map('trim', explode(',', $trustedProxies));
 

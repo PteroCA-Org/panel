@@ -221,6 +221,7 @@ abstract class AbstractPanelController extends AbstractCrudController
         $updatingEvent = $this->dispatchEvent($updatingEvent);
 
         if (!$updatingEvent->isPropagationStopped()) {
+            $previousSnapshot = $this->panelCrudService->createEntitySnapshot($entityInstance, true);
             parent::updateEntity($entityManager, $entityInstance);
 
             $updatedEvent = new CrudEntityUpdatedEvent(
@@ -231,7 +232,7 @@ abstract class AbstractPanelController extends AbstractCrudController
             );
 
             $this->dispatchEvent($updatedEvent);
-            $this->logEntityAction(LogActionEnum::ENTITY_EDIT, $entityInstance);
+            $this->logEntityAction(LogActionEnum::ENTITY_EDIT, $entityInstance, $previousSnapshot);
         }
     }
 
@@ -250,6 +251,8 @@ abstract class AbstractPanelController extends AbstractCrudController
         $deletingEvent = $this->dispatchEvent($deletingEvent);
 
         if (!$deletingEvent->isPropagationStopped()) {
+            // Doctrine clears generated identifiers on removal, so the snapshot is taken beforehand
+            $previousSnapshot = $this->panelCrudService->createEntitySnapshot($entityInstance);
             parent::deleteEntity($entityManager, $entityInstance);
 
             $deletedEvent = new CrudEntityDeletedEvent(
@@ -260,14 +263,14 @@ abstract class AbstractPanelController extends AbstractCrudController
             );
 
             $this->dispatchEvent($deletedEvent);
-            $this->logEntityAction(LogActionEnum::ENTITY_DELETE, $entityInstance);
+            $this->logEntityAction(LogActionEnum::ENTITY_DELETE, $entityInstance, $previousSnapshot);
         }
     }
 
-    private function logEntityAction(LogActionEnum $action, $entityInstance): void
+    private function logEntityAction(LogActionEnum $action, $entityInstance, ?array $previousSnapshot = null): void
     {
         $this->panelCrudService
-            ->logEntityAction($action, $entityInstance, $this->getUser(), $this->getEntityFqcn());
+            ->logEntityAction($action, $entityInstance, $this->getUser(), $this->getEntityFqcn(), $previousSnapshot);
     }
 
     protected function shouldUseConventionBasedPermissions(): bool

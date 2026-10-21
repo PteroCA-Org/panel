@@ -2,5 +2,7 @@ pteroca:
   crud:
     user:
       passwords_must_match: 'Пароли должны совпадать.'
+    voucher:
+      code_already_exists: 'Ваучер с таким кодом уже существует.'
   register:
     email_already_exists: 'Учетная запись с таким адресом электронной почты уже существует.'

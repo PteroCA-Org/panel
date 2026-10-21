@@ -31,7 +31,7 @@
                             </div>
                             <h4 class="mb-1 fw-bold">{{ server.serverProduct.name }} #{{ server.pterodactylServerIdentifier }}</h4>
                             <div class="ms-auto">
-                                <a href="{{ path('servers') }}" class="btn btn-outline-secondary px-3">
+                                <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn btn-outline-secondary px-3">
                                     <i class="fas fa-arrow-left me-1"></i>{{ 'pteroca.server.back_to_servers'|trans }}
                                 </a>
                             </div>
@@ -63,7 +63,7 @@
                             {% endif %}
                         </div>
                         <div class="ms-auto d-flex gap-2 align-items-center">
-                            <a href="{{ path('servers') }}" class="btn btn-outline-secondary px-3">
+                            <a href="{{ path('panel', { routeName: 'servers' }) }}" class="btn btn-outline-secondary px-3">
                                 <i class="fas fa-arrow-left me-1"></i>{{ 'pteroca.server.back_to_servers'|trans }}
                             </a>
                             {% if is_manage_in_pterodactyl_button_enabled() %}

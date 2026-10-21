@@ -1207,6 +1207,8 @@ pteroca:
         custom_head_scripts_panel: '注入到面板（仪表盘、管理）<head> 部分的自定义 HTML/JavaScript 代码。用于内部分析、监控工具或自定义集成。警告：仅添加来自可信源的脚本以防止 XSS 攻击。'
         avatar_max_size: '用户头像上传的最大文件大小（例如 2M、500K、5M）。使用 Symfony 大小格式。'
         avatar_allowed_extensions: '头像上传允许的 MIME 类型，以逗号分隔（例如 image/jpeg、image/png、image/webp）。'
+        landing_featured_categories_count: '登录页首页上显示的精选分类数量'
+        landing_featured_products_count: '登录页首页上显示的精选产品数量'
         panel_theme: 用户面板的主题（仪表盘、服务器、商店）。控制所有管理员和面向用户的页面的外观。
         landing_theme: 登录页面的主题（访客的主页）。显示给未登录用户在公共站点上。
         email_theme: 电子邮件模板的主题。控制通知、注册和购买电子邮件的样式。
@@ -1431,6 +1433,10 @@ pteroca:
       max_global_uses_help: 代金券在全球范围内可使用的最大次数。
       used_count: 使用次数
       used_count_help: 代金券已被使用的次数。
+      status: '状态'
+      status_active: '有效'
+      status_used_up: '已用完'
+      status_expired: '已过期'
       one_use_per_user: 每个用户限用一次
       one_use_per_user_help: 每个用户只能使用一次代金券。
       description: 描述
@@ -1515,7 +1521,7 @@ pteroca:
       successfully_applied_server_discount: 代金券已应用！%value%%折扣将应用于您的服务器购买。
       successfully_applied_payment_discount: 代金券已应用！%value%%折扣将应用于您的付款。
       max_global_uses_reached: 已达到代金券最大使用次数。
-      already_used: 代金券已被使用。
+      already_used: '您已使用过此代金券。'
       only_for_new_accounts: 代金券仅限新账户使用。
       minimum_top_up_amount_required: '您必须至少充值 {{ amount }} {{ currency }} 才能使用此代金券。'
       minimum_order_amount_required: '您必须至少订购 {{ amount }} 才能使用此代金券。'
@@ -1666,6 +1672,13 @@ pteroca:
       up_to_date: 最新
       update_available: 有可用更新
       pteroca_plugin_not_detected: 未检测到
+    addon_security:
+      title: '需要更新 Pterodactyl 插件的安全版本'
+      message: '已安装的 PteroCA Pterodactyl 插件（v%version%）低于最低安全版本 %minimum%。请在 Pterodactyl 面板上更新该插件。'
+      advisory_link: '查看安全公告'
+      upgrade_label: '升级命令'
+      update_required: '需要安全更新'
+      plain: 'PteroCA Pterodactyl 插件（v%version%）低于最低安全版本 %minimum%。可以继续，但请尽快更新插件。公告：%advisory_url% 命令：%command%'
     server_create:
       select_user_help: 选择将成为此服务器所有者的用户
       base_product_help: 可选选择产品模板以预填充配置值

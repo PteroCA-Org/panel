@@ -7,6 +7,7 @@ use App\Core\Event\Email\EmailAfterSendEvent;
 use App\Core\Event\Email\EmailBeforeSendEvent;
 use App\Core\Service\SettingService;
 use App\Core\Service\System\IpAddressProviderService;
+use App\Core\Service\Template\TemplateService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Mailer\Mailer;
@@ -18,6 +19,7 @@ use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
 class MailerService implements MailerServiceInterface
 {
@@ -45,6 +47,30 @@ class MailerService implements MailerServiceInterface
      * @throws RuntimeError
      * @throws LoaderError
      */
+    /**
+     * Theme template paths are registered per HTTP request, so console commands (cron jobs,
+     * messenger workers) need the email and default theme roots added as a fallback.
+     */
+    private function ensureEmailTemplatePaths(string $template): void
+    {
+        $loader = $this->twig->getLoader();
+        if (!$loader instanceof FilesystemLoader || $loader->exists($template)) {
+            return;
+        }
+
+        $themesDir = $this->projectDir . '/themes';
+        $themes = array_unique(array_filter([
+            $this->settingsService->getSetting(SettingEnum::EMAIL_THEME->value),
+            TemplateService::DEFAULT_THEME,
+        ]));
+
+        foreach ($themes as $theme) {
+            if (is_dir("$themesDir/$theme")) {
+                $loader->addPath("$themesDir/$theme");
+            }
+        }
+    }
+
     public function sendEmail(string $to, string $subject, string $template, array $context): void
     {
         if (empty($this->mailer)) {
@@ -85,6 +111,7 @@ class MailerService implements MailerServiceInterface
 
         // Update email with modified values
         $email->subject($modifiedSubject);
+        $this->ensureEmailTemplatePaths($modifiedTemplate);
         $email->html($this->twig->render($modifiedTemplate, $modifiedContext));
 
         // Try to send email and dispatch after-send event

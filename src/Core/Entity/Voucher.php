@@ -7,12 +7,18 @@ use App\Core\Repository\VoucherRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VoucherRepository::class)]
+#[UniqueEntity(fields: ['code'], message: 'pteroca.crud.voucher.code_already_exists')]
 class Voucher extends AbstractEntity
 {
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_USED_UP = 'used_up';
+    public const STATUS_EXPIRED = 'expired';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -231,9 +237,24 @@ class Voucher extends AbstractEntity
         return $this;
     }
 
+    public function getStatus(): string
+    {
+        if ($this->expirationDate !== null && $this->expirationDate < new DateTime()) {
+            return self::STATUS_EXPIRED;
+        }
+
+        if (!empty($this->maxGlobalUses) && $this->usedCount >= $this->maxGlobalUses) {
+            return self::STATUS_USED_UP;
+        }
+
+        return self::STATUS_ACTIVE;
+    }
+
     public function setDeletedAtValue(): void
     {
         $this->deletedAt = new DateTime();
+        // Release the unique code so it can be reused by a new voucher
+        $this->code = sprintf('%s-deleted-%d', mb_substr($this->code, 0, 200), $this->id);
     }
 
     #[Assert\Callback]

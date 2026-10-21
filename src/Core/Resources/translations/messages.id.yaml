@@ -1258,6 +1258,8 @@ pteroca:
         custom_head_scripts_panel: 'Kode HTML/JavaScript khusus yang disuntikkan ke bagian <head> panel (dashboard, admin). Gunakan untuk analytics internal, tools pemantauan, atau integrasi khusus. PERINGATAN: Hanya tambahkan skrip dari sumber yang terpercaya untuk mencegah serangan XSS.'
         avatar_max_size: 'Ukuran file maksimum untuk pengunggahan avatar pengguna (mis., 2M, 500K, 5M). Menggunakan format ukuran Symfony.'
         avatar_allowed_extensions: 'Jenis MIME yang diizinkan untuk pengunggahan avatar, dipisahkan dengan koma (mis., image/jpeg, image/png, image/webp).'
+        landing_featured_categories_count: 'Jumlah kategori unggulan yang ditampilkan di halaman landing (beranda)'
+        landing_featured_products_count: 'Jumlah produk unggulan yang ditampilkan di halaman landing (beranda)'
         panel_theme: 'Tema untuk panel pengguna (dasbor, server, toko). Mengontrol tampilan semua halaman admin dan user-facing.'
         landing_theme: 'Tema untuk halaman landing (halaman utama untuk pengunjung). Ditampilkan kepada pengguna yang belum login di situs publik.'
         email_theme: 'Tema untuk template email. Mengontrol gaya pemberitahuan, pendaftaran, dan email pembelian.'
@@ -1470,6 +1472,10 @@ pteroca:
       max_global_uses_help: 'Jumlah maksimum kali voucher ini dapat digunakan secara global.'
       used_count: 'Jumlah digunakan'
       used_count_help: 'Jumlah kali voucher ini telah digunakan.'
+      status: 'Status'
+      status_active: 'Aktif'
+      status_used_up: 'Habis'
+      status_expired: 'Kedaluwarsa'
       one_use_per_user: 'Satu penggunaan per pengguna'
       one_use_per_user_help: 'Voucher hanya dapat digunakan sekali per pengguna.'
       description: Deskripsi
@@ -1515,7 +1521,7 @@ pteroca:
       successfully_applied_server_discount: 'Voucher diterapkan! Diskon %value%% akan diterapkan pada pembelian server Anda.'
       successfully_applied_payment_discount: 'Voucher diterapkan! Diskon %value%% akan diterapkan pada pembayaran Anda.'
       max_global_uses_reached: 'Penggunaan global maksimum tercapai.'
-      already_used: 'Voucher sudah digunakan.'
+      already_used: 'Anda sudah menggunakan voucher ini.'
       only_for_new_accounts: 'Voucher hanya untuk akun baru.'
       minimum_top_up_amount_required: 'Anda harus mengisi ulang akun Anda dengan setidaknya {{ amount }} {{ currency }} untuk menggunakan voucher ini.'
       minimum_order_amount_required: 'Anda harus memesan setidaknya {{ amount }} untuk menggunakan voucher ini.'
@@ -1666,6 +1672,13 @@ pteroca:
       up_to_date: Terkini
       update_available: 'Pembaruan tersedia'
       pteroca_plugin_not_detected: 'Tidak Terdeteksi'
+    addon_security:
+      title: 'Pembaruan keamanan addon Pterodactyl diperlukan'
+      message: 'Addon PteroCA Pterodactyl yang terpasang (v%version%) lebih lama dari versi aman minimum %minimum%. Perbarui addon di panel Pterodactyl Anda.'
+      advisory_link: 'Baca advisori keamanan'
+      upgrade_label: 'Perintah peningkatan'
+      update_required: 'Pembaruan keamanan diperlukan'
+      plain: 'Addon PteroCA Pterodactyl (v%version%) lebih lama dari versi aman minimum %minimum%. Anda dapat melanjutkan, tetapi perbarui addon sesegera mungkin. Advisori: %advisory_url% Perintah: %command%'
     server_create:
       select_user_help: 'Pilih pengguna yang akan menjadi pemilik server ini'
       base_product_help: 'Secara opsional pilih template produk untuk mengisi nilai konfigurasi sebelumnya'
