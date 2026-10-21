@@ -57,7 +57,8 @@ final class PterodactylDatabases extends AbstractPterodactylClientAdapter implem
             ],
         ]);
 
-        $data = $this->validateClientResponse($response, 201);
+        // Pterodactyl returns 200 for created resources; 201 is accepted for compatible panels
+        $data = $this->validateClientResponse($response, [200, 201]);
 
         return new PterodactylDatabase($this->getDataFromResponse($data), $this->getMetaFromResponse($data));
     }
