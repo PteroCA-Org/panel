@@ -219,7 +219,16 @@ class RenewServerService extends AbstractActionServerService
         $this->logService->logAction(
             $user,
             LogActionEnum::RENEW_SERVER,
-            ['server' => $server],
+            [
+                'server_id' => $server->getId(),
+                'server_name' => $server->getName(),
+                'pterodactyl_server_id' => $server->getPterodactylServerId(),
+                'charged_amount' => round($finalPrice, 2),
+                'currency' => $currency,
+                'voucher' => $voucherCode,
+                'previous_expires_at' => $previousExpiresAt->format('Y-m-d H:i:s'),
+                'new_expires_at' => $server->getExpiresAt()->format('Y-m-d H:i:s'),
+            ],
         );
 
         // 6. Emit ServerRenewalCompletedEvent (after the entire process)
