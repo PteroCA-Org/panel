@@ -1416,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Maximale Anzahl, wie oft dieser Gutschein global verwendet werden kann.'
       used_count: Verwendungsanzahl
       used_count_help: 'Anzahl der bisherigen Verwendungen dieses Gutscheins.'
+      status: 'Status'
+      status_active: 'Aktiv'
+      status_used_up: 'Aufgebraucht'
+      status_expired: 'Abgelaufen'
       one_use_per_user: 'Nur eine Verwendung pro Benutzer'
       one_use_per_user_help: 'Der Gutschein kann nur einmal pro Benutzer verwendet werden.'
       description: Beschreibung

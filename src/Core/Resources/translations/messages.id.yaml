@@ -1472,6 +1472,10 @@ pteroca:
       max_global_uses_help: 'Jumlah maksimum kali voucher ini dapat digunakan secara global.'
       used_count: 'Jumlah digunakan'
       used_count_help: 'Jumlah kali voucher ini telah digunakan.'
+      status: 'Status'
+      status_active: 'Aktif'
+      status_used_up: 'Habis'
+      status_expired: 'Kedaluwarsa'
       one_use_per_user: 'Satu penggunaan per pengguna'
       one_use_per_user_help: 'Voucher hanya dapat digunakan sekali per pengguna.'
       description: Deskripsi

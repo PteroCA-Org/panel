@@ -1416,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Número máximo de veces que este cupón puede ser usado globalmente.'
       used_count: 'Cantidad de usos'
       used_count_help: 'Cantidad de veces que se ha utilizado este cupón.'
+      status: 'Estado'
+      status_active: 'Activo'
+      status_used_up: 'Agotado'
+      status_expired: 'Caducado'
       one_use_per_user: 'Un uso por usuario'
       one_use_per_user_help: 'El cupón solo puede ser utilizado una vez por cada usuario.'
       description: Descripción

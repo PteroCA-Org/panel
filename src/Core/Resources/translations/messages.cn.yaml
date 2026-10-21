@@ -1433,6 +1433,10 @@ pteroca:
       max_global_uses_help: 代金券在全球范围内可使用的最大次数。
       used_count: 使用次数
       used_count_help: 代金券已被使用的次数。
+      status: '状态'
+      status_active: '有效'
+      status_used_up: '已用完'
+      status_expired: '已过期'
       one_use_per_user: 每个用户限用一次
       one_use_per_user_help: 每个用户只能使用一次代金券。
       description: 描述

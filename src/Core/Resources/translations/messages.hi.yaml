@@ -1416,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'यह वाउचर वैश्विक स्तर पर अधिकतम कितनी बार उपयोग किया जा सकता है।'
       used_count: 'उपयोग गणना'
       used_count_help: 'यह वाउचर कितनी बार उपयोग किया गया है।'
+      status: 'स्थिति'
+      status_active: 'सक्रिय'
+      status_used_up: 'उपयोग हो चुका'
+      status_expired: 'समाप्त'
       one_use_per_user: 'प्रति उपयोगकर्ता एक उपयोग'
       one_use_per_user_help: 'प्रत्येक उपयोगकर्ता केवल एक बार वाउचर का उपयोग कर सकता है।'
       description: विवरण

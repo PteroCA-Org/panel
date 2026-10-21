@@ -1416,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Nombre maximal de fois que ce bon peut être utilisé globalement.'
       used_count: "Nombre d'utilisations"
       used_count_help: 'Nombre de fois où ce bon a été utilisé.'
+      status: 'Statut'
+      status_active: 'Actif'
+      status_used_up: 'Épuisé'
+      status_expired: 'Expiré'
       one_use_per_user: 'Une utilisation par utilisateur'
       one_use_per_user_help: "Le bon ne peut être utilisé qu'une seule fois par utilisateur."
       description: Description

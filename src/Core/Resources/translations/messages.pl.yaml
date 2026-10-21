@@ -1416,6 +1416,10 @@ pteroca:
       max_global_uses_help: 'Maksymalna liczba razy, kiedy voucher może być użyty globalnie.'
       used_count: 'Liczba użyć'
       used_count_help: 'Liczba razy, kiedy voucher został użyty.'
+      status: 'Status'
+      status_active: 'Aktywny'
+      status_used_up: 'Wykorzystany'
+      status_expired: 'Wygasły'
       one_use_per_user: 'Jedno użycie na użytkownika'
       one_use_per_user_help: 'Voucher może być użyty tylko raz na użytkownika.'
       description: Opis

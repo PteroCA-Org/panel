@@ -1418,6 +1418,10 @@ pteroca:
       max_global_uses_help: 'Número máximo de vezes que este voucher pode ser usado globalmente.'
       used_count: 'Contagem de usos'
       used_count_help: 'Número de vezes que o voucher foi usado.'
+      status: 'Estado'
+      status_active: 'Ativo'
+      status_used_up: 'Esgotado'
+      status_expired: 'Expirado'
       one_use_per_user: 'Um uso por usuário'
       one_use_per_user_help: 'O voucher só pode ser usado uma vez por usuário.'
       description: Descrição

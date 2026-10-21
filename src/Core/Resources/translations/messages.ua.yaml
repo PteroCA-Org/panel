@@ -1450,6 +1450,10 @@ pteroca:
       max_global_uses_help: 'Максимальна кількість глобальних використань ваучера.'
       used_count: 'Кількість використань'
       used_count_help: 'Кількість разів використання ваучера.'
+      status: 'Статус'
+      status_active: 'Активний'
+      status_used_up: 'Вичерпано'
+      status_expired: 'Термін дії минув'
       one_use_per_user: 'Одне використання на користувача'
       one_use_per_user_help: 'Ваучер можна використати лише один раз на користувача.'
       description: Опис
