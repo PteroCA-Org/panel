@@ -99,8 +99,8 @@ readonly class ServerUserService
             }
 
             $currentSubusers = $this->getAllSubusers($server, $user);
-            foreach ($currentSubusers['data'] ?? [] as $subuser) {
-                if (isset($subuser['attributes']['email']) && $subuser['attributes']['email'] === $email) {
+            foreach ($currentSubusers as $subuser) {
+                if (isset($subuser['email']) && strcasecmp($subuser['email'], $email) === 0) {
                     throw new Exception($this->translator->trans('pteroca.api.server_user.user_already_added', ['email' => $email]));
                 }
             }

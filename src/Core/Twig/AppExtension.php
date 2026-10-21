@@ -207,8 +207,23 @@ class AppExtension extends AbstractExtension
         return $this->pluginAssetManager->getAssetUrl($pluginName, $path);
     }
 
-    public function formatDate(\DateTimeInterface $date): string
+    /**
+     * Pterodactyl API responses provide dates as ISO 8601 strings, so strings are accepted too.
+     */
+    public function formatDate(\DateTimeInterface|string|null $date): string
     {
+        if ($date === null || $date === '') {
+            return '-';
+        }
+
+        if (is_string($date)) {
+            try {
+                $date = new \DateTimeImmutable($date);
+            } catch (Exception) {
+                return $date;
+            }
+        }
+
         return $this->dateFormatterService->formatDateTime($date);
     }
 
