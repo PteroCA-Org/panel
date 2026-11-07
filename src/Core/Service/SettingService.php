@@ -3,6 +3,8 @@
 namespace App\Core\Service;
 
 use App\Core\Entity\Setting;
+use App\Core\Enum\SettingContextEnum;
+use App\Core\Enum\SettingEnum;
 use App\Core\Repository\SettingRepository;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -30,6 +32,14 @@ class SettingService
                 return $setting?->getValue();
             }
         );
+    }
+
+    public function isPublicRegistrationEnabled(): bool
+    {
+        return $this->settingRepository->findOneBy([
+            'name' => SettingEnum::PUBLIC_REGISTRATION_ENABLED->value,
+            'context' => SettingContextEnum::SECURITY->value,
+        ])?->getValue() === '1';
     }
 
     /**

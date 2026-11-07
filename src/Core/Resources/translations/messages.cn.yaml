@@ -1186,6 +1186,7 @@ pteroca:
         customer_motd_message: MOTD组件内容。支持HTML和Twig语法，用于格式化、链接、动态内容。
         customer_motd_enabled: 在仪表板上显示每日消息组件。用于公告和通知。
         customer_motd_title: MOTD组件标题（如重要通知、欢迎）。在卡片顶部以粗体显示。
+        public_registration_enabled: '允许访客通过公开注册表单创建账号。'
         require_email_verification: 电子邮件验证模式：禁用（无）、可选（自愿）或必需（访问前强制）。
         google_captcha_verification: '在注册和登录表单上启用reCAPTCHA v3。需要网站密钥和密钥才能运行。'
         google_captcha_site_key: '公开的reCAPTCHA v3网站密钥。在前端可见，显示验证码组件。来自Google控制台。'

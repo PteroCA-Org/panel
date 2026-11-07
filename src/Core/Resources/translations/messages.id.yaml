@@ -1236,6 +1236,7 @@ pteroca:
         customer_motd_enabled: 'Tampilkan widget Pesan Hari Ini di dasbor. Berguna untuk pengumuman dan pemberitahuan.'
         customer_motd_title: 'Judul widget MOTD (mis. Pemberitahuan Penting, Selamat Datang). Muncul tebal di atas kartu.'
         customer_motd_message: 'Konten widget MOTD. Mendukung sintaks HTML dan Twig untuk format, tautan, konten dinamis.'
+        public_registration_enabled: 'Izinkan pengunjung membuat akun melalui formulir pendaftaran publik.'
         require_email_verification: 'Mode verifikasi email: nonaktif (tidak ada), opsional (sukarela), atau wajib (wajib sebelum akses).'
         google_captcha_verification: 'Aktifkan reCAPTCHA v3 di formulir pendaftaran dan login. Memerlukan kunci situs dan kunci rahasia untuk berfungsi.'
         google_captcha_site_key: 'Kunci situs reCAPTCHA v3 publik. Terlihat di frontend, menampilkan widget captcha. Dari Google Console.'

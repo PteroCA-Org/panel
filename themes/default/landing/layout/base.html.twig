@@ -61,9 +61,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_login') }}">{{ 'pteroca.landing.nav.login'|trans }}</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
-                                </li>
+                                {% if is_public_registration_enabled() %}
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary btn-sm ms-3" href="{{ path('app_register') }}">{{ 'pteroca.landing.nav.get_started'|trans }}</a>
+                                    </li>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     </ul>

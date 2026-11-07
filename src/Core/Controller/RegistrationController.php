@@ -8,6 +8,7 @@ use App\Core\Contract\UserInterface;
 use App\Core\Form\RegistrationFormType;
 use App\Core\Event\Form\FormSubmitEvent;
 use App\Core\Enum\EmailVerificationValueEnum;
+use App\Core\Service\SettingService;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ use App\Core\Service\Mailer\EmailVerificationService;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use App\Core\Service\Authorization\RegistrationService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
@@ -32,11 +34,16 @@ class RegistrationController extends AbstractController
     public function register(
         Request $request,
         UserAuthenticatorInterface $userAuthenticator,
+        SettingService $settingService,
         #[Autowire(service: 'App\Core\Security\UserAuthenticator')]
         AuthenticatorInterface $authenticator,
     ): Response {
         if ($this->getUser() !== null) {
             return $this->redirectToRoute('panel');
+        }
+
+        if (!$settingService->isPublicRegistrationEnabled()) {
+            throw new AccessDeniedHttpException();
         }
 
         $registrationErrors = [];

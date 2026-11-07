@@ -9,9 +9,11 @@
                     {{ 'pteroca.landing.cta.subtitle'|trans }}
                 </p>
                 <div class="d-flex flex-wrap justify-content-center gap-3">
-                    <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-5">
-                        {{ 'pteroca.landing.cta.create_account'|trans }}
-                    </a>
+                    {% if is_public_registration_enabled() %}
+                        <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-5">
+                            {{ 'pteroca.landing.cta.create_account'|trans }}
+                        </a>
+                    {% endif %}
                     <a href="{{ path('landing_store') }}" class="btn btn-outline-light btn-lg px-4">
                         {{ 'pteroca.landing.cta.view_plans'|trans }}
                     </a>

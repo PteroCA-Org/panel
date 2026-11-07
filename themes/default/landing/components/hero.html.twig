@@ -15,9 +15,11 @@
             <a href="{{ path('landing_store') }}" class="btn btn-outline-light btn-lg px-4">
                 <i class="fas fa-server me-2"></i>{{ 'pteroca.landing.hero.browse_servers'|trans }}
             </a>
-            <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-4">
-                <i class="fas fa-rocket me-2"></i>{{ 'pteroca.landing.hero.get_started'|trans }}
-            </a>
+            {% if is_public_registration_enabled() %}
+                <a href="{{ path('app_register') }}" class="btn btn-primary btn-lg px-4">
+                    <i class="fas fa-rocket me-2"></i>{{ 'pteroca.landing.hero.get_started'|trans }}
+                </a>
+            {% endif %}
         </div>
     </div>
 </section>
