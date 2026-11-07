@@ -35,6 +35,7 @@ enum SettingEnum: string
     case CUSTOMER_MOTD_ENABLED = 'customer_motd_enabled';
     case CUSTOMER_MOTD_MESSAGE = 'customer_motd_message';
     case CUSTOMER_MOTD_TITLE = 'customer_motd_title';
+    case PUBLIC_REGISTRATION_ENABLED = 'public_registration_enabled';
     case REQUIRE_EMAIL_VERIFICATION = 'require_email_verification';
     case GOOGLE_CAPTCHA_VERIFICATION = 'google_captcha_verification';
     case GOOGLE_CAPTCHA_SITE_KEY = 'google_captcha_site_key';

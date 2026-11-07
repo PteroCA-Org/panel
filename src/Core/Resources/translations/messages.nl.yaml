@@ -1183,6 +1183,7 @@ pteroca:
         customer_motd_message: 'MOTD-widget inhoud. Ondersteunt HTML- en Twig-syntaxis voor opmaak, links, dynamische inhoud.'
         customer_motd_enabled: 'Bericht van de Dag-widget weergeven op dashboard. Handig voor aankondigingen en mededelingen.'
         customer_motd_title: 'MOTD-widget kop (bijv. Belangrijke Mededeling, Welkom). Vet weergegeven bovenaan kaart.'
+        public_registration_enabled: 'Sta bezoekers toe een account aan te maken via het openbare registratieformulier.'
         require_email_verification: 'E-mailverificatiemodus: disabled (geen), optional (vrijwillig) of required (verplicht voor toegang).'
         google_captcha_verification: 'reCAPTCHA v3 activeren op registratie- en loginformulieren. Vereist sitesleutel en geheime sleutel.'
         google_captcha_site_key: 'Openbare reCAPTCHA v3 sitesleutel. Zichtbaar in frontend, toont captcha-widget. Van Google Console.'

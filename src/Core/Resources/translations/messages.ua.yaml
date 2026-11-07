@@ -1211,6 +1211,7 @@ pteroca:
         customer_motd_message: 'Вміст віджету MOTD. Підтримує синтаксис HTML та Twig для форматування, посилань, динамічного вмісту.'
         customer_motd_enabled: 'Показати віджет Повідомлення Дня на панелі. Корисно для оголошень та повідомлень.'
         customer_motd_title: "Заголовок віджету MOTD (напр. Важливе Оголошення, Ласкаво просимо). З'являється жирним зверху картки."
+        public_registration_enabled: 'Дозволити відвідувачам створювати облікові записи через публічну форму реєстрації.'
         require_email_verification: "Режим верифікації email: disabled (немає), optional (добровільно) або required (обов'язково перед доступом)."
         google_captcha_verification: 'Увімкнути reCAPTCHA v3 на формах реєстрації та входу. Потрібен ключ сайту та секретний ключ.'
         google_captcha_site_key: 'Публічний ключ сайту reCAPTCHA v3. Видимий у фронтенді, показує віджет captcha. З Google Console.'

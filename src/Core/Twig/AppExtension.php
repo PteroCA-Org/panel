@@ -51,6 +51,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('get_logo', [$this, 'getLogo']),
             new TwigFunction('get_title', [$this, 'getTitle']),
             new TwigFunction('get_site_url', [$this, 'getSiteUrl']),
+            new TwigFunction('is_public_registration_enabled', [$this, 'isPublicRegistrationEnabled']),
             new TwigFunction('show_email_verification_alert', [$this, 'showEmailVerificationAlert']),
             new TwigFunction('get_captcha_site_key', [$this, 'getCaptchaSiteKey']),
             new TwigFunction('get_favicon', [$this, 'getFavicon']),
@@ -153,6 +154,11 @@ class AppExtension extends AbstractExtension
             EmailVerificationValueEnum::REQUIRED->value,
             EmailVerificationValueEnum::OPTIONAL->value,
         ]);
+    }
+
+    public function isPublicRegistrationEnabled(): bool
+    {
+        return $this->settingService->isPublicRegistrationEnabled();
     }
 
     public function usePterodactylPanelAsClientPanel(): bool

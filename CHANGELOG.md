@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Added a security setting to disable public account registration without affecting existing users or administrator-created accounts.
+
 ## [0.6.6] - 2026-10-21
 
 ### Security

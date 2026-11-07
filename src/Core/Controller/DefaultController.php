@@ -257,7 +257,7 @@ class DefaultController extends AbstractController
             ];
         }
 
-        return [
+        $buttons = [
             [
                 'type' => 'secondary',
                 'label' => 'pteroca.landing.nav.login',
@@ -266,15 +266,20 @@ class DefaultController extends AbstractController
                 'priority' => 50,
                 'condition' => 'guest',
             ],
-            [
+        ];
+
+        if ($this->settingService->isPublicRegistrationEnabled()) {
+            $buttons[] = [
                 'type' => 'primary',
                 'label' => 'pteroca.landing.nav.get_started',
                 'url' => $this->generateUrl('app_register'),
                 'position' => 'right',
                 'priority' => 100,
                 'condition' => 'guest',
-            ],
-        ];
+            ];
+        }
+
+        return $buttons;
     }
 
     /**

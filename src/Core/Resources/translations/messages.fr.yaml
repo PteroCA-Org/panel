@@ -1183,6 +1183,7 @@ pteroca:
         customer_motd_message: 'Contenu widget MOTD. Supporte syntaxe HTML et Twig pour formatage, liens, contenu dynamique.'
         customer_motd_enabled: 'Afficher widget Message du Jour sur tableau de bord. Utile pour annonces et notifications.'
         customer_motd_title: 'Titre widget MOTD (ex. Avis Important, Bienvenue). Affiché en gras en haut de carte.'
+        public_registration_enabled: 'Autoriser les visiteurs à créer un compte via le formulaire public d’inscription.'
         require_email_verification: 'Mode vérification email: disabled (aucune), optional (volontaire) ou required (obligatoire avant accès).'
         google_captcha_verification: 'Activer reCAPTCHA v3 sur formulaires inscription et connexion. Nécessite clé site et clé secrète.'
         google_captcha_site_key: 'Clé site publique reCAPTCHA v3. Visible dans frontend, affiche widget captcha. Depuis Google Console.'
